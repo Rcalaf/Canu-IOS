@@ -1,0 +1,308 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DEA93B1C17204EA600303BB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
+		DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1D17204EA600303BB5 /* Foundation.framework */; };
+		DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */; };
+		DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B2117204EA600303BB5 /* CoreData.framework */; };
+		DEA93B2817204EA600303BB5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B2617204EA600303BB5 /* InfoPlist.strings */; };
+		DEA93B2A17204EA600303BB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B2917204EA600303BB5 /* main.m */; };
+		DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B2D17204EA600303BB5 /* AppDelegate.m */; };
+		DEA93B3017204EA600303BB5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B2F17204EA600303BB5 /* Default.png */; };
+		DEA93B3217204EA600303BB5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B3117204EA600303BB5 /* Default@2x.png */; };
+		DEA93B3417204EA600303BB5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B3317204EA600303BB5 /* Default-568h@2x.png */; };
+		DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DEA93B1817204EA600303BB5 /* CANU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CANU.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEA93B1B17204EA600303BB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DEA93B1D17204EA600303BB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DEA93B2117204EA600303BB5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		DEA93B2517204EA600303BB5 /* CANU-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CANU-Info.plist"; sourceTree = "<group>"; };
+		DEA93B2717204EA600303BB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DEA93B2917204EA600303BB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DEA93B2B17204EA600303BB5 /* CANU-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CANU-Prefix.pch"; sourceTree = "<group>"; };
+		DEA93B2C17204EA600303BB5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DEA93B2D17204EA600303BB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DEA93B2F17204EA600303BB5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		DEA93B3117204EA600303BB5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		DEA93B3317204EA600303BB5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		DEA93B3617204EA600303BB5 /* CANU.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CANU.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEA93B1517204EA600303BB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA93B1C17204EA600303BB5 /* UIKit.framework in Frameworks */,
+				DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */,
+				DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */,
+				DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DEA93B0F17204EA600303BB5 = {
+			isa = PBXGroup;
+			children = (
+				DEA93B2317204EA600303BB5 /* CANU */,
+				DEA93B1A17204EA600303BB5 /* Frameworks */,
+				DEA93B1917204EA600303BB5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DEA93B1917204EA600303BB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B1817204EA600303BB5 /* CANU.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B1B17204EA600303BB5 /* UIKit.framework */,
+				DEA93B1D17204EA600303BB5 /* Foundation.framework */,
+				DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */,
+				DEA93B2117204EA600303BB5 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DEA93B2317204EA600303BB5 /* CANU */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
+				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
+				DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */,
+				DEA93B2417204EA600303BB5 /* Supporting Files */,
+			);
+			path = CANU;
+			sourceTree = "<group>";
+		};
+		DEA93B2417204EA600303BB5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B2517204EA600303BB5 /* CANU-Info.plist */,
+				DEA93B2617204EA600303BB5 /* InfoPlist.strings */,
+				DEA93B2917204EA600303BB5 /* main.m */,
+				DEA93B2B17204EA600303BB5 /* CANU-Prefix.pch */,
+				DEA93B2F17204EA600303BB5 /* Default.png */,
+				DEA93B3117204EA600303BB5 /* Default@2x.png */,
+				DEA93B3317204EA600303BB5 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEA93B1717204EA600303BB5 /* CANU */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEA93B3A17204EA600303BB5 /* Build configuration list for PBXNativeTarget "CANU" */;
+			buildPhases = (
+				DEA93B1417204EA600303BB5 /* Sources */,
+				DEA93B1517204EA600303BB5 /* Frameworks */,
+				DEA93B1617204EA600303BB5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CANU;
+			productName = CANU;
+			productReference = DEA93B1817204EA600303BB5 /* CANU.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEA93B1017204EA600303BB5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = CANU;
+			};
+			buildConfigurationList = DEA93B1317204EA600303BB5 /* Build configuration list for PBXProject "CANU" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DEA93B0F17204EA600303BB5;
+			productRefGroup = DEA93B1917204EA600303BB5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEA93B1717204EA600303BB5 /* CANU */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DEA93B1617204EA600303BB5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA93B2817204EA600303BB5 /* InfoPlist.strings in Resources */,
+				DEA93B3017204EA600303BB5 /* Default.png in Resources */,
+				DEA93B3217204EA600303BB5 /* Default@2x.png in Resources */,
+				DEA93B3417204EA600303BB5 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEA93B1417204EA600303BB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
+				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
+				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DEA93B2617204EA600303BB5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEA93B2717204EA600303BB5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DEA93B3817204EA600303BB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DEA93B3917204EA600303BB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DEA93B3B17204EA600303BB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
+				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DEA93B3C17204EA600303BB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
+				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEA93B1317204EA600303BB5 /* Build configuration list for PBXProject "CANU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEA93B3817204EA600303BB5 /* Debug */,
+				DEA93B3917204EA600303BB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEA93B3A17204EA600303BB5 /* Build configuration list for PBXNativeTarget "CANU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEA93B3B17204EA600303BB5 /* Debug */,
+				DEA93B3C17204EA600303BB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DEA93B3617204EA600303BB5 /* CANU.xcdatamodel */,
+			);
+			currentVersion = DEA93B3617204EA600303BB5 /* CANU.xcdatamodel */;
+			path = CANU.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DEA93B1017204EA600303BB5 /* Project object */;
+}
