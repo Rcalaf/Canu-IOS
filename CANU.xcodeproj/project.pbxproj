@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2F59D717269C77007AD8FB /* UserProfileViewController.m */; };
 		DEA93B1C17204EA600303BB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
 		DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1D17204EA600303BB5 /* Foundation.framework */; };
 		DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */; };
@@ -18,9 +19,34 @@
 		DEA93B3217204EA600303BB5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B3117204EA600303BB5 /* Default@2x.png */; };
 		DEA93B3417204EA600303BB5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B3317204EA600303BB5 /* Default-568h@2x.png */; };
 		DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */; };
+		DEA93B3E17204EC400303BB5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B3D17204EC400303BB5 /* SystemConfiguration.framework */; };
+		DEA93B4017204ECA00303BB5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B3F17204ECA00303BB5 /* MobileCoreServices.framework */; };
+		DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B4417204EF100303BB5 /* AFHTTPClient.m */; };
+		DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B4617204EF100303BB5 /* AFHTTPRequestOperation.m */; };
+		DEA93B5817204EF100303BB5 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B4817204EF100303BB5 /* AFImageRequestOperation.m */; };
+		DEA93B5917204EF100303BB5 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B4A17204EF100303BB5 /* AFJSONRequestOperation.m */; };
+		DEA93B5A17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B4C17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m */; };
+		DEA93B5B17204EF100303BB5 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B4F17204EF100303BB5 /* AFPropertyListRequestOperation.m */; };
+		DEA93B5C17204EF100303BB5 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B5117204EF100303BB5 /* AFURLConnectionOperation.m */; };
+		DEA93B5D17204EF100303BB5 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B5317204EF100303BB5 /* AFXMLRequestOperation.m */; };
+		DEA93B5E17204EF100303BB5 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B5517204EF100303BB5 /* UIImageView+AFNetworking.m */; };
+		DEA93B6117204F7C00303BB5 /* AFCanuAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B6017204F7C00303BB5 /* AFCanuAPIClient.m */; };
+		DEA93B641720511A00303BB5 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B631720511A00303BB5 /* FacebookSDK.framework */; };
+		DEA93B661720515300303BB5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B651720515300303BB5 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DEA93B681720516000303BB5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B671720516000303BB5 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DEA93B6A1720517F00303BB5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B691720517F00303BB5 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DEA93B6F1720564500303BB5 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B6E1720564500303BB5 /* SignUpViewController.m */; };
+		DEA93B721720565700303BB5 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B711720565700303BB5 /* SignInViewController.m */; };
+		DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */; };
+		DEA93B791720616500303BB5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B781720616500303BB5 /* MainViewController.m */; };
+		DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4A1732BD9B009E9A7D /* Activity.m */; };
+		DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */; };
+		DED4901B17298A61005A0BF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DED4901A17298A61005A0BF9 /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE2F59D617269C77007AD8FB /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
+		DE2F59D717269C77007AD8FB /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		DEA93B1817204EA600303BB5 /* CANU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CANU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA93B1B17204EA600303BB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEA93B1D17204EA600303BB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,6 +62,46 @@
 		DEA93B3117204EA600303BB5 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DEA93B3317204EA600303BB5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		DEA93B3617204EA600303BB5 /* CANU.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CANU.xcdatamodel; sourceTree = "<group>"; };
+		DEA93B3D17204EC400303BB5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DEA93B3F17204ECA00303BB5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		DEA93B4317204EF100303BB5 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		DEA93B4417204EF100303BB5 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
+		DEA93B4517204EF100303BB5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		DEA93B4617204EF100303BB5 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		DEA93B4717204EF100303BB5 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
+		DEA93B4817204EF100303BB5 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
+		DEA93B4917204EF100303BB5 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		DEA93B4A17204EF100303BB5 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		DEA93B4B17204EF100303BB5 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		DEA93B4C17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		DEA93B4D17204EF100303BB5 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		DEA93B4E17204EF100303BB5 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		DEA93B4F17204EF100303BB5 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		DEA93B5017204EF100303BB5 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		DEA93B5117204EF100303BB5 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		DEA93B5217204EF100303BB5 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		DEA93B5317204EF100303BB5 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		DEA93B5417204EF100303BB5 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		DEA93B5517204EF100303BB5 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		DEA93B5F17204F7C00303BB5 /* AFCanuAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCanuAPIClient.h; sourceTree = "<group>"; };
+		DEA93B6017204F7C00303BB5 /* AFCanuAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCanuAPIClient.m; sourceTree = "<group>"; };
+		DEA93B631720511A00303BB5 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		DEA93B651720515300303BB5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		DEA93B671720516000303BB5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		DEA93B691720517F00303BB5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		DEA93B6D1720564500303BB5 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		DEA93B6E1720564500303BB5 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		DEA93B701720565700303BB5 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		DEA93B711720565700303BB5 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		DEA93B771720616500303BB5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		DEA93B781720616500303BB5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		DEBBDA491732BD9B009E9A7D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
+		DEBBDA4A1732BD9B009E9A7D /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
+		DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesViewController.h; sourceTree = "<group>"; };
+		DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesViewController.m; sourceTree = "<group>"; };
+		DED4901917298A61005A0BF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		DED4901A17298A61005A0BF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,20 +109,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEA93B6A1720517F00303BB5 /* Social.framework in Frameworks */,
+				DEA93B681720516000303BB5 /* AdSupport.framework in Frameworks */,
+				DEA93B661720515300303BB5 /* Accounts.framework in Frameworks */,
+				DEA93B4017204ECA00303BB5 /* MobileCoreServices.framework in Frameworks */,
+				DEA93B3E17204EC400303BB5 /* SystemConfiguration.framework in Frameworks */,
 				DEA93B1C17204EA600303BB5 /* UIKit.framework in Frameworks */,
 				DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */,
 				DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */,
 				DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */,
+				DEA93B641720511A00303BB5 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE2F59D917269C7C007AD8FB /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				DE2F59D617269C77007AD8FB /* UserProfileViewController.h */,
+				DE2F59D717269C77007AD8FB /* UserProfileViewController.m */,
+			);
+			name = UserProfile;
+			sourceTree = "<group>";
+		};
 		DEA93B0F17204EA600303BB5 = {
 			isa = PBXGroup;
 			children = (
+				DED4901D17298A6F005A0BF9 /* Models */,
 				DEA93B2317204EA600303BB5 /* CANU */,
+				DEA93B6217204F9600303BB5 /* Networking Extensions */,
+				DEA93B4117204EDC00303BB5 /* Vendor */,
 				DEA93B1A17204EA600303BB5 /* Frameworks */,
 				DEA93B1917204EA600303BB5 /* Products */,
 			);
@@ -73,6 +157,12 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEA93B691720517F00303BB5 /* Social.framework */,
+				DEA93B671720516000303BB5 /* AdSupport.framework */,
+				DEA93B651720515300303BB5 /* Accounts.framework */,
+				DEA93B631720511A00303BB5 /* FacebookSDK.framework */,
+				DEA93B3F17204ECA00303BB5 /* MobileCoreServices.framework */,
+				DEA93B3D17204EC400303BB5 /* SystemConfiguration.framework */,
 				DEA93B1B17204EA600303BB5 /* UIKit.framework */,
 				DEA93B1D17204EA600303BB5 /* Foundation.framework */,
 				DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */,
@@ -88,6 +178,12 @@
 				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
 				DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */,
 				DEA93B2417204EA600303BB5 /* Supporting Files */,
+				DEA93B741720566700303BB5 /* SignUp */,
+				DEA93B731720565B00303BB5 /* SignIn */,
+				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
+				DEA93B7A1720616A00303BB5 /* Main */,
+				DE2F59D917269C7C007AD8FB /* UserProfile */,
+				DEBBDA501732D575009E9A7D /* ActivitiesTableView */,
 			);
 			path = CANU;
 			sourceTree = "<group>";
@@ -104,6 +200,112 @@
 				DEA93B3317204EA600303BB5 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DEA93B4117204EDC00303BB5 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B4217204EF100303BB5 /* AFNetworking */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		DEA93B4217204EF100303BB5 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B4317204EF100303BB5 /* AFHTTPClient.h */,
+				DEA93B4417204EF100303BB5 /* AFHTTPClient.m */,
+				DEA93B4517204EF100303BB5 /* AFHTTPRequestOperation.h */,
+				DEA93B4617204EF100303BB5 /* AFHTTPRequestOperation.m */,
+				DEA93B4717204EF100303BB5 /* AFImageRequestOperation.h */,
+				DEA93B4817204EF100303BB5 /* AFImageRequestOperation.m */,
+				DEA93B4917204EF100303BB5 /* AFJSONRequestOperation.h */,
+				DEA93B4A17204EF100303BB5 /* AFJSONRequestOperation.m */,
+				DEA93B4B17204EF100303BB5 /* AFNetworkActivityIndicatorManager.h */,
+				DEA93B4C17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m */,
+				DEA93B4D17204EF100303BB5 /* AFNetworking.h */,
+				DEA93B4E17204EF100303BB5 /* AFPropertyListRequestOperation.h */,
+				DEA93B4F17204EF100303BB5 /* AFPropertyListRequestOperation.m */,
+				DEA93B5017204EF100303BB5 /* AFURLConnectionOperation.h */,
+				DEA93B5117204EF100303BB5 /* AFURLConnectionOperation.m */,
+				DEA93B5217204EF100303BB5 /* AFXMLRequestOperation.h */,
+				DEA93B5317204EF100303BB5 /* AFXMLRequestOperation.m */,
+				DEA93B5417204EF100303BB5 /* UIImageView+AFNetworking.h */,
+				DEA93B5517204EF100303BB5 /* UIImageView+AFNetworking.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		DEA93B6217204F9600303BB5 /* Networking Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B5F17204F7C00303BB5 /* AFCanuAPIClient.h */,
+				DEA93B6017204F7C00303BB5 /* AFCanuAPIClient.m */,
+			);
+			name = "Networking Extensions";
+			sourceTree = "<group>";
+		};
+		DEA93B731720565B00303BB5 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B701720565700303BB5 /* SignInViewController.h */,
+				DEA93B711720565700303BB5 /* SignInViewController.m */,
+			);
+			name = SignIn;
+			sourceTree = "<group>";
+		};
+		DEA93B741720566700303BB5 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B6D1720564500303BB5 /* SignUpViewController.h */,
+				DEA93B6E1720564500303BB5 /* SignUpViewController.m */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		DEA93B7A1720616A00303BB5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DEA93B771720616500303BB5 /* MainViewController.h */,
+				DEA93B781720616500303BB5 /* MainViewController.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		DEBBDA4C1732BDA0009E9A7D /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				DEBBDA491732BD9B009E9A7D /* Activity.h */,
+				DEBBDA4A1732BD9B009E9A7D /* Activity.m */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
+		DEBBDA501732D575009E9A7D /* ActivitiesTableView */ = {
+			isa = PBXGroup;
+			children = (
+				DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */,
+				DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */,
+			);
+			name = ActivitiesTableView;
+			sourceTree = "<group>";
+		};
+		DED4901C17298A67005A0BF9 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DED4901917298A61005A0BF9 /* User.h */,
+				DED4901A17298A61005A0BF9 /* User.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		DED4901D17298A6F005A0BF9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DED4901C17298A67005A0BF9 /* User */,
+				DEBBDA4C1732BDA0009E9A7D /* Activity */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +363,7 @@
 				DEA93B3017204EA600303BB5 /* Default.png in Resources */,
 				DEA93B3217204EA600303BB5 /* Default@2x.png in Resources */,
 				DEA93B3417204EA600303BB5 /* Default-568h@2x.png in Resources */,
+				DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +377,23 @@
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
+				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
+				DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */,
+				DEA93B5817204EF100303BB5 /* AFImageRequestOperation.m in Sources */,
+				DEA93B5917204EF100303BB5 /* AFJSONRequestOperation.m in Sources */,
+				DEA93B5A17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				DEA93B5B17204EF100303BB5 /* AFPropertyListRequestOperation.m in Sources */,
+				DEA93B5C17204EF100303BB5 /* AFURLConnectionOperation.m in Sources */,
+				DEA93B5D17204EF100303BB5 /* AFXMLRequestOperation.m in Sources */,
+				DEA93B5E17204EF100303BB5 /* UIImageView+AFNetworking.m in Sources */,
+				DEA93B6117204F7C00303BB5 /* AFCanuAPIClient.m in Sources */,
+				DEA93B6F1720564500303BB5 /* SignUpViewController.m in Sources */,
+				DEA93B721720565700303BB5 /* SignInViewController.m in Sources */,
+				DEA93B791720616500303BB5 /* MainViewController.m in Sources */,
+				DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */,
+				DED4901B17298A61005A0BF9 /* User.m in Sources */,
+				DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */,
+				DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,9 +470,17 @@
 		DEA93B3B17204EA600303BB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
 				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -261,9 +489,17 @@
 		DEA93B3C17204EA600303BB5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
 				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				OTHER_LDFLAGS = (
+					"-lsqlite3.0",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -288,6 +524,7 @@
 				DEA93B3C17204EA600303BB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
