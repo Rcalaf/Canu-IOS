@@ -16,5 +16,6 @@
 //@property (readonly) User *user;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
++ (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
 @end

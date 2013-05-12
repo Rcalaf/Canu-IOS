@@ -11,4 +11,5 @@
 @interface UserProfileViewController : UIViewController
 
 -(IBAction)performLogout:(id)sender;
+-(IBAction)showActivities:(id)sender;
 @end
