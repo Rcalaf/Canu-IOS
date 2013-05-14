@@ -15,12 +15,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *getOn;
 @property (weak, nonatomic) IBOutlet UIButton *logIn;
 
+
 @end
 
 @implementation MainViewController
 
 @synthesize getOn = _getOn;
 @synthesize logIn = _logIn;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,19 +50,41 @@
 -(void) loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:(235.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
+   // [UIColor colorWithRed:(255.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
     
-    _getOn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_getOn setTitle:@"Get On" forState:UIControlStateNormal];
-    [_getOn setFrame:CGRectMake(25.0, 25.0, 200.0, 45.0)];
-    [_getOn addTarget:self action:@selector(goSignUp:) forControlEvents:UIControlEventTouchDown];
+    UIScrollView *scrollDescription = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403.0)];
+    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scroll_content.png"]];
     
-    _logIn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_logIn setTitle:@"Log In" forState:UIControlStateNormal];
-    [_logIn setFrame:CGRectMake(25.0, 85.0, 200.0, 45.0)];
-    [_logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchDown];
+    [scrollDescription addSubview:backgroundImage];
+    scrollDescription.contentSize = backgroundImage.image.size;
     
-    //UIActivityIndicatorView *
+    
+    UIView *buttonBox = [[UIView alloc] initWithFrame:CGRectMake(0.0, 403.0, 320.0, 57.0)];
+    [buttonBox setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
+     
+    _getOn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_getOn setTitle:@"GET ON" forState:UIControlStateNormal];
+    [_getOn setFrame:CGRectMake(10.0, 10.0, 145.0, 37.0)];
+    [_getOn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
+    _getOn.titleLabel.font = [UIFont fontWithName:@"Lato" size:12.0];
+    [_getOn setBackgroundColor:[UIColor colorWithRed:(255.0 / 255.0) green:(255.0 / 255.0) blue:(255.0 / 255.0) alpha: 1]];
+    [_getOn addTarget:self action:@selector(goSignUp:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _logIn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_logIn setTitle:@"LOG IN" forState:UIControlStateNormal];
+    [_logIn setFrame:CGRectMake(165.0, 10.0, 145.0, 37.0)];
+    [_logIn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
+    _logIn.titleLabel.font = [UIFont fontWithName:@"Lato" size:12.0];
+    [_logIn setBackgroundColor:[UIColor colorWithRed:(166.0 / 255.0) green:(207.0 / 255.0) blue:(212.0 / 255.0) alpha: 1]];
+    [_logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
+
+    [buttonBox addSubview:_getOn];
+    [buttonBox addSubview:_logIn];
+    [self.view addSubview:scrollDescription];
+    [self.view addSubview:buttonBox];
+    
+    
 }
 
 - (void)viewDidLoad
@@ -68,9 +92,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    
-    [self.view addSubview:_getOn];
-    [self.view addSubview:_logIn];
+
+   // [self.view addSubview:_logIn];
 }
 
 - (void)viewWillAppear:(BOOL)animated
