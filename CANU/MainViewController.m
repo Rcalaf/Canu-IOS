@@ -50,6 +50,7 @@
 -(void) loadView
 {
     [super loadView];
+    
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
    // [UIColor colorWithRed:(255.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
     
@@ -58,6 +59,10 @@
     
     [scrollDescription addSubview:backgroundImage];
     scrollDescription.contentSize = backgroundImage.image.size;
+    CGPoint bottomOffset = CGPointMake(0.0, 650.0);
+    
+    
+    [scrollDescription setContentOffset:bottomOffset animated:YES];
     
     
     UIView *buttonBox = [[UIView alloc] initWithFrame:CGRectMake(0.0, 403.0, 320.0, 57.0)];
@@ -67,7 +72,7 @@
     [_getOn setTitle:@"GET ON" forState:UIControlStateNormal];
     [_getOn setFrame:CGRectMake(10.0, 10.0, 145.0, 37.0)];
     [_getOn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
-    _getOn.titleLabel.font = [UIFont fontWithName:@"Lato" size:12.0];
+    _getOn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
     [_getOn setBackgroundColor:[UIColor colorWithRed:(255.0 / 255.0) green:(255.0 / 255.0) blue:(255.0 / 255.0) alpha: 1]];
     [_getOn addTarget:self action:@selector(goSignUp:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -75,7 +80,7 @@
     [_logIn setTitle:@"LOG IN" forState:UIControlStateNormal];
     [_logIn setFrame:CGRectMake(165.0, 10.0, 145.0, 37.0)];
     [_logIn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
-    _logIn.titleLabel.font = [UIFont fontWithName:@"Lato" size:12.0];
+    _logIn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
     [_logIn setBackgroundColor:[UIColor colorWithRed:(166.0 / 255.0) green:(207.0 / 255.0) blue:(212.0 / 255.0) alpha: 1]];
     [_logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -92,8 +97,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-
-   // [self.view addSubview:_logIn];
 }
 
 - (void)viewWillAppear:(BOOL)animated

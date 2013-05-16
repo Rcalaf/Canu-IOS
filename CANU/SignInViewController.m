@@ -25,17 +25,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.username = [[UITextField alloc] initWithFrame:CGRectMake(25.0, 25.0, 200.0, 25.0)];
-        self.username.borderStyle = UITextBorderStyleRoundedRect;
-        self.username.placeholder = @"USERNAME";
-        self.username.delegate = self;
-        [self.view addSubview:self.username];
-        self.password = [[UITextField alloc] initWithFrame:CGRectMake(25.0, 60.0, 200.0, 25.0)];
-        self.password.borderStyle = UITextBorderStyleRoundedRect;
-        self.password.placeholder = @"PASSWORD";
-        self.password.secureTextEntry = YES;
-        self.password.delegate = self;
-        [self.view addSubview:self.password];
+
     }
     return self;
 }
@@ -86,13 +76,55 @@
 -(void) loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:(235.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"signin_bg.png"]];
+    
+    UIView  *container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0, 300.0, 94.5)];
+    [container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
+    
+    UIView *userIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 47.0, 47.0)];
+    UIView *lockerIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 47.5, 47.0, 47.0)];
+    userIconView.backgroundColor = [UIColor whiteColor];
+    lockerIconView.backgroundColor = [UIColor whiteColor];
+   
+    [container addSubview:userIconView];
+    [container addSubview:lockerIconView];
+    
+    self.username = [[UITextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
+    self.username.borderStyle = UITextBorderStyleNone;
+    self.username.backgroundColor = [UIColor whiteColor];
+    self.username.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+    self.username.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.username.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
+    self.username.placeholder = @"USERNAME";
+    self.username.delegate = self;
+    [container addSubview:self.username];
+    
+    self.password = [[UITextField alloc] initWithFrame:CGRectMake(47.5, 47.5, 252.5, 47.0)];
+    self.password.backgroundColor = [UIColor whiteColor];
+    self.password.borderStyle = UITextBorderStyleNone;
+    self.password.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+    self.password.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.password.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
+    self.password.placeholder = @"PASSWORD";
+    self.password.secureTextEntry = YES;
+    self.password.delegate = self;
+    [container addSubview:self.password];
+
+    [self.view addSubview:container];
+    
+
+    
+    
+   
+    
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = NO;
    
 }
 

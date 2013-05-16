@@ -49,6 +49,7 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Lato-Bol.ttf</string>
 		<string>Lato-Reg.ttf</string>
 	</array>
 </dict>
