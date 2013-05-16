@@ -9,17 +9,23 @@
 #import "SignInViewController.h"
 #import "UserProfileViewController.h"
 #import "AFCanuAPIClient.h"
+#import "UICanuTextField.h"
 
 @interface SignInViewController ()
 
 @property (strong, nonatomic) IBOutlet UITextField *username;
 @property (strong, nonatomic) IBOutlet UITextField *password;
+
+- (void)keyboardWillHide:(NSNotification *)notification;
+- (void)keyboardWillShow:(NSNotification *)notification;
+
 @end
 
 @implementation SignInViewController
 
 @synthesize username = _username;
 @synthesize password = _password;
+__strong UIView *_container;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,10 +67,10 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-   // NSLog(@"Should Return Editing");
     [textField resignFirstResponder];
     return YES;
 }
+
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField
 {
@@ -73,51 +79,41 @@
     return YES;
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"An event occure");
+}
+
 -(void) loadView
 {
     [super loadView];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"signin_bg.png"]];
     
-    UIView  *container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0, 300.0, 94.5)];
-    [container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
+    _container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0, 300.0, 94.5)];
+    [_container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
     
     UIView *userIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 47.0, 47.0)];
     UIView *lockerIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 47.5, 47.0, 47.0)];
     userIconView.backgroundColor = [UIColor whiteColor];
     lockerIconView.backgroundColor = [UIColor whiteColor];
    
-    [container addSubview:userIconView];
-    [container addSubview:lockerIconView];
+    [_container addSubview:userIconView];
+    [_container addSubview:lockerIconView];
     
-    self.username = [[UITextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
-    self.username.borderStyle = UITextBorderStyleNone;
-    self.username.backgroundColor = [UIColor whiteColor];
-    self.username.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
-    self.username.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.username.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
-    self.username.placeholder = @"USERNAME";
+    self.username = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
+    self.username.placeholder = @"Username";
     self.username.delegate = self;
-    [container addSubview:self.username];
+    [_container addSubview:self.username];
     
-    self.password = [[UITextField alloc] initWithFrame:CGRectMake(47.5, 47.5, 252.5, 47.0)];
-    self.password.backgroundColor = [UIColor whiteColor];
-    self.password.borderStyle = UITextBorderStyleNone;
-    self.password.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
-    self.password.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-    self.password.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
-    self.password.placeholder = @"PASSWORD";
+    self.password = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 47.5, 252.5, 47.0)];
+    self.password.placeholder = @"Password";
     self.password.secureTextEntry = YES;
     self.password.delegate = self;
-    [container addSubview:self.password];
+    [_container addSubview:self.password];
 
-    [self.view addSubview:container];
-    
+    [self.view addSubview:_container];
 
-    
-    
-   
-    
     
 }
 
@@ -128,17 +124,50 @@
    
 }
 
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        _container.frame =CGRectMake(10.0, 139.0, _container.frame.size.width, _container.frame.size.height);
+    }];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        _container.frame =CGRectMake(10.0, 298.0, _container.frame.size.width, _container.frame.size.height);
+    }];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"login" style:UIBarButtonItemStyleBordered target:self action:@selector(login:)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+    _container = nil;
     _username = nil;
     _password = nil;
+    
     [super viewDidUnload];
 }
 
