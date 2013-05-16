@@ -15,6 +15,10 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *username;
 @property (strong, nonatomic) IBOutlet UITextField *password;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *loginButton;
+
+
 
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)keyboardWillShow:(NSNotification *)notification;
@@ -25,7 +29,11 @@
 
 @synthesize username = _username;
 @synthesize password = _password;
+@synthesize backButton = _backButton;
+@synthesize loginButton = _loginButton;
+
 __strong UIView *_container;
+__strong UIView *_toolBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,7 +71,11 @@ __strong UIView *_container;
 
 }
 
-
+-(IBAction)back:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"Should Pop controller");
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -113,13 +125,35 @@ __strong UIView *_container;
     [_container addSubview:self.password];
 
     [self.view addSubview:_container];
-
+    
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+    _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    
+    _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_loginButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
+    [_loginButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
+    [_loginButton setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
+    _loginButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+     [_loginButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+    
+    [_toolBar addSubview:_loginButton];
+    
+    _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
+    [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    
+    [_toolBar addSubview:_backButton];
+    
+    
+    [self.view addSubview:_toolBar];
     
 }
 
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+
+
     //self.navigationController.navigationBarHidden = NO;
    
 }
@@ -141,7 +175,10 @@ __strong UIView *_container;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"login" style:UIBarButtonItemStyleBordered target:self action:@selector(login:)];
+    [_loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [_backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"login" style:UIBarButtonItemStyleBordered target:self action:@selector(login:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -163,7 +200,9 @@ __strong UIView *_container;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillHideNotification
+
                                                   object:nil];
+    _toolBar = nil;
     _container = nil;
     _username = nil;
     _password = nil;
