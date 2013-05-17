@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) UIView *container;
+@property (strong, nonatomic) UIView *toolBar;
 
 
 
@@ -32,8 +34,8 @@
 @synthesize backButton = _backButton;
 @synthesize loginButton = _loginButton;
 
-__strong UIView *_container;
-__strong UIView *_toolBar;
+@synthesize container = _container;
+@synthesize toolBar =  _toolBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,34 +69,15 @@ __strong UIView *_toolBar;
                                          //NSLog(@"%@",error);
                                          NSLog(@"Error");
                                      }];
-    }
+    } 
 
 }
 
 -(IBAction)back:(id)sender
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
-    NSLog(@"Should Pop controller");
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    NSLog(@"Should Return Editing");
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    NSLog(@"An event occure");
-}
 
 -(void) loadView
 {
@@ -107,19 +90,21 @@ __strong UIView *_toolBar;
     
     UIView *userIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 47.0, 47.0)];
     UIView *lockerIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 47.5, 47.0, 47.0)];
-    userIconView.backgroundColor = [UIColor whiteColor];
-    lockerIconView.backgroundColor = [UIColor whiteColor];
+    userIconView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon_username.png"]];
+    lockerIconView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon_password.png"]];
    
     [_container addSubview:userIconView];
     [_container addSubview:lockerIconView];
     
     self.username = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
     self.username.placeholder = @"Username";
+    [self.password setReturnKeyType:UIReturnKeyNext];
     self.username.delegate = self;
     [_container addSubview:self.username];
     
     self.password = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 47.5, 252.5, 47.0)];
     self.password.placeholder = @"Password";
+    [self.password setReturnKeyType:UIReturnKeyGo];
     self.password.secureTextEntry = YES;
     self.password.delegate = self;
     [_container addSubview:self.password];
@@ -130,11 +115,11 @@ __strong UIView *_toolBar;
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_loginButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
+    [_loginButton setTitle:@"LOG IN" forState:UIControlStateNormal];
     [_loginButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
-    [_loginButton setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
+    [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _loginButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-     [_loginButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+    [_loginButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
     
     [_toolBar addSubview:_loginButton];
     
@@ -158,6 +143,31 @@ __strong UIView *_toolBar;
    
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField.placeholder isEqual: @"Password"]) {
+        [self login:nil];
+    } else {
+        [self.password becomeFirstResponder];
+    }
+    
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.password resignFirstResponder];
+    [self.username resignFirstResponder];
+}
+
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.25 animations:^{
@@ -177,6 +187,7 @@ __strong UIView *_toolBar;
     [super viewDidLoad];
     [_loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [_backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+
     
     //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"login" style:UIBarButtonItemStyleBordered target:self action:@selector(login:)];
     

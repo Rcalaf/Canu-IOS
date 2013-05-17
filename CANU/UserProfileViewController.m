@@ -26,19 +26,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.view.backgroundColor = [UIColor colorWithRed:(235.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
-        
-        self.logoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [self.logoutButton addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchDown];
-        self.logoutButton.frame = CGRectMake(25.0, 25.0, 200.0, 50.0);
-        [self.logoutButton setTitle:@"Log Out" forState:UIControlStateNormal];
-        [self.view addSubview:self.logoutButton];
-        
-        self.activitiesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [self.activitiesButton addTarget:self action:@selector(showActivities:) forControlEvents:UIControlEventTouchDown];
-        self.activitiesButton.frame = CGRectMake(25.0, 85.0, 200.0, 50.0);
-        [self.activitiesButton setTitle:@"Activities" forState:UIControlStateNormal];
-        [self.view addSubview:self.activitiesButton];
+  
     }
     return self;
 }
@@ -59,11 +47,23 @@
     [self.navigationController pushViewController:[[ActivitiesViewController alloc] init] animated:YES];
 }
 
-/*-(void) loadView
+-(void) loadView
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:(235.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
-}*/
+ 
+    self.logoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.logoutButton addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchDown];
+    self.logoutButton.frame = CGRectMake(25.0, 25.0, 200.0, 50.0);
+    [self.logoutButton setTitle:@"Log Out" forState:UIControlStateNormal];
+    [self.view addSubview:self.logoutButton];
+ 
+    self.activitiesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.activitiesButton addTarget:self action:@selector(showActivities:) forControlEvents:UIControlEventTouchDown];
+    self.activitiesButton.frame = CGRectMake(25.0, 85.0, 200.0, 50.0);
+    [self.activitiesButton setTitle:@"Activities" forState:UIControlStateNormal];
+    [self.view addSubview:self.activitiesButton];
+}
 
 - (void)viewDidLoad
 {

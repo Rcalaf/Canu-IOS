@@ -79,9 +79,10 @@
     _logIn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_logIn setTitle:@"LOG IN" forState:UIControlStateNormal];
     [_logIn setFrame:CGRectMake(165.0, 10.0, 145.0, 37.0)];
-    [_logIn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
+    [_logIn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _logIn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [_logIn setBackgroundColor:[UIColor colorWithRed:(166.0 / 255.0) green:(207.0 / 255.0) blue:(212.0 / 255.0) alpha: 1]];
+  //  [_logIn setBackgroundColor:[UIColor colorWithRed:(166.0 / 255.0) green:(207.0 / 255.0) blue:(212.0 / 255.0) alpha: 1]];
+    [_logIn setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
     [_logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
 
     [buttonBox addSubview:_getOn];

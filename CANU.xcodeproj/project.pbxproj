@@ -53,6 +53,16 @@
 		DED4901B17298A61005A0BF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DED4901A17298A61005A0BF9 /* User.m */; };
 		DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A69174534830087CB8A /* back_arrow.png */; };
 		DEFD7A6C174534830087CB8A /* back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A6A174534830087CB8A /* back_arrow@2x.png */; };
+		DEFD7A71174694660087CB8A /* facebook_btn_off.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A6D174694660087CB8A /* facebook_btn_off.png */; };
+		DEFD7A72174694660087CB8A /* facebook_btn_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A6E174694660087CB8A /* facebook_btn_off@2x.png */; };
+		DEFD7A73174694660087CB8A /* facebook_btn_on.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A6F174694660087CB8A /* facebook_btn_on.png */; };
+		DEFD7A74174694660087CB8A /* facebook_btn_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A70174694660087CB8A /* facebook_btn_on@2x.png */; };
+		DEFD7A761746CAAB0087CB8A /* icon_password.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A751746CAAB0087CB8A /* icon_password.png */; };
+		DEFD7A7C1746CACA0087CB8A /* icon_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A771746CACA0087CB8A /* icon_password@2x.png */; };
+		DEFD7A7D1746CACA0087CB8A /* icon_username.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A781746CACA0087CB8A /* icon_username.png */; };
+		DEFD7A7E1746CACA0087CB8A /* icon_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A791746CACA0087CB8A /* icon_username@2x.png */; };
+		DEFD7A7F1746CACA0087CB8A /* icon_userpic.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A7A1746CACA0087CB8A /* icon_userpic.png */; };
+		DEFD7A801746CACA0087CB8A /* icon_userpic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A7B1746CACA0087CB8A /* icon_userpic@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +135,16 @@
 		DED4901A17298A61005A0BF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		DEFD7A69174534830087CB8A /* back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_arrow.png; sourceTree = "<group>"; };
 		DEFD7A6A174534830087CB8A /* back_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_arrow@2x.png"; sourceTree = "<group>"; };
+		DEFD7A6D174694660087CB8A /* facebook_btn_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_btn_off.png; sourceTree = "<group>"; };
+		DEFD7A6E174694660087CB8A /* facebook_btn_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_btn_off@2x.png"; sourceTree = "<group>"; };
+		DEFD7A6F174694660087CB8A /* facebook_btn_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_btn_on.png; sourceTree = "<group>"; };
+		DEFD7A70174694660087CB8A /* facebook_btn_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook_btn_on@2x.png"; sourceTree = "<group>"; };
+		DEFD7A751746CAAB0087CB8A /* icon_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_password.png; sourceTree = "<group>"; };
+		DEFD7A771746CACA0087CB8A /* icon_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_password@2x.png"; sourceTree = "<group>"; };
+		DEFD7A781746CACA0087CB8A /* icon_username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_username.png; sourceTree = "<group>"; };
+		DEFD7A791746CACA0087CB8A /* icon_username@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_username@2x.png"; sourceTree = "<group>"; };
+		DEFD7A7A1746CACA0087CB8A /* icon_userpic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_userpic.png; sourceTree = "<group>"; };
+		DEFD7A7B1746CACA0087CB8A /* icon_userpic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_userpic@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +200,16 @@
 		DE4D952517429F1000FB026F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DEFD7A771746CACA0087CB8A /* icon_password@2x.png */,
+				DEFD7A781746CACA0087CB8A /* icon_username.png */,
+				DEFD7A791746CACA0087CB8A /* icon_username@2x.png */,
+				DEFD7A7A1746CACA0087CB8A /* icon_userpic.png */,
+				DEFD7A7B1746CACA0087CB8A /* icon_userpic@2x.png */,
+				DEFD7A751746CAAB0087CB8A /* icon_password.png */,
+				DEFD7A6D174694660087CB8A /* facebook_btn_off.png */,
+				DEFD7A6E174694660087CB8A /* facebook_btn_off@2x.png */,
+				DEFD7A6F174694660087CB8A /* facebook_btn_on.png */,
+				DEFD7A70174694660087CB8A /* facebook_btn_on@2x.png */,
 				DE85A62C1743AB2300A050E5 /* signin_bg.png */,
 				DE85A62D1743AB2300A050E5 /* signin_bg@2x.png */,
 				DE85A62B1743A75600A050E5 /* MainView */,
@@ -458,6 +488,16 @@
 				DE85A62F1743AB2300A050E5 /* signin_bg@2x.png in Resources */,
 				DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */,
 				DEFD7A6C174534830087CB8A /* back_arrow@2x.png in Resources */,
+				DEFD7A71174694660087CB8A /* facebook_btn_off.png in Resources */,
+				DEFD7A72174694660087CB8A /* facebook_btn_off@2x.png in Resources */,
+				DEFD7A73174694660087CB8A /* facebook_btn_on.png in Resources */,
+				DEFD7A74174694660087CB8A /* facebook_btn_on@2x.png in Resources */,
+				DEFD7A761746CAAB0087CB8A /* icon_password.png in Resources */,
+				DEFD7A7C1746CACA0087CB8A /* icon_password@2x.png in Resources */,
+				DEFD7A7D1746CACA0087CB8A /* icon_username.png in Resources */,
+				DEFD7A7E1746CACA0087CB8A /* icon_username@2x.png in Resources */,
+				DEFD7A7F1746CACA0087CB8A /* icon_userpic.png in Resources */,
+				DEFD7A801746CACA0087CB8A /* icon_userpic@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
