@@ -60,6 +60,10 @@
 
 -(IBAction)back:(id)sender
 {
+    
+    AppDelegate *appDelegate =
+    [[UIApplication sharedApplication] delegate];
+    [appDelegate closeSession];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -67,7 +71,6 @@
 
 - (void)sessionStateChanged:(NSNotification*)notification {
     if (FBSession.activeSession.isOpen) {
-        [self.facebookButton setTitle:@"Unlink Facebook" forState:UIControlStateNormal];
         [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_on.png"] forState:UIControlStateNormal];
         
         [FBRequestConnection
@@ -288,9 +291,9 @@
     
     self.facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
     if (FBSession.activeSession.isOpen) {
-    [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_off.png"] forState:UIControlStateNormal];
+        [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_on.png"] forState:UIControlStateNormal]; 
     }else{
-    [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_on.png"] forState:UIControlStateNormal]; 
+        [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_off.png"] forState:UIControlStateNormal];
     }
     [self.facebookButton addTarget:self action:@selector(authButtonAction:) forControlEvents:UIControlEventTouchDown];
     self.facebookButton.frame = CGRectMake(10.0, 241.5, 300.0, 47.0);
