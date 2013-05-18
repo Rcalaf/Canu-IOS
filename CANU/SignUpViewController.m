@@ -172,7 +172,12 @@
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
-    
+
+    if ([textField.text isEqualToString:@""]) {
+        textField.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+    } else{
+        textField.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+    }
     if (self.userName == textField) {
         [textField resignFirstResponder];
         [self.password becomeFirstResponder];
@@ -189,6 +194,31 @@
         [textField resignFirstResponder];
     }
     
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    CGPoint offset;
+    //textField.backgroundColor = [UIColor redColor];
+    if (self.userName == textField) {
+        offset = CGPointMake(0.0, 0.0);
+    }
+    else if (self.password == textField) {
+        offset = CGPointMake(0.0, 0.0);
+    }
+    else if (self.name == textField) {
+        offset = CGPointMake(0.0, 159.0);
+    }
+    else if (self.email == textField) {
+        offset = CGPointMake(0.0, 159.0);
+    }
+    
+    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height + 159.0);
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [_scrollView setContentOffset:offset animated:YES];
+    }];
     return YES;
 }
 
@@ -257,7 +287,11 @@
     [_scrollView addSubview:container];
     
     self.facebookButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if (FBSession.activeSession.isOpen) {
     [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_off.png"] forState:UIControlStateNormal];
+    }else{
+    [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_on.png"] forState:UIControlStateNormal]; 
+    }
     [self.facebookButton addTarget:self action:@selector(authButtonAction:) forControlEvents:UIControlEventTouchDown];
     self.facebookButton.frame = CGRectMake(10.0, 241.5, 300.0, 47.0);
     [self.facebookButton setTitle:@"Link Facebook" forState:UIControlStateNormal];
