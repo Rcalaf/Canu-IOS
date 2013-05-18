@@ -27,7 +27,6 @@ NSString *const FBSessionStateChangedNotification =
     //self.window.backgroundColor = [UIColor whiteColor];
    //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
-    NSLog(@"%@",token);
     UINavigationController *nvc = [[UINavigationController alloc] init];
     if (token) {
         UserProfileViewController *upvc = [[UserProfileViewController alloc] init];

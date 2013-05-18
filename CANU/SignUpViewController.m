@@ -125,53 +125,39 @@
 
 - (IBAction)performSingUp:(id)sender
 {
-    /*
-    NSString *alertMessage = @"";
-    if([self.name.text isEqualToString: @"name"]){
-        alertMessage = [alertMessage
-                        stringByAppendingString:
-                        [NSString stringWithFormat:@"%@ must be set\n",
-                         self.name.text]];
-    }
-    if([self.email.text isEqualToString: @"email"]){
-        alertMessage = [alertMessage
-                        stringByAppendingString:
-                        [NSString stringWithFormat:@"%@ must be set\n",
-                         self.email.text]];
-    }
-    if([self.userName.text isEqualToString: @"user name"]){
-        alertMessage = [alertMessage
-                        stringByAppendingString:
-                        [NSString stringWithFormat:@"%@ must be set\n",
-                         self.userName.text]];
-    }
-    if([self.password.text isEqualToString: @"password"]){
-        alertMessage = [alertMessage
-                        stringByAppendingString:
-                        [NSString stringWithFormat:@"%@ must be set\n",
-                        self.password.text]];
-    }
-    if(![alertMessage isEqualToString:@""]){
-        UIAlertView *signInVerificationErrors = [[UIAlertView alloc] initWithTitle:@"Sign in Verification" message:alertMessage delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [signInVerificationErrors show];
-    }*/
     
+   // NSString *alertMessage = @"";
+    BOOL incomplete = NO;
+    if (!self.name.text || !self.email.text ||
+        !self.userName.text || !self.password.text)
+        {
+            incomplete = YES;
+     /*   alertMessage = [alertMessage
+                        stringByAppendingString:
+                        [NSString stringWithFormat:@"%@ must be set\n",
+                         self.name.text]];*/
+    }
     
     //Another userName existance verification
-    NSArray *objectsArray = [NSArray arrayWithObjects:self.userName.text,self.password.text,self.name.text,self.email.text,nil];
-    NSArray *keysArray = [NSArray arrayWithObjects:@"username",@"password",@"first_name",@"email",nil];
+    if (!incomplete) {
+        NSArray *objectsArray = [NSArray arrayWithObjects:self.userName.text,self.password.text,self.name.text,self.email.text,nil];
+        NSArray *keysArray = [NSArray arrayWithObjects:@"username",@"password",@"first_name",@"email",nil];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     
-    [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:parameters
+        [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:parameters
                                      success:^(AFHTTPRequestOperation *operation, id JSON) {
                                          NSLog(@"%@",operation);
                                          NSLog(@"%@",JSON);
                                      }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          //NSLog(@"%@",operation);
-                                         NSLog(@"%@",error);
+                                         
+                                          NSLog(@"Request Failed with Error: %@", [[error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"] class]);
+                                      
+                                         
                                      }];
+    }
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
@@ -355,6 +341,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+
+#warning Be sure you save the taken picture....
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{

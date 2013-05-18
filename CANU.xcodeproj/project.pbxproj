@@ -67,6 +67,8 @@
 		DEFD7A861746F7650087CB8A /* feedback_bad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A821746F7650087CB8A /* feedback_bad@2x.png */; };
 		DEFD7A871746F7650087CB8A /* feedback_good.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A831746F7650087CB8A /* feedback_good.png */; };
 		DEFD7A881746F7650087CB8A /* feedback_good@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A841746F7650087CB8A /* feedback_good@2x.png */; };
+		DEFD7A971747F8370087CB8A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A961747F8370087CB8A /* icon.png */; };
+		DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A981747F83E0087CB8A /* icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +155,8 @@
 		DEFD7A821746F7650087CB8A /* feedback_bad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_bad@2x.png"; sourceTree = "<group>"; };
 		DEFD7A831746F7650087CB8A /* feedback_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback_good.png; sourceTree = "<group>"; };
 		DEFD7A841746F7650087CB8A /* feedback_good@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback_good@2x.png"; sourceTree = "<group>"; };
+		DEFD7A961747F8370087CB8A /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../icon.png; sourceTree = "<group>"; };
+		DEFD7A981747F83E0087CB8A /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,8 @@
 		DE4D952417429EFE00FB026F /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				DEFD7A981747F83E0087CB8A /* icon@2x.png */,
+				DEFD7A961747F8370087CB8A /* icon.png */,
 				DEFD7A771746CACA0087CB8A /* icon_password@2x.png */,
 				DEFD7A781746CACA0087CB8A /* icon_username.png */,
 				DEFD7A791746CACA0087CB8A /* icon_username@2x.png */,
@@ -514,6 +520,8 @@
 				DEFD7A861746F7650087CB8A /* feedback_bad@2x.png in Resources */,
 				DEFD7A871746F7650087CB8A /* feedback_good.png in Resources */,
 				DEFD7A881746F7650087CB8A /* feedback_good@2x.png in Resources */,
+				DEFD7A971747F8370087CB8A /* icon.png in Resources */,
+				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
