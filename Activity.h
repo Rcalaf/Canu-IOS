@@ -10,8 +10,11 @@
 
 @interface Activity : NSObject
 
-@property (readonly) NSUInteger activityID;
-@property (readonly) NSString *text;
+@property (readonly) NSUInteger activityId;
+@property (readonly) NSString *title;
+@property (readonly) NSString *description;
+//@property (readonly)
+
 
 //@property (readonly) User *user;
 

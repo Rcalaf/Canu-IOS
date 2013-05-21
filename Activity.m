@@ -11,8 +11,9 @@
 
 @implementation Activity
 
-@synthesize activityID = _activityID;
-@synthesize text = _text;
+@synthesize activityId = _activityId;
+@synthesize title = _title;
+@synthesize description = _description;
 
 //@synthesize user = _user;
 
@@ -22,8 +23,8 @@
         return nil;
     }
     
-    _activityID = [[attributes valueForKeyPath:@"id"] integerValue];
-    _text = [attributes valueForKeyPath:@"title"];
+    _activityId = [[attributes valueForKeyPath:@"id"] integerValue];
+    _title = [attributes valueForKeyPath:@"title"];
     
    //_user = [[User alloc] initWithAttributes:[attributes valueForKeyPath:@"user"]];
     

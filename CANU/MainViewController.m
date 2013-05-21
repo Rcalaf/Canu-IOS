@@ -69,7 +69,7 @@
     [buttonBox setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
      
     _getOn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_getOn setTitle:@"GET ON" forState:UIControlStateNormal];
+    [_getOn setTitle:@"SIGN UP" forState:UIControlStateNormal];
     [_getOn setFrame:CGRectMake(10.0, 10.0, 145.0, 37.0)];
     [_getOn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
     _getOn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
@@ -77,7 +77,7 @@
     [_getOn addTarget:self action:@selector(goSignUp:) forControlEvents:UIControlEventTouchUpInside];
     
     _logIn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_logIn setTitle:@"LOG IN" forState:UIControlStateNormal];
+    [_logIn setTitle:@"SIGN IN" forState:UIControlStateNormal];
     [_logIn setFrame:CGRectMake(165.0, 10.0, 145.0, 37.0)];
     [_logIn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _logIn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];

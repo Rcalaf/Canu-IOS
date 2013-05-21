@@ -8,6 +8,7 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "SignUpViewController.h"
+#import "UserProfileViewController.h"
 #import "AFCanuAPIClient.h"
 #import "AppDelegate.h"
 #import "UICanuTextField.h"
@@ -99,6 +100,17 @@
                  self.email.text = [user objectForKey:@"email"];
                  // Display the user info
                 // [self authButtonAction:self.authButton];
+                 NSURL *facebookGraphUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@.%@/picture?type=large",user.first_name,user.last_name]];
+                 
+                 UIImage* myImage = [UIImage imageWithData:
+                                    [NSData dataWithContentsOfURL:facebookGraphUrl]];
+                 
+                 
+//[_takePictureButton setImage:[UIColor colorWithPatternImage:myImage]];
+                 [_takePictureButton setImage:myImage forState:UIControlStateNormal];
+                // _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIBaseURLString]];
+                 
+                 NSLog(@"%@",myImage);
                  
              }
          }];
@@ -148,8 +160,11 @@
     
         [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:parameters
                                      success:^(AFHTTPRequestOperation *operation, id JSON) {
-                                         NSLog(@"%@",operation);
+                                         //NSLog(@"%@",operation);
                                          NSLog(@"%@",JSON);
+                                         //UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
+                                        //[self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
+                                         
                                      }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          //NSLog(@"%@",operation);
                                          

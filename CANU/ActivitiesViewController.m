@@ -113,7 +113,7 @@
     }
     
     Activity *activity= [_activities objectAtIndex:indexPath.row];
-    cell.textLabel.text = activity.text;
+    cell.textLabel.text = activity.title;
     
     return cell;
 }
