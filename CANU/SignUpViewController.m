@@ -12,6 +12,7 @@
 #import "AFCanuAPIClient.h"
 #import "AppDelegate.h"
 #import "UICanuTextField.h"
+#import "User.h"
 
 
 @interface SignUpViewController ()
@@ -153,17 +154,23 @@
     //Another userName existance verification
     if (!incomplete) {
         NSArray *objectsArray = [NSArray arrayWithObjects:self.userName.text,self.password.text,self.name.text,self.email.text,nil];
-        NSArray *keysArray = [NSArray arrayWithObjects:@"username",@"password",@"first_name",@"email",nil];
-    
+        NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"email",nil];
+        
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+        
+        NSDictionary *user = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:parameters, nil] forKeys:[NSArray arrayWithObjects:@"user", nil]];
     
     
-        [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:parameters
+        [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:user
                                      success:^(AFHTTPRequestOperation *operation, id JSON) {
                                          //NSLog(@"%@",operation);
                                          NSLog(@"%@",JSON);
-                                         //UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-                                        //[self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
+                                         User *user = [[User alloc] initWithAttributes:[JSON objectForKey:@"user"]];
+                                         [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"token"];
+                                         AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+                                         appDelegate.user = user;
+                                         UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
+                                         [self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
                                          
                                      }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          //NSLog(@"%@",operation);

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
+		DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549581768EEE200C39E5E /* UICanuPicker.m */; };
 		DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2F59D717269C77007AD8FB /* UserProfileViewController.m */; };
 		DE4D952E1742A00700FB026F /* intro_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952A1742A00700FB026F /* intro_bg.png */; };
 		DE4D952F1742A00700FB026F /* intro_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952B1742A00700FB026F /* intro_bg@2x.png */; };
@@ -14,6 +16,7 @@
 		DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952D1742A00700FB026F /* scroll_content@2x.png */; };
 		DE4D95351742A6F700FB026F /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE4D95331742A6F700FB026F /* Lato-Bol.ttf */; };
 		DE4D95361742A6F700FB026F /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE4D95341742A6F700FB026F /* Lato-Reg.ttf */; };
+		DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */; };
 		DE85A62E1743AB2300A050E5 /* signin_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE85A62C1743AB2300A050E5 /* signin_bg.png */; };
 		DE85A62F1743AB2300A050E5 /* signin_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE85A62D1743AB2300A050E5 /* signin_bg@2x.png */; };
 		DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DE85A6311744FCD400A050E5 /* UICanuTextField.m */; };
@@ -72,6 +75,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
+		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
+		DE1549571768EEE200C39E5E /* UICanuPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuPicker.h; sourceTree = "<group>"; };
+		DE1549581768EEE200C39E5E /* UICanuPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuPicker.m; sourceTree = "<group>"; };
 		DE2F59D617269C77007AD8FB /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		DE2F59D717269C77007AD8FB /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		DE4D952A1742A00700FB026F /* intro_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_bg.png; sourceTree = "<group>"; };
@@ -80,6 +87,8 @@
 		DE4D952D1742A00700FB026F /* scroll_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scroll_content@2x.png"; sourceTree = "<group>"; };
 		DE4D95331742A6F700FB026F /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		DE4D95341742A6F700FB026F /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
+		DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityViewController.h; sourceTree = "<group>"; };
+		DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
 		DE85A62C1743AB2300A050E5 /* signin_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signin_bg.png; sourceTree = "<group>"; };
 		DE85A62D1743AB2300A050E5 /* signin_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "signin_bg@2x.png"; sourceTree = "<group>"; };
 		DE85A6301744FCD400A050E5 /* UICanuTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuTextField.h; sourceTree = "<group>"; };
@@ -135,8 +144,8 @@
 		DEA93B781720616500303BB5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		DEBBDA491732BD9B009E9A7D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		DEBBDA4A1732BD9B009E9A7D /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
-		DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesViewController.h; sourceTree = "<group>"; };
-		DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesViewController.m; sourceTree = "<group>"; };
+		DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivitiesViewController.h; path = CANU/ActivitiesViewController.h; sourceTree = "<group>"; };
+		DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivitiesViewController.m; path = CANU/ActivitiesViewController.m; sourceTree = "<group>"; };
 		DED4901917298A61005A0BF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		DED4901A17298A61005A0BF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		DEFD7A69174534830087CB8A /* back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_arrow.png; sourceTree = "<group>"; };
@@ -180,6 +189,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */,
+				DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */,
+			);
+			name = UIDatePickerActionSheet;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		DE2F59D917269C7C007AD8FB /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +263,18 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		DE81F8B2175E4DA300AD1071 /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */,
+				DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */,
+				DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */,
+				DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */,
+			);
+			name = Activities;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		DE85A6331744FCDA00A050E5 /* UICanuTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +287,8 @@
 		DEA93B0F17204EA600303BB5 = {
 			isa = PBXGroup;
 			children = (
+				DE1549571768EEE200C39E5E /* UICanuPicker.h */,
+				DE1549581768EEE200C39E5E /* UICanuPicker.m */,
 				DED4901D17298A6F005A0BF9 /* Models */,
 				DEA93B2317204EA600303BB5 /* CANU */,
 				DE4D952317429EF100FB026F /* Resources */,
@@ -294,6 +327,8 @@
 		DEA93B2317204EA600303BB5 /* CANU */ = {
 			isa = PBXGroup;
 			children = (
+				DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */,
+				DE81F8B2175E4DA300AD1071 /* Activities */,
 				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
 				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
 				DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */,
@@ -303,7 +338,6 @@
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
 				DEA93B7A1720616A00303BB5 /* Main */,
 				DE2F59D917269C7C007AD8FB /* UserProfile */,
-				DEBBDA501732D575009E9A7D /* ActivitiesTableView */,
 				DE85A6331744FCDA00A050E5 /* UICanuTextField */,
 			);
 			path = CANU;
@@ -400,15 +434,6 @@
 				DEBBDA4A1732BD9B009E9A7D /* Activity.m */,
 			);
 			name = Activity;
-			sourceTree = "<group>";
-		};
-		DEBBDA501732D575009E9A7D /* ActivitiesTableView */ = {
-			isa = PBXGroup;
-			children = (
-				DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */,
-				DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */,
-			);
-			name = ActivitiesTableView;
 			sourceTree = "<group>";
 		};
 		DED4901C17298A67005A0BF9 /* User */ = {
@@ -553,6 +578,9 @@
 				DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */,
 				DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
+				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,
+				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
+				DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

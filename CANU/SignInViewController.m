@@ -6,14 +6,16 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "SignInViewController.h"
 #import "UserProfileViewController.h"
 #import "AFCanuAPIClient.h"
 #import "UICanuTextField.h"
+#import "User.h"
 
 @interface SignInViewController ()
 
-@property (strong, nonatomic) IBOutlet UITextField *username;
+@property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
@@ -29,7 +31,7 @@
 
 @implementation SignInViewController
 
-@synthesize username = _username;
+@synthesize email = _email;
 @synthesize password = _password;
 @synthesize backButton = _backButton;
 @synthesize loginButton = _loginButton;
@@ -48,28 +50,22 @@
 
 -(IBAction)login:(id)sender
 {
-    NSLog(@"Login Logic, AFNetwork, get a token and put inside the UserDefaults...");
+    //NSLog(@"Login Logic, AFNetwork, get a token and put inside the UserDefaults...");
     
-    if (self.username.text && self.password.text) {
+    if (self.email.text && self.password.text) {
+        
+        [User logInWithEmail:self.email.text Password:self.password.text Block:^(User *user, NSError *error) {
+            if (user){
+                AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+                appDelegate.user = user;
+                [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
+                UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
+                [self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
+            }
+        }];
+  
     
-    NSArray *objectsArray = [NSArray arrayWithObjects:self.username.text,self.password.text,nil];
-    NSArray *keysArray = [NSArray arrayWithObjects:@"username",@"password",nil];
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-    
-   [[AFCanuAPIClient sharedClient] postPath:@"api-token-auth/" parameters:parameters
-                                     success:^(AFHTTPRequestOperation *operation, id JSON) {
-                                         //NSLog(@"%@",operation);
-                                         NSLog(@"%@",[JSON valueForKey:@"token"]);
-                                         [[NSUserDefaults standardUserDefaults] setObject:[JSON valueForKey:@"token"] forKey:@"token"];
-                                         UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-                                         [self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
-                                         
-                                     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         //NSLog(@"%@",operation);
-                                         //NSLog(@"%@",error);
-                                         NSLog(@"Error");
-                                     }];
-    } 
+    }
 
 }
 
@@ -96,11 +92,11 @@
     [_container addSubview:userIconView];
     [_container addSubview:lockerIconView];
     
-    self.username = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
-    self.username.placeholder = @"Username";
+    self.email = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
+    self.email.placeholder = @"Email";
     [self.password setReturnKeyType:UIReturnKeyNext];
-    self.username.delegate = self;
-    [_container addSubview:self.username];
+    self.email.delegate = self;
+    [_container addSubview:self.email];
     
     self.password = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 47.5, 252.5, 47.0)];
     self.password.placeholder = @"Password";
@@ -165,7 +161,7 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.password resignFirstResponder];
-    [self.username resignFirstResponder];
+    [self.email resignFirstResponder];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -215,7 +211,7 @@
                                                   object:nil];
     _toolBar = nil;
     _container = nil;
-    _username = nil;
+    _email = nil;
     _password = nil;
     
     [super viewDidUnload];

@@ -11,10 +11,13 @@
 #import "MainViewController.h"
 #import "UserProfileViewController.h"
 
+
 NSString *const FBSessionStateChangedNotification =
 @"CANU.CANU:FBSessionStateChangedNotification";
 
 @implementation AppDelegate
+
+@synthesize user = _user;
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -22,11 +25,12 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    //self.window.backgroundColor = [UIColor whiteColor];
-   //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"token"];
+    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    
+    NSLog(@"session token: %@",token);
+    
     UINavigationController *nvc = [[UINavigationController alloc] init];
     if (token) {
         UserProfileViewController *upvc = [[UserProfileViewController alloc] init];

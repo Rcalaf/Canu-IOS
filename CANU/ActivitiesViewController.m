@@ -56,7 +56,7 @@
     [_activityIndicatorView startAnimating];
     //self.navigationItem.rightBarButtonItem.enabled = NO;
     
-    [Activity userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+    [Activity activitiesWithBlock:^(NSArray *activities, NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         } else {
@@ -96,15 +96,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*NSLog(@"Calling datasource");
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    //Activity *activity= [_activities objectAtIndex:indexPath.row];
-    //cell.textLabel.text = activity.text;
-    
-    // Configure the cell...
-    
-    return cell;*/
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -118,28 +109,36 @@
     return cell;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //[_activities];
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        Activity *activity= [_activities objectAtIndex:indexPath.row];
+        [activity removeActivityFromUserWithBlock:^(NSError *error) {
+            if (!error){
+                [self reload:nil];
+            }
+        }];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

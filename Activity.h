@@ -11,14 +11,16 @@
 @interface Activity : NSObject
 
 @property (readonly) NSUInteger activityId;
+@property (readonly) NSUInteger ownerId;
 @property (readonly) NSString *title;
 @property (readonly) NSString *description;
-//@property (readonly)
+@property (readonly) UIImage *picture;
 
 
 //@property (readonly) User *user;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
-+ (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
++ (void)activitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+- (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block;
 
 @end

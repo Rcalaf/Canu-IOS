@@ -12,8 +12,10 @@
 @implementation Activity
 
 @synthesize activityId = _activityId;
+@synthesize ownerId = _ownerId;
 @synthesize title = _title;
 @synthesize description = _description;
+@synthesize picture = _picture;
 
 //@synthesize user = _user;
 
@@ -25,19 +27,19 @@
     
     _activityId = [[attributes valueForKeyPath:@"id"] integerValue];
     _title = [attributes valueForKeyPath:@"title"];
-    
-   //_user = [[User alloc] initWithAttributes:[attributes valueForKeyPath:@"user"]];
-    
+    _ownerId = [[attributes valueForKeyPath:@"user_id"] integerValue];
+ // _description= [attributes valueForKeyPath:@"description"];
+        
     return self;
 }
 
 
-+ (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
++ (void)activitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     [[AFCanuAPIClient sharedClient] getPath:@"activities/" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSLog(@"%@",JSON);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
-            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            Activity *activity = [[Activity alloc] initWithAttributes:[attributes objectForKey:@"activity"]];
             [mutableActivities addObject:activity];
         }
         
@@ -47,6 +49,24 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             block([NSArray array], error);
+        }
+    }];
+}
+
+
+
+
+- (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block {
+
+    NSString *path = [NSString stringWithFormat:@"/users/%d/activities/%lu",1,(unsigned long)self.activityId];
+    [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        if (block) {
+            block(nil);
+        }
+      
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block(error);
         }
     }];
 }

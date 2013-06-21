@@ -9,7 +9,7 @@
 #import "AFCanuAPIClient.h"
 #import "AFJSONRequestOperation.h"
 
-static NSString * const kAFCanuAPIBaseURLString = @"http://127.0.0.1:8000/";
+static NSString * const kAFCanuAPIBaseURLString = @"http://0.0.0.0:3000/";
 
 @implementation AFCanuAPIClient
 

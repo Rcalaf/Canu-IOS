@@ -10,12 +10,18 @@
 
 @interface User : NSObject
 
-@property (strong,nonatomic) NSString *name;
+@property (readonly) NSUInteger userId;
+@property (strong,nonatomic) NSString *firstName;
+@property (strong,nonatomic) NSString *lastName;
 @property (strong,nonatomic) NSString *password;
 @property (strong,nonatomic) NSString *userName;
 @property (strong,nonatomic) NSString *email;
+@property (strong,nonatomic) UIImage *profileImage;
 @property (strong,nonatomic) NSString *token;
 
+
+- (id)initWithAttributes:(NSDictionary *)attributes;
++ (void)logInWithEmail:(NSString *)userName Password:(NSString *)password Block:(void (^)(User *user, NSError *error))block;
 /*
 + (User *)logInWithUserName:(NSString *)userName Password:(NSString *)password;
 + (User *)signUpWithUserName:(NSString *)userName
