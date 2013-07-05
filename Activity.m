@@ -7,6 +7,7 @@
 //
 
 #import "Activity.h"
+#import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
 
 @implementation Activity
@@ -34,9 +35,9 @@
 }
 
 
-+ (void)activitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
++ (void)publicFeedWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     [[AFCanuAPIClient sharedClient] getPath:@"activities/" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSLog(@"%@",JSON);
+        //NSLog(@"%@",JSON);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             Activity *activity = [[Activity alloc] initWithAttributes:[attributes objectForKey:@"activity"]];
@@ -57,8 +58,10 @@
 
 
 - (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block {
+    
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
 
-    NSString *path = [NSString stringWithFormat:@"/users/%d/activities/%lu",1,(unsigned long)self.activityId];
+    NSString *path = [NSString stringWithFormat:@"/users/%lu/activities/%lu",(unsigned long)appDelegate.user.userId,(unsigned long)self.activityId];
     [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         if (block) {
             block(nil);

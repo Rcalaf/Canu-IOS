@@ -9,7 +9,10 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "UserProfileViewController.h"
+#import "ActivitiesViewController.h"
+#import "UICanuNavigationController.h"
+
+
 
 
 NSString *const FBSessionStateChangedNotification =
@@ -19,6 +22,7 @@ NSString *const FBSessionStateChangedNotification =
 
 @synthesize user = _user;
 
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -26,20 +30,27 @@ NSString *const FBSessionStateChangedNotification =
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    //self.navigationController = [[UICanuNavigationControllerViewController alloc] init];
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-    
     NSLog(@"session token: %@",token);
-    
-    UINavigationController *nvc = [[UINavigationController alloc] init];
+   
     if (token) {
-        UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-        [nvc addChildViewController:upvc];
+        UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
+        ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
+        //[nvc pushViewController:avc animated:NO];
+        [nvc addChildViewController:avc];
+        self.window.rootViewController = nvc;
     } else {
         MainViewController *mvc = [[MainViewController alloc] init];
-        [nvc addChildViewController:mvc];
+        //[nvc addChildViewController:mvc];
+        self.window.rootViewController = mvc;
     }
-    self.window.rootViewController = nvc;
+
+   
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

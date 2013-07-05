@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "SignInViewController.h"
 #import "UserProfileViewController.h"
+#import "UICanuNavigationController.h"
+#import "ActivitiesViewController.h"
 #import "AFCanuAPIClient.h"
 #import "UICanuTextField.h"
 #import "User.h"
@@ -58,9 +60,20 @@
             if (user){
                 AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
                 appDelegate.user = user;
+                
+                NSLog(@"%@",user.token);
                 [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
-                UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-                [self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
+                
+                UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
+                ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
+                //[nvc pushViewController:avc animated:NO];
+                [nvc addChildViewController:avc];
+                appDelegate.window.rootViewController = nvc;
+                
+                
+               // UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
+                
+                //[self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
             }
         }];
   
@@ -71,7 +84,8 @@
 
 -(IBAction)back:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:NO completion:^{}];
+   // [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

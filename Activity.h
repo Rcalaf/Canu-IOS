@@ -20,7 +20,7 @@
 //@property (readonly) User *user;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
-+ (void)activitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
++ (void)publicFeedWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 - (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block;
 
 @end

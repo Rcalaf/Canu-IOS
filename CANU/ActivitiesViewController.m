@@ -56,11 +56,11 @@
     [_activityIndicatorView startAnimating];
     //self.navigationItem.rightBarButtonItem.enabled = NO;
     
-    [Activity activitiesWithBlock:^(NSArray *activities, NSError *error) {
+    [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         } else {
-            NSLog(@"%@",activities);
+            //NSLog(@"%@",activities);
             _activities = activities;
             [self.tableView reloadData];
         }

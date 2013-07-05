@@ -7,10 +7,12 @@
 //
 
 #import "NewActivityViewController.h"
+#import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
 #import "UICanuTextField.h"
 #import "UIDatePickerActionSheet.h"
 #import "Activity.h"
+
 
 @interface NewActivityViewController ()
 
@@ -56,9 +58,12 @@ float oldValue;
         NSArray *objectsArray = [NSArray arrayWithObjects:self.name.text,self.description.text,self.start.text,self.lengthPicker.text,nil];
         NSArray *keysArray = [NSArray arrayWithObjects:@"title",@"description",@"start",@"length",nil];
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-          
+       
+       AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+       NSLog(@"%lu", (unsigned long)appDelegate.user.userId);
         
-        [[AFCanuAPIClient sharedClient] postPath:@"users/1/activities" parameters:parameters
+       
+        [[AFCanuAPIClient sharedClient] postPath:[NSString stringWithFormat:@"users/%lu/activities",(unsigned long)appDelegate.user.userId] parameters:parameters
                                          success:^(AFHTTPRequestOperation *operation, id JSON) {
                                              //NSLog(@"%@",operation);
                                              NSLog(@"%@",[JSON valueForKey:@"activity"]);
@@ -145,13 +150,13 @@ float oldValue;
         self.name.placeholder = @"name";
         self.name.delegate = self;
         [self.name setReturnKeyType:UIReturnKeyNext];
-        [self.view addSubview:_name];
+        
         
         self.description = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 82.0, 252.5, 47.0)];
         self.description.placeholder = @"Description";
         self.description.delegate = self;
         [self.description setReturnKeyType:UIReturnKeyNext];
-        [self.view addSubview:_description];
+        
         
         
         self.start = [[UILabel alloc] initWithFrame:CGRectMake(47.5, 139.0, 252.5, 47.0)];
@@ -164,10 +169,11 @@ float oldValue;
         [self.lengthPicker setUserInteractionEnabled:YES];
         self.lengthPicker.text = [NSString stringWithFormat:@"00:%.2d", _length ];
         
+        //create the gesture to trigger the date picker
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
         [_start addGestureRecognizer:tapRecognizer];
         
-        
+        //Set the time formatter and the start time
         NSDate *now = [NSDate date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -177,7 +183,7 @@ float oldValue;
         [self.start setUserInteractionEnabled:YES];
         
         
-        
+        // Create Gestures for setting the time
         UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(incrementActivityLength:)];
         tgr.delegate = self;
         [_lengthPicker addGestureRecognizer:tgr];
@@ -186,13 +192,11 @@ float oldValue;
         [_lengthPicker addGestureRecognizer:pgr];
     
         
-              
-        [self.view addSubview:_start];
-        [self.view addSubview:_lengthPicker];
-
+        //set the toolbar
         _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
         _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
         
+        //set the create button
         _createButon = [UIButton buttonWithType:UIButtonTypeCustom];
         [_createButon setTitle:@"CREATE FUN" forState:UIControlStateNormal];
         [_createButon setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
@@ -201,16 +205,21 @@ float oldValue;
         [_createButon setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
         [_createButon addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchUpInside];
         
-        
-        [_toolBar addSubview:_createButon];
-        
+        //set Back button 
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
         [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
         
-        [_toolBar addSubview:_backButton];
         
+        
+        
+        [self.view addSubview:_name];
+        [self.view addSubview:_description];
+        [self.view addSubview:_start];
+        [self.view addSubview:_lengthPicker];
+        [_toolBar addSubview:_createButon];
+        [_toolBar addSubview:_backButton];
         [self.view addSubview:_toolBar];
         
         

@@ -21,12 +21,16 @@
 
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
-+ (void)logInWithEmail:(NSString *)userName Password:(NSString *)password Block:(void (^)(User *user, NSError *error))block;
-/*
-+ (User *)logInWithUserName:(NSString *)userName Password:(NSString *)password;
-+ (User *)signUpWithUserName:(NSString *)userName
-                   password:(NSString*)password
-                       name:(NSString *)name
-                      email:(NSString *)email;
-*/
+
++ (void)logInWithEmail:(NSString *)userName
+              Password:(NSString *)password
+                 Block:(void (^)(User *user, NSError *error))block;
+
++ (void)SignUpWithUserName:(NSString *)userName
+                  Password:(NSString*)password
+                 FirstName:(NSString *)firstName
+                  LastName:(NSString *)lastName
+                     Email:(NSString *)email
+                     Block:(void (^)(User *user, NSError *error))block;
+
 @end

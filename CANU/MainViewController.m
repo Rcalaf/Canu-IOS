@@ -35,14 +35,16 @@
 
 - (IBAction)goSignUp:(id)sender
 {    
-    NSLog(@"Go to SignUp");
-    [self.navigationController pushViewController:[[SignUpViewController alloc] init] animated:YES];
+    //NSLog(@"Go to SignUp");
+    [self presentViewController:[[SignUpViewController alloc] init] animated:NO completion:^{}];
+    //[self.navigationController pushViewController:[[SignUpViewController alloc] init] animated:YES];
 }
 
 - (IBAction)goSignIn:(id)sender
 {
-    NSLog(@"Go to SignIN");
-    [self.navigationController pushViewController:[[SignInViewController alloc] init] animated:YES];
+    //NSLog(@"Go to SignIN");
+    [self presentViewController:[[SignInViewController alloc] init] animated:NO completion:^{}];
+    //[self.navigationController pushViewController:[[SignInViewController alloc] init] animated:YES];
 
    // [self performSegueWithIdentifier:@"SignIn" sender:sender];
 }

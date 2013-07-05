@@ -8,7 +8,9 @@
 
 #import <FacebookSDK/FacebookSDK.h>
 #import "SignUpViewController.h"
-#import "UserProfileViewController.h"
+#import "UICanuNavigationController.h"
+//#import "UserProfileViewController.h"
+#import "ActivitiesViewController.h"
 #import "AFCanuAPIClient.h"
 #import "AppDelegate.h"
 #import "UICanuTextField.h"
@@ -20,7 +22,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *userName;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UITextField *name;
-@property (strong, nonatomic) IBOutlet UITextField *lastName;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UIButton *facebookButton;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -40,8 +43,9 @@
 
 @synthesize userName = _userName;
 @synthesize password = _password;
-@synthesize name = _name;
+@synthesize firstName = _firstName;
 @synthesize lastName = _lastName;
+@synthesize name = _name;
 @synthesize email = _email;
 @synthesize facebookButton = _facebookButton;
 @synthesize toolBar = _toolBar;
@@ -66,7 +70,8 @@
     AppDelegate *appDelegate =
     [[UIApplication sharedApplication] delegate];
     [appDelegate closeSession];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:NO completion:^{}];
+    //[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -80,39 +85,21 @@
                                            id<FBGraphUser> user,
                                            NSError *error) {
              if (!error) {
-                 NSString *userInfo = @"";
+                 self.firstName = user.first_name;
+                 self.lastName = user.last_name;
                  
-                 userInfo = [userInfo
-                             stringByAppendingString:
-                             [NSString stringWithFormat:@"Name: %@\n\n",
-                              user.first_name]];
-                 self.name.text = user.first_name;
+                 self.name.text = [self.firstName stringByAppendingFormat:@" %@",self.lastName];
                  
-                 userInfo = [userInfo
-                             stringByAppendingString:
-                             [NSString stringWithFormat:@"Last Name: %@\n\n",
-                              user.last_name]];
-                self.name.text = [self.name.text stringByAppendingFormat:@" %@",user.last_name];
-                 
-                 userInfo = [userInfo
-                             stringByAppendingString:
-                             [NSString stringWithFormat:@"Email: %@\n\n",
-                              [user objectForKey:@"email"]]];
                  self.email.text = [user objectForKey:@"email"];
-                 // Display the user info
-                // [self authButtonAction:self.authButton];
+
                  NSURL *facebookGraphUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@.%@/picture?type=large",user.first_name,user.last_name]];
                  
                  UIImage* myImage = [UIImage imageWithData:
-                                    [NSData dataWithContentsOfURL:facebookGraphUrl]];
-                 
-                 
-//[_takePictureButton setImage:[UIColor colorWithPatternImage:myImage]];
+                                     [NSData dataWithContentsOfURL:facebookGraphUrl]];
+
                  [_takePictureButton setImage:myImage forState:UIControlStateNormal];
-                // _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIBaseURLString]];
                  
-                 NSLog(@"%@",myImage);
-                 
+                 //NSLog(@"%@",myImage);
              }
          }];
     } else {
@@ -139,16 +126,36 @@
 - (IBAction)performSingUp:(id)sender
 {
     
+    [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text Block:^(User *user, NSError *error) {
+        if (user){
+            AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+            NSLog(@"%@",user.userName);
+            appDelegate.user = user;
+            [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
+            
+            
+            UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
+            ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
+            //[nvc pushViewController:avc animated:NO];
+            [nvc addChildViewController:avc];
+            appDelegate.window.rootViewController = nvc;
+            
+            //UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
+            //[self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
+        }
+    }];
+
+    
    // NSString *alertMessage = @"";
-    BOOL incomplete = NO;
+   /* BOOL incomplete = NO;
     if (!self.name.text || !self.email.text ||
         !self.userName.text || !self.password.text)
         {
             incomplete = YES;
-     /*   alertMessage = [alertMessage
+        alertMessage = [alertMessage
                         stringByAppendingString:
                         [NSString stringWithFormat:@"%@ must be set\n",
-                         self.name.text]];*/
+                         self.name.text]];
     }
     
     //Another userName existance verification
@@ -175,11 +182,11 @@
                                      }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                          //NSLog(@"%@",operation);
                                          
-                                          NSLog(@"Request Failed with Error: %@", [[error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"] class]);
+                                          NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
                                       
                                          
                                      }];
-    }
+    }*/
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
