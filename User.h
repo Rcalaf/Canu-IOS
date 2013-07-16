@@ -20,17 +20,24 @@
 @property (strong,nonatomic) NSString *token;
 
 
-- (id)initWithAttributes:(NSDictionary *)attributes;
+-(id)initWithAttributes:(NSDictionary *)attributes;
 
-+ (void)logInWithEmail:(NSString *)userName
-              Password:(NSString *)password
-                 Block:(void (^)(User *user, NSError *error))block;
++(void)userWithToken:(NSString *)token
+            andBlock:(void (^)(User *user, NSError *error))block;
 
-+ (void)SignUpWithUserName:(NSString *)userName
-                  Password:(NSString*)password
-                 FirstName:(NSString *)firstName
-                  LastName:(NSString *)lastName
-                     Email:(NSString *)email
-                     Block:(void (^)(User *user, NSError *error))block;
++(void)logInWithEmail:(NSString *)userName
+             Password:(NSString *)password
+                Block:(void (^)(User *user, NSError *error))block;
+
++(void)SignUpWithUserName:(NSString *)userName
+                 Password:(NSString*)password
+                FirstName:(NSString *)firstName
+                 LastName:(NSString *)lastName
+                    Email:(NSString *)email
+                    Block:(void (^)(User *user, NSError *error))block;
+
+-(void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
+
 
 @end

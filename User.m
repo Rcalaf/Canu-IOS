@@ -8,6 +8,7 @@
 
 #import "User.h"
 #import "AFCanuAPIClient.h"
+#import "Activity.h"
 
 @implementation User
 
@@ -37,11 +38,26 @@
     return self;
 }
 
-+ (User *)logInWithUserName:(NSString *)userName Password:(NSString *)password
-{    
-    User *user = [[User alloc] init];
++ (void)userWithToken:(NSString *)token
+             andBlock:(void (^)(User *user, NSError *error))block{
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:@"token"] forKeys: [NSArray arrayWithObject:token]];
     
-    return user;
+    [[AFCanuAPIClient sharedClient] postPath:@"session/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+         //NSLog(@"%@",JSON);
+         User *user= [[User alloc] initWithAttributes:[JSON objectForKey:@"user"]];
+        //NSLog(@"userName: %@",user.userName);
+        if (block) {
+            block(user, nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            //NSLog(@"%@",error);
+            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(nil, error);
+        }
+    }];
+
+    
 }
 
 + (void)logInWithEmail:(NSString *)email Password:(NSString *)password Block:(void (^)(User *user, NSError *error))block {
@@ -107,5 +123,25 @@
                                          
                                      }];
 
+}
+
+- (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
+    [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        //NSLog(@"%@",JSON);
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        for (NSDictionary *attributes in JSON) {
+            Activity *activity = [[Activity alloc] initWithAttributes:[attributes objectForKey:@"activity"]];
+            [mutableActivities addObject:activity];
+        }
+        if (block) {
+            block([NSArray arrayWithArray:mutableActivities], nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block([NSArray array], error);
+        }
+    }];
 }
 @end

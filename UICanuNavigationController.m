@@ -22,8 +22,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.navigationBarHidden = YES;
         self.control = [[UIView alloc] initWithFrame:CGRectMake(-10.0, 423.0, 63.0, 63.0)];
-        self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"world.png"]];
+        self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
         [self.view addSubview:self.control];
     }
     return self;
@@ -33,11 +34,11 @@
     [UIView animateWithDuration:0.3 animations:^{
         _control.frame = CGRectMake(263.0, 423.0, 63.0, 63.0);
     }];
-    NSLog(@"Load Profile view");
-    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"profile.png"]];
+    //NSLog(@"Load Profile view");
+    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
     //[self popViewControllerAnimated:YES];
     [self pushViewController:[[UserProfileViewController alloc] init] animated:YES];
-    NSLog(@"%@",self.topViewController);
+    //NSLog(@"%@",self.topViewController);
 
 }
 
@@ -58,15 +59,16 @@
         _control.frame = CGRectMake(-10.0, 423.0, 63.0, 63.0);
         
     }];
-    NSLog(@"Load Activities view");
+   // NSLog(@"Load Activities view");
     [self popViewControllerAnimated:YES];
-    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"world.png"]];
-    NSLog(@"%@",self.topViewController);
+    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
+    //NSLog(@"%@",self.topViewController);
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     UISwipeGestureRecognizer *goProfileGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goProfile:)];
     goProfileGesture.direction = UISwipeGestureRecognizerDirectionRight;
     

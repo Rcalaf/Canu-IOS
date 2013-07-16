@@ -371,7 +371,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
-#warning Be sure you save the taken picture....
+    #warning Be sure you save the taken picture....
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{

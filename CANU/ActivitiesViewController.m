@@ -8,6 +8,7 @@
 
 #import "ActivitiesViewController.h"
 #import "Activity.h"
+#import "UICanuActivityCell.h"
 
 @interface ActivitiesViewController ()
 - (void)reload:(id)sender;
@@ -32,7 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
+    //self.navigationController.navigationBarHidden = YES;
     [self reload:nil];
 
     
@@ -45,8 +46,8 @@
 
 -(void)loadView
 {
-    [super loadView];
     
+    [super loadView];
     _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     _activityIndicatorView.hidesWhenStopped = YES;
 }
@@ -54,7 +55,6 @@
 - (void)reload:(id)sender
 {
     [_activityIndicatorView startAnimating];
-    //self.navigationItem.rightBarButtonItem.enabled = NO;
     
     [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
         if (error) {
@@ -68,7 +68,7 @@
         [_activityIndicatorView stopAnimating];
        // self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
-    NSLog(@"Loading");
+   // NSLog(@"Loading");
 
     
 }
@@ -77,6 +77,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 130.5f;
 }
 
 #pragma mark - Table view data source
@@ -91,21 +97,38 @@
 {
     // Return the number of rows in the section.
     return [_activities count];
-    
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+/*
+- (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     Activity *activity= [_activities objectAtIndex:indexPath.row];
     cell.textLabel.text = activity.title;
     
+    return cell;
+}*/
+
+- (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Canu Cell";
+    
+    Activity *activity= [_activities objectAtIndex:indexPath.row];
+    
+    UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
+    }
+    
+
+    //cell.activity = activity;
+    cell.textLabel.text = activity.title;
     return cell;
 }
 

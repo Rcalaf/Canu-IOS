@@ -35,10 +35,17 @@ NSString *const FBSessionStateChangedNotification =
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+    [User userWithToken:token andBlock:^(User *user, NSError *error) {
+        self.user = user;
+        
+    }];
+    
     NSLog(@"session token: %@",token);
+    NSLog(@"user: %@",self.user.firstName);
    
     if (token) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
+        nvc.view.backgroundColor = [UIColor redColor];
         ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
         //[nvc pushViewController:avc animated:NO];
         [nvc addChildViewController:avc];
@@ -49,8 +56,6 @@ NSString *const FBSessionStateChangedNotification =
         self.window.rootViewController = mvc;
     }
 
-   
-    
     [self.window makeKeyAndVisible];
     return YES;
 }
