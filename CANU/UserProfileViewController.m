@@ -6,19 +6,24 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+//Custom CANU class import
+#import "UICanuActivityCell.h"
+#import "UIProfileView.h"
+#import "AppDelegate.h"
+
+//Models class import
+#import "User.h"
+#import "Activity.h"
+
+//Controllers import
 #import "UserProfileViewController.h"
 #import "ActivitiesViewController.h"
 #import "MainViewController.h"
-#import "NewActivityViewController.h"
-#import "AppDelegate.h"
-#import "User.h"
-#import "Activity.h"
-#import "UICanuActivityCell.h"
-#import "UIProfileView.h"
+#import "UserSettingsViewController.h"
+//#import "NewActivityViewController.h"
+
 
 @interface UserProfileViewController ()
-
-    
 
 @property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 @property (strong, nonatomic) IBOutlet UIButton *activitiesButton;
@@ -59,59 +64,46 @@
     return self;
 }
 
+/*
 -(IBAction)createActivity:(id)sender{
     NewActivityViewController *nac = [[NewActivityViewController alloc] init];
     [self presentViewController:nac animated:YES completion:nil];
-}
+}*/
 
--(IBAction)performLogout:(id)sender
-{
-    NSLog(@"Logging out!");
-    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"accessToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
-    NSLog(@"session token: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-    
-    MainViewController *mvc = [[MainViewController alloc] init];
-    //[nvc addChildViewController:mvc];
-    appDelegate.window.rootViewController = mvc;
- 
-    NSLog(@"%@",appDelegate.user.userName);
-    
-    //[self.navigationController setViewControllers:[NSArray arrayWithObject:[[MainViewController alloc] init]]];
-}
 
-- (IBAction)showHideProfileInfo:(id)sender{
+
+- (IBAction)showProfileInfo:(id)sender{
     [UIView animateWithDuration:0.3 animations:^(void){
-        if (_profileHidden){
-            _profileView.frame = CGRectMake(0.0f, 345.0f, 320.0f, 114.0f);
-            _profileView.profileImage.hidden = NO;
-            
-            _myActivities.frame = CGRectMake(10.0f, 10.0f, 300.0f, 325.0f);
-        }else{
-            _profileView.frame = CGRectMake(0.0f, 440.0f, 320.0f, 114.0f);
-            _profileView.profileImage.hidden = YES;
-            _myActivities.frame = CGRectMake(10.0f, 10.0f, 300.0f, 420.0f);
-        }
+        _profileView.frame = CGRectMake(0.0f, 345.0f, 320.0f, 114.0f);
+        [_profileView hideComponents:NO];
+        _myActivities.frame = CGRectMake(10.0f, 10.0f, 300.0f, 325.0f);
     } completion:^(BOOL finished) {
         if (finished){
-            if (_profileHidden){
-                _profileHidden = NO;
-                
-            }else{
-                _profileHidden = YES;
-            }
+            _profileHidden = NO;
         }
     }];
 }
 
-/*
--(IBAction)showActivities:(id)sender
-{
-  // [self.navigationController setViewControllers:[NSArray arrayWithObject:[[ActivitiesViewController alloc] init]]];
-    [self.navigationController pushViewController:[[ActivitiesViewController alloc] init] animated:YES];
+- (IBAction)HideProfileInfo:(id)sender{
+    [UIView animateWithDuration:0.3 animations:^(void){
+        _profileView.frame = CGRectMake(0.0f, 440.0f, 320.0f, 114.0f);
+        _myActivities.frame = CGRectMake(10.0f, 10.0f, 300.0f, 420.0f);
+    } completion:^(BOOL finished) {
+        if (finished){
+            [_profileView hideComponents:YES];
+            _profileHidden = YES;
+            
+        }
+    }];
 }
-*/
+
+- (IBAction)showSettings:(id)sender{
+    NSLog(@"Showing settings");
+
+    UserSettingsViewController *us = [[UserSettingsViewController alloc] init];
+    [self presentViewController:us animated:YES completion:nil];
+    
+}
 
 -(void) loadView
 {
@@ -119,39 +111,21 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     
-    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(10.0, 10.0, 300.0, 420.0) style:UITableViewStylePlain];
+    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 420.0) style:UITableViewStyleGrouped];
+    
+    self.myActivities.backgroundView = nil;
+    self.myActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+
     self.myActivities.dataSource = self;
     self.myActivities.delegate = self;
     
     [self reload:nil];
     [self.view addSubview:self.myActivities];
- 
-/*    self.logoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    self.logoutButton.frame = CGRectMake(25.0, 25.0, 200.0, 50.0);
-    [self.logoutButton setTitle:@"Log Out" forState:UIControlStateNormal];
-    [self.view addSubview:self.logoutButton];*/
- 
-   /* self.activitiesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
-    self.activitiesButton.frame = CGRectMake(25.0, 85.0, 200.0, 50.0);
-    [self.activitiesButton setTitle:@"Activities" forState:UIControlStateNormal];
-    [self.view addSubview:self.activitiesButton];*/
- /*
-    self.createActivityButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    
-    self.createActivityButton.frame = CGRectMake(25.0, 145.0, 200.0, 50.0);
-    [self.createActivityButton setTitle:@"New Activity" forState:UIControlStateNormal];
-    [self.view addSubview:self.createActivityButton];
-*/
-    
-    self.profileView = [[UIProfileView alloc] initWithUser:self.user];   
-
+    self.profileView = [[UIProfileView alloc] initWithUser:self.user];
     [self.view addSubview:_profileView];
     
-    
 }
-
 
 
 - (void)viewDidLoad
@@ -163,8 +137,17 @@
     //[self.activitiesButton addTarget:self action:@selector(showActivities:) forControlEvents:UIControlEventTouchDown];
     //[self.createActivityButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchDown];
     
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideProfileInfo:)];
-     [_profileView addGestureRecognizer:tapRecognizer];
+    UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileInfo:)];
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+     [_profileView addGestureRecognizer:swipeRecognizer];
+    
+    swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(HideProfileInfo:)];
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [_profileView addGestureRecognizer:swipeRecognizer];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
+    
+    [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
     
     // AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
    //  NSLog(@"%@",appDelegate.user.userName);

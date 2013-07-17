@@ -9,6 +9,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "ActivitiesFeedViewController.h" 
 #import "ActivitiesViewController.h"
 #import "UICanuNavigationController.h"
 
@@ -35,18 +36,21 @@ NSString *const FBSessionStateChangedNotification =
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-    [User userWithToken:token andBlock:^(User *user, NSError *error) {
-        self.user = user;
-        
-    }];
     
     NSLog(@"session token: %@",token);
-    NSLog(@"user: %@",self.user.firstName);
+    NSLog(@"user: %@",self.user);
+    
+    if (token) {
+        [User userWithToken:token andBlock:^(User *user, NSError *error) {
+            self.user = user;
+            
+        }];
+    }
    
     if (token) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
         nvc.view.backgroundColor = [UIColor redColor];
-        ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
+        ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
         //[nvc pushViewController:avc animated:NO];
         [nvc addChildViewController:avc];
         self.window.rootViewController = nvc;

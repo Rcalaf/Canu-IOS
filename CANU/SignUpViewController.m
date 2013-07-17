@@ -323,7 +323,7 @@
     [_signInButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
     [_signInButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _signInButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [_signInButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+    [_signInButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 255.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
     
     [_toolBar addSubview:_signInButton];
     

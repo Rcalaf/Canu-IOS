@@ -66,6 +66,9 @@
 		DEB29BBC17955AC800D9FFAE /* navmenu_world@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BBA17955AC800D9FFAE /* navmenu_world@2x.png */; };
 		DEB29BBF17955B0600D9FFAE /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BBD17955B0500D9FFAE /* settings.png */; };
 		DEB29BC017955B0600D9FFAE /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BBE17955B0600D9FFAE /* settings@2x.png */; };
+		DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */; };
+		DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */; };
+		DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */; };
 		DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4A1732BD9B009E9A7D /* Activity.m */; };
 		DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */; };
 		DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DECA169E17807EE8009747E8 /* UICanuNavigationController.m */; };
@@ -175,6 +178,12 @@
 		DEB29BBA17955AC800D9FFAE /* navmenu_world@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navmenu_world@2x.png"; sourceTree = "<group>"; };
 		DEB29BBD17955B0500D9FFAE /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		DEB29BBE17955B0600D9FFAE /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		DEB29BC21795700700D9FFAE /* UserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserSettingsViewController.h; path = ../UserSettingsViewController.h; sourceTree = "<group>"; };
+		DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserSettingsViewController.m; path = ../UserSettingsViewController.m; sourceTree = "<group>"; };
+		DEB29BC517958AF300D9FFAE /* UICanuBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuBottomBar.h; sourceTree = "<group>"; };
+		DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuBottomBar.m; sourceTree = "<group>"; };
+		DEB29BC81796EE8600D9FFAE /* ActivitiesFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesFeedViewController.h; sourceTree = "<group>"; };
+		DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesFeedViewController.m; sourceTree = "<group>"; };
 		DEBBDA491732BD9B009E9A7D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		DEBBDA4A1732BD9B009E9A7D /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivitiesViewController.h; path = CANU/ActivitiesViewController.h; sourceTree = "<group>"; };
@@ -233,12 +242,13 @@
 				DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */,
 			);
 			name = UIDatePickerActionSheet;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		DE2F59D917269C7C007AD8FB /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				DEB29BC21795700700D9FFAE /* UserSettingsViewController.h */,
+				DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */,
 				DE2F59D617269C77007AD8FB /* UserProfileViewController.h */,
 				DE2F59D717269C77007AD8FB /* UserProfileViewController.m */,
 			);
@@ -321,6 +331,8 @@
 				DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */,
 				DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */,
 				DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */,
+				DEB29BC81796EE8600D9FFAE /* ActivitiesFeedViewController.h */,
+				DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */,
 			);
 			name = Activities;
 			path = ..;
@@ -333,11 +345,14 @@
 				DE85A6311744FCD400A050E5 /* UICanuTextField.m */,
 			);
 			name = UICanuTextField;
+			path = CANU;
 			sourceTree = "<group>";
 		};
 		DEA93B0F17204EA600303BB5 = {
 			isa = PBXGroup;
 			children = (
+				DEB29BC517958AF300D9FFAE /* UICanuBottomBar.h */,
+				DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */,
 				DE1549571768EEE200C39E5E /* UICanuPicker.h */,
 				DE1549581768EEE200C39E5E /* UICanuPicker.m */,
 				DED4901D17298A6F005A0BF9 /* Models */,
@@ -378,10 +393,6 @@
 		DEA93B2317204EA600303BB5 /* CANU */ = {
 			isa = PBXGroup;
 			children = (
-				DEB29BB417954FEB00D9FFAE /* ProfileView */,
-				DEB29BB017954FA700D9FFAE /* CanuCell */,
-				DEF015F41780F1300005FFC0 /* UICanuNavigationController */,
-				DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */,
 				DE81F8B2175E4DA300AD1071 /* Activities */,
 				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
 				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
@@ -392,7 +403,6 @@
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
 				DEA93B7A1720616A00303BB5 /* Main */,
 				DE2F59D917269C7C007AD8FB /* UserProfile */,
-				DE85A6331744FCDA00A050E5 /* UICanuTextField */,
 			);
 			path = CANU;
 			sourceTree = "<group>";
@@ -414,6 +424,11 @@
 		DEA93B4117204EDC00303BB5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				DEB29BB417954FEB00D9FFAE /* ProfileView */,
+				DEB29BB017954FA700D9FFAE /* CanuCell */,
+				DEF015F41780F1300005FFC0 /* UICanuNavigationController */,
+				DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */,
+				DE85A6331744FCDA00A050E5 /* UICanuTextField */,
 				DEA93B4217204EF100303BB5 /* AFNetworking */,
 			);
 			name = Vendor;
@@ -488,7 +503,6 @@
 				DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */,
 			);
 			name = CanuCell;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		DEB29BB417954FEB00D9FFAE /* ProfileView */ = {
@@ -498,7 +512,6 @@
 				DEB29BB217954FDA00D9FFAE /* UIProfileView.m */,
 			);
 			name = ProfileView;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		DEBBDA4C1732BDA0009E9A7D /* Activity */ = {
@@ -535,7 +548,6 @@
 				DECA169D17807EE8009747E8 /* UICanuNavigationController.h */,
 			);
 			name = UICanuNavigationController;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
@@ -682,6 +694,9 @@
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
 				DEF015F91784B9020005FFC0 /* UICanuActivityCell.m in Sources */,
 				DEB29BB317954FDA00D9FFAE /* UIProfileView.m in Sources */,
+				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
+				DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */,
+				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

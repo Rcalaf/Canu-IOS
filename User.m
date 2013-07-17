@@ -40,7 +40,7 @@
 
 + (void)userWithToken:(NSString *)token
              andBlock:(void (^)(User *user, NSError *error))block{
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:@"token"] forKeys: [NSArray arrayWithObject:token]];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:token] forKeys: [NSArray arrayWithObject:@"token"]];
     
     [[AFCanuAPIClient sharedClient] postPath:@"session/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
          //NSLog(@"%@",JSON);

@@ -13,6 +13,7 @@
 @interface UICanuActivityCell : UITableViewCell
 
 @property (strong, nonatomic) Activity *activity;
+@property (strong, nonatomic) IBOutlet UIView *actionButton;
 
 
 

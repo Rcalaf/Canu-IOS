@@ -1,58 +1,66 @@
 //
-//  ActivitiesViewController.m
+//  ActivitiesFeedViewController.m
 //  CANU
 //
-//  Created by Roger Calaf on 02/05/13.
+//  Created by Roger Calaf on 17/07/13.
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
 #import "UICanuActivityCell.h"
+#import "ActivitiesFeedViewController.h"
 #import "Activity.h"
-#import "ActivitiesViewController.h"
 #import "NewActivityViewController.h"
 
 
+@interface ActivitiesFeedViewController ()
 
-@interface ActivitiesViewController ()
+@property (strong, nonatomic) UITableView *tableView;
+
 - (void)reload:(id)sender;
 @end
 
-@implementation ActivitiesViewController{
+@implementation ActivitiesFeedViewController{
 @private
-    NSArray *_activities;
-    __strong UIActivityIndicatorView *_activityIndicatorView;
-    
+NSArray *_activities;
+__strong UIActivityIndicatorView *_activityIndicatorView;
+
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
+@synthesize tableView = _tableview;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
 }
 
+-(void)loadView
+{
+    [super loadView];
+    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 310.0f, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self.view addSubview:self.tableView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.navigationController.navigationBarHidden = YES;
     [self reload:nil];
-
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	// Do any additional setup after loading the view.
 }
 
--(void)loadView
+- (void)didReceiveMemoryWarning
 {
-    
-    [super loadView];
-    _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _activityIndicatorView.hidesWhenStopped = YES;
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)reload:(id)sender
@@ -69,17 +77,11 @@
         }
         
         [_activityIndicatorView stopAnimating];
-       // self.navigationItem.rightBarButtonItem.enabled = YES;
+        // self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
-   // NSLog(@"Loading");
-
+    // NSLog(@"Loading");
     
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 -(void)triggerCellAction:(id)recognizer
@@ -110,20 +112,20 @@
 }
 
 /*
-- (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
-    Activity *activity= [_activities objectAtIndex:indexPath.row];
-    cell.textLabel.text = activity.title;
-    
-    return cell;
-}*/
+ - (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ static NSString *CellIdentifier = @"Cell";
+ 
+ UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+ if (!cell) {
+ cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+ }
+ 
+ Activity *activity= [_activities objectAtIndex:indexPath.row];
+ cell.textLabel.text = activity.title;
+ 
+ return cell;
+ }*/
 
 - (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -136,7 +138,7 @@
         cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
     }
     
-
+    
     //cell.activity = activity;
     cell.textLabel.text = activity.title;
     UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
@@ -169,28 +171,28 @@
                 [self reload:nil];
             }
         }];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 #pragma mark - Table view delegate

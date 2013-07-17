@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface UserProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
--(IBAction)performLogout:(id)sender;
+//-(IBAction)performLogout:(id)sender;
 //-(IBAction)showActivities:(id)sender;
--(IBAction)createActivity:(id)sender;
+//-(IBAction)createActivity:(id)sender;
 @end

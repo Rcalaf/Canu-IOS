@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ActivitiesViewController : UITableViewController
+@interface ActivitiesViewController : UITableViewController <UIGestureRecognizerDelegate>
 
 @end

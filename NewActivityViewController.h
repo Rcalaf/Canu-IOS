@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Activity;
+
 @interface NewActivityViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate>
+
+@property (strong, nonatomic) Activity *activity;
 
 - (IBAction)createActivity:(id)sender;
 - (IBAction)goBack:(id)sender;

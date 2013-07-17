@@ -13,6 +13,7 @@
 @implementation UICanuActivityCell
 
 @synthesize activity = _activity;
+@synthesize actionButton = _actionButton;
 
 
 
@@ -91,13 +92,19 @@
         [descriptionViewContent addSubview:location];
         [self.backgroundView addSubview:descriptionViewContent];
         
-        UIView *actionButton = [[UIView alloc] initWithFrame:CGRectMake(256.5f, 85.0f, 43.5f, 35.0f)];
-        actionButton.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(221.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
+        self.actionButton = [[UIView alloc] initWithFrame:CGRectMake(256.5f, 84.5f, 42.5f, 34.5f)];
+        self.actionButton.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(221.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
         UIImageView *buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_edit.png"]];
         buttonIcon.frame = CGRectMake(0.0f, -5.0f, buttonIcon.image.size.width, buttonIcon.image.size.height);
-        [actionButton addSubview:buttonIcon];
+        [self.actionButton addSubview:buttonIcon];
         
-        [self.backgroundView addSubview:actionButton];
+        /*self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.actionButton.frame = CGRectMake(256.5f, 85.0f, 43.5f, 35.0f);
+        self.actionButton.backgroundColor = */
+        self.actionButton.userInteractionEnabled = YES;
+        
+       // [self.backgroundView addSubview:_actionButton];
+        [self.contentView addSubview:_actionButton];
 
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;

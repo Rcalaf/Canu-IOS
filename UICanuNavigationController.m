@@ -9,6 +9,8 @@
 #import "UICanuNavigationController.h"
 #import "UserProfileViewController.h"
 #import "ActivitiesViewController.h"
+#import "NewActivityViewController.h"
+#import "Activity.h"
 
 @interface UICanuNavigationController ()
     
@@ -42,8 +44,9 @@
 
 }
 
--(IBAction)createActivity:(UISwipeGestureRecognizer *)gesture{
-    
+-(IBAction)createActivity:(UITapGestureRecognizer *)gesture{
+    NewActivityViewController *nac = [[NewActivityViewController alloc] init];
+    [self presentViewController:nac animated:YES completion:nil];
 }
 /*
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -75,8 +78,10 @@
     UISwipeGestureRecognizer *goActivitiesGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goActivities:)];
     goActivitiesGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     
-    UISwipeGestureRecognizer *createActivityGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(createActivity:)];
-    createActivityGesture.direction = UISwipeGestureRecognizerDirectionUp;
+   /* UISwipeGestureRecognizer *createActivityGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(createActivity:)];
+    createActivityGesture.direction = UISwipeGestureRecognizerDirectionUp;*/
+    
+    UITapGestureRecognizer *createActivityGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(createActivity:)];
     
     [_control addGestureRecognizer:goProfileGesture];
     [_control addGestureRecognizer:goActivitiesGesture];
