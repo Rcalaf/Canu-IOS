@@ -69,6 +69,11 @@
 		DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */; };
 		DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */; };
 		DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */; };
+		DEB29BCC1798007A00D9FFAE /* test_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BCB1798007A00D9FFAE /* test_background@2x.png */; };
+		DEB29BCE179801D300D9FFAE /* test_background2.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BCD179801D300D9FFAE /* test_background2.png */; };
+		DEB29BD0179987E300D9FFAE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB29BCF179987E300D9FFAE /* MapKit.framework */; };
+		DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */; };
+		DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */; };
 		DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4A1732BD9B009E9A7D /* Activity.m */; };
 		DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */; };
 		DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DECA169E17807EE8009747E8 /* UICanuNavigationController.m */; };
@@ -184,6 +189,12 @@
 		DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuBottomBar.m; sourceTree = "<group>"; };
 		DEB29BC81796EE8600D9FFAE /* ActivitiesFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesFeedViewController.h; sourceTree = "<group>"; };
 		DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesFeedViewController.m; sourceTree = "<group>"; };
+		DEB29BCB1798007A00D9FFAE /* test_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test_background@2x.png"; sourceTree = "<group>"; };
+		DEB29BCD179801D300D9FFAE /* test_background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test_background2.png; sourceTree = "<group>"; };
+		DEB29BCF179987E300D9FFAE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DEB29C111799C2C800D9FFAE /* FindLocationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindLocationsViewController.h; sourceTree = "<group>"; };
+		DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindLocationsViewController.m; sourceTree = "<group>"; };
+		DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindLocationsViewController.xib; sourceTree = "<group>"; };
 		DEBBDA491732BD9B009E9A7D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		DEBBDA4A1732BD9B009E9A7D /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
 		DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivitiesViewController.h; path = CANU/ActivitiesViewController.h; sourceTree = "<group>"; };
@@ -219,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB29BD0179987E300D9FFAE /* MapKit.framework in Frameworks */,
 				DEA93B6A1720517F00303BB5 /* Social.framework in Frameworks */,
 				DEA93B681720516000303BB5 /* AdSupport.framework in Frameworks */,
 				DEA93B661720515300303BB5 /* Accounts.framework in Frameworks */,
@@ -304,6 +316,8 @@
 		DE4D952517429F1000FB026F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DEB29BCD179801D300D9FFAE /* test_background2.png */,
+				DEB29BCB1798007A00D9FFAE /* test_background@2x.png */,
 				DE4D952A1742A00700FB026F /* intro_bg.png */,
 				DE4D952B1742A00700FB026F /* intro_bg@2x.png */,
 				DE4D952C1742A00700FB026F /* scroll_content.png */,
@@ -327,6 +341,9 @@
 		DE81F8B2175E4DA300AD1071 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				DEB29C111799C2C800D9FFAE /* FindLocationsViewController.h */,
+				DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */,
+				DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */,
 				DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */,
 				DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */,
 				DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */,
@@ -376,6 +393,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEB29BCF179987E300D9FFAE /* MapKit.framework */,
 				DEA93B691720517F00303BB5 /* Social.framework */,
 				DEA93B671720516000303BB5 /* AdSupport.framework */,
 				DEA93B651720515300303BB5 /* Accounts.framework */,
@@ -424,8 +442,8 @@
 		DEA93B4117204EDC00303BB5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				DEB29BB417954FEB00D9FFAE /* ProfileView */,
-				DEB29BB017954FA700D9FFAE /* CanuCell */,
+				DEB29BB417954FEB00D9FFAE /* UIProfileView */,
+				DEB29BB017954FA700D9FFAE /* UICanuCell */,
 				DEF015F41780F1300005FFC0 /* UICanuNavigationController */,
 				DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */,
 				DE85A6331744FCDA00A050E5 /* UICanuTextField */,
@@ -496,22 +514,22 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		DEB29BB017954FA700D9FFAE /* CanuCell */ = {
+		DEB29BB017954FA700D9FFAE /* UICanuCell */ = {
 			isa = PBXGroup;
 			children = (
 				DEF015F71784B9020005FFC0 /* UICanuActivityCell.h */,
 				DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */,
 			);
-			name = CanuCell;
+			name = UICanuCell;
 			sourceTree = "<group>";
 		};
-		DEB29BB417954FEB00D9FFAE /* ProfileView */ = {
+		DEB29BB417954FEB00D9FFAE /* UIProfileView */ = {
 			isa = PBXGroup;
 			children = (
 				DEB29BB117954FDA00D9FFAE /* UIProfileView.h */,
 				DEB29BB217954FDA00D9FFAE /* UIProfileView.m */,
 			);
-			name = ProfileView;
+			name = UIProfileView;
 			sourceTree = "<group>";
 		};
 		DEBBDA4C1732BDA0009E9A7D /* Activity */ = {
@@ -657,6 +675,9 @@
 				DEB29BBC17955AC800D9FFAE /* navmenu_world@2x.png in Resources */,
 				DEB29BBF17955B0600D9FFAE /* settings.png in Resources */,
 				DEB29BC017955B0600D9FFAE /* settings@2x.png in Resources */,
+				DEB29BCC1798007A00D9FFAE /* test_background@2x.png in Resources */,
+				DEB29BCE179801D300D9FFAE /* test_background2.png in Resources */,
+				DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +718,7 @@
 				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
 				DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */,
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
+				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

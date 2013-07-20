@@ -10,7 +10,7 @@
 #import "SignInViewController.h"
 #import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
-#import "ActivitiesViewController.h"
+#import "ActivitiesFeedViewController.h"
 #import "AFCanuAPIClient.h"
 #import "UICanuTextField.h"
 #import "User.h"
@@ -65,7 +65,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
                 
                 UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-                ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
+                ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
                 //[nvc pushViewController:avc animated:NO];
                 [nvc addChildViewController:avc];
                 appDelegate.window.rootViewController = nvc;

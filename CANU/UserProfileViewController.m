@@ -17,7 +17,6 @@
 
 //Controllers import
 #import "UserProfileViewController.h"
-#import "ActivitiesViewController.h"
 #import "MainViewController.h"
 #import "UserSettingsViewController.h"
 //#import "NewActivityViewController.h"
@@ -76,7 +75,7 @@
     [UIView animateWithDuration:0.3 animations:^(void){
         _profileView.frame = CGRectMake(0.0f, 345.0f, 320.0f, 114.0f);
         [_profileView hideComponents:NO];
-        _myActivities.frame = CGRectMake(10.0f, 10.0f, 300.0f, 325.0f);
+        _myActivities.frame = CGRectMake(0.0f, 0.0f, 310.0f, 325.0f);
     } completion:^(BOOL finished) {
         if (finished){
             _profileHidden = NO;
@@ -87,7 +86,7 @@
 - (IBAction)HideProfileInfo:(id)sender{
     [UIView animateWithDuration:0.3 animations:^(void){
         _profileView.frame = CGRectMake(0.0f, 440.0f, 320.0f, 114.0f);
-        _myActivities.frame = CGRectMake(10.0f, 10.0f, 300.0f, 420.0f);
+        _myActivities.frame = CGRectMake(0.0f, 0.0f, 310.0f, 420.0f);
     } completion:^(BOOL finished) {
         if (finished){
             [_profileView hideComponents:YES];

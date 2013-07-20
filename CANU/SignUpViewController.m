@@ -10,7 +10,7 @@
 #import "SignUpViewController.h"
 #import "UICanuNavigationController.h"
 //#import "UserProfileViewController.h"
-#import "ActivitiesViewController.h"
+#import "ActivitiesFeedViewController.h"
 #import "AFCanuAPIClient.h"
 #import "AppDelegate.h"
 #import "UICanuTextField.h"
@@ -129,13 +129,13 @@
     [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text Block:^(User *user, NSError *error) {
         if (user){
             AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-            NSLog(@"%@",user.userName);
+            NSLog(@"token:%@ for user%@",user.token,user.firstName);
             appDelegate.user = user;
             [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
             
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-            ActivitiesViewController *avc = [[ActivitiesViewController alloc] init];
+            ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
             //[nvc pushViewController:avc animated:NO];
             [nvc addChildViewController:avc];
             appDelegate.window.rootViewController = nvc;

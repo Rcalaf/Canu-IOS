@@ -7,6 +7,7 @@
 //
 
 #import "NewActivityViewController.h"
+#import "FindLocationsViewController.h"
 #import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
 #import "UICanuTextField.h"
@@ -155,20 +156,20 @@ float oldValue;
     }else{
         self.view.backgroundColor = [UIColor colorWithRed:(164.0 / 255.0) green:(205.0 / 255.0) blue:(210.0 / 255.0) alpha: 1];
     }
+    
     _length = 20;
     
     self.name = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 25.0, 252.5, 47.0)];
     self.name.placeholder = @"name";
+    self.name.text = self.activity.title;
     self.name.delegate = self;
     [self.name setReturnKeyType:UIReturnKeyNext];
     
-    
     self.description = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 82.0, 252.5, 47.0)];
     self.description.placeholder = @"Description";
+    self.description.text = self.activity.description;
     self.description.delegate = self;
     [self.description setReturnKeyType:UIReturnKeyNext];
-    
-    
     
     self.start = [[UILabel alloc] initWithFrame:CGRectMake(47.5, 139.0, 252.5, 47.0)];
     self.start.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
@@ -180,11 +181,11 @@ float oldValue;
     [self.lengthPicker setUserInteractionEnabled:YES];
     self.lengthPicker.text = [NSString stringWithFormat:@"00:%.2d", _length ];
     
-    //create the gesture to trigger the date picker
+    // Create the gesture to trigger the date picker
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [_start addGestureRecognizer:tapRecognizer];
     
-    //Set the time formatter and the start time
+    // Set the time formatter and the start time
     NSDate *now = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -192,7 +193,6 @@ float oldValue;
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     self.start.text = [dateFormatter stringFromDate:now];
     [self.start setUserInteractionEnabled:YES];
-    
     
     // Create Gestures for setting the time
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(incrementActivityLength:)];
@@ -202,8 +202,7 @@ float oldValue;
     pgr.delegate = self;
     [_lengthPicker addGestureRecognizer:pgr];
     
-    
-    //set the toolbar
+    // Set the toolbar
     _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
@@ -222,7 +221,6 @@ float oldValue;
     [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     
-    
     [self.view addSubview:_name];
     [self.view addSubview:_description];
     [self.view addSubview:_start];
@@ -230,9 +228,26 @@ float oldValue;
     [_toolBar addSubview:_createButon];
     [_toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];
+    /*UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test_background2.png"]];
+    background.frame = CGRectMake(10.0f, 203.5f, background.frame.size.width, background.frame.size.height);
+    [self.view addSubview:background];*/
+    
+    UIView *findLocationButton = [[UIView alloc] initWithFrame:CGRectMake(47.5, 253.0, 252.5, 47.0)];
+    findLocationButton.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    UITapGestureRecognizer *fl = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerFindLocation:)];
+    tgr.delegate = self;
+    [findLocationButton addGestureRecognizer:fl];
+    [self.view addSubview:findLocationButton];
+    
     
 }
 
+
+-(IBAction)triggerFindLocation:(UITapGestureRecognizer *)gesture
+{
+    FindLocationsViewController *findLocations = [[ FindLocationsViewController alloc] init];
+    [self presentViewController:findLocations animated:YES completion:nil];
+}
 
 - (BOOL)textFieldShouldReturn:(UICanuTextField *)textField
 {

@@ -43,7 +43,7 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:token] forKeys: [NSArray arrayWithObject:@"token"]];
     
     [[AFCanuAPIClient sharedClient] postPath:@"session/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-         //NSLog(@"%@",JSON);
+         NSLog(@"%@",JSON);
          User *user= [[User alloc] initWithAttributes:[JSON objectForKey:@"user"]];
         //NSLog(@"userName: %@",user.userName);
         if (block) {
@@ -67,8 +67,8 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     [[AFCanuAPIClient sharedClient] postPath:@"session/login/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-           // NSLog(@"%@",JSON);
-        User *user= [[User alloc] initWithAttributes:[JSON objectForKey:@"user"]];
+        NSLog(@"%@",JSON);
+        User *user= [[User alloc] initWithAttributes:JSON];
         NSLog(@"userName: %@",user.userName);
         if (block) {
             block(user, nil);
@@ -108,7 +108,7 @@
     [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:parameters
                                      success:^(AFHTTPRequestOperation *operation, id JSON) {
                                          NSLog(@"%@",JSON);
-                                         User *user= [[User alloc] initWithAttributes:[JSON objectForKey:@"user"]];
+                                         User *user= [[User alloc] initWithAttributes:JSON];
                                          if (block) {
                                              block(user, nil);
                                          }
@@ -126,13 +126,12 @@
 }
 
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
-    
     NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
     [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        //NSLog(@"%@",JSON);
+        NSLog(@"%@",JSON);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
-            Activity *activity = [[Activity alloc] initWithAttributes:[attributes objectForKey:@"activity"]];
+            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             [mutableActivities addObject:activity];
         }
         if (block) {

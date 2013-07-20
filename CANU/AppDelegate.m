@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "ActivitiesFeedViewController.h" 
-#import "ActivitiesViewController.h"
 #import "UICanuNavigationController.h"
 
 
@@ -38,7 +37,7 @@ NSString *const FBSessionStateChangedNotification =
     NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     
     NSLog(@"session token: %@",token);
-    NSLog(@"user: %@",self.user);
+    
     
     if (token) {
         [User userWithToken:token andBlock:^(User *user, NSError *error) {
@@ -47,6 +46,8 @@ NSString *const FBSessionStateChangedNotification =
         }];
     }
    
+    NSLog(@"user: %@",self.user);
+    
     if (token) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
         nvc.view.backgroundColor = [UIColor redColor];

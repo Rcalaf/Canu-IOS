@@ -36,11 +36,14 @@
 
 
 + (void)publicFeedWithBlock:(void (^)(NSArray *activities, NSError *error))block {
+
     [[AFCanuAPIClient sharedClient] getPath:@"activities/" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        //NSLog(@"%@",JSON);
+        //NSLog(@"%lu",(unsigned long)[[JSON objectForKey:@"activities"] count]);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        //NSLog(@"%lu",(unsigned long)[mutableActivities count]);
         for (NSDictionary *attributes in JSON) {
-            Activity *activity = [[Activity alloc] initWithAttributes:[attributes objectForKey:@"activity"]];
+             NSLog(@"%@",attributes);
+            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             [mutableActivities addObject:activity];
         }
         
@@ -52,6 +55,7 @@
             block([NSArray array], error);
         }
     }];
+    
 }
 
 

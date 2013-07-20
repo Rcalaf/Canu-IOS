@@ -28,7 +28,7 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier activity:(Activity *)activity
 {
-   NSLog(@"%lu",(unsigned long)activity.ownerId);
+   //NSLog(@"%lu",(unsigned long)activity.ownerId);
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.activity = activity;
@@ -106,7 +106,6 @@
        // [self.backgroundView addSubview:_actionButton];
         [self.contentView addSubview:_actionButton];
 
-        
         self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     }

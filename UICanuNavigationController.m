@@ -8,7 +8,6 @@
 
 #import "UICanuNavigationController.h"
 #import "UserProfileViewController.h"
-#import "ActivitiesViewController.h"
 #import "NewActivityViewController.h"
 #import "Activity.h"
 
