@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface User : NSObject
+@interface User : NSObject <NSCoding>
 
 @property (readonly) NSUInteger userId;
 @property (strong,nonatomic) NSString *firstName;
@@ -16,7 +16,7 @@
 @property (strong,nonatomic) NSString *password;
 @property (strong,nonatomic) NSString *userName;
 @property (strong,nonatomic) NSString *email;
-@property (strong,nonatomic) UIImage *profileImage;
+@property (strong,nonatomic) NSURL *profileImageUrl;
 @property (strong,nonatomic) NSString *token;
 
 
@@ -34,10 +34,12 @@
                 FirstName:(NSString *)firstName
                  LastName:(NSString *)lastName
                     Email:(NSString *)email
+           ProfilePicture:(UIImage *)profilePicture
                     Block:(void (^)(User *user, NSError *error))block;
 
 -(void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
+-(NSDictionary *)serialize;
 
 
 @end

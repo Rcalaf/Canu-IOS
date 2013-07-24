@@ -57,6 +57,12 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
 	// Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self reload:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -111,6 +117,8 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
     return [_activities count];
 }
 
+
+
 /*
  - (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
  {
@@ -135,9 +143,8 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
     
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
+        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier Status:activity.status activity:activity];
     }
-    
     
     //cell.activity = activity;
     cell.textLabel.text = activity.title;

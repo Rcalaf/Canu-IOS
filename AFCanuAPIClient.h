@@ -8,6 +8,8 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 
+extern NSString *const kAFCanuAPIBaseURLString;
+
 @interface AFCanuAPIClient : AFHTTPClient
 
 + (AFCanuAPIClient *)sharedClient;

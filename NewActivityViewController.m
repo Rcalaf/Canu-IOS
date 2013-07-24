@@ -34,6 +34,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *createButon;
 @property (strong, nonatomic) IBOutlet UIButton *takePictureButton;
 
+@property (strong, nonatomic) MKMapItem *location;
+@property (strong, nonatomic) UILabel *locationName;
+
+- (void)itemMap:(NSNotification*)notification;
+
 @end
 
 @implementation NewActivityViewController
@@ -48,33 +53,30 @@
 @synthesize backButton = _backButton;
 @synthesize createButon = _createButon;
 @synthesize takePictureButton = _takePictureButton;
+@synthesize location = _location;
+@synthesize locationName = _locationName;
+
 
 float oldValue;
 
  
 - (IBAction)createActivity:(id)sender{
-   if (self.description.text && self.name.text) {
-        NSArray *objectsArray = [NSArray arrayWithObjects:self.name.text,self.description.text,self.start.text,self.lengthPicker.text,nil];
-        NSArray *keysArray = [NSArray arrayWithObjects:@"title",@"description",@"start",@"length",nil];
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+   if (self.name.text && self.location) {
        
-       AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-       NSLog(@"%lu", (unsigned long)appDelegate.user.userId);
-        
-       
-        [[AFCanuAPIClient sharedClient] postPath:[NSString stringWithFormat:@"users/%lu/activities",(unsigned long)appDelegate.user.userId] parameters:parameters
-                                         success:^(AFHTTPRequestOperation *operation, id JSON) {
-                                             //NSLog(@"%@",operation);
-                                             NSLog(@"%@",[JSON valueForKey:@"activity"]);
-                                            
-                                             [self dismissViewControllerAnimated:YES completion:^{
-                                                 NSLog(@"Done");
-                                             }];
-                                         }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                             //NSLog(@"%@",operation);
-                                             //NSLog(@"%@",error);
-                                             NSLog(@"Error");
-                                         }];
+       [Activity createActivityForUserWithTitle:self.name.text
+                                  Description:self.description.text
+                                    StartDate:self.start.text
+                                       Length:self.lengthPicker.text
+                                       Street:self.location.placemark.addressDictionary[@"Street"]
+                                         City:self.location.placemark.addressDictionary[@"City"]
+                                          Zip:self.location.placemark.addressDictionary[@"ZIP"]
+                                      Country:self.location.placemark.addressDictionary[@"Country"]
+                                     Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
+                                    Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
+                                          Image:[UIImage imageNamed:@"icon_userpic.png"]
+                                          Block:^(NSError *error) {
+                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                          }];
     }
     
     
@@ -86,7 +88,7 @@ float oldValue;
 }
 
 -(IBAction)tapped:(UITapGestureRecognizer *)gesture{
-    UIDatePickerActionSheet *das = [[UIDatePickerActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Acept", nil];
+    UIDatePickerActionSheet *das = [[UIDatePickerActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Accept", nil];
     [das showInView:self.view];
 }
 
@@ -186,12 +188,17 @@ float oldValue;
     [_start addGestureRecognizer:tapRecognizer];
     
     // Set the time formatter and the start time
-    NSDate *now = [NSDate date];
+   
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     dateFormatter.dateFormat = @"dd MMM hh:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    self.start.text = [dateFormatter stringFromDate:now];
+    if (self.activity) {
+        self.start.text = [dateFormatter stringFromDate:[self.activity startDate]];
+    } else {
+        self.start.text = [dateFormatter stringFromDate:[NSDate date]];
+    }
+    
     [self.start setUserInteractionEnabled:YES];
     
     // Create Gestures for setting the time
@@ -208,7 +215,7 @@ float oldValue;
     
     //set the create button
     _createButon = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_createButon setTitle:@"CREATE FUN" forState:UIControlStateNormal];
+    [_createButon setTitle:@"CREATE ACTIVITY" forState:UIControlStateNormal];
     [_createButon setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
     [_createButon setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _createButon.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
@@ -233,13 +240,23 @@ float oldValue;
     [self.view addSubview:background];*/
     
     UIView *findLocationButton = [[UIView alloc] initWithFrame:CGRectMake(47.5, 253.0, 252.5, 47.0)];
+    
+    _locationName = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 252.5, 47.0)];
+    if (self.activity) {
+        self.locationName.text = [self.activity locationDescription];
+    }else{
+        self.locationName.text = @"Tap to choose location";
+    }
+    [findLocationButton addSubview:_locationName];
+    
     findLocationButton.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     UITapGestureRecognizer *fl = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerFindLocation:)];
     tgr.delegate = self;
     [findLocationButton addGestureRecognizer:fl];
+    
+
+   
     [self.view addSubview:findLocationButton];
-    
-    
 }
 
 
@@ -262,16 +279,28 @@ float oldValue;
     return YES;
 }
 
-
+- (void)itemMap:(NSNotification*)notification
+{
+   
+    self.location = (MKMapItem *)notification.object;
+    self.locationName.text = self.location.placemark.addressDictionary[@"Street"];
+  //  [self.view setNeedsDisplay];
+     NSLog(@"%@",self.location.placemark.addressDictionary);
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-
-    //[_signInButton addTarget:self action:@selector(performSingUp:) forControlEvents:UIControlEventTouchUpInside];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(itemMap:)
+                                                 name:FindLocationDissmised
+                                               object:nil];
+    
 	// Do any additional setup after loading the view.
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {

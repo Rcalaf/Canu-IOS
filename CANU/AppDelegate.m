@@ -6,17 +6,19 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
-#import <FacebookSDK/FacebookSDK.h>
+
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "ActivitiesFeedViewController.h" 
 #import "UICanuNavigationController.h"
 
 
+@class User;
 
 
 NSString *const FBSessionStateChangedNotification =
 @"CANU.CANU:FBSessionStateChangedNotification";
+
 
 @implementation AppDelegate
 
@@ -30,25 +32,29 @@ NSString *const FBSessionStateChangedNotification =
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    //self.navigationController = [[UICanuNavigationControllerViewController alloc] init];
-    
+  
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
+  //  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     
-    NSLog(@"session token: %@",token);
+    //NSLog(@"session token: %@",token);
+    //NSLog(@"user1: %@",self.user);
     
-    
-    if (token) {
+    /*if (token) {
         [User userWithToken:token andBlock:^(User *user, NSError *error) {
             self.user = user;
-            
+            NSLog(@"user2: %@",self.user);
         }];
-    }
-   
-    NSLog(@"user: %@",self.user);
+    }*/
     
-    if (token) {
+    NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
+    if (savedUserAttributes) {
+        self.user = [[User alloc] initWithAttributes:savedUserAttributes];
+    }
+    
+    NSLog(@"user3: %@",self.user);
+    
+    if (self.user) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
         nvc.view.backgroundColor = [UIColor redColor];
         ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];

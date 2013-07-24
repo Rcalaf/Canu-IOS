@@ -37,8 +37,8 @@
 {
     NSLog(@"Logging out!");
     //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"accessToken"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
-    NSLog(@"session token: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
+  //  NSLog(@"session token: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     
     AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     appDelegate.user = nil;

@@ -70,7 +70,7 @@
     AppDelegate *appDelegate =
     [[UIApplication sharedApplication] delegate];
     [appDelegate closeSession];
-    [self dismissViewControllerAnimated:NO completion:^{}];
+    [self dismissViewControllerAnimated:NO completion:nil];
     //[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -126,12 +126,13 @@
 - (IBAction)performSingUp:(id)sender
 {
     
-    [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text Block:^(User *user, NSError *error) {
+    [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:_takePictureButton.imageView.image Block:^(User *user, NSError *error) {
         if (user){
             AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
             NSLog(@"token:%@ for user%@",user.token,user.firstName);
             appDelegate.user = user;
-            [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+//            [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
             
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
@@ -372,6 +373,8 @@
 {
 
     #warning Be sure you save the taken picture....
+    
+    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{

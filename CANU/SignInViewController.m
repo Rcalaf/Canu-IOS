@@ -61,9 +61,9 @@
                 AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
                 appDelegate.user = user;
                 
-                NSLog(@"%@",user.token);
-                [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
-                
+               
+               // [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
+                [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
                 UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
                 ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
                 //[nvc pushViewController:avc animated:NO];

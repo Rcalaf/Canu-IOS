@@ -14,6 +14,7 @@
 
 @synthesize activity = _activity;
 @synthesize actionButton = _actionButton;
+@synthesize status = _status;
 
 
 
@@ -26,12 +27,13 @@
     return self;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier activity:(Activity *)activity
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Status:(UICanuActivityCellStatus)status activity:(Activity *)activity
 {
-   //NSLog(@"%lu",(unsigned long)activity.ownerId);
+    
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.activity = activity;
+        self.status = status;
         
         UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         backgroundView.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
@@ -41,11 +43,11 @@
         userContentView.backgroundColor = [UIColor colorWithRed:(250.0/255.0) green:(250.0/255.0) blue:(250.0/255.0) alpha:1.0f];
         
         UIImageView *userPic = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 25.0, 25.0)];
-        [userPic setImageWithURL:[NSURL URLWithString:@"/"] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [userPic setImageWithURL:activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [userContentView addSubview:userPic];
         
         UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, 128.0f, 35.0f)];
-        userName.text = [NSString stringWithFormat:@"user: %lu",(unsigned long)_activity.ownerId];
+        userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName,activity.user.lastName];
         userName.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         userName.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -57,16 +59,28 @@
         UIView *timeDayContent = [[UIView alloc] initWithFrame:CGRectMake(169.0f, 85.0f, 87.0f, 35.0f)];
         timeDayContent.backgroundColor = userContentView.backgroundColor;
         
+        
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+        [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
+        timeFormatter.dateFormat = @"hh:mm";
+        [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+      
+        
         UILabel *timeFrame = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 20.0f, 82.0f, 12.0f)];
-        timeFrame.text = [NSString stringWithFormat:@"%d:%d - %d:%d",20,0,20,30];
+        timeFrame.text = [timeFormatter stringFromDate:[self.activity startDate]];//[NSString stringWithFormat:@"%d:%d - %d:%d",20,0,20,30];
         timeFrame.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
         timeFrame.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         timeFrame.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
         [timeDayContent addSubview:timeFrame];
         
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        dateFormatter.dateFormat = @"dd MMM";
+        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        
         UILabel *day = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 5.0f, 62.0f, 12.0f)];
-        day.text = [NSString stringWithFormat:@"jan 1"];
+        day.text = [dateFormatter stringFromDate:[self.activity startDate]];
         day.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
         day.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -85,7 +99,7 @@
         
         [descriptionViewContent addSubview:locationIcon];
         UILabel *location = [[UILabel alloc] initWithFrame:CGRectMake(28.0f, 60.0f, 200.0f, 12.0f)];
-        location.text = [NSString stringWithFormat:@"Diegonal 343, Barcelona"];
+        location.text = [self.activity locationDescription];
         location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
         location.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
         location.backgroundColor = userContentView.backgroundColor;
@@ -93,8 +107,21 @@
         [self.backgroundView addSubview:descriptionViewContent];
         
         self.actionButton = [[UIView alloc] initWithFrame:CGRectMake(256.5f, 84.5f, 42.5f, 34.5f)];
-        self.actionButton.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(221.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
-        UIImageView *buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_edit.png"]];
+        UIImageView *buttonIcon;
+        switch (self.status) {
+            case UICanuActivityCellGo:
+                self.actionButton.backgroundColor = [UIColor colorWithRed:(162.0 / 255.0) green:(203.0 / 255.0) blue:(208.0 / 255.0) alpha: 1];
+                buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_gogoing.png"]];
+                break;
+            case UICanuActivityCellToGo:
+                self.actionButton.backgroundColor = [UIColor colorWithRed:(59.0 / 255.0) green:(194.0 / 255.0) blue:(141.0 / 255.0) alpha: 1];
+                buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_go.png"]];
+                break;
+            default:
+                self.actionButton.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(221.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
+                buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_edit.png"]];
+                break;
+        }
         buttonIcon.frame = CGRectMake(0.0f, -5.0f, buttonIcon.image.size.width, buttonIcon.image.size.height);
         [self.actionButton addSubview:buttonIcon];
         

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
+extern NSString *const FindLocationDissmised;
+
 @interface FindLocationsViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UISearchBar *ibSearchBar;
 @property (strong, nonatomic) IBOutlet MKMapView *ibMapView;

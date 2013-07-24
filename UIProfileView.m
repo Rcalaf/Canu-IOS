@@ -7,6 +7,7 @@
 //
 
 #import "UIProfileView.h"
+#import "UIImageView+AFNetworking.h"
 #import "User.h"
 
 @implementation UIProfileView
@@ -39,13 +40,13 @@
         self.hideTag.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
         [self addSubview:self.hideTag];
         
+        
+        //NSLog(@"%@",user.profileImageUrl);
+        //NSLog(@"%@",[user.profileImageUrl class]);
         self.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 94.0, 94.0)];
-        /*if (user.profileImage == nil){
-            self.profileImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_userpic.png"]];
-        }else{
-            self.profileImage.image = user.profileImage;
-        }*/
-        self.profileImage.backgroundColor = [UIColor redColor];
+        [self.profileImage  setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+       
+        //self.profileImage.backgroundColor = [UIColor redColor];
         [self addSubview:self.profileImage];
         self.profileImage.userInteractionEnabled = YES;
         

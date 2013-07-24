@@ -24,6 +24,11 @@
 		DE6A8A331787358700B220BA /* fullview_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6A8A2F1787358700B220BA /* fullview_go@2x.png */; };
 		DE6A8A3617873D4D00B220BA /* feed_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6A8A3417873D4C00B220BA /* feed_edit.png */; };
 		DE6A8A3717873D4D00B220BA /* feed_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6A8A3517873D4D00B220BA /* feed_edit@2x.png */; };
+		DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE713962179D47FE00EBCB91 /* CoreLocation.framework */; };
+		DE713968179FE89800EBCB91 /* feed_go.png in Resources */ = {isa = PBXBuildFile; fileRef = DE713964179FE89700EBCB91 /* feed_go.png */; };
+		DE713969179FE89800EBCB91 /* feed_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE713965179FE89700EBCB91 /* feed_go@2x.png */; };
+		DE71396A179FE89800EBCB91 /* feed_gogoing.png in Resources */ = {isa = PBXBuildFile; fileRef = DE713966179FE89700EBCB91 /* feed_gogoing.png */; };
+		DE71396B179FE89800EBCB91 /* feed_gogoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE713967179FE89700EBCB91 /* feed_gogoing@2x.png */; };
 		DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */; };
 		DE85A62E1743AB2300A050E5 /* signin_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE85A62C1743AB2300A050E5 /* signin_bg.png */; };
 		DE85A62F1743AB2300A050E5 /* signin_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE85A62D1743AB2300A050E5 /* signin_bg@2x.png */; };
@@ -75,7 +80,6 @@
 		DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */; };
 		DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */; };
 		DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4A1732BD9B009E9A7D /* Activity.m */; };
-		DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */; };
 		DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = DECA169E17807EE8009747E8 /* UICanuNavigationController.m */; };
 		DED4901B17298A61005A0BF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DED4901A17298A61005A0BF9 /* User.m */; };
 		DEF015F91784B9020005FFC0 /* UICanuActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */; };
@@ -120,6 +124,11 @@
 		DE6A8A2F1787358700B220BA /* fullview_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_go@2x.png"; sourceTree = "<group>"; };
 		DE6A8A3417873D4C00B220BA /* feed_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feed_edit.png; sourceTree = "<group>"; };
 		DE6A8A3517873D4D00B220BA /* feed_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feed_edit@2x.png"; sourceTree = "<group>"; };
+		DE713962179D47FE00EBCB91 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DE713964179FE89700EBCB91 /* feed_go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feed_go.png; sourceTree = "<group>"; };
+		DE713965179FE89700EBCB91 /* feed_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feed_go@2x.png"; sourceTree = "<group>"; };
+		DE713966179FE89700EBCB91 /* feed_gogoing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feed_gogoing.png; sourceTree = "<group>"; };
+		DE713967179FE89700EBCB91 /* feed_gogoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feed_gogoing@2x.png"; sourceTree = "<group>"; };
 		DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityViewController.h; sourceTree = "<group>"; };
 		DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
 		DE85A62C1743AB2300A050E5 /* signin_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signin_bg.png; sourceTree = "<group>"; };
@@ -197,8 +206,6 @@
 		DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FindLocationsViewController.xib; sourceTree = "<group>"; };
 		DEBBDA491732BD9B009E9A7D /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		DEBBDA4A1732BD9B009E9A7D /* Activity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Activity.m; sourceTree = "<group>"; };
-		DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivitiesViewController.h; path = CANU/ActivitiesViewController.h; sourceTree = "<group>"; };
-		DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivitiesViewController.m; path = CANU/ActivitiesViewController.m; sourceTree = "<group>"; };
 		DECA169D17807EE8009747E8 /* UICanuNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuNavigationController.h; sourceTree = "<group>"; };
 		DECA169E17807EE8009747E8 /* UICanuNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuNavigationController.m; sourceTree = "<group>"; };
 		DED4901917298A61005A0BF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -230,6 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */,
 				DEB29BD0179987E300D9FFAE /* MapKit.framework in Frameworks */,
 				DEA93B6A1720517F00303BB5 /* Social.framework in Frameworks */,
 				DEA93B681720516000303BB5 /* AdSupport.framework in Frameworks */,
@@ -281,6 +289,10 @@
 		DE4D952417429EFE00FB026F /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				DE713964179FE89700EBCB91 /* feed_go.png */,
+				DE713965179FE89700EBCB91 /* feed_go@2x.png */,
+				DE713966179FE89700EBCB91 /* feed_gogoing.png */,
+				DE713967179FE89700EBCB91 /* feed_gogoing@2x.png */,
 				DEB29BBD17955B0500D9FFAE /* settings.png */,
 				DEB29BBE17955B0600D9FFAE /* settings@2x.png */,
 				DEB29BB917955AC700D9FFAE /* navmenu_world.png */,
@@ -344,8 +356,6 @@
 				DEB29C111799C2C800D9FFAE /* FindLocationsViewController.h */,
 				DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */,
 				DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */,
-				DEBBDA4D1732D4EC009E9A7D /* ActivitiesViewController.h */,
-				DEBBDA4E1732D4EC009E9A7D /* ActivitiesViewController.m */,
 				DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */,
 				DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */,
 				DEB29BC81796EE8600D9FFAE /* ActivitiesFeedViewController.h */,
@@ -393,6 +403,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE713962179D47FE00EBCB91 /* CoreLocation.framework */,
 				DEB29BCF179987E300D9FFAE /* MapKit.framework */,
 				DEA93B691720517F00303BB5 /* Social.framework */,
 				DEA93B671720516000303BB5 /* AdSupport.framework */,
@@ -678,6 +689,10 @@
 				DEB29BCC1798007A00D9FFAE /* test_background@2x.png in Resources */,
 				DEB29BCE179801D300D9FFAE /* test_background2.png in Resources */,
 				DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */,
+				DE713968179FE89800EBCB91 /* feed_go.png in Resources */,
+				DE713969179FE89800EBCB91 /* feed_go@2x.png in Resources */,
+				DE71396A179FE89800EBCB91 /* feed_gogoing.png in Resources */,
+				DE71396B179FE89800EBCB91 /* feed_gogoing@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,7 +722,6 @@
 				DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */,
 				DED4901B17298A61005A0BF9 /* User.m in Sources */,
 				DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */,
-				DEBBDA4F1732D4EC009E9A7D /* ActivitiesViewController.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
 				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
