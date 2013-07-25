@@ -372,7 +372,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
-    #warning Be sure you save the taken picture....
+  //  #warning Be sure you save the taken picture....
     
     [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];

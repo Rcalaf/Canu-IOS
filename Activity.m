@@ -33,6 +33,7 @@
 @synthesize longitude = _longitude;
 @synthesize user = _user;
 @synthesize location = _location;
+@synthesize attendeeIds = _attendeeIds;
 
 
 - (MKMapItem *)location {
@@ -67,6 +68,8 @@
    // NSLog(@"%d user:%d owner: %d",appDelegate.user.userId == self.ownerId,appDelegate.user.userId,self.ownerId);
     if (self.ownerId == appDelegate.user.userId) {
         status = UICanuActivityCellEditable;
+    } else if ([self.attendeeIds containsObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]]){
+        status = UICanuActivityCellGo;
     }else{
         status = UICanuActivityCellToGo;
     }
@@ -124,7 +127,14 @@
     _latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
     //_pictureUrl = [attributes valueForKeyPath:@"activity_picture"];
     
-        
+    NSMutableArray *mutableAssistents = [NSMutableArray arrayWithCapacity:[[attributes valueForKeyPath:@"attendee_ids"] count]];
+    for (NSNumber *assistentId in [attributes valueForKeyPath:@"attendee_ids"]) {
+        [mutableAssistents addObject:assistentId];
+    }
+    _attendeeIds = mutableAssistents;
+   // NSLog(@"%@",mutableAssistents);
+    
+    
     return self;
 }
 
@@ -134,19 +144,16 @@
 }
 
 + (void)publicFeedWithBlock:(void (^)(NSArray *activities, NSError *error))block {
-
+    //NSLog(@"called public feed");
     [[AFCanuAPIClient sharedClient] getPath:@"activities/" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         //NSLog(@"%@",JSON);
-        //NSLog(@"%lu",(unsigned long)[[JSON objectForKey:@"activities"] count]);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
-        //NSLog(@"%lu",(unsigned long)[mutableActivities count]);
         for (NSDictionary *attributes in JSON) {
              //NSLog(@"%@",attributes);
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             //NSLog(@"%@",[activity startDate]);
             [mutableActivities addObject:activity];
         }
-        
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
@@ -159,9 +166,51 @@
 }
 
 
+- (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block
+{
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
+    [[AFCanuAPIClient sharedClient] postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        for (NSDictionary *attributes in JSON) {
+           // NSLog(@"%@",attributes);
+            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            //NSLog(@"%@",activity.attendeeIds);
+            [mutableActivities addObject:activity];
+        }
+        
+        if (block) {
+            block([NSArray arrayWithArray:mutableActivities], nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block(nil,error);
+        }
+    }];
+
+}
+
+- (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block
+{
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
+    [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        for (NSDictionary *attributes in JSON) {
+            //NSLog(@"%@",attributes);
+            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            [mutableActivities addObject:activity];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block(nil,error);
+        }
+    }];
+}
 
 
-- (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block {
+- (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block{
     
     AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
 

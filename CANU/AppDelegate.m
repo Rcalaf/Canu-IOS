@@ -13,6 +13,8 @@
 #import "UICanuNavigationController.h"
 
 
+
+
 @class User;
 
 
@@ -58,8 +60,8 @@ NSString *const FBSessionStateChangedNotification =
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
         nvc.view.backgroundColor = [UIColor redColor];
         ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
-        //[nvc pushViewController:avc animated:NO];
-        [nvc addChildViewController:avc];
+        [nvc pushViewController:avc animated:NO];
+        //[nvc addChildViewController:avc];
         self.window.rootViewController = nvc;
     } else {
         MainViewController *mvc = [[MainViewController alloc] init];

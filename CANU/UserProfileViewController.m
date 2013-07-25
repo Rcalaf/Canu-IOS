@@ -19,7 +19,7 @@
 #import "UserProfileViewController.h"
 #import "MainViewController.h"
 #import "UserSettingsViewController.h"
-//#import "NewActivityViewController.h"
+#import "NewActivityViewController.h"
 
 
 @interface UserProfileViewController ()
@@ -118,7 +118,7 @@
     self.myActivities.dataSource = self;
     self.myActivities.delegate = self;
     
-    [self reload:nil];
+    //[self reload:nil];
     [self.view addSubview:self.myActivities];
     
     self.profileView = [[UIProfileView alloc] initWithUser:self.user];
@@ -147,6 +147,8 @@
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
     
     [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
+    
+    [self reload:nil];
     
     // AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
    //  NSLog(@"%@",appDelegate.user.userName);
@@ -214,6 +216,53 @@
     
 }
 
+-(void)triggerCellAction:(id)recognizer
+{
+    UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
+    NewActivityViewController *eac;
+    NSLog(@"%u",cell.activity.status);
+    
+    if (cell.activity.status == UICanuActivityCellGo) {
+        [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                Activity *a = [activities objectAtIndex:1] ;
+                NSLog(@"activities GO:%@",a.attendeeIds );
+                _activities = activities;
+                //[self.myActivities reloadData];
+                
+            }
+        }];
+    }
+    if (cell.activity.status == UICanuActivityCellEditable) {
+        eac = [[NewActivityViewController alloc] init];
+        eac.activity = cell.activity;
+        [self presentViewController:eac animated:YES completion:nil];
+    }
+    
+    if (cell.activity.status == UICanuActivityCellToGo) {
+        [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                Activity *a = [activities objectAtIndex:1] ;
+                NSLog(@"activities TOGO:%@",a.attendeeIds );
+                _activities = activities;
+                //[self.myActivities reloadData];
+                
+            }
+        }];
+    }
+    // Activity *a = [_activities objectAtIndex:1] ;
+   // NSLog(@"activities global:%@",a.attendeeIds );
+   // [self.myActivities reloadData];
+     
+    //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
+    [self reload:nil];
+}
+
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
@@ -236,21 +285,25 @@
 
 - (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Canu Cell";
+    //static NSString *CellIdentifier = @"Canu Cell";
     
     Activity *activity= [_activities objectAtIndex:indexPath.row];
     
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Canu Cell %u",activity.status];
+    
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier Status:UICanuActivityCellEditable activity:activity];
+        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
     }
     
    
     //cell.activity = activity;
-    
     cell.textLabel.text = activity.title;
-    
+    UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
+    //cellAction.delegate = self;
+    [cell.actionButton addGestureRecognizer:cellAction];
     return cell;
+    
 }
 
 @end

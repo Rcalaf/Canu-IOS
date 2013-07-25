@@ -27,13 +27,19 @@
     return self;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Status:(UICanuActivityCellStatus)status activity:(Activity *)activity
+- (void) setStatus:(UICanuActivityCellStatus)status{
+    _status = status;
+    NSLog(@"setting new status");
+    [self setNeedsDisplay];
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier activity:(Activity *)activity
 {
     
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.activity = activity;
-        self.status = status;
+        //self.status = status;
         
         UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         backgroundView.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
@@ -108,21 +114,17 @@
         
         self.actionButton = [[UIView alloc] initWithFrame:CGRectMake(256.5f, 84.5f, 42.5f, 34.5f)];
         UIImageView *buttonIcon;
-        switch (self.status) {
-            case UICanuActivityCellGo:
-                self.actionButton.backgroundColor = [UIColor colorWithRed:(162.0 / 255.0) green:(203.0 / 255.0) blue:(208.0 / 255.0) alpha: 1];
-                buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_gogoing.png"]];
-                break;
-            case UICanuActivityCellToGo:
-                self.actionButton.backgroundColor = [UIColor colorWithRed:(59.0 / 255.0) green:(194.0 / 255.0) blue:(141.0 / 255.0) alpha: 1];
-                buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_go.png"]];
-                break;
-            default:
-                self.actionButton.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(221.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
-                buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_edit.png"]];
-                break;
+        if ([self.reuseIdentifier isEqualToString:[NSString stringWithFormat:@"Canu Cell %u",UICanuActivityCellGo]] ) {
+            self.actionButton.backgroundColor = [UIColor colorWithRed:(162.0 / 255.0) green:(203.0 / 255.0) blue:(208.0 / 255.0) alpha: 1];
+            buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_gogoing.png"]];
+        } else if ([self.reuseIdentifier isEqualToString:[NSString stringWithFormat:@"Canu Cell %u",UICanuActivityCellToGo]]){
+            self.actionButton.backgroundColor = [UIColor colorWithRed:(59.0 / 255.0) green:(194.0 / 255.0) blue:(141.0 / 255.0) alpha: 1];
+            buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_go.png"]];
+        } else {
+            self.actionButton.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(221.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
+            buttonIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_edit.png"]];
         }
-        buttonIcon.frame = CGRectMake(0.0f, -5.0f, buttonIcon.image.size.width, buttonIcon.image.size.height);
+                   buttonIcon.frame = CGRectMake(0.0f, -5.0f, buttonIcon.image.size.width, buttonIcon.image.size.height);
         [self.actionButton addSubview:buttonIcon];
         
         /*self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];

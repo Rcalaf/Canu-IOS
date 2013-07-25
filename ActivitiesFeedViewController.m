@@ -12,21 +12,19 @@
 #import "NewActivityViewController.h"
 
 
-@interface ActivitiesFeedViewController ()
+@interface ActivitiesFeedViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableActivities;
 
 - (void)reload:(id)sender;
 @end
 
 @implementation ActivitiesFeedViewController{
 @private
-NSArray *_activities;
-__strong UIActivityIndicatorView *_activityIndicatorView;
-
+    NSArray *_activities;
 }
 
-@synthesize tableView = _tableview;
+@synthesize tableActivities = _tableActivities;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,26 +39,27 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(1.0f, 0.0f, 310.0f, self.view.frame.size.height) style:UITableViewStyleGrouped];
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(1.0f, 0.0f, 310.0f, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.tableActivities.backgroundView = nil;
+    self.tableActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
 
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.view addSubview:self.tableView];
+    self.tableActivities.dataSource = self;
+    self.tableActivities.delegate = self;
+   
+    [self.view addSubview:self.tableActivities]; 
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self reload:nil];
-	// Do any additional setup after loading the view.
+ // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [self reload:nil];
+   [self reload:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,18 +70,17 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
 
 - (void)reload:(id)sender
 {
-    [_activityIndicatorView startAnimating];
+    //[_activityIndicatorView startAnimating];
+   // NSLog(@"reload?");
     
     [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         } else {
-            //NSLog(@"%@",activities);
             _activities = activities;
-            [self.tableView reloadData];
+            [_tableActivities reloadData];
         }
         
-        [_activityIndicatorView stopAnimating];
         // self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
     // NSLog(@"Loading");
@@ -93,10 +91,39 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
 -(void)triggerCellAction:(id)recognizer
 {
     UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
-    NewActivityViewController *eac = [[NewActivityViewController alloc] init];
-    eac.activity = cell.activity;
-    [self presentViewController:eac animated:YES completion:nil];
+    NewActivityViewController *eac;
+
+    
+    if (cell.activity.status == UICanuActivityCellGo) {
+        [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+               _activities = activities;
+                //[_tableActivities reloadData];
+                
+            }
+        }];
+    }
+    if (cell.activity.status == UICanuActivityCellEditable) {
+        eac = [[NewActivityViewController alloc] init];
+        eac.activity = cell.activity;
+        [self presentViewController:eac animated:YES completion:nil];
+    }
+    
+    if (cell.activity.status == UICanuActivityCellToGo) {
+        [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                _activities = activities;
+                //[_tableActivities reloadData];
+            }
+        }];
+    }
+    
     //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
+    [self reload:nil];
 }
 
 
@@ -137,20 +164,25 @@ __strong UIActivityIndicatorView *_activityIndicatorView;
 
 - (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Canu Cell";
+    //static NSString *CellIdentifier = @"";
     
     Activity *activity= [_activities objectAtIndex:indexPath.row];
     
+    NSString *CellIdentifier = [NSString stringWithFormat:@"Canu Cell %u",activity.status];
+    
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier Status:activity.status activity:activity];
+        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
     }
     
+    NSLog(@"%@",cell.reuseIdentifier);
     //cell.activity = activity;
+    // NSLog(@"%u",cell.activity.status);
     cell.textLabel.text = activity.title;
     UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
     //cellAction.delegate = self;
     [cell.actionButton addGestureRecognizer:cellAction];
+    
     return cell;
 }
 

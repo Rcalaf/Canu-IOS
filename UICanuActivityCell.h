@@ -24,7 +24,7 @@ typedef enum {
 
 
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier Status:(UICanuActivityCellStatus)status activity:(Activity *)activity;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier activity:(Activity *)activity;
 
 
 @end

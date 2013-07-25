@@ -29,6 +29,7 @@
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;
 @property (readonly) int status;
+@property (readonly) NSArray *attendeeIds;
 
 
 @property (readonly) User *user;
@@ -48,6 +49,9 @@
                                  Block:(void (^)(NSError *error))block;
 - (id)initWithAttributes:(NSDictionary *)attributes;
 - (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block;
+- (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+- (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
 - (NSDate *)startDate;
 - (NSString *)locationDescription;
 - (void)populateLocationDataWith:(MKMapItem *)mapItem;

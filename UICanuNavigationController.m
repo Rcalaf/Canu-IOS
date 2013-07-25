@@ -63,6 +63,7 @@
     }];
    // NSLog(@"Load Activities view");
     [self popViewControllerAnimated:YES];
+    
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
     //NSLog(@"%@",self.topViewController);
 }
