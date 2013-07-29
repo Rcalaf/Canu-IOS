@@ -61,24 +61,65 @@ float oldValue;
 
  
 - (IBAction)createActivity:(id)sender{
+     NSLog(@"tap title: %@ and location: %@",self.name.text, self.activity.location);
+    NSLog(@"%@",self.location);
    if (self.name.text && self.location) {
+      
+        NSArray *lengthTimeParts = [self.lengthPicker.text componentsSeparatedByString:@":"];
        
-       [Activity createActivityForUserWithTitle:self.name.text
-                                  Description:self.description.text
-                                    StartDate:self.start.text
-                                       Length:self.lengthPicker.text
-                                       Street:self.location.placemark.addressDictionary[@"Street"]
-                                         City:self.location.placemark.addressDictionary[@"City"]
-                                          Zip:self.location.placemark.addressDictionary[@"ZIP"]
-                                      Country:self.location.placemark.addressDictionary[@"Country"]
-                                     Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
-                                    Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
-                                          Image:[UIImage imageNamed:@"icon_userpic.png"]
-                                          Block:^(NSError *error) {
-                                              [self dismissViewControllerAnimated:YES completion:nil];
-                                          }];
-    }
-    
+       NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
+       
+       NSDate *start;
+       if (self.activity) {
+          start = self.activity.start;
+       } else {
+          start = [NSDate date];
+       }
+       
+       NSDate *end = [start dateByAddingTimeInterval:delay];
+       
+       
+       NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+       [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+       dateFormatter.dateFormat = @"dd MMM HH:mm";
+       [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        
+       if (self.activity) {
+           [self.activity editActivityForUserWithTitle:self.name.text
+                                        Description:self.description.text
+                                          StartDate:self.start.text
+                                             Length:self.lengthPicker.text
+                                            EndDate:[dateFormatter stringFromDate:end]
+                                             Street:self.location.placemark.addressDictionary[@"Street"]
+                                               City:self.location.placemark.addressDictionary[@"City"]
+                                                Zip:self.location.placemark.addressDictionary[@"ZIP"]
+                                            Country:self.location.placemark.addressDictionary[@"Country"]
+                                           Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
+                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
+                                              Image:[UIImage imageNamed:@"icon_userpic.png"]
+                                              Block:^(NSError *error) {
+                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                              }];
+       } else {
+           [Activity createActivityForUserWithTitle:self.name.text
+                                        Description:self.description.text
+                                          StartDate:self.start.text
+                                             Length:self.lengthPicker.text
+                                            EndDate:[dateFormatter stringFromDate:end]
+                                             Street:self.location.placemark.addressDictionary[@"Street"]
+                                               City:self.location.placemark.addressDictionary[@"City"]
+                                                Zip:self.location.placemark.addressDictionary[@"ZIP"]
+                                            Country:self.location.placemark.addressDictionary[@"Country"]
+                                           Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
+                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
+                                              Image:[UIImage imageNamed:@"icon_userpic.png"]
+                                              Block:^(NSError *error) {
+                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                              }];
+           
+       }
+
+   }
     
 }
 
@@ -122,15 +163,13 @@ float oldValue;
 -(IBAction)incrementActivityLength:(UITapGestureRecognizer *)gesture
 {
     _length = _length + 20;
-    int hours = _length/60;
-    int minuts = _length%60;
-    self.lengthPicker.text = [NSString stringWithFormat:@"%.2d:%.2d", hours,minuts  ];
+    self.lengthPicker.text = [Activity lengthToString:_length];
 }
 
 - (void)actionSheet:(UIDatePickerActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat = @"dd MMM hh:mm";
+    dateFormatter.dateFormat = @"dd MMM HH:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     self.start.text = [dateFormatter stringFromDate:actionSheet.datePicker.date];
 }
@@ -159,7 +198,12 @@ float oldValue;
         self.view.backgroundColor = [UIColor colorWithRed:(164.0 / 255.0) green:(205.0 / 255.0) blue:(210.0 / 255.0) alpha: 1];
     }
     
-    _length = 20;
+    if (self.activity) {
+        _length = [self.activity lengthToInteger];
+        _location = self.activity.location;
+    }else{
+        _length = 20;
+    }
     
     self.name = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 25.0, 252.5, 47.0)];
     self.name.placeholder = @"name";
@@ -181,7 +225,7 @@ float oldValue;
     self.lengthPicker.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
     self.lengthPicker.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
     [self.lengthPicker setUserInteractionEnabled:YES];
-    self.lengthPicker.text = [NSString stringWithFormat:@"00:%.2d", _length ];
+    self.lengthPicker.text = [Activity lengthToString:_length];
     
     // Create the gesture to trigger the date picker
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
@@ -191,10 +235,10 @@ float oldValue;
    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat = @"dd MMM hh:mm";
+    dateFormatter.dateFormat = @"dd MMM HH:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     if (self.activity) {
-        self.start.text = [dateFormatter stringFromDate:[self.activity startDate]];
+        self.start.text = [dateFormatter stringFromDate:self.activity.start];
     } else {
         self.start.text = [dateFormatter stringFromDate:[NSDate date]];
     }
@@ -215,7 +259,11 @@ float oldValue;
     
     //set the create button
     _createButon = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_createButon setTitle:@"CREATE ACTIVITY" forState:UIControlStateNormal];
+    if (self.activity) {
+        [_createButon setTitle:@"EDIT ACTIVITY" forState:UIControlStateNormal];
+    } else {
+        [_createButon setTitle:@"CREATE ACTIVITY" forState:UIControlStateNormal];
+    }
     [_createButon setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
     [_createButon setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _createButon.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
@@ -285,7 +333,7 @@ float oldValue;
     self.location = (MKMapItem *)notification.object;
     self.locationName.text = self.location.placemark.addressDictionary[@"Street"];
   //  [self.view setNeedsDisplay];
-     NSLog(@"%@",self.location.placemark.addressDictionary);
+  //   NSLog(@"%@",self.location.placemark.addressDictionary);
 }
 
 - (void)viewDidLoad

@@ -14,7 +14,11 @@
 
 @synthesize activity = _activity;
 @synthesize actionButton = _actionButton;
-@synthesize status = _status;
+@synthesize userName = _userName;
+@synthesize day = _day;
+@synthesize timeFrame = _timeFrame;
+@synthesize location = _location;
+//@synthesize status = _status;
 
 
 
@@ -27,11 +31,11 @@
     return self;
 }
 
-- (void) setStatus:(UICanuActivityCellStatus)status{
+/*- (void) setStatus:(UICanuActivityCellStatus)status{
     _status = status;
     NSLog(@"setting new status");
-    [self setNeedsDisplay];
-}
+    //[self setNeedsDisplay];
+}*/
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier activity:(Activity *)activity
 {
@@ -40,6 +44,8 @@
     if (self) {
         self.activity = activity;
         //self.status = status;
+        
+        self.textLabel.text = activity.title;
         
         UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.frame.size.width, self.frame.size.height)];
         backgroundView.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
@@ -52,13 +58,13 @@
         [userPic setImageWithURL:activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [userContentView addSubview:userPic];
         
-        UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, 128.0f, 35.0f)];
-        userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName,activity.user.lastName];
-        userName.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
-        userName.backgroundColor = userContentView.backgroundColor;
+        _userName = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, 128.0f, 35.0f)];
+        _userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName,activity.user.lastName];
+        _userName.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+        _userName.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
-        [userContentView addSubview:userName];
+        _userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
+        [userContentView addSubview:_userName];
         [self.backgroundView addSubview:userContentView];
         
         
@@ -68,30 +74,30 @@
         
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
         [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
-        timeFormatter.dateFormat = @"hh:mm";
+        timeFormatter.dateFormat = @"HH:mm";
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
       
         
-        UILabel *timeFrame = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 20.0f, 82.0f, 12.0f)];
-        timeFrame.text = [timeFormatter stringFromDate:[self.activity startDate]];//[NSString stringWithFormat:@"%d:%d - %d:%d",20,0,20,30];
-        timeFrame.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
-        timeFrame.backgroundColor = userContentView.backgroundColor;
+        _timeFrame = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 20.0f, 82.0f, 12.0f)];
+        _timeFrame.text = [timeFormatter stringFromDate:self.activity.start];//[NSString stringWithFormat:@"%d:%d - %d:%d",20,0,20,30];
+        _timeFrame.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
+        _timeFrame.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        timeFrame.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
-        [timeDayContent addSubview:timeFrame];
+        _timeFrame.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
+        [timeDayContent addSubview:_timeFrame];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
         dateFormatter.dateFormat = @"dd MMM";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         
-        UILabel *day = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 5.0f, 62.0f, 12.0f)];
-        day.text = [dateFormatter stringFromDate:[self.activity startDate]];
-        day.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
-        day.backgroundColor = userContentView.backgroundColor;
+        _day = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 5.0f, 62.0f, 12.0f)];
+        _day.text = [dateFormatter stringFromDate:self.activity.start];
+        _day.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
+        _day.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        day.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
-        [timeDayContent addSubview:day];
+        _day.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
+        [timeDayContent addSubview:_day];
         
         [self.backgroundView addSubview:timeDayContent];
         
@@ -104,12 +110,12 @@
         //[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_location.png"]];
         
         [descriptionViewContent addSubview:locationIcon];
-        UILabel *location = [[UILabel alloc] initWithFrame:CGRectMake(28.0f, 60.0f, 200.0f, 12.0f)];
-        location.text = [self.activity locationDescription];
-        location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
-        location.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
-        location.backgroundColor = userContentView.backgroundColor;
-        [descriptionViewContent addSubview:location];
+        _location = [[UILabel alloc] initWithFrame:CGRectMake(28.0f, 60.0f, 200.0f, 12.0f)];
+        _location.text = [self.activity locationDescription];
+        _location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
+        _location.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
+        _location.backgroundColor = userContentView.backgroundColor;
+        [descriptionViewContent addSubview:_location];
         [self.backgroundView addSubview:descriptionViewContent];
         
         self.actionButton = [[UIView alloc] initWithFrame:CGRectMake(256.5f, 84.5f, 42.5f, 34.5f)];

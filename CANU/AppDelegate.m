@@ -37,6 +37,8 @@ NSString *const FBSessionStateChangedNotification =
   
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
+    
   //  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     
     //NSLog(@"session token: %@",token);
@@ -70,11 +72,25 @@ NSString *const FBSessionStateChangedNotification =
     }
 
     [self.window makeKeyAndVisible];
+    
+    application.applicationIconBadgeNumber = 0;
+    
+    // Handle launching from a notification
+    UILocalNotification *localNotif =
+    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        NSLog(@"Recieved Notification oppening%@",localNotif);
+    }
+    
     return YES;
 }
 
 
-
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
+    // Handle the notificaton when the app is running
+    // app.applicationIconBadgeNumber = app.applicationIconBadgeNumber + 1;
+    NSLog(@"Recieved Notification from background%@",notif);
+}
 
 /*
  * Callback for session changes.
@@ -183,6 +199,9 @@ NSString *const FBSessionStateChangedNotification =
     // We need to properly handle activation of the application with regards to Facebook Login
     // (e.g., returning from iOS 6.0 Login Dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
+     application.applicationIconBadgeNumber = 0;
+     NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
+   
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

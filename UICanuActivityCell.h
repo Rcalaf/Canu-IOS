@@ -20,7 +20,12 @@ typedef enum {
 
 @property (strong, nonatomic) Activity *activity;
 @property (strong, nonatomic) IBOutlet UIView *actionButton;
-@property (nonatomic) UICanuActivityCellStatus status;
+@property (strong, nonatomic) UILabel *userName;
+@property (strong, nonatomic) UILabel *day;
+@property (strong, nonatomic) UILabel *timeFrame;
+@property (strong, nonatomic) UILabel *location;
+
+//@property (nonatomic) UICanuActivityCellStatus status;
 
 
 

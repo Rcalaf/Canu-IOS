@@ -220,15 +220,15 @@
 {
     UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
     NewActivityViewController *eac;
-    NSLog(@"%u",cell.activity.status);
+   // NSLog(@"%u",cell.activity.status);
     
     if (cell.activity.status == UICanuActivityCellGo) {
         [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-                Activity *a = [activities objectAtIndex:1] ;
-                NSLog(@"activities GO:%@",a.attendeeIds );
+               // Activity *a = [activities objectAtIndex:1] ;
+                //NSLog(@"activities GO:%@",a.attendeeIds );
                 _activities = activities;
                 //[self.myActivities reloadData];
                 
@@ -246,8 +246,8 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-                Activity *a = [activities objectAtIndex:1] ;
-                NSLog(@"activities TOGO:%@",a.attendeeIds );
+                //Activity *a = [activities objectAtIndex:1] ;
+                //NSLog(@"activities TOGO:%@",a.attendeeIds );
                 _activities = activities;
                 //[self.myActivities reloadData];
                 

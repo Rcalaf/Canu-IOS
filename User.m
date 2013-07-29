@@ -84,18 +84,20 @@
 + (void)userWithToken:(NSString *)token
              andBlock:(void (^)(User *user, NSError *error))block{
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:token] forKeys: [NSArray arrayWithObject:@"token"]];
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] postPath:@"session/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
          //NSLog(@"%@",JSON);
         if (block) {
             block([[User alloc] initWithAttributes:[JSON objectForKey:@"user"]], nil);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             //NSLog(@"%@",error);
             NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
             block(nil, error);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 
     
@@ -106,18 +108,21 @@
     NSArray *objectsArray = [NSArray arrayWithObjects:email,password,nil];
     NSArray *keysArray = [NSArray arrayWithObjects:@"email",@"password",nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] postPath:@"session/login/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         NSLog(@"%@",JSON);
         if (block) {
             block([[User alloc] initWithAttributes:JSON], nil);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             //NSLog(@"%@",error);
             NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
             block(nil, error);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
@@ -152,21 +157,25 @@
         NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
     }];*/
     
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                             NSLog(@"Process completed %@",JSON);
                                             User *user= [[User alloc] initWithAttributes:JSON];
                                             if (block) {
                                                 block(user, nil);
                                             }
+                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                         }
                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+                                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                         if (block) {
                                             NSLog(@"%@",error);
                                             NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
                                             block(nil, error);
-                                        }                                                
+                                        }
+                                        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                         }];
     [operation start];
 
@@ -174,7 +183,9 @@
 
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
         //NSLog(@"%@",JSON);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
@@ -184,10 +195,12 @@
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             block([NSArray array], error);
         }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 

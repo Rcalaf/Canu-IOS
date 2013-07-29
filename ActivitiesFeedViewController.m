@@ -52,7 +52,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self reload:nil];
+  //  [self reload:nil];
  // Do any additional setup after loading the view.
 }
 
@@ -74,6 +74,7 @@
    // NSLog(@"reload?");
     
     [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
+        
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         } else {
@@ -99,8 +100,8 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-               _activities = activities;
-                //[_tableActivities reloadData];
+               //_activities = activities;
+              //[self.tableActivities reloadData];
                 
             }
         }];
@@ -108,6 +109,7 @@
     if (cell.activity.status == UICanuActivityCellEditable) {
         eac = [[NewActivityViewController alloc] init];
         eac.activity = cell.activity;
+        NSLog(@"loc: %@",eac.activity.location);
         [self presentViewController:eac animated:YES completion:nil];
     }
     
@@ -116,8 +118,8 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-                _activities = activities;
-                //[_tableActivities reloadData];
+               //_activities = activities;
+               // [self.tableActivities reloadData];
             }
         }];
     }
@@ -173,14 +175,33 @@
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
+    } else{
+        cell.activity = activity;
+        cell.textLabel.text = activity.title;
+        cell.location.text = activity.locationDescription;
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName, activity.user.lastName];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        dateFormatter.dateFormat = @"dd MMM";
+        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        
+        cell.day.text = [dateFormatter stringFromDate:activity.start];
+        
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+        [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
+        timeFormatter.dateFormat = @"HH:mm";
+        [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        cell.timeFrame.text = [timeFormatter stringFromDate:activity.start];
+        
+        
     }
     
-    NSLog(@"%@",cell.reuseIdentifier);
+    //NSLog(@"%@",cell.reuseIdentifier);
     //cell.activity = activity;
     // NSLog(@"%u",cell.activity.status);
-    cell.textLabel.text = activity.title;
+    //cell.textLabel.text = activity.title;
     UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
-    //cellAction.delegate = self;
     [cell.actionButton addGestureRecognizer:cellAction];
     
     return cell;

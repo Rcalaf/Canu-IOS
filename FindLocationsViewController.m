@@ -84,7 +84,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
 {
     //MKMapItem *item = [[self.ibMapView selectedAnnotations] objectAtIndex:0];
     
-    NSLog(@"%@",chosenLocation.placemark);
+    //NSLog(@"%@",chosenLocation.placemark);
     [self dismissViewControllerAnimated:YES completion:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:FindLocationDissmised object:chosenLocation];
 

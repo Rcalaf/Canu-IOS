@@ -22,7 +22,8 @@
 @property (readonly) NSString *city;
 @property (readonly) NSString *zip;
 @property (readonly) NSString *country;
-@property (readonly) NSString *start;
+@property (readonly) NSDate *start;
+@property (readonly) NSDate *end;
 @property (readonly) NSString *length;
 @property (readonly) CLLocationDegrees latitude;
 @property (readonly) CLLocationDegrees longitude;
@@ -39,6 +40,7 @@
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate
                                 Length:(NSString *)length
+                               EndDate:(NSString *)endDate
                                 Street:(NSString *)street
                                   City:(NSString *)city
                                    Zip:(NSString *)zip
@@ -47,12 +49,30 @@
                              Longitude:(NSString *)longitude
                                  Image:(UIImage *)activityImage
                                  Block:(void (^)(NSError *error))block;
+
+- (void)editActivityForUserWithTitle:(NSString *)title
+                         Description:(NSString *)description
+                           StartDate:(NSString *)startDate
+                              Length:(NSString *)length
+                             EndDate:(NSString *)endDate
+                              Street:(NSString *)street
+                                City:(NSString *)city
+                                 Zip:(NSString *)zip
+                             Country:(NSString *)country
+                            Latitude:(NSString *)latitude
+                           Longitude:(NSString *)longitude
+                               Image:(UIImage *)activityImage
+                               Block:(void (^)(NSError *error))block;
+
++ (NSString *)lengthToString:(NSInteger)length;
+
 - (id)initWithAttributes:(NSDictionary *)attributes;
 - (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block;
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
-- (NSDate *)startDate;
+- (NSInteger)lengthToInteger;
+//- (NSDate *)startDate;
 - (NSString *)locationDescription;
 - (void)populateLocationDataWith:(MKMapItem *)mapItem;
 
