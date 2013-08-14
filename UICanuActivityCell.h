@@ -15,15 +15,19 @@ typedef enum {
 } UICanuActivityCellStatus;
 
 @class Activity;
+@class User;
 
 @interface UICanuActivityCell : UITableViewCell
 
 @property (strong, nonatomic) Activity *activity;
+@property (strong, nonatomic) User *user;
 @property (strong, nonatomic) IBOutlet UIView *actionButton;
 @property (strong, nonatomic) UILabel *userName;
 @property (strong, nonatomic) UILabel *day;
-@property (strong, nonatomic) UILabel *timeFrame;
+@property (strong, nonatomic) UILabel *timeStart;
+@property (strong, nonatomic) UILabel *timeEnd;
 @property (strong, nonatomic) UILabel *location;
+
 
 //@property (nonatomic) UICanuActivityCellStatus status;
 

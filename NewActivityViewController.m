@@ -65,9 +65,9 @@ float oldValue;
     NSLog(@"%@",self.location);
    if (self.name.text && self.location) {
       
-        NSArray *lengthTimeParts = [self.lengthPicker.text componentsSeparatedByString:@":"];
+       //NSArray *lengthTimeParts = [self.lengthPicker.text componentsSeparatedByString:@":"];
        
-       NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
+       //NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
        
        NSDate *start;
        if (self.activity) {
@@ -76,20 +76,20 @@ float oldValue;
           start = [NSDate date];
        }
        
-       NSDate *end = [start dateByAddingTimeInterval:delay];
+       /*NSDate *end = [start dateByAddingTimeInterval:delay];
        
        
        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
        dateFormatter.dateFormat = @"dd MMM HH:mm";
-       [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+       [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];*/
         
        if (self.activity) {
            [self.activity editActivityForUserWithTitle:self.name.text
                                         Description:self.description.text
                                           StartDate:self.start.text
                                              Length:self.lengthPicker.text
-                                            EndDate:[dateFormatter stringFromDate:end]
+                                            EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
                                                City:self.location.placemark.addressDictionary[@"City"]
                                                 Zip:self.location.placemark.addressDictionary[@"ZIP"]
@@ -105,7 +105,7 @@ float oldValue;
                                         Description:self.description.text
                                           StartDate:self.start.text
                                              Length:self.lengthPicker.text
-                                            EndDate:[dateFormatter stringFromDate:end]
+                                            EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
                                                City:self.location.placemark.addressDictionary[@"City"]
                                                 Zip:self.location.placemark.addressDictionary[@"ZIP"]

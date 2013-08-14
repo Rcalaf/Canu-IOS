@@ -9,14 +9,17 @@
 #import "UICanuActivityCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "Activity.h"
+#import "User.h"
 
 @implementation UICanuActivityCell
 
 @synthesize activity = _activity;
+@synthesize user = _user;
 @synthesize actionButton = _actionButton;
 @synthesize userName = _userName;
 @synthesize day = _day;
-@synthesize timeFrame = _timeFrame;
+@synthesize timeStart = _timeStart;
+@synthesize timeEnd = _timeEnd;
 @synthesize location = _location;
 //@synthesize status = _status;
 
@@ -55,14 +58,16 @@
         userContentView.backgroundColor = [UIColor colorWithRed:(250.0/255.0) green:(250.0/255.0) blue:(250.0/255.0) alpha:1.0f];
         
         UIImageView *userPic = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 25.0, 25.0)];
-        [userPic setImageWithURL:activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [userPic setImageWithURL:self.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [userContentView addSubview:userPic];
         
         _userName = [[UILabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, 128.0f, 35.0f)];
-        _userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName,activity.user.lastName];
+        _userName.text = [NSString stringWithFormat:@"%@ %@",self.activity.user.firstName,activity.user.lastName];
         _userName.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         _userName.backgroundColor = userContentView.backgroundColor;
+        
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        
         _userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
         [userContentView addSubview:_userName];
         [self.backgroundView addSubview:userContentView];
@@ -78,13 +83,21 @@
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
       
         
-        _timeFrame = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 20.0f, 82.0f, 12.0f)];
-        _timeFrame.text = [timeFormatter stringFromDate:self.activity.start];//[NSString stringWithFormat:@"%d:%d - %d:%d",20,0,20,30];
-        _timeFrame.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
-        _timeFrame.backgroundColor = userContentView.backgroundColor;
+        _timeStart = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 20.0f, 82.0f, 12.0f)];
+        _timeStart.text = [timeFormatter stringFromDate:self.activity.start];
+        _timeStart.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
+        _timeStart.backgroundColor = userContentView.backgroundColor;
         //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        _timeFrame.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
-        [timeDayContent addSubview:_timeFrame];
+        _timeStart.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
+        [timeDayContent addSubview:_timeStart];
+        
+        _timeEnd = [[UILabel alloc] initWithFrame:CGRectMake(35.0f, 20.0f, 82.0f, 12.0f)];
+        _timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
+        _timeEnd.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
+        _timeEnd.backgroundColor = userContentView.backgroundColor;
+        //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        _timeEnd.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
+        [timeDayContent addSubview:_timeEnd];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];

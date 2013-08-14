@@ -236,9 +236,10 @@
     _city = [attributes valueForKeyPath:@"city"];
     _country = [attributes valueForKeyPath:@"country"];
     _street = [attributes valueForKeyPath:@"street"];
+    _zip = [attributes valueForKeyPath:@"zip_code"];
     
     self.start = [attributes valueForKeyPath:@"start"];
-    self.end = [attributes valueForKeyPath:@"end"];
+    self.end = [attributes valueForKeyPath:@"end_date"];
     
     _length = [attributes valueForKeyPath:@"length"];
     

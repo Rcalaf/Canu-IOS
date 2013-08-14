@@ -42,6 +42,10 @@
     self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(1.0f, 0.0f, 310.0f, self.view.frame.size.height) style:UITableViewStyleGrouped];
     self.tableActivities.backgroundView = nil;
     self.tableActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    
+    //UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    
+    
 
     self.tableActivities.dataSource = self;
     self.tableActivities.delegate = self;
@@ -175,8 +179,11 @@
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
+    
     } else{
+        
         cell.activity = activity;
+        
         cell.textLabel.text = activity.title;
         cell.location.text = activity.locationDescription;
         cell.userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName, activity.user.lastName];
@@ -192,9 +199,9 @@
         [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
         timeFormatter.dateFormat = @"HH:mm";
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        cell.timeFrame.text = [timeFormatter stringFromDate:activity.start];
-        
-        
+        cell.timeStart.text = [timeFormatter stringFromDate:activity.start];
+        cell.timeEnd.text = [timeFormatter stringFromDate:activity.end];
+        //[cell setNeedsDisplay];
     }
     
     //NSLog(@"%@",cell.reuseIdentifier);
