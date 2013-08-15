@@ -75,7 +75,7 @@
     [UIView animateWithDuration:0.3 animations:^(void){
         _profileView.frame = CGRectMake(0.0f, 345.0f, 320.0f, 114.0f);
         [_profileView hideComponents:NO];
-        _myActivities.frame = CGRectMake(0.0f, 0.0f, 310.0f, 325.0f);
+        //_myActivities.frame = CGRectMake(0.0f, 0.0f, 320.0f, 325.0f);
     } completion:^(BOOL finished) {
         if (finished){
             _profileHidden = NO;
@@ -86,7 +86,7 @@
 - (IBAction)HideProfileInfo:(id)sender{
     [UIView animateWithDuration:0.3 animations:^(void){
         _profileView.frame = CGRectMake(0.0f, 440.0f, 320.0f, 114.0f);
-        _myActivities.frame = CGRectMake(0.0f, 0.0f, 310.0f, 420.0f);
+       // _myActivities.frame = CGRectMake(0.0f, 0.0f, 320.0f, 420.0f);
     } completion:^(BOOL finished) {
         if (finished){
             [_profileView hideComponents:YES];
@@ -110,7 +110,7 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     
-    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 420.0) style:UITableViewStyleGrouped];
+    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 450.0) style:UITableViewStyleGrouped];
     
     self.myActivities.backgroundView = nil;
     self.myActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
@@ -180,7 +180,7 @@
 #pragma mark - Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 130.5f;
+    return 130.0f;
 }
 
 #pragma mark - Table view data source
@@ -299,6 +299,8 @@
    
     //cell.activity = activity;
     cell.textLabel.text = activity.title;
+    
+    //[cell.actionButton addTarget:self action:@selector(triggerCellAction:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
     //cellAction.delegate = self;
     [cell.actionButton addGestureRecognizer:cellAction];

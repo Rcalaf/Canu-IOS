@@ -21,7 +21,8 @@ typedef enum {
 
 @property (strong, nonatomic) Activity *activity;
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) IBOutlet UIView *actionButton;
+//@property (strong, nonatomic) IBOutlet UIView *actionButton;
+@property (strong, nonatomic) IBOutlet UIButton *actionButton;
 @property (strong, nonatomic) UILabel *userName;
 @property (strong, nonatomic) UILabel *day;
 @property (strong, nonatomic) UILabel *timeStart;
