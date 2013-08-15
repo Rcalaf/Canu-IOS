@@ -200,7 +200,7 @@
         timeFormatter.dateFormat = @"HH:mm";
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         cell.timeStart.text = [timeFormatter stringFromDate:activity.start];
-        cell.timeEnd.text = [timeFormatter stringFromDate:activity.end];
+        cell.timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:activity.end]];
         //[cell setNeedsDisplay];
     }
     

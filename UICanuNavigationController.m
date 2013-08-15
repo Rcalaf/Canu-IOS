@@ -24,7 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.navigationBarHidden = YES;
-        self.control = [[UIView alloc] initWithFrame:CGRectMake(-10.0, 423.0, 63.0, 63.0)];
+        self.control = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 423.0, 63.0, 63.0)];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
         [self.view addSubview:self.control];
     }
@@ -33,7 +33,7 @@
 
 - (IBAction)goProfile:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(263.0, 423.0, 63.0, 63.0);
+        _control.frame = CGRectMake(260.0, 423.0, 63.0, 63.0);
     }];
     //NSLog(@"Load Profile view");
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
@@ -58,7 +58,7 @@
 
 - (IBAction)goActivities:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(-10.0, 423.0, 63.0, 63.0);
+        _control.frame = CGRectMake(-3.0, 423.0, 63.0, 63.0);
         
     }];
    // NSLog(@"Load Activities view");
