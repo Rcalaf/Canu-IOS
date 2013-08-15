@@ -20,6 +20,7 @@
 @property (strong, nonatomic) UIImageView *hideArrow;
 
 
+
 - (id)initWithUser:(User *)user;
 - (void)hideComponents:(BOOL)hide;
 @end
