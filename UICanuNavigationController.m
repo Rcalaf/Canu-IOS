@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "UICanuNavigationController.h"
 #import "UserProfileViewController.h"
 #import "NewActivityViewController.h"
@@ -36,23 +37,23 @@
     [UIView animateWithDuration:0.3 animations:^{
         _control.frame = CGRectMake(260.0, 420.0, 63.0, 63.0);
     }];
-    //NSLog(@"Load Profile view");
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    UserProfileViewController *upvc =  appDelegate.profileViewController == nil ? [[UserProfileViewController alloc] init] : appDelegate.profileViewController;
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
-    //[self popViewControllerAnimated:YES];
-    [self pushViewController:[[UserProfileViewController alloc] init] animated:YES];
+    [self pushViewController:upvc animated:YES];
     //NSLog(@"%@",self.topViewController);
 
 }
 
 -(IBAction)bounce:(UITapGestureRecognizer *)gesture{
-    NSLog(@"Bounce");
+    //NSLog(@"Bounce");
    
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _control.frame;
         frame.origin.y = 400.0f;
         _control.frame = frame;
     } completion:^(BOOL finished){
-        [UIView animateWithDuration:.1 animations:^{
+        [UIView animateWithDuration:.2 animations:^{
             CGRect frame = _control.frame;
             frame.origin.y = 420.0f;
             _control.frame = frame;

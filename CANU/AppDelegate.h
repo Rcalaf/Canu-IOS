@@ -11,7 +11,8 @@
 #import "User.h"
 
 
-
+@class ActivitiesFeedViewController;
+@class UserProfileViewController;
 
 extern NSString *const FBSessionStateChangedNotification;
 
@@ -20,6 +21,9 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) User *user;
+
+@property (strong, nonatomic) ActivitiesFeedViewController *publicFeedViewController;
+@property (strong, nonatomic) UserProfileViewController *profileViewController;
 
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;

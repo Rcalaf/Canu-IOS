@@ -21,6 +21,7 @@
 @synthesize timeStart = _timeStart;
 @synthesize timeEnd = _timeEnd;
 @synthesize location = _location;
+@synthesize userPic = _userPic;
 //@synthesize status = _status;
 
 
@@ -52,9 +53,9 @@
         
         self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feed_cell.png"]];
         
-        UIImageView *userPic = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 91.0, 25.0, 25.0)];
-        [userPic setImageWithURL:self.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-        [self.contentView addSubview:userPic];
+        _userPic = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 91.0, 25.0, 25.0)];
+        [_userPic setImageWithURL:self.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [self.contentView addSubview:_userPic];
         
         _userName = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 89.0f, 128.0f, 25.0f)];
         _userName.text = [NSString stringWithFormat:@"%@ %@",self.activity.user.firstName,activity.user.lastName];

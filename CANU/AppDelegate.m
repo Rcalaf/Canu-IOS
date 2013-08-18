@@ -10,9 +10,8 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "ActivitiesFeedViewController.h" 
+#import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
-
-
 
 
 @class User;
@@ -25,6 +24,8 @@ NSString *const FBSessionStateChangedNotification =
 @implementation AppDelegate
 
 @synthesize user = _user;
+@synthesize publicFeedViewController = _publicFeedViewController;
+@synthesize profileViewController = _profileViewController;
 
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -60,10 +61,11 @@ NSString *const FBSessionStateChangedNotification =
     
     if (self.user) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-        nvc.view.backgroundColor = [UIColor redColor];
-        ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
-        [nvc pushViewController:avc animated:NO];
-        //[nvc addChildViewController:avc];
+     
+        _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
+        _profileViewController = [[UserProfileViewController alloc] init];
+        [nvc pushViewController:self.publicFeedViewController animated:NO];
+
         self.window.rootViewController = nvc;
     } else {
         MainViewController *mvc = [[MainViewController alloc] init];

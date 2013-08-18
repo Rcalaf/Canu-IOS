@@ -6,10 +6,17 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "UIImageView+AFNetworking.h"
 #import "UICanuActivityCell.h"
+
 #import "ActivitiesFeedViewController.h"
-#import "Activity.h"
+
 #import "NewActivityViewController.h"
+#import "DetailActivityViewController.h"
+
+#import "Activity.h"
+
+
 
 
 @interface ActivitiesFeedViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
@@ -104,8 +111,8 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-               //_activities = activities;
-              //[self.tableActivities reloadData];
+               _activities = activities;
+              [self.tableActivities reloadData];
                 
             }
         }];
@@ -122,8 +129,8 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-               //_activities = activities;
-               // [self.tableActivities reloadData];
+                _activities = activities;
+                [self.tableActivities reloadData];
             }
         }];
     }
@@ -183,6 +190,8 @@
     } else{
         
         cell.activity = activity;
+        
+        [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         
         cell.textLabel.text = activity.title;
         cell.location.text = activity.locationDescription;
@@ -267,13 +276,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    
+    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
+    davc.activity = [_activities objectAtIndex:indexPath.row];
+    [self presentViewController:davc animated:YES completion:nil];
+
+ 
 }
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 130.5f;

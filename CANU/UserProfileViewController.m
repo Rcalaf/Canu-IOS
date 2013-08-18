@@ -6,10 +6,13 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "UIImageView+AFNetworking.h"
+
 //Custom CANU class import
 #import "UICanuActivityCell.h"
 #import "UIProfileView.h"
 #import "AppDelegate.h"
+
 
 //Models class import
 #import "User.h"
@@ -22,7 +25,8 @@
 #import "NewActivityViewController.h"
 
 
-@interface UserProfileViewController ()
+@interface UserProfileViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+
 
 @property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 @property (strong, nonatomic) IBOutlet UIButton *activitiesButton;
@@ -104,6 +108,49 @@
     
 }
 
+//User profile ImagePicker
+-(IBAction)takePic:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose an existing one",@"Take a picutre", nil];
+    [actionSheet showInView:self.view];
+}
+
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    
+    if (buttonIndex == 0) {
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self presentViewController:imagePicker animated:YES completion:^{
+            NSLog(@"Done");
+        }];
+    } else if (buttonIndex == 1){
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+            [self presentViewController:imagePicker animated:YES completion:^{
+                NSLog(@"Done");
+            }];
+        }
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    
+    //  #warning Be sure you save the taken picture....
+    
+    //[self.profileView.profileImage setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+    //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+    
+}
+
+
 -(void) loadView
 {
     [super loadView];
@@ -111,6 +158,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     
     self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 450.0) style:UITableViewStyleGrouped];
+
     
     self.myActivities.backgroundView = nil;
     self.myActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
@@ -145,8 +193,10 @@
     [_profileView addGestureRecognizer:swipeRecognizer];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
-    
     [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
+    
+    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
+    [_profileView.profileImage addGestureRecognizer:tapRecognizer];
     
     [self reload:nil];
     
@@ -159,6 +209,7 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self reload:nil];
     self.navigationController.navigationBarHidden = YES;
     
 }
@@ -209,7 +260,7 @@
             [self.myActivities reloadData];
         }
     }];
-    NSLog(@"Loading user_id: %d",self.user.userId);
+    //NSLog(@"Loading user_id: %d",self.user.userId);
     
     
     
@@ -257,8 +308,8 @@
     // Activity *a = [_activities objectAtIndex:1] ;
    // NSLog(@"activities global:%@",a.attendeeIds );
    // [self.myActivities reloadData];
-     
     //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
+    
     [self reload:nil];
 }
 
@@ -292,17 +343,42 @@
     NSString *CellIdentifier = [NSString stringWithFormat:@"Canu Cell %u",activity.status];
     
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
+    
     if (!cell) {
         cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
+    }else{
+        
+        cell.activity = activity;
+        
+        [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        
+        cell.textLabel.text = activity.title;
+        cell.location.text = activity.locationDescription;
+        cell.userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName, activity.user.lastName];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        dateFormatter.dateFormat = @"dd MMM";
+        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        
+        cell.day.text = [dateFormatter stringFromDate:activity.start];
+        
+        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+        [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
+        timeFormatter.dateFormat = @"HH:mm";
+        [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        cell.timeStart.text = [timeFormatter stringFromDate:activity.start];
+        cell.timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:activity.end]];
+        //[cell setNeedsDisplay];
     }
-    
    
     //cell.activity = activity;
-    cell.textLabel.text = activity.title;
+    //cell.textLabel.text = activity.title;
     
     //[cell.actionButton addTarget:self action:@selector(triggerCellAction:) forControlEvents:UIControlEventTouchUpInside];
     UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
-    //cellAction.delegate = self;
     [cell.actionButton addGestureRecognizer:cellAction];
     return cell;
     

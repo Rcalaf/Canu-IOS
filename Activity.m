@@ -263,7 +263,8 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] getPath:@"activities/" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         
-        //NSLog(@"%@",JSON);
+        //  NSLog(@"%@",JSON);
+        //  NSLog(@"%d",[JSON count]);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             // NSLog(@"%@",attributes);
@@ -289,6 +290,7 @@
 {
     AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
@@ -297,7 +299,7 @@
             //NSLog(@"%@",activity.attendeeIds);
             [mutableActivities addObject:activity];
         }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
         
         [self addNotification];
         
@@ -321,10 +323,7 @@
 
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
-    UIApplication *app = [UIApplication sharedApplication];
-
-    
-    AppDelegate *appDelegate =[app delegate];
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
@@ -338,6 +337,12 @@
             [mutableActivities addObject:activity];
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+       
+        
+        if (block) {
+            block([NSArray arrayWithArray:mutableActivities], nil);
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             block(nil,error);

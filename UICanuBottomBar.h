@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol UICanuBottomBarDelegate
+
+@end
+
 @interface UICanuBottomBar : UIView
+
+@property (weak) id <UICanuBottomBarDelegate> delegate;
+@property (strong, nonatomic) UIButton *backButton;
 
 @end

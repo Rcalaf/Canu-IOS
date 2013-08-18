@@ -28,6 +28,7 @@ typedef enum {
 @property (strong, nonatomic) UILabel *timeStart;
 @property (strong, nonatomic) UILabel *timeEnd;
 @property (strong, nonatomic) UILabel *location;
+@property (strong, nonatomic) UIImageView *userPic;
 
 
 //@property (nonatomic) UICanuActivityCellStatus status;
