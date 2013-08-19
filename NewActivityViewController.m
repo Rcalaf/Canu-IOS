@@ -15,6 +15,7 @@
 #import "Activity.h"
 
 
+
 @interface NewActivityViewController ()
 
 
@@ -22,7 +23,7 @@
 @property int length;
 
 
-@property (strong, nonatomic) IBOutlet UICanuTextField *name;
+@property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) IBOutlet UICanuTextField *description;
 
 @property (strong, nonatomic) IBOutlet UILabel *start;
@@ -193,50 +194,62 @@ float oldValue;
     [super loadView];
     
     if (self.activity) {
-        self.view.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(220.0 / 255.0) blue:(32.0 / 255.0) alpha: 1];
-    }else{
-        self.view.backgroundColor = [UIColor colorWithRed:(164.0 / 255.0) green:(205.0 / 255.0) blue:(210.0 / 255.0) alpha: 1];
-    }
-    
-    if (self.activity) {
         _length = [self.activity lengthToInteger];
         _location = self.activity.location;
     }else{
         _length = 20;
+        // _location =
     }
     
-    self.name = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 25.0, 252.5, 47.0)];
-    self.name.placeholder = @"name";
-    self.name.text = self.activity.title;
-    self.name.delegate = self;
-    [self.name setReturnKeyType:UIReturnKeyNext];
+    self.view.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
     
-    self.description = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 82.0, 252.5, 47.0)];
-    self.description.placeholder = @"Description";
-    self.description.text = self.activity.description;
-    self.description.delegate = self;
-    [self.description setReturnKeyType:UIReturnKeyNext];
+    UIColor *textColor = [UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
     
-    self.start = [[UILabel alloc] initWithFrame:CGRectMake(47.5, 139.0, 252.5, 47.0)];
-    self.start.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
-    self.start.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
+    // Gradient background Background
+    UIImageView *background;
+    if (self.activity) {
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit_bg.png"]];
+    }else{
+        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_bg.png"]];
+    }
     
-    self.lengthPicker = [[UILabel alloc] initWithFrame:CGRectMake(47.5, 196.0, 252.5, 47.0)];
-    self.lengthPicker.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
-    self.lengthPicker.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
-    [self.lengthPicker setUserInteractionEnabled:YES];
-    self.lengthPicker.text = [Activity lengthToString:_length];
     
+    background.frame = CGRectMake(0.0f, -219.0f, 320.0f, 699.0f);
+    [self.view addSubview:background];
+    
+    // FormGrid
+    UIImageView *formGrid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_world.png"]];
+    CGRect formGridFrame = formGrid.frame;
+    formGridFrame.origin.x = 10.0f;
+    formGridFrame.origin.y = 203.0f;
+    formGrid.frame = formGridFrame;
+    [formGrid setUserInteractionEnabled:YES];
+    
+    
+    _name = [[UITextField alloc] initWithFrame:CGRectMake(18.0f, 0.0f, 260.0, 47.0)];
+    _name.placeholder = @"Title";
+    _name.textColor = textColor;
+    _name.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    _name.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
+    _name.text = self.activity.title;
+    _name.delegate = self;
+    [_name setReturnKeyType:UIReturnKeyNext];
+    [formGrid addSubview:_name];
+    
+    _start = [[UILabel alloc] initWithFrame:CGRectMake(65.0f, 47.5f, 110.0f, 47.0f)];
+    _start.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
+    _start.textColor = textColor;
     // Create the gesture to trigger the date picker
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
     [_start addGestureRecognizer:tapRecognizer];
     
     // Set the time formatter and the start time
-   
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     dateFormatter.dateFormat = @"dd MMM HH:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
     if (self.activity) {
         self.start.text = [dateFormatter stringFromDate:self.activity.start];
     } else {
@@ -245,13 +258,63 @@ float oldValue;
     
     [self.start setUserInteractionEnabled:YES];
     
-    // Create Gestures for setting the time
+    [formGrid addSubview:_start];
+    
+    _lengthPicker = [[UILabel alloc] initWithFrame:CGRectMake(215.0f, 47.5f, 87.0f, 47.0f)];
+    _lengthPicker.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
+    _lengthPicker.textColor = textColor;
+    _lengthPicker.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
+    _lengthPicker.text = [Activity lengthToString:_length];
+    [_lengthPicker setUserInteractionEnabled:YES];
+    
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(incrementActivityLength:)];
     tgr.delegate = self;
     [_lengthPicker addGestureRecognizer:tgr];
     UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(finetuneActivityLength:)];
     pgr.delegate = self;
     [_lengthPicker addGestureRecognizer:pgr];
+    
+    [formGrid addSubview:_lengthPicker];
+    
+    
+    
+    UIView *findLocationButton = [[UIView alloc] initWithFrame:CGRectMake(47.5f, 95.0f, 252.5, 47.0)];
+    
+    _locationName = [[UILabel alloc] initWithFrame:CGRectMake(18.0, 0.0, 226.5, 47.0)];
+    if (self.activity) {
+        _locationName.text = [self.activity locationDescription];
+    }else{
+        _locationName.text = @"Current location";
+    }
+    [findLocationButton addSubview:_locationName];
+    _locationName.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
+    _locationName.textColor = [UIColor colorWithRed:26.0f/255.0f green:144.0f/255.0f blue:161.0f/255.0f alpha:1.0f];
+    
+    findLocationButton.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
+    UITapGestureRecognizer *fl = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerFindLocation:)];
+    tgr.delegate = self;
+    [findLocationButton addGestureRecognizer:fl];
+    
+    
+    
+    [formGrid addSubview:findLocationButton];
+    
+    
+    _description = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 345.0f, 300.0f, 47.0)];
+    _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
+    _description.placeholder = @"Details";
+    _description.text = self.activity.description;
+    _description.delegate = self;
+    [self.description setReturnKeyType:UIReturnKeyNext];
+    [self.view addSubview:_description];
+    
+    [self.view addSubview:formGrid];
+    
+
+    
+    
+    
+    
     
     // Set the toolbar
     _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
@@ -276,35 +339,9 @@ float oldValue;
     [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:_name];
-    [self.view addSubview:_description];
-    [self.view addSubview:_start];
-    [self.view addSubview:_lengthPicker];
     [_toolBar addSubview:_createButon];
     [_toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];
-    /*UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test_background2.png"]];
-    background.frame = CGRectMake(10.0f, 203.5f, background.frame.size.width, background.frame.size.height);
-    [self.view addSubview:background];*/
-    
-    UIView *findLocationButton = [[UIView alloc] initWithFrame:CGRectMake(47.5, 253.0, 252.5, 47.0)];
-    
-    _locationName = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, 252.5, 47.0)];
-    if (self.activity) {
-        self.locationName.text = [self.activity locationDescription];
-    }else{
-        self.locationName.text = @"Tap to choose location";
-    }
-    [findLocationButton addSubview:_locationName];
-    
-    findLocationButton.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
-    UITapGestureRecognizer *fl = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerFindLocation:)];
-    tgr.delegate = self;
-    [findLocationButton addGestureRecognizer:fl];
-    
-
-   
-    [self.view addSubview:findLocationButton];
 }
 
 

@@ -294,15 +294,14 @@
     [[AFCanuAPIClient sharedClient] postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
-           // NSLog(@"%@",attributes);
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            if (activity.activityId == self.activityId) _attendeeIds = activity.attendeeIds;
             //NSLog(@"%@",activity.attendeeIds);
             [mutableActivities addObject:activity];
         }
         
         
         [self addNotification];
-        
         
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
@@ -334,11 +333,12 @@
         for (NSDictionary *attributes in JSON) {
             //NSLog(@"%@",attributes);
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            if (activity.activityId == self.activityId) _attendeeIds = activity.attendeeIds;
             [mutableActivities addObject:activity];
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
        
-        
+       
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }

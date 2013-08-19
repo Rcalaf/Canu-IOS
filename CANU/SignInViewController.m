@@ -65,7 +65,7 @@
                // [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
                 [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
                 UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-                ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
+                ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
                 //[nvc pushViewController:avc animated:NO];
                 [nvc addChildViewController:avc];
                 appDelegate.window.rootViewController = nvc;

@@ -35,19 +35,18 @@
 
 -(IBAction)performLogout:(id)sender
 {
-    NSLog(@"Logging out!");
-    //[[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"accessToken"];
+
+#warning remove the notifications before log out
+    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
-  //  NSLog(@"session token: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"]);
     
     AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     appDelegate.user = nil;
 
     MainViewController *mvc = [[MainViewController alloc] init];
-    //[nvc addChildViewController:mvc];
     appDelegate.window.rootViewController = mvc;
     
-    NSLog(@"%@",appDelegate.user.userName);
+    //NSLog(@"%@",appDelegate.user.userName);
     
     //[self.navigationController setViewControllers:[NSArray arrayWithObject:[[MainViewController alloc] init]]];
 }

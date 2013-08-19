@@ -136,7 +136,7 @@
     }
     
     //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
-    [self reload:nil];
+    //[self reload:nil];
 }
 
 

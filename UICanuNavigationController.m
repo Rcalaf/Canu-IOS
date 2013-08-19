@@ -38,7 +38,7 @@
         _control.frame = CGRectMake(260.0, 420.0, 63.0, 63.0);
     }];
     AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-    UserProfileViewController *upvc =  appDelegate.profileViewController == nil ? [[UserProfileViewController alloc] init] : appDelegate.profileViewController;
+    UserProfileViewController *upvc =  appDelegate.profileViewController;
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
     [self pushViewController:upvc animated:YES];
     //NSLog(@"%@",self.topViewController);

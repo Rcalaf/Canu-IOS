@@ -55,9 +55,7 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-               // Activity *activity = [activities objectAtIndex:self.activity.activityId];
-                //_numberOfAssistents = [NSString stringWithFormat:@"%ul",[activity.attendeeIds count]];
-                 _numberOfAssistents = [NSString stringWithFormat:@"%ul",[self.activity.attendeeIds count]];
+                 _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                 [_actionButton setImage:[UIImage imageNamed:@"feed_action_yes.png"] forState:UIControlStateNormal];
                 
             }
@@ -69,7 +67,7 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-                _numberOfAssistents = [NSString stringWithFormat:@"%ul",[self.activity.attendeeIds count]];
+                _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                [_actionButton setImage:[UIImage imageNamed:@"feed_action_go.png"] forState:UIControlStateNormal];
             }
         }];

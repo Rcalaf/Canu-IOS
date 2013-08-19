@@ -32,13 +32,45 @@ NSString *const FBSessionStateChangedNotification =
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+- (ActivitiesFeedViewController *)publicFeedViewController
+{
+    if (!_publicFeedViewController) {
+        _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
+        //NSLog(@"Creating public feed");
+    } 
+    return _publicFeedViewController;
+}
+
+- (UserProfileViewController *)profileViewController
+{
+    if (!_profileViewController) {
+        _profileViewController = [[UserProfileViewController alloc] init];
+       // NSLog(@"Creating User profile");
+    }
+    _profileViewController.user = self.user;
+    // NSLog(@"user id: %lu",(unsigned long)_profileViewController.user.userId);
+
+    return _profileViewController;
+}
+
+- (User *)user
+{
+    if (!_user) {
+        NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
+        if (savedUserAttributes) {
+            _user = [[User alloc] initWithAttributes:savedUserAttributes];
+        }
+    }
+    return _user;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
   
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
+    //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
   //  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     
@@ -52,12 +84,9 @@ NSString *const FBSessionStateChangedNotification =
         }];
     }*/
     
-    NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
-    if (savedUserAttributes) {
-        self.user = [[User alloc] initWithAttributes:savedUserAttributes];
-    }
+
     
-    NSLog(@"user3: %@",self.user);
+    //NSLog(@"user3: %@",self.user);
     
     if (self.user) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];

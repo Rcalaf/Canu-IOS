@@ -136,7 +136,8 @@
             
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-            ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
+           // ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
+            ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
             //[nvc pushViewController:avc animated:NO];
             [nvc addChildViewController:avc];
             appDelegate.window.rootViewController = nvc;
@@ -374,7 +375,7 @@
 
   //  #warning Be sure you save the taken picture....
     
-    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerCropRect] forState:UIControlStateNormal];
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{

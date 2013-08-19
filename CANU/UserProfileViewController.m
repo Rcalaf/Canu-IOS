@@ -35,7 +35,7 @@
 @property (strong, nonatomic) IBOutlet UIProfileView *profileView;
 @property (strong, nonatomic) IBOutlet UITableView *myActivities;
 @property (nonatomic) BOOL profileHidden;
-@property (strong, nonatomic) User *user;
+
 
 - (void)reload:(id)sender;
 
@@ -142,9 +142,7 @@
     
     //  #warning Be sure you save the taken picture....
     
-    //[self.profileView.profileImage setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
-    //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
+    //[self.profileView.profileImage setImage:[info valueForKey:UIImagePickerControllerCropRect] forState:UIControlStateNormal];
     [self dismissViewControllerAnimated:YES completion:^{
     }];
     
@@ -209,6 +207,11 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self.profileView.profileImage setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    self.profileView.name.text = [NSString stringWithFormat:@"%@ %@",self.user.firstName,self.user.lastName];
+    
+
+    NSLog(@"user: %ul",self.user.userId);
     [self reload:nil];
     self.navigationController.navigationBarHidden = YES;
     
@@ -280,8 +283,9 @@
             } else {
                // Activity *a = [activities objectAtIndex:1] ;
                 //NSLog(@"activities GO:%@",a.attendeeIds );
-                _activities = activities;
+                //_activities = activities;
                 //[self.myActivities reloadData];
+                [self reload:nil];
                 
             }
         }];
@@ -299,8 +303,9 @@
             } else {
                 //Activity *a = [activities objectAtIndex:1] ;
                 //NSLog(@"activities TOGO:%@",a.attendeeIds );
-                _activities = activities;
+                //_activities = activities;
                 //[self.myActivities reloadData];
+                [self reload:nil];
                 
             }
         }];
@@ -310,7 +315,7 @@
    // [self.myActivities reloadData];
     //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
     
-    [self reload:nil];
+   // ;
 }
 
 
