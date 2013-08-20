@@ -169,6 +169,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     [self.ibMapView setCenterCoordinate:chosenLocation.placemark.location.coordinate animated:YES];
     [self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
     
+    
    // [self dismissViewControllerAnimated:YES completion:nil];
    // [[NSNotificationCenter defaultCenter] postNotificationName:FindLocationDissmised object:item];
     
@@ -176,6 +177,11 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     
    
     
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
+{
+    NSLog(@"dragging");
 }
 
 

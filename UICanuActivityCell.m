@@ -98,7 +98,7 @@
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        dateFormatter.dateFormat = @"dd MMM";
+        dateFormatter.dateFormat = @"d MMM";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         
         _day = [[UILabel alloc] initWithFrame:CGRectMake(180.0f, 96.5f, 30.0f, 12.0f)];

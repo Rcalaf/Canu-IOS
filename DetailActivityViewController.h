@@ -7,15 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "Activity.h"
 
 
-@interface DetailActivityViewController : UIViewController
+@interface DetailActivityViewController : UIViewController <MKMapViewDelegate>
 
 //@property (strong, nonatomic) UIButton *backButton;
 //@property (strong, nonatomic) UIView *toolBar;
 @property (strong, nonatomic) UIButton *actionButton;
 @property (strong, nonatomic) UILabel *numberOfAssistents;
+@property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) Activity *activity;
 
 
