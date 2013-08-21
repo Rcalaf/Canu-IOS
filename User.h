@@ -22,22 +22,33 @@
 
 -(id)initWithAttributes:(NSDictionary *)attributes;
 
-+(void)userWithToken:(NSString *)token
-            andBlock:(void (^)(User *user, NSError *error))block;
++ (void)userWithToken:(NSString *)token
+             andBlock:(void (^)(User *user, NSError *error))block;
 
-+(void)logInWithEmail:(NSString *)userName
-             Password:(NSString *)password
-                Block:(void (^)(User *user, NSError *error))block;
++ (void)logInWithEmail:(NSString *)userName
+              Password:(NSString *)password
+                 Block:(void (^)(User *user, NSError *error))block;
 
-+(void)SignUpWithUserName:(NSString *)userName
-                 Password:(NSString*)password
-                FirstName:(NSString *)firstName
-                 LastName:(NSString *)lastName
-                    Email:(NSString *)email
-           ProfilePicture:(UIImage *)profilePicture
-                    Block:(void (^)(User *user, NSError *error))block;
++ (void)SignUpWithUserName:(NSString *)userName
+                  Password:(NSString*)password
+                 FirstName:(NSString *)firstName
+                  LastName:(NSString *)lastName
+                     Email:(NSString *)email
+            ProfilePicture:(UIImage *)profilePicture
+                     Block:(void (^)(User *user, NSError *error))block;
 
--(void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+- (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
+- (void)editUserWithUserName:(NSString *)userName
+                    Password:(NSString*)password
+                   FirstName:(NSString *)firstName
+                    LastName:(NSString *)lastName
+                       Email:(NSString *)email
+              ProfilePicture:(UIImage *)profilePicture
+                       Block:(void (^)(User *user, NSError *error))block;
+
+- (void)editUserWithProfilePicture:(UIImage *)profilePicture
+                                 Block:(void (^)(User *user, NSError *error))block;
 
 -(NSDictionary *)serialize;
 

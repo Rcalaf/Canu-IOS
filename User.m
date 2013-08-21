@@ -181,6 +181,108 @@
 
 }
 
+
+- (void)editUserWithUserName:(NSString *)userName
+                  Password:(NSString*)password
+                 FirstName:(NSString *)firstName
+                  LastName:(NSString *)lastName
+                     Email:(NSString *)email
+            ProfilePicture:(UIImage *)profilePicture
+                     Block:(void (^)(User *user, NSError *error))block
+{
+    
+    if (!userName) { userName = @""; }
+    if (!password) { password = @""; }
+    if (!userName) { userName = @""; }
+    if (!firstName){ firstName = @""; }
+    if (!lastName) { lastName = @""; }
+    if (!email)    { email = @""; }
+    
+    NSArray *objectsArray = [NSArray arrayWithObjects:userName,password,firstName,lastName,email,nil];
+    NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"last_name",@"email",nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    
+    
+    NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d",self.userId];
+    
+    NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+    }];
+    
+    //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+     NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+     }];*/
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                                                            NSLog(@"Process completed %@",JSON);
+                                                                                            User *user= [[User alloc] initWithAttributes:JSON];
+                                                                                            if (block) {
+                                                                                                block(user, nil);
+                                                                                            }
+                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                                                        }
+                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                                                            if (block) {
+                                                                                                NSLog(@"%@",error);
+                                                                                                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+                                                                                                block(nil, error);
+                                                                                            }
+                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                                                        }];
+    [operation start];
+    
+}
+
+
+- (void)editUserWithProfilePicture:(UIImage *)profilePicture
+                         Block:(void (^)(User *user, NSError *error))block
+{
+    NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d/profile-image",self.userId];
+    
+    NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
+        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+    }];
+    
+    //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+     NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
+     }];*/
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                            NSLog(@"Process completed %@",JSON);
+                                                            User *user= [[User alloc] initWithAttributes:JSON];
+                                                            if (block) {
+                                                                block(user, nil);
+                                                            }
+                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                    }
+                                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
+                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                            if (block) {
+                                                                NSLog(@"%@",error);
+                                                                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+                                                                block(nil, error);
+                                                            }
+                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                    }];
+    [operation start];
+    
+}
+
+
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];

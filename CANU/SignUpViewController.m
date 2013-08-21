@@ -375,9 +375,9 @@
 
 #warning It crashes here!! Be sure you save the taken picture....
     
-    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
+    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
+    NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 

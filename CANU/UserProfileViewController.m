@@ -139,12 +139,21 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     
-    //  #warning Be sure you save the taken picture....
     
-    //[self.profileView.profileImage setImage:[info valueForKey:UIImagePickerControllerCropRect] forState:UIControlStateNormal];
-    [self dismissViewControllerAnimated:YES completion:^{
+    UIImage *newImage = [info valueForKey:UIImagePickerControllerEditedImage];
+    
+    [self.user editUserWithProfilePicture:newImage Block:^(User *user, NSError *error) {
+        if (!error) {
+            self.profileView.profileImage.image = newImage;
+            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+            appDelegate.user = user;
+        }
+      
     }];
+        
+    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 

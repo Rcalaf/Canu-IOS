@@ -427,6 +427,9 @@
 		DE6ED9CF17C424CC00C5E72E /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				DE2F59D917269C7C007AD8FB /* UserProfile */,
+				DEA93B741720566700303BB5 /* SignUp */,
+				DEA93B731720565B00303BB5 /* SignIn */,
 				DE6ED9D617C4286500C5E72E /* AttendeesContainerViewController.h */,
 				DE6ED9D717C4286500C5E72E /* AttendeesContainerViewController.m */,
 				DE6ED9D917C428B100C5E72E /* AttendeesTableViewController.h */,
@@ -515,11 +518,8 @@
 				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
 				DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */,
 				DEA93B2417204EA600303BB5 /* Supporting Files */,
-				DEA93B741720566700303BB5 /* SignUp */,
-				DEA93B731720565B00303BB5 /* SignIn */,
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
 				DEA93B7A1720616A00303BB5 /* Main */,
-				DE2F59D917269C7C007AD8FB /* UserProfile */,
 			);
 			path = CANU;
 			sourceTree = "<group>";
