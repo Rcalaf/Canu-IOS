@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Activity.h"
+
 
 @interface AttendeesContainerViewController : UIViewController
+
+
+@property (strong, nonatomic) Activity *activity;
 
 @end

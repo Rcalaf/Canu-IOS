@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Activity.h"
 
 @interface AttendeesTableViewController : UITableViewController
+
+@property (strong, nonatomic) Activity *activity;
+@property (strong, nonatomic) NSArray *attendees;
 
 @end

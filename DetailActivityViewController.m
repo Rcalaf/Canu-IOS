@@ -11,6 +11,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "NewActivityViewController.h"
 #import "AttendeesContainerViewController.h"
+#import "AttendeesTableViewController.h"
 
 #define kGridBaseCenter CGPointMake(160.0f,201.0f)
 
@@ -47,6 +48,9 @@
 - (IBAction)showAttendees:(id)sender
 {
     AttendeesContainerViewController *attendeesList = [[AttendeesContainerViewController alloc] init];
+    attendeesList.activity = self.activity;
+
+   // AttendeesTableViewController *attendeesList = [[AttendeesTableViewController alloc] init];
     [self presentViewController:attendeesList animated:YES completion:nil];
 }
 
@@ -259,8 +263,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIPanGestureRecognizer *upGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(testSwipeUp:)];
-    [_grid addGestureRecognizer:upGesture];
+   // UIPanGestureRecognizer *upGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(testSwipeUp:)];
+   // [_grid addGestureRecognizer:upGesture];
     
     
     

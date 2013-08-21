@@ -373,9 +373,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
 
-  //  #warning Be sure you save the taken picture....
+#warning It crashes here!! Be sure you save the taken picture....
     
-    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerCropRect] forState:UIControlStateNormal];
+    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerOriginalImage] forState:UIControlStateNormal];
     //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
     // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{

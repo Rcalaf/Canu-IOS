@@ -9,11 +9,15 @@
 #import "AttendeesContainerViewController.h"
 #import "AttendeesTableViewController.h"
 
+
 @interface AttendeesContainerViewController ()
 
 @end
 
 @implementation AttendeesContainerViewController
+
+
+@synthesize activity = _activity;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +37,12 @@
 {
     [super loadView];
     
+    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    
     AttendeesTableViewController *attendeesList = [[AttendeesTableViewController alloc] init];
+    attendeesList.activity = _activity;
     [self addChildViewController:attendeesList];
+    [self.view addSubview:attendeesList.view];
     
     UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
     toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];

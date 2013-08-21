@@ -313,7 +313,7 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
-            block(nil,error);
+            block([NSArray array],error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
@@ -345,7 +345,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
-            block(nil,error);
+            block([NSArray array],error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
@@ -366,6 +366,30 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
+- (void)attendees:(void (^)(NSArray *attendees, NSError *error))block{
+    NSLog(@"Attendees called");
+    NSString *path = [NSString stringWithFormat:@"/activities/%lu/attendees",(unsigned long)self.activityId];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        for (NSDictionary *attributes in JSON) {
+            User *user = [[User alloc] initWithAttributes:attributes];
+            [mutableActivities addObject:user];
+        }
+        NSLog(@"%@",JSON);
+        
+        if (block) {
+            block([NSArray arrayWithArray:mutableActivities],nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block([NSArray array],error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];

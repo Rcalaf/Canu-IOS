@@ -6,13 +6,45 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "UIImageView+AFNetworking.h"
+#import "UICanuAttendeeCell.h"
 #import "AttendeesTableViewController.h"
 
-@interface AttendeesTableViewController ()
 
+
+@interface AttendeesTableViewController ()
+- (void)reload:(id)sender;
 @end
 
 @implementation AttendeesTableViewController
+
+@synthesize activity = _activity;
+@synthesize attendees = _attendees;
+
+
+
+- (void)reload:(id)sender
+{
+    //[_activityIndicatorView startAnimating];
+     NSLog(@"reload?");
+    
+    [self.activity attendees:^(NSArray *attendees, NSError *error) {
+        
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        } else {
+            _attendees = attendees;
+            
+            [self.tableView reloadData];
+        }
+        
+        // self.navigationItem.rightBarButtonItem.enabled = YES;
+    }];
+    // NSLog(@"Loading");
+    
+    
+}
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,12 +69,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self reload:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,25 +94,30 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
+
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [_attendees count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    static NSString *CellIdentifier = @"AttendeeCell";
+    User *user= [_attendees objectAtIndex:indexPath.row];
+   // UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     // Configure the cell...
-    
+    if (!cell) {
+        cell = [[UICanuAttendeeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
+    [cell.imageView setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     return cell;
 }
 
@@ -128,5 +172,10 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 67.0f;
+}
+
 
 @end
