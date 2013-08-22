@@ -47,10 +47,9 @@
         [self addSubview:self.hideArrow];
         
         
-        //NSLog(@"%@",user.profileImageUrl);
-        //NSLog(@"%@",[user.profileImageUrl class]);
         self.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 94.0, 94.0)];
-        [self.profileImage  setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        self.profileImage.image = user.profileImage;
+//      [self.profileImage  setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
        
         //self.profileImage.backgroundColor = [UIColor redColor];
         [self addSubview:self.profileImage];

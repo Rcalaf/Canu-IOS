@@ -5,7 +5,7 @@
 //  Created by Roger Calaf on 21/08/13.
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
-
+#import "AFCanuAPIClient.h"
 #import "UIImageView+AFNetworking.h"
 #import "UICanuAttendeeCell.h"
 #import "AttendeesTableViewController.h"
@@ -117,7 +117,8 @@
         
     }
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
-    [cell.imageView setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,user.profileImageUrl]];
+    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     return cell;
 }
 

@@ -129,8 +129,8 @@
     [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:_takePictureButton.imageView.image Block:^(User *user, NSError *error) {
         if (user){
             AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-            NSLog(@"token:%@ for user%@",user.token,user.firstName);
-            appDelegate.user = user;
+            //NSLog(@"token:%@ for user%@",user.token,user.firstName);
+            //appDelegate.user = user;
             [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
 //            [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
             
@@ -372,12 +372,9 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-
-#warning It crashes here!! Be sure you save the taken picture....
-    
     [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
-    //self.picture.image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
+    //self.picture.image = [info valueForKey:UIImagePickerControllerEditedImage];
+   // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
     [self dismissViewControllerAnimated:YES completion:^{
     }];
 

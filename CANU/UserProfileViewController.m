@@ -28,7 +28,7 @@
 @interface UserProfileViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
 
-@property (strong, nonatomic) IBOutlet UIButton *logoutButton;
+//@property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 @property (strong, nonatomic) IBOutlet UIButton *activitiesButton;
 @property (strong, nonatomic) IBOutlet UIButton *createActivityButton;
 
@@ -46,7 +46,7 @@
     NSArray *_activities;
 }
 
-@synthesize logoutButton = _logoutButton;
+//@synthesize logoutButton = _logoutButton;
 @synthesize activitiesButton = _activitiesButton;
 @synthesize createActivityButton = _createActivityButton;
 @synthesize user = _user;
@@ -124,32 +124,32 @@
     
     if (buttonIndex == 0) {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [self presentViewController:imagePicker animated:YES completion:^{
-            NSLog(@"Done");
-        }];
+        [self presentViewController:imagePicker animated:YES completion:nil];
     } else if (buttonIndex == 1){
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-            [self presentViewController:imagePicker animated:YES completion:^{
-                NSLog(@"Done");
-            }];
+            [self presentViewController:imagePicker animated:YES completion:nil];
         }
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+
     
     UIImage *newImage = [info valueForKey:UIImagePickerControllerEditedImage];
     
     [self.user editUserWithProfilePicture:newImage Block:^(User *user, NSError *error) {
         if (!error) {
             self.profileView.profileImage.image = newImage;
+            //self.user = user;
             [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-            appDelegate.user = user;
+            appDelegate.user = nil;
         }
+        // NSLog(@"new pic url: %@",user.profileImageUrl);
+        // NSLog(@"app pic url: %@",appDelegate.user.profileImageUrl);
       
     }];
         
@@ -185,7 +185,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.logoutButton addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchDown];
+    //[self.logoutButton addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchDown];
     
     
     //[self.activitiesButton addTarget:self action:@selector(showActivities:) forControlEvents:UIControlEventTouchDown];
@@ -216,11 +216,11 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [self.profileView.profileImage setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    //[self.profileView.profileImage setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     self.profileView.name.text = [NSString stringWithFormat:@"%@ %@",self.user.firstName,self.user.lastName];
-    
+    self.profileView.profileImage.image = self.user.profileImage;
 
-    NSLog(@"user: %ul",self.user.userId);
+    NSLog(@"user: %u",self.user.userId);
     [self reload:nil];
     self.navigationController.navigationBarHidden = YES;
     
@@ -228,8 +228,9 @@
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    self.logoutButton = nil;
+    //self.logoutButton = nil;
     [super viewWillDisappear:YES];
+    [self performSelector:@selector(HideProfileInfo:) withObject:self];
     
 
 }

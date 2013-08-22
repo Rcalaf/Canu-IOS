@@ -36,10 +36,10 @@
     self.textLabel.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
     self.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
     
-    CGRect imageFrame = self.imageView.frame;
+   /* CGRect imageFrame = self.imageView.frame;
     imageFrame.size.height = 37.0f;
-    imageFrame.size.width = 37.0f;
-    self.imageView.frame = imageFrame;
+    imageFrame.size.width = 37.0f;*/
+    self.imageView.frame = CGRectMake(10.0f, 10.0f, 37.0f, 37.0f);
     
 }
 @end

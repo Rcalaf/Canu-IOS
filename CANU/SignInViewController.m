@@ -59,7 +59,7 @@
         [User logInWithEmail:self.email.text Password:self.password.text Block:^(User *user, NSError *error) {
             if (user){
                 AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-                appDelegate.user = user;
+                //appDelegate.user = user;
                 
                
                // [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];

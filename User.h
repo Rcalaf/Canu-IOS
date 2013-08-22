@@ -18,6 +18,7 @@
 @property (strong,nonatomic) NSString *email;
 @property (strong,nonatomic) NSURL *profileImageUrl;
 @property (strong,nonatomic) NSString *token;
+@property (strong,nonatomic) UIImage *profileImage;
 
 
 -(id)initWithAttributes:(NSDictionary *)attributes;

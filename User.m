@@ -7,6 +7,8 @@
 //
 
 #import "User.h"
+#import "UIImageView+AFNetworking.h"
+#import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
 #import "Activity.h"
 #import "AFNetworking.h"
@@ -20,6 +22,7 @@
 @synthesize firstName = _firstName;
 @synthesize lastName = _lastName;
 @synthesize profileImageUrl = _profileImageUrl;
+@synthesize profileImage = _profileImage;
 @synthesize token = _token;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
@@ -58,8 +61,8 @@
     _firstName = [attributes valueForKeyPath:@"first_name"];
     _lastName = [attributes valueForKeyPath:@"last_name"];
     _token = [attributes valueForKeyPath:@"token"];
-    _profileImageUrl = [[NSURL URLWithString:kAFCanuAPIBaseURLString] URLByAppendingPathComponent:[attributes valueForKey:@"profile_pic"]];
-    
+    //_profileImageUrl = [[NSURL URLWithString:kAFCanuAPIBaseURLString] URLByAppendingPathComponent:[attributes valueForKey:@"profile_pic"]];
+    _profileImageUrl = [NSURL URLWithString:[attributes valueForKey:@"profile_pic"]];
     //NSLog(@"user urlpic: %@",self.profileImageUrl);
     return self;
 }
@@ -146,10 +149,14 @@
     NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"last_name",@"email",nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];    
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    dateFormatter.dateFormat = @"YYYYddHHmm";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     
     NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"POST" path:@"users/" parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]]] mimeType:@"image/jpeg"];
     }];
     
     //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -207,8 +214,13 @@
     
     NSString *url = [NSString stringWithFormat:@"/users/%d",self.userId];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    dateFormatter.dateFormat = @"YYYYddHHmm";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]]] mimeType:@"image/jpeg"];
     }];
     
     //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -244,12 +256,19 @@
 - (void)editUserWithProfilePicture:(UIImage *)profilePicture
                          Block:(void (^)(User *user, NSError *error))block
 {
+  //  AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
     
     NSString *url = [NSString stringWithFormat:@"/users/%d/profile-image",self.userId];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    dateFormatter.dateFormat = @"YYYYddHHmm";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:@"avatar.jpg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]] ] mimeType:@"image/jpeg"];
     }];
     
     //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -264,6 +283,8 @@
                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                             NSLog(@"Process completed %@",JSON);
                                                             User *user= [[User alloc] initWithAttributes:JSON];
+                                                            //[[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+                                                            //appDelegate.user = user;
                                                             if (block) {
                                                                 block(user, nil);
                                                             }

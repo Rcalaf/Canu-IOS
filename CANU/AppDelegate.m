@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "AFCanuAPIClient.h"
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
@@ -13,8 +14,6 @@
 #import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
 
-
-@class User;
 
 
 NSString *const FBSessionStateChangedNotification =
@@ -59,6 +58,10 @@ NSString *const FBSessionStateChangedNotification =
         NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         if (savedUserAttributes) {
             _user = [[User alloc] initWithAttributes:savedUserAttributes];
+            
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_user.profileImageUrl]];
+            NSLog(@"profile pic url %@",url);
+            _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         }
     }
     return _user;
@@ -66,8 +69,6 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-  
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
@@ -86,7 +87,7 @@ NSString *const FBSessionStateChangedNotification =
     
 
     
-    //NSLog(@"user3: %@",self.user);
+    NSLog(@"user: %@",self.user.profileImageUrl);
     
     if (self.user) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
