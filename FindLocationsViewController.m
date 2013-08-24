@@ -7,6 +7,7 @@
 //
 
 #import "FindLocationsViewController.h"
+#import "MKCanuAnnotationView.h"
 
 NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
 
@@ -17,8 +18,9 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
 @implementation FindLocationsViewController{
     MKLocalSearch *localSearch;
     MKLocalSearchResponse *results;
-    MKMapItem *chosenLocation;
 }
+
+@synthesize chosenLocation = _chosenLocation;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -64,7 +66,29 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     [self.ibMapView setShowsUserLocation:YES];
     [self.ibMapView setUserInteractionEnabled:YES];
     [self.ibMapView setUserTrackingMode:MKUserTrackingModeFollow];
+     //[self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
     // Do any additional setup after loading the view from its nib.
+    
+  
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    
+    if (_chosenLocation) {
+        [self.ibMapView removeAnnotations:[self.ibMapView annotations]];
+        
+        MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+        annotation.coordinate = _chosenLocation.placemark.coordinate;
+        //[self.ibMapView addAnnotation:_chosenLocation.placemark];
+        [self.ibMapView addAnnotation:annotation];
+        [self.ibMapView selectAnnotation:annotation animated:YES];
+        [self.ibMapView setCenterCoordinate:annotation.coordinate animated:YES];
+        [self.ibMapView setRegion:MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.003, 0.003)) animated:YES];
+        [self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
+     
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,7 +110,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     
     //NSLog(@"%@",chosenLocation.placemark);
     [self dismissViewControllerAnimated:YES completion:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:FindLocationDissmised object:chosenLocation];
+    [[NSNotificationCenter defaultCenter] postNotificationName:FindLocationDissmised object:_chosenLocation];
 
 }
 
@@ -159,14 +183,23 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     [self.searchDisplayController setActive:NO animated:YES];
     
     //MKMapItem *item = results.mapItems[indexPath.row];
-    chosenLocation = results.mapItems[indexPath.row];
+    _chosenLocation = results.mapItems[indexPath.row];
     
     [self.ibMapView removeAnnotations:[self.ibMapView annotations]];
     
-    [self.ibMapView addAnnotation:chosenLocation.placemark];
-    [self.ibMapView selectAnnotation:chosenLocation.placemark animated:YES];
+   // MKCanuAnnotation *annotation = [[MKCanuAnnotation alloc] initWithCoordinate:_chosenLocation.placemark.coordinate];
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = _chosenLocation.placemark.coordinate;
+    
+    //[self.ibMapView addAnnotation:_chosenLocation.placemark];
+    [self.ibMapView addAnnotation:annotation];
+    
+   // [self.ibMapView addAnnotation:_chosenLocation.placemark];
+    [self.ibMapView selectAnnotation:annotation animated:YES];
 
-    [self.ibMapView setCenterCoordinate:chosenLocation.placemark.location.coordinate animated:YES];
+    [self.ibMapView setCenterCoordinate:annotation.coordinate animated:YES];
+    [self.ibMapView setRegion:MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.003, 0.003)) animated:YES];
     [self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
     
     
@@ -179,10 +212,80 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     
 }
 
+#pragma mark - MapKit View Delegate
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
-    NSLog(@"dragging");
+    #warning block the select location button here!
+    if (newState == MKAnnotationViewDragStateEnding)
+    {
+        annotationView.canShowCallout = NO;
+        CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
+        NSLog(@"Pin dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
+        
+        [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:annotationView.annotation.coordinate.latitude longitude:annotationView.annotation.coordinate.longitude] completionHandler:
+         ^(NSArray *placemarks, NSError *error) {
+             
+             if (error != nil) {
+                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
+                                             message:[error localizedDescription]
+                                            delegate:nil
+                                   cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+                 return;
+             }
+             _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+             NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
+             
+#warning unblock the select location button here!
+         }];
+        
+        
+    }
 }
+
+
+- (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    MKAnnotationView *annotationView = [mv dequeueReusableAnnotationViewWithIdentifier:@"PinAnnotationView"];
+    
+    if (!annotationView) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
+        annotationView.draggable = YES;
+        
+    }
+    
+    return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view
+{
+   // NSLog(@"deselected pin");
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    NSLog(@"selected pin");
+    //view.canShowCallout = YES;
+    
+    // [MKMapItem openMapsWithItems:[NSArray arrayWithObject:[[MKPlacemark alloc] initWithPlacemark:self.activity.location.placemark]] launchOptions:nil];
+    
+    
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+ //   NSLog(@"Callout !!º");
+}
+
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    MKAnnotationView* annotationView = [mapView viewForAnnotation:userLocation];
+    annotationView.canShowCallout = NO;
+   // annotationView.enabled = NO;
+}
+
+
+
 
 
 

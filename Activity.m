@@ -30,11 +30,18 @@
 @synthesize zip = _zip;
 @synthesize country = _country;
 @synthesize pictureUrl = _picture;
-@synthesize latitude = _latitude;
-@synthesize longitude = _longitude;
+//@synthesize latitude = _latitude;
+//@synthesize longitude = _longitude;
 @synthesize user = _user;
 @synthesize location = _location;
+@synthesize coordinate = _coordinate;
 @synthesize attendeeIds = _attendeeIds;
+
+/*
+
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+    _coordinate = newCoordinate;
+}*/
 
 
 - (void)setStart:(id)start
@@ -123,7 +130,7 @@
 
 
 - (MKMapItem *)location {
-    NSLog(@"location");
+   // NSLog(@"location");
     if (!_location) {
         if (!self.street) _street = @"";
         if (!self.city) _city = @"";
@@ -137,13 +144,16 @@
     
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
  
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.latitude, self.longitude) addressDictionary:parameters];
+        //MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.latitude, self.longitude) addressDictionary:parameters];
+        
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.coordinate addressDictionary:parameters];
 
         _location = [[MKMapItem alloc] initWithPlacemark:placemark];
     }
     return _location;
 }
 
+/*
 - (void)populateLocationDataWith:(MKMapItem *)mapItem
 {
     _street = mapItem.placemark.addressDictionary[@"Street"];
@@ -153,7 +163,7 @@
     _longitude = mapItem.placemark.coordinate.latitude;
     _latitude = mapItem.placemark.coordinate.longitude;
 
-}
+}*/
 
 - (NSInteger)status
 {
@@ -187,34 +197,13 @@
     return hours*60+minutes;
 }
 
-
-/*- (NSDate *)startDate
-{
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSArray *dateParts = [self.start componentsSeparatedByString:@"T"];
-    NSArray *dayParts = [[dateParts objectAtIndex:0] componentsSeparatedByString:@"-"];
-    NSArray *timeParts = [[dateParts objectAtIndex:1] componentsSeparatedByString:@":"];
-    [comps setYear:[[dayParts objectAtIndex:0] integerValue]];
-    [comps setMonth:[[dayParts objectAtIndex:1] integerValue]];
-    [comps setDay:[[dayParts objectAtIndex:2] integerValue]];
-
-    [comps setHour:[[timeParts objectAtIndex:0] integerValue]];
-    [comps setMinute:[[timeParts objectAtIndex:1] integerValue]];
-    [comps setSecond:[[timeParts objectAtIndex:2] integerValue]];
-
-    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-    return date;
-}
-
-- (NSDate *)endDate
-{
-    NSDate *date;
-    return date;
-}*/
-
 - (NSString *)locationDescription
 {
-    return [NSString stringWithFormat:@"%@, %@, %@",self.street,self.city,self.zip];
+    NSString *description = @"";
+    if (self.street) description = [description stringByAppendingString:self.street];
+    if (self.city) description = [description stringByAppendingFormat:@", %@",self.city];
+    if (self.zip) description = [description stringByAppendingFormat:@", %@",self.zip];
+    return description;
 }
 
 
@@ -243,8 +232,12 @@
     
     _length = [attributes valueForKeyPath:@"length"];
     
-    _longitude = [[attributes valueForKeyPath:@"longitude"] floatValue];
-    _latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
+    //_longitude = [[attributes valueForKeyPath:@"longitude"] floatValue];
+    //_latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
+    
+    _coordinate.latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
+    _coordinate.longitude =[[attributes valueForKeyPath:@"longitude"] floatValue];
+    
     //_pictureUrl = [attributes valueForKeyPath:@"activity_picture"];
     
     NSMutableArray *mutableAssistents = [NSMutableArray arrayWithCapacity:[[attributes valueForKeyPath:@"attendee_ids"] count]];
@@ -352,7 +345,7 @@
 }
 
 
-- (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block{
+- (void)removeActivityWithBlock:(void (^)(NSError *error))block{
     
     AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
 
@@ -372,7 +365,7 @@
 }
 
 - (void)attendees:(void (^)(NSArray *attendees, NSError *error))block{
-    NSLog(@"Attendees called");
+    //NSLog(@"Attendees called");
     NSString *path = [NSString stringWithFormat:@"/activities/%lu/attendees",(unsigned long)self.activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
@@ -381,7 +374,7 @@
             User *user = [[User alloc] initWithAttributes:attributes];
             [mutableActivities addObject:user];
         }
-        NSLog(@"%@",JSON);
+      //  NSLog(@"%@",JSON);
         
         if (block) {
             block([NSArray arrayWithArray:mutableActivities],nil);

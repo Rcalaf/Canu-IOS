@@ -16,6 +16,7 @@
     if (self) {
         self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"attendee_cell.png"]];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self setTransform:CGAffineTransformMakeRotation(M_PI)];
     }
     return self;
 }

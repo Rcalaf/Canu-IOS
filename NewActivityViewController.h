@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class Activity;
 
-@interface NewActivityViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface NewActivityViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UISearchDisplayDelegate, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) Activity *activity;
 

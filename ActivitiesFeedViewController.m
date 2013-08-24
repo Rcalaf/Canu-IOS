@@ -5,7 +5,7 @@
 //  Created by Roger Calaf on 17/07/13.
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
-
+#import "AFCanuAPIClient.h"
 #import "UIImageView+AFNetworking.h"
 #import "UICanuActivityCell.h"
 
@@ -46,10 +46,11 @@
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, self.view.frame.size.height) style:UITableViewStyleGrouped];
+    self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
     self.tableActivities.backgroundView = nil;
     self.tableActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    
+    [self.tableActivities setTransform:CGAffineTransformMakeRotation(M_PI)];
+    self.tableActivities.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
     //UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     
     
@@ -78,6 +79,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 - (void)reload:(id)sender
 {
@@ -191,7 +194,9 @@
         
         cell.activity = activity;
         
-        [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,cell.activity.user.profileImageUrl]];
+        [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+       // [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         
         cell.textLabel.text = activity.title;
         cell.location.text = activity.locationDescription;
@@ -242,7 +247,7 @@
         //[_activities];
         //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         Activity *activity= [_activities objectAtIndex:indexPath.row];
-        [activity removeActivityFromUserWithBlock:^(NSError *error) {
+        [activity removeActivityWithBlock:^(NSError *error) {
             if (!error){
                 [self reload:nil];
             }
@@ -289,5 +294,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 130.5f;
 }
+
+
 
 @end

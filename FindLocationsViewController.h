@@ -14,4 +14,6 @@ extern NSString *const FindLocationDissmised;
 @interface FindLocationsViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UISearchBar *ibSearchBar;
 @property (strong, nonatomic) IBOutlet MKMapView *ibMapView;
+@property (strong, nonatomic) MKMapItem *chosenLocation;
+
 @end

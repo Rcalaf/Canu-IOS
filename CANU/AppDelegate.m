@@ -60,7 +60,7 @@ NSString *const FBSessionStateChangedNotification =
             _user = [[User alloc] initWithAttributes:savedUserAttributes];
             
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_user.profileImageUrl]];
-            NSLog(@"profile pic url %@",url);
+          //  NSLog(@"profile pic url %@",url);
             _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
         }
     }
@@ -87,7 +87,7 @@ NSString *const FBSessionStateChangedNotification =
     
 
     
-    NSLog(@"user: %@",self.user.profileImageUrl);
+    //NSLog(@"user: %@",self.user.profileImageUrl);
     
     if (self.user) {
         UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];

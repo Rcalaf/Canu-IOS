@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DetailActivityViewController.h"
+#import "AFCanuAPIClient.h"
 #import "UIImageView+AFNetworking.h"
 #import "NewActivityViewController.h"
 #import "AttendeesContainerViewController.h"
@@ -110,8 +111,10 @@
 
     
     
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,self.activity.user.profileImageUrl]];
     UIImageView *userPic = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 5.0, 25.0, 25.0)];
-    [userPic setImageWithURL:self.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    [userPic setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    //[userPic setImageWithURL:self.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     [_grid addSubview:userPic];
     
     UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 0.0f, 128.0f, 34.0f)];
@@ -166,8 +169,9 @@
     [_mapView setUserInteractionEnabled: YES];
     _mapView.delegate = self;
     // [_mapView setVisibleMapRect:MKMapRectMake(self.activity.location.placemark.location.coordinate.latitude, self.activity.location.placemark.location.coordinate.longitude, 200.0, 30.0) animated:YES];
+    
     [_mapView addAnnotation:self.activity.location.placemark];
-    [_mapView selectAnnotation:self.activity.location.placemark animated:YES];
+    //[_mapView selectAnnotation:self.activity.location.placemark animated:YES];
     
     //Hack to add an offset to the view
     //CLLocationCoordinate2D pinCoordinate = self.activity.location.placemark.location.coordinate;
@@ -175,7 +179,7 @@
     //[_mapView setCenterCoordinate:pinCoordinate animated:YES];
 
     // Use this for proper center.
-    [_mapView setCenterCoordinate:self.activity.location.placemark.location.coordinate animated:YES];
+    [_mapView setCenterCoordinate:self.activity.coordinate animated:YES];
     
     [_mapView setUserTrackingMode:MKUserTrackingModeNone];
     
@@ -201,7 +205,7 @@
     [_grid addSubview:location];
 
     UITextView *description = [[UITextView alloc] initWithFrame:CGRectMake(18.0f, 265.0, 252.0f, 102.0f)];
-    description.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non convallis magna, in porttitor justo. Cras semper id felis id lobortis. Nam volutpat vel erat. ";
+    description.text = self.activity.description;
     description.font = [UIFont fontWithName:@"Lato-Regular" size:15.0];
     //description.backgroundColor = userName.backgroundColor;
     //userName.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -232,12 +236,6 @@
     
     [_actionButton addTarget:self action:@selector(triggerCellAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    /*UIImageView *attendeesPlaceholder = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fullview_action_ppl.png"]];
-    CGRect attendeesPlaceholderFrame = attendeesPlaceholder.frame;
-    attendeesPlaceholderFrame.origin.x = 67.0f;
-    attendeesPlaceholderFrame.origin.y = 10.0f;
-    attendeesPlaceholder.frame = attendeesPlaceholderFrame;*/
-    
     UIButton *attendeesButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [attendeesButton setFrame:CGRectMake(67.0f, 10.0f, 116.5f, 37.0f)];
     [attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl.png"] forState:UIControlStateNormal];
@@ -262,13 +260,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-   // UIPanGestureRecognizer *upGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(testSwipeUp:)];
-   // [_grid addGestureRecognizer:upGesture];
-    
-    
-    
-    
+    [super viewDidLoad];    
 	// Do any additional setup after loading the view.
 }
 
@@ -278,31 +270,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)testSwipeUp:(UIPanGestureRecognizer *)recognizer
-{
-    //  NSLog(@"test action:%@",recognizer);
-    CGPoint location = [recognizer translationInView:self.view];
-    
-  //  float newX;
-  //  float newY;
-
-   // NSLog(@"%u",(int)floorf(_grid.center.x) + 10 > (int)floorf(_grid.center.x) && (int)floorf(_grid.center.x) > (int)floorf(_grid.center.x) - 10);
-    if ((int)floorf(kGridBaseCenter.x) + 10 > (int)floorf(_grid.center.x) &&
-        (int)floorf(_grid.center.x) > (int)floorf(kGridBaseCenter.x) - 10) {
-        _grid.center = CGPointMake(_grid.center.x + location.x, _grid.center.y) ;
-    }
-    if ((int)floorf(kGridBaseCenter.y) + 10 > (int)floorf(_grid.center.y) &&
-        (int)floorf(_grid.center.y) > (int)floorf(kGridBaseCenter.y) - 10) {
-        _grid.center = CGPointMake(_grid.center.x , _grid.center.y + location.y) ;
-    }
-    
-    if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
-       // NSLog(@"stop!!!");
-        [UIView animateWithDuration:0.1 animations:^{
-            _grid.frame = CGRectMake(10.0f,10.0f,_grid.frame.size.width, _grid.frame.size.height);
-        }];
-    }
-}
 
 #pragma mark - MapKit View Delegate
 
@@ -316,6 +283,5 @@
     [mv setRegion:region animated:YES];
 
 }
-
 
 @end

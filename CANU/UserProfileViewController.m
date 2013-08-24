@@ -164,7 +164,7 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     
-    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 450.0) style:UITableViewStyleGrouped];
+    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, -10.0, 320.0, 450.0) style:UITableViewStyleGrouped];
 
     
     self.myActivities.backgroundView = nil;
@@ -172,6 +172,8 @@
 
     self.myActivities.dataSource = self;
     self.myActivities.delegate = self;
+    [self.myActivities setTransform:CGAffineTransformMakeRotation(M_PI)];
+    self.myActivities.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
     
     //[self reload:nil];
     [self.view addSubview:self.myActivities];
@@ -220,7 +222,7 @@
     self.profileView.name.text = [NSString stringWithFormat:@"%@ %@",self.user.firstName,self.user.lastName];
     self.profileView.profileImage.image = self.user.profileImage;
 
-    NSLog(@"user: %u",self.user.userId);
+   // NSLog(@"user: %u",self.user.userId);
     [self reload:nil];
     self.navigationController.navigationBarHidden = YES;
     
@@ -367,7 +369,7 @@
         
         cell.activity = activity;
         
-        [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [cell.imageView setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         
         cell.textLabel.text = activity.title;
         cell.location.text = activity.locationDescription;

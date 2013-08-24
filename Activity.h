@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-#import <CoreLocation/CoreLocation.h>
+//#import <CoreLocation/CoreLocation.h>
 #import "User.h"
 
 
-@interface Activity : NSObject
+@interface Activity : NSObject //<MKAnnotation>
 
 @property (readonly) NSUInteger activityId;
 @property (readonly) NSUInteger ownerId;
@@ -25,8 +25,9 @@
 @property (readonly) NSDate *start;
 @property (readonly) NSDate *end;
 @property (readonly) NSString *length;
-@property (readonly) CLLocationDegrees latitude;
-@property (readonly) CLLocationDegrees longitude;
+//@property (readonly) CLLocationDegrees latitude;
+//@property (readonly) CLLocationDegrees longitude;
+@property (readonly) CLLocationCoordinate2D coordinate;
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;
 @property (readonly) int status;
@@ -67,7 +68,7 @@
 + (NSString *)lengthToString:(NSInteger)length;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
-- (void)removeActivityFromUserWithBlock:(void (^)(NSError *error))block;
+- (void)removeActivityWithBlock:(void (^)(NSError *error))block;
 - (void)attendees:(void (^)(NSArray *attendees, NSError *error))block;  
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
@@ -75,7 +76,7 @@
 - (NSInteger)lengthToInteger;
 //- (NSDate *)startDate;
 - (NSString *)locationDescription;
-- (void)populateLocationDataWith:(MKMapItem *)mapItem;
+//- (void)populateLocationDataWith:(MKMapItem *)mapItem;
 
 
 
