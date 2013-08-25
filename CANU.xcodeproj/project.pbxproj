@@ -58,6 +58,7 @@
 		DE6ED9DB17C428B100C5E72E /* AttendeesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6ED9DA17C428B100C5E72E /* AttendeesTableViewController.m */; };
 		DE6ED9DD17C530DA00C5E72E /* attendee_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED9DC17C530DA00C5E72E /* attendee_cell.png */; };
 		DE6ED9DF17C530EB00C5E72E /* attendee_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6ED9DE17C530EB00C5E72E /* attendee_cell@2x.png */; };
+		DE6F8FEE17C96D5900B99401 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6F8FED17C96D5900B99401 /* TutorialViewController.m */; };
 		DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE713962179D47FE00EBCB91 /* CoreLocation.framework */; };
 		DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */; };
 		DE85A62E1743AB2300A050E5 /* signin_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE85A62C1743AB2300A050E5 /* signin_bg.png */; };
@@ -193,6 +194,8 @@
 		DE6ED9DA17C428B100C5E72E /* AttendeesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendeesTableViewController.m; sourceTree = "<group>"; };
 		DE6ED9DC17C530DA00C5E72E /* attendee_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attendee_cell.png; sourceTree = "<group>"; };
 		DE6ED9DE17C530EB00C5E72E /* attendee_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "attendee_cell@2x.png"; sourceTree = "<group>"; };
+		DE6F8FEC17C96D5900B99401 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
+		DE6F8FED17C96D5900B99401 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		DE713962179D47FE00EBCB91 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewActivityViewController.h; sourceTree = "<group>"; };
 		DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
@@ -441,6 +444,15 @@
 			name = Users;
 			sourceTree = "<group>";
 		};
+		DE6F8FEB17C96D1A00B99401 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				DE6F8FEC17C96D5900B99401 /* TutorialViewController.h */,
+				DE6F8FED17C96D5900B99401 /* TutorialViewController.m */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		DE81F8B2175E4DA300AD1071 /* Activities */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +527,7 @@
 		DEA93B2317204EA600303BB5 /* CANU */ = {
 			isa = PBXGroup;
 			children = (
+				DE6F8FEB17C96D1A00B99401 /* Tutorial */,
 				DE6ED9CF17C424CC00C5E72E /* Users */,
 				DE81F8B2175E4DA300AD1071 /* Activities */,
 				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
@@ -891,6 +904,7 @@
 				DE6ED9D817C4286500C5E72E /* AttendeesContainerViewController.m in Sources */,
 				DE6ED9DB17C428B100C5E72E /* AttendeesTableViewController.m in Sources */,
 				DEAE0B7A17C9540200EEB078 /* MKCanuAnnotationView.m in Sources */,
+				DE6F8FEE17C96D5900B99401 /* TutorialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

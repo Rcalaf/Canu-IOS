@@ -46,7 +46,9 @@
 
 @end
 
-@implementation NewActivityViewController
+@implementation NewActivityViewController{
+    CLLocationManager *locationManager;
+}
 
 @synthesize activity = _activity;
 @synthesize formGrid = _formGrid;
@@ -207,6 +209,35 @@ float oldValue;
     return self;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation: [locations objectAtIndex:0] completionHandler:
+     ^(NSArray *placemarks, NSError *error) {
+         NSLog(@"location: %@",error);
+         if (error != nil) {
+             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
+                                         message:[error localizedDescription]
+                                        delegate:nil
+                               cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+             return;
+         }         
+         
+         _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+         
+         //String to address
+          NSString *locatedaddress = [[_location.placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+         
+         //Print the location in the console
+            NSLog(@"Currently address is: %@",locatedaddress);
+         
+         
+         
+     }];
+    [locationManager stopUpdatingLocation];
+}
+
+
 - (void)loadView
 {
     [super loadView];
@@ -216,39 +247,13 @@ float oldValue;
         _location = self.activity.location;
     }else{
         _length = 20;
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        CLLocationManager *lm = [[CLLocationManager alloc]init];
-        lm.delegate = self;
-        [lm startUpdatingLocation];
-        
+       
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        [locationManager startUpdatingLocation];
+        NSLog(@"location: %@",locationManager.location);
         //Block address
-        [geocoder reverseGeocodeLocation: lm.location completionHandler:
-         ^(NSArray *placemarks, NSError *error) {
-             
-             if (error != nil) {
-                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
-                                             message:[error localizedDescription]
-                                            delegate:nil
-                                   cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
-                 return;
-             }
-             //Get address
-             //NSLog(@"%@",[[placemarks objectAtIndex:0] class]);
-             //CLPlacemark *placemark = ;
-             
-             
-             _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
-             
-             //String to address
-             // NSString *locatedaddress = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-             
-             //Print the location in the console
-             //   NSLog(@"Currently address is: %@",locatedaddress);
-             
-             
-             
-         }];
-        [lm stopUpdatingLocation];
+        
     }
     
     self.view.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
@@ -349,27 +354,29 @@ float oldValue;
     
     [_formGrid addSubview:findLocationButton];
     
-    
-    if (![_description hasText]) {
-        UITextField *detailsPlaceholder = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 345.0f, 300.0f, 47.0)];
-        detailsPlaceholder.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
-        detailsPlaceholder.placeholder = @"Details";
-        detailsPlaceholder.text = self.activity.description;
-        detailsPlaceholder.delegate = self;
-        [detailsPlaceholder setReturnKeyType:UIReturnKeyNext];
-        [self.view addSubview:detailsPlaceholder];
-    }
 
-    
-    _description = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 345.0f, 300.0f, 47.0)];
-    _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
-    _description.text = self.activity.description ;
+    _description = [[UITextView alloc] init];
+    UITextField *detailsPlaceholder = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 345.0f, 300.0f, 47.0)];
+    detailsPlaceholder.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
+    detailsPlaceholder.placeholder = @"Details";
+    detailsPlaceholder.delegate = self;
+    [detailsPlaceholder setReturnKeyType:UIReturnKeyNext];
+    [self.view addSubview:detailsPlaceholder];
+    if (!self.activity.description || [self.activity.description isEqualToString:@""]) {
+        _description.frame = CGRectMake(10.0f, 345.0f, 300.0f, 47.0);
+        _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
+    } else {
+        _formGrid.frame = CGRectMake(10.0, 149.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
+        _description.frame = CGRectMake(10.0, 292.0f, 300.0f, 101.0f);
+        _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:1.0f];
+    }
+   
+    _description.text = self.activity.description;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
     _description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
     [self.description setReturnKeyType:UIReturnKeyNext];
     [self.view addSubview:_description];
-    
     [self.view addSubview:_formGrid];
     
     
@@ -419,7 +426,6 @@ float oldValue;
 {
     FindLocationsViewController *findLocations = [[ FindLocationsViewController alloc] init];
     findLocations.chosenLocation = _location;
-    NSLog(@"location 1: %@",findLocations.chosenLocation);
     [self presentViewController:findLocations animated:YES completion:nil];
 }
 
@@ -444,8 +450,7 @@ float oldValue;
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    
-    if ([_description hasText] && ![_description.text isEqualToString:@"Details"]) {
+    if ([_description hasText]) {
         [UIView animateWithDuration:0.25 animations:^{
             _formGrid.frame =CGRectMake(10.0, -9.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
             _description.frame =CGRectMake(10.0, 133.0f, _description.frame.size.width, 101.0f);
@@ -471,7 +476,7 @@ float oldValue;
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-    if ([_description hasText] && ![_description.text isEqualToString:@"Details"]) {
+    if ([_description hasText]) {
             [UIView animateWithDuration:0.25 animations:^{
                 _formGrid.frame =CGRectMake(10.0, 149.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
                 _description.frame =CGRectMake(10.0,  292.0f, _description.frame.size.width, 101.0f);
@@ -507,9 +512,11 @@ float oldValue;
   //   NSLog(@"%@",self.location.placemark.addressDictionary);
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(itemMap:)
@@ -565,6 +572,7 @@ float oldValue;
     
     [super viewWillDisappear:YES];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

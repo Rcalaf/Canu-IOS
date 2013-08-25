@@ -66,7 +66,6 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     [self.ibMapView setShowsUserLocation:YES];
     [self.ibMapView setUserInteractionEnabled:YES];
     [self.ibMapView setUserTrackingMode:MKUserTrackingModeFollow];
-     //[self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
     // Do any additional setup after loading the view from its nib.
     
   
@@ -125,7 +124,6 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = searchBar.text;
     request.region = self.ibMapView.region;
-    // NSLog(@"%@",self.ibMapView.region);
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     localSearch = [[MKLocalSearch alloc] initWithRequest:request];
@@ -151,8 +149,6 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
         }
         
         results = response;
-       // MKMapItem *first = [response.mapItems objectAtIndex:0];
-       // NSLog(@"%@",first.placemark );
         
         [self.searchDisplayController.searchResultsTableView reloadData];
     }];

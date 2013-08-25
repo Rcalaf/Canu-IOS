@@ -13,6 +13,7 @@
 #import "ActivitiesFeedViewController.h" 
 #import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
+#import "TutorialViewController.h"
 
 
 
@@ -75,17 +76,12 @@ NSString *const FBSessionStateChangedNotification =
     
   //  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     
-    //NSLog(@"session token: %@",token);
-    //NSLog(@"user1: %@",self.user);
-    
     /*if (token) {
         [User userWithToken:token andBlock:^(User *user, NSError *error) {
             self.user = user;
             NSLog(@"user2: %@",self.user);
         }];
     }*/
-    
-
     
     //NSLog(@"user: %@",self.user.profileImageUrl);
     
@@ -103,6 +99,9 @@ NSString *const FBSessionStateChangedNotification =
         self.window.rootViewController = mvc;
     }
 
+    /*TutorialViewController *tutorial = [[TutorialViewController alloc] init];
+    [self.window addSubview:tutorial.view];
+    self.window.rootViewController = tutorial;*/
     [self.window makeKeyAndVisible];
     
     application.applicationIconBadgeNumber = 0;
