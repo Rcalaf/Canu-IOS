@@ -56,15 +56,15 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
    // [UIColor colorWithRed:(255.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
     
-    UIScrollView *scrollDescription = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403.0)];
-    UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scroll_content.png"]];
+  //  UIScrollView *scrollDescription = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403.0)];
+  //  UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scroll_content.png"]];
     
-    [scrollDescription addSubview:backgroundImage];
-    scrollDescription.contentSize = backgroundImage.image.size;
-    CGPoint bottomOffset = CGPointMake(0.0, 650.0);
+   // [scrollDescription addSubview:backgroundImage];
+   // scrollDescription.contentSize = backgroundImage.image.size;
+   // CGPoint bottomOffset = CGPointMake(0.0, 650.0);
     
     
-    [scrollDescription setContentOffset:bottomOffset animated:YES];
+   // [scrollDescription setContentOffset:bottomOffset animated:YES];
     
     
     UIView *buttonBox = [[UIView alloc] initWithFrame:CGRectMake(0.0, 403.0, 320.0, 57.0)];
@@ -89,7 +89,7 @@
 
     [buttonBox addSubview:_getOn];
     [buttonBox addSubview:_logIn];
-    [self.view addSubview:scrollDescription];
+    //[self.view addSubview:scrollDescription];
     [self.view addSubview:buttonBox];
     
     

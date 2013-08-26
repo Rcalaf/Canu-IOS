@@ -168,7 +168,7 @@
 - (NSInteger)status
 {
     NSInteger status;
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     if (self.ownerId == appDelegate.user.userId) {
         status = UICanuActivityCellEditable;
     } else if ([self.attendeeIds containsObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]]){
@@ -281,7 +281,7 @@
 
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
@@ -315,7 +315,7 @@
 
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
@@ -347,7 +347,7 @@
 
 - (void)removeActivityWithBlock:(void (^)(NSError *error))block{
     
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     NSString *path = [NSString stringWithFormat:@"/users/%lu/activities/%lu",(unsigned long)appDelegate.user.userId,(unsigned long)self.activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -406,7 +406,7 @@
     //NSLog(@"end: %@",endDate);
     if (!description) { description = @""; }
     
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
     NSArray *objectsArray = [NSArray arrayWithObjects:
@@ -492,7 +492,7 @@
     //NSLog(@"end: %@",endDate);
     if (!description) { description = @""; }
     
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
     NSArray *objectsArray = [NSArray arrayWithObjects:

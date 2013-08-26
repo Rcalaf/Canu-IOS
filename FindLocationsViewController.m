@@ -67,6 +67,10 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     [self.ibMapView setUserInteractionEnabled:YES];
     [self.ibMapView setUserTrackingMode:MKUserTrackingModeFollow];
     // Do any additional setup after loading the view from its nib.
+
+    UILongPressGestureRecognizer *selectLocationRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(movePin:)];
+    selectLocationRecognizer.minimumPressDuration = 1;
+    [self.ibMapView addGestureRecognizer:selectLocationRecognizer];
     
   
 }
@@ -80,8 +84,8 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
         
         MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
         annotation.coordinate = _chosenLocation.placemark.coordinate;
-        //[self.ibMapView addAnnotation:_chosenLocation.placemark];
-        [self.ibMapView addAnnotation:annotation];
+        [self.ibMapView addAnnotation:_chosenLocation.placemark];
+        //[self.ibMapView addAnnotation:annotation];
         [self.ibMapView selectAnnotation:annotation animated:YES];
         [self.ibMapView setCenterCoordinate:annotation.coordinate animated:YES];
         [self.ibMapView setRegion:MKCoordinateRegionMake(annotation.coordinate, MKCoordinateSpanMake(0.003, 0.003)) animated:YES];
@@ -208,13 +212,46 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     
 }
 
-#pragma mark - MapKit View Delegate
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
+#pragma mark - Gesture Recognizer
+
+- (void)movePin:(UILongPressGestureRecognizer *)recognizer
 {
-    #warning block the select location button here!
+    [self.ibMapView removeAnnotations:[self.ibMapView annotations]];
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"UIGestureRecognizerStateEnded");
+        [self.ibMapView addAnnotation:_chosenLocation.placemark];
+        [self.ibMapView selectAnnotation:_chosenLocation.placemark animated:YES];
+        [self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
+    }
+    else if (recognizer.state == UIGestureRecognizerStateBegan){
+        NSLog(@"UIGestureecognizerStateBegan.");
+       CLLocationCoordinate2D coordinate = [self.ibMapView convertPoint:[recognizer locationInView:self.ibMapView] toCoordinateFromView:self.ibMapView];
+        [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] completionHandler:
+         ^(NSArray *placemarks, NSError *error) {
+             
+             if (error != nil) {
+                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
+                                             message:[error localizedDescription]
+                                            delegate:nil
+                                   cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+                 return;
+             }
+             _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+             NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
+           
+             
+         }];
+    }
+  
+}
+
+#pragma mark - MapKit View Delegate
+/* - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
+{
+   #warning block the select location button here!
     if (newState == MKAnnotationViewDragStateEnding)
     {
-        annotationView.canShowCallout = NO;
+        //annotationView.canShowCallout = NO;
         CLLocationCoordinate2D droppedAt = annotationView.annotation.coordinate;
         NSLog(@"Pin dropped at %f,%f", droppedAt.latitude, droppedAt.longitude);
         
@@ -236,16 +273,20 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
         
         
     }
-}
+}*/
 
 
 - (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id <MKAnnotation>)annotation
 {
+    if([annotation isKindOfClass: [MKUserLocation class]])
+        return nil;
+    
     MKAnnotationView *annotationView = [mv dequeueReusableAnnotationViewWithIdentifier:@"PinAnnotationView"];
     
     if (!annotationView) {
         annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
-        annotationView.draggable = YES;
+        //annotationView.draggable = YES;
+        annotationView.canShowCallout = YES;
         
     }
     

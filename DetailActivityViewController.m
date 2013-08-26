@@ -17,7 +17,7 @@
 #define kGridBaseCenter CGPointMake(160.0f,201.0f)
 
 
-@interface DetailActivityViewController ()
+@interface DetailActivityViewController () <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) UIImageView *grid;
 @end
 
@@ -97,8 +97,7 @@
     
     UIColor *textColor = [UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
     
-    AppDelegate *appDelegate =
-    [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
     

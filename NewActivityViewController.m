@@ -34,6 +34,7 @@
 
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
+
 @property (strong, nonatomic) UIView *toolBar;
 @property (strong, nonatomic) IBOutlet UIButton *createButon;
 @property (strong, nonatomic) IBOutlet UIButton *takePictureButton;
@@ -48,6 +49,7 @@
 
 @implementation NewActivityViewController{
     CLLocationManager *locationManager;
+    UIView *findLocationButton;
 }
 
 @synthesize activity = _activity;
@@ -214,7 +216,6 @@ float oldValue;
      CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation: [locations objectAtIndex:0] completionHandler:
      ^(NSArray *placemarks, NSError *error) {
-         NSLog(@"location: %@",error);
          if (error != nil) {
              [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
                                          message:[error localizedDescription]
@@ -224,7 +225,7 @@ float oldValue;
          }         
          
          _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
-         
+         findLocationButton.userInteractionEnabled = YES;
          //String to address
           NSString *locatedaddress = [[_location.placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
          
@@ -247,12 +248,15 @@ float oldValue;
         _location = self.activity.location;
     }else{
         _length = 20;
-       
-        locationManager = [[CLLocationManager alloc] init];
+         AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        locationManager = appDelegate.locationManager;
+        locationManager.delegate = self;
+        [locationManager startUpdatingLocation];
+         /*locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         [locationManager startUpdatingLocation];
         NSLog(@"location: %@",locationManager.location);
-        //Block address
+        //Block address*/
         
     }
     
@@ -333,19 +337,24 @@ float oldValue;
     
     
     
-    UIView *findLocationButton = [[UIView alloc] initWithFrame:CGRectMake(47.5f, 95.0f, 252.5, 47.0)];
+    findLocationButton = [[UIView alloc] initWithFrame:CGRectMake(47.5f, 95.0f, 252.5, 47.0)];
     
     _locationName = [[UILabel alloc] initWithFrame:CGRectMake(18.0, 0.0, 226.5, 47.0)];
     if (self.activity) {
         _locationName.text = [self.activity locationDescription];
+        NSLog(@"Here..");
     }else{
+        NSLog(@"not here..");
         _locationName.text = @"Current location";
+        findLocationButton.userInteractionEnabled = NO;
     }
+    NSLog(@"%d",findLocationButton.userInteractionEnabled);
     [findLocationButton addSubview:_locationName];
     _locationName.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _locationName.textColor = [UIColor colorWithRed:26.0f/255.0f green:144.0f/255.0f blue:161.0f/255.0f alpha:1.0f];
     
     findLocationButton.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
+    
     UITapGestureRecognizer *fl = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerFindLocation:)];
     tgr.delegate = self;
     [findLocationButton addGestureRecognizer:fl];
@@ -375,7 +384,7 @@ float oldValue;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
     _description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
-    [self.description setReturnKeyType:UIReturnKeyNext];
+    [self.description setReturnKeyType:UIReturnKeyDone];
     [self.view addSubview:_description];
     [self.view addSubview:_formGrid];
     
@@ -507,7 +516,8 @@ float oldValue;
 {
    
     self.location = (MKMapItem *)notification.object;
-    self.locationName.text = self.location.placemark.addressDictionary[@"Street"];
+   // self.locationName.text = self.location.placemark.addressDictionary[@"Street"];
+    self.locationName.text = [[[self.location.placemark addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
   //  [self.view setNeedsDisplay];
   //   NSLog(@"%@",self.location.placemark.addressDictionary);
 }

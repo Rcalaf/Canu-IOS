@@ -40,7 +40,7 @@
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
     
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.user = nil;
 
     MainViewController *mvc = [[MainViewController alloc] init];

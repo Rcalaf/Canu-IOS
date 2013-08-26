@@ -10,6 +10,7 @@
 #import "SignUpViewController.h"
 #import "UICanuNavigationController.h"
 //#import "UserProfileViewController.h"
+#import "TutorialViewController.h"
 #import "ActivitiesFeedViewController.h"
 #import "AFCanuAPIClient.h"
 #import "AppDelegate.h"
@@ -67,8 +68,7 @@
 -(IBAction)back:(id)sender
 {
     
-    AppDelegate *appDelegate =
-    [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate closeSession];
     [self dismissViewControllerAnimated:NO completion:nil];
     //[self.navigationController popToRootViewControllerAnimated:YES];
@@ -108,8 +108,7 @@
 }
 
 - (IBAction)authButtonAction:(id)sender {
-    AppDelegate *appDelegate =
-    [[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // If the user is authenticated, log out when the button is clicked.
     // If the user is not authenticated, log in when the button is clicked.
@@ -128,7 +127,7 @@
     
     [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:_takePictureButton.imageView.image Block:^(User *user, NSError *error) {
         if (user){
-            AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+            AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
             //NSLog(@"token:%@ for user%@",user.token,user.firstName);
             //appDelegate.user = user;
             [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
@@ -136,14 +135,13 @@
             
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-           // ActivitiesFeedViewController *avc = [[ActivitiesFeedViewController alloc] init];
             ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
-            //[nvc pushViewController:avc animated:NO];
             [nvc addChildViewController:avc];
             appDelegate.window.rootViewController = nvc;
             
-            //UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-            //[self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
+            TutorialViewController *tutorial = [[TutorialViewController alloc] init];
+            [nvc presentViewController:tutorial animated:YES completion:nil];
+            
         }
     }];
 
@@ -246,7 +244,7 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403)];
     _scrollView.contentSize = CGSizeMake(320.0, 432.0);

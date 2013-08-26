@@ -58,7 +58,7 @@
         
         [User logInWithEmail:self.email.text Password:self.password.text Block:^(User *user, NSError *error) {
             if (user){
-                AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+                AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
                 //appDelegate.user = user;
                 
                
@@ -93,7 +93,7 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"signin_bg.png"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
     
     _container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0, 300.0, 94.5)];
     [_container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];

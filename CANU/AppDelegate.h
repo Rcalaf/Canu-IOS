@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "User.h"
 
@@ -16,19 +17,20 @@
 
 extern NSString *const FBSessionStateChangedNotification;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (strong, nonatomic) User *user;
-
 @property (strong, nonatomic) ActivitiesFeedViewController *publicFeedViewController;
 @property (strong, nonatomic) UserProfileViewController *profileViewController;
 
+@property (readonly, strong, nonatomic) CLLocationManager *locationManager;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

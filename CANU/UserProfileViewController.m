@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
-#import "UIImageView+AFNetworking.h"
+//#import "UIImageView+AFNetworking.h"
 
 //Custom CANU class import
-#import "UICanuActivityCell.h"
+//#import "UICanuActivityCell.h"
 #import "UIProfileView.h"
 #import "AppDelegate.h"
 
@@ -22,7 +22,9 @@
 #import "UserProfileViewController.h"
 #import "MainViewController.h"
 #import "UserSettingsViewController.h"
-#import "NewActivityViewController.h"
+#import "ActivityTableViewController.h"
+//#import "NewActivityViewController.h"
+//#import "DetailActivityViewController.h"
 
 
 @interface UserProfileViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
@@ -33,18 +35,18 @@
 @property (strong, nonatomic) IBOutlet UIButton *createActivityButton;
 
 @property (strong, nonatomic) IBOutlet UIProfileView *profileView;
-@property (strong, nonatomic) IBOutlet UITableView *myActivities;
+//@property (strong, nonatomic) IBOutlet UITableView *myActivities;
 @property (nonatomic) BOOL profileHidden;
 
 
-- (void)reload:(id)sender;
+//- (void)reload:(id)sender;
 
 @end
 
-@implementation UserProfileViewController{
+@implementation UserProfileViewController/*{
 @private
     NSArray *_activities;
-}
+}*/
 
 //@synthesize logoutButton = _logoutButton;
 @synthesize activitiesButton = _activitiesButton;
@@ -54,13 +56,13 @@
 
 
 @synthesize profileView = _profileView;
-@synthesize myActivities = _myActivities;
+//@synthesize myActivities = _myActivities;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+        AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         self.user = appDelegate.user;
         _profileHidden = YES;
     }
@@ -136,7 +138,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
 
     
     UIImage *newImage = [info valueForKey:UIImagePickerControllerEditedImage];
@@ -164,7 +166,11 @@
     
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     
-    self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, -10.0, 320.0, 450.0) style:UITableViewStyleGrouped];
+    ActivityTableViewController *activitiesList = [[ActivityTableViewController alloc] init];
+    [self addChildViewController:activitiesList];
+    [self.view addSubview:activitiesList.view];
+    
+    /*self.myActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0, -10.0, 320.0, 450.0) style:UITableViewStyleGrouped];
 
     
     self.myActivities.backgroundView = nil;
@@ -176,7 +182,7 @@
     self.myActivities.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
     
     //[self reload:nil];
-    [self.view addSubview:self.myActivities];
+    [self.view addSubview:self.myActivities];*/
     
     self.profileView = [[UIProfileView alloc] initWithUser:self.user];
     [self.view addSubview:_profileView];
@@ -207,7 +213,7 @@
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
     [_profileView.profileImage addGestureRecognizer:tapRecognizer];
     
-    [self reload:nil];
+    //[self reload:nil];
     
     // AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
    //  NSLog(@"%@",appDelegate.user.userName);
@@ -223,7 +229,7 @@
     self.profileView.profileImage.image = self.user.profileImage;
 
    // NSLog(@"user: %u",self.user.userId);
-    [self reload:nil];
+   // [self reload:nil];
     self.navigationController.navigationBarHidden = YES;
     
 }
@@ -243,17 +249,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 130.0f;
-}
-
+/*
 #pragma mark - Table view data source
 - (void)reload:(id)sender
 {
     //[_activityIndicatorView startAnimating];
-    
+    */
     /*[Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -266,7 +267,7 @@
         //[_activityIndicatorView stopAnimating];
        
     }];*/
-    [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+   /* [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         } else {
@@ -274,13 +275,13 @@
             _activities = activities;
             [self.myActivities reloadData];
         }
-    }];
+    }];*/
     //NSLog(@"Loading user_id: %d",self.user.userId);
     
     
     
     
-}
+/*}
 
 -(void)triggerCellAction:(id)recognizer
 {
@@ -388,7 +389,6 @@
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         cell.timeStart.text = [timeFormatter stringFromDate:activity.start];
         cell.timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:activity.end]];
-        //[cell setNeedsDisplay];
     }
    
     //cell.activity = activity;
@@ -401,4 +401,23 @@
     
 }
 
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Navigation logic may go here. Create and push another view controller.
+    
+    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
+    davc.activity = [_activities objectAtIndex:indexPath.row];
+    [self presentViewController:davc animated:YES completion:nil];
+    
+    
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 130.0f;
+}
+
+*/
 @end

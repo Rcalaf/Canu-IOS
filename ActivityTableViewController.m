@@ -1,83 +1,77 @@
 //
-//  ActivitiesFeedViewController.m
+//  ActivityTableViewController.m
 //  CANU
 //
-//  Created by Roger Calaf on 17/07/13.
+//  Created by Roger Calaf on 26/08/13.
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
-//#import "AFCanuAPIClient.h"
-//#import "UIImageView+AFNetworking.h"
-//#import "UICanuActivityCell.h"
+
+#import "Activity.h"
+
+#import "AFCanuAPIClient.h"
+#import "UIImageView+AFNetworking.h"
+
+#import "UICanuActivityCell.h"
+
+#import "ActivityTableViewController.h"
+#import "NewActivityViewController.h"
+#import "DetailActivityViewController.h"
 
 #import "ActivitiesFeedViewController.h"
-#import "ActivityTableViewController.h"
-
-//#import "NewActivityViewController.h"
-//#import "DetailActivityViewController.h"
-
-//#import "Activity.h"
+#import "UserProfileViewController.h"
 
 
+@interface ActivityTableViewController ()
 
-
-@interface ActivitiesFeedViewController () //<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
-
-@property (strong, nonatomic) IBOutlet UITableView *tableActivities;
-
-//- (void)reload:(id)sender;
 @end
 
-@implementation ActivitiesFeedViewController{
+@implementation ActivityTableViewController{
 @private
     NSArray *_activities;
 }
 
-@synthesize tableActivities = _tableActivities;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
     return self;
 }
 
--(void)loadView
+- (void)loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    
-    ActivityTableViewController *activitiesList = [[ActivityTableViewController alloc] init];
-    [self addChildViewController:activitiesList];
-    [self.view addSubview:activitiesList.view];
-    
-    /*self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
-    self.tableActivities.backgroundView = nil;
-    self.tableActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    [self.tableActivities setTransform:CGAffineTransformMakeRotation(M_PI)];
-    self.tableActivities.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
-    //UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    
-    
-
-    self.tableActivities.dataSource = self;
-    self.tableActivities.delegate = self;
-   
-    [self.view addSubview:self.tableActivities]; */
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    [self.tableView setTransform:CGAffineTransformMakeRotation(M_PI)];
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
+    //self.tableView.dataSource = self;
+    //self.tableView.delegate = self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   // [self reload:nil];
- // Do any additional setup after loading the view.
+
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    //refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    //[refresh setTransform:CGAffineTransformMakeRotation(M_PI)];
+    [refresh addTarget:self action:@selector(reload:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+    [self reload:nil];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+ 
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-   //[self reload:nil];
+    //[self reload:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,25 +80,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)refreshView:(UIRefreshControl *)refresh {
+ 
+}
 
-/*
 - (void)reload:(id)sender
 {
-    //[_activityIndicatorView startAnimating];
-   // NSLog(@"reload?");
-    
-    [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
-        
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            _activities = activities;
-            [_tableActivities reloadData];
-        }
-        
-        // self.navigationItem.rightBarButtonItem.enabled = YES;
-    }];
-    // NSLog(@"Loading");
+
+    if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
+        [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
+            
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                _activities = activities;
+                if (self.refreshControl.refreshing) {
+                    [self.refreshControl endRefreshing];
+                }
+                [self.tableView reloadData];
+            }
+            
+            // self.navigationItem.rightBarButtonItem.enabled = YES;
+        }];
+    }else{
+        [[(UserProfileViewController *)self.parentViewController user] userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                //NSLog(@"%@",activities);
+                _activities = activities;
+                if (self.refreshControl.refreshing) {
+                    [self.refreshControl endRefreshing];
+                }
+                [self.tableView reloadData];
+            }
+        }];
+    }
+
     
     
 }
@@ -113,7 +125,7 @@
 {
     UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
     NewActivityViewController *eac;
-
+    
     //UIActivityIndicatorView
     
     if (cell.activity.status == UICanuActivityCellGo) {
@@ -121,8 +133,8 @@
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
-               _activities = activities;
-              [self.tableActivities reloadData];
+                _activities = activities;
+                [self.tableView reloadData];
                 
             }
         }];
@@ -130,7 +142,7 @@
     if (cell.activity.status == UICanuActivityCellEditable) {
         eac = [[NewActivityViewController alloc] init];
         eac.activity = cell.activity;
-        NSLog(@"loc: %@",eac.activity.location);
+        //NSLog(@"loc: %@",eac.activity.location);
         [self presentViewController:eac animated:YES completion:nil];
     }
     
@@ -140,7 +152,7 @@
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 _activities = activities;
-                [self.tableActivities reloadData];
+                [self.tableView reloadData];
             }
         }];
     }
@@ -148,9 +160,6 @@
     //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
     //[self reload:nil];
 }
-
-
-
 
 
 #pragma mark - Table view data source
@@ -167,8 +176,6 @@
     return [_activities count];
 }
 
-
-
 - (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //static NSString *CellIdentifier = @"";
@@ -180,14 +187,14 @@
     UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
-    
+        
     } else{
         
         cell.activity = activity;
         
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,cell.activity.user.profileImageUrl]];
         [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-       // [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        // [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         
         cell.textLabel.text = activity.title;
         cell.location.text = activity.locationDescription;
@@ -216,6 +223,7 @@
 }
 
 
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -224,45 +232,36 @@
 }
 
 
-
-
+/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        //[_activities];
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        Activity *activity= [_activities objectAtIndex:indexPath.row];
-        [activity removeActivityWithBlock:^(NSError *error) {
-            if (!error){
-                [self reload:nil];
-            }
-        }];
-    }
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
+    }   
 }
 */
 
 /*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+}
+*/
 
 /*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
 
-/*
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -272,8 +271,8 @@
     DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
     davc.activity = [_activities objectAtIndex:indexPath.row];
     [self presentViewController:davc animated:YES completion:nil];
-
- 
+    
+    
 }
 
 
@@ -281,7 +280,5 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 130.5f;
 }
-*/
-
 
 @end

@@ -37,7 +37,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         _control.frame = CGRectMake(260.0, 420.0, 63.0, 63.0);
     }];
-    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserProfileViewController *upvc =  appDelegate.profileViewController;
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
     [self pushViewController:upvc animated:YES];

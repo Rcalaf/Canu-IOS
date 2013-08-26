@@ -21,11 +21,17 @@ NSString *const FBSessionStateChangedNotification =
 @"CANU.CANU:FBSessionStateChangedNotification";
 
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    UICanuNavigationController *canuViewController;
+    MainViewController *loginViewController;
+    CLLocationCoordinate2D currentLocation;
+}
 
 @synthesize user = _user;
 @synthesize publicFeedViewController = _publicFeedViewController;
 @synthesize profileViewController = _profileViewController;
+
+@synthesize locationManager = _locationManager;
 
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -53,6 +59,20 @@ NSString *const FBSessionStateChangedNotification =
     return _profileViewController;
 }
 
+- (CLLocationManager *)locationManager
+{
+    if (_locationManager != nil) {
+        _locationManager.delegate = self;
+        return _locationManager;
+    }
+
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+    _locationManager.distanceFilter=200;
+    return _locationManager;
+}
+
 - (User *)user
 {
     if (!_user) {
@@ -68,10 +88,23 @@ NSString *const FBSessionStateChangedNotification =
     return _user;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"%@",[locations objectAtIndex:0]);
+    currentLocation = [[locations objectAtIndex:0] coordinate];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
+        [self.locationManager startMonitoringSignificantLocationChanges];
+    }
+    
+    
     //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
   //  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
@@ -84,24 +117,26 @@ NSString *const FBSessionStateChangedNotification =
     }*/
     
     //NSLog(@"user: %@",self.user.profileImageUrl);
+ 
     
     if (self.user) {
-        UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-     
+        canuViewController = [[UICanuNavigationController alloc] init];
+    
         _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
         _profileViewController = [[UserProfileViewController alloc] init];
-        [nvc pushViewController:self.publicFeedViewController animated:NO];
+        [canuViewController pushViewController:self.publicFeedViewController animated:NO];
 
-        self.window.rootViewController = nvc;
+        self.window.rootViewController = canuViewController;
     } else {
-        MainViewController *mvc = [[MainViewController alloc] init];
+        loginViewController = [[MainViewController alloc] init];
         //[nvc addChildViewController:mvc];
-        self.window.rootViewController = mvc;
+        self.window.rootViewController = loginViewController;
+        
     }
 
-    /*TutorialViewController *tutorial = [[TutorialViewController alloc] init];
-    [self.window addSubview:tutorial.view];
-    self.window.rootViewController = tutorial;*/
+
+    
+    
     [self.window makeKeyAndVisible];
     
     application.applicationIconBadgeNumber = 0;
@@ -217,6 +252,8 @@ NSString *const FBSessionStateChangedNotification =
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+     [self.locationManager stopMonitoringSignificantLocationChanges];
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -232,6 +269,10 @@ NSString *const FBSessionStateChangedNotification =
     [FBSession.activeSession handleDidBecomeActive];
      application.applicationIconBadgeNumber = 0;
      NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
+    
+  
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    
    
 }
 
