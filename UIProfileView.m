@@ -31,7 +31,7 @@
 
 - (id)initWithUser:(User *)user
 {
-    self = [super initWithFrame:CGRectMake(0.0, 440.0, 320.0, 114.0)];
+    self = [super initWithFrame:CGRectMake(0.0, 460.0 + KIphone5Margin, 320.0, 114.0)];
     if (self) {
         self.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(255.0 / 255.0) blue:(255.0 / 255.0) alpha: 1];
         
@@ -42,7 +42,7 @@
         self.hideTag.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
         [self addSubview:self.hideTag];
         
-        self.hideArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bringup_profile_with_arrow.png"]];
+        self.hideArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bringup_profile_arrow.png"]];
         self.hideArrow.frame = CGRectMake(0.0, -12.0, self.hideArrow.frame.size.width, self.hideArrow.frame.size.height);
         [self addSubview:self.hideArrow];
         
@@ -79,13 +79,13 @@
         self.profileImage.hidden = YES;
         self.name.hidden = YES;
         self.settingsButton.hidden = YES;
-        self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_with_arrow.png"];
+      //  self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_with_arrow.png"];
     }else{
         self.hideTag.hidden = YES;
         self.profileImage.hidden = NO;
         self.name.hidden = NO;
         self.settingsButton.hidden = NO;
-        self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_arrow.png"];
+      //  self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_arrow.png"];
     }
 }
 

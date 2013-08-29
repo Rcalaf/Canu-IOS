@@ -10,4 +10,6 @@
 
 @interface ActivityTableViewController : UITableViewController
 
+@property (strong, nonatomic) NSArray *activities;
+
 @end

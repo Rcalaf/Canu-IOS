@@ -29,7 +29,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     if (self) {
         
         // Set the toolbar
-        UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+        UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
         toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
         
         //set the create button

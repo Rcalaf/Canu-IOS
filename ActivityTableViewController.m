@@ -25,10 +25,9 @@
 
 @end
 
-@implementation ActivityTableViewController{
-@private
-    NSArray *_activities;
-}
+@implementation ActivityTableViewController
+
+@synthesize activities = _activities;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,11 +41,12 @@
 - (void)loadView
 {
     [super loadView];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f + KIphone5Margin) style:UITableViewStyleGrouped];
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
     [self.tableView setTransform:CGAffineTransformMakeRotation(M_PI)];
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
+    
     //self.tableView.dataSource = self;
     //self.tableView.delegate = self;
 }
@@ -71,7 +71,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    //[self reload:nil];
+    [self reload:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,9 +80,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)refreshView:(UIRefreshControl *)refresh {
- 
-}
 
 - (void)reload:(id)sender
 {
@@ -94,10 +91,11 @@
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 _activities = activities;
-                if (self.refreshControl.refreshing) {
-                    [self.refreshControl endRefreshing];
-                }
+              
                 [self.tableView reloadData];
+            }
+            if (self.refreshControl.refreshing) {
+                [self.refreshControl endRefreshing];
             }
             
             // self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -109,10 +107,10 @@
             } else {
                 //NSLog(@"%@",activities);
                 _activities = activities;
-                if (self.refreshControl.refreshing) {
-                    [self.refreshControl endRefreshing];
-                }
                 [self.tableView reloadData];
+            }
+            if (self.refreshControl.refreshing) {
+                [self.refreshControl endRefreshing];
             }
         }];
     }
@@ -159,6 +157,11 @@
     
     //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
     //[self reload:nil];
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 

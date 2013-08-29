@@ -54,9 +54,32 @@
 {
     //NSLog(@"Login Logic, AFNetwork, get a token and put inside the UserDefaults...");
     
-    if (self.email.text && self.password.text) {
+   // if (self.email.text && self.password.text) {
         
         [User logInWithEmail:self.email.text Password:self.password.text Block:^(User *user, NSError *error) {
+           
+           /*if (error != nil) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
+                                            message:[error localizedDescription]
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+                return;
+            }*/
+            
+            //NSLog(@"%@",[[error localizedRecoverySuggestion] componentsSeparatedByString:@"\""]);
+          
+            if ([[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound || self.email.text == nil) {
+                self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+            }else{
+                self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+            }
+            if ([[error localizedRecoverySuggestion] rangeOfString:@"password"].location != NSNotFound || self.password.text == nil) {
+                self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+            }else{
+                self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+            }
+            
+            
             if (user){
                 AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
                 //appDelegate.user = user;
@@ -70,15 +93,11 @@
                 [nvc addChildViewController:avc];
                 appDelegate.window.rootViewController = nvc;
                 
-                
-               // UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-                
-                //[self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
             }
         }];
   
     
-    }
+ //   }
 
 }
 
@@ -93,9 +112,13 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
+    if (IS_IPHONE_5) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg-568h.png"]];
+    }else{
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
+    }
     
-    _container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0, 300.0, 94.5)];
+    _container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0 + KIphone5Margin, 300.0, 94.5)];
     [_container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
     
     UIView *userIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 47.0, 47.0)];
@@ -121,7 +144,7 @@
 
     [self.view addSubview:_container];
     
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -181,14 +204,14 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.25 animations:^{
-        _container.frame =CGRectMake(10.0, 139.0, _container.frame.size.width, _container.frame.size.height);
+        _container.frame =CGRectMake(10.0, 139.0  + KIphone5Margin, _container.frame.size.width, _container.frame.size.height);
     }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.25 animations:^{
-        _container.frame =CGRectMake(10.0, 298.0, _container.frame.size.width, _container.frame.size.height);
+        _container.frame =CGRectMake(10.0, 298.0  + KIphone5Margin, _container.frame.size.width, _container.frame.size.height);
     }];
 }
 

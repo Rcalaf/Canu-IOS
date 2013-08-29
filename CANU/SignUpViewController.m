@@ -126,6 +126,28 @@
 {
     
     [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:_takePictureButton.imageView.image Block:^(User *user, NSError *error) {
+        
+        if (error != nil) {
+         [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
+         message:[error localizedDescription]
+         delegate:nil
+         cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+         return;
+         }
+        
+        NSLog(@"%@",[[error localizedRecoverySuggestion] componentsSeparatedByString:@"\""]);
+        
+        if ([[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound || self.email.text == nil) {
+            self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+        }else{
+            self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+        }
+        if ([[error localizedRecoverySuggestion] rangeOfString:@"password"].location != NSNotFound || self.password.text == nil) {
+            self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+        }else{
+            self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+        }
+        
         if (user){
             AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
             //NSLog(@"token:%@ for user%@",user.token,user.firstName);
@@ -191,11 +213,6 @@
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
 
-    if ([textField.text isEqualToString:@""]) {
-        textField.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-    } else{
-        textField.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
-    }
     if (self.userName == textField) {
         [textField resignFirstResponder];
         [self.password becomeFirstResponder];
@@ -244,13 +261,18 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
+    if (IS_IPHONE_5) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg-568h.png"]];
+    }else{
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
+    }
+
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403 + KIphone5Margin)];
     _scrollView.contentSize = CGSizeMake(320.0, 432.0);
     
     
-    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 137.0, 300.0, 94.5)];
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 137.0 + KIphone5Margin, 300.0, 94.5)];
     [container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
     
     UIView *userIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 47.0, 47.0)];
@@ -281,7 +303,7 @@
     
     [_scrollView addSubview:container];
     
-    container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0, 300.0, 94.5)];
+    container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0 + KIphone5Margin, 300.0, 94.5)];
     [container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
     
     self.name = [[UICanuTextField alloc] initWithFrame:CGRectMake(95, 0.0, 205, 47.0)];
@@ -311,11 +333,11 @@
         [self.facebookButton setImage:[UIImage imageNamed:@"facebook_btn_off.png"] forState:UIControlStateNormal];
     }
     [self.facebookButton addTarget:self action:@selector(authButtonAction:) forControlEvents:UIControlEventTouchDown];
-    self.facebookButton.frame = CGRectMake(10.0, 241.5, 300.0, 47.0);
+    self.facebookButton.frame = CGRectMake(10.0, 241.5 + KIphone5Margin, 300.0, 47.0);
     [self.facebookButton setTitle:@"Link Facebook" forState:UIControlStateNormal];
     [_scrollView addSubview:self.facebookButton];
     
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _signInButton = [UIButton buttonWithType:UIButtonTypeCustom];

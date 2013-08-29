@@ -26,7 +26,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.navigationBarHidden = YES;
-        self.control = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 420.0, 63.0, 63.0)];
+        self.control = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 420.0 + KIphone5Margin, 63.0, 63.0)];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
         [self.view addSubview:self.control];
     }
@@ -35,7 +35,7 @@
 
 - (IBAction)goProfile:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(260.0, 420.0, 63.0, 63.0);
+        _control.frame = CGRectMake(260.0, 420.0 + KIphone5Margin, 63.0, 63.0);
     }];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserProfileViewController *upvc =  appDelegate.profileViewController;
@@ -50,12 +50,12 @@
    
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _control.frame;
-        frame.origin.y = 400.0f;
+        frame.origin.y = 400.0f + KIphone5Margin;
         _control.frame = frame;
     } completion:^(BOOL finished){
         [UIView animateWithDuration:.2 animations:^{
             CGRect frame = _control.frame;
-            frame.origin.y = 420.0f;
+            frame.origin.y = 420.0f + KIphone5Margin;
             _control.frame = frame;
         }];
     }];
@@ -66,17 +66,17 @@
   //  NSLog(@"test action:%@",recognizer);
     CGPoint location = [recognizer locationInView:self.view];
   //  NSLog(@"location x:%f",location.x);
-    if (location.y < 423.0f && location.y > 0.0f) {
+    if (location.y < 423.0f + KIphone5Margin && location.y > 0.0f) {
         _control.frame = CGRectMake(_control.frame.origin.x, location.y, _control.frame.size.width, _control.frame.size.height);
     }
     
     if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
-        if (_control.frame.origin.y < 318.0f) {
+        if (_control.frame.origin.y < 318.0f + KIphone5Margin) {
             NewActivityViewController *nac = [[NewActivityViewController alloc] init];
             [self presentViewController:nac animated:YES completion:nil];
         }
         [UIView animateWithDuration:0.3 animations:^{
-            _control.frame = CGRectMake(_control.frame.origin.x, 420.0,_control.frame.size.width, _control.frame.size.height);
+            _control.frame = CGRectMake(_control.frame.origin.x, 420.0f + KIphone5Margin,_control.frame.size.width, _control.frame.size.height);
         }];
     }
 }
@@ -85,7 +85,7 @@
 
 - (IBAction)goActivities:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(-3.0, 420.0, 63.0, 63.0);
+        _control.frame = CGRectMake(-3.0, 420.0 + KIphone5Margin, 63.0, 63.0);
         
     }];
    // NSLog(@"Load Activities view");

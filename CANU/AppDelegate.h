@@ -15,6 +15,7 @@
 @class ActivitiesFeedViewController;
 @class UserProfileViewController;
 
+
 extern NSString *const FBSessionStateChangedNotification;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
@@ -25,7 +26,9 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) ActivitiesFeedViewController *publicFeedViewController;
 @property (strong, nonatomic) UserProfileViewController *profileViewController;
 
+
 @property (readonly, strong, nonatomic) CLLocationManager *locationManager;
+@property (readonly, nonatomic) CLLocationCoordinate2D currentLocation;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

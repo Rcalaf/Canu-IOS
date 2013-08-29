@@ -19,6 +19,7 @@
 #import "Activity.h"
 
 //Controllers import
+#import "UICanuNavigationController.h"   
 #import "UserProfileViewController.h"
 #import "MainViewController.h"
 #import "UserSettingsViewController.h"
@@ -76,10 +77,47 @@
 }*/
 
 
+- (void)showHideProfile:(id)sender
+{
+    UIView *mask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    mask.backgroundColor = [UIColor colorWithWhite:255.0 alpha:.5];
+    if (_profileHidden) {
+        [UIView animateWithDuration:0.3 animations:^(void){
+            _profileView.frame = CGRectMake(0.0f, 345.0f + KIphone5Margin, 320.0f, 114.0f);
+            [_profileView hideComponents:NO];
+            
+            
+            [self.view insertSubview:mask aboveSubview:self.view];
+            
+            
+            //_myActivities.frame = CGRectMake(0.0f, 0.0f, 320.0f, 325.0f);
+        } completion:^(BOOL finished) {
+            if (finished){
+                //self.view.userInteractionEnabled = NO;
+                _profileHidden = NO;
+            }
+        }];
+   
+    }else{
+        [UIView animateWithDuration:0.3 animations:^(void){
+            _profileView.frame = CGRectMake(0.0f, 460.0f + KIphone5Margin, 320.0f, 114.0f);
+            
+            // _myActivities.frame = CGRectMake(0.0f, 0.0f, 320.0f, 420.0f);
+        } completion:^(BOOL finished) {
+            if (finished){
+                //self.view.userInteractionEnabled = YES;
+                [_profileView hideComponents:YES];
+                _profileHidden = YES;
+                
+            }
+        }];
+    }
+}
 
+/*
 - (IBAction)showProfileInfo:(id)sender{
     [UIView animateWithDuration:0.3 animations:^(void){
-        _profileView.frame = CGRectMake(0.0f, 345.0f, 320.0f, 114.0f);
+        _profileView.frame = CGRectMake(0.0f, 345.0f + KIphone5Margin, 320.0f, 114.0f);
         [_profileView hideComponents:NO];
         //_myActivities.frame = CGRectMake(0.0f, 0.0f, 320.0f, 325.0f);
     } completion:^(BOOL finished) {
@@ -91,7 +129,7 @@
 
 - (IBAction)HideProfileInfo:(id)sender{
     [UIView animateWithDuration:0.3 animations:^(void){
-        _profileView.frame = CGRectMake(0.0f, 440.0f, 320.0f, 114.0f);
+        _profileView.frame = CGRectMake(0.0f, 440.0f + KIphone5Margin, 320.0f, 114.0f);
        // _myActivities.frame = CGRectMake(0.0f, 0.0f, 320.0f, 420.0f);
     } completion:^(BOOL finished) {
         if (finished){
@@ -101,6 +139,7 @@
         }
     }];
 }
+*/
 
 - (IBAction)showSettings:(id)sender{
     NSLog(@"Showing settings");
@@ -199,19 +238,20 @@
     //[self.activitiesButton addTarget:self action:@selector(showActivities:) forControlEvents:UIControlEventTouchDown];
     //[self.createActivityButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchDown];
     
-    UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileInfo:)];
+    /*UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileInfo:)];
     swipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-     [_profileView addGestureRecognizer:swipeRecognizer];
+     [_profileView addGestureRecognizer:swipeRecognizer];*/
     
-    swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(HideProfileInfo:)];
+    /*swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(HideProfileInfo:)];
     swipeRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    [_profileView addGestureRecognizer:swipeRecognizer];
+    [_profileView addGestureRecognizer:swipeRecognizer];*/
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
     [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
     
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
     [_profileView.profileImage addGestureRecognizer:tapRecognizer];
+
     
     //[self reload:nil];
     
@@ -228,8 +268,14 @@
     self.profileView.name.text = [NSString stringWithFormat:@"%@ %@",self.user.firstName,self.user.lastName];
     self.profileView.profileImage.image = self.user.profileImage;
 
-   // NSLog(@"user: %u",self.user.userId);
-   // [self reload:nil];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideProfile:)];
+    [_profileView addGestureRecognizer:tapRecognizer];
+    
+    UICanuNavigationController *navController = (UICanuNavigationController *)self.navigationController;
+    [navController.control addGestureRecognizer:tapRecognizer];
+    NSLog(@"%@",navController.control.gestureRecognizers);
+   
+    
     self.navigationController.navigationBarHidden = YES;
     
 }
@@ -239,8 +285,15 @@
     //self.logoutButton = nil;
     [super viewWillDisappear:YES];
     [self performSelector:@selector(HideProfileInfo:) withObject:self];
+    UICanuNavigationController *navController = (UICanuNavigationController *)self.navigationController;
+    [navController.control removeGestureRecognizer:[navController.control.gestureRecognizers lastObject]];
     
 
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning

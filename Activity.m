@@ -253,16 +253,16 @@
 
 
 + (void)publicFeedWithBlock:(void (^)(NSArray *activities, NSError *error))block {
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] getPath:@"activities/" parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        
-        //  NSLog(@"%@",JSON);
-        //  NSLog(@"%d",[JSON count]);
+    [[AFCanuAPIClient sharedClient] getPath:@"activities" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             // NSLog(@"%@",attributes);
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
-            //NSLog(@"%@",[activity startDate]);
             [mutableActivities addObject:activity];
         }
         if (block) {
@@ -282,9 +282,12 @@
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
+    
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] postPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+    [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
@@ -316,9 +319,12 @@
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
+    
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+    [[AFCanuAPIClient sharedClient] deletePath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
 
         [self removeNotification];
         
@@ -404,9 +410,15 @@
 {
 
     //NSLog(@"end: %@",endDate);
-    if (!description) { description = @""; }
+    if (!description) description = @""; 
+    if (!street) street = @"";
+    if (!city) city = @"";
+    if (!zip) zip = @"";
+    if (!country) country = @"";
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    
     
     
     NSArray *objectsArray = [NSArray arrayWithObjects:
@@ -490,7 +502,11 @@
 {
     
     //NSLog(@"end: %@",endDate);
-    if (!description) { description = @""; }
+    if (!description) description = @"";
+    if (!street) street = @"";
+    if (!city) city = @"";
+    if (!zip) zip = @"";
+    if (!country) country = @"";
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     

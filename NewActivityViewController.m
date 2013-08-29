@@ -267,20 +267,28 @@ float oldValue;
     // Gradient background Background
     UIImageView *background;
     if (self.activity) {
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit_bg.png"]];
+        if (IS_IPHONE_5) {
+            background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit_bg-568h.png"]];
+        }else{
+            background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"edit_bg.png"]];
+        }
     }else{
-        background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_bg.png"]];
+        if (IS_IPHONE_5) {
+            background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_bg-568h.png"]];
+        }else{
+            background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_bg.png"]];
+        }
     }
     
     
-    background.frame = CGRectMake(0.0f, -219.0f, 320.0f, 699.0f);
+    background.frame = CGRectMake(0.0f, -219.0f, 320.0f, 699.0f + KIphone5Margin);
     [self.view addSubview:background];
     
     // FormGrid
     _formGrid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_world.png"]];
     CGRect formGridFrame = _formGrid.frame;
     formGridFrame.origin.x = 10.0f;
-    formGridFrame.origin.y = 203.0f;
+    formGridFrame.origin.y = 203.0f + KIphone5Margin;
     _formGrid.frame = formGridFrame;
     [_formGrid setUserInteractionEnabled:YES];
     
@@ -365,18 +373,18 @@ float oldValue;
     
 
     _description = [[UITextView alloc] init];
-    UITextField *detailsPlaceholder = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 345.0f, 300.0f, 47.0)];
+    UITextField *detailsPlaceholder = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 345.0f + KIphone5Margin, 300.0f, 47.0)];
     detailsPlaceholder.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
     detailsPlaceholder.placeholder = @"Details";
     detailsPlaceholder.delegate = self;
     [detailsPlaceholder setReturnKeyType:UIReturnKeyNext];
     [self.view addSubview:detailsPlaceholder];
     if (!self.activity.description || [self.activity.description isEqualToString:@""]) {
-        _description.frame = CGRectMake(10.0f, 345.0f, 300.0f, 47.0);
+        _description.frame = CGRectMake(10.0f, 345.0f + KIphone5Margin , 300.0f, 47.0);
         _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
     } else {
         _formGrid.frame = CGRectMake(10.0, 149.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-        _description.frame = CGRectMake(10.0, 292.0f, 300.0f, 101.0f);
+        _description.frame = CGRectMake(10.0, 292.0f + KIphone5Margin, 300.0f, 101.0f);
         _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:1.0f];
     }
    
@@ -390,7 +398,7 @@ float oldValue;
     
     
     // Set the toolbar
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     //set the create button
@@ -461,20 +469,20 @@ float oldValue;
 {
     if ([_description hasText]) {
         [UIView animateWithDuration:0.25 animations:^{
-            _formGrid.frame =CGRectMake(10.0, -9.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-            _description.frame =CGRectMake(10.0, 133.0f, _description.frame.size.width, 101.0f);
+            _formGrid.frame =CGRectMake(10.0, -9.5f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
+            _description.frame =CGRectMake(10.0, 133.0f + KIphone5Margin, _description.frame.size.width, 101.0f);
             _description.backgroundColor = [UIColor whiteColor];
         }];
     } else {
         if ([_name isFirstResponder]) {
             [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0f, 196.0f, _formGrid.frame.size.width, _formGrid.frame.size.height);
+                _formGrid.frame =CGRectMake(10.0f, 196.0f  + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
                 //_description.frame = CGRectMake(10.0, 338.5f, _description.frame.size.width, _description.frame.size.height);
             }];
         }else if ([_description isFirstResponder]){
             [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, -9.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0, 133.0f, _description.frame.size.width, 101.0f);
+                _formGrid.frame =CGRectMake(10.0, -9.5f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
+                _description.frame =CGRectMake(10.0, 133.0f + KIphone5Margin, _description.frame.size.width, 101.0f);
                 _description.backgroundColor = [UIColor whiteColor];
             }];
         }
@@ -487,21 +495,21 @@ float oldValue;
 {
     if ([_description hasText]) {
             [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, 149.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0,  292.0f, _description.frame.size.width, 101.0f);
+                _formGrid.frame =CGRectMake(10.0, 149.5f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
+                _description.frame =CGRectMake(10.0,  292.0f + KIphone5Margin, _description.frame.size.width, 101.0f);
             }];
     } else {
         if ([_name isFirstResponder]) {
             [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, 203.0f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0,  345.0f, _description.frame.size.width, 47.0f);
+                _formGrid.frame =CGRectMake(10.0, 203.0f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
+                _description.frame =CGRectMake(10.0,  345.0f + KIphone5Margin, _description.frame.size.width, 47.0f);
                 _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
             }];
             
         } else if ([_description isFirstResponder]){
             [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, 203.0f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0,  345.0f, _description.frame.size.width, 47.0f);
+                _formGrid.frame =CGRectMake(10.0, 203.0f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
+                _description.frame =CGRectMake(10.0,  345.0f + KIphone5Margin, _description.frame.size.width, 47.0f);
                 _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
             }];
             
@@ -562,25 +570,31 @@ float oldValue;
                                                     name:UIKeyboardWillHideNotification
      
                                                   object:nil];
+     _activity = nil;
+     _formGrid = nil;
+     _name = nil;
+     _description = nil;
+     _lengthPicker = nil;
+     _start = nil;
+     _toolBar = nil;
+     _backButton = nil;
+     _createButon = nil;
+     _takePictureButton = nil;
+     _location = nil;
+     _locationName = nil;
     [super viewDidUnload];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    /*_activity = nil;
-    _formGrid = nil;
-    _name = nil;
-    _description = nil;
-    _lengthPicker = nil;
-    _start = nil;
-    _toolBar = nil;
-    _backButton = nil;
-    _createButon = nil;
-    _takePictureButton = nil;
-    _location = nil;
-    _locationName = nil;*/
+   
     
     [super viewWillDisappear:YES];
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 

@@ -44,7 +44,7 @@
     [self addChildViewController:attendeesList];
     [self.view addSubview:attendeesList.view];
     
-    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -61,6 +61,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning

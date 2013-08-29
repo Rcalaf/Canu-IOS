@@ -108,6 +108,9 @@
 
 + (void)logInWithEmail:(NSString *)email Password:(NSString *)password Block:(void (^)(User *user, NSError *error))block {
 
+    if (!email) email = @""; 
+    if (!password) password = @""; 
+    
     NSArray *objectsArray = [NSArray arrayWithObjects:email,password,nil];
     NSArray *keysArray = [NSArray arrayWithObjects:@"email",@"password",nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
@@ -121,7 +124,7 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
-            //NSLog(@"%@",error);
+            NSLog(@"%@",error);
             NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
             block(nil, error);
         }
@@ -138,12 +141,12 @@
                       Block:(void (^)(User *user, NSError *error))block
 {
 
-    if (!userName) { userName = @""; }
-    if (!password) { password = @""; }
-    if (!userName) { userName = @""; }
-    if (!firstName){ firstName = @""; }
-    if (!lastName) { lastName = @""; }
-    if (!email)    { email = @""; }    
+    if (!userName) userName = @"";
+    if (!password) password = @"";
+    if (!userName) userName = @"";
+    if (!firstName) firstName = @"";
+    if (!lastName) lastName = @"";
+    if (!email)    email = @""; 
     
     NSArray *objectsArray = [NSArray arrayWithObjects:userName,password,firstName,lastName,email,nil];
     NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"last_name",@"email",nil];

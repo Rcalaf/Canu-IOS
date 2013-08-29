@@ -24,12 +24,12 @@ NSString *const FBSessionStateChangedNotification =
 @implementation AppDelegate{
     UICanuNavigationController *canuViewController;
     MainViewController *loginViewController;
-    CLLocationCoordinate2D currentLocation;
 }
 
 @synthesize user = _user;
 @synthesize publicFeedViewController = _publicFeedViewController;
 @synthesize profileViewController = _profileViewController;
+@synthesize currentLocation = _currentLocation;
 
 @synthesize locationManager = _locationManager;
 
@@ -91,7 +91,7 @@ NSString *const FBSessionStateChangedNotification =
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%@",[locations objectAtIndex:0]);
-    currentLocation = [[locations objectAtIndex:0] coordinate];
+    _currentLocation = [[locations objectAtIndex:0] coordinate];
     [self.locationManager stopMonitoringSignificantLocationChanges];
 }
 
@@ -104,6 +104,8 @@ NSString *const FBSessionStateChangedNotification =
         [self.locationManager startMonitoringSignificantLocationChanges];
     }
     
+    NSLog(@"is Iphone 5? %d",IS_IPHONE_5 );
+    NSLog(@"Margin: %f",KIphone5Margin);
     
     //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
@@ -118,7 +120,7 @@ NSString *const FBSessionStateChangedNotification =
     
     //NSLog(@"user: %@",self.user.profileImageUrl);
  
-    
+    NSLog(@"%f,%f",_currentLocation.latitude,_currentLocation.longitude);
     if (self.user) {
         canuViewController = [[UICanuNavigationController alloc] init];
     
@@ -133,9 +135,6 @@ NSString *const FBSessionStateChangedNotification =
         self.window.rootViewController = loginViewController;
         
     }
-
-
-    
     
     [self.window makeKeyAndVisible];
     

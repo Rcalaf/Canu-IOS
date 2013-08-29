@@ -53,7 +53,12 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
+    if (IS_IPHONE_5) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg-568h.png"]];
+    }else{
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
+    }
+    
    // [UIColor colorWithRed:(255.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
     
   //  UIScrollView *scrollDescription = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403.0)];
@@ -67,8 +72,8 @@
    // [scrollDescription setContentOffset:bottomOffset animated:YES];
     
     
-    UIView *buttonBox = [[UIView alloc] initWithFrame:CGRectMake(0.0, 403.0, 320.0, 57.0)];
-    [buttonBox setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
+    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 403.0f + KIphone5Margin, 320.0f, 57.0f)];
+    [toolBar setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
      
     _getOn = [UIButton buttonWithType:UIButtonTypeCustom];
     [_getOn setTitle:@"SIGN UP" forState:UIControlStateNormal];
@@ -87,10 +92,10 @@
     [_logIn setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
     [_logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
 
-    [buttonBox addSubview:_getOn];
-    [buttonBox addSubview:_logIn];
+    [toolBar addSubview:_getOn];
+    [toolBar addSubview:_logIn];
     //[self.view addSubview:scrollDescription];
-    [self.view addSubview:buttonBox];
+    [self.view addSubview:toolBar];
     
     
 }

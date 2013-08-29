@@ -99,9 +99,16 @@
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
+    
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
     
-    _grid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fullview_bg.png"]];
+    if (IS_IPHONE_5) {
+        _grid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fullview_bg-568h.png"]];
+    }else{
+        _grid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fullview_bg.png"]];
+    }
+
+ 
     CGRect gridFrame = _grid.frame;
     gridFrame.origin.x = 10.0f;
     gridFrame.origin.y = 10.0f;
@@ -218,7 +225,7 @@
     
     
     //Tool bar and its items creation
-    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5, 320.0, 57.0)];
+    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -269,6 +276,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
 
 #pragma mark - MapKit View Delegate
 

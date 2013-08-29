@@ -11,6 +11,7 @@
 
 #import "ActivitiesFeedViewController.h"
 #import "ActivityTableViewController.h"
+#import "ActivityMapViewController.h"
 
 //#import "NewActivityViewController.h"
 //#import "DetailActivityViewController.h"
@@ -28,11 +29,12 @@
 @end
 
 @implementation ActivitiesFeedViewController{
+   // ActivityMapViewController *activitiesMap;
 @private
     NSArray *_activities;
 }
 
-@synthesize tableActivities = _tableActivities;
+//@synthesize tableActivities = _tableActivities;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -51,6 +53,9 @@
     ActivityTableViewController *activitiesList = [[ActivityTableViewController alloc] init];
     [self addChildViewController:activitiesList];
     [self.view addSubview:activitiesList.view];
+    
+    
+    
     
     /*self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
     self.tableActivities.backgroundView = nil;
@@ -84,6 +89,23 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+        ActivityTableViewController *activitiesTableViewController = (ActivityTableViewController *)[self.childViewControllers objectAtIndex:0];
+        ActivityMapViewController *activitiesMapController = [[ActivityMapViewController alloc] init];
+        activitiesMapController.activities = activitiesTableViewController.activities;
+        [self presentViewController:activitiesMapController animated:YES completion:nil];
+    }
+}
+
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return  UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
 }
 
 

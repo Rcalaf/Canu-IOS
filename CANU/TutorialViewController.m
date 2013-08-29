@@ -37,7 +37,11 @@
     self.skipTutorialButton.hidden = YES;
     self.skipTutorialButton = nil;
     self.navView.hidden = NO;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_2.png"]];
+    if (IS_IPHONE_5) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_2-568h.png"]];
+    }else{
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_2.png"]];
+    }
 }
 
 - (IBAction)done:(id)sender
@@ -49,9 +53,13 @@
 
 - (IBAction)showProfile:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        self.navView.frame = CGRectMake(260.0, 400.0, 63.0, 63.0);
+        self.navView.frame = CGRectMake(260.0, 400.0 + KIphone5Margin, 63.0, 63.0);
         self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_3.png"]];
+        if (IS_IPHONE_5) {
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_3-568h.png"]];
+        }else{
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_3.png"]];
+        }
     }];
     step = 2;
     [self.navView removeGestureRecognizer:gesture];
@@ -59,9 +67,13 @@
 
 - (IBAction)showActivities:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        self.navView.frame = CGRectMake(-3.0, 400.0, 63.0, 63.0);
+        self.navView.frame = CGRectMake(-3.0, 400.0 + KIphone5Margin, 63.0, 63.0);
         self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_4.png"]];
+        if (IS_IPHONE_5) {
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_4-568h.png"]];
+        }else{
+            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_4.png"]];
+        }
     }];
 
     step = 3;
@@ -73,12 +85,12 @@
 -(IBAction)bounce:(UITapGestureRecognizer *)gesture{
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _navView.frame;
-        frame.origin.y = 380.0f;
+        frame.origin.y = 380.0f + KIphone5Margin;
         _navView.frame = frame;
     } completion:^(BOOL finished){
         [UIView animateWithDuration:.2 animations:^{
             CGRect frame = _navView.frame;
-            frame.origin.y = 400.0f;
+            frame.origin.y = 400.0f + KIphone5Margin;
             _navView.frame = frame;
         }];
     }];
@@ -89,19 +101,19 @@
     //  NSLog(@"test action:%@",recognizer);
     CGPoint location = [recognizer locationInView:self.view];
     //  NSLog(@"location x:%f",location.x);
-    if (location.y < 400.0f && location.y > 0.0f) {
+    if (location.y < 400.0f + KIphone5Margin && location.y > 0.0f) {
         _navView.frame = CGRectMake(_navView.frame.origin.x, location.y, _navView.frame.size.width, _navView.frame.size.height);
     }
     
     if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
-        if (_navView.frame.origin.y < 318.0f && step == 3) {
+        if (_navView.frame.origin.y < 318.0f + KIphone5Margin && step == 3) {
             self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_5.png"]];
             _navView.hidden = YES;
             self.doneTutorialButton.hidden = NO;
             
         }
         [UIView animateWithDuration:0.3 animations:^{
-            _navView.frame = CGRectMake(_navView.frame.origin.x, 400.0,_navView.frame.size.width, _navView.frame.size.height);
+            _navView.frame = CGRectMake(_navView.frame.origin.x, 400.0 + KIphone5Margin,_navView.frame.size.width, _navView.frame.size.height);
         }];
     }
 }
@@ -120,25 +132,29 @@
 {
     step = 1;
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_1.png"]];
+    if (IS_IPHONE_5) {
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_1-568h.png"]];
+    }else{
+        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_1.png"]];
+    }
     self.runTutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.runTutorialButton.frame = CGRectMake(80.0f, 362.0f, 160.0f, 37.0f);
+    self.runTutorialButton.frame = CGRectMake(80.0f, 362.0f + KIphone5Margin, 160.0f, 37.0f);
     [self.runTutorialButton setImage:[UIImage imageNamed:@"guide_btn_start.png"] forState:UIControlStateNormal];
     [self.runTutorialButton addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.runTutorialButton];
     self.skipTutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.skipTutorialButton.frame = CGRectMake(80.0f, 410.0f, 160.0f, 37.0f);
+    self.skipTutorialButton.frame = CGRectMake(80.0f, 410.0f + KIphone5Margin, 160.0f, 37.0f);
     [self.skipTutorialButton setImage:[UIImage imageNamed:@"guide_btn_skip.png"] forState:UIControlStateNormal];
     [self.skipTutorialButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.skipTutorialButton];
     self.doneTutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.doneTutorialButton.frame = CGRectMake(80.0f, 362.0f, 160.0f, 37.0f);
+    self.doneTutorialButton.frame = CGRectMake(80.0f, 362.0f + KIphone5Margin , 160.0f, 37.0f);
     [self.doneTutorialButton setImage:[UIImage imageNamed:@"guide_btn_gotit.png"] forState:UIControlStateNormal];
     [self.doneTutorialButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
     self.doneTutorialButton.hidden = YES;
     [self.view addSubview:self.doneTutorialButton];
     //[self.view setUserInteractionEnabled:YES];
-    self.navView = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 400.0, 63.0, 63.0)];
+    self.navView = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 400.0 + KIphone5Margin, 63.0, 63.0)];
     self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
     self.navView.hidden = YES;
     [self.view addSubview:self.navView];
