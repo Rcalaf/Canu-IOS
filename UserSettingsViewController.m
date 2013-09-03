@@ -42,8 +42,6 @@
 -(IBAction)performLogout:(id)sender
 {
 
-#warning remove the notifications before log out
-    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];

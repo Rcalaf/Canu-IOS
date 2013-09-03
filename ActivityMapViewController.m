@@ -57,7 +57,6 @@
 {
     [super viewWillAppear:YES];
     self.map.delegate = self;
-    [self.map setShowsUserLocation:YES];
     [self.map setUserInteractionEnabled:YES];
     [self.map setUserTrackingMode:MKUserTrackingModeNone];
 }
@@ -90,6 +89,7 @@
     if (UIInterfaceOrientationIsLandscape(fromInterfaceOrientation)) {
        // [self dismissViewControllerAnimated:YES completion:nil];
         self.view.hidden = YES;
+        [self.map setShowsUserLocation:NO];
     }
 }
 

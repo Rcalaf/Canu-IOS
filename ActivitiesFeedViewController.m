@@ -9,7 +9,6 @@
 #import "ActivityTableViewController.h"
 #import "ActivityMapViewController.h"
 #import "Activity.h"
-#import "AppDelegate.h"
 
 @interface ActivitiesFeedViewController () <CLLocationManagerDelegate>
 
@@ -75,10 +74,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-   /* AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    _locationManager = appDelegate.locationManager;
-    _locationManager.delegate = self;*/
-    [_locationManager stopUpdatingLocation];
+ 
     
    
 }
@@ -94,6 +90,7 @@
 {
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
        // [_map.map addAnnotations:_list.activities];
+        
         [_map reload:self];
        // [_map.map setCenterCoordinate: animated:YES];
         
@@ -101,6 +98,7 @@
        /* for (Activity *activity in _list.activities) {
                 [_map.map addAnnotation:activity.location.placemark];
         }*/
+        [_map.map setShowsUserLocation:YES];
         _map.view.hidden = NO;
     }
 }

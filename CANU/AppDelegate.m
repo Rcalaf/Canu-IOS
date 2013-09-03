@@ -137,7 +137,7 @@ NSString *const FBSessionStateChangedNotification =
         
         canuViewController = [[UICanuNavigationController alloc] init];
         _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
-        _profileViewController = [[UserProfileViewController alloc] init];
+       // _profileViewController = [[UserProfileViewController alloc] init];
         [canuViewController pushViewController:self.publicFeedViewController animated:NO];
         self.window.rootViewController = canuViewController;
         
@@ -159,6 +159,7 @@ NSString *const FBSessionStateChangedNotification =
     if (localNotif) {
         NSLog(@"Recieved Notification oppening%@",localNotif);
     }*/
+     [self.locationManager stopUpdatingLocation];
     
     return YES;
 }
