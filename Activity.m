@@ -12,7 +12,7 @@
 #import "AFNetworking.h"
 #import "UICanuActivityCell.h"
 
-@interface Activity ()
+@interface Activity () <MKAnnotation>
 - (NSDictionary *)serialize;
 @end
 
@@ -111,6 +111,7 @@
     localNotif.userInfo = infoDict;
     
     [app scheduleLocalNotification:localNotif];
+
 }
 
 -(void)removeNotification
@@ -252,10 +253,16 @@
 
 
 
-+ (void)publicFeedWithBlock:(void (^)(NSArray *activities, NSError *error))block {
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
++ (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block {
+    //AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
+    NSDictionary *parameters;
+    if (CLLocationCoordinate2DIsValid(coordinate)) {
+        parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:coordinate.latitude ],@"latitude",[NSNumber numberWithDouble:coordinate.longitude],@"longitude", nil];
+    } else {
+        parameters = nil;
+    }
+    
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] getPath:@"activities" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
@@ -287,6 +294,7 @@
     
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
     [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
@@ -296,8 +304,8 @@
             [mutableActivities addObject:activity];
         }
         
-        
-        [self addNotification];
+
+        //[self addNotification];
         
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
@@ -324,9 +332,10 @@
     
     NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)appDelegate.user.userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
     [[AFCanuAPIClient sharedClient] deletePath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
 
-        [self removeNotification];
+       // [self removeNotification];
         
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
@@ -452,6 +461,8 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     NSData *imageData = UIImageJPEGRepresentation(activityImage, 1.0);
     
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
+    
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"POST" path:[NSString stringWithFormat:@"users/%lu/activities",(unsigned long)appDelegate.user.userId] parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:imageData name:@"image" fileName:@"activity.jpg" mimeType:@"image/jpeg"];
     }];
@@ -463,8 +474,9 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            Activity *newActivity = [[Activity alloc] initWithAttributes:JSON];
-                                                                                            [newActivity addNotification];
+                                                                                            //Activity *newActivity = [[Activity alloc] initWithAttributes:JSON];
+
+                                                                                            //[newActivity addNotification];
                                                                                              //NSLog(@" sorry: %@",JSON);
                                                                                             if (block) {
                                                                                                 block(nil);
@@ -544,6 +556,8 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     NSData *imageData = UIImageJPEGRepresentation(activityImage, 1.0);
     
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
+    
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:[NSString stringWithFormat:@"users/%lu/activities/%lu",(unsigned long)appDelegate.user.userId,(unsigned long)self.activityId] parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:imageData name:@"image" fileName:@"activity.jpg" mimeType:@"image/jpeg"];
     }];
@@ -555,8 +569,9 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            Activity *newActivity = [[Activity alloc] initWithAttributes:JSON];
-                                                                                            [newActivity addNotification];
+                                                                                            //Activity *newActivity = [[Activity alloc] initWithAttributes:JSON];
+
+                                                                                            //[newActivity addNotification];
                                                                                             //NSLog(@" sorry: %@",JSON);
                                                                                             if (block) {
                                                                                                 block(nil);

@@ -13,6 +13,8 @@
 @implementation UIProfileView
 
 @synthesize profileImage = _profileImage;
+@synthesize mask =  _mask;
+
 @synthesize name = _name;
 @synthesize settingsButton = _settingsButton;
 @synthesize hideArrow = _hideArrow;
@@ -34,6 +36,11 @@
     self = [super initWithFrame:CGRectMake(0.0, 460.0 + KIphone5Margin, 320.0, 114.0)];
     if (self) {
         self.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(255.0 / 255.0) blue:(255.0 / 255.0) alpha: 1];
+        
+        self.mask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.mask.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
+       // self.mask.hidden = YES;
+       
         
         self.hideTag = [[UILabel alloc] initWithFrame:CGRectMake(145.5f, 5.5f, 70.0f, 10.0f)];
         //self.hideTag.backgroundColor = [UIColor redColor];
@@ -85,6 +92,8 @@
         self.profileImage.hidden = NO;
         self.name.hidden = NO;
         self.settingsButton.hidden = NO;
+        self.mask.hidden = NO;
+        
       //  self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_arrow.png"];
     }
 }

@@ -19,6 +19,7 @@
 
 @interface DetailActivityViewController () <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) UIImageView *grid;
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @end
 
 @implementation DetailActivityViewController
@@ -30,6 +31,7 @@
 @synthesize numberOfAssistents = _numberOfAssistents;
 @synthesize activity = _activity;
 @synthesize grid = _grid;
+@synthesize loadingIndicator = _loadingIndicator;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -66,18 +68,26 @@
         eac.activity = self.activity;
         [self presentViewController:eac animated:YES completion:nil];
     }else if ([self.actionButton.imageView.image isEqual:[UIImage imageNamed:@"fullview_action_go.png"]]){
+        _actionButton.hidden = YES;
+        _loadingIndicator.hidden = NO;
+        [_loadingIndicator startAnimating];
         [self.activity attendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                  _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                 [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
-                
             }
+           
+            _loadingIndicator.hidden = YES;
+            [_loadingIndicator stopAnimating];
+             _actionButton.hidden = NO;
         }];
     }
     else {
-       
+        _actionButton.hidden = YES;
+        _loadingIndicator.hidden = NO;
+        [_loadingIndicator startAnimating];
         [self.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -85,6 +95,9 @@
                 _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
             }
+            _loadingIndicator.hidden = YES;
+            [_loadingIndicator stopAnimating];
+            _actionButton.hidden = NO;
         }];
     }
    
@@ -96,6 +109,8 @@
     [super loadView];
     
     UIColor *textColor = [UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
+    
+
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -124,7 +139,8 @@
     [_grid addSubview:userPic];
     
     UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 0.0f, 128.0f, 34.0f)];
-    userName.text = [NSString stringWithFormat:@"%@ %@",self.activity.user.firstName,self.activity.user.lastName];
+    //userName.text = [NSString stringWithFormat:@"%@ %@",self.activity.user.firstName,self.activity.user.lastName];
+    userName.text = self.activity.user.userName;
     userName.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
     userName.backgroundColor = [UIColor colorWithRed:(250.0/255.0) green:(250.0/255.0) blue:(250.0/255.0) alpha:1.0f];
     
@@ -252,15 +268,17 @@
     _numberOfAssistents.textColor = textColor;
     _numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
     _numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
-
     
-    //[attendeesPlaceholder addSubview:_numberOfAssistents];
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _loadingIndicator.frame = CGRectMake(228.5f, 5.0f, 47.0f, 47.0f);
+    _loadingIndicator.hidden = YES;
+    
     [attendeesButton.imageView addSubview:_numberOfAssistents];
     
-    //[toolBar addSubview:attendeesPlaceholder];
     [toolBar addSubview:attendeesButton];
     [toolBar addSubview:backButton];
     [toolBar addSubview:_actionButton];
+    [toolBar addSubview:_loadingIndicator];
     [self.view addSubview:toolBar];
 }
 
@@ -281,7 +299,39 @@
     return NO;
 }
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+
 #pragma mark - MapKit View Delegate
+
+- (MKAnnotationView *)mapView:(MKMapView *)mv viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    if([annotation isKindOfClass: [MKUserLocation class]])
+        return nil;
+    
+    MKAnnotationView *annotationView = [mv dequeueReusableAnnotationViewWithIdentifier:@"PinAnnotationView"];
+    UIImage *canuPin = [UIImage imageNamed:@"map_pin.png"];
+    if (!annotationView) {
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
+        annotationView.image = canuPin;
+        annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        annotationView.canShowCallout = YES;
+    }
+    return annotationView;
+}
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
+    // Get the "Current User Location" MKMapItem
+    MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+    MKMapItem *activityLocationMapItem = _activity.location;
+    // Pass the current location and destination map items to the Maps app
+    // Set the direction mode in the launchOptions dictionary
+    [MKMapItem openMapsWithItems:@[currentLocationMapItem, activityLocationMapItem] launchOptions:launchOptions];
+}
 
 - (void)mapView:(MKMapView *)mv didAddAnnotationViews:(NSArray *)views
 
@@ -289,9 +339,8 @@
     MKAnnotationView *annotationView = [views objectAtIndex:0];
     id<MKAnnotation> mp = [annotationView annotation];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([mp coordinate] ,400,400);
-    
     [mv setRegion:region animated:YES];
-
 }
+
 
 @end

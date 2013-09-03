@@ -47,7 +47,7 @@
 - (IBAction)done:(id)sender
 {
     //AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-    NSLog(@"dismissing!!");
+    //NSLog(@"dismissing!!");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

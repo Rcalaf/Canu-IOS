@@ -14,4 +14,5 @@
 @property (strong, nonatomic) MKMapView *map;
 @property (strong, nonatomic) NSArray *activities;
 
+- (void)reload:(id)sender;
 @end

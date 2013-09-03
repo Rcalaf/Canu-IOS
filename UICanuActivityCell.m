@@ -17,6 +17,7 @@
 @synthesize activity = _activity;
 @synthesize user = _user;
 @synthesize actionButton = _actionButton;
+@synthesize loadingIndicator = _loadingIndicator;
 @synthesize userName = _userName;
 @synthesize day = _day;
 @synthesize timeStart = _timeStart;
@@ -62,7 +63,8 @@
        // [self.contentView addSubview:_userPic];
         
         _userName = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 99.0f, 128.0f, 25.0f)];
-        _userName.text = [NSString stringWithFormat:@"%@ %@",self.activity.user.firstName,activity.user.lastName];
+        //_userName.text = [NSString stringWithFormat:@"%@ %@",self.activity.user.firstName,activity.user.lastName];
+        _userName.text = self.activity.user.userName;
         _userName.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
         _userName.backgroundColor = [UIColor colorWithRed:(250.0/255.0) green:(250.0/255.0) blue:(250.0/255.0) alpha:1.0f];
         
@@ -113,7 +115,12 @@
         _day.textColor = _timeStart.textColor;
         [self.contentView addSubview:_day];
         
-       
+        self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.loadingIndicator.frame = CGRectMake(253.0f, 29.0f, 47.0f, 47.0f);
+        //self.loadingIndicator.backgroundColor = [UIColor redColor];
+        self.loadingIndicator.hidden = YES;
+        [self addSubview:self.loadingIndicator];
+        
         self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.actionButton.frame = CGRectMake(243.0f, 29.0f, 47.0f, 47.0f);
 
@@ -141,6 +148,7 @@
 
     // Configure the view for the selected state
 }
+
 
 #pragma mark - UIView
 

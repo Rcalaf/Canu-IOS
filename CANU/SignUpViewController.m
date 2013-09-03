@@ -17,6 +17,8 @@
 #import "UICanuTextField.h"
 #import "User.h"
 
+#define kTakeUserPic [UIImage imageNamed:@"icon_userpic.png"] 
+#define kNoUserPic [UIImage imageNamed:@"icon_username.png"] 
 
 @interface SignUpViewController ()
 
@@ -40,7 +42,7 @@
 
 @end
 
-@implementation SignUpViewController
+@implementation SignUpViewController 
 
 @synthesize userName = _userName;
 @synthesize password = _password;
@@ -125,15 +127,18 @@
 - (IBAction)performSingUp:(id)sender
 {
     
-    [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:_takePictureButton.imageView.image Block:^(User *user, NSError *error) {
+    
+    UIImage *profileImage = [_takePictureButton.imageView.image isEqual:kTakeUserPic] ? nil : _takePictureButton.imageView.image;
+    
+    [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:profileImage Block:^(User *user, NSError *error) {
         
-        if (error != nil) {
+       /* if (error != nil) {
          [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
          message:[error localizedDescription]
          delegate:nil
          cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
          return;
-         }
+         }*/
         
         NSLog(@"%@",[[error localizedRecoverySuggestion] componentsSeparatedByString:@"\""]);
         
@@ -147,14 +152,20 @@
         }else{
             self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
         }
-        
+        if ([[error localizedRecoverySuggestion] rangeOfString:@"user_name"].location != NSNotFound || self.userName.text == nil) {
+            self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+        }else{
+            self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+        }
+        if ([[error localizedRecoverySuggestion] rangeOfString:@"first_name"].location != NSNotFound || self.name.text == nil) {
+            self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+        }else{
+            self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+        }
+       
         if (user){
             AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-            //NSLog(@"token:%@ for user%@",user.token,user.firstName);
-            //appDelegate.user = user;
-            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-//            [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
-            
+            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];            
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
             ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
@@ -167,68 +178,10 @@
         }
     }];
 
-    
-   // NSString *alertMessage = @"";
-   /* BOOL incomplete = NO;
-    if (!self.name.text || !self.email.text ||
-        !self.userName.text || !self.password.text)
-        {
-            incomplete = YES;
-        alertMessage = [alertMessage
-                        stringByAppendingString:
-                        [NSString stringWithFormat:@"%@ must be set\n",
-                         self.name.text]];
-    }
-    
-    //Another userName existance verification
-    if (!incomplete) {
-        NSArray *objectsArray = [NSArray arrayWithObjects:self.userName.text,self.password.text,self.name.text,self.email.text,nil];
-        NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"email",nil];
-        
-        NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-        
-        NSDictionary *user = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:parameters, nil] forKeys:[NSArray arrayWithObjects:@"user", nil]];
-    
-    
-        [[AFCanuAPIClient sharedClient] postPath:@"users/" parameters:user
-                                     success:^(AFHTTPRequestOperation *operation, id JSON) {
-                                         //NSLog(@"%@",operation);
-                                         NSLog(@"%@",JSON);
-                                         User *user = [[User alloc] initWithAttributes:[JSON objectForKey:@"user"]];
-                                         [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"token"];
-                                         AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-                                         appDelegate.user = user;
-                                         UserProfileViewController *upvc = [[UserProfileViewController alloc] init];
-                                         [self.navigationController setViewControllers:[NSArray arrayWithObject:upvc]];
-                                         
-                                     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                         //NSLog(@"%@",operation);
-                                         
-                                          NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-                                      
-                                         
-                                     }];
-    }*/
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
-
-    if (self.userName == textField) {
-        [textField resignFirstResponder];
-        [self.password becomeFirstResponder];
-    }
-    else if (self.password == textField) {
-        [textField resignFirstResponder];
-        [self.name becomeFirstResponder];
-    }
-    else if (self.name == textField) {
-        [textField resignFirstResponder];
-        [self.email becomeFirstResponder];
-    }
-    else if (self.email == textField) {
-        [textField resignFirstResponder];
-    }
-    
+    [textField resignFirstResponder];    
     return YES;
 }
 
@@ -257,6 +210,7 @@
     return YES;
 }
 
+
 -(void) loadView
 {
     [super loadView];
@@ -270,6 +224,8 @@
     
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403 + KIphone5Margin)];
     _scrollView.contentSize = CGSizeMake(320.0, 432.0);
+    
+   // _scrollView.delegate = self;
     
     
     UIView *container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 137.0 + KIphone5Margin, 300.0, 94.5)];
@@ -315,6 +271,7 @@
     self.email = [[UICanuTextField alloc] initWithFrame:CGRectMake(95, 47.5, 205, 47.0)];
     self.email.placeholder = @"E-mail";
     self.email.delegate = self;
+    self.email.keyboardType = UIKeyboardTypeEmailAddress;
     [self.email setReturnKeyType:UIReturnKeyGo];
     [container addSubview:self.email];
     
@@ -392,11 +349,11 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    [self.takePictureButton setImage:[info valueForKey:UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
+ //   NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
+    
     //self.picture.image = [info valueForKey:UIImagePickerControllerEditedImage];
-   // NSLog(@"%@",[info valueForKey:UIImagePickerControllerEditedImage]);
-    [self dismissViewControllerAnimated:YES completion:^{
-    }];
+    [_takePictureButton setImage:[info valueForKey:UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
@@ -469,10 +426,19 @@
 	// Do any additional setup after loading the view.
 }
 
+-(BOOL)shouldAutorotate
+{
+    return NO;
+}
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-   /* _userName = nil;
+    
+}
+
+- (void)viewDidUnload
+{
+    _userName = nil;
     _password= nil;
     _name= nil;
     _lastName= nil;
@@ -480,7 +446,8 @@
     _facebookButton= nil;
     _toolBar= nil;
     _backButton= nil;
-    _signIn= nil;*/
+    _signInButton= nil;
+    _takePictureButton = nil;
 }
 
 - (void)didReceiveMemoryWarning

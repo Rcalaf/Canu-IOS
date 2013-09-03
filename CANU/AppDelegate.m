@@ -81,8 +81,8 @@ NSString *const FBSessionStateChangedNotification =
             _user = [[User alloc] initWithAttributes:savedUserAttributes];
             
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_user.profileImageUrl]];
-          //  NSLog(@"profile pic url %@",url);
             _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            if (_user.profileImage == nil) _user.profileImage = [UIImage imageNamed:@"icon_userpic.png"];
         }
     }
     return _user;
@@ -90,22 +90,30 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    NSLog(@"%@",[locations objectAtIndex:0]);
+   // NSLog(@"%@",[locations objectAtIndex:0]);
     _currentLocation = [[locations objectAtIndex:0] coordinate];
-    [self.locationManager stopMonitoringSignificantLocationChanges];
+     [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:_currentLocation.latitude],@"latitude",[NSNumber numberWithDouble:_currentLocation.longitude],@"longitude", nil] forKey:@"currentLocation"];
+    [self.locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    NSLog(@"Monitoring...");
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-        [self.locationManager startMonitoringSignificantLocationChanges];
+        [self.locationManager startUpdatingLocation];
     }
-    
-    NSLog(@"is Iphone 5? %d",IS_IPHONE_5 );
-    NSLog(@"Margin: %f",KIphone5Margin);
     
     //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
@@ -118,17 +126,21 @@ NSString *const FBSessionStateChangedNotification =
         }];
     }*/
     
-    //NSLog(@"user: %@",self.user.profileImageUrl);
- 
-    NSLog(@"%f,%f",_currentLocation.latitude,_currentLocation.longitude);
-    if (self.user) {
-        canuViewController = [[UICanuNavigationController alloc] init];
+  //  NSLog(@"user: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"]);
     
+    _currentLocation.longitude = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"] objectForKey:@"longitude"] doubleValue];
+    _currentLocation.latitude = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"] objectForKey:@"latitude"] doubleValue];
+ 
+  //  NSLog(@"%f,%f",_currentLocation.latitude,_currentLocation.longitude);
+    if (self.user) {
+        
+        canuViewController = [[UICanuNavigationController alloc] init];
         _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
         _profileViewController = [[UserProfileViewController alloc] init];
         [canuViewController pushViewController:self.publicFeedViewController animated:NO];
-
         self.window.rootViewController = canuViewController;
+        
+        
     } else {
         loginViewController = [[MainViewController alloc] init];
         //[nvc addChildViewController:mvc];
@@ -141,21 +153,21 @@ NSString *const FBSessionStateChangedNotification =
     application.applicationIconBadgeNumber = 0;
     
     // Handle launching from a notification
-    UILocalNotification *localNotif =
+    /*UILocalNotification *localNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         NSLog(@"Recieved Notification oppening%@",localNotif);
-    }
+    }*/
     
     return YES;
 }
 
-
+/*
 - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
     // Handle the notificaton when the app is running
     // app.applicationIconBadgeNumber = app.applicationIconBadgeNumber + 1;
     NSLog(@"Recieved Notification from background%@",notif);
-}
+}*/
 
 /*
  * Callback for session changes.
@@ -251,7 +263,7 @@ NSString *const FBSessionStateChangedNotification =
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     [self.locationManager stopMonitoringSignificantLocationChanges];
+     [self.locationManager stopUpdatingLocation];
     
 }
 
@@ -266,11 +278,11 @@ NSString *const FBSessionStateChangedNotification =
     // We need to properly handle activation of the application with regards to Facebook Login
     // (e.g., returning from iOS 6.0 Login Dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
-     application.applicationIconBadgeNumber = 0;
-     NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
+     //application.applicationIconBadgeNumber = 0;
+     //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
   
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
     
    
 }

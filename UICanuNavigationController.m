@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UICanuNavigationController.h"
 #import "UserProfileViewController.h"
+#import "ActivitiesFeedViewController.h"
 #import "NewActivityViewController.h"
 #import "Activity.h"
 
@@ -133,6 +134,16 @@
    // NSLog(@"one: %@",gestureRecognizer);
    // NSLog(@"other: %@",otherGestureRecognizer);
     return YES;
+}
+
+
+- (BOOL)shouldAutorotate
+{
+    if ([self.visibleViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
+        return YES;
+    }else{
+        return NO;
+    }
 }
 
 @end

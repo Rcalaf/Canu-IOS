@@ -130,7 +130,8 @@
     [_container addSubview:lockerIconView];
     
     self.email = [[UICanuTextField alloc] initWithFrame:CGRectMake(47.5, 0.0, 252.5, 47.0)];
-    self.email.placeholder = @"Email";
+    self.email.placeholder = @"Email or UserName";
+    self.email.keyboardType = UIKeyboardTypeEmailAddress;
     [self.password setReturnKeyType:UIReturnKeyNext];
     self.email.delegate = self;
     [_container addSubview:self.email];
@@ -174,6 +175,11 @@
 
     //self.navigationController.navigationBarHidden = NO;
    
+}
+
+-(BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

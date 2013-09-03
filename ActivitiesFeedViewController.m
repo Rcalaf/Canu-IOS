@@ -5,36 +5,23 @@
 //  Created by Roger Calaf on 17/07/13.
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
-//#import "AFCanuAPIClient.h"
-//#import "UIImageView+AFNetworking.h"
-//#import "UICanuActivityCell.h"
-
 #import "ActivitiesFeedViewController.h"
 #import "ActivityTableViewController.h"
 #import "ActivityMapViewController.h"
+#import "Activity.h"
+#import "AppDelegate.h"
 
-//#import "NewActivityViewController.h"
-//#import "DetailActivityViewController.h"
+@interface ActivitiesFeedViewController ()
 
-//#import "Activity.h"
-
-
-
-
-@interface ActivitiesFeedViewController () //<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
-
-@property (strong, nonatomic) IBOutlet UITableView *tableActivities;
-
+@property (strong, nonatomic) ActivityMapViewController *map;
+@property (strong, nonatomic) ActivityTableViewController *list;
 //- (void)reload:(id)sender;
 @end
 
-@implementation ActivitiesFeedViewController{
-   // ActivityMapViewController *activitiesMap;
-@private
-    NSArray *_activities;
-}
+@implementation ActivitiesFeedViewController
 
-//@synthesize tableActivities = _tableActivities;
+@synthesize map = _map;
+@synthesize list = _list;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,39 +37,30 @@
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
     
-    ActivityTableViewController *activitiesList = [[ActivityTableViewController alloc] init];
-    [self addChildViewController:activitiesList];
-    [self.view addSubview:activitiesList.view];
+    _list = [[ActivityTableViewController alloc] init];
+    [self addChildViewController:_list];
+    [self.view addSubview:_list.view];
     
+    _map = [[ActivityMapViewController alloc] init];
+    [self addChildViewController:_map];
+    [self.view addSubview:_map.view];
+    _map.view.hidden = YES;
     
-    
-    
-    /*self.tableActivities = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f, 460.0f) style:UITableViewStyleGrouped];
-    self.tableActivities.backgroundView = nil;
-    self.tableActivities.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    [self.tableActivities setTransform:CGAffineTransformMakeRotation(M_PI)];
-    self.tableActivities.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
-    //UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    
-    
-
-    self.tableActivities.dataSource = self;
-    self.tableActivities.delegate = self;
-   
-    [self.view addSubview:self.tableActivities]; */
+    // AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    // [appDelegate.locationManager stopUpdatingLocation];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   // [self reload:nil];
+   
  // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-   //[self reload:nil];
+   
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,10 +73,15 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        ActivityTableViewController *activitiesTableViewController = (ActivityTableViewController *)[self.childViewControllers objectAtIndex:0];
-        ActivityMapViewController *activitiesMapController = [[ActivityMapViewController alloc] init];
-        activitiesMapController.activities = activitiesTableViewController.activities;
-        [self presentViewController:activitiesMapController animated:YES completion:nil];
+       // [_map.map addAnnotations:_list.activities];
+        [_map reload:self];
+        [_map.map setShowsUserLocation:NO];
+        [_map.map setUserInteractionEnabled:YES];
+        [_map.map setUserTrackingMode:MKUserTrackingModeFollow];
+       /* for (Activity *activity in _list.activities) {
+                [_map.map addAnnotation:activity.location.placemark];
+        }*/
+        _map.view.hidden = NO;
     }
 }
 
@@ -107,203 +90,6 @@
 {
     return  UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
 }
-
-
-/*
-- (void)reload:(id)sender
-{
-    //[_activityIndicatorView startAnimating];
-   // NSLog(@"reload?");
-    
-    [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
-        
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-        } else {
-            _activities = activities;
-            [_tableActivities reloadData];
-        }
-        
-        // self.navigationItem.rightBarButtonItem.enabled = YES;
-    }];
-    // NSLog(@"Loading");
-    
-    
-}
-
--(void)triggerCellAction:(id)recognizer
-{
-    UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
-    NewActivityViewController *eac;
-
-    //UIActivityIndicatorView
-    
-    if (cell.activity.status == UICanuActivityCellGo) {
-        [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
-            if (error) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-            } else {
-               _activities = activities;
-              [self.tableActivities reloadData];
-                
-            }
-        }];
-    }
-    if (cell.activity.status == UICanuActivityCellEditable) {
-        eac = [[NewActivityViewController alloc] init];
-        eac.activity = cell.activity;
-        NSLog(@"loc: %@",eac.activity.location);
-        [self presentViewController:eac animated:YES completion:nil];
-    }
-    
-    if (cell.activity.status == UICanuActivityCellToGo) {
-        [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
-            if (error) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-            } else {
-                _activities = activities;
-                [self.tableActivities reloadData];
-            }
-        }];
-    }
-    
-    //NSLog(@"%lu", (unsigned long)cell.activity.activityId);
-    //[self reload:nil];
-}
-
-
-
-
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [_activities count];
-}
-
-
-
-- (UICanuActivityCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //static NSString *CellIdentifier = @"";
-    
-    Activity *activity= [_activities objectAtIndex:indexPath.row];
-    
-    NSString *CellIdentifier = [NSString stringWithFormat:@"Canu Cell %u",activity.status];
-    
-    UICanuActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[UICanuActivityCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier activity:activity];
-    
-    } else{
-        
-        cell.activity = activity;
-        
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,cell.activity.user.profileImageUrl]];
-        [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-       // [cell.userPic setImageWithURL:cell.activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-        
-        cell.textLabel.text = activity.title;
-        cell.location.text = activity.locationDescription;
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName, activity.user.lastName];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        dateFormatter.dateFormat = @"dd MMM";
-        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        
-        cell.day.text = [dateFormatter stringFromDate:activity.start];
-        
-        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-        [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
-        timeFormatter.dateFormat = @"HH:mm";
-        [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        cell.timeStart.text = [timeFormatter stringFromDate:activity.start];
-        cell.timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:activity.end]];
-        //[cell setNeedsDisplay];
-    }
-    
-    UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];
-    [cell.actionButton addGestureRecognizer:cellAction];
-    
-    return cell;
-}
-
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return NO;
-}
-
-
-
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        //[_activities];
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        Activity *activity= [_activities objectAtIndex:indexPath.row];
-        [activity removeActivityWithBlock:^(NSError *error) {
-            if (!error){
-                [self reload:nil];
-            }
-        }];
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
-*/
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    
-    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
-    davc.activity = [_activities objectAtIndex:indexPath.row];
-    [self presentViewController:davc animated:YES completion:nil];
-
- 
-}
-
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 130.5f;
-}
-*/
 
 
 @end

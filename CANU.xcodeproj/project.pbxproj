@@ -10,6 +10,8 @@
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549581768EEE200C39E5E /* UICanuPicker.m */; };
 		DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2F59D717269C77007AD8FB /* UserProfileViewController.m */; };
+		DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */; };
+		DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */; };
 		DE4D95301742A00700FB026F /* scroll_content.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952C1742A00700FB026F /* scroll_content.png */; };
 		DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952D1742A00700FB026F /* scroll_content@2x.png */; };
 		DE4D95351742A6F700FB026F /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE4D95331742A6F700FB026F /* Lato-Bol.ttf */; };
@@ -172,6 +174,9 @@
 		DE1549581768EEE200C39E5E /* UICanuPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuPicker.m; sourceTree = "<group>"; };
 		DE2F59D617269C77007AD8FB /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		DE2F59D717269C77007AD8FB /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
+		DE4064DE17D511BB00B11CE9 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
+		DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = privacy_policy.pdf; sourceTree = "<group>"; };
 		DE4D952C1742A00700FB026F /* scroll_content.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scroll_content.png; sourceTree = "<group>"; };
 		DE4D952D1742A00700FB026F /* scroll_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scroll_content@2x.png"; sourceTree = "<group>"; };
 		DE4D95331742A6F700FB026F /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
@@ -407,9 +412,27 @@
 			name = UserProfile;
 			sourceTree = "<group>";
 		};
+		DE4064E117D511C500B11CE9 /* PrivacyPolicy */ = {
+			isa = PBXGroup;
+			children = (
+				DE4064DE17D511BB00B11CE9 /* PrivacyPolicyViewController.h */,
+				DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */,
+			);
+			name = PrivacyPolicy;
+			sourceTree = "<group>";
+		};
+		DE4064E217D51C2A00B11CE9 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */,
+			);
+			name = Documents;
+			sourceTree = "<group>";
+		};
 		DE4D952317429EF100FB026F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DE4064E217D51C2A00B11CE9 /* Documents */,
 				DEFD7A891746F79A0087CB8A /* Buttons */,
 				DE6ED8A917BD043F00C5E72E /* Backgrounds */,
 				DE4D95321742A6D800FB026F /* Fonts */,
@@ -632,6 +655,7 @@
 				DEA93B2417204EA600303BB5 /* Supporting Files */,
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
 				DEA93B7A1720616A00303BB5 /* Main */,
+				DE4064E117D511C500B11CE9 /* PrivacyPolicy */,
 			);
 			path = CANU;
 			sourceTree = "<group>";
@@ -1005,6 +1029,7 @@
 				DED1243E17CFC630000EE414 /* fullview_bg-568h@2x.png in Resources */,
 				DED1244117CFC81E000EE414 /* create_bg-568h@2x.png in Resources */,
 				DED1244217CFC81E000EE414 /* edit_bg-568h@2x.png in Resources */,
+				DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +1078,7 @@
 				DE6F8FEE17C96D5900B99401 /* TutorialViewController.m in Sources */,
 				DED1242117CBFD97000EE414 /* ActivityTableViewController.m in Sources */,
 				DED1243617CD03C9000EE414 /* ActivityMapViewController.m in Sources */,
+				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1164,7 +1190,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1172,6 +1198,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6397AFCE-A671-4F05-AB64-9CE37EB89741";
 				SDKROOT = iphoneos;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
@@ -1201,6 +1228,7 @@
 		DEA93B3C17204EA600303BB5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1213,6 +1241,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6397AFCE-A671-4F05-AB64-9CE37EB89741";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};

@@ -134,7 +134,7 @@ float oldValue;
 }
 
 - (IBAction)deleteActivity:(id)sender{
-    NSLog(@"trigger delete");
+    //NSLog(@"trigger delete");
     [self.activity removeActivityWithBlock:^(NSError *error){
         if (!error) {
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -151,8 +151,13 @@ float oldValue;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(IBAction)tapped:(UITapGestureRecognizer *)gesture{
+-(IBAction)selectDayTime:(UITapGestureRecognizer *)gesture{
     UIDatePickerActionSheet *das = [[UIDatePickerActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:@"Accept", nil];
+    if (self.activity) {
+        das.datePicker.date = self.activity.start;
+    } else {
+        das.datePicker.date = [NSDate date];
+    }    
     [das showInView:self.view];
 }
 
@@ -192,7 +197,7 @@ float oldValue;
 - (void)actionSheet:(UIDatePickerActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat = @"dd MMM HH:mm";
+    dateFormatter.dateFormat = @"d MMM HH:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     self.start.text = [dateFormatter stringFromDate:actionSheet.datePicker.date];
 }
@@ -213,12 +218,18 @@ float oldValue;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    
+    CLLocationCoordinate2D coordintate = [[locations objectAtIndex:0] coordinate];
+  
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:coordintate.latitude],@"latitude",[NSNumber numberWithDouble:coordintate.longitude],@"longitude", nil] forKey:@"currentLocation"];
+    
      CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation: [locations objectAtIndex:0] completionHandler:
      ^(NSArray *placemarks, NSError *error) {
          if (error != nil) {
-             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
-                                         message:[error localizedDescription]
+             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
+                                         message:@"The map server is not available."//[error localizedDescription]
                                         delegate:nil
                                cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
              return;
@@ -252,12 +263,6 @@ float oldValue;
         locationManager = appDelegate.locationManager;
         locationManager.delegate = self;
         [locationManager startUpdatingLocation];
-         /*locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-        [locationManager startUpdatingLocation];
-        NSLog(@"location: %@",locationManager.location);
-        //Block address*/
-        
     }
     
     self.view.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
@@ -307,14 +312,14 @@ float oldValue;
     _start.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
     _start.textColor = textColor;
     // Create the gesture to trigger the date picker
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectDayTime:)];
     [_start addGestureRecognizer:tapRecognizer];
     
     // Set the time formatter and the start time
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat = @"dd MMM HH:mm";
+    dateFormatter.dateFormat = @"d MMM HH:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     
     if (self.activity) {
@@ -350,13 +355,10 @@ float oldValue;
     _locationName = [[UILabel alloc] initWithFrame:CGRectMake(18.0, 0.0, 226.5, 47.0)];
     if (self.activity) {
         _locationName.text = [self.activity locationDescription];
-        NSLog(@"Here..");
     }else{
-        NSLog(@"not here..");
         _locationName.text = @"Current location";
         findLocationButton.userInteractionEnabled = NO;
     }
-    NSLog(@"%d",findLocationButton.userInteractionEnabled);
     [findLocationButton addSubview:_locationName];
     _locationName.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _locationName.textColor = [UIColor colorWithRed:26.0f/255.0f green:144.0f/255.0f blue:161.0f/255.0f alpha:1.0f];
@@ -377,7 +379,7 @@ float oldValue;
     detailsPlaceholder.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
     detailsPlaceholder.placeholder = @"Details";
     detailsPlaceholder.delegate = self;
-    [detailsPlaceholder setReturnKeyType:UIReturnKeyNext];
+    //[detailsPlaceholder setReturnKeyType:UIReturnKeySearch];
     [self.view addSubview:detailsPlaceholder];
     if (!self.activity.description || [self.activity.description isEqualToString:@""]) {
         _description.frame = CGRectMake(10.0f, 345.0f + KIphone5Margin , 300.0f, 47.0);
@@ -392,7 +394,7 @@ float oldValue;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
     _description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
-    [self.description setReturnKeyType:UIReturnKeyDone];
+    [self.description setReturnKeyType:UIReturnKeyDefault];
     [self.view addSubview:_description];
     [self.view addSubview:_formGrid];
     
@@ -405,11 +407,11 @@ float oldValue;
    
     if (self.activity) {
         UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        saveButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
+        saveButton.frame = CGRectMake(194.0f, 10.0f, 116.0f, 36.0f);
         [saveButton setImage:[UIImage imageNamed:@"edit_save.png"] forState:UIControlStateNormal];
         [saveButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchUpInside];
         UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        deleteButton.frame = CGRectMake(194.0f, 10.0f, 116.0f, 36.0f);
+        deleteButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
         [deleteButton setImage:[UIImage imageNamed:@"edit_delete.png"] forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(deleteActivity:) forControlEvents:UIControlEventTouchUpInside];
     

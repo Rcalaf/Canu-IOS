@@ -17,18 +17,20 @@
 				<string>icon.png</string>
 				<string>icon@2x.png</string>
 			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>CANU.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>se.canu.canu</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>canu</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.8</string>
+	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -41,7 +43,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>0.8</string>
+	<string>1.0.0</string>
 	<key>FacebookAppID</key>
 	<string>213847565419629</string>
 	<key>FacebookDisplayName</key>
@@ -53,6 +55,8 @@
 		<string>Lato-Bol.ttf</string>
 		<string>Lato-Reg.ttf</string>
 	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

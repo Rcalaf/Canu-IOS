@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ActivityMapViewController.h"
+#import "DetailActivityViewController.h"
 #import "Activity.h"
 
 @interface ActivityMapViewController () <MKMapViewDelegate>
@@ -17,7 +18,7 @@
 @implementation ActivityMapViewController
 
 @synthesize map = _map;
-@synthesize activities = _activities;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,40 +29,46 @@
     return self;
 }
 
+- (void)reload:(id)sender
+{
+    [Activity publicFeedWithCoorindate:CLLocationCoordinate2DMake(-200, -200) WithBlock:^(NSArray *activities, NSError *error) {
+            
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        } else {
+             [_map addAnnotations:activities];
+            activities = nil;
+            //_activities = activities;
+        }
+    }];
+    
+}
+
+
 - (void)loadView
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    _map = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 480.0f, 300.0f)];
+    _map = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, -20.0f, 480.0f + KIphone5Margin, 300.0f)];
     [self.view addSubview:_map];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    NSLog(@"WillLoad");
     self.map.delegate = self;
     [self.map setShowsUserLocation:YES];
     [self.map setUserInteractionEnabled:YES];
     //[self.map setUserTrackingMode:MKUserTrackingModeFollow];
-    
-    for (Activity *activity in _activities) {
-        
-        [self.map addAnnotation:activity.location.placemark];
-    }
-    
-
 }
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
-    NSLog(@"didLoad");
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self.map setRegion:MKCoordinateRegionMake(appDelegate.currentLocation, MKCoordinateSpanMake(0.300, 0.300)) animated:YES];
     [self.map setUserTrackingMode:MKUserTrackingModeNone];
-    
 	// Do any additional setup after loading the view.
 }
 
@@ -81,19 +88,17 @@
 {
 
     if (UIInterfaceOrientationIsLandscape(fromInterfaceOrientation)) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+       // [self dismissViewControllerAnimated:YES completion:nil];
+        self.view.hidden = YES;
     }
 }
 
 - (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
  {
      if (UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
-         [UIView animateWithDuration:duration animations:^{
-             self.map.hidden = YES;
-         }];
-         
+         [self.map removeAnnotations:[self.map annotations]];
      }
-}
+ }
 
 
 #pragma mark - MapKit View Delegate
@@ -133,10 +138,11 @@
         return nil;
     
     MKAnnotationView *annotationView = [mv dequeueReusableAnnotationViewWithIdentifier:@"PinAnnotationView"];
-    
+    UIImage *canuPin = [UIImage imageNamed:@"map_pin.png"];
     if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
-        //annotationView.draggable = YES;
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
+        annotationView.image = canuPin;
+         annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         annotationView.canShowCallout = YES;
         
     }
@@ -151,7 +157,7 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    NSLog(@"selected pin");
+   // NSLog(@"selected pin");
     //view.canShowCallout = YES;
     
     // [MKMapItem openMapsWithItems:[NSArray arrayWithObject:[[MKPlacemark alloc] initWithPlacemark:self.activity.location.placemark]] launchOptions:nil];
@@ -161,7 +167,9 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-       NSLog(@"Callout !!º");
+    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
+    davc.activity = view.annotation;
+    [self presentViewController:davc animated:YES completion:nil];
 }
 
 

@@ -13,6 +13,7 @@
 
 #import "UICanuActivityCell.h"
 
+#import "AppDelegate.h"
 #import "ActivityTableViewController.h"
 #import "NewActivityViewController.h"
 #import "DetailActivityViewController.h"
@@ -22,7 +23,7 @@
 
 
 @interface ActivityTableViewController ()
-
+- (void)reload:(id)sender;
 @end
 
 @implementation ActivityTableViewController
@@ -51,6 +52,7 @@
     //self.tableView.delegate = self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,7 +62,7 @@
     //[refresh setTransform:CGAffineTransformMakeRotation(M_PI)];
     [refresh addTarget:self action:@selector(reload:) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
-    [self reload:nil];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -72,6 +74,13 @@
 {
     [super viewWillAppear:YES];
     [self reload:nil];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    self.activities = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,9 +92,12 @@
 
 - (void)reload:(id)sender
 {
+    //NSLog(@"%@",[self.parentViewController class]);
 
     if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
-        [Activity publicFeedWithBlock:^(NSArray *activities, NSError *error) {
+        AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        [Activity publicFeedWithCoorindate:appDelegate.currentLocation WithBlock:^(NSArray *activities, NSError *error) {
             
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -97,8 +109,6 @@
             if (self.refreshControl.refreshing) {
                 [self.refreshControl endRefreshing];
             }
-            
-            // self.navigationItem.rightBarButtonItem.enabled = YES;
         }];
     }else{
         [[(UserProfileViewController *)self.parentViewController user] userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
@@ -124,17 +134,23 @@
     UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
     NewActivityViewController *eac;
     
-    //UIActivityIndicatorView
-    
+
     if (cell.activity.status == UICanuActivityCellGo) {
+        cell.loadingIndicator.hidden = NO;
+        [cell.loadingIndicator startAnimating];
+        cell.actionButton.hidden = YES;
         [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 _activities = activities;
-                [self.tableView reloadData];
-                
+               // [self.tableView reloadData];
             }
+           
+            [self reload:nil];
+            //cell.loadingIndicator.hidden = YES;
+            //cell.actionButton.hidden = NO;
+            
         }];
     }
     if (cell.activity.status == UICanuActivityCellEditable) {
@@ -145,13 +161,21 @@
     }
     
     if (cell.activity.status == UICanuActivityCellToGo) {
+        cell.loadingIndicator.hidden = NO;
+        [cell.loadingIndicator startAnimating];
+        cell.actionButton.hidden = YES;
         [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 _activities = activities;
-                [self.tableView reloadData];
+              //  [self.tableView reloadData];
             }
+            
+            [self reload:nil];
+             //cell.loadingIndicator.hidden = YES;
+            //cell.actionButton.hidden = NO;
+            
         }];
     }
     
@@ -159,10 +183,6 @@
     //[self reload:nil];
 }
 
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
 
 
 #pragma mark - Table view data source
@@ -201,11 +221,12 @@
         
         cell.textLabel.text = activity.title;
         cell.location.text = activity.locationDescription;
-        cell.userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName, activity.user.lastName];
+        //cell.userName.text = [NSString stringWithFormat:@"%@ %@",activity.user.firstName, activity.user.lastName];
+         cell.userName.text = activity.user.userName;
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        dateFormatter.dateFormat = @"dd MMM";
+        dateFormatter.dateFormat = @"d MMM";
         [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         
         cell.day.text = [dateFormatter stringFromDate:activity.start];
@@ -216,7 +237,10 @@
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         cell.timeStart.text = [timeFormatter stringFromDate:activity.start];
         cell.timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:activity.end]];
-        //[cell setNeedsDisplay];
+        
+        [cell.loadingIndicator stopAnimating];
+        cell.loadingIndicator.hidden = YES;
+        cell.actionButton.hidden = NO;
     }
     
     UITapGestureRecognizer *cellAction = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(triggerCellAction:)];

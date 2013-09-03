@@ -12,7 +12,7 @@
 
 
 
-@interface AttendeesTableViewController ()
+@interface AttendeesTableViewController () 
 - (void)reload:(id)sender;
 @end
 
@@ -26,7 +26,7 @@
 - (void)reload:(id)sender
 {
     //[_activityIndicatorView startAnimating];
-     NSLog(@"reload?");
+    // NSLog(@"reload?");
     
     [self.activity attendees:^(NSArray *attendees, NSError *error) {
         
@@ -34,9 +34,12 @@
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         } else {
             _attendees = attendees;
-            
             [self.tableView reloadData];
         }
+        if (self.refreshControl.refreshing) {
+            [self.refreshControl endRefreshing];
+        }
+
         
         // self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
@@ -71,6 +74,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    //refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    //[refresh setTransform:CGAffineTransformMakeRotation(M_PI)];
+    [refresh addTarget:self action:@selector(reload:) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
     
 
     // Uncomment the following line to preserve selection between presentations.
@@ -118,7 +127,8 @@
         cell = [[UICanuAttendeeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
         
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
+    //cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
+    cell.textLabel.text = user.userName;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,user.profileImageUrl]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     return cell;

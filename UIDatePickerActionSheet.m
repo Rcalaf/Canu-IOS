@@ -24,6 +24,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
+        self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        [self addSubview:_datePicker];
        // _datePicker = [[UIDatePicker alloc] init];
        // [self addSubview:_datePicker];
     }
@@ -39,22 +42,16 @@
 
 - (void)showInView:(UIView *)view {
 	[super showInView:view];
-	
-	UIDatePicker *pickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
-	pickerView.datePickerMode = UIDatePickerModeDateAndTime;
-	self.datePicker = pickerView;
-	
-	// add picker to action sheet
-	[self addSubview:_datePicker];
-	
+	[self setFrame:CGRectMake(0, 160 + KIphone5Margin, 320, 272)];
+    	
 	// get an array of all of the subviews of our action sheet
-	NSArray *subviews = [self subviews];
+	//NSArray *subviews = [self subviews];
     //NSLog(@"%@",subviews);
 	
-	[[subviews objectAtIndex:self.firstOtherButtonIndex] setFrame:CGRectMake(20, 226, 280, 46)];
-	[_datePicker setFrame:CGRectMake(0, 0, 320, 216)];
+	//[[subviews objectAtIndex:self.firstOtherButtonIndex] setFrame:CGRectMake(20, 226, 280, 46)];
+	[_datePicker setFrame:CGRectMake(0, 85, 320, 216)];
 	
-	[self setFrame:CGRectMake(0, 180, 320, 272)];
+	
 }
 
 

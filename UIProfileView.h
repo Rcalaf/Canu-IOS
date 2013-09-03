@@ -15,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *profileImage;
 @property (strong, nonatomic) UILabel *name;
 @property (strong, nonatomic) IBOutlet UIImageView *settingsButton;
-
+@property (strong, nonatomic) UIView *mask;
 @property (strong, nonatomic) UILabel *hideTag;
 @property (strong, nonatomic) UIImageView *hideArrow;
 

@@ -137,8 +137,8 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
         if (error != nil) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
-                                        message:[error localizedDescription]
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
+                                        message:@"The map server is not available."//[error localizedDescription]
                                        delegate:nil
                               cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
             return;
@@ -218,13 +218,13 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
 {
     [self.ibMapView removeAnnotations:[self.ibMapView annotations]];
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"UIGestureRecognizerStateEnded");
+        //NSLog(@"UIGestureRecognizerStateEnded");
         [self.ibMapView addAnnotation:_chosenLocation.placemark];
         [self.ibMapView selectAnnotation:_chosenLocation.placemark animated:YES];
         [self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
     }
     else if (recognizer.state == UIGestureRecognizerStateBegan){
-        NSLog(@"UIGestureecognizerStateBegan.");
+        //NSLog(@"UIGestureecognizerStateBegan.");
        CLLocationCoordinate2D coordinate = [self.ibMapView convertPoint:[recognizer locationInView:self.ibMapView] toCoordinateFromView:self.ibMapView];
         [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] completionHandler:
          ^(NSArray *placemarks, NSError *error) {
@@ -237,7 +237,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
                  return;
              }
              _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
-             NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
+            // NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
            
              
          }];
@@ -282,9 +282,10 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
         return nil;
     
     MKAnnotationView *annotationView = [mv dequeueReusableAnnotationViewWithIdentifier:@"PinAnnotationView"];
-    
+    UIImage *canuPin = [UIImage imageNamed:@"map_pin.png"];
     if (!annotationView) {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"PinAnnotationView"];
+        annotationView.image = canuPin;
         //annotationView.draggable = YES;
         annotationView.canShowCallout = YES;
         
@@ -300,7 +301,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    NSLog(@"selected pin");
+    //NSLog(@"selected pin");
     //view.canShowCallout = YES;
     
     // [MKMapItem openMapsWithItems:[NSArray arrayWithObject:[[MKPlacemark alloc] initWithPlacemark:self.activity.location.placemark]] launchOptions:nil];
