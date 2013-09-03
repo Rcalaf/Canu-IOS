@@ -144,10 +144,10 @@
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 _activities = activities;
-               // [self.tableView reloadData];
+                if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self.tableView reloadData];
             }
-           
-            [self reload:nil];
+            if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload:nil];
+            //
             //cell.loadingIndicator.hidden = YES;
             //cell.actionButton.hidden = NO;
             
@@ -169,10 +169,11 @@
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 _activities = activities;
-              //  [self.tableView reloadData];
+                if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self.tableView reloadData];
             }
+            if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload:nil];
             
-            [self reload:nil];
+            //[self reload:nil];
              //cell.loadingIndicator.hidden = YES;
             //cell.actionButton.hidden = NO;
             

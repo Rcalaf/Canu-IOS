@@ -134,12 +134,12 @@ float oldValue;
 }
 
 - (IBAction)deleteActivity:(id)sender{
-    //NSLog(@"trigger delete");
     [self.activity removeActivityWithBlock:^(NSError *error){
         if (!error) {
             [self dismissViewControllerAnimated:YES completion:nil];
         } else {
-             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            //[error localizedDescription]
+             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"Couldn't delete the activity." delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         }
      
     }];

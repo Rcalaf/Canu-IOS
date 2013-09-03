@@ -11,17 +11,19 @@
 #import "Activity.h"
 #import "AppDelegate.h"
 
-@interface ActivitiesFeedViewController ()
+@interface ActivitiesFeedViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) ActivityMapViewController *map;
 @property (strong, nonatomic) ActivityTableViewController *list;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 //- (void)reload:(id)sender;
 @end
 
-@implementation ActivitiesFeedViewController
+@implementation ActivitiesFeedViewController 
 
 @synthesize map = _map;
 @synthesize list = _list;
+@synthesize locationManager = _locationManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +33,17 @@
     }
     return self;
 }
+
+/*- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    
+    CLLocationCoordinate2D coordintate = [[locations objectAtIndex:0] coordinate];
+    
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:coordintate.latitude],@"latitude",[NSNumber numberWithDouble:coordintate.longitude],@"longitude", nil] forKey:@"currentLocation"];
+    [_locationManager stopUpdatingLocation];
+}*/
+
 
 -(void)loadView
 {
@@ -46,6 +59,8 @@
     [self.view addSubview:_map.view];
     _map.view.hidden = YES;
     
+    
+    //[_map.map setShowsUserLocation:YES];
     // AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     // [appDelegate.locationManager stopUpdatingLocation];
 }
@@ -60,6 +75,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+   /* AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _locationManager = appDelegate.locationManager;
+    _locationManager.delegate = self;*/
+    [_locationManager stopUpdatingLocation];
+    
    
 }
 
@@ -75,9 +95,9 @@
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
        // [_map.map addAnnotations:_list.activities];
         [_map reload:self];
-        [_map.map setShowsUserLocation:NO];
-        [_map.map setUserInteractionEnabled:YES];
-        [_map.map setUserTrackingMode:MKUserTrackingModeFollow];
+       // [_map.map setCenterCoordinate: animated:YES];
+        
+      
        /* for (Activity *activity in _list.activities) {
                 [_map.map addAnnotation:activity.location.placemark];
         }*/

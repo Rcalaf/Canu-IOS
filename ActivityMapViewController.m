@@ -49,7 +49,7 @@
 {
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    _map = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, -20.0f, 480.0f + KIphone5Margin, 300.0f)];
+    _map = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, -20.0f, 480.0f + KIphone5Margin, 340.0f)];
     [self.view addSubview:_map];
 }
 
@@ -59,7 +59,7 @@
     self.map.delegate = self;
     [self.map setShowsUserLocation:YES];
     [self.map setUserInteractionEnabled:YES];
-    //[self.map setUserTrackingMode:MKUserTrackingModeFollow];
+    [self.map setUserTrackingMode:MKUserTrackingModeNone];
 }
 
 - (void)viewDidLoad

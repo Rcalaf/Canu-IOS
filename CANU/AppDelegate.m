@@ -90,6 +90,7 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    NSLog(@"did update launched");
    // NSLog(@"%@",[locations objectAtIndex:0]);
     _currentLocation = [[locations objectAtIndex:0] coordinate];
      [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:_currentLocation.latitude],@"latitude",[NSNumber numberWithDouble:_currentLocation.longitude],@"longitude", nil] forKey:@"currentLocation"];
@@ -98,12 +99,12 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
 {
-    NSLog(@"Monitoring...");
+    NSLog(@"loc manager Monitoring...");
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"loc manager Fail...");
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -291,6 +292,7 @@ NSString *const FBSessionStateChangedNotification =
 {
     // Saves changes in the application's managed object context before the application terminates.
     [FBSession.activeSession close];
+    [self.locationManager stopUpdatingLocation];
     [self saveContext];
 }
 

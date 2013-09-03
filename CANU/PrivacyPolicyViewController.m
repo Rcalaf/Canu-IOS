@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIWebView *browser;
 @property (strong, nonatomic) UIView *toolBar;
+@property (strong, nonatomic) UIButton *closeButton;
 @property (strong, nonatomic) UIButton *backButton;
 
 @end
@@ -20,6 +21,7 @@
 
 @synthesize browser = _browser;
 @synthesize toolBar = _toolBar;
+@synthesize closeButton = _closeButton;
 @synthesize backButton = _backButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -40,7 +42,10 @@
 - (void)loadView
 {
     [super loadView];
-    _browser = [[UIWebView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    
+    _browser = [[UIWebView alloc] initWithFrame:self.view.frame];
+    _browser.scalesPageToFit=YES;
     
     
     /*NSString *html = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"privacy_policy" ofType:@"pdf"] encoding:NSUTF8StringEncoding error:nil];
@@ -53,15 +58,15 @@
     
     [self.view addSubview:_browser];
     
-    UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
-    [close setTitle:@"Close" forState:UIControlStateNormal];
-    [close setFrame:CGRectMake(10.0f, 403.0f + KIphone5Margin, 300.0f, 47.0f)];
-    [close setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
-    close.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [close setBackgroundColor:[UIColor whiteColor]];
-    [close  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchDown];
+    _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    [_closeButton setFrame:CGRectMake(10.0f, 403.0f + KIphone5Margin, 300.0f, 47.0f)];
+    [_closeButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+    _closeButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+    [_closeButton setBackgroundColor:[UIColor whiteColor]];
+    [_closeButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchDown];
     
-    [self.view addSubview:close];
+    [self.view addSubview:_closeButton];
     
     /*_toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
@@ -80,6 +85,22 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+        self.browser.frame = CGRectMake(0.0f, 0.0f, 480.0f + KIphone5Margin, 320.0f);
+        [_closeButton setFrame:CGRectMake(150.0f, 243.0f, 300.0f, 47.0f)];
+    } else {
+        self.browser.frame = CGRectMake(0.0f, 0.0f, 320.0f, 480.0f + KIphone5Margin);
+        [_closeButton setFrame:CGRectMake(10.0f, 403.0f + KIphone5Margin, 300.0f, 47.0f)];
+    }
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning
