@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserProfileViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface UserProfileViewController : UIViewController <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) User *user;
 
 //-(IBAction)performLogout:(id)sender;

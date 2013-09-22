@@ -19,7 +19,7 @@
 
 
 + (AFCanuAPIClient *)sharedClient {
-    //NSLog(@"%@, %d",kAFCanuAPIBaseURLString,DEBUG);
+  //  NSLog(@"%@",kAFCanuAPIBaseURLString);
     static AFCanuAPIClient *_sharedClient = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{

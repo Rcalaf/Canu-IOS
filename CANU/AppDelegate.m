@@ -18,19 +18,20 @@
 
 
 NSString *const FBSessionStateChangedNotification =
-@"CANU.CANU:FBSessionStateChangedNotification";
+@"se.canu.canu:FBSessionStateChangedNotification";
 
 
 @implementation AppDelegate{
     UICanuNavigationController *canuViewController;
     MainViewController *loginViewController;
+    
 }
 
 @synthesize user = _user;
+@synthesize device_token = _device_token;
 @synthesize publicFeedViewController = _publicFeedViewController;
 @synthesize profileViewController = _profileViewController;
 @synthesize currentLocation = _currentLocation;
-
 @synthesize locationManager = _locationManager;
 
 
@@ -107,9 +108,15 @@ NSString *const FBSessionStateChangedNotification =
     NSLog(@"loc manager Fail...");
 }
 
+/*- (void)applicationDidFinishLaunching:(UIApplication *)app {
+    // other setup tasks here....
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+}*/
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
@@ -132,6 +139,7 @@ NSString *const FBSessionStateChangedNotification =
     _currentLocation.longitude = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"] objectForKey:@"longitude"] doubleValue];
     _currentLocation.latitude = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"] objectForKey:@"latitude"] doubleValue];
  
+    NSLog(@"running did lunch");
   //  NSLog(@"%f,%f",_currentLocation.latitude,_currentLocation.longitude);
     if (self.user) {
         
@@ -161,7 +169,44 @@ NSString *const FBSessionStateChangedNotification =
     }*/
      [self.locationManager stopUpdatingLocation];
     
+
+    
     return YES;
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+	NSLog(@"My token is hex: %@", deviceToken);
+    
+    const char* data = [deviceToken bytes];
+    NSMutableString* token = [NSMutableString string];
+    
+    for (int i = 0; i < [deviceToken length]; i++) {
+        [token appendFormat:@"%02.2hhX", data[i]];
+    }
+    
+    _device_token = token;
+    
+    if (self.user) {
+        [self.user updateDeviceToken:_device_token Block:^(NSError *error){
+            if (error) {
+                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            }
+        }];
+
+    }
+    
+    NSLog(@"My token in string: %@", _device_token);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+   // NSLog(@"%@",userInfo);
+   // application.applicationIconBadgeNumber =application.applicationIconBadgeNumber + 1 ;
 }
 
 /*
@@ -210,7 +255,7 @@ NSString *const FBSessionStateChangedNotification =
     if (error) {
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Error"
-                                  message:error.localizedDescription
+                                  message:NSLocalizedString(@"The operation couldn't be completed or was cancelled", nil)//error.localizedDescription
                                   delegate:nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -280,7 +325,7 @@ NSString *const FBSessionStateChangedNotification =
     // We need to properly handle activation of the application with regards to Facebook Login
     // (e.g., returning from iOS 6.0 Login Dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
-     //application.applicationIconBadgeNumber = 0;
+     application.applicationIconBadgeNumber = 0;
      //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
   

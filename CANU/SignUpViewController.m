@@ -165,7 +165,13 @@
        
         if (user){
             AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];            
+            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+            
+            [user updateDeviceToken:appDelegate.device_token Block:^(NSError *error){
+                if (error) {
+                    NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+                }
+            }];
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
             ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
@@ -177,7 +183,8 @@
             
         }
     }];
-
+    
+    
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {

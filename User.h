@@ -51,6 +51,9 @@
 - (void)editUserWithProfilePicture:(UIImage *)profilePicture
                                  Block:(void (^)(User *user, NSError *error))block;
 
+- (void)updateDeviceToken:(NSString *)device_token
+                    Block: (void (^)(NSError *error))block;
+
 -(NSDictionary *)serialize;
 
 

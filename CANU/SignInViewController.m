@@ -84,8 +84,12 @@
                 AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
                 //appDelegate.user = user;
                 
+                [user updateDeviceToken:appDelegate.device_token Block:^(NSError *error){
+                    if (error) {
+                        NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+                    }
+                }];
                
-               // [[NSUserDefaults standardUserDefaults] setObject:user.token forKey:@"accessToken"];
                 [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
                 UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
                 ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
