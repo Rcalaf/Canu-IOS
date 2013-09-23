@@ -315,35 +315,6 @@
     
 }
 
-- (void)updateDeviceToken:(NSString *)device_token
-                    Block: (void (^)(NSError *error))block{
-    
-    if (!device_token) device_token = @"";
-    
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:device_token] forKeys: [NSArray arrayWithObject:@"device_token"]];
-    
-    NSString *url = [NSString stringWithFormat:@"/users/%d/device_token/%@",self.userId,device_token];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
-    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        //NSLog(@"%@",JSON);
-        if (block) {
-            block(nil);
-        }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            //NSLog(@"%@",error);
-           // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-            block(error);
-        }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    }];
-    
-}
-
 
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
@@ -367,6 +338,64 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+}
+
+#pragma mark - User/device notification logic
+
+- (void)updateDeviceToken:(NSString *)device_token
+                    Block: (void (^)(NSError *error))block{
+    
+    if (!device_token) device_token = @"";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:device_token] forKeys: [NSArray arrayWithObject:@"device_token"]];
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d/device_token",self.userId];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        //NSLog(@"%@",JSON);
+        if (block) {
+            block(nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            //NSLog(@"%@",error);
+            // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
+- (void)updateDevice:(NSString *)device_token Badge:(NSInteger)badge WithBlock:(void (^)(NSError *))block
+{
+    if (!device_token) device_token = @"";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:badge]] forKeys: [NSArray arrayWithObject:@"badge"]];
+    
+    NSString *url = [NSString stringWithFormat:@"/devices/%@/badge",device_token];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        //NSLog(@"%@",JSON);
+        if (block) {
+            block(nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            //NSLog(@"%@",error);
+            // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+
 }
 
 

@@ -176,7 +176,7 @@ NSString *const FBSessionStateChangedNotification =
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-	NSLog(@"My token is hex: %@", deviceToken);
+	//NSLog(@"My token is hex: %@", deviceToken);
     
     const char* data = [deviceToken bytes];
     NSMutableString* token = [NSMutableString string];
@@ -196,7 +196,7 @@ NSString *const FBSessionStateChangedNotification =
 
     }
     
-    NSLog(@"My token in string: %@", _device_token);
+  //  NSLog(@"My token in string: %@", _device_token);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -205,8 +205,14 @@ NSString *const FBSessionStateChangedNotification =
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-   // NSLog(@"%@",userInfo);
+    NSLog(@"%@",userInfo);
    // application.applicationIconBadgeNumber =application.applicationIconBadgeNumber + 1 ;
+    
+    [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:^(NSError *error){
+        if (error) {
+            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+        }
+    }];
 }
 
 /*
@@ -325,7 +331,15 @@ NSString *const FBSessionStateChangedNotification =
     // We need to properly handle activation of the application with regards to Facebook Login
     // (e.g., returning from iOS 6.0 Login Dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
-     application.applicationIconBadgeNumber = 0;
+    application.applicationIconBadgeNumber = 0;
+    if (_device_token) {
+        [self.user updateDevice:_device_token Badge:0 WithBlock:^(NSError *error){
+            if (error) {
+                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            }
+        }];
+    }
+
      //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
     
   

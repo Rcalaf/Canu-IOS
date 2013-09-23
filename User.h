@@ -54,6 +54,11 @@
 - (void)updateDeviceToken:(NSString *)device_token
                     Block: (void (^)(NSError *error))block;
 
+- (void)updateDevice:(NSString *)device_token
+               Badge:(NSInteger)badge
+           WithBlock:(void (^)(NSError *))block;
+
+
 -(NSDictionary *)serialize;
 
 
