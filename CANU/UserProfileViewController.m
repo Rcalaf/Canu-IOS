@@ -137,7 +137,7 @@
     
     UIImage *newImage = [info valueForKey:UIImagePickerControllerEditedImage];
     
-    [self.user editUserWithProfilePicture:newImage Block:^(User *user, NSError *error) {
+    [self.user editUserProfilePicture:newImage Block:^(User *user, NSError *error) {
         if (!error) {
             self.profileView.profileImage.image = newImage;
             //self.user = user;

@@ -202,70 +202,53 @@
 
 
 - (void)editUserWithUserName:(NSString *)userName
-                  Password:(NSString*)password
-                 FirstName:(NSString *)firstName
-                  LastName:(NSString *)lastName
-                     Email:(NSString *)email
-            ProfilePicture:(UIImage *)profilePicture
-                     Block:(void (^)(User *user, NSError *error))block
+                    Password:(NSString *)password
+                   FirstName:(NSString *)firstName
+                    LastName:(NSString *)lastName
+                       Email:(NSString *)email
+                       Block:(void (^)(User *user, NSError *error))block
 {
     
     if (!userName) { userName = @""; }
-    if (!password) { password = @""; }
     if (!userName) { userName = @""; }
     if (!firstName){ firstName = @""; }
     if (!lastName) { lastName = @""; }
     if (!email)    { email = @""; }
+
+    NSArray *objectsArray;
+    NSArray *keysArray;
+    if (!password) {
+        objectsArray = [NSArray arrayWithObjects:userName,firstName,lastName,email,nil];
+        keysArray = [NSArray arrayWithObjects:@"user_name",@"first_name",@"last_name",@"email",nil];
+    } else {
+        objectsArray = [NSArray arrayWithObjects:userName,password,firstName,lastName,email,nil];
+        keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"last_name",@"email",nil];
+    }
+
+    NSDictionary *user = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"user"]];
     
-    NSArray *objectsArray = [NSArray arrayWithObjects:userName,password,firstName,lastName,email,nil];
-    NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"last_name",@"email",nil];
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-    
-    
-    NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
     
     NSString *url = [NSString stringWithFormat:@"/users/%d",self.userId];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat = @"YYYYddHHmm";
-    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-    
-    NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]]] mimeType:@"image/jpeg"];
-    }];
-    
-    //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-     NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
-     }];*/
-    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                            NSLog(@"Process completed %@",JSON);
-                                                                                            User *user= [[User alloc] initWithAttributes:JSON];
-                                                                                            if (block) {
-                                                                                                block(user, nil);
-                                                                                            }
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                        }
-                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                            if (block) {
-                                                                                                NSLog(@"%@",error);
-                                                                                                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-                                                                                                block(nil, error);
-                                                                                            }
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                        }];
-    [operation start];
-    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        User *user= [[User alloc] initWithAttributes:JSON];
+        if (block) {
+            block(user, nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(nil, error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
 }
 
-
-- (void)editUserWithProfilePicture:(UIImage *)profilePicture
+- (void)editUserProfilePicture:(UIImage *)profilePicture
                          Block:(void (^)(User *user, NSError *error))block
 {
   //  AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
@@ -278,7 +261,7 @@
     dateFormatter.dateFormat = @"YYYYddHHmm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     
-    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]] ] mimeType:@"image/jpeg"];
     }];

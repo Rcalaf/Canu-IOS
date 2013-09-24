@@ -88,6 +88,10 @@
 		DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE713962179D47FE00EBCB91 /* CoreLocation.framework */; };
 		DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */; };
 		DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DE85A6311744FCD400A050E5 /* UICanuTextField.m */; };
+		DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7C7EB17F1F2EF009CBE25 /* EditUserViewController.m */; };
+		DEA7C7F017F1F73C009CBE25 /* button_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA7C7EE17F1F73C009CBE25 /* button_arrow.png */; };
+		DEA7C7F117F1F73C009CBE25 /* button_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA7C7EF17F1F73C009CBE25 /* button_arrow@2x.png */; };
+		DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7C7F317F23858009CBE25 /* EditUserPasswordViewController.m */; };
 		DEA93B1C17204EA600303BB5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
 		DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1D17204EA600303BB5 /* Foundation.framework */; };
 		DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */; };
@@ -260,6 +264,12 @@
 		DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
 		DE85A6301744FCD400A050E5 /* UICanuTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuTextField.h; sourceTree = "<group>"; };
 		DE85A6311744FCD400A050E5 /* UICanuTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuTextField.m; sourceTree = "<group>"; };
+		DEA7C7EA17F1F2EF009CBE25 /* EditUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserViewController.h; sourceTree = "<group>"; };
+		DEA7C7EB17F1F2EF009CBE25 /* EditUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserViewController.m; sourceTree = "<group>"; };
+		DEA7C7EE17F1F73C009CBE25 /* button_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_arrow.png; sourceTree = "<group>"; };
+		DEA7C7EF17F1F73C009CBE25 /* button_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_arrow@2x.png"; sourceTree = "<group>"; };
+		DEA7C7F217F23858009CBE25 /* EditUserPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserPasswordViewController.h; sourceTree = "<group>"; };
+		DEA7C7F317F23858009CBE25 /* EditUserPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserPasswordViewController.m; sourceTree = "<group>"; };
 		DEA93B1817204EA600303BB5 /* CANU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CANU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA93B1B17204EA600303BB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEA93B1D17204EA600303BB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -404,10 +414,14 @@
 		DE2F59D917269C7C007AD8FB /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
+				DEA7C7EA17F1F2EF009CBE25 /* EditUserViewController.h */,
+				DEA7C7EB17F1F2EF009CBE25 /* EditUserViewController.m */,
 				DEB29BC21795700700D9FFAE /* UserSettingsViewController.h */,
 				DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */,
 				DE2F59D617269C77007AD8FB /* UserProfileViewController.h */,
 				DE2F59D717269C77007AD8FB /* UserProfileViewController.m */,
+				DEA7C7F217F23858009CBE25 /* EditUserPasswordViewController.h */,
+				DEA7C7F317F23858009CBE25 /* EditUserPasswordViewController.m */,
 			);
 			name = UserProfile;
 			sourceTree = "<group>";
@@ -446,6 +460,8 @@
 		DE4D952417429EFE00FB026F /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				DEA7C7EE17F1F73C009CBE25 /* button_arrow.png */,
+				DEA7C7EF17F1F73C009CBE25 /* button_arrow@2x.png */,
 				DED1242F17CCFDFD000EE414 /* map_pin.png */,
 				DED1243017CCFDFD000EE414 /* map_pin@2x.png */,
 				DE6ED8A117BD00D400C5E72E /* bringup_profile_arrow.png */,
@@ -948,6 +964,7 @@
 				DEFD7A971747F8370087CB8A /* icon.png in Resources */,
 				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
 				DE6A8A2A1786DFD200B220BA /* create_location.png in Resources */,
+				DEA7C7F017F1F73C009CBE25 /* button_arrow.png in Resources */,
 				DE6A8A2B1786DFD200B220BA /* create_location@2x.png in Resources */,
 				DEB29BB717955A4000D9FFAE /* menunav_me.png in Resources */,
 				DEB29BB817955A4000D9FFAE /* menunav_me@2x.png in Resources */,
@@ -997,6 +1014,7 @@
 				DE67FDBF17CA64E900240E1C /* hello_bg-568h@2x.png in Resources */,
 				DE67FDC017CA64E900240E1C /* hello_bg.png in Resources */,
 				DE67FDC117CA64E900240E1C /* hello_bg@2x.png in Resources */,
+				DEA7C7F117F1F73C009CBE25 /* button_arrow@2x.png in Resources */,
 				DE67FDC617CA64F500240E1C /* intro_bg.png in Resources */,
 				DE67FDC717CA64F500240E1C /* intro_bg@2x.png in Resources */,
 				DE67FDDC17CA66DD00240E1C /* guide_btn_gotit.png in Resources */,
@@ -1063,6 +1081,7 @@
 				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
 				DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */,
+				DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */,
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
 				DEF015F91784B9020005FFC0 /* UICanuActivityCell.m in Sources */,
 				DEB29BB317954FDA00D9FFAE /* UIProfileView.m in Sources */,
@@ -1077,6 +1096,7 @@
 				DEAE0B7A17C9540200EEB078 /* MKCanuAnnotationView.m in Sources */,
 				DE6F8FEE17C96D5900B99401 /* TutorialViewController.m in Sources */,
 				DED1242117CBFD97000EE414 /* ActivityTableViewController.m in Sources */,
+				DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */,
 				DED1243617CD03C9000EE414 /* ActivityMapViewController.m in Sources */,
 				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,
 			);

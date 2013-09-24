@@ -63,7 +63,7 @@
         self.profileImage.userInteractionEnabled = YES;
         
         self.name = [[UILabel alloc] initWithFrame:CGRectMake(118.5f, 21.0f, 160.5f, 18.5)];
-        self.name.text = [NSString stringWithFormat:@"%@ %@",user.firstName,user.lastName];
+        self.name.text = [NSString stringWithFormat:@"%@",user.firstName];
         self.name.font = [UIFont fontWithName:@"Lato-Bold" size:12.0];
         self.name.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
         [self addSubview:_name];

@@ -45,11 +45,10 @@
                    FirstName:(NSString *)firstName
                     LastName:(NSString *)lastName
                        Email:(NSString *)email
-              ProfilePicture:(UIImage *)profilePicture
                        Block:(void (^)(User *user, NSError *error))block;
 
-- (void)editUserWithProfilePicture:(UIImage *)profilePicture
-                                 Block:(void (^)(User *user, NSError *error))block;
+- (void)editUserProfilePicture:(UIImage *)profilePicture
+                         Block:(void (^)(User *user, NSError *error))block;
 
 - (void)updateDeviceToken:(NSString *)device_token
                     Block: (void (^)(NSError *error))block;
