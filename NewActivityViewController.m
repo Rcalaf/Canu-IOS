@@ -41,6 +41,7 @@
 
 @property (strong, nonatomic) MKMapItem *location;
 @property (strong, nonatomic) UILabel *locationName;
+//@property (strong, nonatomic) CLLocationManager *locationManager;
 
 
 - (void)itemMap:(NSNotification*)notification;
@@ -48,7 +49,6 @@
 @end
 
 @implementation NewActivityViewController{
-    CLLocationManager *locationManager;
     UIView *findLocationButton;
 }
 
@@ -63,6 +63,8 @@
 @synthesize backButton = _backButton;
 @synthesize createButon = _createButon;
 @synthesize takePictureButton = _takePictureButton;
+
+//@synthesize locationManager = _locationManager;
 @synthesize location = _location;
 @synthesize locationName = _locationName;
 
@@ -71,13 +73,9 @@ float oldValue;
 
  
 - (IBAction)createActivity:(id)sender{
-     NSLog(@"tap title: %@ and location: %@",self.name.text, self.activity.location);
-    NSLog(@"%@",self.location);
-   if (self.name.text && self.location) {
+   if (self.location) {
       
        //NSArray *lengthTimeParts = [self.lengthPicker.text componentsSeparatedByString:@":"];
-       
-       //NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
        
        NSDate *start;
        if (self.activity) {
@@ -86,6 +84,9 @@ float oldValue;
           start = [NSDate date];
        }
        
+       
+       
+       //NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
        /*NSDate *end = [start dateByAddingTimeInterval:delay];
        
        
@@ -108,7 +109,17 @@ float oldValue;
                                           Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
                                               Image:[UIImage imageNamed:@"icon_userpic.png"]
                                               Block:^(NSError *error) {
-                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                                  if (error) {
+                                                      NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
+                                                      if ([[error localizedRecoverySuggestion] rangeOfString:@"title"].location != NSNotFound) {
+                                                          NSLog(@"title error");
+                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                                      }else{
+                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                                      }
+                                                  } else {
+                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                  }
                                               }];
        } else {
            [Activity createActivityForUserWithTitle:self.name.text
@@ -124,12 +135,26 @@ float oldValue;
                                           Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
                                               Image:[UIImage imageNamed:@"icon_userpic.png"]
                                               Block:^(NSError *error) {
-                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                                  if (error) {
+                                                      NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
+
+                                                      if ([[error localizedRecoverySuggestion] rangeOfString:@"title"].location != NSNotFound) {
+                                                          NSLog(@"error");
+                                                         // self.name.backgroundColor = [UIColor  redColor];
+                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                                      }else{
+                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                                      }
+                                                  } else {
+                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                  }
                                               }];
            
        }
 
-   }
+   } /*else {
+        self.locationName.text = @"choose a location";
+   }*/
     
 }
 
@@ -202,21 +227,8 @@ float oldValue;
     self.start.text = [dateFormatter stringFromDate:actionSheet.datePicker.date];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-           
-    }
-    return self;
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+/*- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     
     CLLocationCoordinate2D coordintate = [[locations objectAtIndex:0] coordinate];
@@ -246,9 +258,23 @@ float oldValue;
          
          
      }];
-    [locationManager stopUpdatingLocation];
+    [_locationManager stopUpdatingLocation];
 }
 
+
+- (CLLocationManager *)locationManager
+{
+    if (_locationManager != nil) {
+        _locationManager.delegate = self;
+        return _locationManager;
+    }
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
+    _locationManager.distanceFilter=200;
+    return _locationManager;
+}*/
 
 - (void)loadView
 {
@@ -260,9 +286,33 @@ float oldValue;
     }else{
         _length = 20;
          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-        locationManager = appDelegate.locationManager;
-        locationManager.delegate = self;
-        [locationManager startUpdatingLocation];
+        //_location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:appDelegate.currentLocation addressDictionary:nil]];
+        
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.latitude  longitude:appDelegate.currentLocation.longitude] completionHandler:
+         ^(NSArray *placemarks, NSError *error) {
+             if (error != nil) {
+                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
+                                             message:@"The map server is not available."//[error localizedDescription]
+                                            delegate:nil
+                                   cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+                 return;
+             }
+             
+             _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+             findLocationButton.userInteractionEnabled = YES;
+             //String to address
+             NSString *locatedaddress = [[_location.placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+             
+             //Print the location in the console
+             NSLog(@"Currently address is: %@",locatedaddress);
+             
+             
+             
+         }];
+        /*locationManager = appDelegate.locationManager;
+        locationManager.delegate = self;*/
+       // [_locationManager startUpdatingLocation];
     }
     
     self.view.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
@@ -298,12 +348,14 @@ float oldValue;
     [_formGrid setUserInteractionEnabled:YES];
     
     
-    _name = [[UITextField alloc] initWithFrame:CGRectMake(18.0f, 0.0f, 260.0, 47.0)];
+    _name = [[UITextField alloc] initWithFrame:CGRectMake(18.0f, 0.0f, 280.0, 47.0)];
     _name.placeholder = @"Title";
     _name.textColor = textColor;
     _name.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     _name.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
     _name.text = self.activity.title;
+    _name.rightViewMode = UITextFieldViewModeAlways;
+    _name.rightView.bounds = CGRectMake(self.name.rightView.frame.size.width - 47.0, 0.0, 47.0, 47.0);
     _name.delegate = self;
     [_name setReturnKeyType:UIReturnKeyNext];
     [_formGrid addSubview:_name];
@@ -393,7 +445,7 @@ float oldValue;
     _description.text = self.activity.description;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
-    _description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
+    //_description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
     [self.description setReturnKeyType:UIReturnKeyDefault];
     [self.view addSubview:_description];
     [self.view addSubview:_formGrid];
@@ -454,6 +506,13 @@ float oldValue;
     return YES;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField.text.length >= 25 && range.length == 0)
+        return NO;
+    return YES;
+}
+
 
 - (BOOL)textFieldShouldEndEditing:(UICanuTextField *)textField
 {
@@ -465,6 +524,11 @@ float oldValue;
 {
     [_name resignFirstResponder];
     [_description resignFirstResponder];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -532,6 +596,15 @@ float oldValue;
   //   NSLog(@"%@",self.location.placemark.addressDictionary);
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
@@ -594,16 +667,17 @@ float oldValue;
     [super viewWillDisappear:YES];
 }
 
-- (BOOL)shouldAutorotate
-{
-    return NO;
-}
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
+}
+
 
 @end

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class ActivityMapViewController;
 
 @interface ActivitiesFeedViewController : UIViewController 
 

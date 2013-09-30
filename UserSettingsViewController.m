@@ -44,18 +44,8 @@
 
 -(IBAction)performLogout:(id)sender
 {
-
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
-    
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.user = nil;
-
-    MainViewController *mvc = [[MainViewController alloc] init];
-    appDelegate.window.rootViewController = mvc;
-    
-    //NSLog(@"%@",appDelegate.user.userName);
-    
-    //[self.navigationController setViewControllers:[NSArray arrayWithObject:[[MainViewController alloc] init]]];
+    [appDelegate.user logOut];
 }
 
 - (IBAction)back:(id)sender

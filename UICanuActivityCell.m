@@ -154,7 +154,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.textLabel.frame = CGRectMake(15.0f, 26.0f, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
+    self.textLabel.frame = CGRectMake(15.0f, 26.0f, 220.0f, self.textLabel.frame.size.height);
     self.textLabel.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(255.0/255.0) blue:(255.0/255.0) alpha:1.0f];
     self.textLabel.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
     self.textLabel.font = [UIFont fontWithName:@"Lato-Bold" size:22.0];

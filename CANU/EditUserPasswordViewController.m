@@ -54,7 +54,7 @@
 {
     _password.rightView = nil;
     _proxyPassword.rightView = nil;
-    NSLog(@" %@ %@",_password.text,_proxyPassword.text);
+    //NSLog(@" %@ %@",_password.text,_proxyPassword.text);
     if ([_password.text isEqualToString:_proxyPassword.text]) {
         
     [self.user editUserWithUserName:_user.userName
@@ -63,17 +63,22 @@
                            LastName:@""
                               Email:_user.email
                               Block:^(User *user, NSError *error){
-                                  if (error && [[error localizedRecoverySuggestion] rangeOfString:@"proxy_password"].location != NSNotFound) {
-                                      _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                                  }else{
-                                      _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                  NSLog(@"%@",[error localizedRecoverySuggestion]);
+                                  if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
+                                      [self.user logOut];
+                                  } else {
+                                      
+                                      if (error && [[error localizedRecoverySuggestion] rangeOfString:@"proxy_password"].location != NSNotFound) {
+                                          _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                      }else{
+                                          _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                      }
+                                      if (error && [[error localizedRecoverySuggestion] rangeOfString:@"password"].location != NSNotFound){
+                                          _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                      }else{
+                                          _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                      }
                                   }
-                                  if (error && [[error localizedRecoverySuggestion] rangeOfString:@"password"].location != NSNotFound){
-                                      _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                                  }else{
-                                      _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
-                                  }
-                                  
                                   
                                  if (user) {
                                       [self dismissViewControllerAnimated:YES completion:nil];
@@ -174,6 +179,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 @end

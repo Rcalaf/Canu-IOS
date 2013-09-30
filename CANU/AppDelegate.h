@@ -18,7 +18,7 @@
 
 extern NSString *const FBSessionStateChangedNotification;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
@@ -28,8 +28,8 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) UserProfileViewController *profileViewController;
 
 
-@property (readonly, strong, nonatomic) CLLocationManager *locationManager;
-@property (readonly, nonatomic) CLLocationCoordinate2D currentLocation;
+//@property (readonly, strong, nonatomic) CLLocationManager *locationManager;
+@property (nonatomic) CLLocationCoordinate2D currentLocation;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

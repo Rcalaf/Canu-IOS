@@ -65,9 +65,10 @@
 {
     
     [super viewDidLoad];
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self.map setRegion:MKCoordinateRegionMake(appDelegate.currentLocation, MKCoordinateSpanMake(0.300, 0.300)) animated:YES];
-    [self.map setUserTrackingMode:MKUserTrackingModeNone];
+    //AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //[self.map setUserTrackingMode:MKUserTrackingModeFollow];
+    [self.map setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake(23.0, 0.0), MKCoordinateSpanMake(100,0)) animated:NO];
+ 
 	// Do any additional setup after loading the view.
 }
 

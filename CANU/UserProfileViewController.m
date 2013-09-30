@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
-//#import "UIImageView+AFNetworking.h"
+#import "AFCanuAPIClient.h"
+#import "UIImageView+AFNetworking.h"
 
 //Custom CANU class import
 #import "UIProfileView.h"
@@ -107,7 +108,7 @@
 //User profile ImagePicker
 -(IBAction)takePic:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose an existing one",@"Take a picutre", nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose an existing one",@"Take a picture", nil];
     [actionSheet showInView:self.view];
 }
 
@@ -154,7 +155,10 @@
 {
     [super loadView];
     
+
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
+
+    
     
     ActivityTableViewController *activitiesList = [[ActivityTableViewController alloc] init];
     [self addChildViewController:activitiesList];
@@ -199,9 +203,17 @@
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    
+ 
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.user = appDelegate.user;
     //[self.profileView.profileImage setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-    self.profileView.name.text = [NSString stringWithFormat:@"%@ %@",self.user.firstName,self.user.lastName];
-    self.profileView.profileImage.image = self.user.profileImage;
+    self.profileView.name.text = [NSString stringWithFormat:@"%@",self.user.firstName];
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,self.user.profileImageUrl]];
+    [self.profileView.profileImage  setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    
+   // self.profileView.profileImage.image = self.user.profileImage;
 
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideProfile:)];
     [_profileView addGestureRecognizer:tapRecognizer];

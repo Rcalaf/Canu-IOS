@@ -12,6 +12,7 @@
 #import "AFCanuAPIClient.h"
 #import "Activity.h"
 #import "AFNetworking.h"
+#import "MainViewController.h"
 
 @implementation User
 
@@ -103,8 +104,6 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
-
-    
 }
 
 + (void)logInWithEmail:(NSString *)email Password:(NSString *)password Block:(void (^)(User *user, NSError *error))block {
@@ -117,7 +116,6 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] postPath:@"session/login/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
        // NSLog(@"%@",JSON);
         if (block) {
             block([[User alloc] initWithAttributes:JSON], nil);
@@ -197,6 +195,42 @@
                                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                         }];
     [operation start];
+
+}
+
+- (void)logOut
+{
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.token,@"token", nil];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] postPath:@"session/logout/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
+        appDelegate.user = nil;
+        
+        MainViewController *mvc = [[MainViewController alloc] init];
+        appDelegate.window.rootViewController = mvc;
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
+        appDelegate.user = nil;
+        
+        MainViewController *mvc = [[MainViewController alloc] init];
+        appDelegate.window.rootViewController = mvc;
+       
+        /*[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];*/
+        
+        NSLog(@"logout Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+        
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
 
 }
 

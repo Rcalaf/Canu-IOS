@@ -15,6 +15,7 @@
 @property (strong, nonatomic) ActivityMapViewController *map;
 @property (strong, nonatomic) ActivityTableViewController *list;
 @property (strong, nonatomic) CLLocationManager *locationManager;
+
 //- (void)reload:(id)sender;
 @end
 
@@ -24,6 +25,9 @@
 @synthesize list = _list;
 @synthesize locationManager = _locationManager;
 
+
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,17 +36,6 @@
     }
     return self;
 }
-
-/*- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    
-    CLLocationCoordinate2D coordintate = [[locations objectAtIndex:0] coordinate];
-    
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:coordintate.latitude],@"latitude",[NSNumber numberWithDouble:coordintate.longitude],@"longitude", nil] forKey:@"currentLocation"];
-    [_locationManager stopUpdatingLocation];
-}*/
-
 
 -(void)loadView
 {
@@ -74,6 +67,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+
  
     
    

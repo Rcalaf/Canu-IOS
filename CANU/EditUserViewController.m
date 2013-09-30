@@ -69,26 +69,32 @@
                        LastName:@""
                           Email:_email.text
                           Block:^(User *user, NSError *error){
-                              if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound) || self.email.text == nil) {
-                                  self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                              }else{
-                                  self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                              //NSLog(@"error: %@",error);
+                              if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
+                                  [self.user logOut];
+                              } else {
+                                  if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound) || self.email.text == nil) {
+                                      self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                  }else{
+                                      self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                  }
+                                  if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"user_name"].location != NSNotFound) || self.userName.text == nil) {
+                                      self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                  }else{
+                                      self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                  }
+                                  if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"first_name"].location != NSNotFound) || self.name.text == nil) {
+                                      self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                  }else{
+                                      self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                  }
                               }
-                              if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"user_name"].location != NSNotFound) || self.userName.text == nil) {
-                                  self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                              }else{
-                                  self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
-                              }
-                              if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"first_name"].location != NSNotFound) || self.name.text == nil) {
-                                  self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                              }else{
-                                  self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
-                              }
-                              
                               if (user) {
                                   AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
                                   appDelegate.user = user;
                                   self.user = user;
+                                  //[self dismissViewControllerAnimated:YES completion:nil];
+                                  
                               }
                           }];
     
@@ -210,6 +216,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotate
+{
+    return NO;
 }
 
 @end

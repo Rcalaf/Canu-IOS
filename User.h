@@ -40,6 +40,8 @@
 
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
+- (void)logOut;
+
 - (void)editUserWithUserName:(NSString *)userName
                     Password:(NSString*)password
                    FirstName:(NSString *)firstName

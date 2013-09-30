@@ -44,6 +44,8 @@
 }*/
 
 
+
+
 - (void)setStart:(id)start
 {
     if ([[start class] isKindOfClass:[NSDate class]] ) {
@@ -419,6 +421,7 @@
 {
 
     //NSLog(@"end: %@",endDate);
+    if (!title) title = @"";
     if (!description) description = @""; 
     if (!street) street = @"";
     if (!city) city = @"";
@@ -487,8 +490,8 @@
                                                                                             
                                                                                             if (block) {
                                                                                                 
-                                                                                                NSLog(@"%@",error);
-                                                                                                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+                                                                                               // NSLog(@"%@",error);
+                                                                                               // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
                                                                                                 block(error);
                                                                                             }
                                                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -514,6 +517,7 @@
 {
     
     //NSLog(@"end: %@",endDate);
+    if (!title) title = @"";
     if (!description) description = @"";
     if (!street) street = @"";
     if (!city) city = @"";

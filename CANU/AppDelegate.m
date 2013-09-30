@@ -32,7 +32,6 @@ NSString *const FBSessionStateChangedNotification =
 @synthesize publicFeedViewController = _publicFeedViewController;
 @synthesize profileViewController = _profileViewController;
 @synthesize currentLocation = _currentLocation;
-@synthesize locationManager = _locationManager;
 
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -60,20 +59,6 @@ NSString *const FBSessionStateChangedNotification =
     return _profileViewController;
 }
 
-- (CLLocationManager *)locationManager
-{
-    if (_locationManager != nil) {
-        _locationManager.delegate = self;
-        return _locationManager;
-    }
-
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    _locationManager.distanceFilter=200;
-    return _locationManager;
-}
-
 - (User *)user
 {
     if (!_user) {
@@ -82,6 +67,8 @@ NSString *const FBSessionStateChangedNotification =
             _user = [[User alloc] initWithAttributes:savedUserAttributes];
             
             NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_user.profileImageUrl]];
+            NSLog(@"appDel: user profile pic url: %@",url);
+            
             _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
             if (_user.profileImage == nil) _user.profileImage = [UIImage imageNamed:@"icon_userpic.png"];
         }
@@ -89,58 +76,16 @@ NSString *const FBSessionStateChangedNotification =
     return _user;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    NSLog(@"did update launched");
-   // NSLog(@"%@",[locations objectAtIndex:0]);
-    _currentLocation = [[locations objectAtIndex:0] coordinate];
-     [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:_currentLocation.latitude],@"latitude",[NSNumber numberWithDouble:_currentLocation.longitude],@"longitude", nil] forKey:@"currentLocation"];
-    [self.locationManager stopUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
-{
-    NSLog(@"loc manager Monitoring...");
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"loc manager Fail...");
-}
-
-/*- (void)applicationDidFinishLaunching:(UIApplication *)app {
-    // other setup tasks here....
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
-}*/
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-        [self.locationManager startUpdatingLocation];
-    }
-    
-    //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
-    
-  //  NSString *token = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-    
-    /*if (token) {
-        [User userWithToken:token andBlock:^(User *user, NSError *error) {
-            self.user = user;
-            NSLog(@"user2: %@",self.user);
-        }];
+    /*if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"no location service enabled" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
     }*/
     
-  //  NSLog(@"user: %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"]);
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
-    _currentLocation.longitude = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"] objectForKey:@"longitude"] doubleValue];
-    _currentLocation.latitude = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLocation"] objectForKey:@"latitude"] doubleValue];
- 
-    NSLog(@"running did lunch");
-  //  NSLog(@"%f,%f",_currentLocation.latitude,_currentLocation.longitude);
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
     if (self.user) {
         
         canuViewController = [[UICanuNavigationController alloc] init];
@@ -167,7 +112,7 @@ NSString *const FBSessionStateChangedNotification =
     if (localNotif) {
         NSLog(@"Recieved Notification oppening%@",localNotif);
     }*/
-     [self.locationManager stopUpdatingLocation];
+    // [self.locationManager stopUpdatingLocation];
     
 
     
@@ -316,7 +261,6 @@ NSString *const FBSessionStateChangedNotification =
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-     [self.locationManager stopUpdatingLocation];
     
 }
 
@@ -341,10 +285,6 @@ NSString *const FBSessionStateChangedNotification =
     }
 
      //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
-    
-  
-    [self.locationManager startUpdatingLocation];
-    
    
 }
 
@@ -352,7 +292,6 @@ NSString *const FBSessionStateChangedNotification =
 {
     // Saves changes in the application's managed object context before the application terminates.
     [FBSession.activeSession close];
-    [self.locationManager stopUpdatingLocation];
     [self saveContext];
 }
 

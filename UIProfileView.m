@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 
+#import "AFCanuAPIClient.h"
 #import "UIProfileView.h"
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
@@ -55,8 +56,10 @@
         
         
         self.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 94.0, 94.0)];
-        self.profileImage.image = user.profileImage;
-//      [self.profileImage  setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        //self.profileImage.image = user.profileImage;
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,user.profileImageUrl]];
+        
+       [self.profileImage  setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
        
         //self.profileImage.backgroundColor = [UIColor redColor];
         [self addSubview:self.profileImage];
