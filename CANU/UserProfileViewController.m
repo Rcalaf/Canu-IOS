@@ -79,8 +79,8 @@
         } completion:^(BOOL finished) {
             if (finished){
                 //self.view.userInteractionEnabled = NO;
-                
                 _profileHidden = NO;
+                [(UICanuNavigationController *)self.navigationController controlFadeShow];
             }
         }];
    
@@ -216,7 +216,7 @@
    // self.profileView.profileImage.image = self.user.profileImage;
 
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideProfile:)];
-    [_profileView addGestureRecognizer:tapRecognizer];
+    //[_profileView addGestureRecognizer:tapRecognizer];
     
     UICanuNavigationController *navController = (UICanuNavigationController *)self.navigationController;
     [navController.control addGestureRecognizer:tapRecognizer];

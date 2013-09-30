@@ -12,5 +12,5 @@
 
 @property (strong, nonatomic) IBOutlet UIView *control;
 
-
+- (void)controlFadeShow;
 @end

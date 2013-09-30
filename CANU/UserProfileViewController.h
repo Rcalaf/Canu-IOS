@@ -14,4 +14,5 @@
 //-(IBAction)performLogout:(id)sender;
 //-(IBAction)showActivities:(id)sender;
 //-(IBAction)createActivity:(id)sender;
+- (void)showHideProfile:(id)sender;
 @end

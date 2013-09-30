@@ -32,9 +32,7 @@
         self.control = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 420.0 + KIphone5Margin, 63.0, 63.0)];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
         [self.view addSubview:self.control];
-        [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-            _control.alpha = kNavboxAlpha;
-        }completion:nil];
+        [self controlFadeShow];
     }
     return self;
 }
@@ -43,9 +41,7 @@
     [UIView animateWithDuration:0.3 animations:^{
         _control.frame = CGRectMake(260.0, 420.0 + KIphone5Margin, 63.0, 63.0);
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-            _control.alpha = kNavboxAlpha;
-        }completion:nil];
+        [self controlFadeShow];
     }];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserProfileViewController *upvc =  appDelegate.profileViewController;
@@ -68,9 +64,7 @@
             frame.origin.y = 420.0f + KIphone5Margin;
             _control.frame = frame;
         }completion:^(BOOL finished) {
-            [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-                _control.alpha = kNavboxAlpha;
-            }completion:nil];
+            [self controlFadeShow];
         }];
     }];
 }
@@ -92,9 +86,7 @@
         [UIView animateWithDuration:0.3 animations:^{
             _control.frame = CGRectMake(_control.frame.origin.x, 420.0f + KIphone5Margin,_control.frame.size.width, _control.frame.size.height);
         }completion:^(BOOL finished) {
-            [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-                _control.alpha = kNavboxAlpha;
-            }completion:nil];
+            [self controlFadeShow];
         }];
     }
 }
@@ -106,9 +98,7 @@
         _control.frame = CGRectMake(-3.0, 420.0 + KIphone5Margin, 63.0, 63.0);
         
     }completion:^(BOOL finished) {
-        [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-            _control.alpha = kNavboxAlpha;
-        }completion:nil];
+        [self controlFadeShow];
     }];
    // NSLog(@"Load Activities view");
     [self popViewControllerAnimated:YES];
@@ -160,6 +150,13 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     _control.alpha = 1.0f;
+}
+
+- (void)controlFadeShow
+{
+    [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
+        _control.alpha = kNavboxAlpha;
+    }completion:nil];
 }
 
 
