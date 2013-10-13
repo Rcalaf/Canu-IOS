@@ -24,10 +24,11 @@
 @property (strong, nonatomic) UIView *container;
 @property (strong, nonatomic) UIView *toolBar;
 
-
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)keyboardWillShow:(NSNotification *)notification;
+- (void)operationInProcess:(BOOL)isInProcess;
 
 @end
 
@@ -41,6 +42,8 @@
 @synthesize container = _container;
 @synthesize toolBar =  _toolBar;
 
+@synthesize loadingIndicator = _loadingIndicator;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,11 +53,23 @@
     return self;
 }
 
+- (void)operationInProcess:(BOOL)isInProcess
+{
+    if (isInProcess) {
+        [_loadingIndicator startAnimating];
+        _loginButton.hidden = YES;
+    }else{
+        [_loadingIndicator stopAnimating];
+        _loginButton.hidden = NO;
+    }
+}
+
 -(IBAction)login:(id)sender
 {
     //NSLog(@"Login Logic, AFNetwork, get a token and put inside the UserDefaults...");
     
    // if (self.email.text && self.password.text) {
+        [self operationInProcess:YES];
         
         [User logInWithEmail:self.email.text Password:self.password.text Block:^(User *user, NSError *error) {
            
@@ -98,6 +113,7 @@
                 appDelegate.window.rootViewController = nvc;
                 
             }
+            [self operationInProcess:NO];
         }];
   
     
@@ -167,6 +183,11 @@
     
     [_toolBar addSubview:_backButton];
     
+    // Activity Indicator
+    
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [_toolBar addSubview:_loadingIndicator];
     
     [self.view addSubview:_toolBar];
     

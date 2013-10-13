@@ -430,9 +430,6 @@
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    
-    
-    
     NSArray *objectsArray = [NSArray arrayWithObjects:
                              title,
                              description,

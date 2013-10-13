@@ -26,6 +26,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) IBOutlet UITextField *email;
 
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
+- (void)operationInProcess:(BOOL)isInProcess;
+
 @end
 
 @implementation EditUserViewController
@@ -41,6 +45,19 @@
 @synthesize name = _name;
 @synthesize email = _email;
 
+@synthesize loadingIndicator = _loadingIndicator;
+
+- (void)operationInProcess:(BOOL)isInProcess
+{
+    if (isInProcess) {
+        [_loadingIndicator startAnimating];
+        _saveButton.hidden = YES;
+    }else{
+        [_loadingIndicator stopAnimating];
+        _saveButton.hidden = NO;
+    }
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,7 +69,7 @@
 
 - (IBAction)back:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (IBAction)showEditPassword:(id)sender
@@ -63,7 +80,8 @@
 
 - (IBAction)updateUser:(id)sender
 {
-[self.user editUserWithUserName:_userName.text
+    [self operationInProcess:YES];
+    [self.user editUserWithUserName:_userName.text
                        Password:nil
                       FirstName:_name.text
                        LastName:@""
@@ -96,6 +114,7 @@
                                   //[self dismissViewControllerAnimated:YES completion:nil];
                                   
                               }
+                              [self operationInProcess:NO];
                           }];
     
 }
@@ -200,6 +219,12 @@
     [self.saveButton  addTarget:self action:@selector(updateUser:) forControlEvents:UIControlEventTouchUpInside];
     
     [_toolBar addSubview:_saveButton];
+    
+    // Activity Indicator
+    
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [_toolBar addSubview:_loadingIndicator];
     
     [_toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];

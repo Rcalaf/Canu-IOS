@@ -80,7 +80,7 @@
             if (finished){
                 //self.view.userInteractionEnabled = NO;
                 _profileHidden = NO;
-                [(UICanuNavigationController *)self.navigationController controlFadeShow];
+                //[(UICanuNavigationController *)self.navigationController controlFadeShow];
             }
         }];
    
@@ -93,7 +93,7 @@
                 [_profileView.mask removeFromSuperview];
                 [_profileView hideComponents:YES];
                 _profileHidden = YES;
-                
+               // [(UICanuNavigationController *)self.navigationController controlFadeShow];
             }
         }];
     }

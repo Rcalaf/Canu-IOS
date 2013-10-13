@@ -170,12 +170,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
+    [self.locationManager startUpdatingLocation];
+
+    /*if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized) {
         [self.locationManager startUpdatingLocation];
     } else {
         [self showFeedback:nil];
-    }
+    }*/
     
     
 
@@ -248,11 +249,7 @@
             if (error) {
                 if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
                     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
-                    appDelegate.user = nil;
-                    
-                    MainViewController *mvc = [[MainViewController alloc] init];
-                    appDelegate.window.rootViewController = mvc;
+                    [appDelegate.user logOut];
                 } else {
                  
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];

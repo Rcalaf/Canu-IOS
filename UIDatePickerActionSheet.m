@@ -26,6 +26,8 @@
     if (self) {
         self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, 320, 216)];
         self.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+        self.datePicker.minimumDate = [NSDate date];
+        self.datePicker.minuteInterval = 15;
         [self addSubview:_datePicker];
        // _datePicker = [[UIDatePicker alloc] init];
        // [self addSubview:_datePicker];

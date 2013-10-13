@@ -112,8 +112,24 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     //MKMapItem *item = [[self.ibMapView selectedAnnotations] objectAtIndex:0];
     
     //NSLog(@"%@",chosenLocation.placemark);
+    [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:_chosenLocation.placemark.coordinate.latitude longitude:_chosenLocation.placemark.coordinate.longitude] completionHandler:
+     ^(NSArray *placemarks, NSError *error) {
+         
+         if (error != nil) {
+             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
+                                         message:[error localizedDescription]
+                                        delegate:nil
+                               cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+             return;
+         }
+         _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+         [[NSNotificationCenter defaultCenter] postNotificationName:FindLocationDissmised object:_chosenLocation];
+         // NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
+         
+         
+     }];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:FindLocationDissmised object:_chosenLocation];
+    
 
 }
 
@@ -184,6 +200,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     
     //MKMapItem *item = results.mapItems[indexPath.row];
     _chosenLocation = results.mapItems[indexPath.row];
+    //NSLog(@"%@",[[[_chosenLocation placemark] addressDictionary] valueForKey:@"FormattedAddressLines"]);
     
     [self.ibMapView removeAnnotations:[self.ibMapView annotations]];
     
@@ -226,7 +243,7 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
     else if (recognizer.state == UIGestureRecognizerStateBegan){
         //NSLog(@"UIGestureecognizerStateBegan.");
        CLLocationCoordinate2D coordinate = [self.ibMapView convertPoint:[recognizer locationInView:self.ibMapView] toCoordinateFromView:self.ibMapView];
-        [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] completionHandler:
+       /* [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] completionHandler:
          ^(NSArray *placemarks, NSError *error) {
              
              if (error != nil) {
@@ -240,7 +257,9 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
             // NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
            
              
-         }];
+         }];*/
+        
+        _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil]];
     }
   
 }

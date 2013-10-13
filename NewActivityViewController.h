@@ -12,7 +12,7 @@
 
 @class Activity;
 
-@interface NewActivityViewController : UIViewController <UITextFieldDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UISearchDisplayDelegate, UISearchBarDelegate>//, CLLocationManagerDelegate>
+@interface NewActivityViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate, UISearchDisplayDelegate, UISearchBarDelegate>//, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) Activity *activity;
 

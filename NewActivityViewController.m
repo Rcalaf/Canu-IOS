@@ -25,6 +25,7 @@
 @property int length;
 
 @property (strong, nonatomic) UIImageView *formGrid;
+@property (strong, nonatomic) NSDate *dateTime;
 
 @property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) UITextView *description;
@@ -36,15 +37,20 @@
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 
 @property (strong, nonatomic) UIView *toolBar;
-@property (strong, nonatomic) IBOutlet UIButton *createButon;
+@property (strong, nonatomic) IBOutlet UIButton *createButton;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) IBOutlet UIButton *takePictureButton;
 
 @property (strong, nonatomic) MKMapItem *location;
 @property (strong, nonatomic) UILabel *locationName;
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
 //@property (strong, nonatomic) CLLocationManager *locationManager;
 
 
 - (void)itemMap:(NSNotification*)notification;
+- (void)operationInProcess:(BOOL)isInProcess;
 
 @end
 
@@ -61,8 +67,13 @@
 @synthesize start = _start;
 @synthesize toolBar = _toolBar;
 @synthesize backButton = _backButton;
-@synthesize createButon = _createButon;
+@synthesize createButton = _createButton;
+@synthesize saveButton = _saveButton;
+@synthesize deleteButton = _deleteButton;
 @synthesize takePictureButton = _takePictureButton;
+@synthesize dateTime = _dateTime;
+
+@synthesize loadingIndicator = _loadingIndicator;
 
 //@synthesize locationManager = _locationManager;
 @synthesize location = _location;
@@ -71,11 +82,28 @@
 
 float oldValue;
 
+
+- (void)operationInProcess:(BOOL)isInProcess
+{
+    if (isInProcess) {
+        [_loadingIndicator startAnimating];
+        _createButton.hidden = YES;
+        _saveButton.hidden = YES;
+        _deleteButton.hidden = YES;
+    }else{
+        [_loadingIndicator stopAnimating];
+        _createButton.hidden = NO;
+        _saveButton.hidden = NO;
+        _deleteButton.hidden = NO;
+    }
+}
+
  
 - (IBAction)createActivity:(id)sender{
    if (self.location) {
       
        //NSArray *lengthTimeParts = [self.lengthPicker.text componentsSeparatedByString:@":"];
+       [self operationInProcess:YES];
        
        NSDate *start;
        if (self.activity) {
@@ -87,18 +115,18 @@ float oldValue;
        
        
        //NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
-       /*NSDate *end = [start dateByAddingTimeInterval:delay];
+       //NSDate *end = [start dateByAddingTimeInterval:delay];
        
        
        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-       dateFormatter.dateFormat = @"dd MMM HH:mm";
-       [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];*/
+       dateFormatter.dateFormat = @"yyyy-M-dd HH:mm";
+       [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         
        if (self.activity) {
            [self.activity editActivityForUserWithTitle:self.name.text
                                         Description:self.description.text
-                                          StartDate:self.start.text
+                                             StartDate:[dateFormatter stringFromDate:self.dateTime]//self.start.text
                                              Length:self.lengthPicker.text
                                             EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
@@ -110,21 +138,25 @@ float oldValue;
                                               Image:[UIImage imageNamed:@"icon_userpic.png"]
                                               Block:^(NSError *error) {
                                                   if (error) {
-                                                      NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
-                                                      if ([[error localizedRecoverySuggestion] rangeOfString:@"title"].location != NSNotFound) {
-                                                          NSLog(@"title error");
-                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                                                      }else{
-                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                                      if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
+                                                          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                                          [appDelegate.user logOut];
+                                                      } else {
+                                                          if ([[error localizedRecoverySuggestion] rangeOfString:@"title"].location != NSNotFound) {
+                                                              self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                                          }else{
+                                                              self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                                          }
                                                       }
                                                   } else {
                                                       [self dismissViewControllerAnimated:YES completion:nil];
                                                   }
+                                                  [self operationInProcess:NO];
                                               }];
        } else {
            [Activity createActivityForUserWithTitle:self.name.text
                                         Description:self.description.text
-                                          StartDate:self.start.text
+                                          StartDate:[dateFormatter stringFromDate:self.dateTime]//self.start.text
                                              Length:self.lengthPicker.text
                                             EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
@@ -137,28 +169,34 @@ float oldValue;
                                               Block:^(NSError *error) {
                                                   if (error) {
                                                       NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
-
-                                                      if ([[error localizedRecoverySuggestion] rangeOfString:@"title"].location != NSNotFound) {
-                                                          NSLog(@"error");
-                                                         // self.name.backgroundColor = [UIColor  redColor];
-                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-                                                      }else{
-                                                          self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                                      if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
+                                                          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+                                                          [appDelegate.user logOut];
+                                                      } else {
+                                                          if ([[error localizedRecoverySuggestion] rangeOfString:@"title"].location != NSNotFound) {
+                                                              self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                                          }else{
+                                                              self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                                          }
                                                       }
+                                                    
                                                   } else {
                                                       [self dismissViewControllerAnimated:YES completion:nil];
                                                   }
+                                                  [self operationInProcess:NO];
                                               }];
+           
            
        }
 
-   } /*else {
-        self.locationName.text = @"choose a location";
-   }*/
+   }else{
+       self.locationName.text = @"GPS disabled or couldn't get location";
+   }
     
 }
 
 - (IBAction)deleteActivity:(id)sender{
+    [self operationInProcess:YES];
     [self.activity removeActivityWithBlock:^(NSError *error){
         if (!error) {
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -166,7 +204,7 @@ float oldValue;
             //[error localizedDescription]
              [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"Couldn't delete the activity." delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
         }
-     
+     [self operationInProcess:NO];
     }];
     
 }
@@ -215,7 +253,7 @@ float oldValue;
 
 -(IBAction)incrementActivityLength:(UITapGestureRecognizer *)gesture
 {
-    _length = _length + 20;
+    _length = _length + 15;
     self.lengthPicker.text = [Activity lengthToString:_length];
 }
 
@@ -224,6 +262,7 @@ float oldValue;
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     dateFormatter.dateFormat = @"d MMM HH:mm";
     [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    self.dateTime = actionSheet.datePicker.date;
     self.start.text = [dateFormatter stringFromDate:actionSheet.datePicker.date];
 }
 
@@ -284,7 +323,7 @@ float oldValue;
         _length = [self.activity lengthToInteger];
         _location = self.activity.location;
     }else{
-        _length = 20;
+        _length = 15;
          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         //_location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:appDelegate.currentLocation addressDictionary:nil]];
         
@@ -376,8 +415,10 @@ float oldValue;
     
     if (self.activity) {
         self.start.text = [dateFormatter stringFromDate:self.activity.start];
+        self.dateTime = self.activity.start;
     } else {
         self.start.text = [dateFormatter stringFromDate:[NSDate date]];
+        self.dateTime =[NSDate date];
     }
     
     [self.start setUserInteractionEnabled:YES];
@@ -445,6 +486,7 @@ float oldValue;
     _description.text = self.activity.description;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
+    _description.delegate = self;
     //_description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
     [self.description setReturnKeyType:UIReturnKeyDefault];
     [self.view addSubview:_description];
@@ -458,28 +500,33 @@ float oldValue;
     //set the create button
    
     if (self.activity) {
-        UIButton *saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        saveButton.frame = CGRectMake(194.0f, 10.0f, 116.0f, 36.0f);
-        [saveButton setImage:[UIImage imageNamed:@"edit_save.png"] forState:UIControlStateNormal];
-        [saveButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchUpInside];
-        UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        deleteButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
-        [deleteButton setImage:[UIImage imageNamed:@"edit_delete.png"] forState:UIControlStateNormal];
-        [deleteButton addTarget:self action:@selector(deleteActivity:) forControlEvents:UIControlEventTouchUpInside];
+        _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _saveButton.frame = CGRectMake(194.0f, 10.0f, 116.0f, 36.0f);
+        [_saveButton setImage:[UIImage imageNamed:@"edit_save.png"] forState:UIControlStateNormal];
+        [_saveButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchUpInside];
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _deleteButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
+        [_deleteButton setImage:[UIImage imageNamed:@"edit_delete.png"] forState:UIControlStateNormal];
+        [_deleteButton addTarget:self action:@selector(deleteActivity:) forControlEvents:UIControlEventTouchUpInside];
     
-        [_toolBar addSubview:saveButton];
-        [_toolBar addSubview:deleteButton];
+        [_toolBar addSubview:_saveButton];
+        [_toolBar addSubview:_deleteButton];
     } else {
-         _createButon = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_createButon setImage:[UIImage imageNamed:@"create_active.png"] forState:UIControlStateNormal];
-        [_createButon setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
-        [_createButon setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _createButon.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-        [_createButon setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
-        [_createButon addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchUpInside];
-        [_toolBar addSubview:_createButon];
+         _createButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_createButton setImage:[UIImage imageNamed:@"create_active.png"] forState:UIControlStateNormal];
+        [_createButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
+        [_createButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _createButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+        [_createButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+        [_createButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchUpInside];
+        [_toolBar addSubview:_createButton];
     }
- 
+    
+    // Activity Indicator
+    
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [_toolBar addSubview:_loadingIndicator];
     
     //set Back button
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -500,6 +547,7 @@ float oldValue;
     [self presentViewController:findLocations animated:YES completion:nil];
 }
 
+#pragma mark - UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UICanuTextField *)textField
 {
     [textField resignFirstResponder];
@@ -510,6 +558,7 @@ float oldValue;
 {
     if (textField.text.length >= 25 && range.length == 0)
         return NO;
+   
     return YES;
 }
 
@@ -517,6 +566,15 @@ float oldValue;
 - (BOOL)textFieldShouldEndEditing:(UICanuTextField *)textField
 {
     [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - UITextView Delegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (textView.text.length >= 140 && range.length == 0)
+        return NO;
     return YES;
 }
 
@@ -588,7 +646,7 @@ float oldValue;
 
 - (void)itemMap:(NSNotification*)notification
 {
-   
+    //NSLog(@"%@",[[[(MKMapItem *)notification.object placemark] addressDictionary] valueForKey:@"FormattedAddressLines"]);
     self.location = (MKMapItem *)notification.object;
    // self.locationName.text = self.location.placemark.addressDictionary[@"Street"];
     self.locationName.text = [[[self.location.placemark addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
@@ -653,7 +711,9 @@ float oldValue;
      _start = nil;
      _toolBar = nil;
      _backButton = nil;
-     _createButon = nil;
+     _createButton = nil;
+     _saveButton = nil;
+     _deleteButton = nil;
      _takePictureButton = nil;
      _location = nil;
      _locationName = nil;

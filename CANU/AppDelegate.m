@@ -78,18 +78,19 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+   /* if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+        
         [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"no location service enabled" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
     }*/
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    //[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
         
         canuViewController = [[UICanuNavigationController alloc] init];
-        _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
+       // _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
        // _profileViewController = [[UserProfileViewController alloc] init];
         [canuViewController pushViewController:self.publicFeedViewController animated:NO];
         self.window.rootViewController = canuViewController;

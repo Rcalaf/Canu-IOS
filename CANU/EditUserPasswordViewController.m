@@ -23,6 +23,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UITextField *proxyPassword;
 
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
+- (void)operationInProcess:(BOOL)isInProcess;
+
 @end
 
 @implementation EditUserPasswordViewController
@@ -35,6 +39,19 @@
 
 @synthesize password = _password;
 @synthesize proxyPassword = _proxyPassword;
+
+@synthesize loadingIndicator = _loadingIndicator;
+
+- (void)operationInProcess:(BOOL)isInProcess
+{
+    if (isInProcess) {
+        [_loadingIndicator startAnimating];
+        _saveButton.hidden = YES;
+    }else{
+        [_loadingIndicator stopAnimating];
+        _saveButton.hidden = NO;
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,8 +73,10 @@
     _proxyPassword.rightView = nil;
     //NSLog(@" %@ %@",_password.text,_proxyPassword.text);
     if ([_password.text isEqualToString:_proxyPassword.text]) {
+    
+        [self operationInProcess:YES];
         
-    [self.user editUserWithUserName:_user.userName
+        [self.user editUserWithUserName:_user.userName
                            Password:_password.text
                           FirstName:_user.firstName
                            LastName:@""
@@ -81,12 +100,13 @@
                                   }
                                   
                                  if (user) {
-                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                      [self dismissViewControllerAnimated:NO completion:nil];
                                       //AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
                                       //appDelegate.user = user;
                                       //self.user = user;
                                  }
-                              }];
+                                 [self operationInProcess:NO];
+                        }];
     } else {
         if (!_password.text)  _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
         _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
@@ -162,6 +182,12 @@
     [self.saveButton  addTarget:self action:@selector(updatePassword:) forControlEvents:UIControlEventTouchUpInside];
     
     [_toolBar addSubview:_saveButton];
+    
+    // Activity Indicator
+    
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [_toolBar addSubview:_loadingIndicator];
     
     [_toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];

@@ -83,25 +83,20 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
     if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-       // [_map.map addAnnotations:_list.activities];
-        
         [_map reload:self];
-       // [_map.map setCenterCoordinate: animated:YES];
-        
-      
-       /* for (Activity *activity in _list.activities) {
-                [_map.map addAnnotation:activity.location.placemark];
-        }*/
         [_map.map setShowsUserLocation:YES];
         _map.view.hidden = NO;
     }
 }
 
 
+
+
+/*
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return  UIInterfaceOrientationPortrait | UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
 }
-
+*/
 
 @end

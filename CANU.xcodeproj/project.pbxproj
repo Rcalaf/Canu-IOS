@@ -88,6 +88,7 @@
 		DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE713962179D47FE00EBCB91 /* CoreLocation.framework */; };
 		DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */; };
 		DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = DE85A6311744FCD400A050E5 /* UICanuTextField.m */; };
+		DE936C7F180A9B430058608D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE936C7E180A9B430058608D /* Images.xcassets */; };
 		DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA7C7EB17F1F2EF009CBE25 /* EditUserViewController.m */; };
 		DEA7C7F017F1F73C009CBE25 /* button_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA7C7EE17F1F73C009CBE25 /* button_arrow.png */; };
 		DEA7C7F117F1F73C009CBE25 /* button_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA7C7EF17F1F73C009CBE25 /* button_arrow@2x.png */; };
@@ -150,6 +151,7 @@
 		DED1244117CFC81E000EE414 /* create_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DED1243F17CFC81E000EE414 /* create_bg-568h@2x.png */; };
 		DED1244217CFC81E000EE414 /* edit_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DED1244017CFC81E000EE414 /* edit_bg-568h@2x.png */; };
 		DED4901B17298A61005A0BF9 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DED4901A17298A61005A0BF9 /* User.m */; };
+		DEDACFD217FC58950068DB72 /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = DEDACFD117FC58950068DB72 /* icon-60.png */; };
 		DEF015F91784B9020005FFC0 /* UICanuActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */; };
 		DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A69174534830087CB8A /* back_arrow.png */; };
 		DEFD7A6C174534830087CB8A /* back_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEFD7A6A174534830087CB8A /* back_arrow@2x.png */; };
@@ -264,6 +266,7 @@
 		DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewActivityViewController.m; sourceTree = "<group>"; };
 		DE85A6301744FCD400A050E5 /* UICanuTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuTextField.h; sourceTree = "<group>"; };
 		DE85A6311744FCD400A050E5 /* UICanuTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuTextField.m; sourceTree = "<group>"; };
+		DE936C7E180A9B430058608D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DEA7C7EA17F1F2EF009CBE25 /* EditUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditUserViewController.h; sourceTree = "<group>"; };
 		DEA7C7EB17F1F2EF009CBE25 /* EditUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditUserViewController.m; sourceTree = "<group>"; };
 		DEA7C7EE17F1F73C009CBE25 /* button_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_arrow.png; sourceTree = "<group>"; };
@@ -357,6 +360,8 @@
 		DED1244017CFC81E000EE414 /* edit_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit_bg-568h@2x.png"; sourceTree = "<group>"; };
 		DED4901917298A61005A0BF9 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		DED4901A17298A61005A0BF9 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		DEDACFD017FC56D00068DB72 /* icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-120.png"; path = "../icon-120.png"; sourceTree = "<group>"; };
+		DEDACFD117FC58950068DB72 /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-60.png"; path = "../icon-60.png"; sourceTree = "<group>"; };
 		DEF015F71784B9020005FFC0 /* UICanuActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuActivityCell.h; sourceTree = "<group>"; };
 		DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuActivityCell.m; sourceTree = "<group>"; };
 		DEFD7A69174534830087CB8A /* back_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_arrow.png; sourceTree = "<group>"; };
@@ -460,6 +465,8 @@
 		DE4D952417429EFE00FB026F /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				DEDACFD117FC58950068DB72 /* icon-60.png */,
+				DEDACFD017FC56D00068DB72 /* icon-120.png */,
 				DEA7C7EE17F1F73C009CBE25 /* button_arrow.png */,
 				DEA7C7EF17F1F73C009CBE25 /* button_arrow@2x.png */,
 				DED1242F17CCFDFD000EE414 /* map_pin.png */,
@@ -672,6 +679,7 @@
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
 				DEA93B7A1720616A00303BB5 /* Main */,
 				DE4064E117D511C500B11CE9 /* PrivacyPolicy */,
+				DE936C7E180A9B430058608D /* Images.xcassets */,
 			);
 			path = CANU;
 			sourceTree = "<group>";
@@ -998,6 +1006,7 @@
 				DE6ED9B517C2928900C5E72E /* create_active.png in Resources */,
 				DE6ED9B617C2928900C5E72E /* create_active@2x.png in Resources */,
 				DE6ED9BF17C2958100C5E72E /* fullview_action_edit.png in Resources */,
+				DEDACFD217FC58950068DB72 /* icon-60.png in Resources */,
 				DE6ED9C017C2958100C5E72E /* fullview_action_edit@2x.png in Resources */,
 				DE6ED9C117C2958100C5E72E /* fullview_action_go.png in Resources */,
 				DE6ED9C217C2958100C5E72E /* fullview_action_go@2x.png in Resources */,
@@ -1019,6 +1028,7 @@
 				DE67FDC717CA64F500240E1C /* intro_bg@2x.png in Resources */,
 				DE67FDDC17CA66DD00240E1C /* guide_btn_gotit.png in Resources */,
 				DE67FDDD17CA66DD00240E1C /* guide_btn_gotit@2x.png in Resources */,
+				DE936C7F180A9B430058608D /* Images.xcassets in Resources */,
 				DE67FDDE17CA66DD00240E1C /* guide_btn_start.png in Resources */,
 				DE67FDDF17CA66DD00240E1C /* guide_btn_start@2x.png in Resources */,
 				DE67FDF117CA6AB100240E1C /* guide_btn_skip.png in Resources */,
@@ -1138,7 +1148,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D620AC5A-281F-47F1-B6DF-8C5E71BB8F6F";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1147,6 +1157,8 @@
 		DE67B46217A71CC500F5CBC1 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1194,7 +1206,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D620AC5A-281F-47F1-B6DF-8C5E71BB8F6F";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 			};
 			name = Debug;
@@ -1220,7 +1232,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4C62B1CD-8827-4F02-B8F6-07A77150CCC4";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1229,6 +1241,8 @@
 		DEA93B3B17204EA600303BB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1251,6 +1265,8 @@
 		DEA93B3C17204EA600303BB5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

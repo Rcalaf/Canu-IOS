@@ -35,9 +35,12 @@
 @property (strong, nonatomic) IBOutlet UIButton *signInButon;
 @property (strong, nonatomic) IBOutlet UIButton *takePictureButton;
 
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
 - (void)sessionStateChanged:(NSNotification*)notification;
 - (void)keyboardWillHide:(NSNotification *)notification;
 - (void)keyboardWillShow:(NSNotification *)notification;
+- (void)operationInProcess:(BOOL)isInProcess;
 
 
 @end
@@ -57,6 +60,8 @@
 @synthesize scrollView = _scrollView;
 @synthesize takePictureButton = _takePictureButton;
 
+@synthesize loadingIndicator = _loadingIndicator;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -65,6 +70,17 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)operationInProcess:(BOOL)isInProcess
+{
+    if (isInProcess) {
+        [_loadingIndicator startAnimating];
+        _signInButton.hidden = YES;
+    }else{
+        [_loadingIndicator stopAnimating];
+        _signInButton.hidden = NO;
+    }
 }
 
 -(IBAction)back:(id)sender
@@ -130,6 +146,8 @@
     
     UIImage *profileImage = [_takePictureButton.imageView.image isEqual:kTakeUserPic] ? nil : _takePictureButton.imageView.image;
     
+    [self operationInProcess:YES];
+    
     [User SignUpWithUserName:self.userName.text Password:self.password.text FirstName:self.name.text LastName:self.lastName Email:self.email.text ProfilePicture:profileImage Block:^(User *user, NSError *error) {
         
        /* if (error != nil) {
@@ -182,6 +200,7 @@
             [nvc presentViewController:tutorial animated:YES completion:nil];
             
         }
+        [self operationInProcess:NO];
     }];
     
     
@@ -318,6 +337,12 @@
     [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
     
     [_toolBar addSubview:_backButton];
+    
+    // Activity Indicator
+    
+    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [_toolBar addSubview:_loadingIndicator];
     
     [self.view addSubview:_scrollView];
     [self.view addSubview:_toolBar];
