@@ -100,6 +100,7 @@
     _currentLocation = [[manager location] coordinate];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.currentLocation = _currentLocation;
+    [appDelegate.user editLatitude:_currentLocation.latitude Longitude:_currentLocation.longitude];
     
     [self.locationManager stopUpdatingLocation];
     [self reload:nil];

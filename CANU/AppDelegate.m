@@ -83,7 +83,7 @@ NSString *const FBSessionStateChangedNotification =
         [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"no location service enabled" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
     }*/
     
-    //[[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -105,7 +105,7 @@ NSString *const FBSessionStateChangedNotification =
     
     [self.window makeKeyAndVisible];
     
-    application.applicationIconBadgeNumber = 0;
+   // application.applicationIconBadgeNumber = 0;
     
     // Handle launching from a notification
     /*UILocalNotification *localNotif =

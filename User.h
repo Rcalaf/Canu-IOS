@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface User : NSObject <NSCoding>
 
@@ -41,6 +42,9 @@
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
 - (void)logOut;
+
+- (void)editLatitude:(CLLocationDegrees)latitude
+           Longitude:(CLLocationDegrees)longitude;
 
 - (void)editUserWithUserName:(NSString *)userName
                     Password:(NSString*)password

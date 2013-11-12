@@ -234,6 +234,35 @@
 
 }
 
+- (void)editLatitude:(CLLocationDegrees)latitude Longitude:(CLLocationDegrees)longitude{
+    
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (!latitude) { latitude = appDelegate.currentLocation.latitude; }
+    if (!longitude) { longitude = appDelegate.currentLocation.longitude; }
+    
+    NSArray *objectsArray;
+    NSArray *keysArray;
+  
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithDouble:latitude],[NSNumber numberWithDouble:longitude],nil];
+    keysArray = [NSArray arrayWithObjects:@"latitude",@"longitude",nil];
+   
+    
+    NSDictionary *user = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"user"]];
+    
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d",self.userId];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
 
 - (void)editUserWithUserName:(NSString *)userName
                     Password:(NSString *)password
