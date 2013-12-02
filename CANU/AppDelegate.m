@@ -7,6 +7,7 @@
 //
 
 #import "AFCanuAPIClient.h"
+#import <Mixpanel/Mixpanel.h>
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
@@ -14,6 +15,7 @@
 #import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
 #import "TutorialViewController.h"
+#import "ChatViewController.h"
 
 
 
@@ -78,6 +80,14 @@ NSString *const FBSessionStateChangedNotification =
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // Initialize the library with your
+    // Mixpanel project token, MIXPANEL_TOKEN
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    
+    // Later, you can get your instance with
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
    /* if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         
         [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"no location service enabled" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -156,9 +166,24 @@ NSString *const FBSessionStateChangedNotification =
     
     [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:^(NSError *error){
         if (error) {
-            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            NSLog(@"hello");
+            NSLog(@"Request Failed with Error notification: %@", error);
         }
     }];
+    if ( application.applicationState == UIApplicationStateActive ){
+        if ([[(UINavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
+            ChatViewController *currentChat = (ChatViewController *)[(UINavigationController *)self.window.rootViewController visibleViewController];
+            if (currentChat.activity.activityId == [[userInfo valueForKeyPath:@"activity_id"] integerValue]){
+              [currentChat reload];
+            }
+        } else {
+            
+        }
+    } else {
+         NSLog(@"Controller: %@", [[(UINavigationController *)self.window.rootViewController visibleViewController] class]);
+      
+    }
+        
 }
 
 /*

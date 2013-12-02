@@ -268,12 +268,8 @@
             if (self.refreshControl.refreshing) {
                 [self.refreshControl endRefreshing];
             }
-           
         }];
     }
-
-    
-    
 }
 
 -(void)triggerCellAction:(id)recognizer
@@ -448,7 +444,8 @@
 
     DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
     davc.activity = [_activities objectAtIndex:indexPath.row];
-    [self presentViewController:davc animated:YES completion:nil];
+    [self.navigationController pushViewController:davc animated:YES];
+  //  [self presentViewController:davc animated:YES completion:nil];
 
     
     

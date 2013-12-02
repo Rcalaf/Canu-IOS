@@ -21,6 +21,6 @@
 
     #define KIphone5Margin ( IS_IPHONE_5 ? 88.0f : 0.0f)
 
-
+    #define MIXPANEL_TOKEN @"dc20d3edc0817d3743af8302e82a7572"
 
 #endif

@@ -220,6 +220,7 @@
     
     UICanuNavigationController *navController = (UICanuNavigationController *)self.navigationController;
     [navController.control addGestureRecognizer:tapRecognizer];
+    navController.control.hidden = NO;
     
     self.navigationController.navigationBarHidden = YES;
     

@@ -10,6 +10,8 @@
 #import <MapKit/MapKit.h>
 //#import <CoreLocation/CoreLocation.h>
 #import "User.h"
+#import "Message.h"
+
 
 
 @interface Activity : NSObject //<MKAnnotation>
@@ -33,8 +35,9 @@
 @property (readonly) int status;
 @property (readonly) NSArray *attendeeIds;
 
-
 @property (readonly) User *user;
+
+- (id)initWithAttributes:(NSDictionary *)attributes;
 
 + (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block;
 + (void)createActivityForUserWithTitle:(NSString *)title
@@ -65,19 +68,21 @@
                                Image:(UIImage *)activityImage
                                Block:(void (^)(NSError *error))block;
 
-+ (NSString *)lengthToString:(NSInteger)length;
-
-- (id)initWithAttributes:(NSDictionary *)attributes;
 - (void)removeActivityWithBlock:(void (^)(NSError *error))block;
-- (void)attendees:(void (^)(NSArray *attendees, NSError *error))block;  
+
+- (void)attendees:(void (^)(NSArray *attendees, NSError *error))block;
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
+- (void)messagesWithBlock:(void (^)(NSArray *messages, NSError *error))block;
+- (void)newMessage:(NSString *)message
+         WithBlock:(void (^)(NSError *error))block;
+
++ (NSString *)lengthToString:(NSInteger)length;
 - (NSInteger)lengthToInteger;
 //- (NSDate *)startDate;
 - (NSString *)locationDescription;
 //- (void)populateLocationDataWith:(MKMapItem *)mapItem;
-
 
 
 

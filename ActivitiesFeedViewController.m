@@ -8,6 +8,7 @@
 #import "ActivitiesFeedViewController.h"
 #import "ActivityTableViewController.h"
 #import "ActivityMapViewController.h"
+#import "UICanuNavigationController.h"
 #import "Activity.h"
 
 @interface ActivitiesFeedViewController () <CLLocationManagerDelegate>
@@ -67,10 +68,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-
- 
-    
-   
+    UIView *control = [(UICanuNavigationController *)self.navigationController control];
+    control.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning

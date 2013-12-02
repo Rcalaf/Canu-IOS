@@ -59,6 +59,7 @@
     [self presentViewController:tutorial animated:YES completion:nil];
 }
 
+
 - (IBAction)showPrivacyPolicy:(id)sender
 {
     PrivacyPolicyViewController *privacyPolicy = [[PrivacyPolicyViewController alloc] init];
@@ -127,12 +128,6 @@
     [_logOut  addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_logOut];
     
-
-    
-    
-
-    
- 
     
     _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];

@@ -305,16 +305,11 @@
             //NSLog(@"%@",activity.attendeeIds);
             [mutableActivities addObject:activity];
         }
-        
-
         //[self addNotification];
         
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
-        
-        
-        
 
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -590,6 +585,65 @@
                                                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                                                         }];
     [operation start];
+    
+}
+
+
+- (void)messagesWithBlock:(void (^)(NSArray *messages, NSError *error))block {
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *path = [NSString stringWithFormat:@"activities/%lu/chat",(unsigned long)self.activityId];
+   // NSLog(@"url: %@",path);
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
+    [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        NSMutableArray *mutableMessages = [NSMutableArray arrayWithCapacity:[JSON count]];
+        for (NSDictionary *attributes in JSON) {
+            //NSLog(@"%@",attributes);
+            Message *message = [[Message alloc] initWithAttributes:attributes];
+            [mutableMessages addObject:message];
+        }
+        if (block) {
+            block([NSArray arrayWithArray:mutableMessages], nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block([NSArray array], error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
+- (void)newMessage:(NSString *)message WithBlock:(void (^)(NSError *error))block{
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSArray *objectsArray;
+    NSArray *keysArray;
+  
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithUnsignedLong:self.activityId],message,[NSNumber numberWithUnsignedLong:appDelegate.user.userId],nil];
+    keysArray = [NSArray arrayWithObjects:@"activity_id",@"text",@"user_id",nil];
+    
+    
+    NSDictionary *user = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"message"]];
+    
+    NSString *path = [NSString stringWithFormat:@"activities/%lu/chat",(unsigned long)self.activityId];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        // NSLog(@"%@",JSON);
+        if (block) {
+            block(nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
     
 }
 

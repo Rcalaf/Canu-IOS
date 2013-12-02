@@ -12,6 +12,7 @@
 #import "Activity.h"
 #import "User.h"
 
+
 @implementation UICanuActivityCell
 
 @synthesize activity = _activity;

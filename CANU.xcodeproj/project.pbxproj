@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F9950DE8695413798341BD8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EAC58C5CCB4EBCB7D9E22A /* libPods.a */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549581768EEE200C39E5E /* UICanuPicker.m */; };
 		DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2F59D717269C77007AD8FB /* UserProfileViewController.m */; };
@@ -16,6 +17,12 @@
 		DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952D1742A00700FB026F /* scroll_content@2x.png */; };
 		DE4D95351742A6F700FB026F /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE4D95331742A6F700FB026F /* Lato-Bol.ttf */; };
 		DE4D95361742A6F700FB026F /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE4D95341742A6F700FB026F /* Lato-Reg.ttf */; };
+		DE5599B21836491200FE32E9 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5599B11836491200FE32E9 /* Message.m */; };
+		DE5599B6183B96CC00FE32E9 /* ChatTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5599B5183B96CC00FE32E9 /* ChatTableViewController.m */; };
+		DE5599BA183BDFEC00FE32E9 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5599B9183BDFEC00FE32E9 /* ChatViewController.m */; };
+		DE5599BD183CE3E400FE32E9 /* UIChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5599BC183CE3E400FE32E9 /* UIChatCell.m */; };
+		DE5599C0183E154E00FE32E9 /* chat_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = DE5599BE183E154E00FE32E9 /* chat_cell.png */; };
+		DE5599C1183E154E00FE32E9 /* chat_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE5599BF183E154E00FE32E9 /* chat_cell@2x.png */; };
 		DE60782C182BD08D0053F23B /* hello_bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607826182BD08D0053F23B /* hello_bg-568h@2x.png */; };
 		DE60782D182BD08D0053F23B /* hello_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607827182BD08D0053F23B /* hello_bg.png */; };
 		DE60782E182BD08D0053F23B /* hello_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607828182BD08D0053F23B /* hello_bg@2x.png */; };
@@ -174,6 +181,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08EAC58C5CCB4EBCB7D9E22A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B3B013E48BA4501A9D185DC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
 		DE1549571768EEE200C39E5E /* UICanuPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuPicker.h; sourceTree = "<group>"; };
@@ -187,6 +196,16 @@
 		DE4D952D1742A00700FB026F /* scroll_content@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scroll_content@2x.png"; sourceTree = "<group>"; };
 		DE4D95331742A6F700FB026F /* Lato-Bol.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bol.ttf"; sourceTree = "<group>"; };
 		DE4D95341742A6F700FB026F /* Lato-Reg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Reg.ttf"; sourceTree = "<group>"; };
+		DE5599B01836491200FE32E9 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		DE5599B11836491200FE32E9 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		DE5599B4183B96CC00FE32E9 /* ChatTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTableViewController.h; sourceTree = "<group>"; };
+		DE5599B5183B96CC00FE32E9 /* ChatTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTableViewController.m; sourceTree = "<group>"; };
+		DE5599B8183BDFEC00FE32E9 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		DE5599B9183BDFEC00FE32E9 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		DE5599BB183CE3E400FE32E9 /* UIChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIChatCell.h; sourceTree = "<group>"; };
+		DE5599BC183CE3E400FE32E9 /* UIChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIChatCell.m; sourceTree = "<group>"; };
+		DE5599BE183E154E00FE32E9 /* chat_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_cell.png; sourceTree = "<group>"; };
+		DE5599BF183E154E00FE32E9 /* chat_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_cell@2x.png"; sourceTree = "<group>"; };
 		DE607826182BD08D0053F23B /* hello_bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hello_bg-568h@2x.png"; sourceTree = "<group>"; };
 		DE607827182BD08D0053F23B /* hello_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hello_bg.png; sourceTree = "<group>"; };
 		DE607828182BD08D0053F23B /* hello_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hello_bg@2x.png"; sourceTree = "<group>"; };
@@ -401,6 +420,7 @@
 				DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */,
 				DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */,
 				DEA93B641720511A00303BB5 /* FacebookSDK.framework in Frameworks */,
+				1F9950DE8695413798341BD8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +537,26 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		DE5599B31836491600FE32E9 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				DE5599B01836491200FE32E9 /* Message.h */,
+				DE5599B11836491200FE32E9 /* Message.m */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		DE5599B7183B96D100FE32E9 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				DE5599B4183B96CC00FE32E9 /* ChatTableViewController.h */,
+				DE5599B5183B96CC00FE32E9 /* ChatTableViewController.m */,
+				DE5599B8183BDFEC00FE32E9 /* ChatViewController.h */,
+				DE5599B9183BDFEC00FE32E9 /* ChatViewController.m */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		DE67FDC817CA654E00240E1C /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,6 +588,8 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				DE5599BE183E154E00FE32E9 /* chat_cell.png */,
+				DE5599BF183E154E00FE32E9 /* chat_cell@2x.png */,
 				DE607826182BD08D0053F23B /* hello_bg-568h@2x.png */,
 				DE607827182BD08D0053F23B /* hello_bg.png */,
 				DE607828182BD08D0053F23B /* hello_bg@2x.png */,
@@ -607,6 +649,7 @@
 				DE6ED8C817C0EFDA00C5E72E /* DetailActivityViewController.h */,
 				DE6ED8C917C0EFDA00C5E72E /* DetailActivityViewController.m */,
 				DED1242217CBFD9D000EE414 /* FeedList */,
+				DE5599B7183B96D100FE32E9 /* Chat */,
 			);
 			name = Activities;
 			path = ..;
@@ -636,6 +679,7 @@
 				DEA93B4117204EDC00303BB5 /* Vendor */,
 				DEA93B1A17204EA600303BB5 /* Frameworks */,
 				DEA93B1917204EA600303BB5 /* Products */,
+				8B3B013E48BA4501A9D185DC /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -662,6 +706,7 @@
 				DEA93B1D17204EA600303BB5 /* Foundation.framework */,
 				DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */,
 				DEA93B2117204EA600303BB5 /* CoreData.framework */,
+				08EAC58C5CCB4EBCB7D9E22A /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -790,6 +835,8 @@
 				DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */,
 				DE6ED9D317C4273400C5E72E /* UICanuAttendeeCell.h */,
 				DE6ED9D417C4273500C5E72E /* UICanuAttendeeCell.m */,
+				DE5599BB183CE3E400FE32E9 /* UIChatCell.h */,
+				DE5599BC183CE3E400FE32E9 /* UIChatCell.m */,
 			);
 			name = UICanuCell;
 			sourceTree = "<group>";
@@ -848,6 +895,7 @@
 			children = (
 				DED4901C17298A67005A0BF9 /* User */,
 				DEBBDA4C1732BDA0009E9A7D /* Activity */,
+				DE5599B31836491600FE32E9 /* Message */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -903,9 +951,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DEA93B3A17204EA600303BB5 /* Build configuration list for PBXNativeTarget "CANU" */;
 			buildPhases = (
+				493DAD8ED7D2460D82AF8C8E /* Check Pods Manifest.lock */,
 				DEA93B1417204EA600303BB5 /* Sources */,
 				DEA93B1517204EA600303BB5 /* Frameworks */,
 				DEA93B1617204EA600303BB5 /* Resources */,
+				A92BDA3F18544222B0AEFC7B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -956,6 +1006,7 @@
 				DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */,
 				DEFD7A6C174534830087CB8A /* back_arrow@2x.png in Resources */,
 				DEFD7A71174694660087CB8A /* facebook_btn_off.png in Resources */,
+				DE5599C1183E154E00FE32E9 /* chat_cell@2x.png in Resources */,
 				DE60782F182BD08D0053F23B /* intro_bg-568h@2x.png in Resources */,
 				DEFD7A72174694660087CB8A /* facebook_btn_off@2x.png in Resources */,
 				DEFD7A73174694660087CB8A /* facebook_btn_on.png in Resources */,
@@ -1058,10 +1109,44 @@
 				DED1244217CFC81E000EE414 /* edit_bg-568h@2x.png in Resources */,
 				DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */,
 				DE60783C182C007C0053F23B /* Default.png in Resources */,
+				DE5599C0183E154E00FE32E9 /* chat_cell.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		493DAD8ED7D2460D82AF8C8E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A92BDA3F18544222B0AEFC7B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DEA93B1417204EA600303BB5 /* Sources */ = {
@@ -1072,6 +1157,7 @@
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
+				DE5599BD183CE3E400FE32E9 /* UIChatCell.m in Sources */,
 				DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */,
 				DEA93B5817204EF100303BB5 /* AFImageRequestOperation.m in Sources */,
 				DEA93B5917204EF100303BB5 /* AFJSONRequestOperation.m in Sources */,
@@ -1080,6 +1166,7 @@
 				DEA93B5C17204EF100303BB5 /* AFURLConnectionOperation.m in Sources */,
 				DEA93B5D17204EF100303BB5 /* AFXMLRequestOperation.m in Sources */,
 				DEA93B5E17204EF100303BB5 /* UIImageView+AFNetworking.m in Sources */,
+				DE5599B6183B96CC00FE32E9 /* ChatTableViewController.m in Sources */,
 				DEA93B6117204F7C00303BB5 /* AFCanuAPIClient.m in Sources */,
 				DEA93B6F1720564500303BB5 /* SignUpViewController.m in Sources */,
 				DEA93B721720565700303BB5 /* SignInViewController.m in Sources */,
@@ -1093,12 +1180,14 @@
 				DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */,
 				DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */,
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
+				DE5599BA183BDFEC00FE32E9 /* ChatViewController.m in Sources */,
 				DEF015F91784B9020005FFC0 /* UICanuActivityCell.m in Sources */,
 				DEB29BB317954FDA00D9FFAE /* UIProfileView.m in Sources */,
 				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
 				DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */,
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
 				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
+				DE5599B21836491200FE32E9 /* Message.m in Sources */,
 				DE6ED8CA17C0EFDA00C5E72E /* DetailActivityViewController.m in Sources */,
 				DE6ED9D517C4273500C5E72E /* UICanuAttendeeCell.m in Sources */,
 				DE6ED9D817C4286500C5E72E /* AttendeesContainerViewController.m in Sources */,
@@ -1156,6 +1245,7 @@
 		};
 		DE67B46217A71CC500F5CBC1 /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B3B013E48BA4501A9D185DC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1167,6 +1257,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
 				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
@@ -1240,6 +1331,7 @@
 		};
 		DEA93B3B17204EA600303BB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B3B013E48BA4501A9D185DC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1251,6 +1343,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
 				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
@@ -1264,6 +1357,7 @@
 		};
 		DEA93B3C17204EA600303BB5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B3B013E48BA4501A9D185DC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1275,6 +1369,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
 				INFOPLIST_FILE = "CANU/CANU-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",

@@ -55,7 +55,7 @@
     if (!self) {
         return nil;
     }
-    //NSLog(@"%@",attributes);
+ //   NSLog(@"%@",attributes);
     _userId = [[attributes valueForKeyPath:@"id"] integerValue];
     _userName = [attributes valueForKeyPath:@"user_name"];
     _email = [attributes valueForKeyPath:@"email"];
@@ -64,7 +64,7 @@
     _token = [attributes valueForKeyPath:@"token"];
     //_profileImageUrl = [[NSURL URLWithString:kAFCanuAPIBaseURLString] URLByAppendingPathComponent:[attributes valueForKey:@"profile_pic"]];
     _profileImageUrl = [NSURL URLWithString:[attributes valueForKey:@"profile_pic"]];
-    //NSLog(@"user urlpic: %@",self.profileImageUrl);
+   // NSLog(@"user urlpic: %@",self.profileImageUrl);
     return self;
 }
 
@@ -272,7 +272,6 @@
                        Block:(void (^)(User *user, NSError *error))block
 {
     
-    if (!userName) { userName = @""; }
     if (!userName) { userName = @""; }
     if (!firstName){ firstName = @""; }
     if (!lastName) { lastName = @""; }

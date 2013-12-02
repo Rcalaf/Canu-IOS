@@ -13,6 +13,8 @@
 #import "NewActivityViewController.h"
 #import "AttendeesContainerViewController.h"
 #import "AttendeesTableViewController.h"
+#import "UICanuNavigationController.h"
+#import "ChatViewController.h"
 
 #define kGridBaseCenter CGPointMake(160.0f,201.0f)
 
@@ -20,6 +22,8 @@
 @interface DetailActivityViewController () <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) UIImageView *grid;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+@property (strong, nonatomic) ChatViewController *chat;
+@property (strong, nonatomic) UIButton *chatButton;
 @end
 
 @implementation DetailActivityViewController
@@ -32,6 +36,8 @@
 @synthesize activity = _activity;
 @synthesize grid = _grid;
 @synthesize loadingIndicator = _loadingIndicator;
+@synthesize chat = _chat;
+@synthesize chatButton = _chatButton;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,7 +51,8 @@
 
 - (IBAction)goBack:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)showAttendees:(id)sender
@@ -77,6 +84,8 @@
             } else {
                  _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                 [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
+                [_grid addSubview:_chatButton];
+                
             }
            
             _loadingIndicator.hidden = YES;
@@ -94,6 +103,7 @@
             } else {
                 _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
+               [_chatButton removeFromSuperview];
             }
             _loadingIndicator.hidden = YES;
             [_loadingIndicator stopAnimating];
@@ -104,13 +114,18 @@
     
 }
 
+- (IBAction)showChat:(id)sender
+{
+   _chat = [[ChatViewController alloc] initWithActivity:self.activity];
+  [self presentViewController:_chat animated:YES completion:nil];
+    
+}
+
 - (void)loadView
 {
     [super loadView];
     
     UIColor *textColor = [UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f];
-    
-
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -280,6 +295,19 @@
     [toolBar addSubview:_actionButton];
     [toolBar addSubview:_loadingIndicator];
     [self.view addSubview:toolBar];
+    
+   /* _chat = [[ChatViewController alloc] initWithActivity:self.activity];
+    [self addChildViewController:_chat];
+    [self.view addSubview:_chat.view];*/
+    
+    _chatButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_chatButton setTitle:@"Chat" forState:UIControlStateNormal];
+    [_chatButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _chatButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+    _chatButton.frame = CGRectMake(235.5f, 346.0f + KIphone5Margin, 62.0f, 34.0f);
+    _chatButton.backgroundColor = [UIColor colorWithRed:28.0f/255.0f green:165.0f/255.0f blue:195.0f/255.0f alpha:1.0];
+    [_chatButton addTarget:self action:@selector(showChat:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 
 - (void)viewDidLoad
@@ -287,6 +315,24 @@
     [super viewDidLoad];    
 	// Do any additional setup after loading the view.
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [super viewWillAppear:YES];
+    if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedLong:appDelegate.user.userId]] != NSNotFound) {
+        [_grid addSubview:_chatButton];
+    }
+    UIView *control = [(UICanuNavigationController *)self.navigationController control];
+    control.hidden = YES;
+}
+
+/*-(void)viewWillDisappear:(BOOL)animated
+{
+    UIView *control = [(UICanuNavigationController *)self.navigationController control];
+    control.hidden = NO;
+    [super viewWillDisappear:YES];
+}*/
 
 - (void)didReceiveMemoryWarning
 {
