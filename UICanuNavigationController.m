@@ -14,6 +14,8 @@
 #import "Activity.h"
 
 #define kNavboxAlpha ((float) .7)
+#define KNavboxPosition
+#define KNavboxSize ((CGRect) 2.0,418.0 + KIphone5Margin,63.0,63.0)
 
 
 @interface UICanuNavigationController () <UIGestureRecognizerDelegate>
@@ -29,8 +31,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.navigationBarHidden = YES;
-        self.control = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 420.0 + KIphone5Margin, 63.0, 63.0)];
-        self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
+        self.control = [[UIView alloc] initWithFrame:CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0)];
+       // self.control = [[UIView alloc] initWithFrame:KNavboxSize];
+        self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
         [self.view addSubview:self.control];
         //[self controlFadeShow];
     }
@@ -39,13 +42,13 @@
 
 - (IBAction)goProfile:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(260.0, 420.0 + KIphone5Margin, 63.0, 63.0);
+        _control.frame = CGRectMake(255.0, 415.0 + KIphone5Margin, 63.0, 63.0);
     }completion:^(BOOL finished) {
         //[self controlFadeShow];
     }];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserProfileViewController *upvc =  appDelegate.profileViewController;
-    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
+    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
     [self pushViewController:upvc animated:YES];
     //NSLog(@"%@",self.topViewController);
 
@@ -61,7 +64,7 @@
     } completion:^(BOOL finished){
         [UIView animateWithDuration:.2 animations:^{
             CGRect frame = _control.frame;
-            frame.origin.y = 420.0f + KIphone5Margin;
+            frame.origin.y = 415.0f + KIphone5Margin;
             _control.frame = frame;
         }completion:^(BOOL finished) {
           //  [self controlFadeShow];
@@ -84,7 +87,7 @@
             [self presentViewController:nac animated:YES completion:nil];
         }
         [UIView animateWithDuration:0.3 animations:^{
-            _control.frame = CGRectMake(_control.frame.origin.x, 420.0f + KIphone5Margin,_control.frame.size.width, _control.frame.size.height);
+            _control.frame = CGRectMake(_control.frame.origin.x, 415.0f + KIphone5Margin,_control.frame.size.width, _control.frame.size.height);
         }completion:^(BOOL finished) {
             //[self controlFadeShow];
         }];
@@ -95,7 +98,7 @@
 
 - (IBAction)goActivities:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(-3.0, 420.0 + KIphone5Margin, 63.0, 63.0);
+        _control.frame = CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0);
         
     }completion:^(BOOL finished) {
        // [self controlFadeShow];
@@ -103,7 +106,7 @@
    // NSLog(@"Load Activities view");
     [self popViewControllerAnimated:YES];
     
-    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
+    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
     //NSLog(@"%@",self.topViewController);
 }
 

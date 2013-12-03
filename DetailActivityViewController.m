@@ -318,11 +318,11 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    //AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [super viewWillAppear:YES];
-    if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedLong:appDelegate.user.userId]] != NSNotFound) {
+    //if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedLong:appDelegate.user.userId]] != NSNotFound) {
         [_grid addSubview:_chatButton];
-    }
+    //}
     UIView *control = [(UICanuNavigationController *)self.navigationController control];
     control.hidden = YES;
 }

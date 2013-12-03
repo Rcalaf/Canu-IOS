@@ -476,6 +476,10 @@
                                                                                             if (block) {
                                                                                                 block(nil);
                                                                                             }
+                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                [mixpanel track:@"Activity Created" properties:@{@"Title": title,
+                                                              @"Country": country}];
+                                                                        
                                                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                                                         }
                                                                                         failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){

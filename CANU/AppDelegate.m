@@ -98,7 +98,7 @@ NSString *const FBSessionStateChangedNotification =
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-        
+        [mixpanel identify:[NSString stringWithFormat:@"%d",self.user.userId]];
         canuViewController = [[UICanuNavigationController alloc] init];
        // _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
        // _profileViewController = [[UserProfileViewController alloc] init];

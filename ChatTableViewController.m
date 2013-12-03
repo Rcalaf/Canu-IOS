@@ -145,7 +145,7 @@
     //Calculate text area size
     cell.message.text = message.text;
     CGSize textSize = { 280.0, 10000.0 };
-	CGSize size = [message.text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:10.0]
+	CGSize size = [message.text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:15.0]
 					  constrainedToSize:textSize
 						  lineBreakMode:UILineBreakModeWordWrap];
 	size.width += (20.0f);
@@ -230,7 +230,7 @@
     [_messages objectAtIndex:indexPath.row];
 	NSString *text = [[_messages objectAtIndex:indexPath.row] text];
 	CGSize  textSize = { 280.0, 10000.0 };
-	CGSize size = [text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:10.0]
+	CGSize size = [text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:15.0]
                    constrainedToSize:textSize
                        lineBreakMode:UILineBreakModeWordWrap];
 	

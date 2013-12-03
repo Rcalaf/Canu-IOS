@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import <Mixpanel/Mixpanel.h>
 //#import <CoreLocation/CoreLocation.h>
 #import "User.h"
 #import "Message.h"

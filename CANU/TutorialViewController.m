@@ -53,8 +53,8 @@
 
 - (IBAction)showProfile:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        self.navView.frame = CGRectMake(260.0, 400.0 + KIphone5Margin, 63.0, 63.0);
-        self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"menunav_me.png"]];
+        self.navView.frame = CGRectMake(255.0, 395.0 + KIphone5Margin, 63.0, 63.0);
+        self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
         if (IS_IPHONE_5) {
             self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_3-568h.png"]];
         }else{
@@ -67,8 +67,8 @@
 
 - (IBAction)showActivities:(UISwipeGestureRecognizer *)gesture{
     [UIView animateWithDuration:0.3 animations:^{
-        self.navView.frame = CGRectMake(-3.0, 400.0 + KIphone5Margin, 63.0, 63.0);
-        self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
+        self.navView.frame = CGRectMake(2.0, 395.0 + KIphone5Margin, 63.0, 63.0);
+        self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
         if (IS_IPHONE_5) {
             self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_4-568h.png"]];
         }else{
@@ -113,7 +113,7 @@
             
         }
         [UIView animateWithDuration:0.3 animations:^{
-            _navView.frame = CGRectMake(_navView.frame.origin.x, 400.0 + KIphone5Margin,_navView.frame.size.width, _navView.frame.size.height);
+            _navView.frame = CGRectMake(_navView.frame.origin.x, 395.0 + KIphone5Margin,_navView.frame.size.width, _navView.frame.size.height);
         }];
     }
 }
@@ -154,8 +154,8 @@
     self.doneTutorialButton.hidden = YES;
     [self.view addSubview:self.doneTutorialButton];
     //[self.view setUserInteractionEnabled:YES];
-    self.navView = [[UIView alloc] initWithFrame:CGRectMake(-3.0, 400.0 + KIphone5Margin, 63.0, 63.0)];
-    self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_world.png"]];
+    self.navView = [[UIView alloc] initWithFrame:CGRectMake(2.0, 395.0 + KIphone5Margin, 63.0, 63.0)];
+    self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
     self.navView.hidden = YES;
     [self.view addSubview:self.navView];
     
