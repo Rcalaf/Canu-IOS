@@ -147,12 +147,13 @@
     CGSize textSize = { 280.0, 10000.0 };
 	CGSize size = [message.text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:15.0]
 					  constrainedToSize:textSize
-						  lineBreakMode:UILineBreakModeWordWrap];
+						  lineBreakMode:NSLineBreakByWordWrapping];
+    
 	size.width += (20.0f);
    
     [cell.message setFrame:CGRectMake(2.0f, 40.0f, size.width, size.height+10.0f)];
 
-   // cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"chat_cell.png"] stretchableImageWithLeftCapWidth:24  topCapHeight:15]];
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"chat_cell.png"] stretchableImageWithLeftCapWidth:24  topCapHeight:5]];
     
   //  NSLog(@"height: %f, width: %f",size.height,size.width);
     // Configure the cell...
@@ -232,7 +233,7 @@
 	CGSize  textSize = { 280.0, 10000.0 };
 	CGSize size = [text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:15.0]
                    constrainedToSize:textSize
-                       lineBreakMode:UILineBreakModeWordWrap];
+                       lineBreakMode:NSLineBreakByWordWrapping];
 	
     
     

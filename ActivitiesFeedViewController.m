@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 #import "ActivitiesFeedViewController.h"
-#import "ActivityTableViewController.h"
+
 #import "ActivityMapViewController.h"
 #import "UICanuNavigationController.h"
 #import "Activity.h"
@@ -14,7 +14,7 @@
 @interface ActivitiesFeedViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) ActivityMapViewController *map;
-@property (strong, nonatomic) ActivityTableViewController *list;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 
 //- (void)reload:(id)sender;
@@ -25,6 +25,7 @@
 @synthesize map = _map;
 @synthesize list = _list;
 @synthesize locationManager = _locationManager;
+
 
 
 
@@ -61,7 +62,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    
  // Do any additional setup after loading the view.
 }
 
@@ -70,6 +71,7 @@
     [super viewWillAppear:YES];
     UIView *control = [(UICanuNavigationController *)self.navigationController control];
     control.hidden = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning

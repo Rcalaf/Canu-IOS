@@ -7,11 +7,12 @@
 //
 
 #import "AFCanuAPIClient.h"
-#import <Mixpanel/Mixpanel.h>
+//#import <Mixpanel/Mixpanel.h>
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "ActivitiesFeedViewController.h" 
+#import "DetailActivityViewController.h"
 #import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
 #import "TutorialViewController.h"
@@ -83,10 +84,10 @@ NSString *const FBSessionStateChangedNotification =
     
     // Initialize the library with your
     // Mixpanel project token, MIXPANEL_TOKEN
-    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    //[Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
     // Later, you can get your instance with
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    //Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
    /* if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         
@@ -98,7 +99,7 @@ NSString *const FBSessionStateChangedNotification =
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-        [mixpanel identify:[NSString stringWithFormat:@"%d",self.user.userId]];
+       // [mixpanel identify:[NSString stringWithFormat:@"%d",self.user.userId]];
         canuViewController = [[UICanuNavigationController alloc] init];
        // _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
        // _profileViewController = [[UserProfileViewController alloc] init];
@@ -118,7 +119,7 @@ NSString *const FBSessionStateChangedNotification =
    // application.applicationIconBadgeNumber = 0;
     
     // Handle launching from a notification
-    /*UILocalNotification *localNotif =
+   /* UILocalNotification *localNotif =
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         NSLog(@"Recieved Notification oppening%@",localNotif);
@@ -164,24 +165,60 @@ NSString *const FBSessionStateChangedNotification =
     NSLog(@"%@",userInfo);
    // application.applicationIconBadgeNumber =application.applicationIconBadgeNumber + 1 ;
     
-    [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:^(NSError *error){
-        if (error) {
-            NSLog(@"hello");
-            NSLog(@"Request Failed with Error notification: %@", error);
-        }
-    }];
+
     if ( application.applicationState == UIApplicationStateActive ){
-        if ([[(UINavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
-            ChatViewController *currentChat = (ChatViewController *)[(UINavigationController *)self.window.rootViewController visibleViewController];
-            if (currentChat.activity.activityId == [[userInfo valueForKeyPath:@"activity_id"] integerValue]){
+        
+        [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:^(NSError *error){
+            if (error) {
+               // NSLog(@"hello");
+               // NSLog(@"Request Failed with Error notification: %@", error);
+            }
+        }];
+    
+        if ([[(UICanuNavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
+            ChatViewController *currentChat = (ChatViewController *)[(UICanuNavigationController *)self.window.rootViewController visibleViewController];
+            if (currentChat.activity.activityId == [[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] integerValue]){
               [currentChat reload];
             }
-        } else {
+        } /*else {
+           UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+            if (localNotif == nil)
+                return;
+            localNotif.fireDate = [[NSDate date] dateByAddingTimeInterval:4];
+            localNotif.timeZone = [NSTimeZone defaultTimeZone];
             
-        }
+            localNotif.alertBody = [[userInfo valueForKeyPath:@"aps"] valueForKeyPath:@"alert"];
+            localNotif.alertAction = NSLocalizedString(@"View Details", nil);
+            
+            localNotif.soundName = UILocalNotificationDefaultSoundName;
+           // localNotif.applicationIconBadgeNumber = 0;
+            [application scheduleLocalNotification:localNotif];
+        }*/
     } else {
-         NSLog(@"Controller: %@", [[(UINavigationController *)self.window.rootViewController visibleViewController] class]);
-      
+       // NSLog(@"Controller: %@", [[(UINavigationController *)self.window.rootViewController visibleViewController] class]);
+       // NSLog(@"number of staged controllers: %d",[[(UINavigationController *)self.window.rootViewController viewControllers] count]);
+       
+        //Clean the max top three levels
+        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
+        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
+        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
+        
+        // move to the main activity feed
+        [(UICanuNavigationController *)self.window.rootViewController goActivities:nil];
+        
+        if (![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]) {
+            NSLog(@"we are in, value: %d",![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]);
+            [Activity activityWithId:[[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] unsignedIntegerValue] andBlock:^(Activity *activity, NSError *error){
+                if (activity) {
+                    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
+                    davc.activity = activity;
+                    [(UICanuNavigationController *)self.window.rootViewController pushViewController:davc animated:YES];
+                    if ([[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"chat"]) {
+                        [davc presentViewController:[[ChatViewController alloc] initWithActivity:activity] animated:YES completion:nil];
+                    }
+                }
+            }];
+        }
     }
         
 }

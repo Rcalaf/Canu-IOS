@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ActivityTableViewController.h"
 
 
 @interface ActivitiesFeedViewController : UIViewController 
 
+@property (strong, nonatomic) ActivityTableViewController *list;
 
 @end

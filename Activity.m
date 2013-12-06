@@ -217,9 +217,9 @@
     }
     
    //NSLog(@"%@",attributes);
-    _activityId = [[attributes valueForKeyPath:@"id"] integerValue];
+    _activityId = [[attributes valueForKeyPath:@"id"] unsignedIntegerValue];
     _title = [attributes valueForKeyPath:@"title"];
-    _ownerId = [[[attributes valueForKeyPath:@"user"] valueForKeyPath:@"id"] integerValue];
+    _ownerId = [[[attributes valueForKeyPath:@"user"] valueForKeyPath:@"id"] unsignedIntegerValue];
     _user = [[User alloc] initWithAttributes:[attributes valueForKeyPath:@"user"]];
     
     //NSLog(@"%@",[attributes valueForKeyPath:@"user"]);
@@ -285,6 +285,25 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
     
+}
+
+
++ (void)activityWithId:(NSUInteger)activityId andBlock:(void (^)(Activity *activity, NSError *error))block{
+    NSString *path = [NSString stringWithFormat:@"activities/%lu",(unsigned long)activityId];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        Activity *activity = [[Activity alloc] initWithAttributes:JSON];
+        // NSLog(@"%@",JSON);
+        if (block) {
+            block(activity, nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block(nil,error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
 }
 
 
@@ -476,9 +495,9 @@
                                                                                             if (block) {
                                                                                                 block(nil);
                                                                                             }
-                Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                [mixpanel track:@"Activity Created" properties:@{@"Title": title,
-                                                              @"Country": country}];
+               // Mixpanel *mixpanel = [Mixpanel sharedInstance];
+               /* [mixpanel track:@"Activity Created" properties:@{@"Title": title,
+                                                              @"Country": country}];*/
                                                                         
                                                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                                                         }

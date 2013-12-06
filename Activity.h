@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-#import <Mixpanel/Mixpanel.h>
+//#import <Mixpanel/Mixpanel.h>
 //#import <CoreLocation/CoreLocation.h>
 #import "User.h"
 #import "Message.h"
@@ -68,6 +68,9 @@
                            Longitude:(NSString *)longitude
                                Image:(UIImage *)activityImage
                                Block:(void (^)(NSError *error))block;
+
++ (void)activityWithId:(NSUInteger)activityId
+              andBlock:(void (^)(Activity *activity, NSError *error))block;
 
 - (void)removeActivityWithBlock:(void (^)(NSError *error))block;
 

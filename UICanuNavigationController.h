@@ -13,4 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIView *control;
 
 - (void)controlFadeShow;
+- (IBAction)goProfile:(UISwipeGestureRecognizer *)gesture;
+- (IBAction)goActivities:(UISwipeGestureRecognizer *)gesture;
+
 @end
