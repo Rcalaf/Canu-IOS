@@ -84,7 +84,7 @@
             } else {
                  _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                 [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
-                [_grid addSubview:_chatButton];
+              //[_grid addSubview:_chatButton];
                 
             }
            
@@ -103,7 +103,7 @@
             } else {
                 _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
                [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
-               [_chatButton removeFromSuperview];
+             //[_chatButton removeFromSuperview];
             }
             _loadingIndicator.hidden = YES;
             [_loadingIndicator stopAnimating];

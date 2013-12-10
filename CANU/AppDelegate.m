@@ -147,7 +147,7 @@ NSString *const FBSessionStateChangedNotification =
     if (self.user) {
         [self.user updateDeviceToken:_device_token Block:^(NSError *error){
             if (error) {
-                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+                NSLog(@"Device token request FAILED with Error: %@", [error.userInfo valueForKey:@"NSLocalizedDescription"]);
             }
         }];
 

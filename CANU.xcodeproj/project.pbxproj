@@ -966,6 +966,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = CANU;
+				TargetAttributes = {
+					DEA93B1717204EA600303BB5 = {
+						DevelopmentTeam = 73TCT5FXV2;
+					};
+				};
 			};
 			buildConfigurationList = DEA93B1317204EA600303BB5 /* Build configuration list for PBXProject "CANU" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1187,7 +1192,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1196,7 +1201,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D620AC5A-281F-47F1-B6DF-8C5E71BB8F6F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
 				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
@@ -1209,7 +1214,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1224,7 +1230,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9CDC387C-9BE1-4D88-BEDF-D67985A67F64";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1258,7 +1265,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D620AC5A-281F-47F1-B6DF-8C5E71BB8F6F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
 				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 			};
@@ -1285,7 +1292,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4C62B1CD-8827-4F02-B8F6-07A77150CCC4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
 				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
@@ -1298,6 +1305,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1313,7 +1321,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D620AC5A-281F-47F1-B6DF-8C5E71BB8F6F";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1325,6 +1334,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1340,7 +1350,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4C62B1CD-8827-4F02-B8F6-07A77150CCC4";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
