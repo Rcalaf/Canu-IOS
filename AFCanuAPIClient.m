@@ -10,8 +10,8 @@
 #import "AFJSONRequestOperation.h"
 
 
-NSString * const kAFCanuAPIBaseURLString = @"http://api.canu.se/";
-//NSString * const kAFCanuAPIBaseURLString = @"http://0.0.0.0:3000";
+//NSString * const kAFCanuAPIBaseURLString = @"http://api.canu.se/";
+NSString * const kAFCanuAPIBaseURLString = @"http://172.18.61.130:3000";
 
 
 @implementation AFCanuAPIClient

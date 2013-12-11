@@ -44,7 +44,7 @@
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
     
-    _list = [[ActivityTableViewController alloc] init];
+    _list = [[ActivityScrollViewController alloc] init];
     [self addChildViewController:_list];
     [self.view addSubview:_list.view];
     

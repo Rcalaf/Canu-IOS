@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class User;
+
 @interface UserProfileViewController : UIViewController <UIGestureRecognizerDelegate>
 @property (strong, nonatomic) User *user;
 

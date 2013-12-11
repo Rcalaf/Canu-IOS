@@ -277,7 +277,6 @@
     UICanuActivityCell *cell = (UICanuActivityCell *)[[[recognizer view] superview] superview];
     NewActivityViewController *eac;
     
-
     if (cell.activity.status == UICanuActivityCellGo) {
         cell.loadingIndicator.hidden = NO;
         [cell.loadingIndicator startAnimating];

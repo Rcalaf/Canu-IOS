@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EEA97E1185782B000EA9E02 /* ActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA97E0185782B000EA9E02 /* ActivityScrollViewController.m */; };
+		1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA97E4185868B200EA9E02 /* UIScrollViewReverse.m */; };
+		1EEA97EB1858721F00EA9E02 /* UICanuActivityCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA97EA1858721F00EA9E02 /* UICanuActivityCellScroll.m */; };
+		1EEA97EF1858A60D00EA9E02 /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA97EE1858A60D00EA9E02 /* Lato-RegIta.ttf */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549581768EEE200C39E5E /* UICanuPicker.m */; };
 		DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2F59D717269C77007AD8FB /* UserProfileViewController.m */; };
@@ -180,6 +184,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1EEA97DF185782B000EA9E02 /* ActivityScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityScrollViewController.h; sourceTree = "<group>"; };
+		1EEA97E0185782B000EA9E02 /* ActivityScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityScrollViewController.m; sourceTree = "<group>"; };
+		1EEA97E3185868B200EA9E02 /* UIScrollViewReverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIScrollViewReverse.h; path = Vendor/UIScrollViewReverse/UIScrollViewReverse.h; sourceTree = "<group>"; };
+		1EEA97E4185868B200EA9E02 /* UIScrollViewReverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIScrollViewReverse.m; path = Vendor/UIScrollViewReverse/UIScrollViewReverse.m; sourceTree = "<group>"; };
+		1EEA97E91858721F00EA9E02 /* UICanuActivityCellScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuActivityCellScroll.h; path = Vendor/UICanuCell/UICanuActivityCellScroll.h; sourceTree = "<group>"; };
+		1EEA97EA1858721F00EA9E02 /* UICanuActivityCellScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuActivityCellScroll.m; path = Vendor/UICanuCell/UICanuActivityCellScroll.m; sourceTree = "<group>"; };
+		1EEA97EE1858A60D00EA9E02 /* Lato-RegIta.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-RegIta.ttf"; sourceTree = "<group>"; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
 		DE1549571768EEE200C39E5E /* UICanuPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuPicker.h; sourceTree = "<group>"; };
@@ -423,6 +434,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EEA97E21858685E00EA9E02 /* UIScrollViewReverse */ = {
+			isa = PBXGroup;
+			children = (
+				1EEA97E3185868B200EA9E02 /* UIScrollViewReverse.h */,
+				1EEA97E4185868B200EA9E02 /* UIScrollViewReverse.m */,
+			);
+			name = UIScrollViewReverse;
+			sourceTree = "<group>";
+		};
 		DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +547,7 @@
 		DE4D95321742A6D800FB026F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA97EE1858A60D00EA9E02 /* Lato-RegIta.ttf */,
 				DE4D95331742A6F700FB026F /* Lato-Bol.ttf */,
 				DE4D95341742A6F700FB026F /* Lato-Reg.ttf */,
 			);
@@ -740,6 +761,7 @@
 		DEA93B4117204EDC00303BB5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA97E21858685E00EA9E02 /* UIScrollViewReverse */,
 				DEB29BB417954FEB00D9FFAE /* UIProfileView */,
 				DEB29BB017954FA700D9FFAE /* UICanuCell */,
 				DEF015F41780F1300005FFC0 /* UICanuNavigationController */,
@@ -825,6 +847,8 @@
 		DEB29BB017954FA700D9FFAE /* UICanuCell */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA97E91858721F00EA9E02 /* UICanuActivityCellScroll.h */,
+				1EEA97EA1858721F00EA9E02 /* UICanuActivityCellScroll.m */,
 				DEF015F71784B9020005FFC0 /* UICanuActivityCell.h */,
 				DEF015F81784B9020005FFC0 /* UICanuActivityCell.m */,
 				DE6ED9D317C4273400C5E72E /* UICanuAttendeeCell.h */,
@@ -867,6 +891,8 @@
 		DED1242217CBFD9D000EE414 /* FeedList */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA97DF185782B000EA9E02 /* ActivityScrollViewController.h */,
+				1EEA97E0185782B000EA9E02 /* ActivityScrollViewController.m */,
 				DED1241F17CBFD96000EE414 /* ActivityTableViewController.h */,
 				DED1242017CBFD96000EE414 /* ActivityTableViewController.m */,
 				DED1243417CD03C9000EE414 /* ActivityMapViewController.h */,
@@ -1096,6 +1122,7 @@
 				DE67FE1417CA704F00240E1C /* guide_step_1-568h@2x.png in Resources */,
 				DE67FE1517CA704F00240E1C /* guide_step_1.png in Resources */,
 				DE67FE1617CA704F00240E1C /* guide_step_1@2x.png in Resources */,
+				1EEA97EF1858A60D00EA9E02 /* Lato-RegIta.ttf in Resources */,
 				DE60783D182C007C0053F23B /* Default@2x.png in Resources */,
 				DE67FE2017CA704F00240E1C /* guide_step_5-568h@2x.png in Resources */,
 				DE67FE2117CA704F00240E1C /* guide_step_5.png in Resources */,
@@ -1119,8 +1146,10 @@
 			files = (
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
+				1EEA97E1185782B000EA9E02 /* ActivityScrollViewController.m in Sources */,
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
+				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,
 				DE5599BD183CE3E400FE32E9 /* UIChatCell.m in Sources */,
 				DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */,
 				DEA93B5817204EF100303BB5 /* AFImageRequestOperation.m in Sources */,
@@ -1153,6 +1182,7 @@
 				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
 				DE5599B21836491200FE32E9 /* Message.m in Sources */,
 				DE6ED8CA17C0EFDA00C5E72E /* DetailActivityViewController.m in Sources */,
+				1EEA97EB1858721F00EA9E02 /* UICanuActivityCellScroll.m in Sources */,
 				DE6ED9D517C4273500C5E72E /* UICanuAttendeeCell.m in Sources */,
 				DE6ED9D817C4286500C5E72E /* AttendeesContainerViewController.m in Sources */,
 				DE6ED9DB17C428B100C5E72E /* AttendeesTableViewController.m in Sources */,
@@ -1219,7 +1249,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/rcalaf/Documents/Hyper\\ Island/Module\\ 11/CANU",
+					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1284,7 +1314,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1292,7 +1322,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
 				SDKROOT = iphoneos6.1;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
@@ -1310,7 +1340,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/rcalaf/Documents/Hyper\\ Island/Module\\ 11/CANU",
+					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1335,11 +1365,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Users/rcalaf/Documents/Hyper\\ Island/Module\\ 11/CANU",
+					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1351,7 +1381,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
