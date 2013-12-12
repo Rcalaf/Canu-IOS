@@ -28,7 +28,7 @@ typedef enum {
     UICanuActivityCellToGo = 2,
 } UICanuActivityCellStatus;
 
-@interface ActivityScrollViewController () <CLLocationManagerDelegate>
+@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate>
 
 @property (nonatomic) UITextView *feedbackMessage;
 @property (nonatomic, readonly) NSArray *quotes;
@@ -46,8 +46,7 @@ typedef enum {
 @synthesize currentLocation = _currentLocation;
 @synthesize locationManager = _locationManager;
 
-- (NSArray *)quotes
-{
+- (NSArray *)quotes{
     if (!_quotes) {
         if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
             _quotes = [NSArray arrayWithObjects:@"Where are you living? Move to a better place where people do stuff.",
@@ -81,8 +80,7 @@ typedef enum {
     return _quotes;
 }
 
-- (CLLocationManager *)locationManager
-{
+- (CLLocationManager *)locationManager{
     if (_locationManager != nil) {
         _locationManager.delegate = self;
         return _locationManager;
@@ -95,8 +93,7 @@ typedef enum {
     return _locationManager;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     _currentLocation = [[manager location] coordinate];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.currentLocation = _currentLocation;
@@ -106,19 +103,16 @@ typedef enum {
     [self reload];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
-{
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
     NSLog(@"loc manager Monitoring...");
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     NSLog(@"loc manager Fail...");
 }
 
 
-- (id)init
-{
+- (id)init{
     self = [super init];
     if (self) {
         
@@ -136,6 +130,7 @@ typedef enum {
         [self.view addSubview:self.feedbackMessage];
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
         
         [self.locationManager startUpdatingLocation];
@@ -152,10 +147,34 @@ typedef enum {
 	// Do any additional setup after loading the view.
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    float newX,newY;
+    
+    newX = scrollView.contentOffset.x;
+    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    
+    // Reload Animation
+    // to 0 at -100
+    
+}
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    float newX,newY;
+    
+    newX = scrollView.contentOffset.x;
+    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    
+    //Refresh
+    
+    if( newY <= -100.0f ){
+        [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
+    }
+    
+}
 
-- (void)reload
-{
+- (void)reload{
     
     if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
         
@@ -212,8 +231,7 @@ typedef enum {
     }
 }
 
-- (void)showFeedback
-{
+- (void)showFeedback{
     
     NSInteger r = arc4random()%[self.quotes count];
     
@@ -281,6 +299,10 @@ typedef enum {
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
+        
+        [cell.loadingIndicator startAnimating];
+        cell.actionButton.hidden = YES;
+        
         [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -295,6 +317,10 @@ typedef enum {
         eac.activity = cell.activity;
         [self presentViewController:eac animated:YES completion:nil];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
+        
+        [cell.loadingIndicator startAnimating];
+        cell.actionButton.hidden = YES;
+        
         [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];

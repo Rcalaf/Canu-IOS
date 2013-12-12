@@ -12,6 +12,8 @@
 
 @interface UICanuActivityCellScroll : UIView
 
+@property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+@property (strong, nonatomic) UIButton *actionButton;
 @property (strong, nonatomic) Activity *activity;
 @property (retain) id delegate;
 

@@ -21,7 +21,7 @@ typedef enum {
 
 @interface UICanuActivityCellScroll ()
 
-@property (strong, nonatomic) UIButton *actionButton;
+
 
 @end
 
@@ -109,6 +109,10 @@ typedef enum {
         self.actionButton.frame = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
         [self.actionButton addTarget:self action:@selector(touchActionButton) forControlEvents:UIControlEventTouchDown];
         [wrapperName addSubview:_actionButton];
+        
+        self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.loadingIndicator.frame = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
+        [wrapperName addSubview:_loadingIndicator];
         
         if ( _activity.status == UICanuActivityCellGo ) {
             [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes.png"] forState:UIControlStateNormal];
