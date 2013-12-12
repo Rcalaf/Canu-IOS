@@ -105,14 +105,28 @@ typedef enum {
         location.text = _activity.locationDescription;
         [wrapperName addSubview:location];
         
+        self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.loadingIndicator.frame = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
+        [wrapperName addSubview:_loadingIndicator];
+        
+        UIView *wrapperAnimatiomButton = [[UIView alloc]initWithFrame:CGRectMake(243.0f, 19.0f, 47.0f, 47.0f)];
+        wrapperAnimatiomButton.clipsToBounds = YES;
+        [wrapperName addSubview:wrapperAnimatiomButton];
+        
+        self.animationButtonGo = [[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 67, 67)];
+        self.animationButtonGo.image = [UIImage imageNamed:@"feed_action_circle_go"];
+        self.animationButtonGo.hidden = YES;
+        [wrapperAnimatiomButton addSubview:_animationButtonGo];
+        
+        self.animationButtonToGo = [[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 67, 67)];
+        self.animationButtonToGo.image = [UIImage imageNamed:@"feed_action_circle_togo"];
+        self.animationButtonToGo.hidden = YES;
+        [wrapperAnimatiomButton addSubview:_animationButtonToGo];
+        
         self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.actionButton.frame = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
         [self.actionButton addTarget:self action:@selector(touchActionButton) forControlEvents:UIControlEventTouchDown];
         [wrapperName addSubview:_actionButton];
-        
-        self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.loadingIndicator.frame = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
-        [wrapperName addSubview:_loadingIndicator];
         
         if ( _activity.status == UICanuActivityCellGo ) {
             [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes.png"] forState:UIControlStateNormal];

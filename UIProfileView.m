@@ -73,14 +73,14 @@
     
     if (hide) {
         self.mask.frame = [[UIScreen mainScreen] bounds];
-        [UIView animateKeyframesWithDuration:0.4 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.frame = CGRectMake(0.0f, _height - 114, 320.0f, 114.0f);
             self.mask.alpha = 1;
         } completion:^(BOOL finished) {
             
         }];
     }else{
-        [UIView animateKeyframesWithDuration:0.4 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+        [UIView animateWithDuration:0.2 animations:^{
             self.frame = CGRectMake(0.0f, _height, 320.0f, 114.0f);
             self.mask.alpha = 0;
         } completion:^(BOOL finished) {

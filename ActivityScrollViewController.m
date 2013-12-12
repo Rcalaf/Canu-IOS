@@ -133,8 +133,6 @@ typedef enum {
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
         
-        [self.locationManager startUpdatingLocation];
-        
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
         
     }
@@ -145,6 +143,7 @@ typedef enum {
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -299,37 +298,74 @@ typedef enum {
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
-        
+        NSLog(@"Disable To Go / Enable Go");
         [cell.loadingIndicator startAnimating];
+        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
+        cell.animationButtonToGo.hidden = NO;
         cell.actionButton.hidden = YES;
         
-        [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
-            if (error) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-            } else {
-                _activities = activities;
-                if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self showActivities];
-            }
-            if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload];
+        [UIView animateWithDuration:0.2 animations:^{
+            cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
+        } completion:^(BOOL finished) {
+            
+            cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
+            cell.animationButtonToGo.hidden = YES;
+            
+            [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
+                if (error) {
+                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+                } else {
+                    _activities = activities;
+                    cell.animationButtonGo.hidden = NO;
+                    cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
+                    
+                    [UIView animateWithDuration:0.2 animations:^{
+                        cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
+                    } completion:^(BOOL finished) {
+                        cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
+                        if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self showActivities];
+                        if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload];
+                    }];
+                }
+            }];
         }];
+        
     }else if (cell.activity.status == UICanuActivityCellEditable) {
         NewActivityViewController *eac = [[NewActivityViewController alloc] init];
         eac.activity = cell.activity;
         [self presentViewController:eac animated:YES completion:nil];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
-        
+        NSLog(@"Disable Go / Enable To Go");
         [cell.loadingIndicator startAnimating];
+        cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
+        cell.animationButtonGo.hidden = NO;
         cell.actionButton.hidden = YES;
         
-        [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
-            if (error) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-            } else {
-                _activities = activities;
-                if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self showActivities];
-            }
-            if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload];
+        [UIView animateWithDuration:0.2 animations:^{
+            cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
+        } completion:^(BOOL finished) {
+            
+            cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
+            cell.animationButtonGo.hidden = YES;
+            
+            [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
+                if (error) {
+                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+                } else {
+                    _activities = activities;
+                    cell.animationButtonToGo.hidden = NO;
+                    cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
+                    
+                    [UIView animateWithDuration:0.2 animations:^{
+                        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
+                    } completion:^(BOOL finished) {
+                        if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self showActivities];
+                        if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload];
+                    }];
+                }
+            }];
         }];
+
     }
 }
 
