@@ -11,6 +11,12 @@
 #import "UIImageView+AFNetworking.h"
 #import "User.h"
 
+@interface UIProfileView ()
+
+@property (nonatomic, readwrite) int height;
+
+@end
+
 @implementation UIProfileView
 
 @synthesize profileImage = _profileImage;
@@ -19,49 +25,30 @@
 @synthesize name = _name;
 @synthesize settingsButton = _settingsButton;
 @synthesize hideArrow = _hideArrow;
-@synthesize hideTag = _hideTag;
 
 
-
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithUser:(User *)user andFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         
-    }
-    return self;
-}
-
-- (id)initWithUser:(User *)user
-{
-    self = [super initWithFrame:CGRectMake(0.0, 460.0 + KIphone5Margin, 320.0, 114.0)];
-    if (self) {
+        self.profileHidden = YES;
+        
+        self.height = frame.origin.y;
+        
         self.backgroundColor = [UIColor colorWithRed:(255.0 / 255.0) green:(255.0 / 255.0) blue:(255.0 / 255.0) alpha: 1];
         
-        self.mask = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.mask = [[UIView alloc] init];
+        self.mask.alpha = 0;
         self.mask.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
-       // self.mask.hidden = YES;
-       
-        
-        self.hideTag = [[UILabel alloc] initWithFrame:CGRectMake(145.5f, 5.5f, 70.0f, 10.0f)];
-        //self.hideTag.backgroundColor = [UIColor redColor];
-        self.hideTag.text = @"My Profile";
-        self.hideTag.font =[UIFont fontWithName:@"Lato-Regular" size:8.0];
-        self.hideTag.textColor = [UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1];
-        [self addSubview:self.hideTag];
         
         self.hideArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bringup_profile_arrow.png"]];
         self.hideArrow.frame = CGRectMake(0.0, -12.0, self.hideArrow.frame.size.width, self.hideArrow.frame.size.height);
         [self addSubview:self.hideArrow];
         
-        
-        self.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 94.0, 94.0)];
-        //self.profileImage.image = user.profileImage;
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,user.profileImageUrl]];
-        
-       [self.profileImage  setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-       
-        //self.profileImage.backgroundColor = [UIColor redColor];
+        self.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 94.0, 94.0)];
+        [self.profileImage  setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [self addSubview:self.profileImage];
         self.profileImage.userInteractionEnabled = YES;
         
@@ -77,37 +64,30 @@
         self.settingsButton.frame = CGRectMake(282.0f, 20.0f, imageframe.size.width, imageframe.size.height);
         [self addSubview:_settingsButton];
         self.settingsButton.userInteractionEnabled = YES;
-        [self hideComponents:YES];
         
     }
     return self;
 }
 
 - (void)hideComponents:(BOOL)hide{
-    if (hide){
-        self.hideTag.hidden = NO;
-        self.profileImage.hidden = YES;
-        self.name.hidden = YES;
-        self.settingsButton.hidden = YES;
-      //  self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_with_arrow.png"];
+    
+    if (hide) {
+        self.mask.frame = [[UIScreen mainScreen] bounds];
+        [UIView animateKeyframesWithDuration:0.4 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+            self.frame = CGRectMake(0.0f, _height - 114, 320.0f, 114.0f);
+            self.mask.alpha = 1;
+        } completion:^(BOOL finished) {
+            
+        }];
     }else{
-        self.hideTag.hidden = YES;
-        self.profileImage.hidden = NO;
-        self.name.hidden = NO;
-        self.settingsButton.hidden = NO;
-        self.mask.hidden = NO;
-        
-      //  self.hideArrow.image = [UIImage imageNamed:@"bringup_profile_arrow.png"];
+        [UIView animateKeyframesWithDuration:0.4 delay:0 options:UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+            self.frame = CGRectMake(0.0f, _height, 320.0f, 114.0f);
+            self.mask.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.mask.frame = CGRectMake(0, 0, 0, 0);
+        }];
     }
+    
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

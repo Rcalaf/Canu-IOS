@@ -122,6 +122,8 @@ typedef enum {
     self = [super init];
     if (self) {
         
+        self.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        
         self.arrayCell = [[NSMutableArray alloc]init];
         
         self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(60.0f, 70.0f, 200.0f, 340.0f)];

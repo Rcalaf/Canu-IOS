@@ -22,23 +22,15 @@
 #import "AppDelegate.h"
 #import "UserProfileViewController.h"
 #import "UserSettingsViewController.h"
-#import "ActivityTableViewController.h"
+#import "ActivityScrollViewController.h"
 
 
 
 @interface UserProfileViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
-
-//@property (strong, nonatomic) IBOutlet UIButton *logoutButton;
 @property (strong, nonatomic) IBOutlet UIButton *activitiesButton;
 @property (strong, nonatomic) IBOutlet UIButton *createActivityButton;
-
 @property (strong, nonatomic) IBOutlet UIProfileView *profileView;
-//@property (strong, nonatomic) IBOutlet UITableView *myActivities;
-@property (nonatomic) BOOL profileHidden;
-
-
-//- (void)reload:(id)sender;
 
 @end
 
@@ -48,7 +40,6 @@
 @synthesize createActivityButton = _createActivityButton;
 @synthesize user = _user;
 
-@synthesize profileHidden = _profileHidden;
 @synthesize profileView = _profileView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,46 +48,14 @@
     if (self) {
         AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         self.user = appDelegate.user;
-        _profileHidden = YES;
     }
     return self;
 }
 
-/*
--(IBAction)createActivity:(id)sender{
-    NewActivityViewController *nac = [[NewActivityViewController alloc] init];
-    [self presentViewController:nac animated:YES completion:nil];
-}*/
-
-
-- (void)showHideProfile:(id)sender
+- (void)showHideProfile
 {
-    if (_profileHidden) {
-        [UIView animateWithDuration:0.3 animations:^(void){
-            _profileView.frame = CGRectMake(0.0f, 345.0f + KIphone5Margin, 320.0f, 114.0f);
-            [_profileView hideComponents:NO];
-            [self.view insertSubview:_profileView.mask belowSubview:_profileView];
-        } completion:^(BOOL finished) {
-            if (finished){
-                //self.view.userInteractionEnabled = NO;
-                _profileHidden = NO;
-                //[(UICanuNavigationController *)self.navigationController controlFadeShow];
-            }
-        }];
-   
-    }else{
-        [UIView animateWithDuration:0.3 animations:^(void){
-            _profileView.frame = CGRectMake(0.0f, 460.0f + KIphone5Margin, 320.0f, 114.0f);
-        } completion:^(BOOL finished) {
-            if (finished){
-                //self.view.userInteractionEnabled = YES;
-                [_profileView.mask removeFromSuperview];
-                [_profileView hideComponents:YES];
-                _profileHidden = YES;
-               // [(UICanuNavigationController *)self.navigationController controlFadeShow];
-            }
-        }];
-    }
+    [_profileView hideComponents:_profileView.profileHidden];
+    _profileView.profileHidden = !_profileView.profileHidden;
 }
 
 - (IBAction)showSettings:(id)sender
@@ -158,13 +117,12 @@
 
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
 
-    
-    
-    ActivityTableViewController *activitiesList = [[ActivityTableViewController alloc] init];
+    ActivityScrollViewController *activitiesList = [[ActivityScrollViewController alloc] init];
     [self addChildViewController:activitiesList];
     [self.view addSubview:activitiesList.view];
     
-    self.profileView = [[UIProfileView alloc] initWithUser:self.user];
+    self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 114)];
+    [self.view addSubview:_profileView.mask];
     [self.view addSubview:_profileView];
     
 }
@@ -173,19 +131,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self.logoutButton addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchDown];
-    
-    
-    //[self.activitiesButton addTarget:self action:@selector(showActivities:) forControlEvents:UIControlEventTouchDown];
-    //[self.createActivityButton addTarget:self action:@selector(createActivity:) forControlEvents:UIControlEventTouchDown];
-    
-    /*UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showProfileInfo:)];
-    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-     [_profileView addGestureRecognizer:swipeRecognizer];*/
-    
-    /*swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(HideProfileInfo:)];
-    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    [_profileView addGestureRecognizer:swipeRecognizer];*/
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
     [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
@@ -193,11 +138,6 @@
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
     [_profileView.profileImage addGestureRecognizer:tapRecognizer];
 
-    
-    // [self reload:nil];
-    
-    // AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-    // NSLog(@"%@",appDelegate.user.userName);
 }
 
 -(void) viewWillAppear:(BOOL)animated
@@ -215,7 +155,7 @@
     
    // self.profileView.profileImage.image = self.user.profileImage;
 
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideProfile:)];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideProfile)];
     //[_profileView addGestureRecognizer:tapRecognizer];
     
     UICanuNavigationController *navController = (UICanuNavigationController *)self.navigationController;
@@ -228,12 +168,10 @@
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-    //self.logoutButton = nil;
+    
     [super viewWillDisappear:YES];
-    if (!_profileHidden) [self performSelector:@selector(showHideProfile:) withObject:self];
     UICanuNavigationController *navController = (UICanuNavigationController *)self.navigationController;
     [navController.control removeGestureRecognizer:[navController.control.gestureRecognizers lastObject]];
-    
 
 }
 
