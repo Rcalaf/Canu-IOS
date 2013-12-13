@@ -11,6 +11,8 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "User.h"
 
+@class UICanuNavigationController;
+
 
 @class ActivitiesFeedViewController;
 @class UserProfileViewController;
@@ -26,6 +28,8 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) NSString *device_token;
 @property (strong, nonatomic) ActivitiesFeedViewController *publicFeedViewController;
 @property (strong, nonatomic) UserProfileViewController *profileViewController;
+
+@property (strong, nonatomic) UICanuNavigationController *canuViewController;
 
 
 //@property (readonly, strong, nonatomic) CLLocationManager *locationManager;

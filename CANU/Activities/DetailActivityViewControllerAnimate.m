@@ -8,7 +8,10 @@
 
 #import "DetailActivityViewControllerAnimate.h"
 
+#import "AppDelegate.h"
+
 #import "Activity.h"
+#import "UICanuNavigationController.h"
 
 #import "UIImageView+AFNetworking.h"
 
@@ -23,16 +26,24 @@ typedef enum {
     UICanuActivityCellToGo = 2,
 } UICanuActivityCellStatus;
 
-@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate>
+@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextFieldDelegate>
 
 @property (strong, nonatomic) Activity *activity;
 @property (nonatomic) UIView *wrapper;
 @property (nonatomic) UIView *wrapperName;
 @property (nonatomic) UIView *wrapperMap;
 @property (nonatomic) UIView *wrapperDescription;
-@property (nonatomic) UIImageView *actionButton;
+@property (nonatomic) UIView *wrapperBottomBar;
+@property (nonatomic) UIView *wrapperInput;
+@property (nonatomic) UIImageView *actionButtonImage;
 @property (nonatomic) ChatScrollView *chatView;
 @property (nonatomic) MKMapView *mapView;
+@property (nonatomic) UIButton *actionButton;
+@property (nonatomic) UIButton *touchArea;
+@property (nonatomic) UILabel *numberOfAssistents;
+@property (nonatomic) BOOL chatIsOpen;
+@property (nonatomic) UIImageView *shadow;
+@property (nonatomic) UITextField *input;
 
 @end
 
@@ -46,21 +57,20 @@ typedef enum {
         
         self.activity = activity;
         
-        UITapGestureRecognizer *tapWrapper1 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(folderAnimation)];
-        UITapGestureRecognizer *tapWrapper2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(folderAnimation)];
-        UITapGestureRecognizer *tapWrapper3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(folderAnimation)];
+        self.chatIsOpen = NO;
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
         self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, positionY - 10, 320, frame.size.height)];
         [self.view addSubview:_wrapper];
         
-        self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0)];
+        self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 - 10];
         [self.wrapper addSubview:_chatView];
         
         // User
         
         UIView *wrapperUser = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 166, 34)];
         wrapperUser.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        [wrapperUser addGestureRecognizer:tapWrapper1];
         [self.wrapper addSubview:wrapperUser];
         
         UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
@@ -76,7 +86,6 @@ typedef enum {
         
         UIView *wrapperTime = [[UIView alloc]initWithFrame:CGRectMake(177, 10, 133, 34)];
         wrapperTime.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        [wrapperTime addGestureRecognizer:tapWrapper2];
         [self.wrapper addSubview:wrapperTime];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -145,7 +154,6 @@ typedef enum {
         
         self.wrapperName = [[UIView alloc]initWithFrame:CGRectMake(10, 45, 300, 85)];
         self.wrapperName.backgroundColor = [UIColor whiteColor];
-        [self.wrapperName addGestureRecognizer:tapWrapper3];
         [self.wrapper addSubview:_wrapperName];
         
         UILabel *nameActivity = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
@@ -162,26 +170,113 @@ typedef enum {
         location.text = _activity.locationDescription;
         [_wrapperName addSubview:location];
         
-        self.actionButton = [[UIImageView alloc]initWithFrame:CGRectMake(243, 19, 47, 47)];
-        [self.wrapperName addSubview:_actionButton];
+        self.actionButtonImage = [[UIImageView alloc]initWithFrame:CGRectMake(243, 19, 47, 47)];
+        [self.wrapperName addSubview:_actionButtonImage];
         
         if ( _activity.status == UICanuActivityCellGo ) {
-            self.actionButton.image = [UIImage imageNamed:@"feed_action_yes"];
+            self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_yes"];
         } else if ( _activity.status == UICanuActivityCellToGo ){
-            self.actionButton.image = [UIImage imageNamed:@"feed_action_go.png"];
+            self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_go.png"];
         } else {
-            self.actionButton.image = [UIImage imageNamed:@"feed_action_edit.png"];
+            self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_edit.png"];
         }
         
+        self.shadow = [[UIImageView alloc]initWithFrame:CGRectMake(0, 85, 300, 2)];
+        self.shadow.image = [UIImage imageNamed:@"feed_shadow_name"];
+        self.shadow.alpha = 0;
+        [self.wrapperName addSubview:_shadow];
+        
+        // Touch Area
+        
+        self.touchArea = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+        [self.touchArea addTarget:self action:@selector(folderAnimation) forControlEvents:UIControlEventTouchDown];
+        [self.wrapper addSubview:_touchArea];
+        
+        // Bottom Bar
+        
+        self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - 57, 320, 57)];
+        self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xeaeaea);
+        [self.wrapper addSubview:_wrapperBottomBar];
+        
+        UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
+        [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateHighlighted];
+        [self.wrapperBottomBar addSubview:backButton];
+        
+        UIButton *attendeesButton = [[UIButton alloc]initWithFrame:CGRectMake(67, 10, 116, 37)];
+        [attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateNormal];
+        [attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateHighlighted];
+        [self.wrapperBottomBar addSubview:attendeesButton];
+        
+        self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];
+        self.numberOfAssistents.text = [NSString stringWithFormat:@"%i",[self.activity.attendeeIds count]];
+        self.numberOfAssistents.textColor = UIColorFromRGB(0x6d6e7a);
+        self.numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
+        self.numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
+        
+        [attendeesButton.imageView addSubview:_numberOfAssistents];
+        
+        self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_actionButton setFrame:CGRectMake(194, 10, 116, 37)];
+        
+        if (appDelegate.user.userId == self.activity.user.userId) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_edit.png"] forState:UIControlStateNormal];
+        else if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]] == NSNotFound) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
+        else [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
+        
+        [self.wrapperBottomBar addSubview:_actionButton];
+        
+        UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
+        lineBottomBar.backgroundColor = UIColorFromRGB(0xc2c4c5);
+        [self.wrapperBottomBar addSubview:lineBottomBar];
+        
+        // Input Bar
+        
+        self.wrapperInput = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
+        self.wrapperInput.backgroundColor = UIColorFromRGB(0xf1f1f1);
+        [self.wrapper addSubview:_wrapperInput];
+        
+        UIView *inputBackground = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 37)];
+        inputBackground.backgroundColor = [UIColor whiteColor];
+        [self.wrapperInput addSubview:inputBackground];
+        
+        self.input = [[UITextField alloc] initWithFrame:CGRectMake(10, 2, 220, 32)];
+        self.input.placeholder = @"Write something nice...";
+        self.input.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+        self.input.backgroundColor = [UIColor whiteColor];
+        self.input.textColor = UIColorFromRGB(0x6d6e7a);
+        [self.input setReturnKeyType:UIReturnKeySend];
+        self.input.delegate = self;
+        [inputBackground addSubview:_input];
+        
+        if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+            self.input.frame = CGRectMake(10, 8, 220, 20);
+        }
+        
+        UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(241, 2, 57, 32)];
+        [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
+        [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
+        [sendButton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchDown];
+        [inputBackground addSubview:sendButton];
+        
+        UIView *lineInputBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
+        lineInputBar.backgroundColor = UIColorFromRGB(0xd9dada);
+        [self.wrapperInput addSubview:lineInputBar];
+        
+        UICanuNavigationController *navigation = appDelegate.canuViewController;
+        
         [UIView animateWithDuration:0.4 animations:^{
+            navigation.control.alpha = 0;
             self.wrapper.frame = CGRectMake(0, 0, 320, frame.size.height);
-            self.actionButton.alpha = 0;
+            self.actionButtonImage.alpha = 0;
             self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
             self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
             self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
             self.chatView.frame = CGRectMake(10, 340, 300, frame.size.height - 340 - 57);
+            self.touchArea.frame = CGRectMake(10, 340, 300, frame.size.height - 340 - 57);
+            self.wrapperBottomBar.frame = CGRectMake(0, frame.size.height - 57, 320, 57);
         } completion:^(BOOL finished) {
-            
+            navigation.control.hidden = YES;
+            self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
         }];
         
     }
@@ -190,7 +285,87 @@ typedef enum {
 
 - (void)folderAnimation{
     
-    NSLog(@"Touch");
+    if (_chatIsOpen) {
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.mapView.frame = CGRectMake(10, 10, 280, 140);
+            self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
+            self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
+            self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
+            self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+            self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+            self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
+            self.shadow.alpha = 0;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        
+    }else{
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.mapView.frame = CGRectMake(10, - 140, 280, 140);
+            self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
+            self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
+            self.wrapperDescription.frame = CGRectMake(10, 130, 300, 0);
+            self.chatView.frame = CGRectMake(10, 130, 300, self.view.frame.size.height - 130 - 57 - 10);
+            self.touchArea.frame = CGRectMake(10, 10, 300, 120);
+            self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
+            self.shadow.alpha = 1;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        
+    }
+    
+    self.chatIsOpen = !_chatIsOpen;
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
+    }];
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    
+    [self sendMessage];
+    
+    return YES;
+}
+
+- (void)sendMessage{
+    
+    [self.input resignFirstResponder];
+    
+    NSString *message = _input.text;
+    self.input.text = @"";
+    if ([message length] != 0) {
+        [_activity newMessage:message WithBlock:^(NSError *error){
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                
+                // Reload Chat
+                
+            }
+            
+        }];
+    }
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+    }];
     
 }
 

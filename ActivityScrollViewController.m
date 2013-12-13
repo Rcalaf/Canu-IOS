@@ -137,7 +137,7 @@ typedef enum {
         [self.view addSubview:self.feedbackMessage];
         
         self.refreshAnimation = [[UIImageView alloc]initWithFrame:CGRectMake(150, self.view.frame.size.height - 40, 20, 20)];
-        self.refreshAnimation.image = [UIImage imageNamed:@"loadrt-loop-1"];
+//        self.refreshAnimation.image = [UIImage imageNamed:@"loadrt-loop-1"];
         [self.view addSubview:_refreshAnimation];
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Activity;
+
 @interface ChatScrollView : UIView
+
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight;
 
 @end

@@ -61,6 +61,11 @@
 		1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA9852185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m */; };
 		1EEA9859185A2C1A00EA9E02 /* DetailActivityViewControllerAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA9858185A2C1A00EA9E02 /* DetailActivityViewControllerAnimate.m */; };
 		1EEA985F185B44B300EA9E02 /* ChatScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA985E185B44B300EA9E02 /* ChatScrollView.m */; };
+		1EEA9862185B4CEB00EA9E02 /* UICanuChatCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EEA9861185B4CEB00EA9E02 /* UICanuChatCellScroll.m */; };
+		1EEA9865185B5E7400EA9E02 /* feed_shadow_name.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9863185B5E7400EA9E02 /* feed_shadow_name.png */; };
+		1EEA9866185B5E7400EA9E02 /* feed_shadow_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9864185B5E7400EA9E02 /* feed_shadow_name@2x.png */; };
+		1EEA9869185B666E00EA9E02 /* chat_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9867185B666E00EA9E02 /* chat_send.png */; };
+		1EEA986A185B666E00EA9E02 /* chat_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9868185B666E00EA9E02 /* chat_send@2x.png */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549581768EEE200C39E5E /* UICanuPicker.m */; };
 		DE2F59D817269C77007AD8FB /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2F59D717269C77007AD8FB /* UserProfileViewController.m */; };
@@ -295,6 +300,12 @@
 		1EEA9858185A2C1A00EA9E02 /* DetailActivityViewControllerAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailActivityViewControllerAnimate.m; path = CANU/Activities/DetailActivityViewControllerAnimate.m; sourceTree = "<group>"; };
 		1EEA985D185B44B300EA9E02 /* ChatScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChatScrollView.h; path = CANU/Chat/ChatScrollView.h; sourceTree = "<group>"; };
 		1EEA985E185B44B300EA9E02 /* ChatScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChatScrollView.m; path = CANU/Chat/ChatScrollView.m; sourceTree = "<group>"; };
+		1EEA9860185B4CEB00EA9E02 /* UICanuChatCellScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuChatCellScroll.h; path = Vendor/UICanuCell/UICanuChatCellScroll.h; sourceTree = "<group>"; };
+		1EEA9861185B4CEB00EA9E02 /* UICanuChatCellScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuChatCellScroll.m; path = Vendor/UICanuCell/UICanuChatCellScroll.m; sourceTree = "<group>"; };
+		1EEA9863185B5E7400EA9E02 /* feed_shadow_name.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = feed_shadow_name.png; path = Ressources/Backgrounds/feed_shadow_name.png; sourceTree = "<group>"; };
+		1EEA9864185B5E7400EA9E02 /* feed_shadow_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feed_shadow_name@2x.png"; path = "Ressources/Backgrounds/feed_shadow_name@2x.png"; sourceTree = "<group>"; };
+		1EEA9867185B666E00EA9E02 /* chat_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_send.png; path = Ressources/Buttons/chat_send.png; sourceTree = "<group>"; };
+		1EEA9868185B666E00EA9E02 /* chat_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_send@2x.png"; path = "Ressources/Buttons/chat_send@2x.png"; sourceTree = "<group>"; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
 		DE1549571768EEE200C39E5E /* UICanuPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuPicker.h; sourceTree = "<group>"; };
@@ -773,6 +784,8 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA9863185B5E7400EA9E02 /* feed_shadow_name.png */,
+				1EEA9864185B5E7400EA9E02 /* feed_shadow_name@2x.png */,
 				DE517730184F716500690E2F /* create_bg-568h@2x.png */,
 				DE517731184F716500690E2F /* edit_bg-568h@2x.png */,
 				DE517726184F70DC00690E2F /* create_bg.png */,
@@ -1027,6 +1040,8 @@
 				1EEA9852185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m */,
 				DE5599BB183CE3E400FE32E9 /* UIChatCell.h */,
 				DE5599BC183CE3E400FE32E9 /* UIChatCell.m */,
+				1EEA9860185B4CEB00EA9E02 /* UICanuChatCellScroll.h */,
+				1EEA9861185B4CEB00EA9E02 /* UICanuChatCellScroll.m */,
 			);
 			name = UICanuCell;
 			sourceTree = "<group>";
@@ -1106,6 +1121,8 @@
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				1EEA9867185B666E00EA9E02 /* chat_send.png */,
+				1EEA9868185B666E00EA9E02 /* chat_send@2x.png */,
 				DE6ED9B717C2957D00C5E72E /* fullview_action_edit.png */,
 				DE6ED9B817C2957E00C5E72E /* fullview_action_edit@2x.png */,
 				DE6ED9B917C2957E00C5E72E /* fullview_action_go.png */,
@@ -1208,6 +1225,8 @@
 				1EEA98291859FF5500EA9E02 /* loadrt-04@2x.png in Resources */,
 				DEFD7A71174694660087CB8A /* facebook_btn_off.png in Resources */,
 				1EEA98381859FF5500EA9E02 /* loadrt-12.png in Resources */,
+				1EEA986A185B666E00EA9E02 /* chat_send@2x.png in Resources */,
+				1EEA9869185B666E00EA9E02 /* chat_send.png in Resources */,
 				DE5599C1183E154E00FE32E9 /* chat_cell@2x.png in Resources */,
 				DE60782F182BD08D0053F23B /* intro_bg-568h@2x.png in Resources */,
 				DEFD7A72174694660087CB8A /* facebook_btn_off@2x.png in Resources */,
@@ -1255,6 +1274,7 @@
 				1EEA98321859FF5500EA9E02 /* loadrt-09.png in Resources */,
 				DE774B46184E129100F8C244 /* navmenu_me.png in Resources */,
 				DE6ED8BA17BD0FE900C5E72E /* feed_action_edit.png in Resources */,
+				1EEA9866185B5E7400EA9E02 /* feed_shadow_name@2x.png in Resources */,
 				DE6ED8BB17BD0FE900C5E72E /* feed_action_edit@2x.png in Resources */,
 				1EEA98271859FF5500EA9E02 /* loadrt-03@2x.png in Resources */,
 				DE6ED8BC17BD0FE900C5E72E /* feed_action_go.png in Resources */,
@@ -1295,6 +1315,7 @@
 				DE774B48184E129100F8C244 /* navmenu_me@2x.png in Resources */,
 				DE6ED9CD17C3D35000C5E72E /* fullview_bg.png in Resources */,
 				DE6ED9CE17C3D35000C5E72E /* fullview_bg@2x.png in Resources */,
+				1EEA9865185B5E7400EA9E02 /* feed_shadow_name.png in Resources */,
 				DE51772C184F70DC00690E2F /* create_bg.png in Resources */,
 				1EEA98301859FF5500EA9E02 /* loadrt-08.png in Resources */,
 				1EEA98241859FF5500EA9E02 /* loadrt-02.png in Resources */,
@@ -1367,6 +1388,7 @@
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
 				1EEA97E1185782B000EA9E02 /* ActivityScrollViewController.m in Sources */,
+				1EEA9862185B4CEB00EA9E02 /* UICanuChatCellScroll.m in Sources */,
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
 				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,

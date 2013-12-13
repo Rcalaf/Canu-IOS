@@ -25,9 +25,7 @@ NSString *const FBSessionStateChangedNotification =
 
 
 @implementation AppDelegate{
-    UICanuNavigationController *canuViewController;
     MainViewController *loginViewController;
-    
 }
 
 @synthesize user = _user;
@@ -100,11 +98,11 @@ NSString *const FBSessionStateChangedNotification =
 
     if (self.user) {
        // [mixpanel identify:[NSString stringWithFormat:@"%d",self.user.userId]];
-        canuViewController = [[UICanuNavigationController alloc] init];
+        self.canuViewController = [[UICanuNavigationController alloc] init];
        // _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
        // _profileViewController = [[UserProfileViewController alloc] init];
-        [canuViewController pushViewController:self.publicFeedViewController animated:NO];
-        self.window.rootViewController = canuViewController;
+        [self.canuViewController pushViewController:self.publicFeedViewController animated:NO];
+        self.window.rootViewController = _canuViewController;
         
         
     } else {
