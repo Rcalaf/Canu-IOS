@@ -21,6 +21,8 @@
 
     #define KIphone5Margin ( IS_IPHONE_5 ? 88.0f : 0.0f)
 
+    #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
     #define MIXPANEL_TOKEN @"dc20d3edc0817d3743af8302e82a7572"
 
     #define UIColorFromRGB(rgbValue) [UIColor \

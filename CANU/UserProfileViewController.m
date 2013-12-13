@@ -117,7 +117,7 @@
 
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
 
-    ActivityScrollViewController *activitiesList = [[ActivityScrollViewController alloc] init];
+    ActivityScrollViewController *activitiesList = [[ActivityScrollViewController alloc] initForUserProfile:YES andUser:_user];
     [self addChildViewController:activitiesList];
     [self.view addSubview:activitiesList.view];
     

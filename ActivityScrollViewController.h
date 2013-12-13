@@ -10,8 +10,12 @@
 
 #import "UICanuActivityCellScroll.h"
 
+@class User;
+
 @interface ActivityScrollViewController : UIViewController<UICanuActivityCellScrollDelegate>
 
 @property (strong, nonatomic) NSArray *activities;
+
+- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user;
 
 @end

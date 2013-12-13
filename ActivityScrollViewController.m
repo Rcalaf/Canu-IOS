@@ -8,13 +8,11 @@
 
 #import "ActivityScrollViewController.h"
 
-#import "ActivitiesFeedViewController.h"
-#import "UserProfileViewController.h"
-
 #import "UIScrollViewReverse.h"
 #import "UICanuActivityCellScroll.h"
 #import "NewActivityViewController.h"
 #import "DetailActivityViewController.h"
+#import "DetailActivityViewControllerAnimate.h"
 
 #import "AppDelegate.h"
 
@@ -36,6 +34,9 @@ typedef enum {
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSMutableArray *arrayCell;
+@property (nonatomic) BOOL isUserProfile;
+@property (nonatomic) UIImageView *refreshAnimation;
+@property (nonatomic) User *user;
 
 @end
 
@@ -48,7 +49,7 @@ typedef enum {
 
 - (NSArray *)quotes{
     if (!_quotes) {
-        if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
+        if (!_isUserProfile) {
             _quotes = [NSArray arrayWithObjects:@"Where are you living? Move to a better place where people do stuff.",
                        @"Are you that guy who lives in the forest? Unfortunately the animal version of CANU is not ready.",
                        @"Get the people in your area going, obviously they can't do anything themselves.",
@@ -112,11 +113,17 @@ typedef enum {
 }
 
 
-- (id)init{
+- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user{
     self = [super init];
     if (self) {
         
+        self.isUserProfile = isUserProfile;
+        
+        self.user = user;
+        
         self.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        
+        [self.locationManager startUpdatingLocation];
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
@@ -128,6 +135,10 @@ typedef enum {
         self.feedbackMessage.backgroundColor             = self.view.backgroundColor;
         self.feedbackMessage.hidden                      = YES;
         [self.view addSubview:self.feedbackMessage];
+        
+        self.refreshAnimation = [[UIImageView alloc]initWithFrame:CGRectMake(150, self.view.frame.size.height - 40, 20, 20)];
+        self.refreshAnimation.image = [UIImage imageNamed:@"loadrt-loop-1"];
+        [self.view addSubview:_refreshAnimation];
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         self.scrollview.delegate = self;
@@ -143,7 +154,6 @@ typedef enum {
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.locationManager startUpdatingLocation];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -154,7 +164,7 @@ typedef enum {
     newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     // Reload Animation
-    // to 0 at -100
+    
     
 }
 
@@ -175,12 +185,11 @@ typedef enum {
 
 - (void)reload{
     
-    if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
+    if (!_isUserProfile) {
         
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
             
             if (error) {
-                
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
                 
             } else {
@@ -202,13 +211,13 @@ typedef enum {
         
     }else{
         
-        [[(UserProfileViewController *)self.parentViewController user] userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+        [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
+                    
                     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
                     [appDelegate.user logOut];
                 } else {
-                    
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
                 }
             } else {
@@ -237,9 +246,7 @@ typedef enum {
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         self.feedbackMessage.hidden = NO;
         self.activities = @[];
-        
         [self showActivities];
-        
         self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
     } else if ([_activities count] == 0){
         self.feedbackMessage.hidden = NO;
@@ -247,7 +254,6 @@ typedef enum {
     } else {
         self.feedbackMessage.hidden = YES;
     }
-    
     
 }
 
@@ -298,7 +304,7 @@ typedef enum {
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
-        NSLog(@"Disable To Go / Enable Go");
+        
         [cell.loadingIndicator startAnimating];
         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
         cell.animationButtonToGo.hidden = NO;
@@ -323,8 +329,11 @@ typedef enum {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-                        if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self showActivities];
-                        if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload];
+                        if (!_isUserProfile) {
+                            [self showActivities];
+                        }else{
+                            [self reload];
+                        }
                     }];
                 }
             }];
@@ -335,7 +344,7 @@ typedef enum {
         eac.activity = cell.activity;
         [self presentViewController:eac animated:YES completion:nil];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
-        NSLog(@"Disable Go / Enable To Go");
+        
         [cell.loadingIndicator startAnimating];
         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
         cell.animationButtonGo.hidden = NO;
@@ -359,8 +368,11 @@ typedef enum {
                     [UIView animateWithDuration:0.2 animations:^{
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
-                        if ([self.parentViewController isKindOfClass:[ActivitiesFeedViewController class]]) [self showActivities];
-                        if ([self.parentViewController isKindOfClass:[UserProfileViewController class]]) [self reload];
+                        if (!_isUserProfile) {
+                            [self showActivities];
+                        }else{
+                            [self reload];
+                        }
                     }];
                 }
             }];
@@ -371,11 +383,47 @@ typedef enum {
 
 - (void)touchCell:(UITapGestureRecognizer *)sender{
     
-    UICanuActivityCellScroll *cell = (UICanuActivityCellScroll *)sender.view;
+    UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
     
-    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
-    davc.activity = [_activities objectAtIndex:cell.tag];
-    [self.navigationController pushViewController:davc animated:YES];
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        if (i < cellTouch.tag) {
+            
+            float distance = cell.frame.origin.y + cellTouch.frame.origin.y + cellTouch.frame.size.height + 10;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+            }];
+            
+        }else if (i == cellTouch.tag){
+            
+            Activity *activity = [_activities objectAtIndex:cellTouch.tag];
+            
+            float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
+            
+            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andActivity:activity andPosition:position];
+            [self addChildViewController:davc];
+            [self.view addSubview:davc.view];
+            
+//            DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
+//            davc.activity = [_activities objectAtIndex:cellTouch.tag];
+//            [self.navigationController pushViewController:davc animated:YES];
+            
+            cellTouch.alpha = 0;
+            
+        }else{
+            
+            float distance = cell.frame.origin.y - cellTouch.frame.origin.y;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+            }];
+            
+        }
+        
+    }
     
 }
 

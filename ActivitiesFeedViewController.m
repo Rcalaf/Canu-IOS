@@ -44,7 +44,9 @@
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
     
-    _list = [[ActivityScrollViewController alloc] init];
+    User *user = nil;
+    
+    _list = [[ActivityScrollViewController alloc] initForUserProfile:NO andUser:user];
     [self addChildViewController:_list];
     [self.view addSubview:_list.view];
     
