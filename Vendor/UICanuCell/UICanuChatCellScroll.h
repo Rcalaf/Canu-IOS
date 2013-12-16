@@ -14,4 +14,6 @@
 
 - (id)initWithFrame:(CGRect)frame andMessage:(Message *)message;
 
+- (float)heightContent;
+
 @end

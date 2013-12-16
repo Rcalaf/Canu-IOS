@@ -33,6 +33,8 @@
         
         self.backgroundColor = UIColorFromRGB(0xfafafa);
         
+        self.clipsToBounds = YES;
+        
         self.activity = activity;
         
         self.arrayCell = [[NSMutableArray alloc]init];
@@ -82,15 +84,24 @@
         
     }
     
+    float heightTotalContent = 0;
+    
     for (int i = 0; i < [_messages count]; i++) {
         
         Message *message = [_messages objectAtIndex:i];
         
-        UICanuChatCellScroll *cell = [[UICanuChatCellScroll alloc]initWithFrame:CGRectMake(0, i * 50, 300, 40) andMessage:message];
+        UICanuChatCellScroll *cell = [[UICanuChatCellScroll alloc]initWithFrame:CGRectMake(0, heightTotalContent, 300, 40) andMessage:message];
+        heightTotalContent += [cell heightContent];
         [self.scrollview addSubview:cell];
         
         [_arrayCell addObject:cell];
         
+    }
+    
+    self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, heightTotalContent);
+    
+    if (_scrollview.frame.size.height > heightTotalContent) {
+        self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, _scrollview.frame.size.height);
     }
     
 }

@@ -111,7 +111,7 @@ typedef enum {
         timeStart.backgroundColor = UIColorFromRGB(0xf9f9f9);
         timeStart.textColor = UIColorFromRGB(0x6d6e7a);
         [wrapperTime addSubview:timeStart];
-        
+        NSLog(@"%@",self.activity.end);
         UILabel *timeEnd = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
         timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
         timeEnd.font = [UIFont fontWithName:@"Lato-Italic" size:11.0];
