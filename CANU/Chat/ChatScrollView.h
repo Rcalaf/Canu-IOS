@@ -20,4 +20,8 @@
 
 -(void)scrollToLastMessage;
 
+- (void)scrollAnimationFolderFor:(int)contentOffset;
+
+- (void)killScroll;
+
 @end

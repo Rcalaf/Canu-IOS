@@ -26,7 +26,7 @@ typedef enum {
     UICanuActivityCellToGo = 2,
 } UICanuActivityCellStatus;
 
-@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextFieldDelegate>
+@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 
 @property (strong, nonatomic) Activity *activity;
 @property (nonatomic) UIView *wrapper;
@@ -45,6 +45,8 @@ typedef enum {
 @property (nonatomic) UIImageView *shadow;
 @property (nonatomic) UITextField *input;
 @property (nonatomic) BOOL keyboardIsOpen;
+@property (nonatomic) UIScrollView *scrollView;
+@property (nonatomic) BOOL animationFolder;
 
 @end
 
@@ -59,8 +61,8 @@ typedef enum {
         self.activity = activity;
         
         self.chatIsOpen = NO;
-        
         self.keyboardIsOpen = NO;
+        self.animationFolder = NO;
         
         AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
@@ -193,6 +195,14 @@ typedef enum {
         self.shadow.alpha = 0;
         [self.wrapperName addSubview:_shadow];
         
+        // ScrollView
+        
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(10, 195, 300, 145)];
+        self.scrollView.contentSize = CGSizeMake(300, 145 + 1);
+        self.scrollView.delegate = self;
+        self.scrollView.showsVerticalScrollIndicator = NO;
+        [self.wrapper addSubview:_scrollView];
+        
         // Touch Area
         
         self.touchArea = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -290,10 +300,31 @@ typedef enum {
     return self;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    if (!_animationFolder) {
+        if (scrollView.contentOffset.y >= 65) {
+            [self folderAnimation];
+            self.scrollView.userInteractionEnabled = NO;
+            self.scrollView.scrollEnabled = NO;
+        }else{
+            self.wrapperMap.frame = CGRectMake(10, 45, 300, 150 - scrollView.contentOffset.y);
+            self.wrapperName.frame = CGRectMake(10, 195 - scrollView.contentOffset.y, 300, 85);
+            self.wrapperDescription.frame = CGRectMake(10, 280 - scrollView.contentOffset.y, 300, 60);
+            self.chatView.frame = CGRectMake(10, 340 - scrollView.contentOffset.y, 300, self.view.frame.size.height - 340 - 57 + scrollView.contentOffset.y);
+            [self.chatView scrollAnimationFolderFor:scrollView.contentOffset.y];
+        }
+    } 
+    
+}
+
 - (void)folderAnimation{
     
+    self.animationFolder = YES;
+    
+    [self.chatView killScroll];
+    
     if (_chatIsOpen) {
-        
         [UIView animateWithDuration:0.4 animations:^{
             [self.chatView scrollToLastMessage];
             self.mapView.frame = CGRectMake(10, 10, 280, 140);
@@ -304,16 +335,19 @@ typedef enum {
             self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
             self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
             self.shadow.alpha = 0;
+            self.scrollView.frame = CGRectMake(10, 195, 300, 145);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.4 animations:^{
                 self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
             } completion:^(BOOL finished) {
-                
+                [self.chatView scrollToLastMessage];
+                self.animationFolder = NO;
+                self.scrollView.scrollEnabled = YES;
+                self.scrollView.userInteractionEnabled = YES;
             }];
         }];
         
     }else{
-        
         [UIView animateWithDuration:0.4 animations:^{
             [self.chatView scrollToBottom];
             self.mapView.frame = CGRectMake(10, - 140, 280, 140);
@@ -324,11 +358,14 @@ typedef enum {
             self.touchArea.frame = CGRectMake(10, 10, 300, 120);
             self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
             self.shadow.alpha = 1;
+            self.scrollView.frame = CGRectMake(10, 45, 300, 85);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.4 animations:^{
                 self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
             } completion:^(BOOL finished) {
-                
+                self.animationFolder = NO;
+                self.scrollView.scrollEnabled = YES;
+                self.scrollView.userInteractionEnabled = YES;
             }];
         }];
         

@@ -59,7 +59,7 @@
     
     newX = scrollView.contentOffset.x;
     newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
-    
+    NSLog(@"Scroll to %f",scrollView.contentOffset.y);
     // Reload Animation
     
     
@@ -163,6 +163,17 @@
     
     self.scrollview.contentOffset = CGPointMake(0, _yOriginLastMessage);
     
+}
+
+- (void)scrollAnimationFolderFor:(int)contentOffset{
+    
+    self.scrollview.contentOffset = CGPointMake(0, _yOriginLastMessage - contentOffset);
+    
+}
+
+- (void)killScroll{
+    CGPoint offset = _scrollview.contentOffset;
+    [_scrollview setContentOffset:offset animated:NO];
 }
 
 @end
