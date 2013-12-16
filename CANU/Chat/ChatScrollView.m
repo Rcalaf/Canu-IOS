@@ -20,6 +20,8 @@
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSArray *messages;
 @property (nonatomic) NSMutableArray *arrayCell;
+@property (nonatomic) float yOriginLastMessage;
+@property (nonatomic) BOOL isFirstTime;
 
 @end
 
@@ -35,10 +37,13 @@
         
         self.clipsToBounds = YES;
         
+        self.isFirstTime = YES;
+        
         self.activity = activity;
         
         self.arrayCell = [[NSMutableArray alloc]init];
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, maxHeight)];
+        self.scrollview.alpha = 0;
         [self addSubview:_scrollview];
         
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
@@ -88,6 +93,8 @@
     
     for (int i = 0; i < [_messages count]; i++) {
         
+        self.yOriginLastMessage = heightTotalContent;
+        
         Message *message = [_messages objectAtIndex:i];
         
         UICanuChatCellScroll *cell = [[UICanuChatCellScroll alloc]initWithFrame:CGRectMake(0, heightTotalContent, 300, 40) andMessage:message];
@@ -103,6 +110,30 @@
     if (_scrollview.frame.size.height > heightTotalContent) {
         self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, _scrollview.frame.size.height);
     }
+    
+    if (_isFirstTime) {
+        self.isFirstTime = !_isFirstTime;
+        [self scrollToLastMessage];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.scrollview.alpha = 1;
+        }];
+        
+    }else{
+        [self scrollToBottom];
+    }
+    
+}
+
+- (void)scrollToBottom{
+    
+    [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+    
+}
+
+-(void)scrollToLastMessage{
+    
+    self.scrollview.contentOffset = CGPointMake(0, _yOriginLastMessage);
     
 }
 

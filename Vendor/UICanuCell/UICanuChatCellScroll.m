@@ -47,7 +47,6 @@
             userName.text = message.user.userName;
             
         }
-        userName.text = message.user.userName;
         userName.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
         userName.backgroundColor = UIColorFromRGB(0xfafafa);
         userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
@@ -70,13 +69,16 @@
         timeFormatter.dateFormat = @"HH:mm";
         [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
         
-        UILabel *time = [[UILabel alloc] initWithFrame:CGRectMake(45.0f, 10.0f, 128.0f, 10.0f)];
-        NSLog(@"%@",message.date);
-        NSLog(@"%@",[dateFormatter stringFromDate:message.date]);
-        time.text = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:message.date],[timeFormatter stringFromDate:message.date]];
+        UILabel *time = [[UILabel alloc] initWithFrame:CGRectMake(240.0f, 10.0f, 50.0f, 10.0f)];
+        if ([[self normalizedDateWithDate:message.date] isEqualToDate:[self normalizedDateWithDate:[NSDate date]]]) {
+            time.text = [NSString stringWithFormat:@"%@",[timeFormatter stringFromDate:message.date]];
+        }else{
+            time.text = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:message.date],[timeFormatter stringFromDate:message.date]];
+        }
+        time.textAlignment = NSTextAlignmentRight;
         time.font = [UIFont fontWithName:@"Lato-Regular" size:6.0];
         time.backgroundColor = UIColorFromRGB(0xfafafa);
-        time.backgroundColor = [UIColor redColor];
+        time.textColor = UIColorFromRGB(0x6d6e7a);
         time.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
         [self addSubview:time];
         
@@ -85,22 +87,6 @@
 }
 
 - (float)heightContent{
-    
-//    float heightMessage = 0;
-//    
-//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-//        
-//        CGRect frame = [_textMessage.text boundingRectWithSize:CGSizeMake(_textMessage.frame.size.width, FLT_MAX)
-//                                          options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
-//                                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Lato-Regular" size:12.0]}
-//                                          context:nil];
-//        heightMessage = frame.size.height;
-//        
-//    }else{
-//        
-//        heightMessage = [_textMessage.text sizeWithFont:[UIFont fontWithName:@"Lato-Regular" size:12.0] constrainedToSize:CGSizeMake(_textMessage.frame.size.width, FLT_MAX)].height;
-//        
-//    }
     
     CGSize textViewSize = [self.textMessage sizeThatFits:CGSizeMake(self.textMessage.frame.size.width, FLT_MAX)];
     
@@ -112,6 +98,15 @@
     
     return height;
     
+}
+
+-(NSDate*)normalizedDateWithDate:(NSDate*)date
+{
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit)
+                                               fromDate: date];
+    return [calendar dateFromComponents:components];
 }
 
 @end

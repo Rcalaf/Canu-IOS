@@ -44,6 +44,7 @@ typedef enum {
 @property (nonatomic) BOOL chatIsOpen;
 @property (nonatomic) UIImageView *shadow;
 @property (nonatomic) UITextField *input;
+@property (nonatomic) BOOL keyboardIsOpen;
 
 @end
 
@@ -59,12 +60,18 @@ typedef enum {
         
         self.chatIsOpen = NO;
         
+        self.keyboardIsOpen = NO;
+        
         AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
         self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, positionY - 10, 320, frame.size.height)];
         [self.view addSubview:_wrapper];
         
+        UITapGestureRecognizer *tapChatView = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchChatView)];
+        
         self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 - 10];
+        self.chatView.userInteractionEnabled = YES;
+        [self.chatView addGestureRecognizer:tapChatView];
         [self.wrapper addSubview:_chatView];
         
         // User
@@ -111,7 +118,7 @@ typedef enum {
         timeStart.backgroundColor = UIColorFromRGB(0xf9f9f9);
         timeStart.textColor = UIColorFromRGB(0x6d6e7a);
         [wrapperTime addSubview:timeStart];
-        NSLog(@"%@",self.activity.end);
+        
         UILabel *timeEnd = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
         timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
         timeEnd.font = [UIFont fontWithName:@"Lato-Italic" size:11.0];
@@ -288,6 +295,7 @@ typedef enum {
     if (_chatIsOpen) {
         
         [UIView animateWithDuration:0.4 animations:^{
+            [self.chatView scrollToLastMessage];
             self.mapView.frame = CGRectMake(10, 10, 280, 140);
             self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
             self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
@@ -307,6 +315,7 @@ typedef enum {
     }else{
         
         [UIView animateWithDuration:0.4 animations:^{
+            [self.chatView scrollToBottom];
             self.mapView.frame = CGRectMake(10, - 140, 280, 140);
             self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
             self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
@@ -330,6 +339,8 @@ typedef enum {
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
+    
+    self.keyboardIsOpen = !_keyboardIsOpen;
     
     [UIView animateWithDuration:0.3 animations:^{
         self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
@@ -356,16 +367,31 @@ typedef enum {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 
-                // Reload Chat
+                [_chatView reload];
                 
             }
             
         }];
     }
     
+    self.keyboardIsOpen = !_keyboardIsOpen;
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
     }];
+    
+}
+
+- (void)touchChatView{
+    
+    if (_keyboardIsOpen) {
+        
+        [self.input resignFirstResponder];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        }];
+    }
     
 }
 
