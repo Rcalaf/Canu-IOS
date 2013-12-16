@@ -19,19 +19,20 @@
 
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSMutableArray *arrayCell;
+@property (nonatomic) Activity *activity;
+@property (nonatomic) NSArray *attendees;
 
 @end
 
 @implementation AttendeesScrollViewController
 
-@synthesize activity = _activity;
-@synthesize attendees = _attendees;
-
-- (id)initWithFrame:(CGRect)frame{
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity{
     self = [super init];
     if (self) {
         
         self.view.frame = frame;
+        
+        self.activity = activity;
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
@@ -140,6 +141,12 @@
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    
+    NSLog(@"Dealloc AttendeesScrollViewController");
+    
 }
 
 @end

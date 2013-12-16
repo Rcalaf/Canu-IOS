@@ -7,17 +7,14 @@
 //
 
 #import "DetailActivityViewControllerAnimate.h"
-
 #import "AppDelegate.h"
-
 #import "Activity.h"
 #import "UICanuNavigationController.h"
-
 #import "UIImageView+AFNetworking.h"
-
 #import "ChatScrollView.h"
-
 #import "AFCanuAPIClient.h"
+#import "NewActivityViewController.h"
+#import "AttendeesScrollViewController.h"
 #import <MapKit/MapKit.h>
 
 typedef enum {
@@ -39,6 +36,7 @@ typedef enum {
 @property (nonatomic) ChatScrollView *chatView;
 @property (nonatomic) MKMapView *mapView;
 @property (nonatomic) UIButton *actionButton;
+@property (nonatomic) UIButton *attendeesButton;
 @property (nonatomic) UIButton *touchArea;
 @property (nonatomic) UILabel *numberOfAssistents;
 @property (nonatomic) BOOL chatIsOpen;
@@ -47,6 +45,7 @@ typedef enum {
 @property (nonatomic) BOOL keyboardIsOpen;
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) BOOL animationFolder;
+@property (nonatomic) AttendeesScrollViewController *attendeesList;
 
 @end
 
@@ -213,17 +212,19 @@ typedef enum {
         
         self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - 57, 320, 57)];
         self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xeaeaea);
-        [self.wrapper addSubview:_wrapperBottomBar];
+        [self.view addSubview:_wrapperBottomBar];
         
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
         [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
         [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateHighlighted];
+        [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchDown];
         [self.wrapperBottomBar addSubview:backButton];
         
-        UIButton *attendeesButton = [[UIButton alloc]initWithFrame:CGRectMake(67, 10, 116, 37)];
-        [attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateNormal];
-        [attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateHighlighted];
-        [self.wrapperBottomBar addSubview:attendeesButton];
+        self.attendeesButton = [[UIButton alloc]initWithFrame:CGRectMake(67, 10, 116, 37)];
+        [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateNormal];
+        [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateHighlighted];
+        [self.attendeesButton addTarget:self action:@selector(showAttendees) forControlEvents:UIControlEventTouchDown];
+        [self.wrapperBottomBar addSubview:_attendeesButton];
         
         self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];
         self.numberOfAssistents.text = [NSString stringWithFormat:@"%i",[self.activity.attendeeIds count]];
@@ -231,9 +232,10 @@ typedef enum {
         self.numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
         self.numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
         
-        [attendeesButton.imageView addSubview:_numberOfAssistents];
+        [_attendeesButton.imageView addSubview:_numberOfAssistents];
         
         self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.actionButton addTarget:self action:@selector(eventActionButton) forControlEvents:UIControlEventTouchDown];
         [_actionButton setFrame:CGRectMake(194, 10, 116, 37)];
         
         if (appDelegate.user.userId == self.activity.user.userId) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_edit.png"] forState:UIControlStateNormal];
@@ -250,7 +252,7 @@ typedef enum {
         
         self.wrapperInput = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
         self.wrapperInput.backgroundColor = UIColorFromRGB(0xf1f1f1);
-        [self.wrapper addSubview:_wrapperInput];
+        [self.view addSubview:_wrapperInput];
         
         UIView *inputBackground = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 37)];
         inputBackground.backgroundColor = [UIColor whiteColor];
@@ -320,58 +322,62 @@ typedef enum {
 
 - (void)folderAnimation{
     
-    self.animationFolder = YES;
-    
-    [self.chatView killScroll];
-    
-    if (_chatIsOpen) {
-        [UIView animateWithDuration:0.4 animations:^{
-            [self.chatView scrollToLastMessage];
-            self.mapView.frame = CGRectMake(10, 10, 280, 140);
-            self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
-            self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
-            self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
-            self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
-            self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
-            self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
-            self.shadow.alpha = 0;
-            self.scrollView.frame = CGRectMake(10, 195, 300, 145);
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.4 animations:^{
-                self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
-            } completion:^(BOOL finished) {
-                [self.chatView scrollToLastMessage];
-                self.animationFolder = NO;
-                self.scrollView.scrollEnabled = YES;
-                self.scrollView.userInteractionEnabled = YES;
-            }];
-        }];
+    if (!_animationFolder) {
         
-    }else{
-        [UIView animateWithDuration:0.4 animations:^{
-            [self.chatView scrollToBottom];
-            self.mapView.frame = CGRectMake(10, - 140, 280, 140);
-            self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
-            self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
-            self.wrapperDescription.frame = CGRectMake(10, 130, 300, 0);
-            self.chatView.frame = CGRectMake(10, 130, 300, self.view.frame.size.height - 130 - 57 - 10);
-            self.touchArea.frame = CGRectMake(10, 10, 300, 120);
-            self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
-            self.shadow.alpha = 1;
-            self.scrollView.frame = CGRectMake(10, 45, 300, 85);
-        } completion:^(BOOL finished) {
+        self.animationFolder = YES;
+        
+        [self.chatView killScroll];
+        
+        if (_chatIsOpen) {
             [UIView animateWithDuration:0.4 animations:^{
-                self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+                [self.chatView scrollToLastMessage];
+                self.mapView.frame = CGRectMake(10, 10, 280, 140);
+                self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
+                self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
+                self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
+                self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+                self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+                self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
+                self.shadow.alpha = 0;
+                self.scrollView.frame = CGRectMake(10, 195, 300, 145);
             } completion:^(BOOL finished) {
-                self.animationFolder = NO;
-                self.scrollView.scrollEnabled = YES;
-                self.scrollView.userInteractionEnabled = YES;
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+                } completion:^(BOOL finished) {
+                    [self.chatView scrollToLastMessage];
+                    self.animationFolder = NO;
+                    self.scrollView.scrollEnabled = YES;
+                    self.scrollView.userInteractionEnabled = YES;
+                }];
             }];
-        }];
+            
+        }else{
+            [UIView animateWithDuration:0.4 animations:^{
+                [self.chatView scrollToBottom];
+                self.mapView.frame = CGRectMake(10, - 140, 280, 140);
+                self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
+                self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
+                self.wrapperDescription.frame = CGRectMake(10, 130, 300, 0);
+                self.chatView.frame = CGRectMake(10, 130, 300, self.view.frame.size.height - 130 - 57 - 10);
+                self.touchArea.frame = CGRectMake(10, 10, 300, 120);
+                self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
+                self.shadow.alpha = 1;
+                self.scrollView.frame = CGRectMake(10, 45, 300, 85);
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+                } completion:^(BOOL finished) {
+                    self.animationFolder = NO;
+                    self.scrollView.scrollEnabled = YES;
+                    self.scrollView.userInteractionEnabled = YES;
+                }];
+            }];
+            
+        }
+        
+        self.chatIsOpen = !_chatIsOpen;
         
     }
-    
-    self.chatIsOpen = !_chatIsOpen;
     
 }
 
@@ -381,11 +387,12 @@ typedef enum {
     
     [UIView animateWithDuration:0.3 animations:^{
         self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
+        self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57 - 216, 320, 57);
     }];
     
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [self sendMessage];
     
@@ -415,6 +422,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.2 animations:^{
         self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
     }];
     
 }
@@ -427,6 +435,97 @@ typedef enum {
         
         [UIView animateWithDuration:0.2 animations:^{
             self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+            self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+        }];
+    }
+    
+}
+
+- (void)eventActionButton{
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    if (appDelegate.user.userId == self.activity.user.userId){
+        // edit
+        NewActivityViewController *eac = [[NewActivityViewController alloc] init];
+        eac.activity = self.activity;
+        [self presentViewController:eac animated:YES completion:nil];
+    }else if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]] == NSNotFound){
+        // attend
+        _actionButton.hidden = YES;
+//        _loadingIndicator.hidden = NO;
+//        [_loadingIndicator startAnimating];
+        [self.activity attendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
+                [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
+                //[_grid addSubview:_chatButton];
+                
+            }
+            
+//            _loadingIndicator.hidden = YES;
+//            [_loadingIndicator stopAnimating];
+            _actionButton.hidden = NO;
+        }];
+    }else{
+        // don't attend
+        _actionButton.hidden = YES;
+//        _loadingIndicator.hidden = NO;
+//        [_loadingIndicator startAnimating];
+        [self.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
+                [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
+                //[_chatButton removeFromSuperview];
+            }
+//            _loadingIndicator.hidden = YES;
+//            [_loadingIndicator stopAnimating];
+            _actionButton.hidden = NO;
+        }];
+    }
+    
+}
+
+- (void)backAction{
+    
+    if (_attendeesList != nil) {
+        
+        [self showAttendees];
+        
+    }
+    
+}
+
+- (void)showAttendees{
+    
+    if (_attendeesList == nil) {
+        self.attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 57) andActivity:_activity];
+        [self addChildViewController:self.attendeesList];
+        [self.view addSubview:self.attendeesList.view];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.wrapper.frame = CGRectMake(- 320, 0, 320, self.wrapper.frame.size.height);
+            self.attendeesList.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height - 57);
+            self.attendeesButton.alpha = 0;
+            self.actionButton.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }else{
+        [UIView animateWithDuration:0.4 animations:^{
+            self.wrapper.frame = CGRectMake(0, 0, 320, self.wrapper.frame.size.height);
+            self.attendeesList.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height - 57);
+            self.attendeesButton.alpha = 1;
+            self.actionButton.alpha = 1;
+        } completion:^(BOOL finished) {
+            [self.attendeesList willMoveToParentViewController:nil];
+            [self.attendeesList.view removeFromSuperview];
+            [self.attendeesList removeFromParentViewController];
+            self.attendeesList = nil;
         }];
     }
     

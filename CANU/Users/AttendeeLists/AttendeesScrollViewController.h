@@ -12,9 +12,6 @@
 
 @interface AttendeesScrollViewController : UIViewController
 
-@property (strong, nonatomic) Activity *activity;
-@property (strong, nonatomic) NSArray *attendees;
-
-- (id)initWithFrame:(CGRect)frame;
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity;
 
 @end

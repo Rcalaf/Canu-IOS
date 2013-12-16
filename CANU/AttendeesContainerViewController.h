@@ -12,7 +12,6 @@
 
 @interface AttendeesContainerViewController : UIViewController
 
-
-@property (strong, nonatomic) Activity *activity;
+- (id)initWithFrame:(CGRect)frame andWithActivity:(Activity *)activity;
 
 @end

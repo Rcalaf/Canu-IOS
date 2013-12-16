@@ -14,60 +14,33 @@
 
 @interface AttendeesContainerViewController ()
 
+@property (strong, nonatomic) Activity *activity;
+
 @end
 
 @implementation AttendeesContainerViewController
 
-
-@synthesize activity = _activity;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithFrame:(CGRect)frame andWithActivity:(Activity *)activity{
+    self = [super init];
     if (self) {
-        // Custom initialization
+        
+        self.view.frame = frame;
+        
+        self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+        
+//        AttendeesScrollViewController *attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+//        attendeesList.activity = _activity;
+//        [self addChildViewController:attendeesList];
+//        [self.view addSubview:attendeesList.view];
+        
     }
     return self;
-}
-
-- (IBAction)goBack:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)loadView
-{
-    [super loadView];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-    
-    AttendeesScrollViewController *attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - 57)];
-    attendeesList.activity = _activity;
-    [self addChildViewController:attendeesList];
-    [self.view addSubview:attendeesList.view];
-    
-    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
-    toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
-    
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(goBack:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [toolBar addSubview:backButton];
-    [self.view addSubview:toolBar];
-    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-}
-
-- (BOOL)shouldAutorotate
-{
-    return NO;
 }
 
 - (void)didReceiveMemoryWarning

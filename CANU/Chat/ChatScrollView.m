@@ -59,7 +59,7 @@
     
     newX = scrollView.contentOffset.x;
     newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
-    NSLog(@"Scroll to %f",scrollView.contentOffset.y);
+    
     // Reload Animation
     
     
