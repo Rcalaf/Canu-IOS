@@ -14,7 +14,7 @@
 
 #import "UIScrollViewReverse.h"
 
-@interface ChatScrollView ()
+@interface ChatScrollView ()<UIScrollViewDelegate>
 
 @property (nonatomic) Activity *activity;
 @property (nonatomic) UIScrollViewReverse *scrollview;
@@ -44,12 +44,40 @@
         self.arrayCell = [[NSMutableArray alloc]init];
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, maxHeight)];
         self.scrollview.alpha = 0;
+        self.scrollview.delegate = self;
         [self addSubview:_scrollview];
         
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
         
     }
     return self;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    float newX,newY;
+    
+    newX = scrollView.contentOffset.x;
+    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    
+    // Reload Animation
+    
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    float newX,newY;
+    
+    newX = scrollView.contentOffset.x;
+    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    
+    //Refresh
+    
+    if( newY <= - 80.0f ){
+        [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
+    }
+    
 }
 
 - (void)reload{
