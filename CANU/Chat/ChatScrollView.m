@@ -22,6 +22,7 @@
 @property (nonatomic) NSMutableArray *arrayCell;
 @property (nonatomic) float yOriginLastMessage;
 @property (nonatomic) BOOL isFirstTime;
+@property (nonatomic) UILabel *emptyChat;
 
 @end
 
@@ -113,6 +114,13 @@
             
         }
         
+        if (_emptyChat != nil) {
+            
+            [_emptyChat removeFromSuperview];
+            _emptyChat = nil;
+            
+        }
+        
         [_arrayCell removeAllObjects];
         
     }
@@ -130,6 +138,16 @@
         [self.scrollview addSubview:cell];
         
         [_arrayCell addObject:cell];
+        
+    }
+    
+    if ([_messages count] == 0) {
+        
+        self.emptyChat = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 60)];
+        self.emptyChat.text = @"Touch and write the first message ...";
+        self.emptyChat.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
+        self.emptyChat.textColor = UIColorFromRGB(0x6d6e7a);
+        [self.scrollview addSubview:_emptyChat];
         
     }
     

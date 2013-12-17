@@ -298,7 +298,7 @@ typedef enum {
             self.wrapperBottomBar.frame = CGRectMake(0, frame.size.height - 57, 320, 57);
         } completion:^(BOOL finished) {
             navigation.control.hidden = YES;
-            self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+            self.view.backgroundColor = backgroundColorView;
         }];
         
     }

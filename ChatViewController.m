@@ -71,7 +71,7 @@
     if (self) {
         self.activity = activity;
         //self.view.frame = CGRectMake(10.0f, 265.0f, 300.0f, 200.0f);
-        self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+        self.view.backgroundColor = backgroundColorView;
         _chatTableViewController = [[ChatTableViewController alloc] initWithActivity:activity];
         [self addChildViewController:_chatTableViewController];
         [self.view addSubview:_chatTableViewController.view];

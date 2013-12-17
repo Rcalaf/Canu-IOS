@@ -58,7 +58,7 @@
 - (IBAction)showAttendees:(id)sender
 {
     AttendeesContainerViewController *attendeesList = [[AttendeesContainerViewController alloc] init];
-    attendeesList.activity = self.activity;
+//    attendeesList.activity = self.activity;
 
    // AttendeesTableViewController *attendeesList = [[AttendeesTableViewController alloc] init];
     [self presentViewController:attendeesList animated:YES completion:nil];
@@ -130,7 +130,7 @@
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.view.backgroundColor = backgroundColorView;
     
     if (IS_IPHONE_5) {
         _grid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fullview_bg-568h.png"]];

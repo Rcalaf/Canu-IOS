@@ -22,8 +22,6 @@
 #import "UserProfileViewController.h"
 #import "MainViewController.h"
 
-#define backgroundcolor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-
 @interface ActivityTableViewController () <CLLocationManagerDelegate>
 
 @property (readonly, nonatomic) CLLocationCoordinate2D currentLocation;

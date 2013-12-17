@@ -42,7 +42,7 @@
 - (void)loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.view.backgroundColor = backgroundColorView;
     
     _browser = [[UIWebView alloc] initWithFrame:self.view.frame];
     _browser.scalesPageToFit=YES;

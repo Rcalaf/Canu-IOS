@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) ActivityMapViewController *map;
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
+//@property (strong, nonatomic) CLLocationManager *locationManager;
 
 //- (void)reload:(id)sender;
 @end
@@ -24,7 +24,7 @@
 
 @synthesize map = _map;
 @synthesize list = _list;
-@synthesize locationManager = _locationManager;
+//@synthesize locationManager = _locationManager;
 
 
 
@@ -42,7 +42,7 @@
 -(void)loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.view.backgroundColor = backgroundColorView;
     
     User *user = nil;
     
@@ -50,10 +50,10 @@
     [self addChildViewController:_list];
     [self.view addSubview:_list.view];
     
-    _map = [[ActivityMapViewController alloc] init];
-    [self addChildViewController:_map];
-    [self.view addSubview:_map.view];
-    _map.view.hidden = YES;
+//    _map = [[ActivityMapViewController alloc] init];
+//    [self addChildViewController:_map];
+//    [self.view addSubview:_map.view];
+//    _map.view.hidden = YES;
     
     
     //[_map.map setShowsUserLocation:YES];
@@ -85,11 +85,11 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
-    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
-        [_map reload:self];
-        [_map.map setShowsUserLocation:YES];
-        _map.view.hidden = NO;
-    }
+//    if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+//        [_map reload:self];
+//        [_map.map setShowsUserLocation:YES];
+//        _map.view.hidden = NO;
+//    }
 }
 
 

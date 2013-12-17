@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ActivityTableViewController.h"
 #import "ActivityScrollViewController.h"
 
 

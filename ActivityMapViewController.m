@@ -48,7 +48,7 @@
 - (void)loadView
 {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.view.backgroundColor = backgroundColorView;
     _map = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, -20.0f, 480.0f + KIphone5Margin, 340.0f)];
     [self.view addSubview:_map];
 }

@@ -62,10 +62,10 @@
 {
     [super loadView];
     
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.view.backgroundColor = backgroundColorView;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 320.0f,413.0f + KIphone5Margin) style:UITableViewStyleGrouped];
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+    self.tableView.backgroundColor = backgroundColorView;
     [self.tableView setTransform:CGAffineTransformMakeRotation(M_PI)];
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, 311.5);
     

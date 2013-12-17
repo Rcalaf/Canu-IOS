@@ -26,7 +26,7 @@
         
         self.view.frame = frame;
         
-        self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
+        self.view.backgroundColor = backgroundColorView;
         
 //        AttendeesScrollViewController *attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
 //        attendeesList.activity = _activity;

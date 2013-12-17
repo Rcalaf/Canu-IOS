@@ -18,8 +18,6 @@
 
 #import "Activity.h"
 
-#define backgroundcolor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:1.0];
-
 typedef enum {
     UICanuActivityCellEditable = 0,
     UICanuActivityCellGo = 1,
