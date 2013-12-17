@@ -60,8 +60,7 @@
         
         self.settingsButton  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settings.png"]];
         
-        CGRect imageframe = self.settingsButton.frame;
-        self.settingsButton.frame = CGRectMake(282.0f, 20.0f, imageframe.size.width, imageframe.size.height);
+        self.settingsButton.frame = CGRectMake(275.0f, 15.0f, self.settingsButton.frame.size.width, self.settingsButton.frame.size.height);
         [self addSubview:_settingsButton];
         self.settingsButton.userInteractionEnabled = YES;
         
