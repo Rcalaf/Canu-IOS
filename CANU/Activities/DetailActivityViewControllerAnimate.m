@@ -191,7 +191,7 @@ typedef enum {
             self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_edit.png"];
         }
         
-        self.shadow = [[UIImageView alloc]initWithFrame:CGRectMake(0, 85, 300, 2)];
+        self.shadow = [[UIImageView alloc]initWithFrame:CGRectMake(0, 85, 300, 4)];
         self.shadow.image = [UIImage imageNamed:@"feed_shadow_name"];
         self.shadow.alpha = 0;
         [self.wrapperName addSubview:_shadow];
@@ -295,6 +295,8 @@ typedef enum {
             self.chatView.frame = CGRectMake(10, 340, 300, frame.size.height - 340 - 57);
             self.touchArea.frame = CGRectMake(10, 340, 300, frame.size.height - 340 - 57);
             self.wrapperBottomBar.frame = CGRectMake(0, frame.size.height - 57, 320, 57);
+            self.shadow.alpha = 1;
+            self.shadow.frame = CGRectMake(0, 85 + 60, 300, 4);
         } completion:^(BOOL finished) {
             navigation.control.hidden = YES;
             self.view.backgroundColor = backgroundColorView;
@@ -340,8 +342,8 @@ typedef enum {
                 self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
                 self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
                 self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
-                self.shadow.alpha = 0;
                 self.scrollView.frame = CGRectMake(10, 195, 300, 145);
+                self.shadow.frame = CGRectMake(0, 85 + 60, 300, 4);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.4 animations:^{
                     self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
@@ -363,8 +365,8 @@ typedef enum {
                 self.chatView.frame = CGRectMake(10, 130, 300, self.view.frame.size.height - 130 - 57 - 10);
                 self.touchArea.frame = CGRectMake(10, 10, 300, 120);
                 self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
-                self.shadow.alpha = 1;
                 self.scrollView.frame = CGRectMake(10, 45, 300, 85);
+                self.shadow.frame = CGRectMake(0, 85, 300, 4);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.4 animations:^{
                     self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
@@ -550,6 +552,8 @@ typedef enum {
         self.chatView.alpha = 0;
         self.touchArea.frame = CGRectMake(0, 0, 0, 0);
         self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
+        self.shadow.alpha = 0;
+        self.shadow.frame = CGRectMake(0, 85, 300, 4);
     } completion:^(BOOL finished) {
         
     }];
