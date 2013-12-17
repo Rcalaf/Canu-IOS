@@ -26,7 +26,7 @@ typedef enum {
     UICanuActivityCellToGo = 2,
 } UICanuActivityCellStatus;
 
-@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate>
+@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate>
 
 @property (nonatomic) UITextView *feedbackMessage;
 @property (nonatomic, readonly) NSArray *quotes;
@@ -404,6 +404,7 @@ typedef enum {
             float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
             
             DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andActivity:activity andPosition:position];
+            davc.delegate = self;
             [self addChildViewController:davc];
             [self.view addSubview:davc.view];
             
@@ -424,6 +425,40 @@ typedef enum {
         }
         
     }
+    
+}
+
+- (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+     
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (120 + 10) + 10 ) - 120, 300, 120);
+        }];
+        
+    }
+    
+    [self performSelector:@selector(killViewController:) withObject:viewController afterDelay:0.4];
+    
+}
+
+-(void)killViewController:(id)sender{
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        cell.alpha = 1;
+        
+    }
+    
+    UIViewController *viewController = (UIViewController *) sender;
+    
+    [viewController willMoveToParentViewController:nil];
+    [viewController.view removeFromSuperview];
+    [viewController removeFromParentViewController];
+    viewController = nil;
     
 }
 

@@ -12,6 +12,14 @@
 
 @interface DetailActivityViewControllerAnimate : UIViewController
 
+@property (retain) id delegate;
+
 - (id)initFrame:(CGRect)frame andActivity:(Activity *)activity andPosition:(int)positionY;
 
+@end
+
+@protocol DetailActivityViewControllerAnimateDelegate <NSObject>
+
+@required
+- (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController;
 @end

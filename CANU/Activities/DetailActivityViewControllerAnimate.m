@@ -25,7 +25,8 @@ typedef enum {
 
 @interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 
-@property (strong, nonatomic) Activity *activity;
+@property (nonatomic) int positionY;
+@property (nonatomic) Activity *activity;
 @property (nonatomic) UIView *wrapper;
 @property (nonatomic) UIView *wrapperName;
 @property (nonatomic) UIView *wrapperMap;
@@ -58,6 +59,8 @@ typedef enum {
         self.view.frame = frame;
         
         self.activity = activity;
+        
+        self.positionY = positionY;
         
         self.chatIsOpen = NO;
         self.keyboardIsOpen = NO;
@@ -210,7 +213,7 @@ typedef enum {
         
         // Bottom Bar
         
-        self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height - 57, 320, 57)];
+        self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
         self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xeaeaea);
         [self.view addSubview:_wrapperBottomBar];
         
@@ -496,7 +499,48 @@ typedef enum {
         
         [self showAttendees];
         
+    }else{
+        
+        if (_chatIsOpen) {
+            
+            [self folderAnimation];
+            
+            [self performSelector:@selector(animationBack) withObject:nil afterDelay:0.8];
+            
+        }else{
+            [self animationBack];
+        }
+        
     }
+    
+}
+
+- (void)animationBack{
+    
+    [self.delegate closeDetailActivity:self];
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    UICanuNavigationController *navigation = appDelegate.canuViewController;
+    
+    navigation.control.hidden = NO;
+    
+    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:0.0];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        navigation.control.alpha = 1;
+        self.wrapper.frame = CGRectMake(0, _positionY - 10, 320, _wrapper.frame.size.height);
+        self.actionButtonImage.alpha = 1;
+        self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
+        self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
+        self.wrapperDescription.frame = CGRectMake(10, 130, 300, 0);
+        self.chatView.frame = CGRectMake(10, 130, 300,0);
+        self.chatView.alpha = 0;
+        self.touchArea.frame = CGRectMake(0, 0, 0, 0);
+        self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
+    } completion:^(BOOL finished) {
+        
+    }];
     
 }
 
@@ -541,6 +585,12 @@ typedef enum {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    
+    NSLog(@"dealloc Detail Activity");
+    
 }
 
 @end
