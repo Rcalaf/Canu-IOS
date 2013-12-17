@@ -274,7 +274,7 @@ typedef enum {
             self.input.frame = CGRectMake(10, 8, 220, 20);
         }
         
-        UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(241, 2, 57, 32)];
+        UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(237, 2, 61, 33)];
         [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
         [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
         [sendButton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchDown];
