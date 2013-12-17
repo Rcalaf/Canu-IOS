@@ -39,6 +39,7 @@ typedef enum {
 @property (nonatomic) UIButton *actionButton;
 @property (nonatomic) UIButton *attendeesButton;
 @property (nonatomic) UIButton *touchArea;
+@property (nonatomic) UIButton *touchQuitKeyboard;
 @property (nonatomic) UILabel *numberOfAssistents;
 @property (nonatomic) BOOL chatIsOpen;
 @property (nonatomic) UIImageView *shadow;
@@ -71,11 +72,9 @@ typedef enum {
         self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, positionY - 10, 320, frame.size.height)];
         [self.view addSubview:_wrapper];
         
-        UITapGestureRecognizer *tapChatView = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchChatView)];
+        
         
         self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 - 10];
-        self.chatView.userInteractionEnabled = YES;
-        [self.chatView addGestureRecognizer:tapChatView];
         [self.wrapper addSubview:_chatView];
         
         // User
@@ -386,7 +385,12 @@ typedef enum {
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
-    self.keyboardIsOpen = !_keyboardIsOpen;
+    self.keyboardIsOpen = YES;
+    
+    self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 57, 320, 216 + 57)];
+    self.touchQuitKeyboard.backgroundColor = [UIColor redColor];
+    [self.touchQuitKeyboard addTarget:self action:@selector(touchChatView) forControlEvents:UIControlEventTouchDown];
+    [self.wrapper addSubview:_touchQuitKeyboard];
     
     [UIView animateWithDuration:0.3 animations:^{
         self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
@@ -421,7 +425,10 @@ typedef enum {
         }];
     }
     
-    self.keyboardIsOpen = !_keyboardIsOpen;
+    self.keyboardIsOpen = NO;
+    
+    [self.touchQuitKeyboard removeFromSuperview];
+    self.touchQuitKeyboard = nil;
     
     [UIView animateWithDuration:0.2 animations:^{
         self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
@@ -434,7 +441,12 @@ typedef enum {
     
     if (_keyboardIsOpen) {
         
+        self.keyboardIsOpen = NO;
+        
         [self.input resignFirstResponder];
+        
+        [self.touchQuitKeyboard removeFromSuperview];
+        self.touchQuitKeyboard = nil;
         
         [UIView animateWithDuration:0.2 animations:^{
             self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);

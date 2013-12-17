@@ -29,6 +29,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) UITextView *description;
+@property (strong, nonatomic) UITextField *detailsPlaceholder;
 
 @property (strong, nonatomic) IBOutlet UILabel *start;
 @property (strong, nonatomic) IBOutlet UILabel *lengthPicker;
@@ -102,7 +103,6 @@ float oldValue;
 - (IBAction)createActivity:(id)sender{
    if (self.location) {
       
-       //NSArray *lengthTimeParts = [self.lengthPicker.text componentsSeparatedByString:@":"];
        [self operationInProcess:YES];
        
        NSDate *start;
@@ -111,12 +111,6 @@ float oldValue;
        } else {
           start = [NSDate date];
        }
-       
-       
-       
-       //NSInteger delay = (([[lengthTimeParts objectAtIndex:0] integerValue]*60) + [[lengthTimeParts objectAtIndex:1] integerValue])*60;
-       //NSDate *end = [start dateByAddingTimeInterval:delay];
-       
        
        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -226,7 +220,6 @@ float oldValue;
 
 -(IBAction)finetuneActivityLength:(UIPanGestureRecognizer *)gesture
 {
-    //float curve = (abs([gesture velocityInView:self.view].y)%100)/100.0;
    
     if([gesture translationInView:self.view].y > oldValue){
         if (_length > 0) {
@@ -240,13 +233,8 @@ float oldValue;
     
     oldValue = [gesture translationInView:self.view].y;
     
-    
-   //NSLog(@"leght value: %f", [gesture translationInView:self.view].y);
-    
     int hours = _length/60;
     int minuts = _length%60;
-    
-   // NSLog(@"time: %d:%d", hours,minuts);
     
     self.lengthPicker.text = [NSString stringWithFormat:@"%.2d:%.2d", hours,minuts  ];
 }
@@ -265,55 +253,6 @@ float oldValue;
     self.dateTime = actionSheet.datePicker.date;
     self.start.text = [dateFormatter stringFromDate:actionSheet.datePicker.date];
 }
-
-
-/*- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    
-    CLLocationCoordinate2D coordintate = [[locations objectAtIndex:0] coordinate];
-  
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:coordintate.latitude],@"latitude",[NSNumber numberWithDouble:coordintate.longitude],@"longitude", nil] forKey:@"currentLocation"];
-    
-     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation: [locations objectAtIndex:0] completionHandler:
-     ^(NSArray *placemarks, NSError *error) {
-         if (error != nil) {
-             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
-                                         message:@"The map server is not available."//[error localizedDescription]
-                                        delegate:nil
-                               cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
-             return;
-         }         
-         
-         _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
-         findLocationButton.userInteractionEnabled = YES;
-         //String to address
-          NSString *locatedaddress = [[_location.placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-         
-         //Print the location in the console
-            NSLog(@"Currently address is: %@",locatedaddress);
-         
-         
-         
-     }];
-    [_locationManager stopUpdatingLocation];
-}
-
-
-- (CLLocationManager *)locationManager
-{
-    if (_locationManager != nil) {
-        _locationManager.delegate = self;
-        return _locationManager;
-    }
-    
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    _locationManager.distanceFilter=200;
-    return _locationManager;
-}*/
 
 - (void)loadView
 {
@@ -382,10 +321,9 @@ float oldValue;
     _formGrid = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"create_world.png"]];
     CGRect formGridFrame = _formGrid.frame;
     formGridFrame.origin.x = 10.0f;
-    formGridFrame.origin.y = 203.0f + KIphone5Margin;
+    formGridFrame.origin.y = self.view.frame.size.height - 57 - 10 - 47 - 142;
     _formGrid.frame = formGridFrame;
     [_formGrid setUserInteractionEnabled:YES];
-    
     
     _name = [[UITextField alloc] initWithFrame:CGRectMake(18.0f, 0.0f, 280.0, 47.0)];
     _name.placeholder = @"Title";
@@ -468,18 +406,17 @@ float oldValue;
     
 
     _description = [[UITextView alloc] init];
-    UITextField *detailsPlaceholder = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 345.0f + KIphone5Margin, 300.0f, 47.0)];
-    detailsPlaceholder.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
-    detailsPlaceholder.placeholder = @"Details";
-    detailsPlaceholder.delegate = self;
-    //[detailsPlaceholder setReturnKeyType:UIReturnKeySearch];
-    [self.view addSubview:detailsPlaceholder];
+    self.detailsPlaceholder = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, self.view.frame.size.height - 57 - 10 - 47 + 15, 300.0f, 24)];
+    self.detailsPlaceholder.backgroundColor = [UIColor clearColor];
+    self.detailsPlaceholder.placeholder = @"Details";
+    self.detailsPlaceholder.delegate = self;
+    [self.view addSubview:_detailsPlaceholder];
     if (!self.activity.description || [self.activity.description isEqualToString:@""]) {
-        _description.frame = CGRectMake(10.0f, 345.0f + KIphone5Margin , 300.0f, 47.0);
+        _description.frame = CGRectMake(10.0f, self.view.frame.size.height - 57 - 10 - 47, 300.0f, 47.0);
         _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
     } else {
-        _formGrid.frame = CGRectMake(10.0, 149.5f, _formGrid.frame.size.width, _formGrid.frame.size.height);
-        _description.frame = CGRectMake(10.0, 292.0f + KIphone5Margin, 300.0f, 101.0f);
+        _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 47 - 197, _formGrid.frame.size.width, _formGrid.frame.size.height);
+        _description.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 101, 300.0f, 101.0f);
         _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:1.0f];
     }
    
@@ -487,14 +424,13 @@ float oldValue;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
     _description.delegate = self;
-    //_description.contentInset = UIEdgeInsetsMake(4.0f, 8.0f, 0.0f, 8.0f);
-    [self.description setReturnKeyType:UIReturnKeyDefault];
+    _description.returnKeyType = UIReturnKeySend;
     [self.view addSubview:_description];
     [self.view addSubview:_formGrid];
     
     
     // Set the toolbar
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     //set the create button
@@ -548,24 +484,14 @@ float oldValue;
 }
 
 #pragma mark - UITextField Delegate
-- (BOOL)textFieldShouldReturn:(UICanuTextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
-    return YES;
-}
-
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField.text.length >= 25 && range.length == 0)
+    
+    if (textField == _name) {
+        [_description becomeFirstResponder];
         return NO;
-   
-    return YES;
-}
-
-
-- (BOOL)textFieldShouldEndEditing:(UICanuTextField *)textField
-{
-    [textField resignFirstResponder];
+    }
+    
     return YES;
 }
 
@@ -573,8 +499,15 @@ float oldValue;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (textView.text.length >= 140 && range.length == 0)
+
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
         return NO;
+    }else{
+        if (textView.text.length >= 140 && range.length == 0)
+            return NO;
+    }
+    
     return YES;
 }
 
@@ -591,53 +524,26 @@ float oldValue;
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    if ([_description hasText]) {
-        [UIView animateWithDuration:0.25 animations:^{
-            _formGrid.frame =CGRectMake(10.0, -9.5f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
-            _description.frame =CGRectMake(10.0, 133.0f + KIphone5Margin, _description.frame.size.width, 101.0f);
-            _description.backgroundColor = [UIColor whiteColor];
-        }];
-    } else {
-        if ([_name isFirstResponder]) {
-            [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0f, 196.0f  + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                //_description.frame = CGRectMake(10.0, 338.5f, _description.frame.size.width, _description.frame.size.height);
-            }];
-        }else if ([_description isFirstResponder]){
-            [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, -9.5f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0, 133.0f + KIphone5Margin, _description.frame.size.width, 101.0f);
-                _description.backgroundColor = [UIColor whiteColor];
-            }];
-        }
-    }
-
-
+    [UIView animateWithDuration:0.25 animations:^{
+        _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 216 - 10 - 47 - 197, _formGrid.frame.size.width, _formGrid.frame.size.height);
+        _description.frame = CGRectMake(10.0, self.view.frame.size.height - 10 - 101 - 216, 300.0f, 101.0f);
+        _description.backgroundColor = [UIColor whiteColor];
+    }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     if ([_description hasText]) {
             [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, 149.5f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0,  292.0f + KIphone5Margin, _description.frame.size.width, 101.0f);
+                _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 47 - 197, _formGrid.frame.size.width, _formGrid.frame.size.height);
+                _description.frame =CGRectMake(10.0, self.view.frame.size.height - 10 - 101 - 57, _description.frame.size.width, 101.0f);
             }];
     } else {
-        if ([_name isFirstResponder]) {
-            [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, 203.0f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0,  345.0f + KIphone5Margin, _description.frame.size.width, 47.0f);
-                _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
-            }];
-            
-        } else if ([_description isFirstResponder]){
-            [UIView animateWithDuration:0.25 animations:^{
-                _formGrid.frame =CGRectMake(10.0, 203.0f + KIphone5Margin, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0,  345.0f + KIphone5Margin, _description.frame.size.width, 47.0f);
-                _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
-            }];
-            
-        }
+        [UIView animateWithDuration:0.25 animations:^{
+            _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 47 - 142, _formGrid.frame.size.width, _formGrid.frame.size.height);
+            _description.frame =CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 47, _description.frame.size.width, 47.0f);
+            _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
+        }];
     }
 
 }
@@ -646,12 +552,10 @@ float oldValue;
 
 - (void)itemMap:(NSNotification*)notification
 {
-    //NSLog(@"%@",[[[(MKMapItem *)notification.object placemark] addressDictionary] valueForKey:@"FormattedAddressLines"]);
+    
     self.location = (MKMapItem *)notification.object;
-   // self.locationName.text = self.location.placemark.addressDictionary[@"Street"];
     self.locationName.text = [[[self.location.placemark addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-  //  [self.view setNeedsDisplay];
-  //   NSLog(@"%@",self.location.placemark.addressDictionary);
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
