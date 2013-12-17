@@ -43,7 +43,7 @@
         self.activity = activity;
         
         self.arrayCell = [[NSMutableArray alloc]init];
-        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, maxHeight)];
+        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -1, frame.size.width, maxHeight)];
         self.scrollview.alpha = 0;
         self.scrollview.delegate = self;
         [self addSubview:_scrollview];
