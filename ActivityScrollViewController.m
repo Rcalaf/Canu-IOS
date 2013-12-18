@@ -13,6 +13,8 @@
 #import "NewActivityViewController.h"
 #import "DetailActivityViewController.h"
 #import "DetailActivityViewControllerAnimate.h"
+#import "UICanuNavigationController.h"
+#import "LoaderAnimation.h"
 
 #import "AppDelegate.h"
 
@@ -33,8 +35,10 @@ typedef enum {
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSMutableArray *arrayCell;
 @property (nonatomic) BOOL isUserProfile;
-@property (nonatomic) UIImageView *refreshAnimation;
+@property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) User *user;
+@property (nonatomic) BOOL isReload;
+@property (nonatomic) UICanuNavigationController *navigation;
 
 @end
 
@@ -44,6 +48,49 @@ typedef enum {
 @synthesize quotes = _quotes;
 @synthesize currentLocation = _currentLocation;
 @synthesize locationManager = _locationManager;
+
+- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user{
+    self = [super init];
+    if (self) {
+        
+        self.isUserProfile = isUserProfile;
+        
+        self.user = user;
+        
+        self.isReload = NO;
+        
+        self.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        
+        [self.locationManager startUpdatingLocation];
+        
+        self.arrayCell = [[NSMutableArray alloc]init];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        
+        self.navigation = appDelegate.canuViewController;
+        
+        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(60.0f, 70.0f, 200.0f, 340.0f)];
+        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:25.0];
+        self.feedbackMessage.textColor                   = [UIColor colorWithRed:28.0f/255.0f green:165.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
+        self.feedbackMessage.allowsEditingTextAttributes = NO;
+        self.feedbackMessage.textAlignment               = NSTextAlignmentCenter;
+        self.feedbackMessage.backgroundColor             = self.view.backgroundColor;
+        self.feedbackMessage.hidden                      = YES;
+        [self.view addSubview:self.feedbackMessage];
+        
+        [self showFeedback];
+        
+        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
+        [self.loaderAnimation startAnimation];
+        [self.view addSubview:_loaderAnimation];
+        
+        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        self.scrollview.delegate = self;
+        [self.view addSubview:_scrollview];
+        
+    }
+    return self;
+}
 
 - (NSArray *)quotes{
     if (!_quotes) {
@@ -99,7 +146,9 @@ typedef enum {
     [appDelegate.user editLatitude:_currentLocation.latitude Longitude:_currentLocation.longitude];
     
     [self.locationManager stopUpdatingLocation];
-    [self reload];
+    
+    [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
@@ -110,44 +159,6 @@ typedef enum {
     NSLog(@"loc manager Fail...");
 }
 
-
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user{
-    self = [super init];
-    if (self) {
-        
-        self.isUserProfile = isUserProfile;
-        
-        self.user = user;
-        
-        self.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-        
-        [self.locationManager startUpdatingLocation];
-        
-        self.arrayCell = [[NSMutableArray alloc]init];
-        
-        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(60.0f, 70.0f, 200.0f, 340.0f)];
-        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:25.0];
-        self.feedbackMessage.textColor                   = [UIColor colorWithRed:28.0f/255.0f green:165.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
-        self.feedbackMessage.allowsEditingTextAttributes = NO;
-        self.feedbackMessage.textAlignment               = NSTextAlignmentCenter;
-        self.feedbackMessage.backgroundColor             = self.view.backgroundColor;
-        self.feedbackMessage.hidden                      = YES;
-        [self.view addSubview:self.feedbackMessage];
-        
-        self.refreshAnimation = [[UIImageView alloc]initWithFrame:CGRectMake(150, self.view.frame.size.height - 40, 20, 20)];
-//        self.refreshAnimation.image = [UIImage imageNamed:@"loadrt-loop-1"];
-        [self.view addSubview:_refreshAnimation];
-        
-        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-        self.scrollview.delegate = self;
-        [self.view addSubview:_scrollview];
-        
-        [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
-        
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -156,13 +167,32 @@ typedef enum {
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float newX,newY;
-    
-    newX = scrollView.contentOffset.x;
+    float newY;
     newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
-    // Reload Animation
+    [self.loaderAnimation contentOffset:newY];
     
+    if (!_isReload) {
+        if (newY < 0) {
+            
+            newY = fabsf(newY);
+            
+            float value = 0,start = 0,end = 50;
+            
+            if (newY > start && newY <= end) {
+                value = (newY - start) / (end - start);
+            }else if (newY > end){
+                value = 1;
+            }else if (newY <= start){
+                value = 0;
+            }
+            
+            [self.navigation changePosition:value];
+            
+        }else{
+            [self.navigation changePosition:0];
+        }
+    }
     
 }
 
@@ -183,6 +213,20 @@ typedef enum {
 
 - (void)reload{
     
+    self.isReload = YES;
+    
+    [self.loaderAnimation startAnimation];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.scrollview.frame = CGRectMake(0, - 58, _scrollview.frame.size.width, _scrollview.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self load];
+    }];
+    
+}
+
+- (void)load{
+    
     if (!_isUserProfile) {
         
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
@@ -200,10 +244,20 @@ typedef enum {
                 
             }
             
-//            Si le loader tourne on le stop
-//            if (self.refreshControl.refreshing) {
-//                [self.refreshControl endRefreshing];
-//            }
+            if (_isReload) {
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
+                    [self.navigation changePosition:0];
+                } completion:^(BOOL finished) {
+                    [self.loaderAnimation stopAnimation];
+                    
+                    self.isReload = NO;
+                    
+                }];
+            }
+            
+            [self.loaderAnimation stopAnimation];
             
         }];
         
@@ -228,10 +282,20 @@ typedef enum {
                 
             }
             
-            //            Si le loader tourne on le stop
-            //            if (self.refreshControl.refreshing) {
-            //                [self.refreshControl endRefreshing];
-            //            }
+            if (_isReload) {
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
+                    [self.navigation changePosition:0];
+                } completion:^(BOOL finished) {
+                    [self.loaderAnimation stopAnimation];
+                    
+                    self.isReload = NO;
+                    
+                }];
+            }
+            
+            [self.loaderAnimation stopAnimation];
             
         }];
     }
@@ -330,7 +394,7 @@ typedef enum {
                         if (!_isUserProfile) {
                             [self showActivities];
                         }else{
-                            [self reload];
+                            [self load];
                         }
                     }];
                 }
@@ -369,7 +433,7 @@ typedef enum {
                         if (!_isUserProfile) {
                             [self showActivities];
                         }else{
-                            [self reload];
+                            [self load];
                         }
                     }];
                 }

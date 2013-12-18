@@ -7,13 +7,11 @@
 //
 
 #import "AttendeesScrollViewController.h"
-
 #import "UICanuAttendeeCellScroll.h"
-
 #import "User.h"
-
 #import "UIScrollViewReverse.h"
 #import "Activity.h"
+#import "LoaderAnimation.h"
 
 @interface AttendeesScrollViewController () <UIScrollViewDelegate>
 
@@ -21,6 +19,8 @@
 @property (nonatomic) NSMutableArray *arrayCell;
 @property (nonatomic) Activity *activity;
 @property (nonatomic) NSArray *attendees;
+@property (nonatomic) LoaderAnimation *loaderAnimation;
+@property (nonatomic) BOOL isReload;
 
 @end
 
@@ -34,13 +34,18 @@
         
         self.activity = activity;
         
+        self.isReload = NO;
+        
         self.arrayCell = [[NSMutableArray alloc]init];
+        
+        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, frame.size.height - 45, 30, 30) withStart:-20 andEnd:-100];
+        [self.view addSubview:_loaderAnimation];
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
         
-        [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
         
     }
     return self;
@@ -48,13 +53,11 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float newX,newY;
-    
-    newX = scrollView.contentOffset.x;
+    float newY;
     newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     // Reload Animation
-    
+    [self.loaderAnimation contentOffset:newY];
     
 }
 
@@ -75,6 +78,20 @@
 
 - (void)reload{
     
+    self.isReload = YES;
+    
+    [self.loaderAnimation startAnimation];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.scrollview.frame = CGRectMake(0, - 48, _scrollview.frame.size.width, _scrollview.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self load];
+    }];
+    
+}
+
+- (void)load{
+    
     [self.activity attendees:^(NSArray *attendees, NSError *error) {
         
         if (error) {
@@ -86,10 +103,19 @@
             
         }
 
-//            Si le loader tourne on le stop
-//            if (self.refreshControl.refreshing) {
-//                [self.refreshControl endRefreshing];
-//            }
+        if (_isReload) {
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                self.scrollview.frame = CGRectMake( 0, -1, _scrollview.frame.size.width, _scrollview.frame.size.height);
+            } completion:^(BOOL finished) {
+                [self.loaderAnimation stopAnimation];
+                
+                self.isReload = NO;
+                
+            }];
+        }
+        
+        [self.loaderAnimation stopAnimation];
         
     }];
     

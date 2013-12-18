@@ -72,8 +72,6 @@ typedef enum {
         self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, positionY - 10, 320, frame.size.height)];
         [self.view addSubview:_wrapper];
         
-        
-        
         self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 - 10];
         [self.wrapper addSubview:_chatView];
         
@@ -286,7 +284,7 @@ typedef enum {
         UICanuNavigationController *navigation = appDelegate.canuViewController;
         
         [UIView animateWithDuration:0.4 animations:^{
-            navigation.control.alpha = 0;
+            [navigation changePosition:1];
             self.wrapper.frame = CGRectMake(0, 0, 320, frame.size.height);
             self.actionButtonImage.alpha = 0;
             self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
@@ -345,7 +343,7 @@ typedef enum {
                 self.scrollView.frame = CGRectMake(10, 195, 300, 145);
                 self.shadow.frame = CGRectMake(0, 85 + 60, 300, 4);
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.4 animations:^{
+                [UIView animateWithDuration:0.2 animations:^{
                     self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
                 } completion:^(BOOL finished) {
                     [self.chatView scrollToLastMessage];
@@ -362,13 +360,13 @@ typedef enum {
                 self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
                 self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
                 self.wrapperDescription.frame = CGRectMake(10, 130, 300, 0);
-                self.chatView.frame = CGRectMake(10, 130, 300, self.view.frame.size.height - 130 - 57 - 10);
+                self.chatView.frame = CGRectMake(10, 130, 300, self.view.frame.size.height - 130 - 57);
                 self.touchArea.frame = CGRectMake(10, 10, 300, 120);
                 self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 57);
                 self.scrollView.frame = CGRectMake(10, 45, 300, 85);
                 self.shadow.frame = CGRectMake(0, 85, 300, 4);
             } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.4 animations:^{
+                [UIView animateWithDuration:0.2 animations:^{
                     self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
                 } completion:^(BOOL finished) {
                     self.animationFolder = NO;
@@ -390,7 +388,6 @@ typedef enum {
     self.keyboardIsOpen = YES;
     
     self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 57, 320, 216 + 57)];
-    self.touchQuitKeyboard.backgroundColor = [UIColor redColor];
     [self.touchQuitKeyboard addTarget:self action:@selector(touchChatView) forControlEvents:UIControlEventTouchDown];
     [self.wrapper addSubview:_touchQuitKeyboard];
     
@@ -420,7 +417,7 @@ typedef enum {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
             } else {
                 
-                [_chatView reload];
+                [_chatView load];
                 
             }
             
@@ -542,7 +539,7 @@ typedef enum {
     self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:0.0];
     
     [UIView animateWithDuration:0.4 animations:^{
-        navigation.control.alpha = 1;
+        [navigation changePosition:0];
         self.wrapper.frame = CGRectMake(0, _positionY - 10, 320, _wrapper.frame.size.height);
         self.actionButtonImage.alpha = 1;
         self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);

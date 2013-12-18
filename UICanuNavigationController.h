@@ -10,10 +10,10 @@
 
 @interface UICanuNavigationController : UINavigationController
 
-@property (strong, nonatomic) IBOutlet UIView *control;
+@property (strong, nonatomic) UIView *control;
 
-- (void)controlFadeShow;
-- (IBAction)goProfile:(UISwipeGestureRecognizer *)gesture;
-- (IBAction)goActivities:(UISwipeGestureRecognizer *)gesture;
+- (void)changePosition:(float)position;
+- (void)goProfile:(UISwipeGestureRecognizer *)gesture;
+- (void)goActivities:(UISwipeGestureRecognizer *)gesture;
 
 @end

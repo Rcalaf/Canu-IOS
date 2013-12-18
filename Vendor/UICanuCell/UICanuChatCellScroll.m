@@ -30,6 +30,8 @@
     if (self) {
         // Initialization code
         
+        self.backgroundColor = UIColorFromRGB(0xfafafa);
+        
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         
         UIView *line = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 280, 1)];
@@ -53,6 +55,7 @@
         [self addSubview:userName];
         
         self.textMessage = [[UITextView alloc]initWithFrame:CGRectMake(40, 40, 234, 5)];
+        self.textMessage.editable = NO;
         self.textMessage.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
         self.textMessage.backgroundColor = UIColorFromRGB(0xfafafa);
         self.textMessage.textColor = UIColorFromRGB(0x6d6e7a);
@@ -95,6 +98,8 @@
     float height = 0;
     
     height = 10 + 25 + 10 + _textMessage.frame.size.height + 10;
+    
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
     
     return height;
     

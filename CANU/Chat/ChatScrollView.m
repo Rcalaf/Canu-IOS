@@ -7,12 +7,10 @@
 //
 
 #import "ChatScrollView.h"
-
 #import "Activity.h"
-
 #import "UICanuChatCellScroll.h"
-
 #import "UIScrollViewReverse.h"
+#import "LoaderAnimation.h"
 
 @interface ChatScrollView ()<UIScrollViewDelegate>
 
@@ -23,6 +21,8 @@
 @property (nonatomic) float yOriginLastMessage;
 @property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) UILabel *emptyChat;
+@property (nonatomic) LoaderAnimation *loaderAnimation;
+@property (nonatomic) BOOL isReload;
 
 @end
 
@@ -34,7 +34,9 @@
     if (self) {
         // Initialization code
         
-        self.backgroundColor = UIColorFromRGB(0xfafafa);
+        UIView *background = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, 150)];
+        background.backgroundColor = UIColorFromRGB(0xfafafa);
+        [self addSubview:background];
         
         self.clipsToBounds = YES;
         
@@ -42,13 +44,20 @@
         
         self.activity = activity;
         
+        self.isReload = NO;
+        
         self.arrayCell = [[NSMutableArray alloc]init];
+        
+        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, maxHeight - 40, 30, 30) withStart:-20 andEnd:-80];
+        [self addSubview:_loaderAnimation];
+        
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -1, frame.size.width, maxHeight)];
         self.scrollview.alpha = 0;
+        self.scrollview.clipsToBounds = NO;
         self.scrollview.delegate = self;
         [self addSubview:_scrollview];
         
-        [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
         
     }
     return self;
@@ -56,13 +65,11 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float newX,newY;
-    
-    newX = scrollView.contentOffset.x;
+    float newY;
     newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     // Reload Animation
-    
+    [self.loaderAnimation contentOffset:newY];
     
 }
 
@@ -83,6 +90,20 @@
 
 - (void)reload{
     
+    self.isReload = YES;
+    
+    [self.loaderAnimation startAnimation];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.scrollview.frame = CGRectMake(0, - 58, _scrollview.frame.size.width, _scrollview.frame.size.height);
+    } completion:^(BOOL finished) {
+        [self load];
+    }];
+    
+}
+
+- (void)load{
+    
     [self.activity messagesWithBlock:^(NSArray *messages, NSError *error) {
         if (error) {
             [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -94,9 +115,19 @@
             
         }
         
-//        if (self.refreshControl.refreshing) {
-//            [self.refreshControl endRefreshing];
-//        }
+        if (_isReload) {
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                self.scrollview.frame = CGRectMake( 0, -1, _scrollview.frame.size.width, _scrollview.frame.size.height);
+            } completion:^(BOOL finished) {
+                [self.loaderAnimation stopAnimation];
+                
+                self.isReload = NO;
+                
+            }];
+        }
+        
+        [self.loaderAnimation stopAnimation];
         
     }];
     

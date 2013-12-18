@@ -32,30 +32,57 @@
     if (self) {
         self.navigationBarHidden = YES;
         self.control = [[UIView alloc] initWithFrame:CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0)];
-       // self.control = [[UIView alloc] initWithFrame:KNavboxSize];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
         [self.view addSubview:self.control];
-        //[self controlFadeShow];
     }
     return self;
 }
 
-- (IBAction)goProfile:(UISwipeGestureRecognizer *)gesture{
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UISwipeGestureRecognizer *goProfileGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goProfile:)];
+    goProfileGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    
+    UISwipeGestureRecognizer *goActivitiesGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goActivities:)];
+    goActivitiesGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    
+    
+    UIPanGestureRecognizer *upGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(testSwipeUp:)];
+    upGesture.delegate = self;
+    
+    UIPanGestureRecognizer *swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(test2SwipeUp:)];
+    swipeGesture.delegate = self;
+    
+    UITapGestureRecognizer *bounceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bounce:)];
+    
+    [_control addGestureRecognizer:goProfileGesture];
+    [_control addGestureRecognizer:goActivitiesGesture];
+    [_control addGestureRecognizer:bounceGesture];
+    [_control addGestureRecognizer:upGesture];
+    
+}
+
+- (void)goProfile:(UISwipeGestureRecognizer *)gesture{
+    
+    NSLog(@"goProfile");
+    
     [UIView animateWithDuration:0.3 animations:^{
         _control.frame = CGRectMake(255.0, 415.0 + KIphone5Margin, 63.0, 63.0);
     }completion:^(BOOL finished) {
-        //[self controlFadeShow];
+        
     }];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     UserProfileViewController *upvc =  appDelegate.profileViewController;
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
     [self pushViewController:upvc animated:YES];
-    //NSLog(@"%@",self.topViewController);
-
+    
 }
 
--(IBAction)bounce:(UITapGestureRecognizer *)gesture{
-    //NSLog(@"Bounce");
+-(void)bounce:(UITapGestureRecognizer *)gesture{
+    
+    NSLog(@"bounce");
    
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _control.frame;
@@ -67,16 +94,15 @@
             frame.origin.y = 415.0f + KIphone5Margin;
             _control.frame = frame;
         }completion:^(BOOL finished) {
-          //  [self controlFadeShow];
         }];
     }];
 }
 
--(IBAction)testSwipeUp:(UIPanGestureRecognizer *)recognizer
+-(void)testSwipeUp:(UIPanGestureRecognizer *)recognizer
 {
-  //  NSLog(@"test action:%@",recognizer);
+    NSLog(@"testSwipeUp");
     CGPoint location = [recognizer locationInView:self.view];
-  //  NSLog(@"location x:%f",location.x);
+    
     if (location.y < 423.0f + KIphone5Margin && location.y > 0.0f) {
         _control.frame = CGRectMake(_control.frame.origin.x, location.y, _control.frame.size.width, _control.frame.size.height);
     }
@@ -89,52 +115,32 @@
         [UIView animateWithDuration:0.3 animations:^{
             _control.frame = CGRectMake(_control.frame.origin.x, 415.0f + KIphone5Margin,_control.frame.size.width, _control.frame.size.height);
         }completion:^(BOOL finished) {
-            //[self controlFadeShow];
+            
         }];
     }
 }
 
 
 
-- (IBAction)goActivities:(UISwipeGestureRecognizer *)gesture{
+- (void)goActivities:(UISwipeGestureRecognizer *)gesture{
+    NSLog(@"goActivities");
     [UIView animateWithDuration:0.3 animations:^{
         _control.frame = CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0);
         
     }completion:^(BOOL finished) {
-       // [self controlFadeShow];
+       
     }];
-   // NSLog(@"Load Activities view");
+   
     [self popViewControllerAnimated:YES];
     
     self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
-    //NSLog(@"%@",self.topViewController);
+    
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-   
-    UISwipeGestureRecognizer *goProfileGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goProfile:)];
-    goProfileGesture.direction = UISwipeGestureRecognizerDirectionRight;
+- (void)changePosition:(float)position{
     
-    UISwipeGestureRecognizer *goActivitiesGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goActivities:)];
-    goActivitiesGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    _control.frame = CGRectMake(_control.frame.origin.x, 415.0f + KIphone5Margin + position * 65,_control.frame.size.width, _control.frame.size.height);
     
-    
-    UIPanGestureRecognizer *upGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(testSwipeUp:)];
-    //swipeGesture.direction = UISwipeGestureRecognizerDirectionUp;
-    upGesture.delegate = self;
-    
-    UIPanGestureRecognizer *swipeGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(test2SwipeUp:)];
-    swipeGesture.delegate = self;
-    
-    UITapGestureRecognizer *bounceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bounce:)];
-    
-    [_control addGestureRecognizer:goProfileGesture];
-    [_control addGestureRecognizer:goActivitiesGesture];
-    [_control addGestureRecognizer:bounceGesture];
-  //  [_control addGestureRecognizer:swipeGesture];
-    [_control addGestureRecognizer:upGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,31 +151,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-   // NSLog(@"one: %@",gestureRecognizer);
-   // NSLog(@"other: %@",otherGestureRecognizer);
     return YES;
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    _control.alpha = 1.0f;
-}
-
-- (void)controlFadeShow
-{
-    [UIView animateWithDuration:1.0 delay:3.0 options:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionAllowUserInteraction animations:^{
-        _control.alpha = kNavboxAlpha;
-    }completion:nil];
-}
-
-
-- (BOOL)shouldAutorotate
-{
-    if ([self.visibleViewController isKindOfClass:[ActivitiesFeedViewController class]]) {
-        return YES;
-    }else{
-        return NO;
-    }
 }
 
 @end

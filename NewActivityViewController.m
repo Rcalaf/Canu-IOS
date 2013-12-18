@@ -416,10 +416,9 @@ float oldValue;
         _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
     } else {
         _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 47 - 197, _formGrid.frame.size.width, _formGrid.frame.size.height);
-        _description.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 101, 300.0f, 101.0f);
+        _description.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 101.5f, 300.0f, 101.0f);
         _description.backgroundColor = [UIColor colorWithWhite:255.0f alpha:1.0f];
     }
-   
     _description.text = self.activity.description;
     _description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0f];
     _description.textColor = textColor;
@@ -526,7 +525,7 @@ float oldValue;
 {
     [UIView animateWithDuration:0.25 animations:^{
         _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 216 - 10 - 47 - 197, _formGrid.frame.size.width, _formGrid.frame.size.height);
-        _description.frame = CGRectMake(10.0, self.view.frame.size.height - 10 - 101 - 216, 300.0f, 101.0f);
+        _description.frame = CGRectMake(10.0, self.view.frame.size.height - 10 - 101.5f - 216, 300.0f, 101.0f);
         _description.backgroundColor = [UIColor whiteColor];
     }];
 }
@@ -536,7 +535,7 @@ float oldValue;
     if ([_description hasText]) {
             [UIView animateWithDuration:0.25 animations:^{
                 _formGrid.frame = CGRectMake(10.0, self.view.frame.size.height - 57 - 10 - 47 - 197, _formGrid.frame.size.width, _formGrid.frame.size.height);
-                _description.frame =CGRectMake(10.0, self.view.frame.size.height - 10 - 101 - 57, _description.frame.size.width, 101.0f);
+                _description.frame =CGRectMake(10.0, self.view.frame.size.height - 10 - 101.5f - 57, _description.frame.size.width, 101.0f);
             }];
     } else {
         [UIView animateWithDuration:0.25 animations:^{

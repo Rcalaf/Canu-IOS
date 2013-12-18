@@ -14,7 +14,7 @@
 
 - (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight;
 
-- (void)reload;
+- (void)load;
 
 - (void)scrollToBottom;
 
