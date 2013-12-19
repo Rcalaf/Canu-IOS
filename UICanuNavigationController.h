@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class ActivitiesFeedViewController;
+
 @interface UICanuNavigationController : UINavigationController
 
 @property (strong, nonatomic) UIView *control;
 
+- (id)initWithActivityFeed:(ActivitiesFeedViewController *)activityFeed;
 - (void)changePosition:(float)position;
 - (void)goProfile:(UISwipeGestureRecognizer *)gesture;
 - (void)goActivities:(UISwipeGestureRecognizer *)gesture;

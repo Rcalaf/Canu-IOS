@@ -192,7 +192,7 @@
             }];
             
             UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-            ActivitiesFeedViewController *avc = appDelegate.publicFeedViewController;
+            ActivitiesFeedViewController *avc = appDelegate.feedViewController;
             [nvc addChildViewController:avc];
             appDelegate.window.rootViewController = nvc;
             

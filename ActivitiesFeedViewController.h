@@ -10,8 +10,12 @@
 #import "ActivityScrollViewController.h"
 
 
-@interface ActivitiesFeedViewController : UIViewController 
+@interface ActivitiesFeedViewController : UIViewController
 
-@property (strong, nonatomic) ActivityScrollViewController *list;
+- (void)userInteractionFeedEnable:(BOOL)value;
+
+- (void)changePosition:(float)position;
+
+- (void)showHideProfile;
 
 @end

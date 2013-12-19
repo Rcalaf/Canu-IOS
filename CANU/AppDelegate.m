@@ -30,8 +30,7 @@ NSString *const FBSessionStateChangedNotification =
 
 @synthesize user = _user;
 @synthesize device_token = _device_token;
-@synthesize publicFeedViewController = _publicFeedViewController;
-@synthesize profileViewController = _profileViewController;
+@synthesize feedViewController = _feedViewController;
 @synthesize currentLocation = _currentLocation;
 
 
@@ -39,25 +38,12 @@ NSString *const FBSessionStateChangedNotification =
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (ActivitiesFeedViewController *)publicFeedViewController
+- (ActivitiesFeedViewController *)feedViewController
 {
-    if (!_publicFeedViewController) {
-        _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
-        //NSLog(@"Creating public feed");
+    if (!_feedViewController) {
+        _feedViewController = [[ActivitiesFeedViewController alloc] init];
     } 
-    return _publicFeedViewController;
-}
-
-- (UserProfileViewController *)profileViewController
-{
-    if (!_profileViewController) {
-        _profileViewController = [[UserProfileViewController alloc] init];
-       // NSLog(@"Creating User profile");
-    }
-    _profileViewController.user = self.user;
-    // NSLog(@"user id: %lu",(unsigned long)_profileViewController.user.userId);
-
-    return _profileViewController;
+    return _feedViewController;
 }
 
 - (User *)user
@@ -87,51 +73,29 @@ NSString *const FBSessionStateChangedNotification =
     // Later, you can get your instance with
     //Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-   /* if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        
-        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"no location service enabled" delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-    }*/
-    
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-       // [mixpanel identify:[NSString stringWithFormat:@"%d",self.user.userId]];
-        self.canuViewController = [[UICanuNavigationController alloc] init];
-       // _publicFeedViewController = [[ActivitiesFeedViewController alloc] init];
-       // _profileViewController = [[UserProfileViewController alloc] init];
-        [self.canuViewController pushViewController:self.publicFeedViewController animated:NO];
-        self.window.rootViewController = _canuViewController;
         
+        self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
+        [self.canuViewController pushViewController:self.feedViewController animated:NO];
+        self.window.rootViewController = _canuViewController;
         
     } else {
         loginViewController = [[MainViewController alloc] init];
-        //[nvc addChildViewController:mvc];
         self.window.rootViewController = loginViewController;
         
     }
     
     [self.window makeKeyAndVisible];
     
-   // application.applicationIconBadgeNumber = 0;
-    
-    // Handle launching from a notification
-   /* UILocalNotification *localNotif =
-    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (localNotif) {
-        NSLog(@"Recieved Notification oppening%@",localNotif);
-    }*/
-    // [self.locationManager stopUpdatingLocation];
-    
-
-    
     return YES;
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
-	//NSLog(@"My token is hex: %@", deviceToken);
     
     const char* data = [deviceToken bytes];
     NSMutableString* token = [NSMutableString string];
@@ -151,7 +115,6 @@ NSString *const FBSessionStateChangedNotification =
 
     }
     
-  //  NSLog(@"My token in string: %@", _device_token);
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
@@ -168,7 +131,6 @@ NSString *const FBSessionStateChangedNotification =
         
         [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:^(NSError *error){
             if (error) {
-               // NSLog(@"hello");
                // NSLog(@"Request Failed with Error notification: %@", error);
             }
         }];

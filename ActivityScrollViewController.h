@@ -16,6 +16,6 @@
 
 @property (strong, nonatomic) NSArray *activities;
 
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user;
+- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame;
 
 @end

@@ -1119,8 +1119,8 @@
 		DEF015F41780F1300005FFC0 /* UICanuNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				DECA169E17807EE8009747E8 /* UICanuNavigationController.m */,
 				DECA169D17807EE8009747E8 /* UICanuNavigationController.h */,
+				DECA169E17807EE8009747E8 /* UICanuNavigationController.m */,
 			);
 			name = UICanuNavigationController;
 			sourceTree = "<group>";

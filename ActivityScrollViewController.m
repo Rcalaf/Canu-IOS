@@ -49,7 +49,7 @@ typedef enum {
 @synthesize currentLocation = _currentLocation;
 @synthesize locationManager = _locationManager;
 
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user{
+- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame{
     self = [super init];
     if (self) {
         
@@ -59,7 +59,7 @@ typedef enum {
         
         self.isReload = NO;
         
-        self.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        self.view.frame = frame;
         
         [self.locationManager startUpdatingLocation];
         

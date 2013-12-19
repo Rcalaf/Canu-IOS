@@ -113,11 +113,11 @@
 -(void) loadView
 {
     [super loadView];
-    
+    NSLog(@"Fail");
 
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
 
-    ActivityScrollViewController *activitiesList = [[ActivityScrollViewController alloc] initForUserProfile:YES andUser:_user];
+    ActivityScrollViewController *activitiesList = [[ActivityScrollViewController alloc] initForUserProfile:YES andUser:_user andFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self addChildViewController:activitiesList];
     [self.view addSubview:activitiesList.view];
     
