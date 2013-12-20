@@ -33,4 +33,5 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFCanuAPIClient.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFNetworking/AFHTTPClient.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../NewActivityViewController.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/AttendeeLists/AttendeesScrollViewController.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/AttendeeLists/AttendeesScrollViewController.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/LoaderAnimation/LoaderAnimation.h

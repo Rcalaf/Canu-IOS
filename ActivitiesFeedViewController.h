@@ -18,4 +18,6 @@
 
 - (void)showHideProfile;
 
+- (void)removeAfterlogOut;
+
 @end

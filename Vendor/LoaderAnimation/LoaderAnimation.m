@@ -96,4 +96,10 @@
     
 }
 
+- (void)setAlpha:(float)alpha{
+    
+    self.imageView.alpha = alpha;
+    
+}
+
 @end

@@ -30,6 +30,6 @@
     green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
     blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-    #define backgroundColorView [UIColor colorWithRed:232.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0]
+    #define backgroundColorView [UIColor colorWithRed:241.0f/255.0f green:245.0f/255.0f blue:245.0f/255.0f alpha:1.0]
 
 #endif

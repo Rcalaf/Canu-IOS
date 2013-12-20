@@ -46,6 +46,7 @@
 {
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.user logOut];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)back:(id)sender

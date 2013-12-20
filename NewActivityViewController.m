@@ -144,6 +144,7 @@ float oldValue;
                                                       }
                                                   } else {
                                                       [self dismissViewControllerAnimated:YES completion:nil];
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                   }
                                                   [self operationInProcess:NO];
                                               }];
@@ -176,6 +177,7 @@ float oldValue;
                                                     
                                                   } else {
                                                       [self dismissViewControllerAnimated:YES completion:nil];
+                                                      [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                   }
                                                   [self operationInProcess:NO];
                                               }];

@@ -17,28 +17,25 @@
 @property (nonatomic) Activity *activity;
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSArray *messages;
-@property (nonatomic) NSMutableArray *arrayCell;
+@property (nonatomic) int smallSize;
 @property (nonatomic) float yOriginLastMessage;
 @property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) UILabel *emptyChat;
-@property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) BOOL isReload;
 
 @end
 
 @implementation ChatScrollView
 
-- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight andMinHeight:(int)minHeight
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         
-        UIView *background = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, 150)];
-        background.backgroundColor = UIColorFromRGB(0xfafafa);
-        [self addSubview:background];
+        self.smallSize = minHeight;
         
-        self.clipsToBounds = YES;
+        self.backgroundColor = UIColorFromRGB(0xf8fafa);
         
         self.isFirstTime = YES;
         
@@ -48,12 +45,15 @@
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
+        UIView *background = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, maxHeight + 57)];
+        background.backgroundColor = UIColorFromRGB(0xf8fafa);
+        [self addSubview:background];
+        
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, maxHeight - 40, 30, 30) withStart:-20 andEnd:-80];
         [self addSubview:_loaderAnimation];
         
-        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -1, frame.size.width, maxHeight)];
+        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -2, frame.size.width, maxHeight)];
         self.scrollview.alpha = 0;
-        self.scrollview.clipsToBounds = NO;
         self.scrollview.delegate = self;
         [self addSubview:_scrollview];
         
@@ -156,7 +156,7 @@
         
     }
     
-    float heightTotalContent = 0;
+    float heightTotalContent = 2;
     
     for (int i = 0; i < [_messages count]; i++) {
         
@@ -168,24 +168,45 @@
         heightTotalContent += [cell heightContent];
         [self.scrollview addSubview:cell];
         
+        if (i == 0) {
+            cell.line.alpha = 0;
+        }
+        
         [_arrayCell addObject:cell];
-        
-    }
-    
-    if ([_messages count] == 0) {
-        
-        self.emptyChat = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 60)];
-        self.emptyChat.text = @"Touch and write the first message ...";
-        self.emptyChat.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
-        self.emptyChat.textColor = UIColorFromRGB(0x6d6e7a);
-        [self.scrollview addSubview:_emptyChat];
         
     }
     
     self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, heightTotalContent);
     
     if (_scrollview.frame.size.height > heightTotalContent) {
-        self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, _scrollview.frame.size.height);
+        
+        for (int i = 0; i < [_arrayCell count]; i++) {
+            
+            UICanuChatCellScroll *cell = [_arrayCell objectAtIndex:i];
+            cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y + (_scrollview.frame.size.height - heightTotalContent), cell.frame.size.width, cell.frame.size.height);
+            
+        }
+        
+        UIView *background = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, (_scrollview.frame.size.height - heightTotalContent))];
+        background.backgroundColor = UIColorFromRGB(0xf8fafa);
+        [self.scrollview addSubview:background];
+        
+        self.yOriginLastMessage = _yOriginLastMessage + (_scrollview.frame.size.height - heightTotalContent);
+        
+        self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, _scrollview.frame.size.height + 1);
+    }
+    
+    if ([_messages count] == 0) {
+        
+        self.yOriginLastMessage = _scrollview.frame.size.height - _smallSize;
+        self.emptyChat = [[UILabel alloc]initWithFrame:CGRectMake(10, _scrollview.frame.size.height - _smallSize, 280, _smallSize)];
+        self.emptyChat.text = @"Say something";
+        self.emptyChat.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
+        self.emptyChat.alpha = 0.5;
+        self.emptyChat.textAlignment = NSTextAlignmentCenter;
+        self.emptyChat.textColor = UIColorFromRGB(0x6d6e7a);
+        [self.scrollview addSubview:_emptyChat];
+        
     }
     
     if (_isFirstTime) {

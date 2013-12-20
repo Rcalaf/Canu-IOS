@@ -38,6 +38,7 @@ typedef enum {
 @property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) User *user;
 @property (nonatomic) BOOL isReload;
+@property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) UICanuNavigationController *navigation;
 
 @end
@@ -52,6 +53,12 @@ typedef enum {
 - (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame{
     self = [super init];
     if (self) {
+        if (!isUserProfile) {
+            NSLog(@"init ActivityScrollViewController Local");
+        }else{
+            NSLog(@"init ActivityScrollViewController User");
+        }
+        self.view.frame = frame;
         
         self.isUserProfile = isUserProfile;
         
@@ -59,15 +66,11 @@ typedef enum {
         
         self.isReload = NO;
         
-        self.view.frame = frame;
+        self.isFirstTime = YES;
         
         [self.locationManager startUpdatingLocation];
         
         self.arrayCell = [[NSMutableArray alloc]init];
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        
-        self.navigation = appDelegate.canuViewController;
         
         self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(60.0f, 70.0f, 200.0f, 340.0f)];
         self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:25.0];
@@ -87,7 +90,7 @@ typedef enum {
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
-        
+    
     }
     return self;
 }
@@ -122,8 +125,22 @@ typedef enum {
         }
         
     }
-    
     return _quotes;
+}
+
+- (UICanuNavigationController *)navigation{
+    if (_isUserProfile) {
+        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
+    }
+    if (!_navigation) {
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        _navigation = appDelegate.canuViewController;
+        
+    }
+    
+    return  _navigation;
+    
 }
 
 - (CLLocationManager *)locationManager{
@@ -131,7 +148,6 @@ typedef enum {
         _locationManager.delegate = self;
         return _locationManager;
     }
-    
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
@@ -152,17 +168,26 @@ typedef enum {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
+    if (_isUserProfile) {
+        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
+    }
     NSLog(@"loc manager Monitoring...");
+    [self.loaderAnimation stopAnimation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    if (_isUserProfile) {
+        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
+    }
     NSLog(@"loc manager Fail...");
+    [self.loaderAnimation stopAnimation];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -288,6 +313,7 @@ typedef enum {
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
                 } completion:^(BOOL finished) {
+                    
                     [self.loaderAnimation stopAnimation];
                     
                     self.isReload = NO;
@@ -359,7 +385,20 @@ typedef enum {
         
         [_arrayCell addObject:cell];
         
+        if (_isFirstTime) {
+            cell.alpha = 0;
+            [UIView animateWithDuration:0.4 delay:i * 0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                cell.alpha = 1;
+            } completion:^(BOOL finished) {
+                if (i == [_activities count] - 1) {
+                    self.isFirstTime = NO;
+                }
+            }];
+        }
+        
     }
+    
+    
     
 }
 
@@ -393,8 +432,10 @@ typedef enum {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
                         if (!_isUserProfile) {
                             [self showActivities];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                         }else{
                             [self load];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
                         }
                     }];
                 }
@@ -432,8 +473,10 @@ typedef enum {
                     } completion:^(BOOL finished) {
                         if (!_isUserProfile) {
                             [self showActivities];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                         }else{
                             [self load];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
                         }
                     }];
                 }
@@ -469,10 +512,6 @@ typedef enum {
             davc.delegate = self;
             [self addChildViewController:davc];
             [self.view addSubview:davc.view];
-            
-//            DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
-//            davc.activity = [_activities objectAtIndex:cellTouch.tag];
-//            [self.navigationController pushViewController:davc animated:YES];
             
             cellTouch.alpha = 0;
             
@@ -528,6 +567,43 @@ typedef enum {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)removeAfterlogOut{
+    NSLog(@"ActivityScrollViewController removeAfterlogOut");
+    
+    [self.feedbackMessage removeFromSuperview];
+    [self.scrollview removeFromSuperview];
+    [self.loaderAnimation removeFromSuperview];
+    
+    if ([_arrayCell count] != 0 ) {
+        
+        for (int i = 0; i < [_arrayCell count]; i++) {
+            
+            UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+            [cell removeFromSuperview];
+            cell = nil;
+            
+        }
+        
+        [_arrayCell removeAllObjects];
+        
+    }
+    
+    self.loaderAnimation = nil;
+    self.arrayCell = nil;
+    self.feedbackMessage = nil;
+    
+}
+
+- (void)dealloc{
+    
+    if (!_isUserProfile) {
+        NSLog(@"dealloc ActivityScrollViewController Local");
+    }else{
+        NSLog(@"dealloc ActivityScrollViewController User");
+    }
+    
 }
 
 @end

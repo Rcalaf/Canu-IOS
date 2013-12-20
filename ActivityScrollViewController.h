@@ -16,6 +16,10 @@
 
 @property (strong, nonatomic) NSArray *activities;
 
+- (void)reload;
+
 - (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame;
+
+- (void)removeAfterlogOut;
 
 @end

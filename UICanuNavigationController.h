@@ -16,7 +16,7 @@
 
 - (id)initWithActivityFeed:(ActivitiesFeedViewController *)activityFeed;
 - (void)changePosition:(float)position;
-- (void)goProfile:(UISwipeGestureRecognizer *)gesture;
-- (void)goActivities:(UISwipeGestureRecognizer *)gesture;
+//- (void)goProfile:(UISwipeGestureRecognizer *)gesture;
+//- (void)goActivities:(UISwipeGestureRecognizer *)gesture;
 
 @end

@@ -433,8 +433,8 @@
 		DEA93B2717204EA600303BB5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DEA93B2917204EA600303BB5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DEA93B2B17204EA600303BB5 /* CANU-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CANU-Prefix.pch"; sourceTree = "<group>"; };
-		DEA93B2C17204EA600303BB5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		DEA93B2D17204EA600303BB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DEA93B2C17204EA600303BB5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CANU/AppDelegate.h; sourceTree = "<group>"; };
+		DEA93B2D17204EA600303BB5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CANU/AppDelegate.m; sourceTree = "<group>"; };
 		DEA93B3617204EA600303BB5 /* CANU.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CANU.xcdatamodel; sourceTree = "<group>"; };
 		DEA93B3D17204EC400303BB5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DEA93B3F17204ECA00303BB5 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -878,6 +878,8 @@
 				DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */,
 				DE1549571768EEE200C39E5E /* UICanuPicker.h */,
 				DE1549581768EEE200C39E5E /* UICanuPicker.m */,
+				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
+				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
 				DED4901D17298A6F005A0BF9 /* Models */,
 				DEA93B2317204EA600303BB5 /* CANU */,
 				DE4D952317429EF100FB026F /* Resources */,
@@ -921,8 +923,6 @@
 				DE6F8FEB17C96D1A00B99401 /* Tutorial */,
 				DE6ED9CF17C424CC00C5E72E /* Users */,
 				DE81F8B2175E4DA300AD1071 /* Activities */,
-				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
-				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
 				DEA93B3517204EA600303BB5 /* CANU.xcdatamodeld */,
 				DEA93B2417204EA600303BB5 /* Supporting Files */,
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,

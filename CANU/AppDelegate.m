@@ -13,7 +13,6 @@
 #import "MainViewController.h"
 #import "ActivitiesFeedViewController.h" 
 #import "DetailActivityViewController.h"
-#import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
 #import "TutorialViewController.h"
 #import "ChatViewController.h"
@@ -78,7 +77,7 @@ NSString *const FBSessionStateChangedNotification =
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-        
+        NSLog(@"User");
         self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
         [self.canuViewController pushViewController:self.feedViewController animated:NO];
         self.window.rootViewController = _canuViewController;
@@ -86,7 +85,7 @@ NSString *const FBSessionStateChangedNotification =
     } else {
         loginViewController = [[MainViewController alloc] init];
         self.window.rootViewController = loginViewController;
-        
+        NSLog(@"No User");
     }
     
     [self.window makeKeyAndVisible];
@@ -164,7 +163,7 @@ NSString *const FBSessionStateChangedNotification =
         [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
         
         // move to the main activity feed
-        [(UICanuNavigationController *)self.window.rootViewController goActivities:nil];
+//        [(UICanuNavigationController *)self.window.rootViewController goActivities:nil];
         
         if (![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]) {
             NSLog(@"we are in, value: %d",![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]);
@@ -411,6 +410,24 @@ NSString *const FBSessionStateChangedNotification =
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - User gestion
+
+- (void)logOut{
+    
+    [self.feedViewController removeAfterlogOut];
+    [self.canuViewController popViewControllerAnimated:NO];
+    [self.canuViewController popToViewController:_feedViewController animated:NO];
+    [self.feedViewController.view removeFromSuperview];
+    [self.feedViewController removeFromParentViewController];
+    self.feedViewController = nil;
+    self.window.rootViewController = nil;
+    self.canuViewController = nil;
+    
+    loginViewController = [[MainViewController alloc] init];
+    self.window.rootViewController = loginViewController;
+    
 }
 
 @end

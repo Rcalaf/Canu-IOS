@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "UICanuNavigationController.h"
-#import "UserProfileViewController.h"
 #import "ActivitiesFeedViewController.h"	
 #import "NewActivityViewController.h"
 #import "Activity.h"
@@ -51,7 +50,7 @@ typedef enum {
 {
     self = [super init];
     if (self) {
-        
+        NSLog(@"Init UICanuNavigationController");
         self.unknowDirection = YES;
         
         self.tribesIsEnable = NO;
@@ -81,54 +80,46 @@ typedef enum {
 {
     [super viewDidLoad];
     
-//    UISwipeGestureRecognizer *goProfileGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goProfile:)];
-//    goProfileGesture.direction = UISwipeGestureRecognizerDirectionRight;
-//    
-//    UISwipeGestureRecognizer *goActivitiesGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(goActivities:)];
-//    goActivitiesGesture.direction = UISwipeGestureRecognizerDirectionLeft;
-    
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(swipeControl:)];
     panGesture.delegate = self;
     
     UITapGestureRecognizer *bounceGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bounce:)];
     
-//    [_control addGestureRecognizer:goProfileGesture];
-//    [_control addGestureRecognizer:goActivitiesGesture];
     [_control addGestureRecognizer:bounceGesture];
     [_control addGestureRecognizer:panGesture];
     
 }
 
-- (void)goProfile:(UISwipeGestureRecognizer *)gesture{
-    
-    NSLog(@"goProfile");
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(255.0, 415.0 + KIphone5Margin, 63.0, 63.0);
-    }completion:^(BOOL finished) {
-        
-    }];
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    UserProfileViewController *upvc =  appDelegate.profileViewController;
-    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
-    [self pushViewController:upvc animated:YES];
-    
-}
-
-- (void)goActivities:(UISwipeGestureRecognizer *)gesture{
-    NSLog(@"goActivities");
-    [UIView animateWithDuration:0.3 animations:^{
-        _control.frame = CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0);
-        
-    }completion:^(BOOL finished) {
-        
-    }];
-    
-    [self popViewControllerAnimated:YES];
-    
-    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
-    
-}
+//- (void)goProfile:(UISwipeGestureRecognizer *)gesture{
+//    
+//    NSLog(@"goProfile");
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        _control.frame = CGRectMake(255.0, 415.0 + KIphone5Margin, 63.0, 63.0);
+//    }completion:^(BOOL finished) {
+//        
+//    }];
+//    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    UserProfileViewController *upvc =  appDelegate.feedViewController;
+//    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
+//    [self pushViewController:upvc animated:YES];
+//    
+//}
+//
+//- (void)goActivities:(UISwipeGestureRecognizer *)gesture{
+//    NSLog(@"goActivities");
+//    [UIView animateWithDuration:0.3 animations:^{
+//        _control.frame = CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0);
+//        
+//    }completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    [self popViewControllerAnimated:YES];
+//    
+//    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
+//    
+//}
 
 -(void)bounce:(UITapGestureRecognizer *)gesture{
     
@@ -396,7 +387,7 @@ typedef enum {
 }
 
 - (void)changePosition:(float)position{
-    
+   
     _control.frame = CGRectMake(_control.frame.origin.x, 415.0f + KIphone5Margin + position * 65,_control.frame.size.width, _control.frame.size.height);
     
 }
@@ -410,6 +401,10 @@ typedef enum {
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return YES;
+}
+
+- (void)dealloc{
+    NSLog(@"dealloc UICanuNavigationController");
 }
 
 @end

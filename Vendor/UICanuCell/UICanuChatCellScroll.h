@@ -12,6 +12,8 @@
 
 @interface UICanuChatCellScroll : UIView
 
+@property (nonatomic) UIView *line;
+
 - (id)initWithFrame:(CGRect)frame andMessage:(Message *)message;
 
 - (float)heightContent;

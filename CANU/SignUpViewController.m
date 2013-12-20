@@ -9,7 +9,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "SignUpViewController.h"
 #import "UICanuNavigationController.h"
-//#import "UserProfileViewController.h"
 #import "TutorialViewController.h"
 #import "ActivitiesFeedViewController.h"
 #import "AFCanuAPIClient.h"
@@ -191,13 +190,12 @@
                 }
             }];
             
-            UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-            ActivitiesFeedViewController *avc = appDelegate.feedViewController;
-            [nvc addChildViewController:avc];
-            appDelegate.window.rootViewController = nvc;
+            appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
+            [appDelegate.canuViewController pushViewController:appDelegate.feedViewController animated:NO];
+            appDelegate.window.rootViewController = appDelegate.canuViewController;
             
             TutorialViewController *tutorial = [[TutorialViewController alloc] init];
-            [nvc presentViewController:tutorial animated:YES completion:nil];
+            [appDelegate.canuViewController presentViewController:tutorial animated:YES completion:nil];
             
         }
         [self operationInProcess:NO];
@@ -248,7 +246,7 @@
     }
 
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403 + KIphone5Margin)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0,self.view.frame.size.height - 57)];
     _scrollView.contentSize = CGSizeMake(320.0, 432.0);
     
    // _scrollView.delegate = self;

@@ -15,6 +15,7 @@
 #import "AFCanuAPIClient.h"
 #import "NewActivityViewController.h"
 #import "AttendeesScrollViewController.h"
+#import "LoaderAnimation.h"
 #import <MapKit/MapKit.h>
 
 typedef enum {
@@ -72,7 +73,7 @@ typedef enum {
         self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, positionY - 10, 320, frame.size.height)];
         [self.view addSubview:_wrapper];
         
-        self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 - 10];
+        self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 andMinHeight:frame.size.height - 340 - 57];
         [self.wrapper addSubview:_chatView];
         
         // User
@@ -105,7 +106,7 @@ typedef enum {
         day.text = [dateFormatter stringFromDate:self.activity.start];
         day.font = [UIFont fontWithName:@"Lato-Regular" size:10.0];
         day.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        day.textColor = UIColorFromRGB(0x6d6e7a);
+        day.textColor = UIColorFromRGB(0x2b4b58);
         [wrapperTime addSubview:day];
         
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
@@ -117,14 +118,15 @@ typedef enum {
         timeStart.text = [timeFormatter stringFromDate:self.activity.start];
         timeStart.font = [UIFont fontWithName:@"Lato-Bold" size:11.0];
         timeStart.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        timeStart.textColor = UIColorFromRGB(0x6d6e7a);
+        timeStart.textColor = UIColorFromRGB(0x2b4b58);
         [wrapperTime addSubview:timeStart];
         
         UILabel *timeEnd = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
         timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
         timeEnd.font = [UIFont fontWithName:@"Lato-Italic" size:11.0];
         timeEnd.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        timeEnd.textColor = UIColorFromRGB(0x6d6e7a);
+        timeEnd.textColor = UIColorFromRGB(0x2b4b58);
+        timeEnd.alpha = 0.5;
         [wrapperTime addSubview:timeEnd];
         
         // Map
@@ -154,7 +156,7 @@ typedef enum {
         description.text = self.activity.description;
         description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
         description.numberOfLines = 2;
-        description.textColor = UIColorFromRGB(0x6d6e7a);
+        description.textColor = UIColorFromRGB(0x2b4b58);
         description.backgroundColor = [UIColor whiteColor];
         [self.wrapperDescription addSubview:description];
         
@@ -167,14 +169,14 @@ typedef enum {
         UILabel *nameActivity = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
         nameActivity.font = [UIFont fontWithName:@"Lato-Bold" size:22.0];
         nameActivity.backgroundColor = [UIColor whiteColor];
-        nameActivity.textColor = UIColorFromRGB(0x6d6e7a);
+        nameActivity.textColor = UIColorFromRGB(0x2b4b58);
         nameActivity.text = _activity.title;
         [_wrapperName addSubview:nameActivity];
         
         UILabel *location = [[UILabel alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
         location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
         location.backgroundColor = [UIColor whiteColor];
-        location.textColor = UIColorFromRGB(0x6d6e7a);
+        location.textColor = UIColorFromRGB(0x2b4b58);
         location.text = _activity.locationDescription;
         [_wrapperName addSubview:location];
         
@@ -211,7 +213,7 @@ typedef enum {
         // Bottom Bar
         
         self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
-        self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xeaeaea);
+        self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xf9f9f9);
         [self.view addSubview:_wrapperBottomBar];
         
         UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
@@ -228,7 +230,7 @@ typedef enum {
         
         self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];
         self.numberOfAssistents.text = [NSString stringWithFormat:@"%i",[self.activity.attendeeIds count]];
-        self.numberOfAssistents.textColor = UIColorFromRGB(0x6d6e7a);
+        self.numberOfAssistents.textColor = UIColorFromRGB(0x2b4b58);
         self.numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
         self.numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
         
@@ -245,13 +247,13 @@ typedef enum {
         [self.wrapperBottomBar addSubview:_actionButton];
         
         UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
-        lineBottomBar.backgroundColor = UIColorFromRGB(0xc2c4c5);
+        lineBottomBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
         [self.wrapperBottomBar addSubview:lineBottomBar];
         
         // Input Bar
         
         self.wrapperInput = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
-        self.wrapperInput.backgroundColor = UIColorFromRGB(0xf1f1f1);
+        self.wrapperInput.backgroundColor = UIColorFromRGB(0xf9f9f9);
         [self.view addSubview:_wrapperInput];
         
         UIView *inputBackground = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 37)];
@@ -260,7 +262,7 @@ typedef enum {
         
         self.input = [[UITextField alloc] initWithFrame:CGRectMake(10, 2, 220, 32)];
         self.input.placeholder = @"Write something nice...";
-        self.input.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+        self.input.font = [UIFont fontWithName:@"Lato-Regular" size:13];
         self.input.backgroundColor = [UIColor whiteColor];
         self.input.textColor = UIColorFromRGB(0x6d6e7a);
         [self.input setReturnKeyType:UIReturnKeySend];
@@ -278,7 +280,7 @@ typedef enum {
         [inputBackground addSubview:sendButton];
         
         UIView *lineInputBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
-        lineInputBar.backgroundColor = UIColorFromRGB(0xd9dada);
+        lineInputBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
         [self.wrapperInput addSubview:lineInputBar];
         
         UICanuNavigationController *navigation = appDelegate.canuViewController;
@@ -311,7 +313,16 @@ typedef enum {
             [self folderAnimation];
             self.scrollView.userInteractionEnabled = NO;
             self.scrollView.scrollEnabled = NO;
+            [self killScroll];
+        }else if (scrollView.contentOffset.y <= 0) {
+            self.mapView.frame = CGRectMake(10, 10, 280, 140);
+            self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
+            self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
+            self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
+            self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+            [self.chatView scrollAnimationFolderFor:0];
         }else{
+            self.mapView.frame = CGRectMake(10, 10 - scrollView.contentOffset.y, 280, 140);
             self.wrapperMap.frame = CGRectMake(10, 45, 300, 150 - scrollView.contentOffset.y);
             self.wrapperName.frame = CGRectMake(10, 195 - scrollView.contentOffset.y, 300, 85);
             self.wrapperDescription.frame = CGRectMake(10, 280 - scrollView.contentOffset.y, 300, 60);
@@ -327,6 +338,8 @@ typedef enum {
     if (!_animationFolder) {
         
         self.animationFolder = YES;
+        
+        self.chatView.loaderAnimation.alpha = 0;
         
         [self.chatView killScroll];
         
@@ -350,12 +363,22 @@ typedef enum {
                     self.animationFolder = NO;
                     self.scrollView.scrollEnabled = YES;
                     self.scrollView.userInteractionEnabled = YES;
+                    self.chatView.loaderAnimation.alpha = 1;
                 }];
             }];
             
         }else{
+            
+            if ([_chatView.arrayCell count] == 0) {
+                self.keyboardIsOpen = YES;
+                [self.input becomeFirstResponder];
+            }
+            
             [UIView animateWithDuration:0.4 animations:^{
                 [self.chatView scrollToBottom];
+                if ([_chatView.arrayCell count] == 0) {
+                    self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
+                }
                 self.mapView.frame = CGRectMake(10, - 140, 280, 140);
                 self.wrapperMap.frame = CGRectMake(10, 45, 300, 0);
                 self.wrapperName.frame = CGRectMake(10, 45, 300, 85);
@@ -367,11 +390,21 @@ typedef enum {
                 self.shadow.frame = CGRectMake(0, 85, 300, 4);
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.2 animations:^{
-                    self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+                    if ([_chatView.arrayCell count] == 0) {
+                        self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57 - 216, 320, 57);
+                    }else{
+                        self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+                    }
                 } completion:^(BOOL finished) {
                     self.animationFolder = NO;
                     self.scrollView.scrollEnabled = YES;
                     self.scrollView.userInteractionEnabled = YES;
+                    self.chatView.loaderAnimation.alpha = 1;
+                    if ([_chatView.arrayCell count] == 0) {
+                        self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 57, 320, 216 + 57)];
+                        [self.touchQuitKeyboard addTarget:self action:@selector(touchChatView) forControlEvents:UIControlEventTouchDown];
+                        [self.wrapper addSubview:_touchQuitKeyboard];
+                    }
                 }];
             }];
             
@@ -384,17 +417,18 @@ typedef enum {
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    
-    self.keyboardIsOpen = YES;
-    
-    self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 57, 320, 216 + 57)];
-    [self.touchQuitKeyboard addTarget:self action:@selector(touchChatView) forControlEvents:UIControlEventTouchDown];
-    [self.wrapper addSubview:_touchQuitKeyboard];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
-        self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57 - 216, 320, 57);
-    }];
+    if (!_keyboardIsOpen) {
+        self.keyboardIsOpen = YES;
+        
+        self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 57, 320, 216 + 57)];
+        [self.touchQuitKeyboard addTarget:self action:@selector(touchChatView) forControlEvents:UIControlEventTouchDown];
+        [self.wrapper addSubview:_touchQuitKeyboard];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.wrapper.frame = CGRectMake(0, - 216, 320, self.view.frame.size.height);
+            self.wrapperInput.frame = CGRectMake(0, self.view.frame.size.height - 57 - 216, 320, 57);
+        }];
+    }
     
 }
 
@@ -405,8 +439,13 @@ typedef enum {
     return YES;
 }
 
+- (void)killScroll{
+    CGPoint offset = self.scrollView.contentOffset;
+    [self.scrollView setContentOffset:offset animated:NO];
+}
+
 - (void)sendMessage{
-    
+    NSLog(@"sendMessage");
     [self.input resignFirstResponder];
     
     NSString *message = _input.text;
@@ -437,7 +476,7 @@ typedef enum {
 }
 
 - (void)touchChatView{
-    
+    NSLog(@"touchChatView");
     if (_keyboardIsOpen) {
         
         self.keyboardIsOpen = NO;
@@ -456,7 +495,7 @@ typedef enum {
 }
 
 - (void)eventActionButton{
-    
+    NSLog(@"eventActionButton");
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
     if (appDelegate.user.userId == self.activity.user.userId){
@@ -505,7 +544,7 @@ typedef enum {
 }
 
 - (void)backAction{
-    
+    NSLog(@"backAction");
     if (_attendeesList != nil) {
         
         [self showAttendees];
@@ -527,7 +566,7 @@ typedef enum {
 }
 
 - (void)animationBack{
-    
+    NSLog(@"animationBack");
     [self.delegate closeDetailActivity:self];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
@@ -558,7 +597,7 @@ typedef enum {
 }
 
 - (void)showAttendees{
-    
+    NSLog(@"showAttendees");
     if (_attendeesList == nil) {
         self.attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 57) andActivity:_activity];
         [self addChildViewController:self.attendeesList];

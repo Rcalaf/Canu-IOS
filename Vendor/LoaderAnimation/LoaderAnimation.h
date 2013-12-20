@@ -10,6 +10,8 @@
 
 @interface LoaderAnimation : UIView
 
+@property (nonatomic) float alpha;
+
 - (id)initWithFrame:(CGRect)frame withStart:(int)start andEnd:(int)end;
 
 - (void)contentOffset:(float)contentOffset;

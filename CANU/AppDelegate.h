@@ -15,7 +15,6 @@
 
 
 @class ActivitiesFeedViewController;
-@class UserProfileViewController;
 
 
 extern NSString *const FBSessionStateChangedNotification;
@@ -44,6 +43,6 @@ extern NSString *const FBSessionStateChangedNotification;
 //Facebook SDK login methods
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 - (void)closeSession;
-
+- (void)logOut;
 
 @end

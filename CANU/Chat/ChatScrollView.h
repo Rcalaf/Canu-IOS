@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class Activity;
+@class Activity,LoaderAnimation;
 
 @interface ChatScrollView : UIView
 
-- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight;
+@property (nonatomic) LoaderAnimation *loaderAnimation;
+@property (nonatomic) NSMutableArray *arrayCell;
+
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight andMinHeight:(int)minHeight;
 
 - (void)load;
 

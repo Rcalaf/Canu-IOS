@@ -31,7 +31,7 @@
 {
     [super loadView];
     self.view.backgroundColor = backgroundColorView;
-    
+    NSLog(@"Init ActivitiesFeedViewController");
     self.navigationController.navigationBarHidden = YES;
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -60,7 +60,11 @@
     self.profilFeed = [[ActivityScrollViewController alloc] initForUserProfile:YES andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
     [self addChildViewController:_profilFeed];
     [self.wrapper addSubview:_profilFeed.view];
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadActivity) name:@"reloadActivity" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLocal) name:@"reloadLocal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadProfile) name:@"reloadProfile" object:nil];
+    
 }
 
 - (void)changePosition:(float)position{
@@ -76,6 +80,25 @@
     }
     
     self.wrapper.userInteractionEnabled = value;
+}
+
+- (void)reloadActivity{
+    
+    [self.localFeed reload];
+    [self.profilFeed reload];
+    
+}
+
+- (void)reloadLocal{
+    
+    [self.localFeed reload];
+    
+}
+
+- (void)reloadProfile{
+    
+    [self.profilFeed reload];
+    
 }
 
 - (void)showHideProfile{
@@ -144,6 +167,31 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)removeAfterlogOut{
+    NSLog(@"ActivitiesFeedViewController removeAfterlogOut");
+    [self.profileView removeFromSuperview];
+    self.profileView = nil;
+    
+    [self.profilFeed removeAfterlogOut];
+    [self.profilFeed willMoveToParentViewController:nil];
+    [self.profilFeed.view removeFromSuperview];
+    [self.profilFeed removeFromParentViewController];
+    self.profilFeed = nil;
+    
+    [self.localFeed removeAfterlogOut];
+    [self.localFeed willMoveToParentViewController:nil];
+    [self.localFeed.view removeFromSuperview];
+    [self.localFeed removeFromParentViewController];
+    self.localFeed = nil;
+    
+}
+
+- (void)dealloc{
+    
+    NSLog(@"dealloc ActivitiesFeedViewController");
+    
 }
 
 @end

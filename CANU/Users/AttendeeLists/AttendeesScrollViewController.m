@@ -41,7 +41,7 @@
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, frame.size.height - 45, 30, 30) withStart:-20 andEnd:-100];
         [self.view addSubview:_loaderAnimation];
         
-        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height -1)];
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
         
@@ -137,7 +137,7 @@
         
     }
     
-    float heightContentScrollView = [_attendees count] * (120 + 10) + 10;
+    float heightContentScrollView = [_attendees count] * (57 + 10) + 10;
     
     if (heightContentScrollView <= _scrollview.frame.size.height) {
         heightContentScrollView = _scrollview.frame.size.height + 1;

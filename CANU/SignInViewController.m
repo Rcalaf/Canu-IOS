@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "SignInViewController.h"
-#import "UserProfileViewController.h"
 #import "UICanuNavigationController.h"
 #import "ActivitiesFeedViewController.h"
 #import "AFCanuAPIClient.h"
@@ -106,11 +105,10 @@
                 }];
                
                 [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-                UICanuNavigationController *nvc = [[UICanuNavigationController alloc] init];
-                ActivitiesFeedViewController *avc = appDelegate.feedViewController;
-                //[nvc pushViewController:avc animated:NO];
-                [nvc addChildViewController:avc];
-                appDelegate.window.rootViewController = nvc;
+                
+                appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
+                [appDelegate.canuViewController pushViewController:appDelegate.feedViewController animated:NO];
+                appDelegate.window.rootViewController = appDelegate.canuViewController;
                 
             }
             [self operationInProcess:NO];
@@ -138,7 +136,7 @@
         self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg.png"]];
     }
     
-    _container = [[UIView alloc] initWithFrame:CGRectMake(10.0, 298.0 + KIphone5Margin, 300.0, 94.5)];
+    _container = [[UIView alloc] initWithFrame:CGRectMake(10.0, self.view.frame.size.height - 95 - 10 - 57, 300.0, 94.5)];
     [_container setBackgroundColor:[UIColor colorWithRed:(109.0 / 255.0) green:(110.0 / 255.0) blue:(122.0 / 255.0) alpha: 1]];
     
     UIView *userIconView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 47.0, 47.0)];
@@ -165,7 +163,7 @@
 
     [self.view addSubview:_container];
     
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -235,14 +233,14 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.25 animations:^{
-        _container.frame =CGRectMake(10.0, 139.0  + KIphone5Margin, _container.frame.size.width, _container.frame.size.height);
+        _container.frame =CGRectMake(10.0, self.view.frame.size.height - 95 - 10 - 216, _container.frame.size.width, _container.frame.size.height);
     }];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.25 animations:^{
-        _container.frame =CGRectMake(10.0, 298.0  + KIphone5Margin, _container.frame.size.width, _container.frame.size.height);
+        _container.frame =CGRectMake(10.0, self.view.frame.size.height - 95 - 10 - 57, _container.frame.size.width, _container.frame.size.height);
     }];
 }
 

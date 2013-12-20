@@ -34,9 +34,9 @@
         
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 280, 1)];
-        line.backgroundColor = UIColorFromRGB(0xe1e1e3);
-        [self addSubview:line];
+        self.line = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 280, 1)];
+        self.line.backgroundColor = UIColorFromRGB(0xd4e0e0);
+        [self addSubview:_line];
         
         UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 25, 25)];
         [avatar setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,message.user.profileImageUrl]] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
@@ -51,15 +51,17 @@
         }
         userName.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
         userName.backgroundColor = UIColorFromRGB(0xfafafa);
-        userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
+        userName.textColor = UIColorFromRGB(0x1a8b9c);
         [self addSubview:userName];
         
         self.textMessage = [[UITextView alloc]initWithFrame:CGRectMake(40, 40, 234, 5)];
         self.textMessage.editable = NO;
-        self.textMessage.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
+        self.textMessage.scrollEnabled = NO;
+        self.textMessage.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         self.textMessage.backgroundColor = UIColorFromRGB(0xfafafa);
-        self.textMessage.textColor = UIColorFromRGB(0x6d6e7a);
+        self.textMessage.textColor = UIColorFromRGB(0x2b4b58);
         self.textMessage.text = message.text;
+        [self.textMessage sizeToFit];
         [self addSubview:_textMessage];
         
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -79,7 +81,7 @@
             time.text = [NSString stringWithFormat:@"%@ %@",[dateFormatter stringFromDate:message.date],[timeFormatter stringFromDate:message.date]];
         }
         time.textAlignment = NSTextAlignmentRight;
-        time.font = [UIFont fontWithName:@"Lato-Regular" size:6.0];
+        time.font = [UIFont fontWithName:@"Lato-Regular" size:8.0];
         time.backgroundColor = UIColorFromRGB(0xfafafa);
         time.textColor = UIColorFromRGB(0x6d6e7a);
         time.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];

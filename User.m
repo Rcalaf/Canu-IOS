@@ -211,25 +211,22 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
         appDelegate.user = nil;
         
-        MainViewController *mvc = [[MainViewController alloc] init];
-        appDelegate.window.rootViewController = mvc;
-        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        [appDelegate logOut];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
         appDelegate.user = nil;
         
-        MainViewController *mvc = [[MainViewController alloc] init];
-        appDelegate.window.rootViewController = mvc;
-       
-        /*[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];*/
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        [appDelegate logOut];
         
         NSLog(@"logout Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
         
-        
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 
 }

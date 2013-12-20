@@ -72,7 +72,7 @@
    // [scrollDescription setContentOffset:bottomOffset animated:YES];
     
     
-    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 403.0f + KIphone5Margin, 320.0f, 57.0f)];
+    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height - 57, 320.0f, 57.0f)];
     [toolBar setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
      
     _getOn = [UIButton buttonWithType:UIButtonTypeCustom];

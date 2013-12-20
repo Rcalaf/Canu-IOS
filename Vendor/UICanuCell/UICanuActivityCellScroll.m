@@ -65,7 +65,7 @@ typedef enum {
         day.text = [dateFormatter stringFromDate:self.activity.start];
         day.font = [UIFont fontWithName:@"Lato-Regular" size:10.0];
         day.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        day.textColor = UIColorFromRGB(0x6d6e7a);
+        day.textColor = UIColorFromRGB(0x2b4b58);
         [wrapperTime addSubview:day];
         
         NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
@@ -77,14 +77,15 @@ typedef enum {
         timeStart.text = [timeFormatter stringFromDate:self.activity.start];
         timeStart.font = [UIFont fontWithName:@"Lato-Bold" size:11.0];
         timeStart.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        timeStart.textColor = UIColorFromRGB(0x6d6e7a);
+        timeStart.textColor = UIColorFromRGB(0x2b4b58);
         [wrapperTime addSubview:timeStart];
         
         UILabel *timeEnd = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
         timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
         timeEnd.font = [UIFont fontWithName:@"Lato-Italic" size:11.0];
         timeEnd.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        timeEnd.textColor = UIColorFromRGB(0x6d6e7a);
+        timeEnd.textColor = UIColorFromRGB(0x2b4b58);
+        timeEnd.alpha = 0.5;
         [wrapperTime addSubview:timeEnd];
         
         UIView *wrapperName = [[UIView alloc]initWithFrame:CGRectMake(0, 35, 300, 85)];
@@ -94,14 +95,14 @@ typedef enum {
         UILabel *nameActivity = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
         nameActivity.font = [UIFont fontWithName:@"Lato-Bold" size:22.0];
         nameActivity.backgroundColor = [UIColor whiteColor];
-        nameActivity.textColor = UIColorFromRGB(0x6d6e7a);
+        nameActivity.textColor = UIColorFromRGB(0x2b4b58);
         nameActivity.text = _activity.title;
         [wrapperName addSubview:nameActivity];
         
         UILabel *location = [[UILabel alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
         location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
         location.backgroundColor = [UIColor whiteColor];
-        location.textColor = UIColorFromRGB(0x6d6e7a);
+        location.textColor = UIColorFromRGB(0x2b4b58);
         location.text = _activity.locationDescription;
         [wrapperName addSubview:location];
         
