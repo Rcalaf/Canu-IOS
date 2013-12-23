@@ -212,7 +212,8 @@ typedef enum {
     if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
         
         self.velocity = [recognizer velocityInView:self.view].x;
-        [NSThread detachNewThreadSelector:@selector(releaseNavBox)toTarget:self withObject:nil];
+        
+        [self performSelectorOnMainThread:@selector(releaseNavBox) withObject:self waitUntilDone:NO];
         
     }
     

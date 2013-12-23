@@ -94,6 +94,8 @@
     
     [_imageView stopAnimating];
     
+    _imageView.image = nil;
+    
 }
 
 - (void)setAlpha:(float)alpha{

@@ -152,6 +152,7 @@ typedef enum {
     _locationManager.delegate = self;
     _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
     _locationManager.distanceFilter=200;
+    
     return _locationManager;
 }
 
@@ -168,17 +169,17 @@ typedef enum {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
-    if (_isUserProfile) {
-        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-    }
+//    if (_isUserProfile) {
+//        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
+//    }
     NSLog(@"loc manager Monitoring...");
     [self.loaderAnimation stopAnimation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    if (_isUserProfile) {
-        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-    }
+//    if (_isUserProfile) {
+//        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
+//    }
     NSLog(@"loc manager Fail...");
     [self.loaderAnimation stopAnimation];
 }
