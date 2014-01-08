@@ -14,6 +14,9 @@
 #import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
 #import "UserSettingsViewController.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 @interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
@@ -22,6 +25,7 @@
 @property (nonatomic) ActivityScrollViewController *localFeed;
 @property (nonatomic) ActivityScrollViewController *profilFeed;
 @property (nonatomic) UIProfileView *profileView;
+@property (nonatomic) AppDelegate *appDelegate;
 
 @end
 
@@ -34,8 +38,8 @@
     NSLog(@"Init ActivitiesFeedViewController");
     self.navigationController.navigationBarHidden = YES;
     
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.user = appDelegate.user;
+    self.appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.user = _appDelegate.user;
     
     self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 640, self.view.frame.size.height)];
     [self.view addSubview:_wrapper];
@@ -71,6 +75,24 @@
     self.wrapper.frame = CGRectMake( - position * 320, 0, 640, self.wrapper.frame.size.height);
     self.localFeed.view.alpha = 1 - position;
     self.profilFeed.view.alpha = position;
+    
+    if (position == 0) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Local Feed"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        self.appDelegate.oldScreenName = @"Local Feed";
+    }else if (position == 0.5){
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Tribes Feed"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        self.appDelegate.oldScreenName = @"Tribes Feed";
+    }else if (position == 1){
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Profile Feed"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        self.appDelegate.oldScreenName = @"Profile Feed";
+    }
+    
 }
 
 - (void)userInteractionFeedEnable:(BOOL)value{
@@ -102,8 +124,19 @@
 }
 
 - (void)showHideProfile{
+    
     [_profileView hideComponents:_profileView.profileHidden];
-    _profileView.profileHidden = !_profileView.profileHidden;
+    
+    if (_profileView.profileHidden) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:self.appDelegate.oldScreenName];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    }else{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Profile User View"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    }
+    
 }
 
 #pragma Mark - Profil View function
@@ -148,7 +181,6 @@
     [self.user editUserProfilePicture:newImage Block:^(User *user, NSError *error) {
         if (!error) {
             self.profileView.profileImage.image = newImage;
-            //self.user = user;
             [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
             appDelegate.user = nil;
         }
@@ -161,6 +193,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Local Feed"];
+    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    self.appDelegate.oldScreenName = @"Local Feed";
+    
 }
 
 - (void)didReceiveMemoryWarning

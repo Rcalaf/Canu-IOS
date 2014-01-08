@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
-//#import <Mixpanel/Mixpanel.h>
-//#import <CoreLocation/CoreLocation.h>
 #import "User.h"
 #import "Message.h"
 
@@ -28,8 +26,6 @@
 @property (readonly) NSDate *start;
 @property (readonly) NSDate *end;
 @property (readonly) NSString *length;
-//@property (readonly) CLLocationDegrees latitude;
-//@property (readonly) CLLocationDegrees longitude;
 @property (readonly) CLLocationCoordinate2D coordinate;
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;

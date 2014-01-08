@@ -42,32 +42,32 @@
     return self;
 }
 
--(IBAction)performLogout:(id)sender
+-(void)performLogout:(id)sender
 {
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate.user logOut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)back:(id)sender
+- (void)back:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)showTutorial:(id)sender
+- (void)showTutorial:(id)sender
 {
     TutorialViewController *tutorial = [[TutorialViewController alloc] init];
     [self presentViewController:tutorial animated:YES completion:nil];
 }
 
 
-- (IBAction)showPrivacyPolicy:(id)sender
+- (void)showPrivacyPolicy:(id)sender
 {
     PrivacyPolicyViewController *privacyPolicy = [[PrivacyPolicyViewController alloc] init];
     [self presentViewController:privacyPolicy animated:NO completion:nil];
 }
 
-- (IBAction)editProfile:(id)sender
+- (void)editProfile:(id)sender
 {
     EditUserViewController *editProfile = [[EditUserViewController alloc] init];
     [self presentViewController:editProfile animated:NO completion:nil];
@@ -130,7 +130,7 @@
     [self.view addSubview:_logOut];
     
     
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];

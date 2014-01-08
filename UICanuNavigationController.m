@@ -127,20 +127,23 @@ typedef enum {
         
         if (_naveboxPosition == NavBoxProfil) {
             [self.activityFeed showHideProfile];
-        }
-        
-        [UIView animateWithDuration:.2 animations:^{
-            CGRect frame = _control.frame;
-            frame.origin.y = 400.0f + KIphone5Margin;
-            _control.frame = frame;
-        } completion:^(BOOL finished){
+        }else{
+           
             [UIView animateWithDuration:.2 animations:^{
                 CGRect frame = _control.frame;
-                frame.origin.y = 415.0f + KIphone5Margin;
+                frame.origin.y = 400.0f + KIphone5Margin;
                 _control.frame = frame;
-            }completion:^(BOOL finished) {
+            } completion:^(BOOL finished){
+                [UIView animateWithDuration:.2 animations:^{
+                    CGRect frame = _control.frame;
+                    frame.origin.y = 415.0f + KIphone5Margin;
+                    _control.frame = frame;
+                }completion:^(BOOL finished) {
+                }];
             }];
-        }];
+            
+        }
+        
     }
     
 }

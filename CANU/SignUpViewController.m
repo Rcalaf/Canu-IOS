@@ -16,6 +16,10 @@
 #import "UICanuTextField.h"
 #import "User.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 #define kTakeUserPic [UIImage imageNamed:@"icon_userpic.png"] 
 #define kNoUserPic [UIImage imageNamed:@"icon_username.png"] 
 
@@ -33,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *signInButon;
 @property (strong, nonatomic) IBOutlet UIButton *takePictureButton;
+@property (nonatomic) BOOL userStartForm;
 
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 
@@ -66,6 +71,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
       
+        self.userStartForm = NO;
+        
         // Custom initialization
     }
     return self;
@@ -84,6 +91,11 @@
 
 -(IBAction)back:(id)sender
 {
+    
+    if (_userStartForm) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Dropout" value:nil] build]];
+    }
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate closeSession];
@@ -142,6 +154,8 @@
 - (IBAction)performSingUp:(id)sender
 {
     
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Save" value:nil] build]];
     
     UIImage *profileImage = [_takePictureButton.imageView.image isEqual:kTakeUserPic] ? nil : _takePictureButton.imageView.image;
     
@@ -211,6 +225,14 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    
+    if (!_userStartForm) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Start" value:nil] build]];
+    }
+    
+    self.userStartForm = YES;
+    
     CGPoint offset;
     //textField.backgroundColor = [UIColor redColor];
     if (self.userName == textField) {
@@ -238,6 +260,10 @@
 -(void) loadView
 {
     [super loadView];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Sign Up"];
+    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
     
     if (IS_IPHONE_5) {
         self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"hello_bg-568h.png"]];

@@ -41,45 +41,39 @@
 {
     self = [super init];
     if (self) {
-        _userId = [aDecoder decodeIntegerForKey:@"userId"];
-        _userName = [aDecoder decodeObjectForKey:@"userName"];
-        _email = [aDecoder decodeObjectForKey:@"email"];
+        _userId    = [aDecoder decodeIntegerForKey:@"userId"];
+        _userName  = [aDecoder decodeObjectForKey:@"userName"];
+        _email     = [aDecoder decodeObjectForKey:@"email"];
         _firstName = [aDecoder decodeObjectForKey:@"firstName"];
-        _lastName = [aDecoder decodeObjectForKey:@"lastName"];
-        _token = [aDecoder decodeObjectForKey:@"token"];
+        _lastName  = [aDecoder decodeObjectForKey:@"lastName"];
+        _token     = [aDecoder decodeObjectForKey:@"token"];
     }
     return self;
 }
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
-    if (!self) {
-        return nil;
+    if (self) {
+        
+        _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
+        _userName        = [attributes valueForKeyPath:@"user_name"];
+        _email           = [attributes valueForKeyPath:@"email"];
+        _firstName       = [attributes valueForKeyPath:@"first_name"];
+        _lastName        = [attributes valueForKeyPath:@"last_name"];
+        _token           = [attributes valueForKeyPath:@"token"];
+        _profileImageUrl = [NSURL URLWithString:[attributes valueForKey:@"profile_pic"]];
+        
     }
- //   NSLog(@"%@",attributes);
-    _userId = [[attributes valueForKeyPath:@"id"] integerValue];
-    _userName = [attributes valueForKeyPath:@"user_name"];
-    _email = [attributes valueForKeyPath:@"email"];
-    _firstName = [attributes valueForKeyPath:@"first_name"];
-    _lastName = [attributes valueForKeyPath:@"last_name"];
-    _token = [attributes valueForKeyPath:@"token"];
-    //_profileImageUrl = [[NSURL URLWithString:kAFCanuAPIBaseURLString] URLByAppendingPathComponent:[attributes valueForKey:@"profile_pic"]];
-    _profileImageUrl = [NSURL URLWithString:[attributes valueForKey:@"profile_pic"]];
-   // NSLog(@"user urlpic: %@",self.profileImageUrl);
+    
     return self;
 }
 
 - (NSDictionary *)serialize
 {
-    NSString *userId = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
+    NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrl];
-    //NSLog(@"User data: %@, %@, %@, %@, %@",_userName,_email,_firstName,_lastName,_token);
-    //NSLog(@"this is the user id %@",userId);
-    
-    NSArray *objectsArray = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,profileImageUrl,nil];
-    //NSLog(@"number of objects: %lu",(unsigned long)[objectsArray count]);
-    NSArray *keysArray =    [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"profile_pic",nil];
-    //NSLog(@"number of keys: %lu",(unsigned long)[keysArray count]);
-    NSDictionary *user = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,profileImageUrl,nil];
+    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"profile_pic",nil];
+    NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     return user;
 }
@@ -91,14 +85,12 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:token];
     [[AFCanuAPIClient sharedClient] postPath:@"session/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-         //NSLog(@"%@",JSON);
         if (block) {
             block([[User alloc] initWithAttributes:[JSON objectForKey:@"user"]], nil);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
-            //NSLog(@"%@",error);
             NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
             block(nil, error);
         }
@@ -116,16 +108,12 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] postPath:@"session/login/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-       // NSLog(@"%@",JSON);
         if (block) {
             block([[User alloc] initWithAttributes:JSON], nil);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
-           // [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-           /* NSLog(@"%@",error);
-            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);*/
             block(nil, error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -163,11 +151,6 @@
         request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"POST" path:@"users/" parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
             [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]]] mimeType:@"image/jpeg"];
         }];
-        
-        //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-         NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
-         }];*/
     } else {
         request = [[AFCanuAPIClient sharedClient] requestWithMethod:@"POST" path:@"users/" parameters:parameters];
     }
@@ -310,7 +293,6 @@
 - (void)editUserProfilePicture:(UIImage *)profilePicture
                          Block:(void (^)(User *user, NSError *error))block
 {
-  //  AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
     NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
     
     NSString *url = [NSString stringWithFormat:@"/users/%d/profile-image",self.userId];
@@ -324,11 +306,6 @@
     NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:url parameters:nil constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
         [formData appendPartWithFileData:imageData name:@"profile_image" fileName:[NSString stringWithFormat:@"avatar_%@.jpg",[dateFormatter stringFromDate:[NSDate date]] ] mimeType:@"image/jpeg"];
     }];
-    
-    //AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-     NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
-     }];*/
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFJSONRequestOperation *operation =
@@ -364,7 +341,6 @@
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
     [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         
-        //NSLog(@"%@",JSON);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];

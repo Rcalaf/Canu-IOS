@@ -7,17 +7,14 @@
 //
 
 #import "AFCanuAPIClient.h"
-//#import <Mixpanel/Mixpanel.h>
-
 #import "AppDelegate.h"
 #import "MainViewController.h"
-#import "ActivitiesFeedViewController.h" 
-#import "DetailActivityViewController.h"
+#import "ActivitiesFeedViewController.h"
 #import "UICanuNavigationController.h"
 #import "TutorialViewController.h"
-#import "ChatViewController.h"
-
-
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "AFCanuAPIClient.h"
 
 NSString *const FBSessionStateChangedNotification =
 @"se.canu.canu:FBSessionStateChangedNotification";
@@ -65,12 +62,23 @@ NSString *const FBSessionStateChangedNotification =
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    // Initialize the library with your
-    // Mixpanel project token, MIXPANEL_TOKEN
-    //[Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    id<GAITracker> tracker;
     
-    // Later, you can get your instance with
-    //Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    if ([AFCanuAPIClient sharedClient].distributionMode) {
+        // Google Analytics //
+        [GAI sharedInstance].trackUncaughtExceptions = YES;
+        [GAI sharedInstance].dispatchInterval = 20;
+        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+        id<GAITracker> tracker;
+        tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-46900796-1"];
+    }
+    
+    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    if (types == UIRemoteNotificationTypeNone){
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"NO" value:nil] build]];
+    } else {
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"YES" value:nil] build]];
+    }
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
@@ -134,12 +142,13 @@ NSString *const FBSessionStateChangedNotification =
             }
         }];
     
-        if ([[(UICanuNavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
-            ChatViewController *currentChat = (ChatViewController *)[(UICanuNavigationController *)self.window.rootViewController visibleViewController];
-            if (currentChat.activity.activityId == [[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] integerValue]){
-              [currentChat reload];
-            }
-        } /*else {
+//        if ([[(UICanuNavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
+//            ChatViewController *currentChat = (ChatViewController *)[(UICanuNavigationController *)self.window.rootViewController visibleViewController];
+//            if (currentChat.activity.activityId == [[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] integerValue]){
+//              [currentChat reload];
+//            }
+//        }
+        /*else {
            UILocalNotification *localNotif = [[UILocalNotification alloc] init];
             if (localNotif == nil)
                 return;
@@ -165,19 +174,19 @@ NSString *const FBSessionStateChangedNotification =
         // move to the main activity feed
 //        [(UICanuNavigationController *)self.window.rootViewController goActivities:nil];
         
-        if (![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]) {
-            NSLog(@"we are in, value: %d",![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]);
-            [Activity activityWithId:[[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] unsignedIntegerValue] andBlock:^(Activity *activity, NSError *error){
-                if (activity) {
-                    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
-                    davc.activity = activity;
-                    [(UICanuNavigationController *)self.window.rootViewController pushViewController:davc animated:YES];
-                    if ([[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"chat"]) {
-                        [davc presentViewController:[[ChatViewController alloc] initWithActivity:activity] animated:YES completion:nil];
-                    }
-                }
-            }];
-        }
+//        if (![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]) {
+//            NSLog(@"we are in, value: %d",![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]);
+//            [Activity activityWithId:[[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] unsignedIntegerValue] andBlock:^(Activity *activity, NSError *error){
+//                if (activity) {
+//                    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
+//                    davc.activity = activity;
+//                    [(UICanuNavigationController *)self.window.rootViewController pushViewController:davc animated:YES];
+//                    if ([[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"chat"]) {
+//                        [davc presentViewController:[[ChatViewController alloc] initWithActivity:activity] animated:YES completion:nil];
+//                    }
+//                }
+//            }];
+//        }
     }
         
 }

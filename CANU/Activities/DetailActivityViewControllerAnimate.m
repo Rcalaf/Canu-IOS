@@ -17,6 +17,9 @@
 #import "AttendeesScrollViewController.h"
 #import "LoaderAnimation.h"
 #import <MapKit/MapKit.h>
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 typedef enum {
     UICanuActivityCellEditable = 0,
@@ -57,6 +60,10 @@ typedef enum {
 - (id)initFrame:(CGRect)frame andActivity:(Activity *)activity andPosition:(int)positionY{
     self = [super init];
     if (self) {
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Details"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         
         self.view.frame = frame;
         
@@ -337,6 +344,10 @@ typedef enum {
     
     if (!_animationFolder) {
         
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Details"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        
         self.animationFolder = YES;
         
         self.chatView.loaderAnimation.alpha = 0;
@@ -368,6 +379,10 @@ typedef enum {
             }];
             
         }else{
+            
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker set:kGAIScreenName value:@"Activity Chat"];
+            [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
             
             if ([_chatView.arrayCell count] == 0) {
                 self.keyboardIsOpen = YES;
@@ -458,6 +473,8 @@ typedef enum {
                 
                 [_chatView load];
                 
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chat" action:@"Send" label:nil value:nil] build]];
             }
             
         }];
@@ -599,6 +616,11 @@ typedef enum {
 - (void)showAttendees{
     NSLog(@"showAttendees");
     if (_attendeesList == nil) {
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Attendees"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        
         self.attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 57) andActivity:_activity];
         [self addChildViewController:self.attendeesList];
         [self.view addSubview:self.attendeesList.view];
@@ -612,6 +634,11 @@ typedef enum {
             
         }];
     }else{
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Details"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        
         [UIView animateWithDuration:0.4 animations:^{
             self.wrapper.frame = CGRectMake(0, 0, 320, self.wrapper.frame.size.height);
             self.attendeesList.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height - 57);
@@ -624,6 +651,28 @@ typedef enum {
             self.attendeesList = nil;
         }];
     }
+    
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+    
+    static NSString *AnnotationViewID = @"annotationViewID";
+    
+    MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+    
+    if (annotationView == nil)
+    {
+        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+    }
+    if(annotation != mapView.userLocation) {
+        
+        annotationView.image = [UIImage imageNamed:@"map_pin"];
+        
+    }
+    
+    annotationView.annotation = annotation;
+    
+    return annotationView;
     
 }
 

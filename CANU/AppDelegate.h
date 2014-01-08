@@ -25,6 +25,7 @@ extern NSString *const FBSessionStateChangedNotification;
 
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSString *device_token;
+@property (strong, nonatomic) NSString *oldScreenName;
 @property (strong, nonatomic) ActivitiesFeedViewController *feedViewController;
 @property (strong, nonatomic) UICanuNavigationController *canuViewController;
 

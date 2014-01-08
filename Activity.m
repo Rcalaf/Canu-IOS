@@ -30,21 +30,10 @@
 @synthesize zip = _zip;
 @synthesize country = _country;
 @synthesize pictureUrl = _picture;
-//@synthesize latitude = _latitude;
-//@synthesize longitude = _longitude;
 @synthesize user = _user;
 @synthesize location = _location;
 @synthesize coordinate = _coordinate;
 @synthesize attendeeIds = _attendeeIds;
-
-/*
-
-- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
-    _coordinate = newCoordinate;
-}*/
-
-
-
 
 - (void)setStart:(id)start
 {
@@ -63,10 +52,6 @@
         [comps setMinute:[[timeParts objectAtIndex:1] integerValue]];
         [comps setSecond:[[timeParts objectAtIndex:2] integerValue]];
         _start = [[NSCalendar currentCalendar] dateFromComponents:comps];
-        /*NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy"];
-        _start = [df dateFromString: start];*/
-        //NSLog(@"%@",_start);
     }
     
 }
@@ -87,8 +72,6 @@
         [comps setHour:[[timeParts objectAtIndex:0] integerValue]];
         [comps setMinute:[[timeParts objectAtIndex:1] integerValue]];
         [comps setSecond:[[timeParts objectAtIndex:2] integerValue]];
-        /*NSDateFormatter *df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];*/
         _end = [[NSCalendar currentCalendar] dateFromComponents:comps];
     }
 }
@@ -102,12 +85,11 @@
     localNotif.fireDate = [self.start dateByAddingTimeInterval:-(5*60)];
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     
-    localNotif.alertBody = [NSString stringWithFormat:NSLocalizedString(@"%@ in %i minutes.", nil),
-                            self.title, 5];
+    localNotif.alertBody = [NSString stringWithFormat:NSLocalizedString(@"%@ in %i minutes.", nil),self.title, 5];
+    
     localNotif.alertAction = NSLocalizedString(@"View Details", nil);
     
     localNotif.soundName = UILocalNotificationDefaultSoundName;
-   // localNotif.applicationIconBadgeNumber = 0;
     
     NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSNumber numberWithUnsignedInteger:self.activityId]  forKey:@"id"];
     localNotif.userInfo = infoDict;
@@ -133,11 +115,11 @@
 
 
 - (MKMapItem *)location {
-   // NSLog(@"location");
+   
     if (!_location) {
-        if (!self.street) _street = @"";
-        if (!self.city) _city = @"";
-        if (!self.zip) _zip = @"";
+        if (!self.street) _street   = @"";
+        if (!self.city) _city       = @"";
+        if (!self.zip) _zip         = @"";
         if (!self.country) _country = @"";
         
     
@@ -146,8 +128,6 @@
         NSArray *keysArray = [NSArray arrayWithObjects:@"Street",@"City",@"ZIP",@"Country",nil];
     
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
- 
-        //MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.latitude, self.longitude) addressDictionary:parameters];
         
         MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.coordinate addressDictionary:parameters];
 
@@ -155,18 +135,6 @@
     }
     return _location;
 }
-
-/*
-- (void)populateLocationDataWith:(MKMapItem *)mapItem
-{
-    _street = mapItem.placemark.addressDictionary[@"Street"];
-    _city = mapItem.placemark.addressDictionary[@"City"];
-    _zip = mapItem.placemark.addressDictionary[@"ZIP"];
-    _country = mapItem.placemark.addressDictionary[@"Country"];
-    _longitude = mapItem.placemark.coordinate.latitude;
-    _latitude = mapItem.placemark.coordinate.longitude;
-
-}*/
 
 - (NSInteger)status
 {
@@ -216,32 +184,25 @@
         return nil;
     }
     
-   //NSLog(@"%@",attributes);
-    _activityId = [[attributes valueForKeyPath:@"id"] unsignedIntegerValue];
-    _title = [attributes valueForKeyPath:@"title"];
-    _ownerId = [[[attributes valueForKeyPath:@"user"] valueForKeyPath:@"id"] unsignedIntegerValue];
-    _user = [[User alloc] initWithAttributes:[attributes valueForKeyPath:@"user"]];
-    
-    //NSLog(@"%@",[attributes valueForKeyPath:@"user"]);
-    _description = [attributes valueForKeyPath:@"description"];
-    
-    _city = [attributes valueForKeyPath:@"city"];
-    _country = [attributes valueForKeyPath:@"country"];
-    _street = [attributes valueForKeyPath:@"street"];
-    _zip = [attributes valueForKeyPath:@"zip_code"];
-    
-    self.start = [attributes valueForKeyPath:@"start"];
-    self.end = [attributes valueForKeyPath:@"end_date"];
-    
-    _length = [attributes valueForKeyPath:@"length"];
-    
-    //_longitude = [[attributes valueForKeyPath:@"longitude"] floatValue];
-    //_latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
-    
+    _activityId          = [[attributes valueForKeyPath:@"id"] unsignedIntegerValue];
+    _title               = [attributes valueForKeyPath:@"title"];
+    _ownerId             = [[[attributes valueForKeyPath:@"user"] valueForKeyPath:@"id"] unsignedIntegerValue];
+    _user                = [[User alloc] initWithAttributes:[attributes valueForKeyPath:@"user"]];
+
+    _description         = [attributes valueForKeyPath:@"description"];
+
+    _city                = [attributes valueForKeyPath:@"city"];
+    _country             = [attributes valueForKeyPath:@"country"];
+    _street              = [attributes valueForKeyPath:@"street"];
+    _zip                 = [attributes valueForKeyPath:@"zip_code"];
+
+    self.start           = [attributes valueForKeyPath:@"start"];
+    self.end             = [attributes valueForKeyPath:@"end_date"];
+
+    _length              = [attributes valueForKeyPath:@"length"];
+
     _coordinate.latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
     _coordinate.longitude =[[attributes valueForKeyPath:@"longitude"] floatValue];
-    
-    //_pictureUrl = [attributes valueForKeyPath:@"activity_picture"];
     
     NSMutableArray *mutableAssistents = [NSMutableArray arrayWithCapacity:[[attributes valueForKeyPath:@"attendee_ids"] count]];
     for (NSNumber *assistentId in [attributes valueForKeyPath:@"attendee_ids"]) {
@@ -495,9 +456,6 @@
                                                                                             if (block) {
                                                                                                 block(nil);
                                                                                             }
-               // Mixpanel *mixpanel = [Mixpanel sharedInstance];
-               /* [mixpanel track:@"Activity Created" properties:@{@"Title": title,
-                                                              @"Country": country}];*/
                                                                         
                                                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                                                         }

@@ -12,11 +12,11 @@
 
 #import "NewActivityViewController.h"
 #import "FindLocationsViewController.h"
-
-
 #import "Activity.h"
 
-
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 @interface NewActivityViewController () 
 
@@ -145,6 +145,9 @@ float oldValue;
                                                   } else {
                                                       [self dismissViewControllerAnimated:YES completion:nil];
                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+                                                      
+                                                      id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                                      [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Save" value:nil] build]];
                                                   }
                                                   [self operationInProcess:NO];
                                               }];
@@ -178,6 +181,10 @@ float oldValue;
                                                   } else {
                                                       [self dismissViewControllerAnimated:YES completion:nil];
                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+                                                      
+                                                      id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                                      [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Save" value:nil] build]];
+                                                      
                                                   }
                                                   [self operationInProcess:NO];
                                               }];
@@ -196,6 +203,10 @@ float oldValue;
     [self.activity removeActivityWithBlock:^(NSError *error){
         if (!error) {
             [self dismissViewControllerAnimated:YES completion:nil];
+            
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Delete" value:nil] build]];
+            
         } else {
             //[error localizedDescription]
              [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"Couldn't delete the activity." delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -207,6 +218,19 @@ float oldValue;
 
 - (IBAction)goBack:(id)sender
 {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:appDelegate.oldScreenName];
+    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    
+    if (self.activity) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Dropout" value:nil] build]];
+    }else{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Dropout" value:nil] build]];
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -261,9 +285,21 @@ float oldValue;
     [super loadView];
     
     if (self.activity) {
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Edit"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];;
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Open" value:nil] build]];
+        
         _length = [self.activity lengthToInteger];
         _location = self.activity.location;
     }else{
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity New"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Open" value:nil] build]];
+        
         _length = 15;
          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         //_location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:appDelegate.currentLocation addressDictionary:nil]];

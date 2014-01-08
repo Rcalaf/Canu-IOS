@@ -15,6 +15,8 @@
 #import "DetailActivityViewControllerAnimate.h"
 #import "UICanuNavigationController.h"
 #import "LoaderAnimation.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 #import "AppDelegate.h"
 
@@ -423,6 +425,10 @@ typedef enum {
                 if (error) {
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
                 } else {
+                    
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Unsubscribe" value:nil] build]];
+                    
                     _activities = activities;
                     cell.animationButtonGo.hidden = NO;
                     cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
@@ -465,6 +471,10 @@ typedef enum {
                 if (error) {
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
                 } else {
+                    
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Subscribe" value:nil] build]];
+                    
                     _activities = activities;
                     cell.animationButtonToGo.hidden = NO;
                     cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);

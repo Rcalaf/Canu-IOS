@@ -14,6 +14,10 @@
 #import "UICanuTextField.h"
 #import "User.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 @interface SignInViewController ()
 
 @property (strong, nonatomic) IBOutlet UITextField *email;
@@ -247,6 +251,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Sign In"];
+    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    
     [_loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [_backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
 

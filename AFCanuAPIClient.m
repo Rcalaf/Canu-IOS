@@ -11,7 +11,9 @@
 
 
 NSString * const kAFCanuAPIBaseURLString = @"http://api.canu.se/";
-//NSString * const kAFCanuAPIBaseURLString = @"http://172.18.61.130:3000";
+NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
+
+BOOL const kAFCanuAPIDistributionMode = NO;
 
 
 @implementation AFCanuAPIClient
@@ -21,8 +23,15 @@ NSString * const kAFCanuAPIBaseURLString = @"http://api.canu.se/";
   
     static AFCanuAPIClient *_sharedClient = nil;
     static dispatch_once_t oncePredicate;
+    
     dispatch_once(&oncePredicate, ^{
-        _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIBaseURLString]];
+        
+        if (kAFCanuAPIDistributionMode) {
+            _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIBaseURLString]];
+        }else{
+            _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIDevBaseURLString]];
+        }
+        
     });
     
     return _sharedClient;
@@ -33,6 +42,8 @@ NSString * const kAFCanuAPIBaseURLString = @"http://api.canu.se/";
     if (!self) {
         return nil;
     }
+    
+    self.distributionMode = kAFCanuAPIDistributionMode;
     
     [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
     

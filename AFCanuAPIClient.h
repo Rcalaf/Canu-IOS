@@ -12,6 +12,8 @@ extern NSString *const kAFCanuAPIBaseURLString;
 
 @interface AFCanuAPIClient : AFHTTPClient
 
+@property (nonatomic) BOOL distributionMode;
+
 + (AFCanuAPIClient *)sharedClient;
 
 @end

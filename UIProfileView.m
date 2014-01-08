@@ -42,6 +42,9 @@
         self.mask.alpha = 0;
         self.mask.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.4f];
         
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeComponents)];
+        [self.mask addGestureRecognizer:tap];
+        
         self.hideArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bringup_profile_arrow.png"]];
         self.hideArrow.frame = CGRectMake(0.0, -12.0, self.hideArrow.frame.size.width, self.hideArrow.frame.size.height);
         [self addSubview:self.hideArrow];
@@ -86,6 +89,14 @@
             self.mask.frame = CGRectMake(0, 0, 0, 0);
         }];
     }
+    
+    self.profileHidden = !hide;
+    
+}
+
+- (void)closeComponents{
+    
+    [self hideComponents:NO];
     
 }
 
