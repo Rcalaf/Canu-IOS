@@ -14,7 +14,9 @@
 #import "DetailActivityViewController.h"
 #import "DetailActivityViewControllerAnimate.h"
 #import "UICanuNavigationController.h"
+#import "ActivitiesFeedViewController.h"
 #import "LoaderAnimation.h"
+#import "UICanuNavigationController.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 
@@ -190,7 +192,6 @@ typedef enum {
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -498,7 +499,7 @@ typedef enum {
 }
 
 - (void)touchCell:(UITapGestureRecognizer *)sender{
-    
+    NSLog(@"touchCell");
     UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
     
     for (int i = 0; i < [_arrayCell count]; i++) {
@@ -521,10 +522,28 @@ typedef enum {
             
             DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andActivity:activity andPosition:position];
             davc.delegate = self;
+            davc.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self addChildViewController:davc];
             [self.view addSubview:davc.view];
             
-            cellTouch.alpha = 0;
+//            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+//            
+//            [self addChildViewController:davc];
+//            [self willMoveToParentViewController:nil];
+//            
+//            [appDelegate.canuViewController.activityFeed transitionFromViewController:self
+//                              toViewController:davc
+//                                      duration:0.3
+//                                       options:UIViewAnimationOptionTransitionNone
+//                                    animations:^{
+//                                        [cellTouch setAlpha:0.0];
+//                                    }
+//                                    completion:^(BOOL finished) {
+//                                        [self removeFromParentViewController];
+//                                        [davc didMoveToParentViewController:self];
+//                                    }];
+//            
+//            cellTouch.alpha = 0;
             
         }else{
             

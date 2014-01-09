@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0EDCEB187DB6DC00088B8A /* fullview_action_circle_go.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE7187DB6DC00088B8A /* fullview_action_circle_go.png */; };
+		1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */; };
+		1E0EDCED187DB6DC00088B8A /* fullview_action_circle_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */; };
+		1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */; };
 		1E814CF9187C495D0013E238 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
 		1E9FB9EC18619A0400085421 /* loader-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C418619A0400085421 /* loader-2.png */; };
@@ -229,6 +233,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E0EDCE7187DB6DC00088B8A /* fullview_action_circle_go.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullview_action_circle_go.png; sourceTree = "<group>"; };
+		1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_go@2x.png"; sourceTree = "<group>"; };
+		1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullview_action_circle_yes.png; sourceTree = "<group>"; };
+		1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_yes@2x.png"; sourceTree = "<group>"; };
 		1E814CF2187C495D0013E238 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		1E814CF3187C495D0013E238 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		1E814CF4187C495D0013E238 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
@@ -564,6 +572,10 @@
 			isa = PBXGroup;
 			children = (
 				1EEA97F91859FF4D00EA9E02 /* Loader */,
+				1E0EDCE7187DB6DC00088B8A /* fullview_action_circle_go.png */,
+				1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */,
+				1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */,
+				1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */,
 				1EEA97F11859D34200EA9E02 /* feed_action_circle_go.png */,
 				1EEA97F21859D34200EA9E02 /* feed_action_circle_go@2x.png */,
 				1EEA97F51859E78600EA9E02 /* feed_action_circle_togo.png */,
@@ -1212,6 +1224,7 @@
 				DE60782F182BD08D0053F23B /* intro_bg-568h@2x.png in Resources */,
 				DEFD7A72174694660087CB8A /* facebook_btn_off@2x.png in Resources */,
 				DEFD7A73174694660087CB8A /* facebook_btn_on.png in Resources */,
+				1E0EDCEB187DB6DC00088B8A /* fullview_action_circle_go.png in Resources */,
 				1E9FB9EC18619A0400085421 /* loader-2.png in Resources */,
 				DEFD7A74174694660087CB8A /* facebook_btn_on@2x.png in Resources */,
 				DEFD7A761746CAAB0087CB8A /* icon_password.png in Resources */,
@@ -1280,6 +1293,7 @@
 				DE6ED9B217C2927100C5E72E /* create_passive@2x.png in Resources */,
 				1E9FB9F118619A0400085421 /* loader-4@2x.png in Resources */,
 				DE6ED9B517C2928900C5E72E /* create_active.png in Resources */,
+				1E0EDCED187DB6DC00088B8A /* fullview_action_circle_yes.png in Resources */,
 				DE6ED9B617C2928900C5E72E /* create_active@2x.png in Resources */,
 				1E9FBA0018619A0400085421 /* loader-12.png in Resources */,
 				DE6ED9BF17C2958100C5E72E /* fullview_action_edit.png in Resources */,
@@ -1319,6 +1333,7 @@
 				DE774B41184E0FDD00F8C244 /* guide_step_4@2x.png in Resources */,
 				1E9FBA0718619A0400085421 /* loader-15@2x.png in Resources */,
 				DE774B3B184E0FDD00F8C244 /* guide_step_2@2x.png in Resources */,
+				1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */,
 				DE607831182BD08D0053F23B /* intro_bg@2x.png in Resources */,
 				1E9FBA0A18619A0400085421 /* loader-17.png in Resources */,
 				DE517732184F716500690E2F /* create_bg-568h@2x.png in Resources */,
@@ -1327,6 +1342,7 @@
 				DE67FDDC17CA66DD00240E1C /* guide_btn_gotit.png in Resources */,
 				DE67FDDD17CA66DD00240E1C /* guide_btn_gotit@2x.png in Resources */,
 				DE51772E184F70DC00690E2F /* edit_bg@2x.png in Resources */,
+				1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */,
 				DE936C81180B39BD0058608D /* Images.xcassets in Resources */,
 				DE67FDDE17CA66DD00240E1C /* guide_btn_start.png in Resources */,
 				DE67FDDF17CA66DD00240E1C /* guide_btn_start@2x.png in Resources */,
@@ -1436,6 +1452,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1445,7 +1462,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
+				PROVISIONING_PROFILE = "42095F80-EA8C-4E71-BD49-2D068ACC903F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42095F80-EA8C-4E71-BD49-2D068ACC903F";
 				SDKROOT = iphoneos;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;
@@ -1497,6 +1515,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1512,7 +1531,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
+				PROVISIONING_PROFILE = "42095F80-EA8C-4E71-BD49-2D068ACC903F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42095F80-EA8C-4E71-BD49-2D068ACC903F";
 				SDKROOT = iphoneos;
 				SYMROOT = build/Products;
 			};
@@ -1530,6 +1550,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1538,7 +1559,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
+				PROVISIONING_PROFILE = "42095F80-EA8C-4E71-BD49-2D068ACC903F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42095F80-EA8C-4E71-BD49-2D068ACC903F";
 				SDKROOT = iphoneos;
 				SYMROOT = build/Products;
 				VALIDATE_PRODUCT = YES;

@@ -202,7 +202,7 @@
     self.email.delegate = self;
     [self.view addSubview:self.email];
 
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];

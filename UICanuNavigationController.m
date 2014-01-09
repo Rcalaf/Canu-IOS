@@ -35,7 +35,6 @@ typedef enum {
 @property (nonatomic) NavBoxPosition naveboxPosition;
 @property (nonatomic) BOOL tribesIsEnable;
 @property (nonatomic) float areaSize;
-@property (nonatomic) ActivitiesFeedViewController *activityFeed;
 @property (nonatomic) BOOL panIsDetect;
 @property (nonatomic) float gapTouchControl;
 @property (nonatomic) float velocity;

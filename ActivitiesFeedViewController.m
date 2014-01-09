@@ -201,6 +201,18 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    self.profilFeed.view.frame = CGRectMake(320, 0, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    self.profilFeed.view.frame = CGRectMake(320, 0, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.profilFeed.view.frame = CGRectMake(320, 0, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

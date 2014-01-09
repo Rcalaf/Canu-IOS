@@ -10,6 +10,7 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Message.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Activities/DetailActivityViewControllerAnimate.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/UICanuNavigationController.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/ActivitiesFeedViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/LoaderAnimation/LoaderAnimation.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAI.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAILogger.h \

@@ -82,8 +82,8 @@
     
     //Refresh
     
-    if( newY <= - 80.0f ){
-        [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
+    if( newY <= - 80.0f ){;
+        [self performSelectorOnMainThread:@selector(reload) withObject:self waitUntilDone:NO];
     }
     
 }

@@ -13,6 +13,7 @@
 @interface UICanuNavigationController : UINavigationController
 
 @property (strong, nonatomic) UIView *control;
+@property (nonatomic) ActivitiesFeedViewController *activityFeed;
 
 - (id)initWithActivityFeed:(ActivitiesFeedViewController *)activityFeed;
 - (void)changePosition:(float)position;

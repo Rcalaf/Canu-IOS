@@ -60,7 +60,7 @@ typedef enum {
 - (id)initFrame:(CGRect)frame andActivity:(Activity *)activity andPosition:(int)positionY{
     self = [super init];
     if (self) {
-        
+        NSLog(@"Start Init");
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:@"Activity Details"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
@@ -308,9 +308,17 @@ typedef enum {
             navigation.control.hidden = YES;
             self.view.backgroundColor = backgroundColorView;
         }];
-        
+        NSLog(@"End Init");
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    NSLog(@"viewDidAppear");
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"viewWillAppear");
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -680,6 +688,7 @@ typedef enum {
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSLog(@"viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning
