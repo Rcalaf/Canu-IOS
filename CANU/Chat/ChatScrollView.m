@@ -57,8 +57,6 @@
         self.scrollview.delegate = self;
         [self addSubview:_scrollview];
         
-        [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
-        
     }
     return self;
 }

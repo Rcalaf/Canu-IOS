@@ -52,20 +52,38 @@ typedef enum {
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) BOOL animationFolder;
 @property (nonatomic) AttendeesScrollViewController *attendeesList;
+@property (nonatomic) CGRect frame;
 
 @end
 
 @implementation DetailActivityViewControllerAnimate
 
+- (void)loadView{
+    
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    self.view = view;
+    
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        
+        
+        
+    }
+    return self;
+}
+
 - (id)initFrame:(CGRect)frame andActivity:(Activity *)activity andPosition:(int)positionY{
+    
     self = [super init];
     if (self) {
         NSLog(@"Start Init");
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"Activity Details"];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        self.view.frame = frame;
+        self.frame = frame;
         
         self.activity = activity;
         
@@ -75,246 +93,261 @@ typedef enum {
         self.keyboardIsOpen = NO;
         self.animationFolder = NO;
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
-        self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, positionY - 10, 320, frame.size.height)];
-        [self.view addSubview:_wrapper];
-        
-        self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 andMinHeight:frame.size.height - 340 - 57];
-        [self.wrapper addSubview:_chatView];
-        
-        // User
-        
-        UIView *wrapperUser = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 166, 34)];
-        wrapperUser.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        [self.wrapper addSubview:wrapperUser];
-        
-        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
-        [avatar setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_activity.user.profileImageUrl]] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-        [wrapperUser addSubview:avatar];
-        
-        UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 128.0f, 25.0f)];
-        userName.text = self.activity.user.userName;
-        userName.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
-        userName.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
-        [wrapperUser addSubview:userName];
-        
-        UIView *wrapperTime = [[UIView alloc]initWithFrame:CGRectMake(177, 10, 133, 34)];
-        wrapperTime.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        [self.wrapper addSubview:wrapperTime];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-        dateFormatter.dateFormat = @"d MMM";
-        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        
-        UILabel *day = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 33, 34)];
-        day.text = [dateFormatter stringFromDate:self.activity.start];
-        day.font = [UIFont fontWithName:@"Lato-Regular" size:10.0];
-        day.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        day.textColor = UIColorFromRGB(0x2b4b58);
-        [wrapperTime addSubview:day];
-        
-        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-        [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
-        timeFormatter.dateFormat = @"HH:mm";
-        [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-        
-        UILabel *timeStart = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 44, 34)];
-        timeStart.text = [timeFormatter stringFromDate:self.activity.start];
-        timeStart.font = [UIFont fontWithName:@"Lato-Bold" size:11.0];
-        timeStart.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        timeStart.textColor = UIColorFromRGB(0x2b4b58);
-        [wrapperTime addSubview:timeStart];
-        
-        UILabel *timeEnd = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
-        timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
-        timeEnd.font = [UIFont fontWithName:@"Lato-Italic" size:11.0];
-        timeEnd.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        timeEnd.textColor = UIColorFromRGB(0x2b4b58);
-        timeEnd.alpha = 0.5;
-        [wrapperTime addSubview:timeEnd];
-        
-        // Map
-        
-        self.wrapperMap = [[UIView alloc]initWithFrame:CGRectMake(10, 45, 300, 0)];
-        self.wrapperMap.clipsToBounds = YES;
-        self.wrapperMap.backgroundColor = [UIColor whiteColor];
-        [self.wrapper addSubview:_wrapperMap];
-        
-        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.activity.coordinate, 400, 400);
-        
-        self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(10, 10, 280, 140)];
-        self.mapView.delegate = self;
-        [self.mapView addAnnotation:self.activity.location.placemark];
-        self.mapView.region = viewRegion;
-        [self.mapView setUserTrackingMode:MKUserTrackingModeNone];
-        [self.wrapperMap addSubview:_mapView];
-        
-        // Description
-        
-        self.wrapperDescription = [[UIView alloc]initWithFrame:CGRectMake(10, 130, 300, 0)];
-        self.wrapperDescription.backgroundColor = [UIColor whiteColor];
-        self.wrapperDescription.clipsToBounds = YES;
-        [self.wrapper addSubview:_wrapperDescription];
-        
-        UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(16, 5, 268, 40)];
-        description.text = self.activity.description;
-        description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
-        description.numberOfLines = 2;
-        description.textColor = UIColorFromRGB(0x2b4b58);
-        description.backgroundColor = [UIColor whiteColor];
-        [self.wrapperDescription addSubview:description];
-        
-        // Name
-        
-        self.wrapperName = [[UIView alloc]initWithFrame:CGRectMake(10, 45, 300, 85)];
-        self.wrapperName.backgroundColor = [UIColor whiteColor];
-        [self.wrapper addSubview:_wrapperName];
-        
-        UILabel *nameActivity = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
-        nameActivity.font = [UIFont fontWithName:@"Lato-Bold" size:22.0];
-        nameActivity.backgroundColor = [UIColor whiteColor];
-        nameActivity.textColor = UIColorFromRGB(0x2b4b58);
-        nameActivity.text = _activity.title;
-        [_wrapperName addSubview:nameActivity];
-        
-        UILabel *location = [[UILabel alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
-        location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
-        location.backgroundColor = [UIColor whiteColor];
-        location.textColor = UIColorFromRGB(0x2b4b58);
-        location.text = _activity.locationDescription;
-        [_wrapperName addSubview:location];
-        
-        self.actionButtonImage = [[UIImageView alloc]initWithFrame:CGRectMake(243, 19, 47, 47)];
-        [self.wrapperName addSubview:_actionButtonImage];
-        
-        if ( _activity.status == UICanuActivityCellGo ) {
-            self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_yes"];
-        } else if ( _activity.status == UICanuActivityCellToGo ){
-            self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_go.png"];
-        } else {
-            self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_edit.png"];
-        }
-        
-        self.shadow = [[UIImageView alloc]initWithFrame:CGRectMake(0, 85, 300, 4)];
-        self.shadow.image = [UIImage imageNamed:@"feed_shadow_name"];
-        self.shadow.alpha = 0;
-        [self.wrapperName addSubview:_shadow];
-        
-        // ScrollView
-        
-        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(10, 195, 300, 145)];
-        self.scrollView.contentSize = CGSizeMake(300, 145 + 1);
-        self.scrollView.delegate = self;
-        self.scrollView.showsVerticalScrollIndicator = NO;
-        [self.wrapper addSubview:_scrollView];
-        
-        // Touch Area
-        
-        self.touchArea = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
-        [self.touchArea addTarget:self action:@selector(folderAnimation) forControlEvents:UIControlEventTouchDown];
-        [self.wrapper addSubview:_touchArea];
-        
-        // Bottom Bar
-        
-        self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
-        self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        [self.view addSubview:_wrapperBottomBar];
-        
-        UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
-        [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
-        [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateHighlighted];
-        [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchDown];
-        [self.wrapperBottomBar addSubview:backButton];
-        
-        self.attendeesButton = [[UIButton alloc]initWithFrame:CGRectMake(67, 10, 116, 37)];
-        [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateNormal];
-        [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateHighlighted];
-        [self.attendeesButton addTarget:self action:@selector(showAttendees) forControlEvents:UIControlEventTouchDown];
-        [self.wrapperBottomBar addSubview:_attendeesButton];
-        
-        self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];
-        self.numberOfAssistents.text = [NSString stringWithFormat:@"%i",[self.activity.attendeeIds count]];
-        self.numberOfAssistents.textColor = UIColorFromRGB(0x2b4b58);
-        self.numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
-        self.numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
-        
-        [_attendeesButton.imageView addSubview:_numberOfAssistents];
-        
-        self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.actionButton addTarget:self action:@selector(eventActionButton) forControlEvents:UIControlEventTouchDown];
-        [_actionButton setFrame:CGRectMake(194, 10, 116, 37)];
-        
-        if (appDelegate.user.userId == self.activity.user.userId) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_edit.png"] forState:UIControlStateNormal];
-        else if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]] == NSNotFound) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
-        else [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
-        
-        [self.wrapperBottomBar addSubview:_actionButton];
-        
-        UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
-        lineBottomBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
-        [self.wrapperBottomBar addSubview:lineBottomBar];
-        
-        // Input Bar
-        
-        self.wrapperInput = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, 320, 57)];
-        self.wrapperInput.backgroundColor = UIColorFromRGB(0xf9f9f9);
-        [self.view addSubview:_wrapperInput];
-        
-        UIView *inputBackground = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 37)];
-        inputBackground.backgroundColor = [UIColor whiteColor];
-        [self.wrapperInput addSubview:inputBackground];
-        
-        self.input = [[UITextField alloc] initWithFrame:CGRectMake(10, 2, 220, 32)];
-        self.input.placeholder = @"Write something nice...";
-        self.input.font = [UIFont fontWithName:@"Lato-Regular" size:13];
-        self.input.backgroundColor = [UIColor whiteColor];
-        self.input.textColor = UIColorFromRGB(0x6d6e7a);
-        [self.input setReturnKeyType:UIReturnKeySend];
-        self.input.delegate = self;
-        [inputBackground addSubview:_input];
-        
-        if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-            self.input.frame = CGRectMake(10, 8, 220, 20);
-        }
-        
-        UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(237, 2, 61, 33)];
-        [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
-        [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
-        [sendButton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchDown];
-        [inputBackground addSubview:sendButton];
-        
-        UIView *lineInputBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
-        lineInputBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
-        [self.wrapperInput addSubview:lineInputBar];
-        
-        UICanuNavigationController *navigation = appDelegate.canuViewController;
-        
-        [UIView animateWithDuration:0.4 animations:^{
-            [navigation changePosition:1];
-            self.wrapper.frame = CGRectMake(0, 0, 320, frame.size.height);
-            self.actionButtonImage.alpha = 0;
-            self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
-            self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
-            self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
-            self.chatView.frame = CGRectMake(10, 340, 300, frame.size.height - 340 - 57);
-            self.touchArea.frame = CGRectMake(10, 340, 300, frame.size.height - 340 - 57);
-            self.wrapperBottomBar.frame = CGRectMake(0, frame.size.height - 57, 320, 57);
-            self.shadow.alpha = 1;
-            self.shadow.frame = CGRectMake(0, 85 + 60, 300, 4);
-        } completion:^(BOOL finished) {
-            navigation.control.hidden = YES;
-            self.view.backgroundColor = backgroundColorView;
-        }];
         NSLog(@"End Init");
     }
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    NSLog(@"Start viewDidLoad");
+    
+    self.view.frame = _frame;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, self.positionY - 10, 320, self.view.frame.size.height)];
+    [self.view addSubview:_wrapper];
+    
+    self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 andMinHeight:self.view.frame.size.height - 340 - 57];
+    [self.wrapper addSubview:_chatView];
+    
+    // User
+    
+    UIView *wrapperUser = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 166, 34)];
+    wrapperUser.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    [self.wrapper addSubview:wrapperUser];
+    
+    UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
+    [avatar setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_activity.user.profileImageUrl]] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    [wrapperUser addSubview:avatar];
+    
+    UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 128.0f, 25.0f)];
+    userName.text = self.activity.user.userName;
+    userName.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
+    userName.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    userName.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
+    [wrapperUser addSubview:userName];
+    
+    UIView *wrapperTime = [[UIView alloc]initWithFrame:CGRectMake(177, 10, 133, 34)];
+    wrapperTime.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    [self.wrapper addSubview:wrapperTime];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    dateFormatter.dateFormat = @"d MMM";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    UILabel *day = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 33, 34)];
+    day.text = [dateFormatter stringFromDate:self.activity.start];
+    day.font = [UIFont fontWithName:@"Lato-Regular" size:10.0];
+    day.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    day.textColor = UIColorFromRGB(0x2b4b58);
+    [wrapperTime addSubview:day];
+    
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
+    timeFormatter.dateFormat = @"HH:mm";
+    [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    UILabel *timeStart = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 44, 34)];
+    timeStart.text = [timeFormatter stringFromDate:self.activity.start];
+    timeStart.font = [UIFont fontWithName:@"Lato-Bold" size:11.0];
+    timeStart.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    timeStart.textColor = UIColorFromRGB(0x2b4b58);
+    [wrapperTime addSubview:timeStart];
+    
+    UILabel *timeEnd = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
+    timeEnd.text = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
+    timeEnd.font = [UIFont fontWithName:@"Lato-Italic" size:11.0];
+    timeEnd.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    timeEnd.textColor = UIColorFromRGB(0x2b4b58);
+    timeEnd.alpha = 0.5;
+    [wrapperTime addSubview:timeEnd];
+    
+    // Map
+    
+    self.wrapperMap = [[UIView alloc]initWithFrame:CGRectMake(10, 45, 300, 0)];
+    self.wrapperMap.clipsToBounds = YES;
+    self.wrapperMap.backgroundColor = [UIColor whiteColor];
+    [self.wrapper addSubview:_wrapperMap];
+    
+    // Description
+    
+    self.wrapperDescription = [[UIView alloc]initWithFrame:CGRectMake(10, 130, 300, 0)];
+    self.wrapperDescription.backgroundColor = [UIColor whiteColor];
+    self.wrapperDescription.clipsToBounds = YES;
+    [self.wrapper addSubview:_wrapperDescription];
+    
+    // Name
+    self.wrapperName = [[UIView alloc]initWithFrame:CGRectMake(10, 45, 300, 85)];
+    self.wrapperName.backgroundColor = [UIColor whiteColor];
+    [self.wrapper addSubview:_wrapperName];
+    
+    UILabel *nameActivity = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
+    nameActivity.font = [UIFont fontWithName:@"Lato-Bold" size:22.0];
+    nameActivity.backgroundColor = [UIColor whiteColor];
+    nameActivity.textColor = UIColorFromRGB(0x2b4b58);
+    nameActivity.text = _activity.title;
+    [_wrapperName addSubview:nameActivity];
+    
+    UILabel *location = [[UILabel alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
+    location.font = [UIFont fontWithName:@"Lato-Regular" size:11.0];
+    location.backgroundColor = [UIColor whiteColor];
+    location.textColor = UIColorFromRGB(0x2b4b58);
+    location.text = _activity.locationDescription;
+    [_wrapperName addSubview:location];
+    
+    self.actionButtonImage = [[UIImageView alloc]initWithFrame:CGRectMake(243, 19, 47, 47)];
+    [self.wrapperName addSubview:_actionButtonImage];
+    
+    if ( _activity.status == UICanuActivityCellGo ) {
+        self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_yes"];
+    } else if ( _activity.status == UICanuActivityCellToGo ){
+        self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_go.png"];
+    } else {
+        self.actionButtonImage.image = [UIImage imageNamed:@"feed_action_edit.png"];
+    }
+    
+    self.shadow = [[UIImageView alloc]initWithFrame:CGRectMake(0, 85, 300, 4)];
+    self.shadow.image = [UIImage imageNamed:@"feed_shadow_name"];
+    self.shadow.alpha = 0;
+    [self.wrapperName addSubview:_shadow];
+    
+    // ScrollView
+    
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(10, 195, 300, 145)];
+    self.scrollView.contentSize = CGSizeMake(300, 145 + 1);
+    self.scrollView.delegate = self;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    [self.wrapper addSubview:_scrollView];
+    
+    // Touch Area
+    
+    self.touchArea = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [self.touchArea addTarget:self action:@selector(folderAnimation) forControlEvents:UIControlEventTouchDown];
+    [self.wrapper addSubview:_touchArea];
+    
+    // Bottom Bar
+    
+    self.wrapperBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 57)];
+    self.wrapperBottomBar.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    [self.view addSubview:_wrapperBottomBar];
+    
+    UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
+    [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateHighlighted];
+    [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchDown];
+    [self.wrapperBottomBar addSubview:backButton];
+    
+    self.attendeesButton = [[UIButton alloc]initWithFrame:CGRectMake(67, 10, 116, 37)];
+    [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateNormal];
+    [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateHighlighted];
+    [self.attendeesButton addTarget:self action:@selector(showAttendees) forControlEvents:UIControlEventTouchDown];
+    [self.wrapperBottomBar addSubview:_attendeesButton];
+    
+    self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.actionButton addTarget:self action:@selector(eventActionButton) forControlEvents:UIControlEventTouchDown];
+    [_actionButton setFrame:CGRectMake(194, 10, 116, 37)];
+    
+    if (appDelegate.user.userId == self.activity.user.userId) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_edit.png"] forState:UIControlStateNormal];
+    else if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]] == NSNotFound) [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
+    else [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];
+    
+    [self.wrapperBottomBar addSubview:_actionButton];
+    
+    UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
+    lineBottomBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
+    [self.wrapperBottomBar addSubview:lineBottomBar];
+    
+    UICanuNavigationController *navigation = appDelegate.canuViewController;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        [navigation changePosition:1];
+        self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+        self.actionButtonImage.alpha = 0;
+        self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
+        self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
+        self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
+        self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+        self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+        self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);
+        self.shadow.alpha = 1;
+        self.shadow.frame = CGRectMake(0, 85 + 60, 300, 4);
+    } completion:^(BOOL finished) {
+        navigation.control.hidden = YES;
+        self.view.backgroundColor = backgroundColorView;
+    }];
+    
+    NSLog(@"End viewDidLoad");
+    
+}
+
 - (void)viewDidAppear:(BOOL)animated{
-    NSLog(@"viewDidAppear");
+    NSLog(@"Start viewDidAppear");
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Activity Details"];
+    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    
+    [self.chatView load];
+    
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.activity.coordinate, 400, 400);
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(10, 10, 280, 140)];
+    self.mapView.delegate = self;
+    [self.mapView addAnnotation:self.activity.location.placemark];
+    self.mapView.region = viewRegion;
+    [self.mapView setUserTrackingMode:MKUserTrackingModeNone];
+    [self.wrapperMap addSubview:_mapView];
+    
+    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(16, 5, 268, 40)];
+    description.text = self.activity.description;
+    description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
+    description.numberOfLines = 2;
+    description.textColor = UIColorFromRGB(0x2b4b58);
+    description.backgroundColor = [UIColor whiteColor];
+    [self.wrapperDescription addSubview:description];
+    
+    self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];
+    self.numberOfAssistents.text = [NSString stringWithFormat:@"%i",[self.activity.attendeeIds count]];
+    self.numberOfAssistents.textColor = UIColorFromRGB(0x2b4b58);
+    self.numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
+    self.numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
+    [_attendeesButton.imageView addSubview:_numberOfAssistents];
+    
+    // Input Bar
+    self.wrapperInput = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, 320, 57)];
+    self.wrapperInput.backgroundColor = UIColorFromRGB(0xf9f9f9);
+    [self.view addSubview:_wrapperInput];
+    
+    UIView *inputBackground = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 37)];
+    inputBackground.backgroundColor = [UIColor whiteColor];
+    [self.wrapperInput addSubview:inputBackground];
+    
+    self.input = [[UITextField alloc] initWithFrame:CGRectMake(10, 2, 220, 32)];
+    self.input.placeholder = @"Write something nice...";
+    self.input.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+    self.input.backgroundColor = [UIColor whiteColor];
+    self.input.textColor = UIColorFromRGB(0x6d6e7a);
+    [self.input setReturnKeyType:UIReturnKeySend];
+    self.input.delegate = self;
+    [inputBackground addSubview:_input];
+    
+    if (!SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.input.frame = CGRectMake(10, 8, 220, 20);
+    }
+    
+    UIButton *sendButton = [[UIButton alloc]initWithFrame:CGRectMake(237, 2, 61, 33)];
+    [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
+    [sendButton setImage:[UIImage imageNamed:@"chat_send"] forState:UIControlStateNormal];
+    [sendButton addTarget:self action:@selector(sendMessage) forControlEvents:UIControlEventTouchDown];
+    [inputBackground addSubview:sendButton];
+    
+    UIView *lineInputBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
+    lineInputBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
+    [self.wrapperInput addSubview:lineInputBar];
+    NSLog(@"End viewDidAppear");
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -663,7 +696,7 @@ typedef enum {
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    
+    NSLog(@"lskdjflsdkjflsdkfjlsdkfj");
     static NSString *AnnotationViewID = @"annotationViewID";
     
     MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
@@ -682,13 +715,6 @@ typedef enum {
     
     return annotationView;
     
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    NSLog(@"viewDidLoad");
 }
 
 - (void)didReceiveMemoryWarning

@@ -526,24 +526,7 @@ typedef enum {
             [self addChildViewController:davc];
             [self.view addSubview:davc.view];
             
-//            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-//            
-//            [self addChildViewController:davc];
-//            [self willMoveToParentViewController:nil];
-//            
-//            [appDelegate.canuViewController.activityFeed transitionFromViewController:self
-//                              toViewController:davc
-//                                      duration:0.3
-//                                       options:UIViewAnimationOptionTransitionNone
-//                                    animations:^{
-//                                        [cellTouch setAlpha:0.0];
-//                                    }
-//                                    completion:^(BOOL finished) {
-//                                        [self removeFromParentViewController];
-//                                        [davc didMoveToParentViewController:self];
-//                                    }];
-//            
-//            cellTouch.alpha = 0;
+            cellTouch.alpha = 0;
             
         }else{
             
