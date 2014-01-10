@@ -46,8 +46,7 @@
     
     self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 114)];
     self.profileView.name.text = [NSString stringWithFormat:@"%@",self.user.firstName];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,self.user.profileImageUrl]];
-    [self.profileView.profileImage  setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    [self.profileView.profileImage  setImageWithURL:self.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     [self.view addSubview:_profileView.mask];
     [self.view addSubview:_profileView];
     

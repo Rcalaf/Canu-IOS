@@ -10,6 +10,13 @@
 #import "AppDelegate.h"
 #import "Activity.h"
 #import "UICanuNavigationController.h"
+#import "UICanuLabelUserName.h"
+#import "UICanuLabelDay.h"
+#import "UICanuLabelTimeStart.h"
+#import "UICanuLabelTimeEnd.h"
+#import "UICanuLabelActivityName.h"
+#import "UICanuLabelLocation.h"
+#import "UICanuLabelDescription.h"
 #import "UIImageView+AFNetworking.h"
 #import "ChatScrollView.h"
 #import "AFCanuAPIClient.h"
@@ -108,50 +115,27 @@ typedef enum {
     [self.wrapper addSubview:wrapperUser];
 
     UIImageView *avatar                          = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
-    [avatar setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_activity.user.profileImageUrl]] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    [avatar setImageWithURL:_activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     [wrapperUser addSubview:avatar];
 
-    UILabel *userName                            = [[UILabel alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 128.0f, 25.0f)];
+    UICanuLabelUserName *userName                = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 128.0f, 25.0f)];
     userName.text                                = self.activity.user.userName;
-    userName.font                                = [UIFont fontWithName:@"Lato-Bold" size:13.0];
-    userName.backgroundColor                     = UIColorFromRGB(0xf9f9f9);
-    userName.textColor                           = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
     [wrapperUser addSubview:userName];
 
     UIView *wrapperTime                          = [[UIView alloc]initWithFrame:CGRectMake(177, 10, 133, 34)];
     wrapperTime.backgroundColor                  = UIColorFromRGB(0xf9f9f9);
     [self.wrapper addSubview:wrapperTime];
 
-    NSDateFormatter *dateFormatter               = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat                     = @"d MMM";
-    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-
-    UILabel *day                                 = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 33, 34)];
-    day.text                                     = [dateFormatter stringFromDate:self.activity.start];
-    day.font                                     = [UIFont fontWithName:@"Lato-Regular" size:10.0];
-    day.backgroundColor                          = UIColorFromRGB(0xf9f9f9);
-    day.textColor                                = UIColorFromRGB(0x2b4b58);
+    UICanuLabelDay *day                          = [[UICanuLabelDay alloc]initWithFrame:CGRectMake(10, 0, 33, 34)];
+    day.date                                     = self.activity.start;
     [wrapperTime addSubview:day];
 
-    NSDateFormatter *timeFormatter               = [[NSDateFormatter alloc] init];
-    [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
-    timeFormatter.dateFormat                     = @"HH:mm";
-    [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
-
-    UILabel *timeStart                           = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 44, 34)];
-    timeStart.text                               = [timeFormatter stringFromDate:self.activity.start];
-    timeStart.font                               = [UIFont fontWithName:@"Lato-Bold" size:11.0];
-    timeStart.backgroundColor                    = UIColorFromRGB(0xf9f9f9);
-    timeStart.textColor                          = UIColorFromRGB(0x2b4b58);
+    UICanuLabelTimeStart *timeStart              = [[UICanuLabelTimeStart alloc]initWithFrame:CGRectMake(50, 0, 44, 34)];
+    timeStart.date                               = self.activity.start;
     [wrapperTime addSubview:timeStart];
 
-    UILabel *timeEnd                             = [[UILabel alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
-    timeEnd.text                                 = [NSString stringWithFormat:@" - %@",[timeFormatter stringFromDate:self.activity.end]];
-    timeEnd.font                                 = [UIFont fontWithName:@"Lato-Italic" size:11.0];
-    timeEnd.backgroundColor                      = UIColorFromRGB(0xf9f9f9);
-    timeEnd.textColor                            = UIColorFromRGB(0x2b4b58);
-    timeEnd.alpha                                = 0.5;
+    UICanuLabelTimeEnd *timeEnd                  = [[UICanuLabelTimeEnd alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
+    timeEnd.date                                 = self.activity.end;
     [wrapperTime addSubview:timeEnd];
 
     // Map
@@ -173,17 +157,11 @@ typedef enum {
     self.wrapperName.backgroundColor             = [UIColor whiteColor];
     [self.wrapper addSubview:_wrapperName];
 
-    UILabel *nameActivity                        = [[UILabel alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
-    nameActivity.font                            = [UIFont fontWithName:@"Lato-Bold" size:22.0];
-    nameActivity.backgroundColor                 = [UIColor whiteColor];
-    nameActivity.textColor                       = UIColorFromRGB(0x2b4b58);
+    UICanuLabelActivityName *nameActivity        = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
     nameActivity.text                            = _activity.title;
     [_wrapperName addSubview:nameActivity];
 
-    UILabel *location                            = [[UILabel alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
-    location.font                                = [UIFont fontWithName:@"Lato-Regular" size:11.0];
-    location.backgroundColor                     = [UIColor whiteColor];
-    location.textColor                           = UIColorFromRGB(0x2b4b58);
+    UICanuLabelLocation *location                = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
     location.text                                = _activity.locationDescription;
     [_wrapperName addSubview:location];
 
@@ -234,7 +212,7 @@ typedef enum {
     [self.attendeesButton setImage:[UIImage imageNamed:@"fullview_action_ppl"] forState:UIControlStateHighlighted];
     [self.attendeesButton addTarget:self action:@selector(showAttendees) forControlEvents:UIControlEventTouchDown];
     [self.wrapperBottomBar addSubview:_attendeesButton];
-    
+
     self.loadingIndicator                        = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.loadingIndicator.frame                  = CGRectMake(194, 10, 116, 37);
     [self.wrapperBottomBar addSubview:_loadingIndicator];
@@ -308,12 +286,8 @@ typedef enum {
     [self.mapView setUserTrackingMode:MKUserTrackingModeNone];
     [self.wrapperMap addSubview:_mapView];
     
-    UILabel *description = [[UILabel alloc] initWithFrame:CGRectMake(16, 5, 268, 40)];
-    description.text = self.activity.description;
-    description.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
-    description.numberOfLines = 2;
-    description.textColor = UIColorFromRGB(0x2b4b58);
-    description.backgroundColor = [UIColor whiteColor];
+    UICanuLabelDescription *description = [[UICanuLabelDescription alloc] initWithFrame:CGRectMake(16, 5, 268, 40)];
+    description.text                    = self.activity.description;
     [self.wrapperDescription addSubview:description];
     
     self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];

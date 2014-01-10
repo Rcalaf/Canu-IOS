@@ -53,15 +53,13 @@
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
-        
         _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
         _userName        = [attributes valueForKeyPath:@"user_name"];
         _email           = [attributes valueForKeyPath:@"email"];
         _firstName       = [attributes valueForKeyPath:@"first_name"];
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
-        _profileImageUrl = [NSURL URLWithString:[attributes valueForKey:@"profile_pic"]];
-        
+        _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
     }
     
     return self;
@@ -71,6 +69,7 @@
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrl];
+    NSLog(@"Maybe error");
     NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,profileImageUrl,nil];
     NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"profile_pic",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];

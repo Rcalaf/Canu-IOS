@@ -11,6 +11,13 @@
 		1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */; };
 		1E0EDCED187DB6DC00088B8A /* fullview_action_circle_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */; };
 		1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */; };
+		1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */; };
+		1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */; };
+		1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */; };
+		1E4F57E01880020400D5F1F4 /* UICanuLabelTimeEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57DF1880020400D5F1F4 /* UICanuLabelTimeEnd.m */; };
+		1E4F57E31880040800D5F1F4 /* UICanuLabelActivityName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57E21880040800D5F1F4 /* UICanuLabelActivityName.m */; };
+		1E4F57E9188005A900D5F1F4 /* UICanuLabelLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57E8188005A900D5F1F4 /* UICanuLabelLocation.m */; };
+		1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */; };
 		1E814CF9187C495D0013E238 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
 		1E9FB9EC18619A0400085421 /* loader-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C418619A0400085421 /* loader-2.png */; };
@@ -237,6 +244,20 @@
 		1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_go@2x.png"; sourceTree = "<group>"; };
 		1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullview_action_circle_yes.png; sourceTree = "<group>"; };
 		1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_yes@2x.png"; sourceTree = "<group>"; };
+		1E4F57D5187FFF1100D5F1F4 /* UICanuLabelUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelUserName.h; path = Vendor/UICanuLabel/UICanuLabelUserName.h; sourceTree = "<group>"; };
+		1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelUserName.m; path = Vendor/UICanuLabel/UICanuLabelUserName.m; sourceTree = "<group>"; };
+		1E4F57D8187FFFCA00D5F1F4 /* UICanuLabelDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDay.h; path = Vendor/UICanuLabel/UICanuLabelDay.h; sourceTree = "<group>"; };
+		1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelDay.m; path = Vendor/UICanuLabel/UICanuLabelDay.m; sourceTree = "<group>"; };
+		1E4F57DB1880013000D5F1F4 /* UICanuLabelTimeStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelTimeStart.h; path = Vendor/UICanuLabel/UICanuLabelTimeStart.h; sourceTree = "<group>"; };
+		1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelTimeStart.m; path = Vendor/UICanuLabel/UICanuLabelTimeStart.m; sourceTree = "<group>"; };
+		1E4F57DE1880020400D5F1F4 /* UICanuLabelTimeEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelTimeEnd.h; path = Vendor/UICanuLabel/UICanuLabelTimeEnd.h; sourceTree = "<group>"; };
+		1E4F57DF1880020400D5F1F4 /* UICanuLabelTimeEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelTimeEnd.m; path = Vendor/UICanuLabel/UICanuLabelTimeEnd.m; sourceTree = "<group>"; };
+		1E4F57E11880040800D5F1F4 /* UICanuLabelActivityName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelActivityName.h; path = Vendor/UICanuLabel/UICanuLabelActivityName.h; sourceTree = "<group>"; };
+		1E4F57E21880040800D5F1F4 /* UICanuLabelActivityName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelActivityName.m; path = Vendor/UICanuLabel/UICanuLabelActivityName.m; sourceTree = "<group>"; };
+		1E4F57E7188005A900D5F1F4 /* UICanuLabelLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelLocation.h; path = Vendor/UICanuLabel/UICanuLabelLocation.h; sourceTree = "<group>"; };
+		1E4F57E8188005A900D5F1F4 /* UICanuLabelLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelLocation.m; path = Vendor/UICanuLabel/UICanuLabelLocation.m; sourceTree = "<group>"; };
+		1E4F57EA1880063300D5F1F4 /* UICanuLabelDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDescription.h; path = Vendor/UICanuLabel/UICanuLabelDescription.h; sourceTree = "<group>"; };
+		1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelDescription.m; path = Vendor/UICanuLabel/UICanuLabelDescription.m; sourceTree = "<group>"; };
 		1E814CF2187C495D0013E238 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		1E814CF3187C495D0013E238 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		1E814CF4187C495D0013E238 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
@@ -538,6 +559,20 @@
 		1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */ = {
 			isa = PBXGroup;
 			children = (
+				1E4F57E7188005A900D5F1F4 /* UICanuLabelLocation.h */,
+				1E4F57E8188005A900D5F1F4 /* UICanuLabelLocation.m */,
+				1E4F57D5187FFF1100D5F1F4 /* UICanuLabelUserName.h */,
+				1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */,
+				1E4F57D8187FFFCA00D5F1F4 /* UICanuLabelDay.h */,
+				1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */,
+				1E4F57DB1880013000D5F1F4 /* UICanuLabelTimeStart.h */,
+				1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */,
+				1E4F57DE1880020400D5F1F4 /* UICanuLabelTimeEnd.h */,
+				1E4F57DF1880020400D5F1F4 /* UICanuLabelTimeEnd.m */,
+				1E4F57E11880040800D5F1F4 /* UICanuLabelActivityName.h */,
+				1E4F57E21880040800D5F1F4 /* UICanuLabelActivityName.m */,
+				1E4F57EA1880063300D5F1F4 /* UICanuLabelDescription.h */,
+				1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */,
 			);
 			name = UICanuLabel;
 			sourceTree = "<group>";
@@ -1395,12 +1430,15 @@
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
 				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,
+				1E4F57E31880040800D5F1F4 /* UICanuLabelActivityName.m in Sources */,
 				DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */,
 				DEA93B5817204EF100303BB5 /* AFImageRequestOperation.m in Sources */,
 				DEA93B5917204EF100303BB5 /* AFJSONRequestOperation.m in Sources */,
 				DEA93B5A17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				DEA93B5B17204EF100303BB5 /* AFPropertyListRequestOperation.m in Sources */,
 				1EEA9859185A2C1A00EA9E02 /* DetailActivityViewControllerAnimate.m in Sources */,
+				1E4F57E9188005A900D5F1F4 /* UICanuLabelLocation.m in Sources */,
+				1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */,
 				DEA93B5C17204EF100303BB5 /* AFURLConnectionOperation.m in Sources */,
 				DEA93B5D17204EF100303BB5 /* AFXMLRequestOperation.m in Sources */,
 				DEA93B5E17204EF100303BB5 /* UIImageView+AFNetworking.m in Sources */,
@@ -1411,6 +1449,7 @@
 				DED4901B17298A61005A0BF9 /* User.m in Sources */,
 				DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
+				1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */,
 				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
@@ -1420,6 +1459,9 @@
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
 				1EEA985F185B44B300EA9E02 /* ChatScrollView.m in Sources */,
 				DEB29BB317954FDA00D9FFAE /* UIProfileView.m in Sources */,
+				1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */,
+				1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */,
+				1E4F57E01880020400D5F1F4 /* UICanuLabelTimeEnd.m in Sources */,
 				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
 				DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */,
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,

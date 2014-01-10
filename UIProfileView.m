@@ -49,9 +49,8 @@
         self.hideArrow.frame = CGRectMake(0.0, -12.0, self.hideArrow.frame.size.width, self.hideArrow.frame.size.height);
         [self addSubview:self.hideArrow];
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,user.profileImageUrl]];
         self.profileImage = [[UIImageView alloc] initWithFrame:CGRectMake(10.0, 10.0, 94.0, 94.0)];
-        [self.profileImage  setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [self.profileImage  setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [self addSubview:self.profileImage];
         self.profileImage.userInteractionEnabled = YES;
         

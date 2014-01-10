@@ -8,11 +8,10 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 
-extern NSString *const kAFCanuAPIBaseURLString;
-
 @interface AFCanuAPIClient : AFHTTPClient
 
 @property (nonatomic) BOOL distributionMode;
+@property (nonatomic) NSString *urlBase;
 
 + (AFCanuAPIClient *)sharedClient;
 

@@ -30,7 +30,7 @@
         self.backgroundColor = [UIColor whiteColor];
         
         UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 37, 37)];
-        [avatar setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_user.profileImageUrl]] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [avatar setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [self addSubview:avatar];
         
         UILabel *username = [[UILabel alloc]initWithFrame:CGRectMake(57, 12, 200, 15)];

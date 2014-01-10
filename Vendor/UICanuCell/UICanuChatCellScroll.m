@@ -39,7 +39,7 @@
         [self addSubview:_line];
         
         UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 25, 25)];
-        [avatar setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,message.user.profileImageUrl]] placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [avatar setImageWithURL:message.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [self addSubview:avatar];
         
         UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(45.0f, 10.0f, 128.0f, 25.0f)];

@@ -48,11 +48,10 @@ NSString *const FBSessionStateChangedNotification =
         NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         if (savedUserAttributes) {
             _user = [[User alloc] initWithAttributes:savedUserAttributes];
+
+            NSLog(@"appDel: user profile pic url: %@",_user.profileImageUrl);
             
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",kAFCanuAPIBaseURLString,_user.profileImageUrl]];
-            NSLog(@"appDel: user profile pic url: %@",url);
-            
-            _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:_user.profileImageUrl]];
             if (_user.profileImage == nil) _user.profileImage = [UIImage imageNamed:@"icon_userpic.png"];
         }
     }
