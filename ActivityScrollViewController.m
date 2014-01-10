@@ -483,6 +483,7 @@ typedef enum {
                     [UIView animateWithDuration:0.2 animations:^{
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
+                        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
                         if (!_isUserProfile) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];

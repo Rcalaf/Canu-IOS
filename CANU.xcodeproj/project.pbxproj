@@ -535,6 +535,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UICanuLabel;
+			sourceTree = "<group>";
+		};
 		1E814CF1187C495D0013E238 /* Google Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -950,6 +957,7 @@
 		DEA93B4117204EDC00303BB5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */,
 				1EEA97E21858685E00EA9E02 /* UIScrollViewReverse */,
 				DEB29BB417954FEB00D9FFAE /* UIProfileView */,
 				DEB29BB017954FA700D9FFAE /* UICanuCell */,
