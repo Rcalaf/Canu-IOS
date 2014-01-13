@@ -75,7 +75,7 @@
 - (IBAction)showEditPassword:(id)sender
 {
     EditUserPasswordViewController *editPasswordController = [[EditUserPasswordViewController alloc] init];
-    [self presentViewController:editPasswordController animated:NO completion:nil];
+    [self presentViewController:editPasswordController animated:YES completion:nil];
 }
 
 - (IBAction)updateUser:(id)sender

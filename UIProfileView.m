@@ -54,15 +54,15 @@
         [self addSubview:self.profileImage];
         self.profileImage.userInteractionEnabled = YES;
         
-        self.name = [[UILabel alloc] initWithFrame:CGRectMake(118.5f, 21.0f, 160.5f, 18.5)];
+        self.name = [[UILabel alloc] initWithFrame:CGRectMake(118.5f, 21.0f, 160, 18)];
         self.name.text = [NSString stringWithFormat:@"%@",user.firstName];
         self.name.font = [UIFont fontWithName:@"Lato-Bold" size:12.0];
         self.name.textColor = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
         [self addSubview:_name];
         
-        self.settingsButton  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settings.png"]];
+        self.settingsButton  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"settings"]];
         
-        self.settingsButton.frame = CGRectMake(275.0f, 15.0f, self.settingsButton.frame.size.width, self.settingsButton.frame.size.height);
+        self.settingsButton.frame = CGRectMake(275.0f, 11.0f, self.settingsButton.frame.size.width, self.settingsButton.frame.size.height);
         [self addSubview:_settingsButton];
         self.settingsButton.userInteractionEnabled = YES;
         

@@ -20,8 +20,8 @@
 @property (strong, nonatomic) UIButton *backButton;
 @property (strong, nonatomic) UIButton *saveButton;
 
-@property (strong, nonatomic) IBOutlet UITextField *password;
-@property (strong, nonatomic) IBOutlet UITextField *proxyPassword;
+@property (strong, nonatomic) UITextField *password;
+@property (strong, nonatomic) UITextField *proxyPassword;
 
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 
@@ -62,12 +62,12 @@
     return self;
 }
 
-- (IBAction)back:(id)sender
+- (void)back:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-- (IBAction)updatePassword:(id)sender
+- (void)updatePassword:(id)sender
 {
     _password.rightView = nil;
     _proxyPassword.rightView = nil;
@@ -126,10 +126,6 @@
         [self.proxyPassword becomeFirstResponder];
     }
     [textField resignFirstResponder];
-    
-    
-    
-    
     return YES;
 }
 
@@ -150,8 +146,6 @@
     self.password = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.0f)];
     self.password.placeholder = @"New Password";
     self.password.secureTextEntry = YES;
-    //self.password.text = _user.userName;
-    //self.password.textColor = textColor;
     [self.password setReturnKeyType:UIReturnKeyNext];
     self.password.delegate = self;
     [self.view addSubview:self.password];
@@ -159,13 +153,11 @@
     self.proxyPassword = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 67.0f, 300.0f, 47.0f)];
     self.proxyPassword.placeholder = @"Password Confirmation";
     self.proxyPassword.secureTextEntry = YES;
-    //self.proxyPassword.text = _user.userName;
-    //proxyPassword = textColor;
     [self.proxyPassword setReturnKeyType:UIReturnKeyDone];
     self.proxyPassword.delegate = self;
     [self.view addSubview:self.proxyPassword];
     
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, 402.5 + KIphone5Margin, 320.0, 57.0)];
+    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
     _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
