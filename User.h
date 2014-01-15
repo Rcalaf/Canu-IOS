@@ -32,6 +32,8 @@
               Password:(NSString *)password
                  Block:(void (^)(User *user, NSError *error))block;
 
++ (void)CheckUsername:(NSString *)username Block:(void (^)(NSError *error))block;
+
 + (void)SignUpWithUserName:(NSString *)userName
                   Password:(NSString*)password
                  FirstName:(NSString *)firstName

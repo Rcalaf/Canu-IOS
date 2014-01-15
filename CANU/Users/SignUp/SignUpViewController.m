@@ -95,6 +95,20 @@
             }];
         }];
         
+    }else{
+        
+        if (!_checkPhoneNumber) {
+            self.checkPhoneNumber = [[CheckPhoneNumber alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height) AndParentViewController:self];
+            [self.wrapper addSubview:_checkPhoneNumber];
+        }
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            self.checkPhoneNumber.frame = CGRectMake(0, _checkPhoneNumber.frame.origin.y, _checkPhoneNumber.frame.size.width, _checkPhoneNumber.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+        }];
+        
     }
     
 }
@@ -148,7 +162,13 @@
 }
 
 - (void)signUpStep1CheckUsername{
-    [self gotToStep2];
+    
+    [User CheckUsername:self.step1.userName.text Block:^(NSError *error) {
+        if (!error) {
+            [self gotToStep2];
+        }
+    }];
+    
 }
 
 - (void)gotToStep2{

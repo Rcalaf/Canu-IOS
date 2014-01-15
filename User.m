@@ -127,6 +127,27 @@
     }];
 }
 
++ (void)CheckUsername:(NSString *)username Block:(void (^)(NSError *error))block {
+    
+    if (!username) username = @"";
+    
+    NSArray *objectsArray = [NSArray arrayWithObjects:username,nil];
+    NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] postPath:@"session/check-username" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        if (block) {
+            block(nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
 + (void)SignUpWithUserName:(NSString *)userName
                    Password:(NSString*)password
                   FirstName:(NSString *)firstName

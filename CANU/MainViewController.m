@@ -58,7 +58,7 @@
     [self addChildViewController:_signUpViewController];
     [self.backgroundColor addSubview:_signUpViewController.view];
     [UIView animateWithDuration:0.4 animations:^{
-        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe8eeee);
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0x83d2d5);
         self.backgroundCloud.alpha = 0;
         self.backgroundTotem.frame = CGRectMake(-320, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
         self.slogan.frame = CGRectMake(-320,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
@@ -164,6 +164,10 @@
     [self.backgroundColor addSubview:_toolBar];
     
     [self.view addSubview:self.backgroundColor];
+    
+    if (_isPhoneCheck) {
+        [self goSignUpForCHeckNumberPhone];
+    }
     
 }
 

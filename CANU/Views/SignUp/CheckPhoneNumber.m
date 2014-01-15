@@ -11,6 +11,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "SignUpViewController.h"
+#include <CommonCrypto/CommonDigest.h>
 
 @interface CheckPhoneNumber () <MFMessageComposeViewControllerDelegate>
 
@@ -39,8 +40,10 @@
         title.font = [UIFont fontWithName:@"Lato-Bold" size:24];
         [self addSubview:title];
         
-        UIButton *check = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 200, 200)];
-        check.backgroundColor = [UIColor blueColor];
+        UIButton *check = [[UIButton alloc]initWithFrame:CGRectMake(10, self.frame.size.height - 57 - 10 -57, 300, 57)];
+        check.backgroundColor = [UIColor whiteColor];
+        [check setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [check setTitle:@"Verify by sms" forState:UIControlStateNormal];
         [check addTarget:self action:@selector(sendSms) forControlEvents:UIControlEventTouchDown];
         [self addSubview:check];
         
