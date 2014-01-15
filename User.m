@@ -65,8 +65,8 @@
         _firstName       = [attributes valueForKeyPath:@"first_name"];
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
-        if ([attributes objectForKey:@"active"] != [NSNull null] && [attributes objectForKey:@"active"] != nil) {
-            _isActive        = [[attributes valueForKeyPath:@"active"] boolValue];
+        if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
+            _isActive        = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
         }
         _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
     }
