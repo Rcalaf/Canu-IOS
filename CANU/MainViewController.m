@@ -9,19 +9,22 @@
 #import "MainViewController.h"
 #import "SignUpViewController.h"
 #import "SignInViewController.h"
+#import "UICanuButtonSignBottomBar.h"
 
-@interface MainViewController ()
+@interface MainViewController () <SignUpViewControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *getOn;
-@property (weak, nonatomic) IBOutlet UIButton *logIn;
-
+@property (nonatomic) UICanuButtonSignBottomBar *getOn;
+@property (nonatomic) UICanuButtonSignBottomBar *logIn;
+@property (nonatomic) SignUpViewController *signUpViewController;
+@property (nonatomic) UIView *backgroundColor;
+@property (nonatomic) UIImageView *backgroundCloud;
+@property (nonatomic) UIImageView *backgroundTotem;
+@property (nonatomic) UILabel *slogan;
+@property (nonatomic) UIView *toolBar;
 
 @end
 
 @implementation MainViewController
-
-@synthesize getOn = _getOn;
-@synthesize logIn = _logIn;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,70 +36,134 @@
     return self;
 }
 
-- (IBAction)goSignUp:(id)sender
-{    
-    //NSLog(@"Go to SignUp");
-    [self presentViewController:[[SignUpViewController alloc] init] animated:NO completion:^{}];
-    //[self.navigationController pushViewController:[[SignUpViewController alloc] init] animated:YES];
+- (void)goSignUp{
+    self.signUpViewController = [[SignUpViewController alloc]initForCheckPhonenumber:NO];
+    self.signUpViewController.delegate = self;
+    [self addChildViewController:_signUpViewController];
+    [self.backgroundColor addSubview:_signUpViewController.view];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe8eeee);
+        self.backgroundCloud.alpha = 0;
+        self.backgroundTotem.frame = CGRectMake(-320, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
+        self.slogan.frame = CGRectMake(-320,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
+        self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height, 320.0f, 57.0f);
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
-- (IBAction)goSignIn:(id)sender
-{
-    //NSLog(@"Go to SignIN");
-    [self presentViewController:[[SignInViewController alloc] init] animated:NO completion:^{}];
-    //[self.navigationController pushViewController:[[SignInViewController alloc] init] animated:YES];
+- (void)goSignUpForCHeckNumberPhone{
+    self.signUpViewController = [[SignUpViewController alloc]initForCheckPhonenumber:YES];
+    self.signUpViewController.delegate = self;
+    [self addChildViewController:_signUpViewController];
+    [self.backgroundColor addSubview:_signUpViewController.view];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe8eeee);
+        self.backgroundCloud.alpha = 0;
+        self.backgroundTotem.frame = CGRectMake(-320, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
+        self.slogan.frame = CGRectMake(-320,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
+        self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height, 320.0f, 57.0f);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
 
-   // [self performSegueWithIdentifier:@"SignIn" sender:sender];
+- (void)signUpGoBackHome{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe4f8f7);
+        self.backgroundCloud.alpha = 1;
+        self.backgroundTotem.frame = CGRectMake(0, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
+        self.slogan.frame = CGRectMake(0,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
+        self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height - 57, 320.0f, 57.0f);
+    } completion:^(BOOL finished) {
+        [self.signUpViewController willMoveToParentViewController:nil];
+        [self.signUpViewController.view removeFromSuperview];
+        [self.signUpViewController removeFromParentViewController];
+        self.signUpViewController = nil;
+    }];
+}
+
+-(void)chechPhoneNumber{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0x83d2d5);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (void)goSignIn:(id)sender
+{
+    [self presentViewController:[[SignInViewController alloc] init] animated:NO completion:^{}];
 }
 
 -(void) loadView
 {
     [super loadView];
     
-    if (IS_IPHONE_5) {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg-568h.png"]];
-    }else{
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"intro_bg.png"]];
+    self.backgroundColor = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.backgroundColor.backgroundColor = UIColorFromRGB(0xe4f8f7);
+    
+    self.backgroundCloud = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 480, self.view.frame.size.width, 480)];
+    self.backgroundCloud.image = [UIImage imageNamed:@"Main_background_cloud"];
+    [self.backgroundColor addSubview:self.backgroundCloud];
+    
+    self.backgroundTotem = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 480, self.view.frame.size.width, 480)];
+    self.backgroundTotem.image = [UIImage imageNamed:@"Main_background_totem"];
+    [self.backgroundColor addSubview:self.backgroundTotem];
+    
+    self.slogan = [[UILabel alloc]initWithFrame:CGRectMake(0, 40 + (self.view.frame.size.height - 480)/2, 320, 80)];
+    self.slogan.text = NSLocalizedString(@"Put your future moments\n in one place", nil);
+    self.slogan.numberOfLines = 2;
+    self.slogan.textAlignment = NSTextAlignmentCenter;
+    self.slogan.backgroundColor = [UIColor clearColor];
+    self.slogan.textColor = UIColorFromRGB(0x1ca6c3);
+    self.slogan.font = [UIFont fontWithName:@"Lato-Bold" size:24];
+    [self.backgroundColor addSubview:self.slogan];
+    
+    if (IS_OS_7_OR_LATER) {
+        // Set vertical effect
+        UIInterpolatingMotionEffect *verticalMotionEffect =
+        [[UIInterpolatingMotionEffect alloc]
+         initWithKeyPath:@"center.y"
+         type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+        verticalMotionEffect.minimumRelativeValue = @(-20);
+        verticalMotionEffect.maximumRelativeValue = @(20);
+        
+        // Set horizontal effect
+        UIInterpolatingMotionEffect *horizontalMotionEffect =
+        [[UIInterpolatingMotionEffect alloc]
+         initWithKeyPath:@"center.x"
+         type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+        horizontalMotionEffect.minimumRelativeValue = @(-20);
+        horizontalMotionEffect.maximumRelativeValue = @(20);
+        
+        // Create group to combine both
+        UIMotionEffectGroup *group = [UIMotionEffectGroup new];
+        group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+        
+        // Add both effects to your view
+        [self.backgroundCloud addMotionEffect:group];
     }
     
-   // [UIColor colorWithRed:(255.0 / 255.0) green:(235.0 / 255.0) blue:(235.0 / 255.0) alpha: 1];
+    self.toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height - 57, 320.0f, 57.0f)];
+    [self.toolBar setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
     
-  //  UIScrollView *scrollDescription = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 403.0)];
-  //  UIImageView *backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scroll_content.png"]];
+    self.getOn = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(10.0, 10.0, 145.0, 37.0) andBlue:NO];
+    [self.getOn setTitle:NSLocalizedString(@"I'M NEW", nil) forState:UIControlStateNormal];
+    [self.getOn addTarget:self action:@selector(goSignUp) forControlEvents:UIControlEventTouchUpInside];
     
-   // [scrollDescription addSubview:backgroundImage];
-   // scrollDescription.contentSize = backgroundImage.image.size;
-   // CGPoint bottomOffset = CGPointMake(0.0, 650.0);
-    
-    
-   // [scrollDescription setContentOffset:bottomOffset animated:YES];
-    
-    
-    UIView *toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height - 57, 320.0f, 57.0f)];
-    [toolBar setBackgroundColor:[UIColor colorWithRed:(245.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 1]];
-     
-    _getOn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_getOn setTitle:@"SIGN UP" forState:UIControlStateNormal];
-    [_getOn setFrame:CGRectMake(10.0, 10.0, 145.0, 37.0)];
-    [_getOn setTitleColor:[UIColor colorWithRed:109.0/256.0 green:110.0/256.0 blue:122.0/256.0 alpha:1.0] forState:UIControlStateNormal];
-    _getOn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [_getOn setBackgroundColor:[UIColor colorWithRed:(255.0 / 255.0) green:(255.0 / 255.0) blue:(255.0 / 255.0) alpha: 1]];
-    [_getOn addTarget:self action:@selector(goSignUp:) forControlEvents:UIControlEventTouchUpInside];
-    
-    _logIn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_logIn setTitle:@"SIGN IN" forState:UIControlStateNormal];
-    [_logIn setFrame:CGRectMake(165.0, 10.0, 145.0, 37.0)];
-    [_logIn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _logIn.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-  //  [_logIn setBackgroundColor:[UIColor colorWithRed:(166.0 / 255.0) green:(207.0 / 255.0) blue:(212.0 / 255.0) alpha: 1]];
-    [_logIn setBackgroundColor:[UIColor colorWithRed:(28.0 / 166.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
-    [_logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
+    self.logIn = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(165.0, 10.0, 145.0, 37.0) andBlue:YES];
+    [self.logIn setTitle:NSLocalizedString(@"SIGN IN", nil) forState:UIControlStateNormal];
+    [self.logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
 
-    [toolBar addSubview:_getOn];
-    [toolBar addSubview:_logIn];
-    //[self.view addSubview:scrollDescription];
-    [self.view addSubview:toolBar];
+    [self.toolBar addSubview:_getOn];
+    [self.toolBar addSubview:_logIn];
     
+    [self.backgroundColor addSubview:_toolBar];
+    
+    [self.view addSubview:self.backgroundColor];
     
 }
 

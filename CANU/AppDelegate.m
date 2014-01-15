@@ -84,13 +84,22 @@ NSString *const FBSessionStateChangedNotification =
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-        NSLog(@"User");
-        self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
-        [self.canuViewController pushViewController:self.feedViewController animated:NO];
-        self.window.rootViewController = _canuViewController;
+        
+        if (self.user.isActive) {
+            NSLog(@"User Active");
+            self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
+            [self.canuViewController pushViewController:self.feedViewController animated:NO];
+            self.window.rootViewController = _canuViewController;
+        }else{
+            NSLog(@"User Not Active");
+            loginViewController = [[MainViewController alloc] init];
+            loginViewController.isPhoneCheck = YES;
+            self.window.rootViewController = loginViewController;
+        }
         
     } else {
         loginViewController = [[MainViewController alloc] init];
+        loginViewController.isPhoneCheck = NO;
         self.window.rootViewController = loginViewController;
         NSLog(@"No User");
     }

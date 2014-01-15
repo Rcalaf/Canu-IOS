@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  CANU
+
+  Created by Vivien Cormier on 14/01/14.
+  Copyright (c) 2014 CANU. All rights reserved.
+*/
+
+//Main
+
+"I'M NEW" = "I'M NEW";
+"SIGN IN" = "SIGN IN";
+"Put your future moments\n in one place" = "Put your future moments\n in one place";
+
+//SignUp
+
+"Create Account" = "Skapa Konto";
+"NEXT" = "NEXT";
+"DONE" = "DONE";
+"By signing up I agree with the Terms and the Privacy Policy" = "Genom att registrera dig Jag godkänner Villkoren och Sekretesspolicyn";
+"Terms" = "Villkoren";
+"Privacy Policy" = "Sekretesspolicyn";
+"Your Profile" = "Your Profile";
+"Grab my Facebook info" = "Grab my Facebook info";

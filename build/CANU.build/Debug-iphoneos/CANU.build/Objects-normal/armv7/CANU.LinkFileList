@@ -1,4 +1,5 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/main.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpStep1.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ActivityScrollViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuChatCellScroll.o
@@ -17,7 +18,6 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFXMLRequestOperation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UIImageView+AFNetworking.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFCanuAPIClient.o
-/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o
@@ -29,6 +29,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuAttendeeCellScroll.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UIDatePickerActionSheet.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuPicker.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpStep2.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/EditUserViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuNavigationController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ChatScrollView.o
@@ -36,14 +37,18 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuLabelTimeStart.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuLabelDay.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuLabelTimeEnd.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuBottomBar.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ActivitiesFeedViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/FindLocationsViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Message.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSignBottomBar.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CheckPhoneNumber.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuActivityCellScroll.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TutorialViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/EditUserPasswordViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AttendeesScrollViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TTTAttributedLabel.o

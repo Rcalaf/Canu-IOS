@@ -25,6 +25,7 @@
 @synthesize profileImageUrl = _profileImageUrl;
 @synthesize profileImage = _profileImage;
 @synthesize token = _token;
+@synthesize isActive = _isActive;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -34,6 +35,7 @@
     [aCoder encodeObject:_firstName forKey:@"firstName"];
     [aCoder encodeObject:_lastName forKey:@"lastName"];
     [aCoder encodeObject:_token forKey:@"token"];
+    [aCoder encodeBool:_isActive forKey:@"isActive"];
     
 }
 
@@ -47,18 +49,25 @@
         _firstName = [aDecoder decodeObjectForKey:@"firstName"];
         _lastName  = [aDecoder decodeObjectForKey:@"lastName"];
         _token     = [aDecoder decodeObjectForKey:@"token"];
+        _isActive  = [aDecoder decodeBoolForKey:@"isActive"];
     }
     return self;
 }
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
+        
+        _isActive        = false;
+        
         _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
         _userName        = [attributes valueForKeyPath:@"user_name"];
         _email           = [attributes valueForKeyPath:@"email"];
         _firstName       = [attributes valueForKeyPath:@"first_name"];
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
+        if ([attributes objectForKey:@"active"] != [NSNull null] && [attributes objectForKey:@"active"] != nil) {
+            _isActive        = [[attributes valueForKeyPath:@"active"] boolValue];
+        }
         _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
     }
     
@@ -69,9 +78,8 @@
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrl];
-    NSLog(@"Maybe error");
-    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,profileImageUrl,nil];
-    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"profile_pic",nil];
+    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.isActive],profileImageUrl,nil];
+    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"acitve",@"profile_pic",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     return user;

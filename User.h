@@ -17,9 +17,10 @@
 @property (strong,nonatomic) NSString *password;
 @property (strong,nonatomic) NSString *userName;
 @property (strong,nonatomic) NSString *email;
-@property (strong,nonatomic) NSURL *profileImageUrl;
 @property (strong,nonatomic) NSString *token;
+@property (strong,nonatomic) NSURL *profileImageUrl;
 @property (strong,nonatomic) UIImage *profileImage;
+@property (nonatomic) BOOL isActive;
 
 
 -(id)initWithAttributes:(NSDictionary *)attributes;
