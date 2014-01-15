@@ -163,12 +163,22 @@
 
 - (void)signUpStep1CheckUsername{
     
-    [User CheckUsername:self.step1.userName.text Block:^(NSError *error) {
-        if (!error) {
-            [self gotToStep2];
-        }
-    }];
+    [self checkUsername];
     
+}
+
+- (void)checkUsername{
+    
+//    [User CheckUsername:self.step1.userName.text Block:^(NSError *error) {
+//        if (!error) {
+//            [self gotToStep2];
+//            self.step1.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+//            self.step1.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+//        }else{
+//            self.step1.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+//        }
+//    }];
+    [self gotToStep2];
 }
 
 - (void)gotToStep2{

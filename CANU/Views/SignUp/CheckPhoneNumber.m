@@ -12,6 +12,8 @@
 #import <MessageUI/MFMessageComposeViewController.h>
 #import "SignUpViewController.h"
 #include <CommonCrypto/CommonDigest.h>
+#import "AppDelegate.h"
+#import "User.h"
 
 @interface CheckPhoneNumber () <MFMessageComposeViewControllerDelegate>
 
@@ -56,8 +58,17 @@
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
 	if([MFMessageComposeViewController canSendText])
 	{
-		controller.body = @"Hello from Mugunth";
-		controller.recipients = [NSArray arrayWithObjects:@"12345678", @"87654321", nil];
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        User *user = appDelegate.user;
+        
+        NSString *string = [NSString stringWithFormat:@"%icanuGettogether%@",user.userId,user.email];
+        
+        NSString *token = [self sha1:string];
+        
+        NSString *text = [NSString stringWithFormat:@"%@#%i",token,user.userId];
+        NSLog(@"%@",text);
+		controller.body = text;
+		controller.recipients = [NSArray arrayWithObjects:@"+46769438333", nil];
 		controller.messageComposeDelegate = self;
         [self.parentViewController presentViewController:controller animated:YES completion:^{
             NSLog(@"Done");
@@ -85,6 +96,24 @@
 	[self.parentViewController dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+-(NSString*) sha1:(NSString*)input
+{
+    const char *cstr = [input cStringUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [NSData dataWithBytes:cstr length:input.length];
+    
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    
+    CC_SHA1(data.bytes, data.length, digest);
+    
+    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
+    
 }
 
 @end
