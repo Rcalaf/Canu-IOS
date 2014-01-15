@@ -20,7 +20,7 @@
 @property (strong,nonatomic) NSString *token;
 @property (strong,nonatomic) NSURL *profileImageUrl;
 @property (strong,nonatomic) UIImage *profileImage;
-@property (nonatomic) BOOL isActive;
+@property (nonatomic) BOOL phoneIsVerified;
 
 
 -(id)initWithAttributes:(NSDictionary *)attributes;
@@ -32,7 +32,8 @@
               Password:(NSString *)password
                  Block:(void (^)(User *user, NSError *error))block;
 
-+ (void)CheckUsername:(NSString *)username Block:(void (^)(NSError *error))block;
++ (void)checkUsername:(NSString *)username
+                Block:(void (^)(NSError *error))block;
 
 + (void)SignUpWithUserName:(NSString *)userName
                   Password:(NSString*)password

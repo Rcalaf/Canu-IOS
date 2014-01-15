@@ -76,6 +76,10 @@
     return self;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self.delegate signUpStep2textFieldShouldAppear];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     if (textField == _name) {
@@ -105,13 +109,17 @@
     if (buttonIndex == 0) {
         [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         [self.parentViewController presentViewController:imagePicker animated:YES completion:^{
-            NSLog(@"Done");
+            
+            [self.delegate signUpStep2textFieldShouldDisappear];
+            
         }];
     } else if (buttonIndex == 1){
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
             [self.parentViewController presentViewController:imagePicker animated:YES completion:^{
-                NSLog(@"Done");
+                
+                [self.delegate signUpStep2textFieldShouldDisappear];
+                
             }];
         }
     }
@@ -120,7 +128,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
     [_takePictureButton setImage:[info valueForKey:UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
-    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.parentViewController dismissViewControllerAnimated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }];
     
 }
 

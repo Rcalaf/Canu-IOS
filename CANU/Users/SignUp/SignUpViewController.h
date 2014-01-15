@@ -10,9 +10,10 @@
 
 @interface SignUpViewController : UIViewController
 
-- (id)initForCheckPhonenumber:(BOOL)isForCheckPhoneNumber;
-
+@property (nonatomic) BOOL isForCheckPhoneNumber;
 @property (retain) id delegate;
+
+- (id)initForCheckPhonenumber:(BOOL)isForCheckPhoneNumber;
 
 @end
 
@@ -20,5 +21,6 @@
 
 @required
 - (void)signUpGoBackHome;
-- (void)chechPhoneNumber;
+- (void)checkPhoneNumberDidAppear;
+- (void)checkPhoneNumberDidDisappear;
 @end

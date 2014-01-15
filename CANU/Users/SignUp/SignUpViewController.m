@@ -18,8 +18,8 @@
 
 @interface SignUpViewController () <SignUpStep1Delegate,SignUpStep2Delegate>
 
+@property (nonatomic) UIView *bottomBar;
 @property (nonatomic) UIView *wrapper;
-@property (nonatomic) BOOL isForCheckPhoneNumber;
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic) SignUpStep1 *step1;
@@ -57,26 +57,26 @@
     self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(320, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:_wrapper];
     
-    UIView *bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57)];
-    bottomBar.backgroundColor = UIColorFromRGB(0xf4f4f4);
-    [self.wrapper addSubview:bottomBar];
+    self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57)];
+    self.bottomBar .backgroundColor = UIColorFromRGB(0xf4f4f4);
+    [self.wrapper addSubview:self.bottomBar ];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
     [self.backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
-    [self.backButton addTarget:self action:@selector(backHome) forControlEvents:UIControlEventTouchDown];
-    [bottomBar addSubview:self.backButton];
+    [self.backButton addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
+    [self.bottomBar  addSubview:self.backButton];
     
     if (!_isForCheckPhoneNumber) {
         
         self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0) andBlue:YES];
         [self.buttonAction setTitle:NSLocalizedString(@"NEXT", nil) forState:UIControlStateNormal];
         [self.buttonAction addTarget:self action:@selector(signUpStep1CheckUsername) forControlEvents:UIControlEventTouchDown];
-        [bottomBar addSubview:_buttonAction];
+        [self.bottomBar  addSubview:_buttonAction];
         
         self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.loadingIndicator.frame = CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0);
-        [bottomBar addSubview:_loadingIndicator];
+        [self.bottomBar  addSubview:_loadingIndicator];
         
         // Step1
         
@@ -97,10 +97,10 @@
         
     }else{
         
-        if (!_checkPhoneNumber) {
-            self.checkPhoneNumber = [[CheckPhoneNumber alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height) AndParentViewController:self];
-            [self.wrapper addSubview:_checkPhoneNumber];
-        }
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57);
+        
+        self.checkPhoneNumber = [[CheckPhoneNumber alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height) AndParentViewController:self];
+        [self.wrapper addSubview:_checkPhoneNumber];
         
         [UIView animateWithDuration:0.4 animations:^{
             self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -113,7 +113,9 @@
     
 }
 
-- (void)backHome{
+#pragma mark - Animation Step
+
+- (void)goToHome{
     
     [self.step1.userName resignFirstResponder];
     [self.step1.password resignFirstResponder];
@@ -131,7 +133,6 @@
         }];
         [self.delegate signUpGoBackHome];
     }];
-    
     
 }
 
@@ -151,46 +152,28 @@
         [self.step2.email resignFirstResponder];
         
         [self.backButton removeTarget:self action:@selector(goToStep1) forControlEvents:UIControlEventTouchDown];
-        [self.backButton addTarget:self action:@selector(backHome) forControlEvents:UIControlEventTouchDown];
+        [self.backButton addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
         
         [self.buttonAction setTitle:NSLocalizedString(@"NEXT", nil) forState:UIControlStateNormal];
         [self.buttonAction removeTarget:self action:@selector(signUpUser) forControlEvents:UIControlEventTouchDown];
-        [self.buttonAction addTarget:self action:@selector(checkUsername) forControlEvents:UIControlEventTouchDown];
+        [self.buttonAction addTarget:self action:@selector(signUpStep1CheckUsername) forControlEvents:UIControlEventTouchDown];
         
     }];
     
 }
 
-- (void)signUpStep1CheckUsername{
-    
-    [self checkUsername];
-    
-}
-
-- (void)checkUsername{
-    
-//    [User CheckUsername:self.step1.userName.text Block:^(NSError *error) {
-//        if (!error) {
-//            [self gotToStep2];
-//            self.step1.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
-//            self.step1.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
-//        }else{
-//            self.step1.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-//        }
-//    }];
-    [self gotToStep2];
-}
-
 - (void)gotToStep2{
     
-    [self.backButton removeTarget:self action:@selector(backHome) forControlEvents:UIControlEventTouchDown];
+    [self.backButton removeTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
     [self.backButton addTarget:self action:@selector(goToStep1) forControlEvents:UIControlEventTouchDown];
     
     [self.buttonAction setTitle:NSLocalizedString(@"DONE", nil) forState:UIControlStateNormal];
-    [self.buttonAction removeTarget:self action:@selector(checkUsername) forControlEvents:UIControlEventTouchDown];
+    [self.buttonAction removeTarget:self action:@selector(signUpStep1CheckUsername) forControlEvents:UIControlEventTouchDown];
     [self.buttonAction addTarget:self action:@selector(signUpUser) forControlEvents:UIControlEventTouchDown];
     
     [self.step2.name becomeFirstResponder];
+    
+    [self.delegate checkPhoneNumberDidDisappear];
     
     if (!_step2) {
         self.step2 = [[SignUpStep2 alloc]initWithFrame:CGRectMake(320, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185) AndParentViewController:self];
@@ -210,6 +193,72 @@
     
 }
 
+-(void)goToPhoneNumber{
+    
+    if (!_checkPhoneNumber) {
+        self.checkPhoneNumber = [[CheckPhoneNumber alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height) AndParentViewController:self];
+        [self.wrapper addSubview:_checkPhoneNumber];
+    }
+    
+    [self.backButton removeTarget:self action:@selector(goToStep1) forControlEvents:UIControlEventTouchDown];
+    [self.backButton addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
+    
+    [self.delegate checkPhoneNumberDidAppear];
+    
+    [self.step1.userName resignFirstResponder];
+    [self.step1.password resignFirstResponder];
+    
+    [self.step2.name resignFirstResponder];
+    [self.step2.email resignFirstResponder];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57);
+        self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.step2.frame = CGRectMake(-320, _step2.frame.origin.y, _step2.frame.size.width, _step2.frame.size.height);
+        self.step2.alpha = 0;
+        self.checkPhoneNumber.frame = CGRectMake(0, _checkPhoneNumber.frame.origin.y, _checkPhoneNumber.frame.size.width, _checkPhoneNumber.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+# pragma mark - Check Sign Up
+
+- (void)signUpStep1CheckUsername{
+    
+    if ([self.step1.password.text isEqualToString:@""] || [self.step1.userName.text isEqualToString:@""]) {
+        
+        if ([self.step1.userName.text isEqualToString:@""]) self.step1.userName.valueValide = NO;
+        else  self.step1.userName.rightView = nil;
+        if ([self.step1.password.text isEqualToString:@""]) self.step1.password.valueValide = NO;
+        else  self.step1.password.rightView = nil;
+        
+        return;
+        
+    }
+    
+    self.buttonAction.hidden = YES;
+    [self.loadingIndicator startAnimating];
+    
+    [User checkUsername:self.step1.userName.text Block:^(NSError *error) {
+        if (!error) {
+            
+            [self gotToStep2];
+            self.step1.userName.valueValide = YES;
+            self.step1.password.valueValide = YES;
+            
+        }else{
+            self.step1.userName.valueValide = NO;
+        }
+        
+        self.buttonAction.hidden = NO;
+        [self.loadingIndicator stopAnimating];
+        
+    }];
+    
+}
+
 - (void)signUpUser{
     
     UIImage *profileImage = [self.step2.takePictureButton.imageView.image isEqual:[UIImage imageNamed:@"icon_userpic.png"]] ? nil : self.step2.takePictureButton.imageView.image;
@@ -219,18 +268,16 @@
     
     [User SignUpWithUserName:self.step1.userName.text Password:self.step1.password.text FirstName:self.step2.name.text LastName:@"" Email:self.step2.email.text ProfilePicture:profileImage Block:^(User *user, NSError *error) {
         
-        NSLog(@"%@",[[error localizedRecoverySuggestion] componentsSeparatedByString:@"\""]);
-        
         if (error) {
             if ([[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound || self.step2.email.text == nil) {
-                self.step2.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                self.step2.email.valueValide = NO;
             }else{
-                self.step2.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                self.step2.email.valueValide = YES;
             }
             if ([[error localizedRecoverySuggestion] rangeOfString:@"first_name"].location != NSNotFound || self.step2.name.text == nil) {
-                self.step2.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                self.step2.name.valueValide = NO;
             }else{
-                self.step2.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                self.step2.name.valueValide = YES;
             }
             
             self.buttonAction.hidden = NO;
@@ -238,8 +285,9 @@
             
         }else{
             if (user){
+                
                 AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+                appDelegate.user = user;
                 
                 [user updateDeviceToken:appDelegate.device_token Block:^(NSError *error){
                     
@@ -262,23 +310,22 @@
     
 }
 
--(void)goToPhoneNumber{
-    
-    if (!_checkPhoneNumber) {
-        
-        self.checkPhoneNumber = [[CheckPhoneNumber alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height) AndParentViewController:self];
-        [self.wrapper addSubview:_checkPhoneNumber];
+#pragma mark - Keyboard
+
+- (void)signUpStep2textFieldShouldAppear{
+    if (self.wrapper.frame.origin.y == 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.wrapper.frame = CGRectMake(0, -216, self.view.frame.size.width, self.view.frame.size.height);
+        }];
     }
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        self.step2.frame = CGRectMake(-320, _step2.frame.origin.y, _step2.frame.size.width, _step2.frame.size.height);
-        self.step2.alpha = 0;
-        self.checkPhoneNumber.frame = CGRectMake(0, _checkPhoneNumber.frame.origin.y, _checkPhoneNumber.frame.size.width, _checkPhoneNumber.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-    }];
-    
+}
+
+- (void)signUpStep2textFieldShouldDisappear{
+    if (self.wrapper.frame.origin.y == -216) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning

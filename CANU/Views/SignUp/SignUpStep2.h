@@ -25,4 +25,6 @@
 
 @required
 - (void)signUpUser;
+- (void)signUpStep2textFieldShouldAppear;
+- (void)signUpStep2textFieldShouldDisappear;
 @end

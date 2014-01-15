@@ -83,14 +83,16 @@
     }];
 }
 
--(void)chechPhoneNumber{
-    
+- (void)checkPhoneNumberDidAppear{
     [UIView animateWithDuration:0.4 animations:^{
         self.backgroundColor.backgroundColor = UIColorFromRGB(0x83d2d5);
-    } completion:^(BOOL finished) {
-        
-    }];
-    
+    } completion:nil];
+}
+
+- (void)checkPhoneNumberDidDisappear{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe8eeee);
+    } completion:nil];
 }
 
 - (void)goSignIn:(id)sender

@@ -1,8 +1,9 @@
 dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/SignUp/SignUpStep1.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/SignUp/SignUpStep2.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/UICanuButton/UICanuButtonSignBottomBar.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/TTTAttributedLabel/TTTAttributedLabel.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/UICanuTextField.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/User.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/SignUp/CheckPhoneNumber.h \

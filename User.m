@@ -25,7 +25,7 @@
 @synthesize profileImageUrl = _profileImageUrl;
 @synthesize profileImage = _profileImage;
 @synthesize token = _token;
-@synthesize isActive = _isActive;
+@synthesize phoneIsVerified = _phoneIsVerified;
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
@@ -35,7 +35,7 @@
     [aCoder encodeObject:_firstName forKey:@"firstName"];
     [aCoder encodeObject:_lastName forKey:@"lastName"];
     [aCoder encodeObject:_token forKey:@"token"];
-    [aCoder encodeBool:_isActive forKey:@"isActive"];
+    [aCoder encodeBool:_phoneIsVerified forKey:@"phoneIsVerified"];
     
 }
 
@@ -49,7 +49,7 @@
         _firstName = [aDecoder decodeObjectForKey:@"firstName"];
         _lastName  = [aDecoder decodeObjectForKey:@"lastName"];
         _token     = [aDecoder decodeObjectForKey:@"token"];
-        _isActive  = [aDecoder decodeBoolForKey:@"isActive"];
+        _phoneIsVerified  = [aDecoder decodeBoolForKey:@"phoneIsVerified"];
     }
     return self;
 }
@@ -57,7 +57,7 @@
     self = [super init];
     if (self) {
         
-        _isActive        = false;
+        _phoneIsVerified = false;
         
         _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
         _userName        = [attributes valueForKeyPath:@"user_name"];
@@ -66,7 +66,7 @@
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
         if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
-            _isActive        = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
+            _phoneIsVerified = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
         }
         _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
     }
@@ -78,8 +78,8 @@
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrl];
-    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.isActive],profileImageUrl,nil];
-    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"acitve",@"profile_pic",nil];
+    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,nil];
+    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     return user;
@@ -93,7 +93,7 @@
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:token];
     [[AFCanuAPIClient sharedClient] postPath:@"session/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         if (block) {
-            block([[User alloc] initWithAttributes:[JSON objectForKey:@"user"]], nil);
+            block([[User alloc] initWithAttributes:JSON], nil);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -127,7 +127,7 @@
     }];
 }
 
-+ (void)CheckUsername:(NSString *)username Block:(void (^)(NSError *error))block {
++ (void)checkUsername:(NSString *)username Block:(void (^)(NSError *error))block {
     
     if (!username) username = @"";
     
