@@ -9,9 +9,14 @@
 #import "SignUpStep1.h"
 
 #import "UICanuTextField.h"
-#import "TTTAttributedLabel.h"
 
-@interface SignUpStep1 () <UITextFieldDelegate>
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
+@interface SignUpStep1 () <UITextFieldDelegate,UIWebViewDelegate>
+
+@property (nonatomic) BOOL userStartForm;
 
 @end
 
@@ -22,6 +27,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.userStartForm = NO;
+        
         UILabel *title1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
         title1.text = NSLocalizedString(@"Create Account", nil);
         title1.textAlignment = NSTextAlignmentCenter;
@@ -30,25 +37,10 @@
         title1.font = [UIFont fontWithName:@"Lato-Bold" size:24];
         [self addSubview:title1];
         
-        TTTAttributedLabel *termsAmdPrivacy = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(0, 50, 320, 20)];
-        termsAmdPrivacy.text = NSLocalizedString(@"By signing up I agree with the Terms and the Privacy Policy", nil);
-        termsAmdPrivacy.textColor = UIColorFromRGB(0x1ca6c3);
-        termsAmdPrivacy.font = [UIFont fontWithName:@"Lato-Regular" size:9];
-        termsAmdPrivacy.textAlignment = NSTextAlignmentCenter;
-        termsAmdPrivacy.backgroundColor = [UIColor clearColor];
-        [self addSubview:termsAmdPrivacy];
-        
-        [termsAmdPrivacy setText:termsAmdPrivacy.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
-            
-            NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Terms", nil) options:NSCaseInsensitiveSearch];
-            NSRange privacyRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Privacy Policy", nil) options:NSCaseInsensitiveSearch];
-            
-            [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
-            [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:privacyRange];
-            
-            return mutableAttributedString;
-            
-        }];
+        UIWebView *termsPrivacy = [[UIWebView alloc]initWithFrame:CGRectMake(0, 50, 320, 20)];
+        termsPrivacy.delegate = self;
+        [termsPrivacy loadHTMLString:[NSString stringWithFormat:@"<html><head><style type='text/css'>body,html,p{ margin:0px; padding:0px; background-color:#e8eeee; } p { text-align:center; font-family:\"Lato-Regular\"; font-size:9px; color: #1ca6c3;} a{ color:#ff0000; } a{ color:#1ca6c3; }</style></head><body><p>%@ <a href='http://terms/'>%@</a> %@ <a href='http://privacy/'>%@</a></p></body></html>",NSLocalizedString(@"By signing up I agree with the", nil),NSLocalizedString(@"Terms", nil),NSLocalizedString(@"and the", nil),NSLocalizedString(@"Privacy Policy", nil) ] baseURL:nil];
+        [self addSubview:termsPrivacy];
         
         UIImageView *iconeUsername = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 47, 47)];
         iconeUsername.image = [UIImage imageNamed:@"icon_username"];
@@ -86,6 +78,42 @@
     
     return YES;
     
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    [self.delegate signUpStep1textFieldShouldAppear];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (!_userStartForm) {
+        
+        self.userStartForm = YES;
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Step1" value:nil] build]];
+        
+    }
+    
+    return YES;
+}
+
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    if ( navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        NSURL *url = [request URL];
+        
+        if ([url.absoluteString isEqualToString:@"http://terms/"]) {
+            [self.delegate openTerms];
+        }
+        
+        if ([url.absoluteString isEqualToString:@"http://privacy/"]) {
+            [self.delegate openPrivacyPolicy];
+        }
+        
+        return NO;
+    }
+    return YES;
 }
 
 - (void)openAnimation{

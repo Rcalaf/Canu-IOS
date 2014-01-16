@@ -70,6 +70,11 @@ NSString *const FBSessionStateChangedNotification =
         [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
         id<GAITracker> tracker;
         tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-46900796-1"];
+        NSLog(@"//////// WARNING ////////");
+        NSLog(@"DISTRIBUTION MODE ENABLE");
+        NSLog(@"//////// WARNING ////////");
+        NSLog(@"DISTRIBUTION MODE ENABLE");
+        NSLog(@"//////// WARNING ////////");
     }
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];

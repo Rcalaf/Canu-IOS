@@ -8,6 +8,7 @@
 
 #import "SignUpViewController.h"
 
+#import <FacebookSDK/FacebookSDK.h>
 #import "SignUpStep1.h"
 #import "SignUpStep2.h"
 #import "UICanuButtonSignBottomBar.h"
@@ -15,6 +16,11 @@
 #import "User.h"
 #import "CheckPhoneNumber.h"
 #import "AppDelegate.h"
+#import "PrivacyPolicyViewController.h"
+
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 @interface SignUpViewController () <SignUpStep1Delegate,SignUpStep2Delegate>
 
@@ -53,6 +59,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(sessionStateChanged:)
+                                                 name:FBSessionStateChangedNotification
+                                               object:nil];
     
     self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(320, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:_wrapper];
@@ -180,6 +191,10 @@
         self.step2.alpha = 0;
         self.step2.delegate = self;
         [self.wrapper addSubview:_step2];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Step2" value:nil] build]];
+        
     }
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -198,6 +213,10 @@
     if (!_checkPhoneNumber) {
         self.checkPhoneNumber = [[CheckPhoneNumber alloc]initWithFrame:CGRectMake(self.view.frame.size.width, 0, self.view.frame.size.width, self.view.frame.size.height) AndParentViewController:self];
         [self.wrapper addSubview:_checkPhoneNumber];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"checkNumber" value:nil] build]];
+        
     }
     
     [self.backButton removeTarget:self action:@selector(goToStep1) forControlEvents:UIControlEventTouchDown];
@@ -293,8 +312,6 @@
                     
                     if (error) {
                         NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-                    }else{
-                        NSLog(@"lsdkjflsdkfjlsdkfjsldkfj");
                     }
                     
                     [self goToPhoneNumber];
@@ -310,7 +327,96 @@
     
 }
 
+#pragma Mark - Facebook Grab
+
+- (void)facebookGrab{
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    if (FBSession.activeSession.isOpen) {
+        [appDelegate closeSession];
+        [appDelegate openSessionWithAllowLoginUI:YES];
+    } else {
+        [appDelegate openSessionWithAllowLoginUI:YES];
+    }
+    
+}
+
+- (void)sessionStateChanged:(NSNotification*)notification {
+    if (FBSession.activeSession.isOpen) {
+        
+        [FBRequestConnection
+         startForMeWithCompletionHandler:^(FBRequestConnection *connection,
+                                           id<FBGraphUser> user,
+                                           NSError *error) {
+             if (!error) {
+                 
+                 NSString *firstName = @"";
+                 NSString *lastName = @"";
+                 NSString *username = @"";
+                 NSString *mail = @"";
+                 
+                 if ([user objectForKey:@"first_name"] != [NSNull null] && [user objectForKey:@"first_name"] != nil) {
+                     firstName = [user objectForKey:@"first_name"];
+                 }
+                 
+                 if ([user objectForKey:@"last_name"] != [NSNull null] && [user objectForKey:@"last_name"] != nil) {
+                     lastName = [user objectForKey:@"last_name"];
+                 }
+                 
+                 if ([user objectForKey:@"username"] != [NSNull null] && [user objectForKey:@"username"] != nil) {
+                     username = [user objectForKey:@"username"];
+                 }
+                 
+                 if ([user objectForKey:@"email"] != [NSNull null] && [user objectForKey:@"email"] != nil) {
+                     mail = [user objectForKey:@"email"];
+                 }
+                 
+                 self.step2.name.text = [NSString stringWithFormat:@"%@ %@",firstName,lastName];
+                 
+                 self.step2.email.text = mail;
+                 
+                 NSURL *facebookGraphUrl = [NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large",username]];
+
+                 UIImage *myImage = [self imageCroppedSquare:[UIImage imageWithData:
+                                                             [NSData dataWithContentsOfURL:facebookGraphUrl]]];
+                 
+                 [self.step2.takePictureButton setImage:myImage forState:UIControlStateNormal];
+                 
+             }
+         }];
+    }
+    
+}
+
+- (UIImage *)imageCroppedSquare:(UIImage *)image{
+
+    double minSize = image.size.height;
+    
+    if (minSize > image.size.width) {
+        minSize = image.size.width;
+    }
+    
+    double x = (image.size.width - minSize) / 2.0;
+    double y = (image.size.height - minSize) / 2.0;
+    
+    CGRect cropRect = CGRectMake(x, y, minSize, minSize);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], cropRect);
+    
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    return cropped;
+}
+
 #pragma mark - Keyboard
+
+-(void)signUpStep1textFieldShouldAppear{
+    if (self.wrapper.frame.origin.y == 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.wrapper.frame = CGRectMake(0, -216, self.view.frame.size.width, self.view.frame.size.height);
+        }];
+    }
+}
 
 - (void)signUpStep2textFieldShouldAppear{
     if (self.wrapper.frame.origin.y == 0) {
@@ -326,6 +432,30 @@
             self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         }];
     }
+}
+
+#pragma Mark - Terms & Pricavy Policy
+
+- (void)openPrivacyPolicy{
+    PrivacyPolicyViewController *privacy = [[PrivacyPolicyViewController alloc]initForTerms:NO];
+    [self presentViewController:privacy animated:YES completion:^{
+        if (self.wrapper.frame.origin.y == -216) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            }];
+        }
+    }];
+}
+
+- (void)openTerms{
+    PrivacyPolicyViewController *privacy = [[PrivacyPolicyViewController alloc]initForTerms:YES];
+    [self presentViewController:privacy animated:YES completion:^{
+        if (self.wrapper.frame.origin.y == -216) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.wrapper.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+            }];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning

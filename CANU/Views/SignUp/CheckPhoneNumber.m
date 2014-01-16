@@ -21,6 +21,10 @@
 #import "ActivitiesFeedViewController.h"
 #import "SignInViewController.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 @interface CheckPhoneNumber () <MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic) int countRequest;
@@ -88,7 +92,7 @@
             
             NSString *token = [self sha1:string];
             
-            NSString *text = [NSString stringWithFormat:@"%@#%i",token,user.userId];
+            NSString *text = [NSString stringWithFormat:@"%@ %@#%i",NSLocalizedString(@"I promise that this is my number.", nil),token,user.userId];
             
             controller.body = text;
             controller.recipients = [NSArray arrayWithObjects:@"+46769438333", nil];
@@ -168,6 +172,7 @@
         
         [self.loadingIndicator stopAnimating];
         self.check.hidden = NO;
+        self.countRequest = 0;
         self.textButton.text = NSLocalizedString(@"Reverify my number", nil);
         
     }
@@ -194,6 +199,10 @@
     if (!self.parentViewController.isForCheckPhoneNumber) {
         TutorialViewController *tutorial = [[TutorialViewController alloc] init];
         [appDelegate.canuViewController presentViewController:tutorial animated:YES completion:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Save" value:nil] build]];
+        
     }
     
 }

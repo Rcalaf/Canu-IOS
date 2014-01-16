@@ -17,7 +17,8 @@
 "Create Account" = "Create Account";
 "NEXT" = "NEXT";
 "DONE" = "DONE";
-"By signing up I agree with the Terms and the Privacy Policy" = "By signing up I agree with the Terms and the Privacy Policy";
+"By signing up I agree with the" = "By signing up I agree with the";
+"and the" = "and the";
 "Terms" = "Terms";
 "Privacy Policy" = "Privacy Policy";
 "Your Profile" = "Your Profile";
@@ -28,5 +29,6 @@
 "Full name" = "Full name";
 "E-mail" = "E-mail";
 "Phone Check" = "Phone Check";
+"I promise that this is my number." = "I promise that this is my number."
 "Reverify my number" = "Reverify my number";
 "Verify my number" = "Verify my number";

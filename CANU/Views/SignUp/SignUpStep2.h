@@ -24,6 +24,7 @@
 @protocol SignUpStep2Delegate <NSObject>
 
 @required
+- (void)facebookGrab;
 - (void)signUpUser;
 - (void)signUpStep2textFieldShouldAppear;
 - (void)signUpStep2textFieldShouldDisappear;

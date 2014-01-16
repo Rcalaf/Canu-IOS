@@ -10,4 +10,6 @@
 
 @interface PrivacyPolicyViewController : UIViewController
 
+- (id)initForTerms:(BOOL)isForTerms;
+
 @end

@@ -24,5 +24,8 @@
 @protocol SignUpStep1Delegate <NSObject>
 
 @required
+- (void)openTerms;
+- (void)openPrivacyPolicy;
 - (void)signUpStep1CheckUsername;
+- (void)signUpStep1textFieldShouldAppear;
 @end

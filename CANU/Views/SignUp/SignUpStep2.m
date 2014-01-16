@@ -10,6 +10,7 @@
 
 #import "UICanuTextField.h"
 #import "TTTAttributedLabel.h"
+#import "AppDelegate.h"
 #import "SignUpViewController.h"
 
 @interface SignUpStep2 () <UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
@@ -35,12 +36,15 @@
         title2.font = [UIFont fontWithName:@"Lato-Bold" size:24];
         [self addSubview:title2];
         
+        UITapGestureRecognizer *tapFacebookGrab = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(facebookGrabAction)];
+        
         TTTAttributedLabel *termsAmdPrivacy = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(0, 50, 320, 20)];
         termsAmdPrivacy.text = NSLocalizedString(@"Grab my Facebook info", nil);
         termsAmdPrivacy.textColor = UIColorFromRGB(0x1ca6c3);
         termsAmdPrivacy.font = [UIFont fontWithName:@"Lato-Regular" size:14];
         termsAmdPrivacy.textAlignment = NSTextAlignmentCenter;
         termsAmdPrivacy.backgroundColor = [UIColor clearColor];
+        [termsAmdPrivacy addGestureRecognizer:tapFacebookGrab];
         [self addSubview:termsAmdPrivacy];
         
         [termsAmdPrivacy setText:termsAmdPrivacy.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -93,6 +97,8 @@
     
 }
 
+#pragma Mark - Picture
+
 - (void)takePic:(id)sender{
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel",nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Choose an existing one",nil),NSLocalizedString(@"Take a picture",nil), nil];
@@ -131,6 +137,14 @@
     [self.parentViewController dismissViewControllerAnimated:YES completion:^{
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }];
+    
+}
+
+#pragma Mark - Facebook Grab
+
+- (void)facebookGrabAction{
+    
+    [self.delegate facebookGrab];
     
 }
 
