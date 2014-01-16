@@ -11,6 +11,21 @@
 		1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */; };
 		1E0EDCED187DB6DC00088B8A /* fullview_action_circle_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */; };
 		1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */; };
+		1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */; };
+		1E3A6B5118842CA1007FB6BA /* Main_background_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */; };
+		1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5018842CA1007FB6BA /* Main_background_cloud@2x.png */; };
+		1E3A6B5518842DB8007FB6BA /* Main_background_totem.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5318842DB8007FB6BA /* Main_background_totem.png */; };
+		1E3A6B5618842DB8007FB6BA /* Main_background_totem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5418842DB8007FB6BA /* Main_background_totem@2x.png */; };
+		1E3A6B5918844303007FB6BA /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5818844303007FB6BA /* SignUpViewController.m */; };
+		1E3A6B6118853FFC007FB6BA /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B6018853FFC007FB6BA /* TTTAttributedLabel.m */; };
+		1E3A6B6318854220007FB6BA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3A6B6218854220007FB6BA /* CoreText.framework */; };
+		1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B7118854F2C007FB6BA /* Localizable.strings */; };
+		1E3A6B7A18859649007FB6BA /* CheckPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B7918859649007FB6BA /* CheckPhoneNumber.m */; };
+		1E3A6B7D1885981E007FB6BA /* SignUp_phoneNumber_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B7B1885981E007FB6BA /* SignUp_phoneNumber_background.png */; };
+		1E3A6B7E1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B7C1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png */; };
+		1E3A6B811886839C007FB6BA /* SignUpStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B801886839C007FB6BA /* SignUpStep1.m */; };
+		1E3A6B84188686EB007FB6BA /* SignUpStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B83188686EB007FB6BA /* SignUpStep2.m */; };
+		1E3A6B8618868EAE007FB6BA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3A6B8518868EAE007FB6BA /* MessageUI.framework */; };
 		1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */; };
 		1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */; };
 		1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */; };
@@ -79,7 +94,6 @@
 		1EEA9869185B666E00EA9E02 /* chat_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9867185B666E00EA9E02 /* chat_send.png */; };
 		1EEA986A185B666E00EA9E02 /* chat_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9868185B666E00EA9E02 /* chat_send@2x.png */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
-		DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549581768EEE200C39E5E /* UICanuPicker.m */; };
 		DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */; };
 		DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */; };
 		DE4D95301742A00700FB026F /* scroll_content.png in Resources */ = {isa = PBXBuildFile; fileRef = DE4D952C1742A00700FB026F /* scroll_content.png */; };
@@ -196,7 +210,6 @@
 		DEA93B661720515300303BB5 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B651720515300303BB5 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DEA93B681720516000303BB5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B671720516000303BB5 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DEA93B6A1720517F00303BB5 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B691720517F00303BB5 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		DEA93B6F1720564500303BB5 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B6E1720564500303BB5 /* SignUpViewController.m */; };
 		DEA93B721720565700303BB5 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B711720565700303BB5 /* SignInViewController.m */; };
 		DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */; };
 		DEA93B791720616500303BB5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA93B781720616500303BB5 /* MainViewController.m */; };
@@ -207,7 +220,6 @@
 		DEB29BBF17955B0600D9FFAE /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BBD17955B0500D9FFAE /* settings.png */; };
 		DEB29BC017955B0600D9FFAE /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DEB29BBE17955B0600D9FFAE /* settings@2x.png */; };
 		DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */; };
-		DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */; };
 		DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */; };
 		DEB29BD0179987E300D9FFAE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB29BCF179987E300D9FFAE /* MapKit.framework */; };
 		DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */; };
@@ -244,6 +256,35 @@
 		1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_go@2x.png"; sourceTree = "<group>"; };
 		1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullview_action_circle_yes.png; sourceTree = "<group>"; };
 		1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_yes@2x.png"; sourceTree = "<group>"; };
+		1E3A6B4C18842610007FB6BA /* UICanuButtonSignBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonSignBottomBar.h; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.h; sourceTree = "<group>"; };
+		1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonSignBottomBar.m; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.m; sourceTree = "<group>"; };
+		1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Main_background_cloud.png; path = Ressources/Backgrounds/Main_background_cloud.png; sourceTree = "<group>"; };
+		1E3A6B5018842CA1007FB6BA /* Main_background_cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Main_background_cloud@2x.png"; path = "Ressources/Backgrounds/Main_background_cloud@2x.png"; sourceTree = "<group>"; };
+		1E3A6B5318842DB8007FB6BA /* Main_background_totem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Main_background_totem.png; path = Ressources/Backgrounds/Main_background_totem.png; sourceTree = "<group>"; };
+		1E3A6B5418842DB8007FB6BA /* Main_background_totem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Main_background_totem@2x.png"; path = "Ressources/Backgrounds/Main_background_totem@2x.png"; sourceTree = "<group>"; };
+		1E3A6B5718844303007FB6BA /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Users/SignUp/SignUpViewController.h; sourceTree = "<group>"; };
+		1E3A6B5818844303007FB6BA /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Users/SignUp/SignUpViewController.m; sourceTree = "<group>"; };
+		1E3A6B5F18853FFC007FB6BA /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		1E3A6B6018853FFC007FB6BA /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		1E3A6B6218854220007FB6BA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		1E3A6B6918854EB4007FB6BA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1E3A6B6A18854EBB007FB6BA /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1E3A6B6B18854EC6007FB6BA /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1E3A6B6C18854ECB007FB6BA /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1E3A6B7018854F2C007FB6BA /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E3A6B7218854F2F007FB6BA /* fr */ = {isa = PBXFileReference; lastKnownFileType = file; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E3A6B7318854F31007FB6BA /* pt */ = {isa = PBXFileReference; lastKnownFileType = file; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E3A6B7418854F32007FB6BA /* sv */ = {isa = PBXFileReference; lastKnownFileType = file; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E3A6B7518854F33007FB6BA /* ru */ = {isa = PBXFileReference; lastKnownFileType = file; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1E3A6B7818859649007FB6BA /* CheckPhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckPhoneNumber.h; path = Views/SignUp/CheckPhoneNumber.h; sourceTree = "<group>"; };
+		1E3A6B7918859649007FB6BA /* CheckPhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckPhoneNumber.m; path = Views/SignUp/CheckPhoneNumber.m; sourceTree = "<group>"; };
+		1E3A6B7B1885981E007FB6BA /* SignUp_phoneNumber_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SignUp_phoneNumber_background.png; path = Ressources/Backgrounds/SignUp_phoneNumber_background.png; sourceTree = "<group>"; };
+		1E3A6B7C1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SignUp_phoneNumber_background@2x.png"; path = "Ressources/Backgrounds/SignUp_phoneNumber_background@2x.png"; sourceTree = "<group>"; };
+		1E3A6B7F1886839C007FB6BA /* SignUpStep1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpStep1.h; path = Views/SignUp/SignUpStep1.h; sourceTree = "<group>"; };
+		1E3A6B801886839C007FB6BA /* SignUpStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpStep1.m; path = Views/SignUp/SignUpStep1.m; sourceTree = "<group>"; };
+		1E3A6B82188686EB007FB6BA /* SignUpStep2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpStep2.h; path = Views/SignUp/SignUpStep2.h; sourceTree = "<group>"; };
+		1E3A6B83188686EB007FB6BA /* SignUpStep2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpStep2.m; path = Views/SignUp/SignUpStep2.m; sourceTree = "<group>"; };
+		1E3A6B8518868EAE007FB6BA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1E4F57D5187FFF1100D5F1F4 /* UICanuLabelUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelUserName.h; path = Vendor/UICanuLabel/UICanuLabelUserName.h; sourceTree = "<group>"; };
 		1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelUserName.m; path = Vendor/UICanuLabel/UICanuLabelUserName.m; sourceTree = "<group>"; };
 		1E4F57D8187FFFCA00D5F1F4 /* UICanuLabelDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDay.h; path = Vendor/UICanuLabel/UICanuLabelDay.h; sourceTree = "<group>"; };
@@ -335,8 +376,6 @@
 		1EEA9868185B666E00EA9E02 /* chat_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_send@2x.png"; path = "Ressources/Buttons/chat_send@2x.png"; sourceTree = "<group>"; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
-		DE1549571768EEE200C39E5E /* UICanuPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuPicker.h; sourceTree = "<group>"; };
-		DE1549581768EEE200C39E5E /* UICanuPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuPicker.m; sourceTree = "<group>"; };
 		DE4064DE17D511BB00B11CE9 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
 		DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = privacy_policy.pdf; sourceTree = "<group>"; };
@@ -475,8 +514,6 @@
 		DEA93B651720515300303BB5 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		DEA93B671720516000303BB5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		DEA93B691720517F00303BB5 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		DEA93B6D1720564500303BB5 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		DEA93B6E1720564500303BB5 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		DEA93B701720565700303BB5 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
 		DEA93B711720565700303BB5 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
 		DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
@@ -492,8 +529,6 @@
 		DEB29BBE17955B0600D9FFAE /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
 		DEB29BC21795700700D9FFAE /* UserSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserSettingsViewController.h; path = ../UserSettingsViewController.h; sourceTree = "<group>"; };
 		DEB29BC31795700700D9FFAE /* UserSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserSettingsViewController.m; path = ../UserSettingsViewController.m; sourceTree = "<group>"; };
-		DEB29BC517958AF300D9FFAE /* UICanuBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuBottomBar.h; sourceTree = "<group>"; };
-		DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuBottomBar.m; sourceTree = "<group>"; };
 		DEB29BC81796EE8600D9FFAE /* ActivitiesFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesFeedViewController.h; sourceTree = "<group>"; };
 		DEB29BC91796EE8600D9FFAE /* ActivitiesFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesFeedViewController.m; sourceTree = "<group>"; };
 		DEB29BCF179987E300D9FFAE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -536,6 +571,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E3A6B8618868EAE007FB6BA /* MessageUI.framework in Frameworks */,
+				1E3A6B6318854220007FB6BA /* CoreText.framework in Frameworks */,
 				1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */,
 				DE517723184EA69100690E2F /* UIKit.framework in Frameworks */,
 				DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */,
@@ -556,6 +593,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E3A6B4B188425C9007FB6BA /* UICanuButton */ = {
+			isa = PBXGroup;
+			children = (
+				1E3A6B4C18842610007FB6BA /* UICanuButtonSignBottomBar.h */,
+				1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */,
+			);
+			name = UICanuButton;
+			sourceTree = "<group>";
+		};
+		1E3A6B5E18853FFC007FB6BA /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				1E3A6B5F18853FFC007FB6BA /* TTTAttributedLabel.h */,
+				1E3A6B6018853FFC007FB6BA /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
+			path = Framework/TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		1E3A6B76188595C2007FB6BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E3A6B77188595D2007FB6BA /* SignUp */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		1E3A6B77188595D2007FB6BA /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				1E3A6B7818859649007FB6BA /* CheckPhoneNumber.h */,
+				1E3A6B7918859649007FB6BA /* CheckPhoneNumber.m */,
+				1E3A6B7F1886839C007FB6BA /* SignUpStep1.h */,
+				1E3A6B801886839C007FB6BA /* SignUpStep1.m */,
+				1E3A6B82188686EB007FB6BA /* SignUpStep2.h */,
+				1E3A6B83188686EB007FB6BA /* SignUpStep2.m */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
 		1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -832,6 +909,12 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E3A6B7B1885981E007FB6BA /* SignUp_phoneNumber_background.png */,
+				1E3A6B7C1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png */,
+				1E3A6B5318842DB8007FB6BA /* Main_background_totem.png */,
+				1E3A6B5418842DB8007FB6BA /* Main_background_totem@2x.png */,
+				1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */,
+				1E3A6B5018842CA1007FB6BA /* Main_background_cloud@2x.png */,
 				1EEA9863185B5E7400EA9E02 /* feed_shadow_name.png */,
 				1EEA9864185B5E7400EA9E02 /* feed_shadow_name@2x.png */,
 				DE517730184F716500690E2F /* create_bg-568h@2x.png */,
@@ -914,10 +997,6 @@
 		DEA93B0F17204EA600303BB5 = {
 			isa = PBXGroup;
 			children = (
-				DEB29BC517958AF300D9FFAE /* UICanuBottomBar.h */,
-				DEB29BC617958AF300D9FFAE /* UICanuBottomBar.m */,
-				DE1549571768EEE200C39E5E /* UICanuPicker.h */,
-				DE1549581768EEE200C39E5E /* UICanuPicker.m */,
 				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
 				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
 				DED4901D17298A6F005A0BF9 /* Models */,
@@ -941,6 +1020,9 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E3A6B8518868EAE007FB6BA /* MessageUI.framework */,
+				1E3A6B6218854220007FB6BA /* CoreText.framework */,
+				1E3A6B5E18853FFC007FB6BA /* TTTAttributedLabel */,
 				1E814CFA187C49F30013E238 /* libz.dylib */,
 				1E814CF1187C495D0013E238 /* Google Analytics */,
 				DE713962179D47FE00EBCB91 /* CoreLocation.framework */,
@@ -962,6 +1044,7 @@
 		DEA93B2317204EA600303BB5 /* CANU */ = {
 			isa = PBXGroup;
 			children = (
+				1E3A6B76188595C2007FB6BA /* Views */,
 				DE6F8FEB17C96D1A00B99401 /* Tutorial */,
 				DE6ED9CF17C424CC00C5E72E /* Users */,
 				DE81F8B2175E4DA300AD1071 /* Activities */,
@@ -985,6 +1068,7 @@
 				DEA93B2617204EA600303BB5 /* InfoPlist.strings */,
 				DEA93B2917204EA600303BB5 /* main.m */,
 				DEA93B2B17204EA600303BB5 /* CANU-Prefix.pch */,
+				1E3A6B7118854F2C007FB6BA /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -992,6 +1076,7 @@
 		DEA93B4117204EDC00303BB5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				1E3A6B4B188425C9007FB6BA /* UICanuButton */,
 				1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */,
 				1EEA97E21858685E00EA9E02 /* UIScrollViewReverse */,
 				DEB29BB417954FEB00D9FFAE /* UIProfileView */,
@@ -1053,8 +1138,8 @@
 		DEA93B741720566700303BB5 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				DEA93B6D1720564500303BB5 /* SignUpViewController.h */,
-				DEA93B6E1720564500303BB5 /* SignUpViewController.m */,
+				1E3A6B5718844303007FB6BA /* SignUpViewController.h */,
+				1E3A6B5818844303007FB6BA /* SignUpViewController.m */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -1231,6 +1316,10 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fr,
+				sv,
+				ru,
+				pt,
 			);
 			mainGroup = DEA93B0F17204EA600303BB5;
 			productRefGroup = DEA93B1917204EA600303BB5 /* Products */;
@@ -1307,10 +1396,12 @@
 				1E9FB9F218619A0400085421 /* loader-5.png in Resources */,
 				DE6ED8A517BD00D400C5E72E /* bringup_profile_arrow.png in Resources */,
 				DE6ED8A617BD00D400C5E72E /* bringup_profile_arrow@2x.png in Resources */,
+				1E3A6B5518842DB8007FB6BA /* Main_background_totem.png in Resources */,
 				DE774B49184E129100F8C244 /* navmenu_local@2x.png in Resources */,
 				DE6ED8A717BD00D400C5E72E /* bringup_profile_with_arrow.png in Resources */,
 				1E9FBA1318619A0400085421 /* loop_4@2x.png in Resources */,
 				DE6ED8A817BD00D400C5E72E /* bringup_profile_with_arrow@2x.png in Resources */,
+				1E3A6B5118842CA1007FB6BA /* Main_background_cloud.png in Resources */,
 				1E9FB9F018619A0400085421 /* loader-4.png in Resources */,
 				DE517733184F716500690E2F /* edit_bg-568h@2x.png in Resources */,
 				1E9FBA0518619A0400085421 /* loader-14@2x.png in Resources */,
@@ -1326,6 +1417,7 @@
 				DE6ED8D117C2787000C5E72E /* create_world.png in Resources */,
 				DE6ED8D217C2787000C5E72E /* create_world@2x.png in Resources */,
 				DE6ED9AB17C2926300C5E72E /* edit_delete.png in Resources */,
+				1E3A6B5618842DB8007FB6BA /* Main_background_totem@2x.png in Resources */,
 				DE6ED9AC17C2926300C5E72E /* edit_delete@2x.png in Resources */,
 				DE6ED9AD17C2926300C5E72E /* edit_save.png in Resources */,
 				1E9FB9FA18619A0400085421 /* loader-9.png in Resources */,
@@ -1369,19 +1461,23 @@
 				DEAE0B6F17C65D5200EEB078 /* feed_cell.png in Resources */,
 				1E9FB9EF18619A0400085421 /* loader-3@2x.png in Resources */,
 				DEAE0B7017C65D5200EEB078 /* feed_cell@2x.png in Resources */,
+				1E3A6B7D1885981E007FB6BA /* SignUp_phoneNumber_background.png in Resources */,
 				1E9FBA1118619A0400085421 /* loop_3@2x.png in Resources */,
 				1EEA97F31859D34200EA9E02 /* feed_action_circle_go.png in Resources */,
 				DE774B3C184E0FDD00F8C244 /* guide_step_3-568h@2x.png in Resources */,
 				1E9FBA0218619A0400085421 /* loader-13.png in Resources */,
 				DE774B41184E0FDD00F8C244 /* guide_step_4@2x.png in Resources */,
+				1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */,
 				1E9FBA0718619A0400085421 /* loader-15@2x.png in Resources */,
 				DE774B3B184E0FDD00F8C244 /* guide_step_2@2x.png in Resources */,
 				1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */,
+				1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */,
 				DE607831182BD08D0053F23B /* intro_bg@2x.png in Resources */,
 				1E9FBA0A18619A0400085421 /* loader-17.png in Resources */,
 				DE517732184F716500690E2F /* create_bg-568h@2x.png in Resources */,
 				1E9FBA0918619A0400085421 /* loader-16@2x.png in Resources */,
 				DEA7C7F117F1F73C009CBE25 /* button_arrow@2x.png in Resources */,
+				1E3A6B7E1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png in Resources */,
 				DE67FDDC17CA66DD00240E1C /* guide_btn_gotit.png in Resources */,
 				DE67FDDD17CA66DD00240E1C /* guide_btn_gotit@2x.png in Resources */,
 				DE51772E184F70DC00690E2F /* edit_bg@2x.png in Resources */,
@@ -1424,6 +1520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
+				1E3A6B811886839C007FB6BA /* SignUpStep1.m in Sources */,
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
 				1EEA97E1185782B000EA9E02 /* ActivityScrollViewController.m in Sources */,
 				1EEA9862185B4CEB00EA9E02 /* UICanuChatCellScroll.m in Sources */,
@@ -1443,7 +1540,6 @@
 				DEA93B5D17204EF100303BB5 /* AFXMLRequestOperation.m in Sources */,
 				DEA93B5E17204EF100303BB5 /* UIImageView+AFNetworking.m in Sources */,
 				DEA93B6117204F7C00303BB5 /* AFCanuAPIClient.m in Sources */,
-				DEA93B6F1720564500303BB5 /* SignUpViewController.m in Sources */,
 				DEA93B721720565700303BB5 /* SignInViewController.m in Sources */,
 				DEA93B791720616500303BB5 /* MainViewController.m in Sources */,
 				DED4901B17298A61005A0BF9 /* User.m in Sources */,
@@ -1454,7 +1550,7 @@
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
-				DE1549591768EEE200C39E5E /* UICanuPicker.m in Sources */,
+				1E3A6B84188686EB007FB6BA /* SignUpStep2.m in Sources */,
 				DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */,
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
 				1EEA985F185B44B300EA9E02 /* ChatScrollView.m in Sources */,
@@ -1462,27 +1558,46 @@
 				1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */,
 				1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */,
 				1E4F57E01880020400D5F1F4 /* UICanuLabelTimeEnd.m in Sources */,
+				1E3A6B5918844303007FB6BA /* SignUpViewController.m in Sources */,
 				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
-				DEB29BC717958AF300D9FFAE /* UICanuBottomBar.m in Sources */,
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
 				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
 				DE5599B21836491200FE32E9 /* Message.m in Sources */,
+				1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */,
+				1E3A6B7A18859649007FB6BA /* CheckPhoneNumber.m in Sources */,
 				1EEA97EB1858721F00EA9E02 /* UICanuActivityCellScroll.m in Sources */,
 				DEAE0B7A17C9540200EEB078 /* MKCanuAnnotationView.m in Sources */,
 				DE6F8FEE17C96D5900B99401 /* TutorialViewController.m in Sources */,
 				DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */,
 				1EEA9850185A033500EA9E02 /* AttendeesScrollViewController.m in Sources */,
 				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,
+				1E3A6B6118853FFC007FB6BA /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		1E3A6B7118854F2C007FB6BA /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E3A6B7018854F2C007FB6BA /* en */,
+				1E3A6B7218854F2F007FB6BA /* fr */,
+				1E3A6B7318854F31007FB6BA /* pt */,
+				1E3A6B7418854F32007FB6BA /* sv */,
+				1E3A6B7518854F33007FB6BA /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		DEA93B2617204EA600303BB5 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				DEA93B2717204EA600303BB5 /* en */,
+				1E3A6B6918854EB4007FB6BA /* fr */,
+				1E3A6B6A18854EBB007FB6BA /* pt */,
+				1E3A6B6B18854EC6007FB6BA /* sv */,
+				1E3A6B6C18854ECB007FB6BA /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

@@ -63,7 +63,7 @@
 
 - (void)showPrivacyPolicy:(id)sender
 {
-    PrivacyPolicyViewController *privacyPolicy = [[PrivacyPolicyViewController alloc] init];
+    PrivacyPolicyViewController *privacyPolicy = [[PrivacyPolicyViewController alloc] initForTerms:NO];
     [self presentViewController:privacyPolicy animated:NO completion:nil];
 }
 

@@ -10,4 +10,6 @@
 
 @interface UICanuTextField : UITextField
 
+@property (nonatomic) BOOL valueValide;
+
 @end

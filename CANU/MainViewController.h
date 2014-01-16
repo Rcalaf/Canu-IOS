@@ -10,7 +10,8 @@
 
 @interface MainViewController : UIViewController
 
-- (IBAction)goSignIn:(id)sender;
-- (IBAction)goSignUp:(id)sender;
+@property (nonatomic) BOOL isPhoneCheck;
+
+- (void)goSignIn:(id)sender;
 
 @end
