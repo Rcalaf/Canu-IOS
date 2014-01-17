@@ -449,13 +449,13 @@ typedef enum {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-                        if (_feedType == FeedProfileType) {
+                        if (_feedType == FeedLocalType) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                         }else if (_feedType == FeedTribeType) {
 //                            [self load];
 //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
-                        }else if (_feedType == FeedLocalType) {
+                        }else if (_feedType == FeedProfileType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
                         }
@@ -498,13 +498,13 @@ typedef enum {
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
-                        if (_feedType == FeedProfileType) {
+                        if (_feedType == FeedLocalType) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                         }else if (_feedType == FeedTribeType) {
                             //                            [self load];
                             //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
-                        }else if (_feedType == FeedLocalType) {
+                        }else if (_feedType == FeedProfileType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
                         }

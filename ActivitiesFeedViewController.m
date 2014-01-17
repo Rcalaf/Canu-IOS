@@ -130,20 +130,20 @@
 }
 
 - (void)reloadActivity{
-    
+    NSLog(@"All reload");
     [self.localFeed reload];
     [self.profilFeed reload];
     
 }
 
 - (void)reloadLocal{
-    
+    NSLog(@"reloadLocal");
     [self.localFeed reload];
     
 }
 
 - (void)reloadProfile{
-    
+    NSLog(@"reloadProfile");
     [self.profilFeed reload];
     
 }
