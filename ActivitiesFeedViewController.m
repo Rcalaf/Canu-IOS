@@ -58,16 +58,6 @@
     self.appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.user = _appDelegate.user;
     
-    self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 119)];
-    [self.view addSubview:_profileView.mask];
-    [self.view addSubview:_profileView];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
-    [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
-    
-    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
-    [_profileView.profileImage addGestureRecognizer:tapRecognizer];
-    
     self.localFeed = [[ActivityScrollViewController alloc] initFor:FeedLocalType andUser:_user andFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self addChildViewController:_localFeed];
     [self.view addSubview:_localFeed.view];
@@ -79,6 +69,16 @@
     self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(640, 0, 320, self.view.frame.size.height)];
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
+    
+    self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 119)];
+    [self.view addSubview:_profileView.mask];
+    [self.view addSubview:_profileView];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
+    [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
+    
+    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
+    [_profileView.profileImage addGestureRecognizer:tapRecognizer];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadActivity) name:@"reloadActivity" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLocal) name:@"reloadLocal" object:nil];

@@ -12,7 +12,7 @@
 NSString * const kAFCanuAPIBaseUDistributionRLString = @"http://api.canu.se";
 NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
 
-BOOL const kAFCanuAPIDistributionMode = NO;
+BOOL const kAFCanuAPIDistributionMode = YES;
 
 
 @implementation AFCanuAPIClient

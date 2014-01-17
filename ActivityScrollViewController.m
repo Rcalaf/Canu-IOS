@@ -256,7 +256,7 @@ typedef enum {
 
 - (void)load{
     
-    if (_feedType == FeedProfileType) {
+    if (_feedType == FeedLocalType) {
         
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
             
@@ -295,7 +295,7 @@ typedef enum {
             [self.loaderAnimation stopAnimation];
             
         
-    }else if(_feedType == FeedLocalType){
+    }else if(_feedType == FeedProfileType){
         
         [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
