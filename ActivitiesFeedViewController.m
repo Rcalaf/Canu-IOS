@@ -44,9 +44,7 @@
     self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 640, self.view.frame.size.height)];
     [self.view addSubview:_wrapper];
     
-    self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 114)];
-    self.profileView.name.text = [NSString stringWithFormat:@"%@",self.user.firstName];
-    [self.profileView.profileImage  setImageWithURL:self.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 119)];
     [self.view addSubview:_profileView.mask];
     [self.view addSubview:_profileView];
     
