@@ -8,15 +8,15 @@
 
 //Main
 
-"I'M NEW" = "I'M NEW";
-"SIGN IN" = "SIGN IN";
-"Put your future moments\n in one place" = "Put your future moments\n in one place";
+"I'M NEW" = "JAG ÄR NY";
+"SIGN IN" = "LOGGA IN";
+"Put your future moments\n in one place" = "Samla dina framtida aktiviteter på en och samma plats";
 
 //SignUp
 
-"Create Account" = "Skapa Konto";
-"NEXT" = "NEXT";
-"DONE" = "DONE";
+"Create Account" = "Skapa konto";
+"NEXT" = "NÄSTA";
+"DONE" = "KLAR";
 "By signing up I agree with the Terms and the Privacy Policy" = "Genom att registrera dig Jag godkänner Villkoren och Sekretesspolicyn";
 "Terms" = "Villkoren";
 "Privacy Policy" = "Sekretesspolicyn";

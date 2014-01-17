@@ -36,7 +36,7 @@
 
 - (void)back:(id)sender
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -49,16 +49,16 @@
     _browser.scalesPageToFit = YES;
     
     if (!_isForTerms) {
-        [_browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/privacy"]]];
+        [_browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/privacyapp"]]];
     }else{
-        [_browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/terms"]]];
+        [_browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/termsapp"]]];
     }
     
     [self.view addSubview:_browser];
     
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
-    [_closeButton setFrame:CGRectMake(10.0f, 403.0f + KIphone5Margin, 300.0f, 47.0f)];
+    [_closeButton setFrame:CGRectMake(10.0f, self.view.frame.size.height - 47 - 30, 300.0f, 47.0f)];
     [_closeButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
     _closeButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
     [_closeButton setBackgroundColor:[UIColor whiteColor]];

@@ -246,11 +246,11 @@
 
 - (void)signUpStep1CheckUsername{
     
-    if ([self.step1.password.text isEqualToString:@""] || [self.step1.userName.text isEqualToString:@""]) {
+    if ([self.step1.password.text isEqualToString:@""] || self.step1.password.text  == nil || [self.step1.userName.text isEqualToString:@""] || self.step1.userName.text  == nil) {
         
-        if ([self.step1.userName.text isEqualToString:@""]) self.step1.userName.valueValide = NO;
+        if ([self.step1.userName.text isEqualToString:@""] || self.step1.userName.text  == nil) self.step1.userName.valueValide = NO;
         else  self.step1.userName.rightView = nil;
-        if ([self.step1.password.text isEqualToString:@""]) self.step1.password.valueValide = NO;
+        if ([self.step1.password.text isEqualToString:@""] || self.step1.password.text  == nil) self.step1.password.valueValide = NO;
         else  self.step1.password.rightView = nil;
         
         return;

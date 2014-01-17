@@ -12,6 +12,4 @@
 
 @property (nonatomic) BOOL isPhoneCheck;
 
-- (void)goSignIn:(id)sender;
-
 @end

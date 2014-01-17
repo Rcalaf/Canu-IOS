@@ -15,6 +15,8 @@
 //SignUp
 
 "Create Account" = "Create Account";
+"Username" = "Username";
+"Password" = "Password";
 "NEXT" = "NEXT";
 "DONE" = "DONE";
 "By signing up I agree with the" = "By signing up I agree with the";
@@ -29,6 +31,11 @@
 "Full name" = "Full name";
 "E-mail" = "E-mail";
 "Phone Check" = "Phone Check";
-"I promise that this is my number." = "I promise that this is my number."
+"I promise that this is my number." = "I promise that this is my number.";
 "Reverify my number" = "Reverify my number";
 "Verify my number" = "Verify my number";
+
+//SignIn
+
+"Welcome Back" = "Welcome Back";
+"Forgot password" = "Forgot password";

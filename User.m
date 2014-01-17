@@ -14,6 +14,12 @@
 #import "AFNetworking.h"
 #import "MainViewController.h"
 
+@interface User ()
+
+@property (strong,nonatomic) NSString *profileImageUrlShort;
+
+@end
+
 @implementation User
 
 @synthesize userId = _userId;
@@ -66,8 +72,9 @@
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
         if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
-            _phoneIsVerified = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
+            _phoneIsVerified  = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
         }
+        _profileImageUrlShort = [attributes valueForKey:@"profile_pic"];
         _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
     }
     
@@ -77,7 +84,7 @@
 - (NSDictionary *)serialize
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
-    NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrl];
+    NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrlShort];
     NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,nil];
     NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];

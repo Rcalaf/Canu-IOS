@@ -10,6 +10,13 @@
 
 @interface SignInViewController : UIViewController <UITextFieldDelegate>
 
-- (IBAction)login:(id)sender;
-- (IBAction)back:(id)sender;
+@property (retain) id delegate;
+
+@end
+
+@protocol SignInViewControllerDelegate <NSObject>
+
+@required
+- (void)signInGoBackHome;
+- (void)signInGoToFeed;
 @end
