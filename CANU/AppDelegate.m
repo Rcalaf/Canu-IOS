@@ -90,7 +90,7 @@ NSString *const FBSessionStateChangedNotification =
 
     if (self.user) {
         
-        if (self.user.phoneIsVerified) {
+        if (self.user.phoneIsVerified || ![AFCanuAPIClient sharedClient].distributionMode) {
             NSLog(@"User Active");
             self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
             [self.canuViewController pushViewController:self.feedViewController animated:NO];

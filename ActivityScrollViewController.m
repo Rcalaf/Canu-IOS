@@ -82,7 +82,7 @@ typedef enum {
         self.feedbackMessage.allowsEditingTextAttributes = NO;
         self.feedbackMessage.textAlignment               = NSTextAlignmentCenter;
         self.feedbackMessage.backgroundColor             = self.view.backgroundColor;
-        self.feedbackMessage.hidden                      = YES;
+        self.feedbackMessage.alpha                       = 0;
         [self.view addSubview:self.feedbackMessage];
         
         [self showFeedback];
@@ -336,15 +336,21 @@ typedef enum {
     NSInteger r = arc4random()%[self.quotes count];
     
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        self.feedbackMessage.hidden = NO;
         self.activities = @[];
+        [UIView  animateWithDuration:0.4 animations:^{
+            self.feedbackMessage.alpha = 1;
+        } completion:nil];
         [self showActivities];
         self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
     } else if ([_activities count] == 0){
-        self.feedbackMessage.hidden = NO;
         self.feedbackMessage.text = [_quotes objectAtIndex:r];
+        [UIView  animateWithDuration:0.4 animations:^{
+            self.feedbackMessage.alpha = 1;
+        } completion:nil];
     } else {
-        self.feedbackMessage.hidden = YES;
+        [UIView  animateWithDuration:0.4 animations:^{
+            self.feedbackMessage.alpha = 0;
+        } completion:nil];
     }
     
 }
@@ -391,7 +397,7 @@ typedef enum {
         
         if (_isFirstTime) {
             cell.alpha = 0;
-            [UIView animateWithDuration:0.4 delay:i * 0.1 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            [UIView animateWithDuration:0.4 delay:0.1 + i * 0.15 options:UIViewAnimationOptionAllowUserInteraction animations:^{
                 cell.alpha = 1;
             } completion:^(BOOL finished) {
                 if (i == [_activities count] - 1) {

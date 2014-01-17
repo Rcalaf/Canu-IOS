@@ -11,11 +11,12 @@
 #import "SignInViewController.h"
 #import "UICanuButtonSignBottomBar.h"
 
-@interface MainViewController () <SignUpViewControllerDelegate>
+@interface MainViewController () <SignUpViewControllerDelegate,SignInViewControllerDelegate>
 
 @property (nonatomic) UICanuButtonSignBottomBar *getOn;
 @property (nonatomic) UICanuButtonSignBottomBar *logIn;
 @property (nonatomic) SignUpViewController *signUpViewController;
+@property (nonatomic) SignInViewController *signInViewController;
 @property (nonatomic) UIView *backgroundColor;
 @property (nonatomic) UIImageView *backgroundCloud;
 @property (nonatomic) UIImageView *backgroundTotem;
@@ -45,7 +46,7 @@
         self.backgroundColor.backgroundColor = UIColorFromRGB(0xe8eeee);
         self.backgroundCloud.alpha = 0;
         self.backgroundTotem.frame = CGRectMake(-320, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
-        self.slogan.frame = CGRectMake(-320,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
+        self.slogan.frame = CGRectMake(-310, 40 + (self.view.frame.size.height - 480)/2, 300, 120);
         self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height, 320.0f, 57.0f);
     } completion:^(BOOL finished) {
         
@@ -61,7 +62,7 @@
         self.backgroundColor.backgroundColor = UIColorFromRGB(0x83d2d5);
         self.backgroundCloud.alpha = 0;
         self.backgroundTotem.frame = CGRectMake(-320, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
-        self.slogan.frame = CGRectMake(-320,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
+        self.slogan.frame = CGRectMake(-310, 40 + (self.view.frame.size.height - 480)/2, 300, 120);
         self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height, 320.0f, 57.0f);
     } completion:^(BOOL finished) {
         
@@ -73,7 +74,7 @@
         self.backgroundColor.backgroundColor = UIColorFromRGB(0xe4f8f7);
         self.backgroundCloud.alpha = 1;
         self.backgroundTotem.frame = CGRectMake(0, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
-        self.slogan.frame = CGRectMake(0,  40 + (self.view.frame.size.height - 480)/2, 320, 80);
+        self.slogan.frame = CGRectMake(10, 40 + (self.view.frame.size.height - 480)/2, 300, 120);
         self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height - 57, 320.0f, 57.0f);
     } completion:^(BOOL finished) {
         [self.signUpViewController willMoveToParentViewController:nil];
@@ -95,13 +96,45 @@
     } completion:nil];
 }
 
-- (void)goSignIn:(id)sender
-{
-    [self presentViewController:[[SignInViewController alloc] init] animated:NO completion:^{}];
+- (void)goSignIn{
+    self.signInViewController = [[SignInViewController alloc]init];
+    self.signInViewController.delegate = self;
+    [self addChildViewController:_signInViewController];
+    [self.backgroundColor addSubview:_signInViewController.view];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe8eeee);
+        self.backgroundCloud.alpha = 0;
+        self.backgroundTotem.frame = CGRectMake(-320, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
+        self.slogan.frame = CGRectMake(-310, 40 + (self.view.frame.size.height - 480)/2, 300, 120);
+        self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height, 320.0f, 57.0f);
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
--(void) loadView
-{
+-(void)signInGoBackHome{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = UIColorFromRGB(0xe4f8f7);
+        self.backgroundCloud.alpha = 1;
+        self.backgroundTotem.frame = CGRectMake(0, self.view.frame.size.height - 480, self.view.frame.size.width, 480);
+        self.slogan.frame = CGRectMake(10, 40 + (self.view.frame.size.height - 480)/2, 300, 120);
+        self.toolBar.frame = CGRectMake(0.0f, self.view.frame.size.height - 57, 320.0f, 57.0f);
+    } completion:^(BOOL finished) {
+        [self.signInViewController willMoveToParentViewController:nil];
+        [self.signInViewController.view removeFromSuperview];
+        [self.signInViewController removeFromParentViewController];
+        self.signInViewController = nil;
+    }];
+}
+
+- (void)signInGoToFeed{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.backgroundColor.backgroundColor = backgroundColorView;
+    } completion:^(BOOL finished) {
+    }];
+}
+
+-(void) loadView{
     [super loadView];
     
     self.backgroundColor = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -115,9 +148,9 @@
     self.backgroundTotem.image = [UIImage imageNamed:@"Main_background_totem"];
     [self.backgroundColor addSubview:self.backgroundTotem];
     
-    self.slogan = [[UILabel alloc]initWithFrame:CGRectMake(0, 40 + (self.view.frame.size.height - 480)/2, 320, 80)];
+    self.slogan = [[UILabel alloc]initWithFrame:CGRectMake(10, 40 + (self.view.frame.size.height - 480)/2, 300, 120)];
     self.slogan.text = NSLocalizedString(@"Put your future moments\n in one place", nil);
-    self.slogan.numberOfLines = 2;
+    self.slogan.numberOfLines = 3;
     self.slogan.textAlignment = NSTextAlignmentCenter;
     self.slogan.backgroundColor = [UIColor clearColor];
     self.slogan.textColor = UIColorFromRGB(0x1ca6c3);
@@ -158,7 +191,7 @@
     
     self.logIn = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(165.0, 10.0, 145.0, 37.0) andBlue:YES];
     [self.logIn setTitle:NSLocalizedString(@"SIGN IN", nil) forState:UIControlStateNormal];
-    [self.logIn addTarget:self action:@selector(goSignIn:) forControlEvents:UIControlEventTouchUpInside];
+    [self.logIn addTarget:self action:@selector(goSignIn) forControlEvents:UIControlEventTouchUpInside];
 
     [self.toolBar addSubview:_getOn];
     [self.toolBar addSubview:_logIn];
