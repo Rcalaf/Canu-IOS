@@ -10,6 +10,12 @@
 
 #import "UICanuActivityCellScroll.h"
 
+typedef enum {
+    FeedLocalType = 0,
+    FeedTribeType = 1,
+    FeedProfileType = 2,
+} FeedTypes;
+
 @class User;
 
 @interface ActivityScrollViewController : UIViewController<UICanuActivityCellScrollDelegate>
@@ -18,7 +24,7 @@
 
 - (void)reload;
 
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame;
+- (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame;
 
 - (void)removeAfterlogOut;
 

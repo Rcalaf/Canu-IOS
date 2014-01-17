@@ -32,13 +32,13 @@ typedef enum {
 
 @interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate>
 
+@property (nonatomic) FeedTypes feedType;
 @property (nonatomic) UITextView *feedbackMessage;
 @property (nonatomic, readonly) NSArray *quotes;
 @property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSMutableArray *arrayCell;
-@property (nonatomic) BOOL isUserProfile;
 @property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) User *user;
 @property (nonatomic) BOOL isReload;
@@ -54,17 +54,24 @@ typedef enum {
 @synthesize currentLocation = _currentLocation;
 @synthesize locationManager = _locationManager;
 
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame{
+- (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame{
     self = [super init];
     if (self) {
-        if (!isUserProfile) {
-            NSLog(@"init ActivityScrollViewController Local");
-        }else{
-            NSLog(@"init ActivityScrollViewController User");
-        }
+        
+        self.feedType = feedType;
+        
         self.view.frame = frame;
         
-        self.isUserProfile = isUserProfile;
+        if (_feedType == FeedLocalType) {
+            NSLog(@"init ActivityScrollViewController Local");
+//            self.view.backgroundColor = [UIColor redColor];
+        }else if (_feedType == FeedTribeType){
+            NSLog(@"init ActivityScrollViewController Tribes");
+//            self.view.backgroundColor = [UIColor blueColor];
+        }else if (_feedType == FeedProfileType){
+            NSLog(@"init ActivityScrollViewController Profile");
+//            self.view.backgroundColor = [UIColor greenColor];
+        }
         
         self.user = user;
         
@@ -101,7 +108,7 @@ typedef enum {
 
 - (NSArray *)quotes{
     if (!_quotes) {
-        if (!_isUserProfile) {
+        if (_feedType == FeedLocalType) {
             _quotes = [NSArray arrayWithObjects:@"Where are you living? Move to a better place where people do stuff.",
                        @"Are you that guy who lives in the forest? Unfortunately the animal version of CANU is not ready.",
                        @"Get the people in your area going, obviously they can't do anything themselves.",
@@ -112,8 +119,9 @@ typedef enum {
                        @"Don’t wait for for someone to kick your butt. Kick others - create!",
                        @"\"We have nothing to do\". - The bored people around you",
                        @"Why do you even live in this town if nothing is happening here?", nil];
-        } else {
-            
+        }else if (_feedType == FeedTribeType){
+            _quotes = [NSArray arrayWithObjects:@"Tribes,\n Coming soon.", nil];
+        }else if (_feedType == FeedProfileType){
             _quotes = [NSArray arrayWithObjects:@"Why are you sitting on the bench all alone? Invite people to join you.",
                        @"It’s a lovely day to get together for some boxing.",
                        @"Your city is doing fun things. Just offer everyone something really boring this time.",
@@ -133,9 +141,7 @@ typedef enum {
 }
 
 - (UICanuNavigationController *)navigation{
-    if (_isUserProfile) {
-        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-    }
+    
     if (!_navigation) {
         
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -173,17 +179,11 @@ typedef enum {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
-//    if (_isUserProfile) {
-//        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-//    }
     NSLog(@"loc manager Monitoring...");
     [self.loaderAnimation stopAnimation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-//    if (_isUserProfile) {
-//        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-//    }
     NSLog(@"loc manager Fail...");
     [self.loaderAnimation stopAnimation];
 }
@@ -256,7 +256,7 @@ typedef enum {
 
 - (void)load{
     
-    if (!_isUserProfile) {
+    if (_feedType == FeedProfileType) {
         
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
             
@@ -290,7 +290,12 @@ typedef enum {
             
         }];
         
-    }else{
+    }else if(_feedType == FeedTribeType){
+            
+            [self.loaderAnimation stopAnimation];
+            
+        
+    }else if(_feedType == FeedLocalType){
         
         [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
@@ -444,10 +449,13 @@ typedef enum {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-                        if (!_isUserProfile) {
+                        if (_feedType == FeedProfileType) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                        }else{
+                        }else if (_feedType == FeedTribeType) {
+//                            [self load];
+//                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                        }else if (_feedType == FeedLocalType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
                         }
@@ -490,10 +498,13 @@ typedef enum {
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
-                        if (!_isUserProfile) {
+                        if (_feedType == FeedProfileType) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                        }else{
+                        }else if (_feedType == FeedTribeType) {
+                            //                            [self load];
+                            //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                        }else if (_feedType == FeedLocalType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
                         }
@@ -568,10 +579,8 @@ typedef enum {
 -(void)killViewController:(id)sender{
     
     for (int i = 0; i < [_arrayCell count]; i++) {
-        
         UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
         cell.alpha = 1;
-        
     }
     
     UIViewController *viewController = (UIViewController *) sender;
@@ -618,10 +627,12 @@ typedef enum {
 
 - (void)dealloc{
     
-    if (!_isUserProfile) {
+    if (_feedType == FeedLocalType) {
         NSLog(@"dealloc ActivityScrollViewController Local");
-    }else{
-        NSLog(@"dealloc ActivityScrollViewController User");
+    }else if (_feedType == FeedTribeType){
+        NSLog(@"dealloc ActivityScrollViewController Tribes");
+    }else if (_feedType == FeedProfileType){
+        NSLog(@"dealloc ActivityScrollViewController Profile");
     }
     
 }

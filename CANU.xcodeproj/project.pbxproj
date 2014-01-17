@@ -32,6 +32,8 @@
 		1E3A6B8F18897549007FB6BA /* User_settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B8D18897549007FB6BA /* User_settings@2x.png */; };
 		1E3A6B92188976E1007FB6BA /* User_image_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B90188976E1007FB6BA /* User_image_edit.png */; };
 		1E3A6B93188976E1007FB6BA /* User_image_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B91188976E1007FB6BA /* User_image_edit@2x.png */; };
+		1E3A6B97188993DE007FB6BA /* NavBox_Tribes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B95188993DE007FB6BA /* NavBox_Tribes.png */; };
+		1E3A6B98188993DE007FB6BA /* NavBox_Tribes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B96188993DE007FB6BA /* NavBox_Tribes@2x.png */; };
 		1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */; };
 		1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */; };
 		1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */; };
@@ -297,6 +299,8 @@
 		1E3A6B8D18897549007FB6BA /* User_settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "User_settings@2x.png"; path = "Ressources/Buttons/User_settings@2x.png"; sourceTree = "<group>"; };
 		1E3A6B90188976E1007FB6BA /* User_image_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = User_image_edit.png; path = Ressources/Buttons/User_image_edit.png; sourceTree = "<group>"; };
 		1E3A6B91188976E1007FB6BA /* User_image_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "User_image_edit@2x.png"; path = "Ressources/Buttons/User_image_edit@2x.png"; sourceTree = "<group>"; };
+		1E3A6B95188993DE007FB6BA /* NavBox_Tribes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBox_Tribes.png; sourceTree = "<group>"; };
+		1E3A6B96188993DE007FB6BA /* NavBox_Tribes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBox_Tribes@2x.png"; sourceTree = "<group>"; };
 		1E4F57D5187FFF1100D5F1F4 /* UICanuLabelUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelUserName.h; path = Vendor/UICanuLabel/UICanuLabelUserName.h; sourceTree = "<group>"; };
 		1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelUserName.m; path = Vendor/UICanuLabel/UICanuLabelUserName.m; sourceTree = "<group>"; };
 		1E4F57D8187FFFCA00D5F1F4 /* UICanuLabelDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDay.h; path = Vendor/UICanuLabel/UICanuLabelDay.h; sourceTree = "<group>"; };
@@ -655,6 +659,16 @@
 			path = CANU/Ressources/Shadow;
 			sourceTree = "<group>";
 		};
+		1E3A6B94188993DE007FB6BA /* NavBox */ = {
+			isa = PBXGroup;
+			children = (
+				1E3A6B95188993DE007FB6BA /* NavBox_Tribes.png */,
+				1E3A6B96188993DE007FB6BA /* NavBox_Tribes@2x.png */,
+			);
+			name = NavBox;
+			path = Ressources/NavBox;
+			sourceTree = "<group>";
+		};
 		1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -814,6 +828,7 @@
 		DE4D952317429EF100FB026F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1E3A6B94188993DE007FB6BA /* NavBox */,
 				1EEA97F01859D33500EA9E02 /* Animations */,
 				DE4064E217D51C2A00B11CE9 /* Documents */,
 				DEFD7A891746F79A0087CB8A /* Buttons */,
@@ -1534,6 +1549,7 @@
 				1E9FB9F718619A0400085421 /* loader-7@2x.png in Resources */,
 				DE60782C182BD08D0053F23B /* hello_bg-568h@2x.png in Resources */,
 				1E9FB9F318619A0400085421 /* loader-5@2x.png in Resources */,
+				1E3A6B98188993DE007FB6BA /* NavBox_Tribes@2x.png in Resources */,
 				DE67FE2217CA704F00240E1C /* guide_step_5@2x.png in Resources */,
 				DED1243117CCFDFD000EE414 /* map_pin.png in Resources */,
 				DED1243217CCFDFD000EE414 /* map_pin@2x.png in Resources */,
@@ -1541,6 +1557,7 @@
 				DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */,
 				DE60783C182C007C0053F23B /* Default.png in Resources */,
 				1E9FB9ED18619A0400085421 /* loader-2@2x.png in Resources */,
+				1E3A6B97188993DE007FB6BA /* NavBox_Tribes.png in Resources */,
 				DE5599C0183E154E00FE32E9 /* chat_cell.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

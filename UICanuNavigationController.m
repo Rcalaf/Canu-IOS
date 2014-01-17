@@ -52,7 +52,7 @@ typedef enum {
         NSLog(@"Init UICanuNavigationController");
         self.unknowDirection = YES;
         
-        self.tribesIsEnable = NO;
+        self.tribesIsEnable = YES;
         
         self.panIsDetect = NO;
         
@@ -231,10 +231,16 @@ typedef enum {
             
             if (positionToBottom < AreaLocal) {
                 NSLog(@"Null");
+                NewActivityViewController *nac = [[NewActivityViewController alloc] init];
+                [self presentViewController:nac animated:YES completion:nil];
             }else if (positionToBottom > AreaLocal && positionToBottom < AreaTribes) {
                 NSLog(@"Local");
+                NewActivityViewController *nac = [[NewActivityViewController alloc] init];
+                [self presentViewController:nac animated:YES completion:nil];
             }else if (positionToBottom > AreaLocal){
                 NSLog(@"Tribes");
+                NewActivityViewController *nac = [[NewActivityViewController alloc] init];
+                [self presentViewController:nac animated:YES completion:nil];
             }
             
         }else{
@@ -368,11 +374,11 @@ typedef enum {
         }
         
         if (value == 0) {
-            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local"]];
         }else if (value == 0.5){
-            
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Tribes"]];
         }else if (value == 1){
-            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me"]];
         }
         
         [UIView animateWithDuration:duration animations:^{

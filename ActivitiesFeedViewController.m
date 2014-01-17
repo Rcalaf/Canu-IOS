@@ -20,9 +20,9 @@
 
 @interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
-@property (nonatomic) UIView *wrapper;
 @property (nonatomic) User *user;
 @property (nonatomic) ActivityScrollViewController *localFeed;
+@property (nonatomic) ActivityScrollViewController *tribeFeed;
 @property (nonatomic) ActivityScrollViewController *profilFeed;
 @property (nonatomic) UIProfileView *profileView;
 @property (nonatomic) AppDelegate *appDelegate;
@@ -31,18 +31,32 @@
 
 @implementation ActivitiesFeedViewController 
 
--(void)loadView
+- (void)loadView{
+    
+    CGSize result = [[UIScreen mainScreen] bounds].size;
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, result.width, result.height)];
+    view.backgroundColor = [UIColor clearColor];
+    self.view = view;
+    
+}
+
+- (void)viewDidLoad
 {
-    [super loadView];
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Local Feed"];
+    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    self.appDelegate.oldScreenName = @"Local Feed";
+    
     self.view.backgroundColor = backgroundColorView;
     NSLog(@"Init ActivitiesFeedViewController");
     self.navigationController.navigationBarHidden = YES;
     
     self.appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.user = _appDelegate.user;
-    
-    self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 640, self.view.frame.size.height)];
-    [self.view addSubview:_wrapper];
     
     self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 119)];
     [self.view addSubview:_profileView.mask];
@@ -54,13 +68,17 @@
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
     [_profileView.profileImage addGestureRecognizer:tapRecognizer];
     
-    self.localFeed = [[ActivityScrollViewController alloc] initForUserProfile:NO andUser:_user andFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.localFeed = [[ActivityScrollViewController alloc] initFor:FeedLocalType andUser:_user andFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self addChildViewController:_localFeed];
-    [self.wrapper addSubview:_localFeed.view];
+    [self.view addSubview:_localFeed.view];
     
-    self.profilFeed = [[ActivityScrollViewController alloc] initForUserProfile:YES andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
+    self.tribeFeed = [[ActivityScrollViewController alloc] initFor:FeedTribeType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
+    [self addChildViewController:_tribeFeed];
+    [self.view addSubview:_tribeFeed.view];
+    
+    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(640, 0, 320, self.view.frame.size.height)];
     [self addChildViewController:_profilFeed];
-    [self.wrapper addSubview:_profilFeed.view];
+    [self.view addSubview:_profilFeed.view];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadActivity) name:@"reloadActivity" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLocal) name:@"reloadLocal" object:nil];
@@ -69,9 +87,19 @@
 }
 
 - (void)changePosition:(float)position{
-    self.wrapper.frame = CGRectMake( - position * 320, 0, 640, self.wrapper.frame.size.height);
-    self.localFeed.view.alpha = 1 - position;
-    self.profilFeed.view.alpha = position;
+    
+    self.localFeed.view.frame = CGRectMake( - position * 640, 0, 320, self.view.frame.size.height);
+    self.tribeFeed.view.frame = CGRectMake( - ( position - 0.5f ) * 640, 0, 320, self.view.frame.size.height);
+    self.profilFeed.view.frame = CGRectMake( - ( position - 1.0f ) * 640, 0, 320, self.view.frame.size.height);
+    
+    float alphaTribes = position * 2;
+    if (alphaTribes > 1) {
+        alphaTribes = alphaTribes - 2 * (alphaTribes - 1);
+    }
+    
+    self.localFeed.view.alpha = 1 - position * 2;
+    self.tribeFeed.view.alpha = alphaTribes;
+    self.profilFeed.view.alpha = position * 2 -1;
     
     if (position == 0) {
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -98,7 +126,7 @@
         [self showHideProfile];
     }
     
-    self.wrapper.userInteractionEnabled = value;
+//    self.wrapper.userInteractionEnabled = value;
 }
 
 - (void)reloadActivity{
@@ -184,30 +212,6 @@
     }];
     
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"Local Feed"];
-    [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    self.appDelegate.oldScreenName = @"Local Feed";
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    self.profilFeed.view.frame = CGRectMake(320, 0, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    self.profilFeed.view.frame = CGRectMake(320, 0, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    self.profilFeed.view.frame = CGRectMake(320, 0, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
