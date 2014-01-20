@@ -92,6 +92,10 @@ typedef enum {
         self.feedbackMessage.alpha                       = 0;
         [self.view addSubview:self.feedbackMessage];
         
+        if (_feedType == FeedTribeType) {
+            [self showFeedback];
+        }
+        
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
         [self.loaderAnimation startAnimation];
         [self.view addSubview:_loaderAnimation];
@@ -181,13 +185,20 @@ typedef enum {
             
             [self.navigation changePosition:value];
             
+            if (self.isEmpty) {
+                self.imageEmptyFeed.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+            }
+            
         } else {
+            
             [self.navigation changePosition:0];
-        }
-        
-        if (self.isEmpty) {
-            self.imageEmptyFeed.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2, 320, 480);
-            self.feedbackMessage.frame = CGRectMake(40.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+            
+            if (self.isEmpty) {
+                self.imageEmptyFeed.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+            }
+            
         }
         
     }

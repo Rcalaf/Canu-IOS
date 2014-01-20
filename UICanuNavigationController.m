@@ -186,6 +186,7 @@ typedef enum {
         if (_verticalDirection) {
             _control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl, _control.frame.size.width, _control.frame.size.height);
         }else{
+            
             float horizontalPosition = location.x;
             
             if (horizontalPosition < NavBoxLocal) {
@@ -264,44 +265,44 @@ typedef enum {
         
         if (_tribesIsEnable) {
             
-            if (fabs(_velocity) > 1000) {
+            if (fabs(_velocity) > 500) {
                 
                 duration = 0.2f;
                 
                 if (_velocity > 0) {
                     
                     if (_naveboxPosition == NavBoxLocal) {
-                        _naveboxPosition = NavBoxTribes;
-                        value = 0.5;
+                        if (_control.frame.origin.x < NavBoxTribes + 30.f) {
+                            _naveboxPosition = NavBoxTribes;
+                            value = 0.5;
+                        } else {
+                            _naveboxPosition = NavBoxProfil;
+                            value = 1;
+                        }
                     }else if (_naveboxPosition == NavBoxTribes) {
                         _naveboxPosition = NavBoxProfil;
                         value = 1;
                     }else{
-                        if (_naveboxPosition == NavBoxProfil) {
-                            value = 1;
-                        }else if (_naveboxPosition == NavBoxTribes) {
-                            value = 0.5;
-                        }else if (_naveboxPosition == NavBoxLocal) {
-                            value = 0;
-                        }
+                        _naveboxPosition = NavBoxProfil;
+                        value = 1;
                     }
                     
                 }else{
                     
                     if (_naveboxPosition == NavBoxProfil) {
-                        _naveboxPosition = NavBoxTribes;
-                        value = 0.5;
+                        if (_control.frame.origin.x > NavBoxTribes - 30.f) {
+                            _naveboxPosition = NavBoxTribes;
+                            value = 0.5;
+                        } else {
+                            _naveboxPosition = NavBoxLocal;
+                            value = 0;
+                        }
                     }else if (_naveboxPosition == NavBoxTribes) {
                         _naveboxPosition = NavBoxLocal;
                         value = 0;
                     }else{
-                        if (_naveboxPosition == NavBoxProfil) {
-                            value = 1;
-                        }else if (_naveboxPosition == NavBoxTribes) {
-                            value = 0.5;
-                        }else if (_naveboxPosition == NavBoxLocal) {
-                            value = 0;
-                        }
+                        _naveboxPosition = NavBoxLocal;
+                        value = 0;
                     }
                     
                 }
@@ -325,7 +326,7 @@ typedef enum {
             
         }else{
             
-            if (fabs(_velocity) > 1000) {
+            if (fabs(_velocity) > 500) {
                 
                 duration = 0.2f;
                 
