@@ -21,6 +21,8 @@ typedef enum {
 @interface ActivityScrollViewController : UIViewController<UICanuActivityCellScrollDelegate>
 
 @property (strong, nonatomic) NSArray *activities;
+@property (nonatomic) BOOL isEmpty;
+@property (retain) id delegate;
 
 - (void)reload;
 
@@ -28,4 +30,11 @@ typedef enum {
 
 - (void)removeAfterlogOut;
 
+@end
+
+@protocol ActivityScrollViewControllerDelegate <NSObject>
+
+@required
+- (void)activityScrollViewControllerStartWithEmptyFeed;
+- (void)activityScrollViewControllerChangementFeed;
 @end

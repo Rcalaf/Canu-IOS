@@ -143,11 +143,14 @@ float oldValue;
                                                           }
                                                       }
                                                   } else {
-                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                      
                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                       
                                                       id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                                                       [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Save" value:nil] build]];
+                                                      
+                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                      
                                                   }
                                                   [self operationInProcess:NO];
                                               }];
@@ -179,11 +182,13 @@ float oldValue;
                                                       }
                                                     
                                                   } else {
-                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                      
                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                       
                                                       id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                                                       [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Save" value:nil] build]];
+                                                      
+                                                      [self dismissViewControllerAnimated:YES completion:nil];
                                                       
                                                   }
                                                   [self operationInProcess:NO];

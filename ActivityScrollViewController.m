@@ -33,8 +33,8 @@ typedef enum {
 @interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate>
 
 @property (nonatomic) FeedTypes feedType;
+@property (nonatomic) UIImageView *imageEmptyFeed;
 @property (nonatomic) UITextView *feedbackMessage;
-@property (nonatomic, readonly) NSArray *quotes;
 @property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (nonatomic) UIScrollViewReverse *scrollview;
@@ -49,9 +49,6 @@ typedef enum {
 
 @implementation ActivityScrollViewController
 
-@synthesize activities = _activities;
-@synthesize quotes = _quotes;
-@synthesize currentLocation = _currentLocation;
 @synthesize locationManager = _locationManager;
 
 - (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame{
@@ -64,13 +61,10 @@ typedef enum {
         
         if (_feedType == FeedLocalType) {
             NSLog(@"init ActivityScrollViewController Local");
-//            self.view.backgroundColor = [UIColor redColor];
-        }else if (_feedType == FeedTribeType){
+        } else if (_feedType == FeedTribeType) {
             NSLog(@"init ActivityScrollViewController Tribes");
-//            self.view.backgroundColor = [UIColor blueColor];
-        }else if (_feedType == FeedProfileType){
+        } else if (_feedType == FeedProfileType) {
             NSLog(@"init ActivityScrollViewController Profile");
-//            self.view.backgroundColor = [UIColor greenColor];
         }
         
         self.user = user;
@@ -79,20 +73,24 @@ typedef enum {
         
         self.isFirstTime = YES;
         
+        self.isEmpty = YES;
+        
         [self.locationManager startUpdatingLocation];
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
-        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(60.0f, 70.0f, 200.0f, 340.0f)];
-        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:25.0];
-        self.feedbackMessage.textColor                   = [UIColor colorWithRed:28.0f/255.0f green:165.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
+        self.imageEmptyFeed = [[UIImageView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480)];
+        self.imageEmptyFeed.alpha = 0;
+        [self.view addSubview:_imageEmptyFeed];
+        
+        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(40.0f, (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f)];
+        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:19.0];
+        self.feedbackMessage.textColor                   = [UIColor whiteColor];
         self.feedbackMessage.allowsEditingTextAttributes = NO;
         self.feedbackMessage.textAlignment               = NSTextAlignmentCenter;
-        self.feedbackMessage.backgroundColor             = self.view.backgroundColor;
+        self.feedbackMessage.backgroundColor             = [UIColor clearColor];
         self.feedbackMessage.alpha                       = 0;
         [self.view addSubview:self.feedbackMessage];
-        
-        [self showFeedback];
         
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
         [self.loaderAnimation startAnimation];
@@ -106,47 +104,11 @@ typedef enum {
     return self;
 }
 
-- (NSArray *)quotes{
-    if (!_quotes) {
-        if (_feedType == FeedLocalType) {
-            _quotes = [NSArray arrayWithObjects:@"Where are you living? Move to a better place where people do stuff.",
-                       @"Are you that guy who lives in the forest? Unfortunately the animal version of CANU is not ready.",
-                       @"Get the people in your area going, obviously they can't do anything themselves.",
-                       @"Seriously, you are in a boring city. You are the only one who can change this!",
-                       @"Are you on the moon? There is definitely not much going on around you.",
-                       @"Looks like you are the only one alive. Time to change this!",
-                       @"You are the first to reach America. Conquer this land with your friends.",
-                       @"Don’t wait for for someone to kick your butt. Kick others - create!",
-                       @"\"We have nothing to do\". - The bored people around you",
-                       @"Why do you even live in this town if nothing is happening here?", nil];
-        }else if (_feedType == FeedTribeType){
-            _quotes = [NSArray arrayWithObjects:@"Tribes,\n Coming soon.", nil];
-        }else if (_feedType == FeedProfileType){
-            _quotes = [NSArray arrayWithObjects:@"Why are you sitting on the bench all alone? Invite people to join you.",
-                       @"It’s a lovely day to get together for some boxing.",
-                       @"Your city is doing fun things. Just offer everyone something really boring this time.",
-                       @"Time to predict the future. How about cutting grass in the park?",
-                       @"Your city is doing boring stuff? Just offer them something they never thought of.",
-                       @"If you came here to check out some photos from last night. This is not the place. How about a new night out?",
-                       @"I don’t like us spending this much time together, please create an activity and do something. - Your phone.",
-                       @"Whats on your bucket list? Go do some of these things today with others!",
-                       @"Stop thinking about what your friends did yesterday, just get together again today.",
-                       @"Come on... Just go fishing.",
-                       @"Whats the craziest thing you've ever done? Do it again.",
-                       @"Maybe grab a beer at the zoo? How about a snowball fight?", nil];
-        }
-        
-    }
-    return _quotes;
-}
-
 - (UICanuNavigationController *)navigation{
     
     if (!_navigation) {
-        
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         _navigation = appDelegate.canuViewController;
-        
     }
     
     return  _navigation;
@@ -154,14 +116,13 @@ typedef enum {
 }
 
 - (CLLocationManager *)locationManager{
-    if (_locationManager != nil) {
-        _locationManager.delegate = self;
+    if (_locationManager) {
         return _locationManager;
     }
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
-    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    _locationManager.distanceFilter=200;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 200;
     
     return _locationManager;
 }
@@ -185,6 +146,7 @@ typedef enum {
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     NSLog(@"loc manager Fail...");
+    [self showFeedback];
     [self.loaderAnimation stopAnimation];
 }
 
@@ -202,11 +164,12 @@ typedef enum {
     [self.loaderAnimation contentOffset:newY];
     
     if (!_isReload) {
+        
         if (newY < 0) {
             
-            newY = fabsf(newY);
-            
             float value = 0,start = 0,end = 50;
+            
+            newY = fabsf(newY);
             
             if (newY > start && newY <= end) {
                 value = (newY - start) / (end - start);
@@ -218,9 +181,15 @@ typedef enum {
             
             [self.navigation changePosition:value];
             
-        }else{
+        } else {
             [self.navigation changePosition:0];
         }
+        
+        if (self.isEmpty) {
+            self.imageEmptyFeed.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2, 320, 480);
+            self.feedbackMessage.frame = CGRectMake(40.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+        }
+        
     }
     
 }
@@ -256,6 +225,8 @@ typedef enum {
 
 - (void)load{
     
+    BOOL isEmptyBefore = self.isEmpty;
+    
     if (_feedType == FeedLocalType) {
         
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
@@ -273,11 +244,19 @@ typedef enum {
                 
             }
             
+            if (isEmptyBefore != self.isEmpty) {
+                [self.delegate activityScrollViewControllerChangementFeed];
+            }
+            
             if (_isReload) {
                 
                 [UIView animateWithDuration:0.4 animations:^{
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                    }
                 } completion:^(BOOL finished) {
                     [self.loaderAnimation stopAnimation];
                     
@@ -293,7 +272,6 @@ typedef enum {
     }else if(_feedType == FeedTribeType){
             
             [self.loaderAnimation stopAnimation];
-            
         
     }else if(_feedType == FeedProfileType){
         
@@ -316,11 +294,19 @@ typedef enum {
                 
             }
             
+            if (isEmptyBefore != self.isEmpty) {
+                [self.delegate activityScrollViewControllerChangementFeed];
+            }
+            
             if (_isReload) {
                 
                 [UIView animateWithDuration:0.4 animations:^{
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                    }
                 } completion:^(BOOL finished) {
                     
                     [self.loaderAnimation stopAnimation];
@@ -337,25 +323,42 @@ typedef enum {
 }
 
 - (void)showFeedback{
-    
-    NSInteger r = arc4random()%[self.quotes count];
-    
+    NSLog(@"FeedBack");
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        self.activities = @[];
+        self.isEmpty = YES;
+        self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
+        self.imageEmptyFeed.alpha = 0;
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
         } completion:nil];
         [self showActivities];
-        self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
     } else if ([_activities count] == 0){
-        self.feedbackMessage.text = [_quotes objectAtIndex:r];
+        self.isEmpty = YES;
+        if (_feedType == FeedLocalType) {
+            self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_local"];
+            self.feedbackMessage.text = NSLocalizedString(@"There isn't much happening around you", nil);
+        } else if (_feedType == FeedTribeType){
+            self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_tribes"];
+            self.feedbackMessage.text = NSLocalizedString(@"Your friends seem asleep", nil);
+        } else if (_feedType == FeedProfileType){
+            self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_profile"];
+            self.feedbackMessage.text = NSLocalizedString(@"Looks like you have plenty of spare time", nil);
+        }
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
+            self.imageEmptyFeed.alpha = 1;
         } completion:nil];
+        [self showActivities];
     } else {
+        self.isEmpty = NO;
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 0;
+            self.imageEmptyFeed.alpha = 0;
         } completion:nil];
+    }
+    
+    if (self.isEmpty && _feedType == FeedLocalType) {
+        [self.delegate activityScrollViewControllerStartWithEmptyFeed];
     }
     
 }

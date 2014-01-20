@@ -4,6 +4,38 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Activity_Empty_feed_Bakground.png</key>
+		<data>
+		naj6imT33wWuQLGjahJuOueUCD8=
+		</data>
+		<key>Activity_Empty_feed_Bakground@2x.png</key>
+		<data>
+		229BTF3FOTVOcjHDlOIQhj68QcM=
+		</data>
+		<key>Activity_Empty_feed_illustration_local.png</key>
+		<data>
+		hjrGKhmtEa3rP/rA9nuju1oWSUQ=
+		</data>
+		<key>Activity_Empty_feed_illustration_local@2x.png</key>
+		<data>
+		kderFOSXH+1it7n+utHzweZUn/k=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile.png</key>
+		<data>
+		Q75/y8m2VCGTnqEvCcgJKVFpf7c=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile@2x.png</key>
+		<data>
+		43Twm37epHCbOH0vMTC93Bch0KI=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes.png</key>
+		<data>
+		Xl/Q1RSNUD0qrGuyZCoYFe/X2Yw=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes@2x.png</key>
+		<data>
+		kozJWJFSNE8aXnLQaOxguoZ+Dek=
+		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
 		wIhTIrL91MPb7ho5LuHkBXNw2Ds=
@@ -274,7 +306,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		gKBEdd95f3yn1kQ5Yt41f7XyfP8=
+		lOSNtZkIkNVp34iZFljHHN1RftQ=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -807,6 +839,38 @@
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Activity_Empty_feed_Bakground.png</key>
+		<data>
+		naj6imT33wWuQLGjahJuOueUCD8=
+		</data>
+		<key>Activity_Empty_feed_Bakground@2x.png</key>
+		<data>
+		229BTF3FOTVOcjHDlOIQhj68QcM=
+		</data>
+		<key>Activity_Empty_feed_illustration_local.png</key>
+		<data>
+		hjrGKhmtEa3rP/rA9nuju1oWSUQ=
+		</data>
+		<key>Activity_Empty_feed_illustration_local@2x.png</key>
+		<data>
+		kderFOSXH+1it7n+utHzweZUn/k=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile.png</key>
+		<data>
+		Q75/y8m2VCGTnqEvCcgJKVFpf7c=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile@2x.png</key>
+		<data>
+		43Twm37epHCbOH0vMTC93Bch0KI=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes.png</key>
+		<data>
+		Xl/Q1RSNUD0qrGuyZCoYFe/X2Yw=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes@2x.png</key>
+		<data>
+		kozJWJFSNE8aXnLQaOxguoZ+Dek=
+		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
 		wIhTIrL91MPb7ho5LuHkBXNw2Ds=
@@ -1077,7 +1141,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		gKBEdd95f3yn1kQ5Yt41f7XyfP8=
+		lOSNtZkIkNVp34iZFljHHN1RftQ=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
