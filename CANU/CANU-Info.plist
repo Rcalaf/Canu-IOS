@@ -44,7 +44,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lato-RegIta.ttf</string>
+		<string>Lato-BolIta.ttf</string>
 		<string>Lato-Bol.ttf</string>
+		<string>Lato-LigIta.ttf</string>
 		<string>Lato-Reg.ttf</string>
 	</array>
 	<key>UIPrerenderedIcon</key>

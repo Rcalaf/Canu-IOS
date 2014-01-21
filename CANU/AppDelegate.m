@@ -15,6 +15,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "AFCanuAPIClient.h"
+#import <Instabug/Instabug.h>
 
 NSString *const FBSessionStateChangedNotification =
 @"se.canu.canu:FBSessionStateChangedNotification";
@@ -75,6 +76,11 @@ NSString *const FBSessionStateChangedNotification =
         NSLog(@"//////// WARNING ////////");
         NSLog(@"DISTRIBUTION MODE ENABLE");
         NSLog(@"//////// WARNING ////////");
+    }
+    
+    [Instabug KickOffWithToken:@"c44d12a703b04a0a5e797bba7452c9d5" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:YES];
+    if (self.user) {
+        [Instabug setEmail:self.user.email];
     }
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];

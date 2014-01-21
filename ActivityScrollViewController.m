@@ -32,17 +32,18 @@ typedef enum {
 
 @interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate>
 
-@property (nonatomic) FeedTypes feedType;
-@property (nonatomic) UIImageView *imageEmptyFeed;
-@property (nonatomic) UITextView *feedbackMessage;
-@property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
-@property (nonatomic, readonly) CLLocationManager *locationManager;
-@property (nonatomic) UIScrollViewReverse *scrollview;
-@property (nonatomic) NSMutableArray *arrayCell;
-@property (nonatomic) LoaderAnimation *loaderAnimation;
-@property (nonatomic) User *user;
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
+@property (nonatomic) NSMutableArray *arrayCell;
+@property (nonatomic) UIImageView *imageEmptyFeed;
+@property (nonatomic) UITextView *feedbackMessage;
+@property (strong, nonatomic) UIButton *callBackActionEmptyFeed;
+@property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
+@property (nonatomic, readonly) CLLocationManager *locationManager;
+@property (nonatomic) User *user;
+@property (nonatomic) FeedTypes feedType;
+@property (nonatomic) UIScrollViewReverse *scrollview;
+@property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) UICanuNavigationController *navigation;
 
 @end
@@ -92,9 +93,11 @@ typedef enum {
         self.feedbackMessage.alpha                       = 0;
         [self.view addSubview:self.feedbackMessage];
         
+        // To delete after implementation Tribes
         if (_feedType == FeedTribeType) {
             [self showFeedback];
         }
+        ///////////
         
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
         [self.loaderAnimation startAnimation];
@@ -103,6 +106,16 @@ typedef enum {
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
+        
+        self.callBackActionEmptyFeed = [[UIButton alloc]initWithFrame:CGRectMake(65, (self.view.frame.size.height - 480)/2 + 350, 190, 37)];
+        self.callBackActionEmptyFeed.backgroundColor = UIColorFromRGB(0x20383f);
+        [self.callBackActionEmptyFeed setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"I want to change this", nil) forState:UIControlStateNormal];
+        self.callBackActionEmptyFeed.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
+        [self.callBackActionEmptyFeed addTarget:self action:@selector(callBackAction) forControlEvents:UIControlEventTouchDown];
+        self.callBackActionEmptyFeed.alpha = 0;
+        self.callBackActionEmptyFeed.hidden = YES;
+        [self.view addSubview:_callBackActionEmptyFeed];
     
     }
     return self;
@@ -334,11 +347,12 @@ typedef enum {
 }
 
 - (void)showFeedback{
-    NSLog(@"FeedBack");
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         self.isEmpty = YES;
         self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
         self.imageEmptyFeed.alpha = 0;
+        self.callBackActionEmptyFeed.alpha = 0;
+        self.callBackActionEmptyFeed.hidden = YES;
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
         } completion:nil];
@@ -355,9 +369,11 @@ typedef enum {
             self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_profile"];
             self.feedbackMessage.text = NSLocalizedString(@"Looks like you have plenty of spare time", nil);
         }
+        self.callBackActionEmptyFeed.hidden = NO;
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
             self.imageEmptyFeed.alpha = 1;
+            self.callBackActionEmptyFeed.alpha = 1;
         } completion:nil];
         [self showActivities];
     } else {
@@ -365,7 +381,10 @@ typedef enum {
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 0;
             self.imageEmptyFeed.alpha = 0;
-        } completion:nil];
+            self.callBackActionEmptyFeed.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.callBackActionEmptyFeed.hidden = YES;
+        }];
     }
     
     if (self.isEmpty && _feedType == FeedLocalType) {
@@ -587,6 +606,13 @@ typedef enum {
     }
     
     [self performSelector:@selector(killViewController:) withObject:viewController afterDelay:0.4];
+    
+}
+
+- (void)callBackAction{
+    
+    NewActivityViewController *nac = [[NewActivityViewController alloc] init];
+    [self presentViewController:nac animated:YES completion:nil];
     
 }
 

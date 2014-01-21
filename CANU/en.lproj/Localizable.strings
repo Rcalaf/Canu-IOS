@@ -40,7 +40,28 @@
 "Welcome Back" = "Welcome Back";
 "Forgot password" = "Forgot password";
 
-// Feed
+//Feed
+
 "Looks like you have plenty of spare time" = "Looks like you have plenty of spare time";
 "Your friends seem asleep" = "Your friends seem asleep";
 "There isn't much happening around you" = "There isn't much happening around you";
+"I want to change this" = "I want to change this";
+
+//Tutorial
+
+//Start
+"Welcome" = "Welcome";
+"Let’s see where in the app your upcoming activities are." = "Let’s see where in the app your upcoming activities are.";
+
+//Local
+"These are activities where you and everyone around is invited." = "These are activities where you and everyone around is invited.";
+"Move the white box to the right" = "Move the white box to the right";
+"Move" = "Move";
+
+//Tribes
+"These are activities your friends don’t want you to miss." = "These are activities your friends don’t want you to miss.";
+
+//Profile
+"These are the activities you are going to." = "These are the activities you are going to.";
+"Tap the white box" = "Tap the white box";
+"Tap" = "Tap";

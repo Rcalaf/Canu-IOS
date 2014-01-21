@@ -34,4 +34,5 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAILogger.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAITracker.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAITrackedViewController.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAIDictionaryBuilder.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/Google\ Analytics/GAIDictionaryBuilder.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Instabug/Instabug.framework/Headers/Instabug.h

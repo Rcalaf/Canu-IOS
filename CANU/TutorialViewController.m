@@ -2,244 +2,184 @@
 //  TutorialViewController.m
 //  CANU
 //
-//  Created by Roger Calaf on 25/08/13.
-//  Copyright (c) 2013 CANU. All rights reserved.
+//  Created by Vivien Cormier on 20/01/14.
+//  Copyright (c) 2014 CANU. All rights reserved.
 //
 
+typedef enum {
+    NavBoxLocal = 2,
+    NavBoxTribes = 129,
+    NavBoxProfil = 255,
+} NavBoxPosition;
+
 #import "TutorialViewController.h"
-#import "AppDelegate.h"
 
-@interface TutorialViewController () <UIGestureRecognizerDelegate>
+#import "TutorialStepStart.h"
+#import "TutorialStepLocal.h"
+#import "TutorialStepTribes.h"
+#import "TutorialStepProfile.h"
 
-@property (strong, nonatomic) UIView *navView;
-@property (strong, nonatomic) UIButton *runTutorialButton;
-@property (strong, nonatomic) UIButton *skipTutorialButton;
-@property (strong, nonatomic) UIButton *doneTutorialButton;
+@interface TutorialViewController () <TutorialStepStartDelegate>
 
+@property (strong, nonatomic) UIView *wrapperStep;
+@property (strong, nonatomic) UIImageView *line;
+@property (strong, nonatomic) UIImageView *navBox;
+@property (strong, nonatomic) TutorialStepStart *tutorialStepStart;
+@property (strong, nonatomic) TutorialStepLocal *tutorialStepLocal;
+@property (strong, nonatomic) TutorialStepTribes *tutorialStepTribes;
+@property (strong, nonatomic) TutorialStepProfile *tutorialStepProfile;
 
 @end
 
+@implementation TutorialViewController
 
-@implementation TutorialViewController{
-    int step;
-}
+#pragma mark - Lifecycle
 
-@synthesize navView = _navView;
-@synthesize runTutorialButton = _runTutorialButton;
-@synthesize doneTutorialButton = _doneTutorialButton;
-@synthesize skipTutorialButton = _skipTutorialButton;
-
-
-- (IBAction)start:(id)sender
-{
-    self.runTutorialButton.hidden = YES;
-    self.runTutorialButton = nil;
-    self.skipTutorialButton.hidden = YES;
-    self.skipTutorialButton = nil;
-    self.navView.hidden = NO;
-    if (IS_IPHONE_5) {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_2-568h.png"]];
-    }else{
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_2.png"]];
-    }
-}
-
-- (IBAction)done:(id)sender
-{
-    //AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
-    //NSLog(@"dismissing!!");
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)showProfile:(UISwipeGestureRecognizer *)gesture{
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navView.frame = CGRectMake(255.0, 395.0 + KIphone5Margin, 63.0, 63.0);
-        self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
-        if (IS_IPHONE_5) {
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_3-568h.png"]];
-        }else{
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_3.png"]];
-        }
-    }];
-    step = 2;
-    [self.navView removeGestureRecognizer:gesture];
-}
-
-- (IBAction)showActivities:(UISwipeGestureRecognizer *)gesture{
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navView.frame = CGRectMake(2.0, 395.0 + KIphone5Margin, 63.0, 63.0);
-        self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
-        if (IS_IPHONE_5) {
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_4-568h.png"]];
-        }else{
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_4.png"]];
-        }
-    }];
-
-    step = 3;
-    
-}
-
-
-
--(IBAction)bounce:(UITapGestureRecognizer *)gesture{
-    [UIView animateWithDuration:.2 animations:^{
-        CGRect frame = _navView.frame;
-        frame.origin.y = 380.0f + KIphone5Margin;
-        _navView.frame = frame;
-    } completion:^(BOOL finished){
-        [UIView animateWithDuration:.2 animations:^{
-            CGRect frame = _navView.frame;
-            frame.origin.y = 400.0f + KIphone5Margin;
-            _navView.frame = frame;
-        }];
-    }];
-}
-
--(IBAction)createActivity:(UIPanGestureRecognizer *)recognizer
-{
-    //  NSLog(@"test action:%@",recognizer);
-    CGPoint location = [recognizer locationInView:self.view];
-    //  NSLog(@"location x:%f",location.x);
-    if (location.y < 400.0f + KIphone5Margin && location.y > 0.0f) {
-        _navView.frame = CGRectMake(_navView.frame.origin.x, location.y, _navView.frame.size.width, _navView.frame.size.height);
-    }
-    
-    if (([recognizer state] == UIGestureRecognizerStateEnded) || ([recognizer state] == UIGestureRecognizerStateCancelled)) {
-        if (_navView.frame.origin.y < 318.0f + KIphone5Margin && step == 3) {
-            self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_5.png"]];
-            _navView.hidden = YES;
-            self.doneTutorialButton.hidden = NO;
-            
-        }
-        [UIView animateWithDuration:0.3 animations:^{
-            _navView.frame = CGRectMake(_navView.frame.origin.x, 395.0 + KIphone5Margin,_navView.frame.size.width, _navView.frame.size.height);
-        }];
-    }
-}
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)loadView
-{
-    step = 1;
+- (void)loadView{
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    if (IS_IPHONE_5) {
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_1-568h.png"]];
-    }else{
-        self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"guide_step_1.png"]];
-    }
-    self.runTutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.runTutorialButton.frame = CGRectMake(80.0f, 362.0f + KIphone5Margin, 160.0f, 37.0f);
-    [self.runTutorialButton setImage:[UIImage imageNamed:@"guide_btn_start.png"] forState:UIControlStateNormal];
-    [self.runTutorialButton addTarget:self action:@selector(start:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.runTutorialButton];
-    self.skipTutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.skipTutorialButton.frame = CGRectMake(80.0f, 410.0f + KIphone5Margin, 160.0f, 37.0f);
-    [self.skipTutorialButton setImage:[UIImage imageNamed:@"guide_btn_skip.png"] forState:UIControlStateNormal];
-    [self.skipTutorialButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.skipTutorialButton];
-    self.doneTutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.doneTutorialButton.frame = CGRectMake(80.0f, 362.0f + KIphone5Margin , 160.0f, 37.0f);
-    [self.doneTutorialButton setImage:[UIImage imageNamed:@"guide_btn_gotit.png"] forState:UIControlStateNormal];
-    [self.doneTutorialButton addTarget:self action:@selector(done:) forControlEvents:UIControlEventTouchUpInside];
-    self.doneTutorialButton.hidden = YES;
-    [self.view addSubview:self.doneTutorialButton];
-    //[self.view setUserInteractionEnabled:YES];
-    self.navView = [[UIView alloc] initWithFrame:CGRectMake(2.0, 395.0 + KIphone5Margin, 63.0, 63.0)];
-    self.navView.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
-    self.navView.hidden = YES;
-    [self.view addSubview:self.navView];
-    
+    self.view.backgroundColor = backgroundColorView;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
-    UISwipeGestureRecognizer *goProfileGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showProfile:)];
-    goProfileGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    self.wrapperStep = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.view addSubview:_wrapperStep];
     
-    UISwipeGestureRecognizer *goActivitiesGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showActivities:)];
-    goActivitiesGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    self.line = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 480, 320, 480)];
+    self.line.alpha = 0;
+    [self.view addSubview:_line];
     
-    UIPanGestureRecognizer *createActivityGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(createActivity:)];
-    createActivityGesture.delegate = self;
-
-    UITapGestureRecognizer *bounceNavGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bounce:)];
+    UISwipeGestureRecognizer *swipeTribes = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(stepTribes:)];
+    swipeTribes.direction = UISwipeGestureRecognizerDirectionRight;
     
-    [_navView addGestureRecognizer:goProfileGesture];
-    [_navView addGestureRecognizer:goActivitiesGesture];
-    [_navView addGestureRecognizer:bounceNavGesture];
-    [_navView addGestureRecognizer:createActivityGesture];
+    self.navBox = [[UIImageView alloc]initWithFrame:CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0)];
+    self.navBox.image = [UIImage imageNamed:@"navmenu_local.png"];
+    self.navBox.alpha = 0;
+    self.navBox.userInteractionEnabled = YES;
+    [self.navBox addGestureRecognizer:swipeTribes];
+    [self.view addSubview:_navBox];
     
-    
-	// Do any additional setup after loading the view.
+    [NSThread detachNewThreadSelector:@selector(stepStart) toTarget:self withObject:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
+#pragma mark - Private
+
+- (void)stepStart{
+    self.tutorialStepStart = [[TutorialStepStart alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.tutorialStepStart.delegate = self;
+    self.tutorialStepStart.alpha = 0;
+    [self.wrapperStep addSubview:_tutorialStepStart];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.tutorialStepStart.alpha = 1;
+    } completion:nil];
+    
 }
 
-#define SWIPE_UP_THRESHOLD -1000.0f
-#define SWIPE_DOWN_THRESHOLD 1000.0f
-#define SWIPE_LEFT_THRESHOLD -1000.0f
-#define SWIPE_RIGHT_THRESHOLD 1000.0f
-
-- (void)handlePanSwipe:(UIPanGestureRecognizer*)recognizer
-{
-    // Get the translation in the view
-    CGPoint t = [recognizer translationInView:recognizer.view];
-    [recognizer setTranslation:CGPointZero inView:recognizer.view];
+- (void)stepLocal{
     
-    // TODO: Here, you should translate your target view using this translation
-    _navView.center = CGPointMake(_navView.center.x + t.x, _navView.center.y + t.y);
-    
-    // But also, detect the swipe gesture
-    if (recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        CGPoint vel = [recognizer velocityInView:recognizer.view];
+    [UIView animateWithDuration:0.4 animations:^{
+        self.view.backgroundColor = UIColorFromRGB(0x84d0d4);
+    } completion:^(BOOL finished) {
+        [self.tutorialStepStart removeFromSuperview];
+        self.tutorialStepStart = nil;
         
-        if (vel.x < SWIPE_LEFT_THRESHOLD)
-        {
-            // TODO: Detected a swipe to the left
-        }
-        else if (vel.x > SWIPE_RIGHT_THRESHOLD)
-        {
-            // TODO: Detected a swipe to the right
-        }
-        else if (vel.y < SWIPE_UP_THRESHOLD)
-        {
-            // TODO: Detected a swipe up
-        }
-        else if (vel.y > SWIPE_DOWN_THRESHOLD)
-        {
-            // TODO: Detected a swipe down
-        }
-        else
-        {
-            // TODO:
-            // Here, the user lifted the finger/fingers but didn't swipe.
-            // If you need you can implement a snapping behaviour, where based on the location of your         targetView,
-            // you focus back on the targetView or on some next view.
-            // It's your call
-        }
-    }
+        self.tutorialStepLocal = [[TutorialStepLocal alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+        [self.wrapperStep addSubview:_tutorialStepLocal];
+        
+        self.line.image = [UIImage imageNamed:@"Tutorial_Step1_line"];
+        
+        [UIView animateWithDuration:0.4 delay:0.2 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.line.alpha = 1;
+            self.navBox.alpha = 1;
+        } completion:nil];
+    }];
+    
+}
+
+- (void)stepTribes:(UIGestureRecognizer *)sender{
+    
+    [self.tutorialStepLocal animationEnd];
+    
+    self.tutorialStepTribes = [[TutorialStepTribes alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.wrapperStep addSubview:_tutorialStepTribes];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.navBox.frame = CGRectMake(NavBoxTribes, 415.0 + KIphone5Margin, 63.0, 63.0);
+        self.line.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.navBox.image = [UIImage imageNamed:@"NavBox_Tribes"];
+        
+        [self.tutorialStepLocal removeFromSuperview];
+        self.tutorialStepLocal = nil;
+        
+        self.line.image = [UIImage imageNamed:@"Tutorial_Step2_line"];
+        
+        [self.navBox removeGestureRecognizer:sender];
+        
+        UISwipeGestureRecognizer *swipeProfile = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeProfile:)];
+        swipeProfile.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [self.navBox addGestureRecognizer:swipeProfile];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.line.alpha = 1;
+        } completion:nil];
+        
+    }];
+}
+
+- (void)swipeProfile:(UIGestureRecognizer *)sender{
+    
+    [self.tutorialStepTribes animationEnd];
+    
+    self.tutorialStepProfile = [[TutorialStepProfile alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    [self.wrapperStep addSubview:_tutorialStepProfile];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.navBox.frame = CGRectMake(NavBoxProfil, 415.0 + KIphone5Margin, 63.0, 63.0);
+        self.line.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.navBox.image = [UIImage imageNamed:@"navmenu_me"];
+        
+        [self.tutorialStepLocal removeFromSuperview];
+        self.tutorialStepLocal = nil;
+        
+        [self.navBox removeGestureRecognizer:sender];
+        
+        UITapGestureRecognizer *goProfileView = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapProfileView:)];
+        
+        [self.navBox addGestureRecognizer:goProfileView];
+        
+    }];
+    
+}
+
+- (void)tapProfileView:(UIGestureRecognizer *)sender{
+    
+    [self.tutorialStepProfile animationStartProfileView];
+    
+    [self.navBox removeGestureRecognizer:sender];
+    
+}
+
+#pragma mark - TutorialStepStartDelegate
+
+- (void)tutorialStepStartNext{
+    
+    [self.tutorialStepStart removeFromSuperview];
+    self.tutorialStepStart = nil;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.view.backgroundColor = UIColorFromRGB(0x84d0d4);
+    } completion:^(BOOL finished) {
+        [self stepLocal];
+    }];
 }
 
 @end

@@ -29,15 +29,15 @@ typedef enum {
 
 @interface UICanuNavigationController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic) CGPoint oldPositionControl;
 @property (nonatomic) BOOL unknowDirection;
 @property (nonatomic) BOOL verticalDirection;
-@property (nonatomic) NavBoxPosition naveboxPosition;
 @property (nonatomic) BOOL tribesIsEnable;
-@property (nonatomic) float areaSize;
 @property (nonatomic) BOOL panIsDetect;
-@property (nonatomic) float gapTouchControl;
+@property (nonatomic) float areaSize;
 @property (nonatomic) float velocity;
+@property (nonatomic) CGPoint gapTouchControl;
+@property (nonatomic) CGPoint oldPositionControl;
+@property (nonatomic) NavBoxPosition naveboxPosition;
     
 @end
 
@@ -89,38 +89,7 @@ typedef enum {
     
 }
 
-//- (void)goProfile:(UISwipeGestureRecognizer *)gesture{
-//    
-//    NSLog(@"goProfile");
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        _control.frame = CGRectMake(255.0, 415.0 + KIphone5Margin, 63.0, 63.0);
-//    }completion:^(BOOL finished) {
-//        
-//    }];
-//    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    UserProfileViewController *upvc =  appDelegate.feedViewController;
-//    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
-//    [self pushViewController:upvc animated:YES];
-//    
-//}
-//
-//- (void)goActivities:(UISwipeGestureRecognizer *)gesture{
-//    NSLog(@"goActivities");
-//    [UIView animateWithDuration:0.3 animations:^{
-//        _control.frame = CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0);
-//        
-//    }completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    [self popViewControllerAnimated:YES];
-//    
-//    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
-//    
-//}
-
--(void)bounce:(UITapGestureRecognizer *)gesture{
+- (void)bounce:(UITapGestureRecognizer *)gesture{
     
     if (!_panIsDetect) {
         
@@ -147,8 +116,7 @@ typedef enum {
     
 }
 
--(void)swipeControl:(UIPanGestureRecognizer *)recognizer
-{
+- (void)swipeControl:(UIPanGestureRecognizer *)recognizer{
     
     CGPoint location = [recognizer locationInView:self.view];
     
@@ -159,7 +127,7 @@ typedef enum {
         self.oldPositionControl = location;
         self.unknowDirection = YES;
         self.panIsDetect = YES;
-        self.gapTouchControl = location.x - _control.frame.origin.x;
+        self.gapTouchControl = CGPointMake(location.x - _control.frame.origin.x, location.y - _control.frame.origin.y);
         [self.activityFeed userInteractionFeedEnable:NO];
         
     }
@@ -175,7 +143,7 @@ typedef enum {
             
             if (gapHorizontal < gapVertical) {
                 self.verticalDirection = YES;
-            }else{
+            } else {
                 self.verticalDirection = NO;
             }
             
@@ -184,7 +152,7 @@ typedef enum {
         }
         
         if (_verticalDirection) {
-            _control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl, _control.frame.size.width, _control.frame.size.height);
+            _control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl.y, _control.frame.size.width, _control.frame.size.height);
         }else{
             
             float horizontalPosition = location.x;
@@ -195,9 +163,9 @@ typedef enum {
                 horizontalPosition = NavBoxProfil;
             }
             
-            _control.frame = CGRectMake(location.x - _gapTouchControl, 415.0 + KIphone5Margin, _control.frame.size.width, _control.frame.size.height);
+            _control.frame = CGRectMake(location.x - _gapTouchControl.x, 415.0 + KIphone5Margin, _control.frame.size.width, _control.frame.size.height);
             
-            float value = ((location.x - _gapTouchControl) - NavBoxLocal) / (NavBoxProfil - NavBoxLocal);
+            float value = ((location.x - _gapTouchControl.x) - NavBoxLocal) / (NavBoxProfil - NavBoxLocal);
             
             if (value < 0) {
                 value = 0;
@@ -230,15 +198,11 @@ typedef enum {
         
         if (_tribesIsEnable) {
             
-            if (positionToBottom < AreaLocal) {
-                NSLog(@"Null");
-                NewActivityViewController *nac = [[NewActivityViewController alloc] init];
-                [self presentViewController:nac animated:YES completion:nil];
-            }else if (positionToBottom > AreaLocal && positionToBottom < AreaTribes) {
+            if (positionToBottom > AreaLocal && positionToBottom < AreaTribes) {
                 NSLog(@"Local");
                 NewActivityViewController *nac = [[NewActivityViewController alloc] init];
                 [self presentViewController:nac animated:YES completion:nil];
-            }else if (positionToBottom > AreaLocal){
+            } else if (positionToBottom > AreaLocal){
                 NSLog(@"Tribes");
                 NewActivityViewController *nac = [[NewActivityViewController alloc] init];
                 [self presentViewController:nac animated:YES completion:nil];
