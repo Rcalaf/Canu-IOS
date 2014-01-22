@@ -18,8 +18,9 @@ typedef enum {
 #import "TutorialStepLocal.h"
 #import "TutorialStepTribes.h"
 #import "TutorialStepProfile.h"
+#import "TutorialStepFinal.h"
 
-@interface TutorialViewController () <TutorialStepStartDelegate>
+@interface TutorialViewController () <TutorialStepStartDelegate,TutorialStepFinalDelegate>
 
 @property (strong, nonatomic) UIView *wrapperStep;
 @property (strong, nonatomic) UIImageView *line;
@@ -28,6 +29,7 @@ typedef enum {
 @property (strong, nonatomic) TutorialStepLocal *tutorialStepLocal;
 @property (strong, nonatomic) TutorialStepTribes *tutorialStepTribes;
 @property (strong, nonatomic) TutorialStepProfile *tutorialStepProfile;
+@property (strong, nonatomic) TutorialStepFinal *tutorialStepFinal;
 
 @end
 
@@ -166,6 +168,58 @@ typedef enum {
     
     [self.navBox removeGestureRecognizer:sender];
     
+    UITapGestureRecognizer *goProfileView2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapProfileView2:)];
+    
+    [self.navBox addGestureRecognizer:goProfileView2];
+    
+}
+
+- (void)tapProfileView2:(UIGestureRecognizer *)sender{
+    
+    self.line.image = [UIImage imageNamed:@"Tutorial_Step5_line"];
+    
+    [self.tutorialStepProfile animationStartProfileViewDisappear];
+    
+    [self.navBox removeGestureRecognizer:sender];
+    
+    UISwipeGestureRecognizer *goCreate = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeCreate:)];
+    goCreate.direction = UISwipeGestureRecognizerDirectionUp;
+    
+    [self.navBox addGestureRecognizer:goCreate];
+    
+    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+        self.line.alpha = 1;
+    } completion:nil];
+    
+}
+
+- (void)swipeCreate:(UIGestureRecognizer *)sender{
+    
+    [self.navBox removeGestureRecognizer:sender];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.navBox.frame = CGRectMake(NavBoxProfil, 215.0 + KIphone5Margin, 63.0, 63.0);
+        self.line.alpha = 0;
+        self.tutorialStepProfile.alpha = 0;
+        self.navBox.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+        [self.tutorialStepProfile removeFromSuperview];
+        self.tutorialStepProfile = nil;
+        
+        self.tutorialStepFinal = [[TutorialStepFinal alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+        self.tutorialStepFinal.alpha = 0;
+        self.tutorialStepFinal.delegate = self;
+        [self.wrapperStep addSubview:_tutorialStepFinal];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.view.backgroundColor = backgroundColorView;
+            self.tutorialStepFinal.alpha = 1;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+    
 }
 
 #pragma mark - TutorialStepStartDelegate
@@ -180,6 +234,14 @@ typedef enum {
     } completion:^(BOOL finished) {
         [self stepLocal];
     }];
+}
+
+#pragma mark - TutorialStepFinalDelegate
+
+- (void)tutorialStepFinalEnd{
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
 }
 
 @end

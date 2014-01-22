@@ -74,6 +74,11 @@
 		1E7A5694188F1BAD00CB5C4A /* TutorialStepProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A5693188F1BAD00CB5C4A /* TutorialStepProfile.m */; };
 		1E7A5697188F1E4F00CB5C4A /* Tutorial_Step3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A5695188F1E4F00CB5C4A /* Tutorial_Step3.png */; };
 		1E7A5698188F1E4F00CB5C4A /* Tutorial_Step3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A5696188F1E4F00CB5C4A /* Tutorial_Step3@2x.png */; };
+		1E7A569D188FD75B00CB5C4A /* Tutorial_Step5_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A5699188FD75B00CB5C4A /* Tutorial_Step5_line.png */; };
+		1E7A569E188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A569A188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png */; };
+		1E7A569F188FD75B00CB5C4A /* Tutorial_Step5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A569B188FD75B00CB5C4A /* Tutorial_Step5.png */; };
+		1E7A56A0188FD75B00CB5C4A /* Tutorial_Step5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A569C188FD75B00CB5C4A /* Tutorial_Step5@2x.png */; };
+		1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A56A2188FDB7B00CB5C4A /* TutorialStepFinal.m */; };
 		1E814CF9187C495D0013E238 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
 		1E9FB9EC18619A0400085421 /* loader-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C418619A0400085421 /* loader-2.png */; };
@@ -385,6 +390,12 @@
 		1E7A5693188F1BAD00CB5C4A /* TutorialStepProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialStepProfile.m; path = Views/Tutorial/TutorialStepProfile.m; sourceTree = "<group>"; };
 		1E7A5695188F1E4F00CB5C4A /* Tutorial_Step3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tutorial_Step3.png; path = Ressources/Backgrounds/Tutorial_Step3.png; sourceTree = "<group>"; };
 		1E7A5696188F1E4F00CB5C4A /* Tutorial_Step3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tutorial_Step3@2x.png"; path = "Ressources/Backgrounds/Tutorial_Step3@2x.png"; sourceTree = "<group>"; };
+		1E7A5699188FD75B00CB5C4A /* Tutorial_Step5_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tutorial_Step5_line.png; path = Ressources/Backgrounds/Tutorial_Step5_line.png; sourceTree = "<group>"; };
+		1E7A569A188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tutorial_Step5_line@2x.png"; path = "Ressources/Backgrounds/Tutorial_Step5_line@2x.png"; sourceTree = "<group>"; };
+		1E7A569B188FD75B00CB5C4A /* Tutorial_Step5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tutorial_Step5.png; path = Ressources/Backgrounds/Tutorial_Step5.png; sourceTree = "<group>"; };
+		1E7A569C188FD75B00CB5C4A /* Tutorial_Step5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tutorial_Step5@2x.png"; path = "Ressources/Backgrounds/Tutorial_Step5@2x.png"; sourceTree = "<group>"; };
+		1E7A56A1188FDB7B00CB5C4A /* TutorialStepFinal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialStepFinal.h; path = Views/Tutorial/TutorialStepFinal.h; sourceTree = "<group>"; };
+		1E7A56A2188FDB7B00CB5C4A /* TutorialStepFinal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialStepFinal.m; path = Views/Tutorial/TutorialStepFinal.m; sourceTree = "<group>"; };
 		1E814CF2187C495D0013E238 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		1E814CF3187C495D0013E238 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		1E814CF4187C495D0013E238 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
@@ -777,6 +788,8 @@
 				1E608BBF188F141F00BED835 /* TutorialStepTribes.m */,
 				1E7A5692188F1BAD00CB5C4A /* TutorialStepProfile.h */,
 				1E7A5693188F1BAD00CB5C4A /* TutorialStepProfile.m */,
+				1E7A56A1188FDB7B00CB5C4A /* TutorialStepFinal.h */,
+				1E7A56A2188FDB7B00CB5C4A /* TutorialStepFinal.m */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -1048,6 +1061,10 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E7A5699188FD75B00CB5C4A /* Tutorial_Step5_line.png */,
+				1E7A569A188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png */,
+				1E7A569B188FD75B00CB5C4A /* Tutorial_Step5.png */,
+				1E7A569C188FD75B00CB5C4A /* Tutorial_Step5@2x.png */,
 				1E7A5695188F1E4F00CB5C4A /* Tutorial_Step3.png */,
 				1E7A5696188F1E4F00CB5C4A /* Tutorial_Step3@2x.png */,
 				1E608BC1188F150800BED835 /* Tutorial_Step2.png */,
@@ -1537,6 +1554,7 @@
 				DEFD7A7C1746CACA0087CB8A /* icon_password@2x.png in Resources */,
 				1E3A6B92188976E1007FB6BA /* User_image_edit.png in Resources */,
 				DEFD7A7D1746CACA0087CB8A /* icon_username.png in Resources */,
+				1E7A569F188FD75B00CB5C4A /* Tutorial_Step5.png in Resources */,
 				DEFD7A7E1746CACA0087CB8A /* icon_username@2x.png in Resources */,
 				1E9FBA0818619A0400085421 /* loader-16.png in Resources */,
 				DEFD7A7F1746CACA0087CB8A /* icon_userpic.png in Resources */,
@@ -1544,6 +1562,7 @@
 				DE774B3E184E0FDD00F8C244 /* guide_step_3@2x.png in Resources */,
 				DEFD7A801746CACA0087CB8A /* icon_userpic@2x.png in Resources */,
 				DEFD7A851746F7650087CB8A /* feedback_bad.png in Resources */,
+				1E7A56A0188FD75B00CB5C4A /* Tutorial_Step5@2x.png in Resources */,
 				DE60782D182BD08D0053F23B /* hello_bg.png in Resources */,
 				1E9FB9FF18619A0400085421 /* loader-11@2x.png in Resources */,
 				DEFD7A861746F7650087CB8A /* feedback_bad@2x.png in Resources */,
@@ -1635,12 +1654,14 @@
 				1E9FB9FC18619A0400085421 /* loader-10.png in Resources */,
 				DE774B48184E129100F8C244 /* navmenu_me@2x.png in Resources */,
 				1E9FB9F618619A0400085421 /* loader-7.png in Resources */,
+				1E7A569E188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png in Resources */,
 				DE6ED9CD17C3D35000C5E72E /* fullview_bg.png in Resources */,
 				1E9FBA0B18619A0400085421 /* loader-17@2x.png in Resources */,
 				DE6ED9CE17C3D35000C5E72E /* fullview_bg@2x.png in Resources */,
 				1E3A6B8A18896FC1007FB6BA /* User_profile_shadow.png in Resources */,
 				1EEA9865185B5E7400EA9E02 /* feed_shadow_name.png in Resources */,
 				DE51772C184F70DC00690E2F /* create_bg.png in Resources */,
+				1E7A569D188FD75B00CB5C4A /* Tutorial_Step5_line.png in Resources */,
 				DE6ED9DD17C530DA00C5E72E /* attendee_cell.png in Resources */,
 				1E9FBA0F18619A0400085421 /* loop_2@2x.png in Resources */,
 				1E9FBA0118619A0400085421 /* loader-12@2x.png in Resources */,
@@ -1749,6 +1770,7 @@
 				1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */,
 				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
+				1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
 				1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,

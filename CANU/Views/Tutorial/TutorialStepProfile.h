@@ -11,5 +11,6 @@
 @interface TutorialStepProfile : UIView
 
 - (void)animationStartProfileView;
+- (void)animationStartProfileViewDisappear;
 
 @end

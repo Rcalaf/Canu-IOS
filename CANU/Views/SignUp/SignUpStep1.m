@@ -72,9 +72,7 @@
 }
 
 - (void)addUIWebView{
-    
     [self.termsPrivacy loadHTMLString:[NSString stringWithFormat:@"<html><head><style type='text/css'>body,html,p{ margin:0px; padding:0px; background-color:#e8eeee; } p { text-align:center; font-family:\"Lato-Regular\"; font-size:9px; color: #1ca6c3;} a{ color:#ff0000; } a{ color:#1ca6c3; }</style></head><body><p>%@ <a href='http://terms/'>%@</a> %@ <a href='http://privacy/'>%@</a></p></body></html>",NSLocalizedString(@"By signing up I agree with the", nil),NSLocalizedString(@"Terms", nil),NSLocalizedString(@"and the", nil),NSLocalizedString(@"Privacy Policy", nil) ] baseURL:nil];
-    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -127,9 +125,9 @@
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
-    [UIView animateWithDuration:0.2 animations:^{
+    [UIView animateWithDuration:0.2 delay:0.2 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         webView.alpha = 1;
-    }];
+    } completion:nil];
 }
 
 - (void)openAnimation{

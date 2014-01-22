@@ -145,14 +145,19 @@
     
     [User logInWithEmail:self.userName.text Password:self.password.text Block:^(User *user, NSError *error) {
         
-        if ([[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound || self.userName.text == nil) {
-            self.userName.valueValide = NO;
-        }else{
+        if (error) {
+            if ([[error localizedRecoverySuggestion] rangeOfString:@"email"].location == NSNotFound) {
+                self.userName.valueValide = YES;
+            } else {
+                self.userName.valueValide = NO;
+            }
+            if ([[error localizedRecoverySuggestion] rangeOfString:@"password"].location == NSNotFound) {
+                self.password.valueValide = YES;
+            } else {
+                self.password.valueValide = NO;
+            }
+        } else {
             self.userName.valueValide = YES;
-        }
-        if ([[error localizedRecoverySuggestion] rangeOfString:@"password"].location != NSNotFound || self.password.text == nil) {
-            self.password.valueValide = NO;
-        }else{
             self.password.valueValide = YES;
         }
         

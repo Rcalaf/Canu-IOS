@@ -25,8 +25,7 @@
 @synthesize closeButton = _closeButton;
 @synthesize backButton = _backButton;
 
-- (id)initForTerms:(BOOL)isForTerms
-{
+- (id)initForTerms:(BOOL)isForTerms{
     self = [super init];
     if (self) {
         self.isForTerms = isForTerms;
@@ -34,14 +33,12 @@
     return self;
 }
 
-- (void)back:(id)sender
-{
+- (void)back:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
-- (void)loadView
-{
+- (void)loadView{
     [super loadView];
     self.view.backgroundColor = backgroundColorView;
     
@@ -58,20 +55,17 @@
     
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
-    [_closeButton setFrame:CGRectMake(10.0f, self.view.frame.size.height - 47 - 30, 300.0f, 47.0f)];
+    [_closeButton setFrame:CGRectMake(0, self.view.frame.size.height - 47, 320.0f, 47.0f)];
     [_closeButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
     _closeButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
     [_closeButton setBackgroundColor:[UIColor whiteColor]];
     [_closeButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:_closeButton];
-    
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (BOOL)shouldAutorotate
