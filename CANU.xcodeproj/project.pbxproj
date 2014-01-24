@@ -81,6 +81,9 @@
 		1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A56A2188FDB7B00CB5C4A /* TutorialStepFinal.m */; };
 		1E814CF9187C495D0013E238 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
+		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
+		1E9FB0281892685300B70E8B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FB0271892685300B70E8B /* Reachability.m */; };
+		1E9FB02F18929CCE00B70E8B /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FB02E18929CCE00B70E8B /* AlertViewController.m */; };
 		1E9FB9EC18619A0400085421 /* loader-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C418619A0400085421 /* loader-2.png */; };
 		1E9FB9ED18619A0400085421 /* loader-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C518619A0400085421 /* loader-2@2x.png */; };
 		1E9FB9EE18619A0400085421 /* loader-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C618619A0400085421 /* loader-3.png */; };
@@ -404,6 +407,12 @@
 		1E814CF7187C495D0013E238 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		1E814CFA187C49F30013E238 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
+		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
+		1E9FB0261892685300B70E8B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		1E9FB0271892685300B70E8B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		1E9FB02D18929CCE00B70E8B /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertViewController.h; path = Alert/AlertViewController.h; sourceTree = "<group>"; };
+		1E9FB02E18929CCE00B70E8B /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertViewController.m; path = Alert/AlertViewController.m; sourceTree = "<group>"; };
 		1E9FB9C418619A0400085421 /* loader-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loader-2.png"; path = "Ressources/Animations/Loader/loader-2.png"; sourceTree = "<group>"; };
 		1E9FB9C518619A0400085421 /* loader-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loader-2@2x.png"; path = "Ressources/Animations/Loader/loader-2@2x.png"; sourceTree = "<group>"; };
 		1E9FB9C618619A0400085421 /* loader-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "loader-3.png"; path = "Ressources/Animations/Loader/loader-3.png"; sourceTree = "<group>"; };
@@ -818,6 +827,34 @@
 			path = "Framework/Google Analytics";
 			sourceTree = "<group>";
 		};
+		1E90977B1891879D004501E2 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				1E90977C189187F4004501E2 /* ErrorManager.h */,
+				1E90977D189187F4004501E2 /* ErrorManager.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		1E9FB0251892685300B70E8B /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				1E9FB0261892685300B70E8B /* Reachability.h */,
+				1E9FB0271892685300B70E8B /* Reachability.m */,
+			);
+			name = Reachability;
+			path = Framework/Reachability;
+			sourceTree = "<group>";
+		};
+		1E9FB02918929C1E00B70E8B /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				1E9FB02D18929CCE00B70E8B /* AlertViewController.h */,
+				1E9FB02E18929CCE00B70E8B /* AlertViewController.m */,
+			);
+			name = Alert;
+			sourceTree = "<group>";
+		};
 		1E9FBA1718619A6000085421 /* LoaderAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1173,6 +1210,7 @@
 			children = (
 				DEA93B2C17204EA600303BB5 /* AppDelegate.h */,
 				DEA93B2D17204EA600303BB5 /* AppDelegate.m */,
+				1E90977B1891879D004501E2 /* Manager */,
 				DED4901D17298A6F005A0BF9 /* Models */,
 				DEA93B2317204EA600303BB5 /* CANU */,
 				DE4D952317429EF100FB026F /* Resources */,
@@ -1194,6 +1232,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E9FB0251892685300B70E8B /* Reachability */,
 				1E7138D9188E9C2B00137A48 /* QuartzCore.framework */,
 				1E7138D7188E9BFF00137A48 /* AVFoundation.framework */,
 				1E7138D5188E9BE400137A48 /* OpenGLES.framework */,
@@ -1225,6 +1264,7 @@
 		DEA93B2317204EA600303BB5 /* CANU */ = {
 			isa = PBXGroup;
 			children = (
+				1E9FB02918929C1E00B70E8B /* Alert */,
 				1E3A6B76188595C2007FB6BA /* Views */,
 				DE6F8FEB17C96D1A00B99401 /* Tutorial */,
 				DE6ED9CF17C424CC00C5E72E /* Users */,
@@ -1743,6 +1783,7 @@
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
 				1EEA97E1185782B000EA9E02 /* ActivityScrollViewController.m in Sources */,
 				1EEA9862185B4CEB00EA9E02 /* UICanuChatCellScroll.m in Sources */,
+				1E9FB02F18929CCE00B70E8B /* AlertViewController.m in Sources */,
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
 				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,
@@ -1772,6 +1813,7 @@
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
 				1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
+				1E9FB0281892685300B70E8B /* Reachability.m in Sources */,
 				1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
 				1E3A6B84188686EB007FB6BA /* SignUpStep2.m in Sources */,
@@ -1796,6 +1838,7 @@
 				1E7138B9188DDC1000137A48 /* TutorialViewController.m in Sources */,
 				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,
 				1E3A6B6118853FFC007FB6BA /* TTTAttributedLabel.m in Sources */,
+				1E90977E189187F4004501E2 /* ErrorManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

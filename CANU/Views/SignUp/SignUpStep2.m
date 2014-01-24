@@ -72,6 +72,7 @@
         self.email = [[UICanuTextField alloc] initWithFrame:CGRectMake(105, 128, 205, 47.0)];
         self.email.placeholder = NSLocalizedString(@"E-mail", nil);
         self.email.delegate = self;
+        self.email.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.email.keyboardType = UIKeyboardTypeEmailAddress;
         [self.email setReturnKeyType:UIReturnKeyGo];
         [self addSubview:self.email];

@@ -69,7 +69,7 @@
         self.information.alpha = 0;
         [self addSubview:_information];
         
-        self.information2 = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake( 0,self.frame.size.height - 25, 320, 20)];
+        self.information2 = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake( 0,(self.frame.size.height - 480)/2 + 320 + 119, 320, 20)];
         self.information2.text = NSLocalizedString(@"Tap again", nil);
         self.information2.textColor = [UIColor whiteColor];
         self.information2.font = [UIFont fontWithName:@"Lato-LightItalic" size:15];
@@ -170,7 +170,7 @@
         self.information.alpha = 0;
         self.information.frame = CGRectMake( 0, (self.frame.size.height - 480)/2 + 350 - 119, 320, 20);
         self.information2.alpha = 1;
-        self.information2.frame = CGRectMake( 0, self.frame.size.height - 119 - 30, 320, 20);
+        self.information2.frame = CGRectMake( 0, (self.frame.size.height - 480)/2 + 320, 320, 20);
         self.text2.alpha = 1;
         self.text2.frame = CGRectMake( 30, (self.frame.size.height - 480)/2 + 160, 260, 180);
     } completion:nil];
@@ -181,7 +181,7 @@
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
         self.profileView.frame = CGRectMake( 0, self.frame.size.height, 320, 119);
         self.information2.alpha = 0;
-        self.information2.frame = CGRectMake( 0, self.frame.size.height, 320, 20);
+        self.information2.frame = CGRectMake( 0, (self.frame.size.height - 480)/2 + 320 + 119, 320, 20);
         self.text2.alpha = 0;
         self.text2.frame = CGRectMake( 30, (self.frame.size.height - 480)/2 + 190 + 119, 260, 180);
     } completion:^(BOOL finished) {

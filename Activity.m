@@ -8,32 +8,20 @@
 
 #import "Activity.h"
 #import "AppDelegate.h"
+#import "ErrorManager.h"
 #import "AFCanuAPIClient.h"
 #import "AFNetworking.h"
 #import "UICanuActivityCell.h"
 
 @interface Activity () <MKAnnotation>
-- (NSDictionary *)serialize;
+
+
+
 @end
 
 @implementation Activity
 
-@synthesize activityId = _activityId;
-@synthesize ownerId = _ownerId;
-@synthesize title = _title;
-@synthesize description = _description;
-@synthesize start = _start;
-@synthesize end = _end;
-@synthesize length = _length;
-@synthesize street = _street;
-@synthesize city =_city;
-@synthesize zip = _zip;
-@synthesize country = _country;
-@synthesize pictureUrl = _picture;
-@synthesize user = _user;
 @synthesize location = _location;
-@synthesize coordinate = _coordinate;
-@synthesize attendeeIds = _attendeeIds;
 
 - (void)setStart:(id)start
 {
@@ -214,10 +202,13 @@
     return self;
 }
 
-
-
+/**
+ *  All activities around the user
+ *
+ *  @param coordinate
+ *  @param block
+ */
 + (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block {
-    //AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *parameters;
     if (CLLocationCoordinate2DIsValid(coordinate)) {
@@ -231,7 +222,6 @@
     [[AFCanuAPIClient sharedClient] getPath:@"activities" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
-            // NSLog(@"%@",attributes);
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             [mutableActivities addObject:activity];
         }
@@ -240,9 +230,23 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            block([NSArray array], error);
-        }
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block([NSArray alloc],customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"Activity" function:@"publicFeedWithCoorindate:WithBlock:"];
+            }
+            
+        }];
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
     
@@ -442,10 +446,6 @@
         [formData appendPartWithFileData:imageData name:@"image" fileName:@"activity.jpg" mimeType:@"image/jpeg"];
     }];
     
-    /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-     NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
-     }];*/
-    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -627,8 +627,5 @@
     }];
     
 }
-
-
-
 
 @end

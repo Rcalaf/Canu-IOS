@@ -76,15 +76,11 @@
     
         [self operationInProcess:YES];
         
-        [self.user editUserWithUserName:_user.userName
-                           Password:_password.text
-                          FirstName:_user.firstName
-                           LastName:@""
-                              Email:_user.email
-                              Block:^(User *user, NSError *error){
+        [self.user editUserWithUserName:_user.userName Password:_password.text FirstName:_user.firstName LastName:@"" Email:_user.email Block:^(User *user, NSError *error){
                                   NSLog(@"%@",[error localizedRecoverySuggestion]);
                                   if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
                                       [self.user logOut];
+                                      NSLog(@"editUser Error");
                                   } else {
                                       
                                       if (error && [[error localizedRecoverySuggestion] rangeOfString:@"proxy_password"].location != NSNotFound) {

@@ -19,7 +19,6 @@
 @property (strong,nonatomic) NSString *email;
 @property (strong,nonatomic) NSString *token;
 @property (strong,nonatomic) NSURL *profileImageUrl;
-@property (strong,nonatomic) UIImage *profileImage;
 @property (nonatomic) BOOL phoneIsVerified;
 
 
@@ -43,6 +42,11 @@
             ProfilePicture:(UIImage *)profilePicture
                      Block:(void (^)(User *user, NSError *error))block;
 
+/**
+ *  Get activities of the user
+ *
+ *  @param block Activities's user / Errors
+ */
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
 - (void)logOut;

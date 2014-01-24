@@ -269,6 +269,12 @@
     [self.localFeed removeFromParentViewController];
     self.localFeed = nil;
     
+    [self.tribeFeed removeAfterlogOut];
+    [self.tribeFeed willMoveToParentViewController:nil];
+    [self.tribeFeed.view removeFromSuperview];
+    [self.tribeFeed removeFromParentViewController];
+    self.tribeFeed = nil;
+    
 }
 
 #pragma mark - NSNotificationCenter

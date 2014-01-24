@@ -110,6 +110,7 @@
     
     self.userName = [[UICanuTextField alloc] initWithFrame:CGRectMake(57.5, 80, 252.5, 47.0)];
     self.userName.placeholder = NSLocalizedString(@"Username", nil);
+    self.userName.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.userName setReturnKeyType:UIReturnKeyNext];
     self.userName.delegate = self;
     [self.container addSubview:self.userName];
@@ -144,7 +145,7 @@
     self.buttonAction.hidden = YES;
     
     [User logInWithEmail:self.userName.text Password:self.password.text Block:^(User *user, NSError *error) {
-        
+    
         if (error) {
             if ([[error localizedRecoverySuggestion] rangeOfString:@"email"].location == NSNotFound) {
                 self.userName.valueValide = YES;

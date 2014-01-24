@@ -51,10 +51,10 @@
 
 //Start
 "Welcome" = "Welcome";
-"Let’s see where in the app your upcoming activities are." = "Let’s see where in the app your upcoming activities are.";
+"Let’s see where your upcoming activities are." = "Let’s see where your upcoming activities are.";
 
 //Local
-"These are activities where you and everyone around is invited." = "These are activities where you and everyone around is invited.";
+"These are activities where you and everyone around is invited." = "These are activities where everyone around is invited.";
 "Move the white box to the right" = "Move the white box to the right";
 "Move" = "Move";
 
@@ -70,6 +70,12 @@
 "Move the white box up" = "Move the white box up";
 
 //Final
-"That’s how you instantly create an activity." = "That’s how you instantly create an activity.";
+"That’s how you instantly create an activity of your choice. For your friends or for everyone." = "That’s how you instantly create an activity of your choice. For your friends or for everyone.";
 "We’re all done. Enjoy." = "We’re all done. Enjoy.";
 "GOT IT" = "GOT IT";
+
+//Error
+"Unknown Error" = "Unknown Error";
+"Please restart your action" = "Please restart your action";
+"No Internet Connection" = "No Internet Connection";
+"Please change this little thing" = "Please change this little thing";

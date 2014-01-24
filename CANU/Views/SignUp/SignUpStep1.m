@@ -51,6 +51,7 @@
         self.userName = [[UICanuTextField alloc] initWithFrame:CGRectMake(57.5, 80, 252.5, 47.0)];
         self.userName.placeholder = NSLocalizedString(@"Username", nil);
         [self.userName setReturnKeyType:UIReturnKeyNext];
+        self.userName.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.userName.delegate = self;
         [self addSubview:self.userName];
         

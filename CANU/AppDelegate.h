@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "User.h"
+#import "ErrorManager.h"
 
 @class UICanuNavigationController;
 
@@ -26,6 +27,12 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSString *device_token;
 @property (strong, nonatomic) NSString *oldScreenName;
+
+/**
+ *  Gestion Error ( UIAlert, Messages )
+ */
+@property (strong, nonatomic) ErrorManager *errorManager;
+
 @property (strong, nonatomic) ActivitiesFeedViewController *feedViewController;
 @property (strong, nonatomic) UICanuNavigationController *canuViewController;
 
@@ -36,7 +43,6 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

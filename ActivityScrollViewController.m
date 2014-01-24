@@ -19,6 +19,7 @@
 #import "UICanuNavigationController.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "ErrorManager.h"
 
 #import "AppDelegate.h"
 
@@ -256,7 +257,9 @@ typedef enum {
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
             
             if (error) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+                
+                // Visual information of this error adding by Error Manager
+                [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
                 
             } else {
                 
@@ -301,13 +304,10 @@ typedef enum {
         
         [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
-                if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
-                    
-                    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-                    [appDelegate.user logOut];
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                }
+                
+                // Visual information of this error adding by Error Manager
+                [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
+
             } else {
                 
                 _activities = activities;

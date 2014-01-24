@@ -29,7 +29,7 @@
         text.textAlignment = NSTextAlignmentCenter;
         text.numberOfLines = 3;
         text.backgroundColor = [UIColor clearColor];
-        text.text = NSLocalizedString(@"Let’s see where in the app your upcoming activities are.", nil);
+        text.text = NSLocalizedString(@"Let’s see where your upcoming activities are.", nil);
         text.font = [UIFont fontWithName:@"Lato-Regular" size:19];
         [self addSubview:text];
         

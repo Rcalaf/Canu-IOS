@@ -36,7 +36,14 @@
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
 
+/**
+ *  All activities around the user
+ *
+ *  @param coordinate
+ *  @param block
+ */
 + (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
 + (void)createActivityForUserWithTitle:(NSString *)title
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate

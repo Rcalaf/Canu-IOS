@@ -16,12 +16,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(30, (self.frame.size.height - 480)/2 + 80, 260, 60)];
+        UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(30, (self.frame.size.height - 480)/2 + 60, 260, 170)];
         title.textColor = UIColorFromRGB(0x16a1bf);
-        title.numberOfLines = 3;
+        title.numberOfLines = 4;
         title.textAlignment = NSTextAlignmentCenter;
         title.backgroundColor = [UIColor clearColor];
-        title.text = NSLocalizedString(@"That’s how you instantly create an activity.", nil);
+        title.text = NSLocalizedString(@"That’s how you instantly create an activity of your choice. For your friends or for everyone.", nil);
         title.font = [UIFont fontWithName:@"Lato-Bold" size:20];
         [self addSubview:title];
         
