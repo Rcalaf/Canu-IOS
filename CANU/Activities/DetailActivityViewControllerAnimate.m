@@ -27,6 +27,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
+#import "UIProfileView.h"
 
 typedef enum {
     UICanuActivityCellEditable = 0,
@@ -110,8 +111,11 @@ typedef enum {
     
     // User
     
+    UITapGestureRecognizer *tapGesture           = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openProfileView)];
+    
     UIView *wrapperUser                          = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 166, 34)];
     wrapperUser.backgroundColor                  = UIColorFromRGB(0xf9f9f9);
+    [wrapperUser addGestureRecognizer:tapGesture];
     [self.wrapper addSubview:wrapperUser];
 
     UIImageView *avatar                          = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
@@ -723,6 +727,25 @@ typedef enum {
     annotationView.annotation = annotation;
     
     return annotationView;
+    
+}
+
+- (void)openProfileView{
+    
+    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:self.activity.user WithBottomBar:YES AndNavigationchangement:NO];
+    [self.view addSubview:profileView];
+    
+    [profileView hideComponents:profileView.profileHidden];
+    
+    if (profileView.profileHidden) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Details"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    } else {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Profile User View"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    }
     
 }
 

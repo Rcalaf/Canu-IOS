@@ -141,6 +141,12 @@
     
 }
 
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self.parentViewController dismissViewControllerAnimated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }];
+}
+
 #pragma Mark - Facebook Grab
 
 - (void)facebookGrabAction{

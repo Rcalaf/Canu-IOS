@@ -13,10 +13,7 @@
 @interface UIProfileView : UIView
 
 @property (readwrite, nonatomic) BOOL profileHidden;
-@property (nonatomic) UIImageView *profileImage;
-@property (nonatomic) UIImageView *settingsButton;
-@property (nonatomic) UIView *mask;
 
-- (id)initWithUser:(User *)user andFrame:(CGRect)frame;
+- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement;
 - (void)hideComponents:(BOOL)hide;
 @end

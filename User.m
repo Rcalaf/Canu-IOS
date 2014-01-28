@@ -435,10 +435,6 @@
             if (canuError == CANUErrorServerDown) {
                 [[ErrorManager sharedErrorManager] serverIsDown];
             } else if (canuError == CANUErrorUnknown) {
-//                if ([operation isKindOfClass:[AFJSONRequestOperation class]]) {
-//                    id JSON = [(AFJSONRequestOperation *)operation responseJSON];
-//                    NSLog(@"JSON: %@", JSON);
-//                }
                 [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDeviceToken:Block:"];
             }
             

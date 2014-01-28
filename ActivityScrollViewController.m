@@ -20,6 +20,10 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "ErrorManager.h"
+#import "UIProfileView.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
 
 #import "AppDelegate.h"
 
@@ -547,6 +551,26 @@ typedef enum {
         }];
 
     }
+}
+
+- (void)cellEventProfileView:(User *)user{
+    
+    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:YES];
+    [self.view addSubview:profileView];
+    
+    [profileView hideComponents:profileView.profileHidden];
+    
+    if (profileView.profileHidden) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:appDelegate.oldScreenName];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    } else {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Profile User View"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    }
+    
 }
 
 - (void)touchCell:(UITapGestureRecognizer *)sender{

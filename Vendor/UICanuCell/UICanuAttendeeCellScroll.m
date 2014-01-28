@@ -27,6 +27,8 @@
         
         self.user = user;
         
+        self.userInteractionEnabled = YES;
+        
         self.backgroundColor = [UIColor whiteColor];
         
         UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 37, 37)];
@@ -47,8 +49,17 @@
         nickname.text = _user.userName;
         [self addSubview:nickname];
         
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openProfileView)];
+        [self addGestureRecognizer:tapGesture];
+        
     }
     return self;
+}
+
+- (void)openProfileView{
+    
+    [self.delegate attendeeCellEventProfileView:_user];
+    
 }
 
 @end

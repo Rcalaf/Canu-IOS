@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class Activity;
+@class Activity,User;
 
 @interface UICanuActivityCellScroll : UIView
 
@@ -27,4 +27,5 @@
 
 @required
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell;
+- (void)cellEventProfileView:(User*)user;
 @end

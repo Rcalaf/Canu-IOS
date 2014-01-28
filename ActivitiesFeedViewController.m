@@ -114,16 +114,6 @@
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
     
-    self.profileView = [[UIProfileView alloc] initWithUser:self.user andFrame:CGRectMake(0, self.view.frame.size.height, 320, 119)];
-    [self.view addSubview:_profileView.mask];
-    [self.view addSubview:_profileView];
-    
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings:)];
-    [_profileView.settingsButton addGestureRecognizer:tapRecognizer];
-    
-    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic:)];
-    [_profileView.profileImage addGestureRecognizer:tapRecognizer];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadActivity) name:@"reloadActivity" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLocal) name:@"reloadLocal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadProfile) name:@"reloadProfile" object:nil];
@@ -226,8 +216,9 @@
 
 - (void)userInteractionFeedEnable:(BOOL)value{
     
-    if (value == false && _profileView.profileHidden == false) {
+    if (value == false && _profileView.profileHidden == false && _profileView) {
         [self showHideProfile];
+        NSLog(@"kjerhfkj");
     }
     
     self.localFeed.view.userInteractionEnabled = value;
@@ -237,6 +228,12 @@
 }
 
 - (void)showHideProfile{
+    
+    if (!_profileView) {
+        NSLog(@"1");
+        self.profileView = [[UIProfileView alloc] initWithUser:self.user WithBottomBar:NO AndNavigationchangement:NO];
+        [self.view addSubview:_profileView];
+    }
     
     [_profileView hideComponents:_profileView.profileHidden];
     
@@ -253,7 +250,7 @@
 }
 
 - (void)removeAfterlogOut{
-    NSLog(@"ActivitiesFeedViewController removeAfterlogOut");
+    
     [self.profileView removeFromSuperview];
     self.profileView = nil;
     
@@ -293,51 +290,6 @@
 - (void)reloadProfile{
     NSLog(@"reloadProfile");
     [self.profilFeed reload];
-}
-
-#pragma mark - UIProfileView
-
-- (void)showSettings:(id)sender{
-    UserSettingsViewController *us = [[UserSettingsViewController alloc] init];
-    [self presentViewController:us animated:YES completion:nil];
-}
-
--(void)takePic:(id)sender{
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose an existing one",@"Take a picture", nil];
-    [actionSheet showInView:self.view];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES;
-    
-    if (buttonIndex == 0) {
-        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    } else if (buttonIndex == 1){
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-            [self presentViewController:imagePicker animated:YES completion:nil];
-        }
-    }
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    UIImage *newImage = [info valueForKey:UIImagePickerControllerEditedImage];
-    
-    [self.user editUserProfilePicture:newImage Block:^(User *user, NSError *error) {
-        if (!error) {
-            self.profileView.profileImage.image = newImage;
-            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-            appDelegate.user = nil;
-        }
-    }];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - ActivityScrollViewControllerDelegate

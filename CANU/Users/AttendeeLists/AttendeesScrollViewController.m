@@ -12,8 +12,12 @@
 #import "UIScrollViewReverse.h"
 #import "Activity.h"
 #import "LoaderAnimation.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+#import "UIProfileView.h"
 
-@interface AttendeesScrollViewController () <UIScrollViewDelegate>
+@interface AttendeesScrollViewController () <UIScrollViewDelegate,UICanuAttendeeCellScrollDelegate>
 
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSMutableArray *arrayCell;
@@ -151,10 +155,30 @@
         User *user = [_attendees objectAtIndex:i];
         
         UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( i * (57 + 10) + 10 ) - 57, 300, 57) andUser:user];
+        cell.delegate = self;
         [self.scrollview addSubview:cell];
         
         [_arrayCell addObject:cell];
         
+    }
+    
+}
+
+- (void)attendeeCellEventProfileView:(User *)user{
+    
+    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:NO];
+    [self.parentViewController.view addSubview:profileView];
+    
+    [profileView hideComponents:profileView.profileHidden];
+    
+    if (profileView.profileHidden) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Attendees"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+    } else {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Profile User View"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
     }
     
 }

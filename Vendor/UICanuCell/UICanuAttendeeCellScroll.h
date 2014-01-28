@@ -12,6 +12,14 @@
 
 @interface UICanuAttendeeCellScroll : UIView
 
+@property (nonatomic) id delegate;
+
 - (id)initWithFrame:(CGRect)frame andUser:(User *)user;
 
+@end
+
+@protocol UICanuAttendeeCellScrollDelegate <NSObject>
+
+@required
+- (void)attendeeCellEventProfileView:(User*)user;
 @end
