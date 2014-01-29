@@ -111,7 +111,7 @@
             [self.parentViewController presentViewController:controller animated:YES completion:nil];
         }
         
-    }else{
+    } else {
         
         [self.phoneNumber resignFirstResponder];
         
@@ -124,8 +124,8 @@
         NSArray *objectsArray;
         NSArray *keysArray;
         
-        objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentUser.userId],self.phoneNumber.text,nil];
-        keysArray = [NSArray arrayWithObjects:@"user_id",@"phone_number",nil];
+        objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentUser.userId],self.phoneNumber.text,@"097c4qw87ryn02tnc2",nil];
+        keysArray = [NSArray arrayWithObjects:@"user_id",@"phone_number",@"key",nil];
         
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
         
