@@ -28,6 +28,7 @@
 @interface CheckPhoneNumber () <MFMessageComposeViewControllerDelegate>
 
 @property (nonatomic) int countRequest;
+@property (nonatomic) UITextField* phoneNumber;
 @property (nonatomic) UILabel *textButton;
 @property (nonatomic) UIButton *check;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicator;
@@ -74,6 +75,16 @@
         self.textButton.font = [UIFont fontWithName:@"Lato-Regular" size:13];
         [self.check addSubview:self.textButton];
         
+        if (![AFCanuAPIClient sharedClient].distributionMode) {
+            
+            self.check.frame = CGRectMake(10, 10 + 57 + 10, 300, 57);
+            
+            self.phoneNumber = [[UITextField  alloc]initWithFrame:CGRectMake(10, 10, 300, 57)];
+            self.phoneNumber.backgroundColor = [UIColor whiteColor];
+            self.phoneNumber.placeholder = @"Put your phone numer : +46 00";
+            [self addSubview:_phoneNumber];
+        }
+        
     }
     return self;
 }
@@ -102,9 +113,31 @@
         
     }else{
         
+        [self.phoneNumber resignFirstResponder];
+        
         [self.loadingIndicator startAnimating];
         self.check.hidden = YES;
-        [self performSelector:@selector(fakeCheckPhoneValidation) withObject:nil afterDelay:2];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        User *currentUser = appDelegate.user;
+        
+        NSArray *objectsArray;
+        NSArray *keysArray;
+        
+        objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentUser.userId],self.phoneNumber.text,nil];
+        keysArray = [NSArray arrayWithObjects:@"user_id",@"phone_number",nil];
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+        
+        NSString *path = @"users/sms-verification-dev";
+        
+        [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:currentUser.token];
+        [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+            [self performSelector:@selector(checkPhoneValidation) withObject:nil afterDelay:1];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self.loadingIndicator stopAnimating];
+            self.check.hidden = NO;
+        }];
         
     }
     
@@ -176,16 +209,6 @@
         self.textButton.text = NSLocalizedString(@"Reverify my number", nil);
         
     }
-    
-}
-
-- (void)fakeCheckPhoneValidation{
-    
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    User *currentUser = appDelegate.user;
-    [[NSUserDefaults standardUserDefaults] setObject:[currentUser serialize] forKey:@"user"];
-    
-    [self goToFeedViewController];
     
 }
 
