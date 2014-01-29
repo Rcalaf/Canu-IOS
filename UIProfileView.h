@@ -14,6 +14,6 @@
 
 @property (readwrite, nonatomic) BOOL profileHidden;
 
-- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement;
+- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement OrTutorial:(BOOL)isTutorial;
 - (void)hideComponents:(BOOL)hide;
 @end

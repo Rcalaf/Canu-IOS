@@ -166,7 +166,7 @@
 
 - (void)attendeeCellEventProfileView:(User *)user{
     
-    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:NO];
+    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:NO OrTutorial:NO];
     [self.parentViewController.view addSubview:profileView];
     
     [profileView hideComponents:profileView.profileHidden];

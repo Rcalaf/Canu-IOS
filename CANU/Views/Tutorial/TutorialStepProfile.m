@@ -158,11 +158,12 @@
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
-    self.profileView = [[UIProfileView alloc] initWithUser:appDelegate.user andFrame:CGRectMake(0, self.frame.size.height, 320, 119)];
+    self.profileView = [[UIProfileView alloc] initWithUser:appDelegate.user WithBottomBar:NO AndNavigationchangement:NO OrTutorial:YES];
     [self addSubview:_profileView];
     
+    [self.profileView hideComponents:YES];
+    
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.profileView.frame = CGRectMake( 0, self.frame.size.height - 119, 320, 119);
         self.illustration.alpha = 0;
         self.illustration.frame = CGRectMake( 0, (self.frame.size.height - 480)/2 - 119, 320, 480);
         self.text.alpha = 0;
@@ -178,8 +179,10 @@
 }
 
 - (void)animationStartProfileViewDisappear{
+    
+    [self.profileView hideComponents:NO];
+    
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.profileView.frame = CGRectMake( 0, self.frame.size.height, 320, 119);
         self.information2.alpha = 0;
         self.information2.frame = CGRectMake( 0, (self.frame.size.height - 480)/2 + 320 + 119, 320, 20);
         self.text2.alpha = 0;

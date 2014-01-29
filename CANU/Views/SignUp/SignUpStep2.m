@@ -26,6 +26,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.facebookGrapgUsed = NO;
+        
         self.parentViewController = parentViewController;
         
         UILabel *title2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
@@ -150,6 +152,8 @@
 #pragma Mark - Facebook Grab
 
 - (void)facebookGrabAction{
+    
+    self.facebookGrapgUsed = NO;
     
     [self.delegate facebookGrab];
     

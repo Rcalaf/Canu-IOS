@@ -732,7 +732,7 @@ typedef enum {
 
 - (void)openProfileView{
     
-    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:self.activity.user WithBottomBar:YES AndNavigationchangement:NO];
+    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:self.activity.user WithBottomBar:YES AndNavigationchangement:NO OrTutorial:NO];
     [self.view addSubview:profileView];
     
     [profileView hideComponents:profileView.profileHidden];

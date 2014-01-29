@@ -207,10 +207,13 @@ float oldValue;
     [self operationInProcess:YES];
     [self.activity removeActivityWithBlock:^(NSError *error){
         if (!error) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
             
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Delete" value:nil] build]];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
             
         } else {
             //[error localizedDescription]

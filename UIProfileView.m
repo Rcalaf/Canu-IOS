@@ -32,7 +32,7 @@
 @implementation UIProfileView
 
 
-- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement{
+- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement OrTutorial:(BOOL)isTutorial{
     
     CGRect rectZero = CGRectMake(0, 0, 0, 0);
     
@@ -57,10 +57,12 @@
 
         self.profileHidden          = YES;
         
-        self.mask                   = [[UIView alloc] init];
-        self.mask.alpha             = 0;
-        self.mask.backgroundColor   = [UIColor colorWithRed:(241.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 0.8f];
-        [self addSubview:_mask];
+        if (!isTutorial) {
+            self.mask                   = [[UIView alloc] init];
+            self.mask.alpha             = 0;
+            self.mask.backgroundColor   = [UIColor colorWithRed:(241.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 0.8f];
+            [self addSubview:_mask];
+        }
 
         self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, _rect.size.height, result.width, 119 + 57)];
         self.wrapper.backgroundColor = [UIColor whiteColor];
@@ -99,9 +101,9 @@
         pseudo.text            = user.userName;
         [self.wrapper addSubview:pseudo];
         
+        self.navigation = appDelegate.canuViewController;
+        
         if (_isBottomBar) {
-            
-            self.navigation = appDelegate.canuViewController;
             
             UIView *bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, 119, 320, 57)];
             bottomBar.backgroundColor = UIColorFromRGB(0xf9f9f9);
@@ -126,11 +128,13 @@
             self.settingsButton.userInteractionEnabled = YES;
             [self.wrapper addSubview:_settingsButton];
             
-            UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
-            [self.settingsButton addGestureRecognizer:tapRecognizer];
-            
-            tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic)];
-            [self.profileImage addGestureRecognizer:tapRecognizer];
+            if (!isTutorial) {
+                UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
+                [self.settingsButton addGestureRecognizer:tapRecognizer];
+                
+                tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic)];
+                [self.profileImage addGestureRecognizer:tapRecognizer];
+            }
             
         }
         
@@ -156,7 +160,7 @@
                 self.navigation.control.hidden = YES;
             }
         }];
-    }else{
+    } else {
         if (_isNavigationChangement) {
             self.navigation.control.hidden = NO;
         }

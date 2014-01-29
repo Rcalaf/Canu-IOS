@@ -14,6 +14,7 @@
 
 @property (retain) id delegate;
 @property (nonatomic) UIButton *takePictureButton;
+@property (nonatomic) BOOL facebookGrapgUsed;
 @property (nonatomic) UICanuTextField *name;
 @property (nonatomic) UICanuTextField *email;
 

@@ -231,7 +231,7 @@
     
     if (!_profileView) {
         NSLog(@"1");
-        self.profileView = [[UIProfileView alloc] initWithUser:self.user WithBottomBar:NO AndNavigationchangement:NO];
+        self.profileView = [[UIProfileView alloc] initWithUser:self.user WithBottomBar:NO AndNavigationchangement:NO OrTutorial:NO];
         [self.view addSubview:_profileView];
     }
     

@@ -216,6 +216,11 @@
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"checkNumber" value:nil] build]];
+        if (self.step2.facebookGrapgUsed) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"FacebookGraph" label:@"YES" value:nil] build]];
+        } else {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"FacebookGraph" label:@"NO" value:nil] build]];
+        }
         
     }
     
