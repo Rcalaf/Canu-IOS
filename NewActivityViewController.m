@@ -18,6 +18,13 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
+#import <CoreTelephony/CTCarrier.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
+#import "Contact.h"
+
+#import <AddressBook/AddressBook.h>
+
 @interface NewActivityViewController () 
 
 
@@ -325,13 +332,13 @@ float oldValue;
              
              _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
              findLocationButton.userInteractionEnabled = YES;
-             //String to address
-             NSString *locatedaddress = [[_location.placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
              
-             //Print the location in the console
-             NSLog(@"Currently address is: %@",locatedaddress);
+             NSString * plistPath = [[NSBundle mainBundle] pathForResource:@"DiallingCodes" ofType:@"plist"];
+             NSDictionary *dictConvertion = [NSDictionary dictionaryWithContentsOfFile:plistPath];
              
+             NSString *countryCode = [dictConvertion objectForKey:[_location.placemark.ISOcountryCode lowercaseString]];
              
+             [self checkPhoneBook:countryCode];
              
          }];
         /*locationManager = appDelegate.locationManager;
@@ -613,45 +620,26 @@ float oldValue;
 }
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
+    
     [super viewDidLoad];
-   
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(itemMap:)
-                                                 name:FindLocationDissmised
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemMap:) name:FindLocationDissmised object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-
-  
-	// Do any additional setup after loading the view.
 }
 
-- (void)viewDidUnload
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:FindLocationDissmised
-                                                  object:nil];
+- (void)viewDidUnload{
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FindLocationDissmised object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-     
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
      _activity = nil;
      _formGrid = nil;
      _name = nil;
@@ -666,13 +654,13 @@ float oldValue;
      _takePictureButton = nil;
      _location = nil;
      _locationName = nil;
+    
     [super viewDidUnload];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-   
-    
     [super viewWillDisappear:YES];
 }
 
@@ -688,5 +676,81 @@ float oldValue;
     return NO;
 }
 
+#pragma mark - Private
+
+- (void)checkPhoneBook:(NSString *)countryCode{
+    
+    NSMutableArray *phoneNumberClean = [[NSMutableArray alloc]init];
+    
+    CFErrorRef *error = nil;
+    
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
+    
+    __block BOOL accessGranted = NO;
+    if (ABAddressBookRequestAccessWithCompletion != NULL) {
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            accessGranted = granted;
+            dispatch_semaphore_signal(sema);
+        });
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
+    
+    if (accessGranted) {
+        
+        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
+        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+        CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
+        
+        for (int i = 0; i < nPeople; i++) {
+            
+            ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+            
+            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            
+            NSString *theFinalPhoneNumber;
+            
+            for (int j = 0; j < ABMultiValueGetCount(multiPhones); j++) {
+                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, 0);
+                NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+                if (phoneNumber) {
+                    theFinalPhoneNumber = phoneNumber;
+                }
+            }
+            
+            
+            if (theFinalPhoneNumber) {
+                
+                NSString *firstNames = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+                
+                NSString *lastNames =  (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
+                
+                NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstNames,lastNames];
+                
+                Contact *contact = [[Contact alloc]initWithFullName:fullName phoneNumber:theFinalPhoneNumber countryCode:countryCode];
+                
+                [phoneNumberClean addObject:contact.convertNumber];
+                
+            }
+            
+        }
+        
+    } else {
+        NSLog(@"Cannot fetch Contacts :( ");
+    }
+    
+    if ([phoneNumberClean count] != 0) {
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        
+        [appDelegate.user checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUError, NSError *error) {
+            
+            NSLog(@"%@",arrayCANUError);
+            
+        }];
+        
+    }
+    
+}
 
 @end

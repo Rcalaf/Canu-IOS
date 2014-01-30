@@ -485,4 +485,58 @@
 
 }
 
+#pragma mark Phone Book
+
+/**
+ *  Detec the CANU User with the phone number in the phone book
+ *
+ *  @param arrayPhoneNumer Array with phone clean number
+ *  @param block
+ */
+- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUError,NSError *error))block{
+    
+    NSString *url = @"users/search/phonebook";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:arrayPhoneNumber] forKeys: [NSArray arrayWithObject:@"phone_numbers"]];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        NSArray *respond = (NSArray *)JSON;
+        
+        NSMutableArray *arrayCANUError = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [respond count]; i++) {
+            User *user = [[User alloc]initWithAttributes:[respond objectAtIndex:i]];
+            [arrayCANUError addObject:user];
+        }
+        
+        if (block) {
+            block(arrayCANUError,nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+
+            if (block) {
+                block(nil,customError);
+            }
+
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDevice:Badge:WithBlock:"];
+            }
+            
+        }];
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
 @end

@@ -71,6 +71,14 @@
                Badge:(NSInteger)badge
            WithBlock:(void (^)(NSError *))block;
 
+/**
+ *  Detec the CANU User with the phone number in the phone book
+ *
+ *  @param arrayPhoneNumer Array with phone clean number
+ *  @param block
+ */
+- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUError,NSError *error))block;
+
 
 -(NSDictionary *)serialize;
 

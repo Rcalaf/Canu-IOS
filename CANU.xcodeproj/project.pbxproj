@@ -46,6 +46,9 @@
 		1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E608BBF188F141F00BED835 /* TutorialStepTribes.m */; };
 		1E608BC3188F150800BED835 /* Tutorial_Step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E608BC1188F150800BED835 /* Tutorial_Step2.png */; };
 		1E608BC4188F150800BED835 /* Tutorial_Step2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E608BC2188F150800BED835 /* Tutorial_Step2@2x.png */; };
+		1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E70867918996FE000328F76 /* AddressBook.framework */; };
+		1E70867D189A849300328F76 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70867C189A849300328F76 /* Contact.m */; };
+		1E708680189A977100328F76 /* DiallingCodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E70867F189A977100328F76 /* DiallingCodes.plist */; };
 		1E7138A9188D4FC400137A48 /* Activity_Empty_feed_Bakground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7138A7188D4FC400137A48 /* Activity_Empty_feed_Bakground.png */; };
 		1E7138AA188D4FC400137A48 /* Activity_Empty_feed_Bakground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7138A8188D4FC400137A48 /* Activity_Empty_feed_Bakground@2x.png */; };
 		1E7138B1188D5B2900137A48 /* Activity_Empty_feed_illustration_local.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7138AB188D5B2900137A48 /* Activity_Empty_feed_illustration_local.png */; };
@@ -361,6 +364,10 @@
 		1E608BBF188F141F00BED835 /* TutorialStepTribes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialStepTribes.m; path = Views/Tutorial/TutorialStepTribes.m; sourceTree = "<group>"; };
 		1E608BC1188F150800BED835 /* Tutorial_Step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tutorial_Step2.png; path = Ressources/Backgrounds/Tutorial_Step2.png; sourceTree = "<group>"; };
 		1E608BC2188F150800BED835 /* Tutorial_Step2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tutorial_Step2@2x.png"; path = "Ressources/Backgrounds/Tutorial_Step2@2x.png"; sourceTree = "<group>"; };
+		1E70867918996FE000328F76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		1E70867B189A849300328F76 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = CANU/Models/Contact/Contact.h; sourceTree = "<group>"; };
+		1E70867C189A849300328F76 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contact.m; path = CANU/Models/Contact/Contact.m; sourceTree = "<group>"; };
+		1E70867F189A977100328F76 /* DiallingCodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DiallingCodes.plist; sourceTree = SOURCE_ROOT; };
 		1E7138A7188D4FC400137A48 /* Activity_Empty_feed_Bakground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Activity_Empty_feed_Bakground.png; path = Ressources/Backgrounds/Activity_Empty_feed_Bakground.png; sourceTree = "<group>"; };
 		1E7138A8188D4FC400137A48 /* Activity_Empty_feed_Bakground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Activity_Empty_feed_Bakground@2x.png"; path = "Ressources/Backgrounds/Activity_Empty_feed_Bakground@2x.png"; sourceTree = "<group>"; };
 		1E7138AB188D5B2900137A48 /* Activity_Empty_feed_illustration_local.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Activity_Empty_feed_illustration_local.png; path = Ressources/Backgrounds/Activity_Empty_feed_illustration_local.png; sourceTree = "<group>"; };
@@ -675,6 +682,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */,
 				1E7138DA188E9C2B00137A48 /* QuartzCore.framework in Frameworks */,
 				1E7138D8188E9BFF00137A48 /* AVFoundation.framework in Frameworks */,
 				1E7138D6188E9BE400137A48 /* OpenGLES.framework in Frameworks */,
@@ -784,6 +792,15 @@
 				1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */,
 			);
 			name = UICanuLabel;
+			sourceTree = "<group>";
+		};
+		1E70867E189A849900328F76 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				1E70867B189A849300328F76 /* Contact.h */,
+				1E70867C189A849300328F76 /* Contact.m */,
+			);
+			name = Contact;
 			sourceTree = "<group>";
 		};
 		1E7138BE188DE6BF00137A48 /* Tutorial */ = {
@@ -1232,6 +1249,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E70867918996FE000328F76 /* AddressBook.framework */,
 				1E9FB0251892685300B70E8B /* Reachability */,
 				1E7138D9188E9C2B00137A48 /* QuartzCore.framework */,
 				1E7138D7188E9BFF00137A48 /* AVFoundation.framework */,
@@ -1282,6 +1300,7 @@
 		DEA93B2417204EA600303BB5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E70867F189A977100328F76 /* DiallingCodes.plist */,
 				DE607838182C007C0053F23B /* Default-568h@2x.png */,
 				DE607839182C007C0053F23B /* Default.png */,
 				DE60783A182C007C0053F23B /* Default@2x.png */,
@@ -1448,6 +1467,7 @@
 				DED4901C17298A67005A0BF9 /* User */,
 				DEBBDA4C1732BDA0009E9A7D /* Activity */,
 				DE5599B31836491600FE32E9 /* Message */,
+				1E70867E189A849900328F76 /* Contact */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1666,6 +1686,7 @@
 				DE774B39184E0FDD00F8C244 /* guide_step_2-568h@2x.png in Resources */,
 				1EEA97F71859E78600EA9E02 /* feed_action_circle_togo.png in Resources */,
 				DE6ED9B217C2927100C5E72E /* create_passive@2x.png in Resources */,
+				1E708680189A977100328F76 /* DiallingCodes.plist in Resources */,
 				1E9FB9F118619A0400085421 /* loader-4@2x.png in Resources */,
 				1E7138BC188DE5FB00137A48 /* Tutorial_Step1.png in Resources */,
 				1E3A6B8B18896FC1007FB6BA /* User_profile_shadow@2x.png in Resources */,
@@ -1806,6 +1827,7 @@
 				DEA93B791720616500303BB5 /* MainViewController.m in Sources */,
 				DED4901B17298A61005A0BF9 /* User.m in Sources */,
 				DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */,
+				1E70867D189A849300328F76 /* Contact.m in Sources */,
 				1E7138DD188EDAB000137A48 /* TutorialStepStart.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
 				1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */,
