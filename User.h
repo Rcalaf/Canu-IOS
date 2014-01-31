@@ -12,13 +12,14 @@
 @interface User : NSObject <NSCoding>
 
 @property (readonly) NSUInteger userId;
-@property (strong,nonatomic) NSString *firstName;
-@property (strong,nonatomic) NSString *lastName;
-@property (strong,nonatomic) NSString *password;
-@property (strong,nonatomic) NSString *userName;
-@property (strong,nonatomic) NSString *email;
-@property (strong,nonatomic) NSString *token;
-@property (strong,nonatomic) NSURL *profileImageUrl;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSURL *profileImageUrl;
 @property (nonatomic) BOOL phoneIsVerified;
 
 
@@ -48,6 +49,13 @@
  *  @param block Activities's user / Errors
  */
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
+/**
+ *  Get activities of the tribes's user
+ *
+ *  @param block Activities's user / Errors
+ */
+- (void)userActivitiesTribesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
 - (void)logOut;
 

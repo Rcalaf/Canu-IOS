@@ -302,7 +302,47 @@ typedef enum {
         
     }else if(_feedType == FeedTribeType){
             
+        [self.user userActivitiesTribesWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                
+                // Visual information of this error adding by Error Manager
+                [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
+                
+            } else {
+                
+                _activities = activities;
+                
+                [self showActivities];
+                
+                [self showFeedback];
+                
+            }
+            
+            if (isEmptyBefore != self.isEmpty) {
+                [self.delegate activityScrollViewControllerChangementFeed];
+            }
+            
+            if (_isReload) {
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
+                    [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                    }
+                } completion:^(BOOL finished) {
+                    
+                    [self.loaderAnimation stopAnimation];
+                    
+                    self.isReload = NO;
+                    
+                }];
+            }
+            
             [self.loaderAnimation stopAnimation];
+            
+        }];
         
     }else if(_feedType == FeedProfileType){
         
@@ -489,12 +529,15 @@ typedef enum {
                         if (_feedType == FeedLocalType) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }else if (_feedType == FeedTribeType) {
-//                            [self load];
-//                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [self load];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                         }else if (_feedType == FeedProfileType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }
                     }];
                 }
@@ -538,12 +581,15 @@ typedef enum {
                         if (_feedType == FeedLocalType) {
                             [self showActivities];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }else if (_feedType == FeedTribeType) {
-                            //                            [self load];
-                            //                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [self load];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                         }else if (_feedType == FeedProfileType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }
                     }];
                 }
@@ -555,7 +601,7 @@ typedef enum {
 
 - (void)cellEventProfileView:(User *)user{
     
-    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:YES];
+    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:YES OrTutorial:NO];
     [self.view addSubview:profileView];
     
     [profileView hideComponents:profileView.profileHidden];

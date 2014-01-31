@@ -33,6 +33,7 @@
     [aCoder encodeObject:_firstName forKey:@"firstName"];
     [aCoder encodeObject:_lastName forKey:@"lastName"];
     [aCoder encodeObject:_token forKey:@"token"];
+    [aCoder encodeObject:_phoneNumber forKey:@"phone_number"];
     [aCoder encodeBool:_phoneIsVerified forKey:@"phoneIsVerified"];
     
 }
@@ -40,13 +41,14 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
-        _userId    = [aDecoder decodeIntegerForKey:@"userId"];
-        _userName  = [aDecoder decodeObjectForKey:@"userName"];
-        _email     = [aDecoder decodeObjectForKey:@"email"];
-        _firstName = [aDecoder decodeObjectForKey:@"firstName"];
-        _lastName  = [aDecoder decodeObjectForKey:@"lastName"];
-        _token     = [aDecoder decodeObjectForKey:@"token"];
-        _phoneIsVerified  = [aDecoder decodeBoolForKey:@"phoneIsVerified"];
+        _userId          = [aDecoder decodeIntegerForKey:@"userId"];
+        _userName        = [aDecoder decodeObjectForKey:@"userName"];
+        _email           = [aDecoder decodeObjectForKey:@"email"];
+        _firstName       = [aDecoder decodeObjectForKey:@"firstName"];
+        _lastName        = [aDecoder decodeObjectForKey:@"lastName"];
+        _token           = [aDecoder decodeObjectForKey:@"token"];
+        _phoneNumber     = [aDecoder decodeObjectForKey:@"phone_number"];
+        _phoneIsVerified = [aDecoder decodeBoolForKey:@"phoneIsVerified"];
     }
     return self;
 }
@@ -61,6 +63,7 @@
         _firstName       = [attributes valueForKeyPath:@"first_name"];
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
+        _phoneNumber     = [attributes valueForKeyPath:@"phone_number"];
         if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
             _phoneIsVerified  = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
         }
@@ -75,8 +78,8 @@
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrlShort];
-    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,nil];
-    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",nil];
+    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,self.phoneNumber,nil];
+    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",@"phone_number",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     return user;
@@ -404,6 +407,54 @@
     }];
 }
 
+/**
+ *  Get activities of the tribes's user
+ *
+ *  @param block Activities's user / Errors
+ */
+- (void)userActivitiesTribesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d/activities/tribes/",self.userId];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        
+        for (NSDictionary *attributes in JSON) {
+            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            [mutableActivities addObject:activity];
+        }
+        if (block) {
+            block([NSArray arrayWithArray:mutableActivities], nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block([NSArray alloc],customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"userActivitiesWithBlock:"];
+            }
+            
+        }];
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
 #pragma mark - User/device notification logic
 
 - (void)updateDeviceToken:(NSString *)device_token Block:(void (^)(NSError *error))block{
@@ -529,7 +580,7 @@
             if (canuError == CANUErrorServerDown) {
                 [[ErrorManager sharedErrorManager] serverIsDown];
             } else if (canuError == CANUErrorUnknown) {
-                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDevice:Badge:WithBlock:"];
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"checkPhoneBook:WithBlock:"];
             }
             
         }];

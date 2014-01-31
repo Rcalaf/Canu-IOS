@@ -116,6 +116,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadActivity) name:@"reloadActivity" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLocal) name:@"reloadLocal" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTribes) name:@"reloadTribes" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadProfile) name:@"reloadProfile" object:nil];
     
 }
@@ -279,12 +280,18 @@
 - (void)reloadActivity{
     NSLog(@"All reload");
     [self.localFeed reload];
+    [self.tribeFeed reload];
     [self.profilFeed reload];
 }
 
 - (void)reloadLocal{
     NSLog(@"reloadLocal");
     [self.localFeed reload];
+}
+
+- (void)reloadTribes{
+    NSLog(@"reloadTribes");
+    [self.tribeFeed reload];
 }
 
 - (void)reloadProfile{

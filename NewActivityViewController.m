@@ -54,6 +54,8 @@
 @property (strong, nonatomic) UILabel *locationName;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 
+@property (strong, nonatomic) NSMutableArray *DarrayCANUUser;
+
 //@property (strong, nonatomic) CLLocationManager *locationManager;
 
 
@@ -129,14 +131,14 @@ float oldValue;
                                         Description:self.description.text
                                              StartDate:[dateFormatter stringFromDate:self.dateTime]//self.start.text
                                              Length:self.lengthPicker.text
-                                            EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
                                                City:self.location.placemark.addressDictionary[@"City"]
                                                 Zip:self.location.placemark.addressDictionary[@"ZIP"]
                                             Country:self.location.placemark.addressDictionary[@"Country"]
                                            Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
-                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
-                                              Image:[UIImage imageNamed:@"icon_userpic.png"]
+                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude]
+                                             Guests:nil
+                                    PrivateLocation:true
                                               Block:^(NSError *error) {
                                                   if (error) {
                                                       if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
@@ -162,18 +164,21 @@ float oldValue;
                                                   [self operationInProcess:NO];
                                               }];
        } else {
+           
+           NSMutableArray *usersInvited = [self createArrayUserInvited];
+           
            [Activity createActivityForUserWithTitle:self.name.text
                                         Description:self.description.text
                                           StartDate:[dateFormatter stringFromDate:self.dateTime]//self.start.text
                                              Length:self.lengthPicker.text
-                                            EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
                                                City:self.location.placemark.addressDictionary[@"City"]
                                                 Zip:self.location.placemark.addressDictionary[@"ZIP"]
                                             Country:self.location.placemark.addressDictionary[@"Country"]
                                            Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
-                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
-                                              Image:[UIImage imageNamed:@"icon_userpic.png"]
+                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude]
+                                             Guests:usersInvited
+                                    PrivateLocation:true
                                               Block:^(NSError *error) {
                                                   if (error) {
                                                       NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
@@ -736,7 +741,7 @@ float oldValue;
         }
         
     } else {
-        NSLog(@"Cannot fetch Contacts :( ");
+        NSLog(@"Cannot fetch Contacts :(");
     }
     
     if ([phoneNumberClean count] != 0) {
@@ -747,9 +752,27 @@ float oldValue;
             
             NSLog(@"%@",arrayCANUError);
             
+            self.DarrayCANUUser = arrayCANUError;
+            
         }];
         
     }
+    
+}
+
+- (NSMutableArray *)createArrayUserInvited{
+    
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < [_DarrayCANUUser count]; i++) {
+        
+        User *user = [_DarrayCANUUser objectAtIndex:i];
+        
+        [array addObject:user.phoneNumber];
+        
+    }
+    
+    return array;
     
 }
 

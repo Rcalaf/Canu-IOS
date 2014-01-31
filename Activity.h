@@ -48,28 +48,28 @@
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate
                                 Length:(NSString *)length
-                               EndDate:(NSString *)endDate
                                 Street:(NSString *)street
                                   City:(NSString *)city
                                    Zip:(NSString *)zip
                                Country:(NSString *)country
                               Latitude:(NSString *)latitude
                              Longitude:(NSString *)longitude
-                                 Image:(UIImage *)activityImage
+                                Guests:(NSMutableArray *)arrayGuests
+                       PrivateLocation:(BOOL)privatelocation
                                  Block:(void (^)(NSError *error))block;
 
 - (void)editActivityForUserWithTitle:(NSString *)title
                          Description:(NSString *)description
                            StartDate:(NSString *)startDate
                               Length:(NSString *)length
-                             EndDate:(NSString *)endDate
                               Street:(NSString *)street
                                 City:(NSString *)city
                                  Zip:(NSString *)zip
                              Country:(NSString *)country
                             Latitude:(NSString *)latitude
                            Longitude:(NSString *)longitude
-                               Image:(UIImage *)activityImage
+                              Guests:(NSMutableArray *)arrayGuests
+                     PrivateLocation:(BOOL)privatelocation
                                Block:(void (^)(NSError *error))block;
 
 + (void)activityWithId:(NSUInteger)activityId

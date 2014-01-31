@@ -285,12 +285,12 @@
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            NSLog(@"%@",activity.title);
             if (activity.activityId == self.activityId) _attendeeIds = activity.attendeeIds;
             //NSLog(@"%@",activity.attendeeIds);
             [mutableActivities addObject:activity];
         }
         //[self addNotification];
-        
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
@@ -388,18 +388,17 @@
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate
                                 Length:(NSString *)length
-                               EndDate:(NSString *)endDate
                                 Street:(NSString *)street
                                   City:(NSString *)city
                                    Zip:(NSString *)zip
                                Country:(NSString *)country
                               Latitude:(NSString *)latitude
                              Longitude:(NSString *)longitude
-                                 Image:(UIImage *)activityImage
-                                 Block:(void (^)(NSError *error))block
-{
+                                Guests:(NSMutableArray *)arrayGuests
+                       PrivateLocation:(BOOL)privatelocation
+                                 Block:(void (^)(NSError *error))block{
+    
 
-    //NSLog(@"end: %@",endDate);
     if (!title) title = @"";
     if (!description) description = @""; 
     if (!street) street = @"";
@@ -409,87 +408,53 @@
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSArray *objectsArray = [NSArray arrayWithObjects:
-                             title,
-                             description,
-                             startDate,
-                             length,
-                             endDate,
-                             street,
-                             city,
-                             zip,
-                             country,
-                             latitude,
-                             longitude,
-                             nil];
-    
-    NSArray *keysArray = [NSArray arrayWithObjects:
-                          @"title",
-                          @"description",
-                          @"start",
-                          @"length",
-                          @"end",
-                          @"street",
-                          @"city",
-                          @"zip",
-                          @"country",
-                          @"latitude",
-                          @"longitude",
-                          nil];
-    
+    NSArray *objectsArray = [NSArray arrayWithObjects: title, description, startDate, length, street, city, zip, country, latitude, longitude,arrayGuests,[NSNumber numberWithBool:privatelocation], nil];
+    NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length", @"street", @"city", @"zip", @"country", @"latitude", @"longitude",@"guests",@"private_location", nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-    NSData *imageData = UIImageJPEGRepresentation(activityImage, 1.0);
-    
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
-    
-    NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"POST" path:[NSString stringWithFormat:@"users/%lu/activities",(unsigned long)appDelegate.user.userId] parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"image" fileName:@"activity.jpg" mimeType:@"image/jpeg"];
-    }];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            //Activity *newActivity = [[Activity alloc] initWithAttributes:JSON];
-
-                                                                                            //[newActivity addNotification];
-                                                                                             //NSLog(@" sorry: %@",JSON);
-                                                                                            if (block) {
-                                                                                                block(nil);
-                                                                                            }
-                                                                        
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                        }
-                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-                                                                                            
-                                                                                            if (block) {
-                                                                                                
-                                                                                               // NSLog(@"%@",error);
-                                                                                               // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-                                                                                                block(error);
-                                                                                            }
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                        }];
-    [operation start];
+    
+    NSString *url = [NSString stringWithFormat:@"users/%i/activities",appDelegate.user.userId];
+    
+    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        if (block) {
+            block(nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (block) {
+            
+            // NSLog(@"%@",error);
+            // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    }];
 
 }
 
 
-- (void)editActivityForUserWithTitle:(NSString *)title 
+- (void)editActivityForUserWithTitle:(NSString *)title
                          Description:(NSString *)description
                            StartDate:(NSString *)startDate
                               Length:(NSString *)length
-                             EndDate:(NSString *)endDate
                               Street:(NSString *)street
                                 City:(NSString *)city
                                  Zip:(NSString *)zip
                              Country:(NSString *)country
                             Latitude:(NSString *)latitude
                            Longitude:(NSString *)longitude
-                               Image:(UIImage *)activityImage
+                              Guests:(NSMutableArray *)arrayGuests
+                     PrivateLocation:(BOOL)privatelocation
                                Block:(void (^)(NSError *error))block
 {
     
-    //NSLog(@"end: %@",endDate);
+    
     if (!title) title = @"";
     if (!description) description = @"";
     if (!street) street = @"";
@@ -500,72 +465,35 @@
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     
-    NSArray *objectsArray = [NSArray arrayWithObjects:
-                             //self.user.userId,
-                             title,
-                             description,
-                             startDate,
-                             length,
-                             endDate,
-                             street,
-                             city,
-                             zip,
-                             country,
-                             latitude,
-                             longitude,
-                             nil];
-    
-    NSArray *keysArray = [NSArray arrayWithObjects:
-                         // @"user_id",
-                          @"title",
-                          @"description",
-                          @"start",
-                          @"length",
-                          @"end",
-                          @"street",
-                          @"city",
-                          @"zip",
-                          @"country",
-                          @"latitude",
-                          @"longitude",
-                          nil];
-    
+    NSArray *objectsArray = [NSArray arrayWithObjects: title, description, startDate, length, street, city, zip, country, latitude, longitude, nil];
+    NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length", @"street", @"city", @"zip", @"country", @"latitude", @"longitude", nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-    NSData *imageData = UIImageJPEGRepresentation(activityImage, 1.0);
     
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
     
-    NSMutableURLRequest *request = [[AFCanuAPIClient sharedClient] multipartFormRequestWithMethod:@"PUT" path:[NSString stringWithFormat:@"users/%lu/activities/%lu",(unsigned long)appDelegate.user.userId,(unsigned long)self.activityId] parameters:parameters constructingBodyWithBlock: ^(id <AFMultipartFormData>formData) {
-        [formData appendPartWithFileData:imageData name:@"image" fileName:@"activity.jpg" mimeType:@"image/jpeg"];
-    }];
-    
-    /*[operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-     NSLog(@"Sent %lld of %lld bytes", totalBytesWritten, totalBytesExpectedToWrite);
-     }];*/
-    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                                            //Activity *newActivity = [[Activity alloc] initWithAttributes:JSON];
-
-                                                                                            //[newActivity addNotification];
-                                                                                            //NSLog(@" sorry: %@",JSON);
-                                                                                            if (block) {
-                                                                                                block(nil);
-                                                                                            }
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                        }
-                                                                                        failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON){
-                                                                                            
-                                                                                            if (block) {
-                                                                                                
-                                                                                                NSLog(@"%@",error);
-                                                                                                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-                                                                                                block(error);
-                                                                                            }
-                                                                                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                                                                        }];
-    [operation start];
+    
+    NSString *url = [NSString stringWithFormat:@"users/%i/activities/%i",appDelegate.user.userId,self.activityId];
+    
+    [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        if (block) {
+            block(nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (block) {
+            
+            NSLog(@"%@",error);
+            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    }];
     
 }
 

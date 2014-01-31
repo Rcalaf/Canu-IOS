@@ -51,7 +51,19 @@
     self.descriptionError.textAlignment = NSTextAlignmentCenter;
     self.descriptionError.font = [UIFont fontWithName:@"Lato-Light" size:15];
     self.descriptionError.text = @"Server down";
+    self.descriptionError.numberOfLines = 5;
     [self.wrapperAlert addSubview:_descriptionError];
+    
+    if (_canuError == CANUErrorNoInternetConnection) {
+        self.titleError.text = @"No internet";
+        self.descriptionError.text = @"Please turn on your wifi";
+    } else if (_canuError == CANUErrorServerDown) {
+        self.titleError.text = @"Server down";
+        self.descriptionError.text = @"Our best chimpanzee Didirk works on this trouble";
+    } else if (_canuError == CANUErrorUnknown) {
+        self.titleError.text = @"Server broken";
+        self.descriptionError.text = @"Our best chimpanzee Didirk works on this trouble";
+    }
     
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapperBlack.alpha = 0.5;
