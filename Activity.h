@@ -77,7 +77,7 @@
 
 - (void)removeActivityWithBlock:(void (^)(NSError *error))block;
 
-- (void)attendees:(void (^)(NSArray *attendees, NSError *error))block;
+- (void)attendees:(void (^)(NSArray *attendees, NSArray *invitationUser, NSArray *invitationGhostuser, NSError *error))block;
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 

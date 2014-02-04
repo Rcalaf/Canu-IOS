@@ -12,6 +12,7 @@
 #import "AFCanuAPIClient.h"
 #import "AFNetworking.h"
 #import "UICanuActivityCell.h"
+#import "Contact.h"
 
 @interface Activity () <MKAnnotation>
 
@@ -258,7 +259,6 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         Activity *activity = [[Activity alloc] initWithAttributes:JSON];
-        // NSLog(@"%@",JSON);
         if (block) {
             block(activity, nil);
         }
@@ -285,7 +285,6 @@
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
-            NSLog(@"%@",activity.title);
             if (activity.activityId == self.activityId) _attendeeIds = activity.attendeeIds;
             //NSLog(@"%@",activity.attendeeIds);
             [mutableActivities addObject:activity];
@@ -360,26 +359,69 @@
     }];
 }
 
-- (void)attendees:(void (^)(NSArray *attendees, NSError *error))block{
-    //NSLog(@"Attendees called");
+- (void)attendees:(void (^)(NSArray *attendees, NSArray *invitationUser, NSArray *invitationGhostuser, NSError *error))block{
+    
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:appDelegate.user.userId],@"user_id", nil];
+    
     NSString *path = [NSString stringWithFormat:@"/activities/%lu/attendees",(unsigned long)self.activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
-        for (NSDictionary *attributes in JSON) {
-            User *user = [[User alloc] initWithAttributes:attributes];
-            [mutableActivities addObject:user];
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:appDelegate.user.token];
+    [[AFCanuAPIClient sharedClient] getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        NSMutableDictionary *mutableResponse = [NSMutableDictionary dictionaryWithDictionary:JSON];
+        
+        NSMutableArray *responseAttendees = [mutableResponse objectForKey:@"attendees"];
+        NSMutableArray *allAttendees = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [responseAttendees count]; i++) {
+            
+            User *user = [[User alloc] initWithAttributes:[[responseAttendees objectAtIndex:i] objectForKey:@"user"]];
+            [allAttendees addObject:user];
+            
         }
-      //  NSLog(@"%@",JSON);
+        
+        NSMutableArray *responseInvitationUser = [[mutableResponse objectForKey:@"invitation"] objectForKey:@"users"];
+        NSMutableArray *allInvitationUser = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [responseInvitationUser count]; i++) {
+            
+            User *user = [[User alloc] initWithAttributes:[[responseInvitationUser objectAtIndex:i] objectForKey:@"user"]];
+            [allInvitationUser addObject:user];
+            
+        }
+        
+        NSMutableArray *responseInvitationGhostuser = [[mutableResponse objectForKey:@"invitation"] objectForKey:@"ghostuser"];
+        NSMutableArray *allInvitationGhostuser = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [responseInvitationGhostuser count]; i++) {
+            
+            [allInvitationGhostuser addObject:[[[responseInvitationGhostuser objectAtIndex:i] objectForKey:@"ghostuser"] objectForKey:@"phone_number"]];
+            
+        }
         
         if (block) {
-            block([NSArray arrayWithArray:mutableActivities],nil);
+            block([NSArray arrayWithArray:allAttendees],[NSArray arrayWithArray:allInvitationUser],[NSArray arrayWithArray:allInvitationGhostuser],nil);
         }
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            block([NSArray array],error);
-        }
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block([NSArray alloc],[NSArray alloc],[NSArray alloc],customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"Activity" function:@"attendees:"];
+            }
+            
+        }];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
@@ -532,7 +574,6 @@
   
     objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithUnsignedLong:self.activityId],message,[NSNumber numberWithUnsignedLong:appDelegate.user.userId],nil];
     keysArray = [NSArray arrayWithObjects:@"activity_id",@"text",@"user_id",nil];
-    
     
     NSDictionary *user = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"message"]];

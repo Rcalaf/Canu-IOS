@@ -85,7 +85,7 @@
  *  @param arrayPhoneNumer Array with phone clean number
  *  @param block
  */
-- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUError,NSError *error))block;
+- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block;
 
 
 -(NSDictionary *)serialize;

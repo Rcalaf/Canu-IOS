@@ -18,12 +18,9 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
-#import <CoreTelephony/CTCarrier.h>
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-
 #import "Contact.h"
 
-#import <AddressBook/AddressBook.h>
+#import "PhoneBook.h"
 
 @interface NewActivityViewController () 
 
@@ -320,6 +317,8 @@ float oldValue;
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Open" value:nil] build]];
         
+        [self checkPhoneBook];
+        
         _length = 15;
          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         //_location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:appDelegate.currentLocation addressDictionary:nil]];
@@ -337,13 +336,6 @@ float oldValue;
              
              _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
              findLocationButton.userInteractionEnabled = YES;
-             
-             NSString * plistPath = [[NSBundle mainBundle] pathForResource:@"DiallingCodes" ofType:@"plist"];
-             NSDictionary *dictConvertion = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-             
-             NSString *countryCode = [dictConvertion objectForKey:[_location.placemark.ISOcountryCode lowercaseString]];
-             
-             [self checkPhoneBook:countryCode];
              
          }];
         /*locationManager = appDelegate.locationManager;
@@ -683,80 +675,38 @@ float oldValue;
 
 #pragma mark - Private
 
-- (void)checkPhoneBook:(NSString *)countryCode{
+- (void)checkPhoneBook{
     
-    NSMutableArray *phoneNumberClean = [[NSMutableArray alloc]init];
-    
-    CFErrorRef *error = nil;
-    
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
-    
-    __block BOOL accessGranted = NO;
-    if (ABAddressBookRequestAccessWithCompletion != NULL) {
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-            accessGranted = granted;
-            dispatch_semaphore_signal(sema);
-        });
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-    }
-    
-    if (accessGranted) {
+    [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
         
-        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
-        CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
-        CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
-        
-        for (int i = 0; i < nPeople; i++) {
+        if (error) {
             
-            ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+        } else {
             
-            ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            NSMutableArray *phoneNumberClean = [[NSMutableArray alloc]init];
             
-            NSString *theFinalPhoneNumber;
-            
-            for (int j = 0; j < ABMultiValueGetCount(multiPhones); j++) {
-                CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, 0);
-                NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
-                if (phoneNumber) {
-                    theFinalPhoneNumber = phoneNumber;
-                }
+            for (int i = 0; i < [arrayContact count]; i++) {
+                
+                Contact *contact = [arrayContact objectAtIndex:i];
+                [phoneNumberClean addObject:contact.convertNumber];
+                
             }
             
-            
-            if (theFinalPhoneNumber) {
+            if ([phoneNumberClean count] != 0) {
                 
-                NSString *firstNames = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
                 
-                NSString *lastNames =  (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
-                
-                NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstNames,lastNames];
-                
-                Contact *contact = [[Contact alloc]initWithFullName:fullName phoneNumber:theFinalPhoneNumber countryCode:countryCode];
-                
-                [phoneNumberClean addObject:contact.convertNumber];
+                [appDelegate.user checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
+                    
+                    self.DarrayCANUUser = arrayCANUUser;
+                    
+                }];
                 
             }
             
         }
         
-    } else {
-        NSLog(@"Cannot fetch Contacts :(");
-    }
-    
-    if ([phoneNumberClean count] != 0) {
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
-        [appDelegate.user checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUError, NSError *error) {
-            
-            NSLog(@"%@",arrayCANUError);
-            
-            self.DarrayCANUUser = arrayCANUError;
-            
-        }];
-        
-    }
+    }];
     
 }
 
@@ -771,6 +721,9 @@ float oldValue;
         [array addObject:user.phoneNumber];
         
     }
+    
+    [array addObject:[NSString stringWithFormat:@"+33630089952"]];
+    [array addObject:[NSString stringWithFormat:@"+33638365742"]];
     
     return array;
     

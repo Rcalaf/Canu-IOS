@@ -544,7 +544,7 @@
  *  @param arrayPhoneNumer Array with phone clean number
  *  @param block
  */
-- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUError,NSError *error))block{
+- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block{
     
     NSString *url = @"users/search/phonebook";
     
@@ -555,15 +555,15 @@
         
         NSArray *respond = (NSArray *)JSON;
         
-        NSMutableArray *arrayCANUError = [[NSMutableArray alloc]init];
+        NSMutableArray *arrayCANUUser = [[NSMutableArray alloc]init];
         
         for (int i = 0; i < [respond count]; i++) {
             User *user = [[User alloc]initWithAttributes:[respond objectAtIndex:i]];
-            [arrayCANUError addObject:user];
+            [arrayCANUUser addObject:user];
         }
         
         if (block) {
-            block(arrayCANUError,nil);
+            block(arrayCANUUser,nil);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         

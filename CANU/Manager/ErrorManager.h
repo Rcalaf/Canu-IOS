@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, CANUError) {
     CANUErrorUnknown = 0,               // Unknow error
     CANUErrorNoInternetConnection = 1,  // No internet connection
     CANUErrorServerDown = 2,            // The canu api server is down
+    CANUErrorPhoneBookRestricted = 3    // If We don't have access to the phone book
 };
 
 @interface ErrorManager : NSObject

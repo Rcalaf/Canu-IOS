@@ -219,7 +219,6 @@
     
     if (value == false && _profileView.profileHidden == false && _profileView) {
         [self showHideProfile];
-        NSLog(@"kjerhfkj");
     }
     
     self.localFeed.view.userInteractionEnabled = value;
@@ -231,7 +230,6 @@
 - (void)showHideProfile{
     
     if (!_profileView) {
-        NSLog(@"1");
         self.profileView = [[UIProfileView alloc] initWithUser:self.user WithBottomBar:NO AndNavigationchangement:NO OrTutorial:NO];
         [self.view addSubview:_profileView];
     }

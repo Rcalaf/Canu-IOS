@@ -35,4 +35,5 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFNetworking/AFImageRequestOperation.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFNetworking/AFNetworkActivityIndicatorManager.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFNetworking/UIImageView+AFNetworking.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/UICanuActivityCell.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/UICanuActivityCell.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/Contact/Contact.h
