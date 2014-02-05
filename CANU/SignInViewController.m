@@ -25,6 +25,7 @@
 @property (nonatomic) UIButton *backButton;
 @property (nonatomic) UIView *wrapper;
 @property (nonatomic) UIView *container;
+@property (nonatomic) UIView *resetContainer;
 @property (nonatomic) UIView *bottomBar;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic) UICanuTextField *userName;
@@ -83,7 +84,7 @@
     title1.font = [UIFont fontWithName:@"Lato-Bold" size:24];
     [self.container addSubview:title1];
     
-//    UITapGestureRecognizer *tapFacebookGrab = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forgotPassword)];
+    UITapGestureRecognizer *tapForgotPassword = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forgotPassword)];
     
     TTTAttributedLabel *labelForgotPassword = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(0, 50, 320, 20)];
     labelForgotPassword.text = NSLocalizedString(@"Forgot password", nil);
@@ -91,7 +92,7 @@
     labelForgotPassword.font = [UIFont fontWithName:@"Lato-Regular" size:14];
     labelForgotPassword.textAlignment = NSTextAlignmentCenter;
     labelForgotPassword.backgroundColor = [UIColor clearColor];
-//    [termsAmdPrivacy addGestureRecognizer:tapFacebookGrab];
+    [labelForgotPassword addGestureRecognizer:tapForgotPassword];
     [self.container addSubview:labelForgotPassword];
     
     [labelForgotPassword setText:labelForgotPassword.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
@@ -211,6 +212,91 @@
         }];
         [self.delegate signInGoBackHome];
     }];
+    
+}
+
+- (void)forgotPassword{
+    
+    self.resetContainer.frame = CGRectMake( 320, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185);
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.resetContainer.frame = CGRectMake( 0, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185);
+        self.container.frame = CGRectMake( -320, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185);
+    } completion:^(BOOL finished) {
+        [self.buttonAction setTitle:NSLocalizedString(@"RESET", nil) forState:UIControlStateNormal];
+        
+        [self.buttonAction removeTarget:self action:@selector(login) forControlEvents:UIControlEventTouchDown];
+        [self.buttonAction addTarget:self action:@selector(resetPassWord) forControlEvents:UIControlEventTouchDown];
+        
+        [self.backButton removeTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
+        [self.backButton addTarget:self action:@selector(backToSignIn) forControlEvents:UIControlEventTouchDown];
+    }];
+    
+}
+
+- (void)backToSignIn{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.resetContainer.frame = CGRectMake( 320, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185);
+        self.container.frame = CGRectMake( 0, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185);
+    } completion:^(BOOL finished) {
+        
+        [self.resetContainer removeFromSuperview];
+        
+        [self.buttonAction setTitle:NSLocalizedString(@"SIGN IN", nil) forState:UIControlStateNormal];
+        
+        [self.buttonAction removeTarget:self action:@selector(resetPassWord) forControlEvents:UIControlEventTouchDown];
+        [self.buttonAction addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchDown];
+        
+        [self.backButton removeTarget:self action:@selector(backToSignIn) forControlEvents:UIControlEventTouchDown];
+        [self.backButton addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
+    }];
+}
+
+- (UIView *)resetContainer{
+    
+    if (!_resetContainer) {
+        
+        _resetContainer = [[UIView alloc]initWithFrame:CGRectMake( 320, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185)];
+        [self.wrapper addSubview:_resetContainer];
+        
+        UILabel *title1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+        title1.text = NSLocalizedString(@"Reset Password", nil);
+        title1.textAlignment = NSTextAlignmentCenter;
+        title1.backgroundColor = [UIColor clearColor];
+        title1.textColor = UIColorFromRGB(0x1ca6c3);
+        title1.font = [UIFont fontWithName:@"Lato-Bold" size:24];
+        [_resetContainer addSubview:title1];
+        
+        TTTAttributedLabel *labelForgotPassword = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(0, 100, 320, 20)];
+        labelForgotPassword.text = NSLocalizedString(@"Check your email. Contact us if you need help", nil);
+        labelForgotPassword.textColor = UIColorFromRGB(0x1ca6c3);
+        labelForgotPassword.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+        labelForgotPassword.textAlignment = NSTextAlignmentCenter;
+        labelForgotPassword.backgroundColor = [UIColor clearColor];
+        [_resetContainer addSubview:labelForgotPassword];
+        
+        [labelForgotPassword setText:labelForgotPassword.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+            
+            NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Contact us", nil) options:NSCaseInsensitiveSearch];
+            
+            [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
+            
+            return mutableAttributedString;
+            
+        }];
+        
+        UICanuTextField *email = [[UICanuTextField alloc] initWithFrame:CGRectMake(10, 128, 300, 47.0)];
+        email.placeholder = NSLocalizedString(@"your email or phone number", nil);
+        [email setReturnKeyType:UIReturnKeyGo];
+        [_resetContainer addSubview:email];
+        
+    }
+    
+    return _resetContainer;
+    
+}
+
+- (void)resetPassWord{
     
 }
 
