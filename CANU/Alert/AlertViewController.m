@@ -7,6 +7,7 @@
 //
 
 #import "AlertViewController.h"
+#import "UICanuButtonSignBottomBar.h"
 
 @interface AlertViewController ()
 
@@ -14,6 +15,7 @@
 @property (strong, nonatomic) UIView *wrapperAlert;
 @property (strong, nonatomic) UILabel *titleError;
 @property (strong, nonatomic) UILabel *descriptionError;
+@property (strong, nonatomic) UICanuButtonSignBottomBar *buttonAction;
 
 @end
 
@@ -65,10 +67,23 @@
         self.descriptionError.text = @"Our best chimpanzee Didirk works on this trouble";
     }
     
+    self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(10, 250 - 37 - 10, self.view.frame.size.width - 20, 37.0) andBlue:YES];
+    [self.buttonAction setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    [self.buttonAction addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchDown];
+    [self.wrapperAlert  addSubview:_buttonAction];
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapperBlack.alpha = 0.5;
         self.wrapperAlert.alpha = 1;
     }];
+    
+}
+
+- (void)back{
+    
+    [self willMoveToParentViewController:nil];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
     
 }
 
