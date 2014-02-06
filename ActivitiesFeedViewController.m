@@ -114,6 +114,9 @@
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
     
+    self.animationCreateActivity = [[AnimationCreateActivity alloc]init];
+    [self.view addSubview:_animationCreateActivity];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadActivity) name:@"reloadActivity" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadLocal) name:@"reloadLocal" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTribes) name:@"reloadTribes" object:nil];

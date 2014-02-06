@@ -86,6 +86,15 @@
 		1E814CF9187C495D0013E238 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
+		1E9F313618A24C470008ADF1 /* AnimationCreateActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9F313518A24C470008ADF1 /* AnimationCreateActivity.m */; };
+		1E9F313C18A2A90D0008ADF1 /* AnimationCreateActivity_local.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F313818A2A90D0008ADF1 /* AnimationCreateActivity_local.png */; };
+		1E9F313D18A2A90D0008ADF1 /* AnimationCreateActivity_local@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F313918A2A90D0008ADF1 /* AnimationCreateActivity_local@2x.png */; };
+		1E9F313E18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F313A18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png */; };
+		1E9F313F18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F313B18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png */; };
+		1E9F314218A396EA0008ADF1 /* AnimationCreateActivity_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314018A396EA0008ADF1 /* AnimationCreateActivity_cloud.png */; };
+		1E9F314318A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314118A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png */; };
+		1E9F314618A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314418A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png */; };
+		1E9F314718A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314518A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png */; };
 		1E9FB0281892685300B70E8B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FB0271892685300B70E8B /* Reachability.m */; };
 		1E9FB02F18929CCE00B70E8B /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FB02E18929CCE00B70E8B /* AlertViewController.m */; };
 		1E9FB9EC18619A0400085421 /* loader-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C418619A0400085421 /* loader-2.png */; };
@@ -419,6 +428,16 @@
 		1E814CFA187C49F30013E238 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
+		1E9F313418A24C470008ADF1 /* AnimationCreateActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationCreateActivity.h; path = Views/AnimationCreateActivity/AnimationCreateActivity.h; sourceTree = "<group>"; };
+		1E9F313518A24C470008ADF1 /* AnimationCreateActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AnimationCreateActivity.m; path = Views/AnimationCreateActivity/AnimationCreateActivity.m; sourceTree = "<group>"; };
+		1E9F313818A2A90D0008ADF1 /* AnimationCreateActivity_local.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimationCreateActivity_local.png; sourceTree = "<group>"; };
+		1E9F313918A2A90D0008ADF1 /* AnimationCreateActivity_local@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AnimationCreateActivity_local@2x.png"; sourceTree = "<group>"; };
+		1E9F313A18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimationCreateActivity_tribes.png; sourceTree = "<group>"; };
+		1E9F313B18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AnimationCreateActivity_tribes@2x.png"; sourceTree = "<group>"; };
+		1E9F314018A396EA0008ADF1 /* AnimationCreateActivity_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimationCreateActivity_cloud.png; sourceTree = "<group>"; };
+		1E9F314118A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AnimationCreateActivity_cloud@2x.png"; sourceTree = "<group>"; };
+		1E9F314418A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimationCreateActivity_cloud_2.png; sourceTree = "<group>"; };
+		1E9F314518A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AnimationCreateActivity_cloud_2@2x.png"; sourceTree = "<group>"; };
 		1E9FB0261892685300B70E8B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1E9FB0271892685300B70E8B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1E9FB02D18929CCE00B70E8B /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertViewController.h; path = Alert/AlertViewController.h; sourceTree = "<group>"; };
@@ -737,6 +756,7 @@
 		1E3A6B76188595C2007FB6BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E9F313318A24BE10008ADF1 /* AnimationCreateActivity */,
 				1E7138BE188DE6BF00137A48 /* Tutorial */,
 				1E3A6B77188595D2007FB6BA /* SignUp */,
 			);
@@ -865,6 +885,31 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		1E9F313318A24BE10008ADF1 /* AnimationCreateActivity */ = {
+			isa = PBXGroup;
+			children = (
+				1E9F313418A24C470008ADF1 /* AnimationCreateActivity.h */,
+				1E9F313518A24C470008ADF1 /* AnimationCreateActivity.m */,
+			);
+			name = AnimationCreateActivity;
+			sourceTree = "<group>";
+		};
+		1E9F313718A2A90D0008ADF1 /* AnimationcreateActivity */ = {
+			isa = PBXGroup;
+			children = (
+				1E9F314418A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png */,
+				1E9F314518A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png */,
+				1E9F314018A396EA0008ADF1 /* AnimationCreateActivity_cloud.png */,
+				1E9F314118A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png */,
+				1E9F313818A2A90D0008ADF1 /* AnimationCreateActivity_local.png */,
+				1E9F313918A2A90D0008ADF1 /* AnimationCreateActivity_local@2x.png */,
+				1E9F313A18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png */,
+				1E9F313B18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png */,
+			);
+			name = AnimationcreateActivity;
+			path = Ressources/Animations/AnimationcreateActivity;
+			sourceTree = "<group>";
+		};
 		1E9FB0251892685300B70E8B /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,6 +950,7 @@
 		1EEA97F01859D33500EA9E02 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				1E9F313718A2A90D0008ADF1 /* AnimationcreateActivity */,
 				1EEA97F91859FF4D00EA9E02 /* Loader */,
 				1E0EDCE7187DB6DC00088B8A /* fullview_action_circle_go.png */,
 				1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */,
@@ -1600,6 +1646,7 @@
 				DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */,
 				DE4D95301742A00700FB026F /* scroll_content.png in Resources */,
 				DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */,
+				1E9F314218A396EA0008ADF1 /* AnimationCreateActivity_cloud.png in Resources */,
 				1E608BC3188F150800BED835 /* Tutorial_Step2.png in Resources */,
 				1E9FB9FE18619A0400085421 /* loader-11.png in Resources */,
 				1E9FBA0E18619A0400085421 /* loop_2.png in Resources */,
@@ -1639,6 +1686,7 @@
 				DE60782D182BD08D0053F23B /* hello_bg.png in Resources */,
 				1E9FB9FF18619A0400085421 /* loader-11@2x.png in Resources */,
 				DEFD7A861746F7650087CB8A /* feedback_bad@2x.png in Resources */,
+				1E9F313E18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png in Resources */,
 				1E9FB9EE18619A0400085421 /* loader-3.png in Resources */,
 				DEFD7A871746F7650087CB8A /* feedback_good.png in Resources */,
 				1E9FBA0318619A0400085421 /* loader-13@2x.png in Resources */,
@@ -1679,9 +1727,11 @@
 				1E9FBA0518619A0400085421 /* loader-14@2x.png in Resources */,
 				1E7138C5188E86C700137A48 /* Lato-LigIta.ttf in Resources */,
 				DE774B46184E129100F8C244 /* navmenu_me.png in Resources */,
+				1E9F313D18A2A90D0008ADF1 /* AnimationCreateActivity_local@2x.png in Resources */,
 				DE6ED8BA17BD0FE900C5E72E /* feed_action_edit.png in Resources */,
 				1EEA9866185B5E7400EA9E02 /* feed_shadow_name@2x.png in Resources */,
 				DE6ED8BB17BD0FE900C5E72E /* feed_action_edit@2x.png in Resources */,
+				1E9F314318A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png in Resources */,
 				DE6ED8BC17BD0FE900C5E72E /* feed_action_go.png in Resources */,
 				DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */,
 				DE6ED8BD17BD0FE900C5E72E /* feed_action_go@2x.png in Resources */,
@@ -1726,6 +1776,7 @@
 				1E7A5697188F1E4F00CB5C4A /* Tutorial_Step3.png in Resources */,
 				DE6ED9C617C2958100C5E72E /* fullview_action_yes@2x.png in Resources */,
 				1E9FB9FC18619A0400085421 /* loader-10.png in Resources */,
+				1E9F313F18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png in Resources */,
 				DE774B48184E129100F8C244 /* navmenu_me@2x.png in Resources */,
 				1E9FB9F618619A0400085421 /* loader-7.png in Resources */,
 				1E7A569E188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png in Resources */,
@@ -1752,6 +1803,7 @@
 				1E9FBA0218619A0400085421 /* loader-13.png in Resources */,
 				DE774B41184E0FDD00F8C244 /* guide_step_4@2x.png in Resources */,
 				1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */,
+				1E9F313C18A2A90D0008ADF1 /* AnimationCreateActivity_local.png in Resources */,
 				1E9FBA0718619A0400085421 /* loader-15@2x.png in Resources */,
 				DE774B3B184E0FDD00F8C244 /* guide_step_2@2x.png in Resources */,
 				1E3A6B93188976E1007FB6BA /* User_image_edit@2x.png in Resources */,
@@ -1773,6 +1825,7 @@
 				DE936C81180B39BD0058608D /* Images.xcassets in Resources */,
 				DE67FDDE17CA66DD00240E1C /* guide_btn_start.png in Resources */,
 				DE67FDDF17CA66DD00240E1C /* guide_btn_start@2x.png in Resources */,
+				1E9F314618A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png in Resources */,
 				DE67FDF117CA6AB100240E1C /* guide_btn_skip.png in Resources */,
 				1E9FB9FB18619A0400085421 /* loader-9@2x.png in Resources */,
 				DE60782E182BD08D0053F23B /* hello_bg@2x.png in Resources */,
@@ -1794,6 +1847,7 @@
 				1E3A6B98188993DE007FB6BA /* NavBox_Tribes@2x.png in Resources */,
 				DE67FE2217CA704F00240E1C /* guide_step_5@2x.png in Resources */,
 				DED1243117CCFDFD000EE414 /* map_pin.png in Resources */,
+				1E9F314718A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png in Resources */,
 				DED1243217CCFDFD000EE414 /* map_pin@2x.png in Resources */,
 				DED1243E17CFC630000EE414 /* fullview_bg-568h@2x.png in Resources */,
 				DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */,
@@ -1865,6 +1919,7 @@
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
 				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
 				DE5599B21836491200FE32E9 /* Message.m in Sources */,
+				1E9F313618A24C470008ADF1 /* AnimationCreateActivity.m in Sources */,
 				1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */,
 				1E3A6B7A18859649007FB6BA /* CheckPhoneNumber.m in Sources */,
 				1EEA97EB1858721F00EA9E02 /* UICanuActivityCellScroll.m in Sources */,

@@ -36,6 +36,38 @@
 		<data>
 		kozJWJFSNE8aXnLQaOxguoZ+Dek=
 		</data>
+		<key>AnimationCreateActivity_cloud.png</key>
+		<data>
+		VuUKyWr8shNs52U7RwwttpjK2lk=
+		</data>
+		<key>AnimationCreateActivity_cloud@2x.png</key>
+		<data>
+		HojbtMIK3Wry08midIPLhvgmCmY=
+		</data>
+		<key>AnimationCreateActivity_cloud_2.png</key>
+		<data>
+		DJHYvr2GMuAZea0898qoJ/VAPx0=
+		</data>
+		<key>AnimationCreateActivity_cloud_2@2x.png</key>
+		<data>
+		cOA+UmjcWUnBBF7iDEJK7j89Atk=
+		</data>
+		<key>AnimationCreateActivity_local.png</key>
+		<data>
+		AiUqrBSuB6K1BO6PCtSTMt9sWEU=
+		</data>
+		<key>AnimationCreateActivity_local@2x.png</key>
+		<data>
+		03JLUSZ71eHTNbf4WG/sGHEe+fI=
+		</data>
+		<key>AnimationCreateActivity_tribes.png</key>
+		<data>
+		hPxXPhA73RfE0yER85CeNQwNkbo=
+		</data>
+		<key>AnimationCreateActivity_tribes@2x.png</key>
+		<data>
+		MkXOYDzmMt0vA9hQmplLinC0Cg8=
+		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
 		wIhTIrL91MPb7ho5LuHkBXNw2Ds=
@@ -826,7 +858,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		Gq9+fUynlHM9GkL19jxeUBO5iQk=
+		S34S6nIJzbXBgJCXDOShbGfTmz0=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -1391,6 +1423,38 @@
 		<data>
 		kozJWJFSNE8aXnLQaOxguoZ+Dek=
 		</data>
+		<key>AnimationCreateActivity_cloud.png</key>
+		<data>
+		VuUKyWr8shNs52U7RwwttpjK2lk=
+		</data>
+		<key>AnimationCreateActivity_cloud@2x.png</key>
+		<data>
+		HojbtMIK3Wry08midIPLhvgmCmY=
+		</data>
+		<key>AnimationCreateActivity_cloud_2.png</key>
+		<data>
+		DJHYvr2GMuAZea0898qoJ/VAPx0=
+		</data>
+		<key>AnimationCreateActivity_cloud_2@2x.png</key>
+		<data>
+		cOA+UmjcWUnBBF7iDEJK7j89Atk=
+		</data>
+		<key>AnimationCreateActivity_local.png</key>
+		<data>
+		AiUqrBSuB6K1BO6PCtSTMt9sWEU=
+		</data>
+		<key>AnimationCreateActivity_local@2x.png</key>
+		<data>
+		03JLUSZ71eHTNbf4WG/sGHEe+fI=
+		</data>
+		<key>AnimationCreateActivity_tribes.png</key>
+		<data>
+		hPxXPhA73RfE0yER85CeNQwNkbo=
+		</data>
+		<key>AnimationCreateActivity_tribes@2x.png</key>
+		<data>
+		MkXOYDzmMt0vA9hQmplLinC0Cg8=
+		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
 		wIhTIrL91MPb7ho5LuHkBXNw2Ds=
@@ -2181,7 +2245,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		Gq9+fUynlHM9GkL19jxeUBO5iQk=
+		S34S6nIJzbXBgJCXDOShbGfTmz0=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>

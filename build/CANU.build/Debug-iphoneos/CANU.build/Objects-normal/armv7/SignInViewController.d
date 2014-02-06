@@ -27,6 +27,7 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../ActivitiesFeedViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/ActivityScrollViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/UICanuCell/UICanuActivityCellScroll.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/AnimationCreateActivity/AnimationCreateActivity.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFCanuAPIClient.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFNetworking/AFHTTPClient.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/AFNetworking/AFURLConnectionOperation.h \

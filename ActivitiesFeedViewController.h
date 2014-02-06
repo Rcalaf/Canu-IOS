@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ActivityScrollViewController.h"
 
+#import "AnimationCreateActivity.h"
 
 @interface ActivitiesFeedViewController : UIViewController
+
+@property (strong, nonatomic) AnimationCreateActivity *animationCreateActivity;
 
 - (void)userInteractionFeedEnable:(BOOL)value;
 

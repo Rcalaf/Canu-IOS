@@ -39,6 +39,7 @@ typedef enum {
 
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
+@property (nonatomic) BOOL loadFirstTime;
 @property (nonatomic) NSMutableArray *arrayCell;
 @property (nonatomic) UIImageView *imageEmptyFeed;
 @property (nonatomic) UITextView *feedbackMessage;
@@ -80,6 +81,8 @@ typedef enum {
         self.isFirstTime = YES;
         
         self.isEmpty = YES;
+        
+        self.loadFirstTime = NO;
         
         [self.locationManager startUpdatingLocation];
         
@@ -157,7 +160,10 @@ typedef enum {
     
     [self.locationManager stopUpdatingLocation];
     
-    [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+    if (!_loadFirstTime) {
+        self.loadFirstTime = YES;
+        [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+    }
     
 }
 
