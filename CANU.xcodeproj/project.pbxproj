@@ -95,6 +95,7 @@
 		1E9F314318A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314118A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png */; };
 		1E9F314618A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314418A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png */; };
 		1E9F314718A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F314518A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png */; };
+		1E9F314A18A3F2460008ADF1 /* CreateEditActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9F314918A3F2460008ADF1 /* CreateEditActivityViewController.m */; };
 		1E9FB0281892685300B70E8B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FB0271892685300B70E8B /* Reachability.m */; };
 		1E9FB02F18929CCE00B70E8B /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9FB02E18929CCE00B70E8B /* AlertViewController.m */; };
 		1E9FB9EC18619A0400085421 /* loader-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9FB9C418619A0400085421 /* loader-2.png */; };
@@ -438,6 +439,8 @@
 		1E9F314118A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AnimationCreateActivity_cloud@2x.png"; sourceTree = "<group>"; };
 		1E9F314418A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimationCreateActivity_cloud_2.png; sourceTree = "<group>"; };
 		1E9F314518A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AnimationCreateActivity_cloud_2@2x.png"; sourceTree = "<group>"; };
+		1E9F314818A3F2460008ADF1 /* CreateEditActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateEditActivityViewController.h; path = CANU/Activities/CreateEditActivityViewController.h; sourceTree = "<group>"; };
+		1E9F314918A3F2460008ADF1 /* CreateEditActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateEditActivityViewController.m; path = CANU/Activities/CreateEditActivityViewController.m; sourceTree = "<group>"; };
 		1E9FB0261892685300B70E8B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1E9FB0271892685300B70E8B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1E9FB02D18929CCE00B70E8B /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertViewController.h; path = Alert/AlertViewController.h; sourceTree = "<group>"; };
@@ -1257,6 +1260,8 @@
 				DEB29C111799C2C800D9FFAE /* FindLocationsViewController.h */,
 				DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */,
 				DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */,
+				1E9F314818A3F2460008ADF1 /* CreateEditActivityViewController.h */,
+				1E9F314918A3F2460008ADF1 /* CreateEditActivityViewController.m */,
 				DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */,
 				DE81F8B0175E4D9E00AD1071 /* NewActivityViewController.m */,
 				DEB29BC81796EE8600D9FFAE /* ActivitiesFeedViewController.h */,
@@ -1925,6 +1930,7 @@
 				1EEA97EB1858721F00EA9E02 /* UICanuActivityCellScroll.m in Sources */,
 				DEAE0B7A17C9540200EEB078 /* MKCanuAnnotationView.m in Sources */,
 				DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */,
+				1E9F314A18A3F2460008ADF1 /* CreateEditActivityViewController.m in Sources */,
 				1EEA9850185A033500EA9E02 /* AttendeesScrollViewController.m in Sources */,
 				1E7138B9188DDC1000137A48 /* TutorialViewController.m in Sources */,
 				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,

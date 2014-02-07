@@ -8,6 +8,10 @@
 
 #import "AnimationCreateActivity.h"
 
+#import "AppDelegate.h"
+
+#import "CreateEditActivityViewController.h"
+
 typedef enum {
     AreaTribes = 110,
     AreaLocal = 280,
@@ -156,6 +160,11 @@ static int const CANUSizeTransition = 70;
  */
 - (void)stopViewFor:(CANUCreateActivity)canuCreateActivity{
     
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    UINavigationController *navigation = (UINavigationController *)appDelegate.canuViewController;
+    
+    CreateEditActivityViewController *createView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
+    
     if (_noChoice) {
         
         int position = 0;
@@ -177,11 +186,13 @@ static int const CANUSizeTransition = 70;
         [UIView animateWithDuration:0.2 animations:^{
             [self animateWithPosition:position];
         } completion:^(BOOL finished) {
+            [navigation presentViewController:createView animated:NO completion:nil];
             self.active = NO;
             self.frame = CGRectMake(0, 0, 0, 0);
         }];
         
     } else {
+        [navigation presentViewController:createView animated:NO completion:nil];
         self.active = NO;
         self.frame = CGRectMake(0, 0, 0, 0);
     }
