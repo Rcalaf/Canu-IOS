@@ -84,3 +84,11 @@
 "No Internet Connection" = "No Internet Connection";
 "Please change this little thing" = "Please change this little thing";
 "OK" = "OK";
+
+// Create
+
+"What do you want to do?" = "What do you want to do?";
+"Today" = "Today";
+"Tomorrow" = "Tomorrow";
+"Location" = "Location";
+"Who is invited ?" = "Who is invited ?";

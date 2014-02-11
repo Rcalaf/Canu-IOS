@@ -205,7 +205,7 @@ typedef enum {
             canuCreateActivity = CANUCreateActivityTribes;
 //            NewActivityViewController *nac = [[NewActivityViewController alloc] init];
 //            [self presentViewController:nac animated:YES completion:nil];
-        } else if (positionToBottom > AreaTribes){
+        } else if (positionToBottom > AreaTribes) {
             NSLog(@"Local");
             canuCreateActivity = CANUCreateActivityLocal;
 //            NewActivityViewController *nac = [[NewActivityViewController alloc] init];

@@ -46,6 +46,16 @@
 		1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E608BBF188F141F00BED835 /* TutorialStepTribes.m */; };
 		1E608BC3188F150800BED835 /* Tutorial_Step2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E608BC1188F150800BED835 /* Tutorial_Step2.png */; };
 		1E608BC4188F150800BED835 /* Tutorial_Step2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E608BC2188F150800BED835 /* Tutorial_Step2@2x.png */; };
+		1E6D2A3A18A513CC0066D266 /* F1_add_description.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E6D2A3818A513CC0066D266 /* F1_add_description.png */; };
+		1E6D2A3B18A513CC0066D266 /* F1_add_description@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E6D2A3918A513CC0066D266 /* F1_add_description@2x.png */; };
+		1E6D2A4118A5185E0066D266 /* UICanuButtonSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4018A5185E0066D266 /* UICanuButtonSelect.m */; };
+		1E6D2A4418A52CDB0066D266 /* F1_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4218A52CDB0066D266 /* F1_calendar.png */; };
+		1E6D2A4518A52CDB0066D266 /* F1_calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4318A52CDB0066D266 /* F1_calendar@2x.png */; };
+		1E6D2A4918A533430066D266 /* UICanuTimePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4818A533430066D266 /* UICanuTimePicker.m */; };
+		1E6D2A4C18A536FF0066D266 /* UICanuLenghtPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4B18A536FF0066D266 /* UICanuLenghtPicker.m */; };
+		1E6D2A4F18A5380A0066D266 /* F1_time_picker.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4D18A5380A0066D266 /* F1_time_picker.png */; };
+		1E6D2A5018A5380A0066D266 /* F1_time_picker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E6D2A4E18A5380A0066D266 /* F1_time_picker@2x.png */; };
+		1E6D2A5318A53A850066D266 /* UICanuScrollPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6D2A5218A53A850066D266 /* UICanuScrollPicker.m */; };
 		1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E70867918996FE000328F76 /* AddressBook.framework */; };
 		1E70867D189A849300328F76 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70867C189A849300328F76 /* Contact.m */; };
 		1E708680189A977100328F76 /* DiallingCodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E70867F189A977100328F76 /* DiallingCodes.plist */; };
@@ -85,6 +95,11 @@
 		1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A56A2188FDB7B00CB5C4A /* TutorialStepFinal.m */; };
 		1E814CF9187C495D0013E238 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
+		1E87E07F18A911DC00840655 /* UICanuAMPMPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E87E07E18A911DC00840655 /* UICanuAMPMPicker.m */; };
+		1E87E08218A932BB00840655 /* F1_lenght_picker.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E87E08018A932BB00840655 /* F1_lenght_picker.png */; };
+		1E87E08318A932BB00840655 /* F1_lenght_picker@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E87E08118A932BB00840655 /* F1_lenght_picker@2x.png */; };
+		1E87E08618AA33EF00840655 /* F1_open_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E87E08418AA33EF00840655 /* F1_open_map.png */; };
+		1E87E08718AA33EF00840655 /* F1_open_map@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E87E08518AA33EF00840655 /* F1_open_map@2x.png */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
 		1E9F313618A24C470008ADF1 /* AnimationCreateActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9F313518A24C470008ADF1 /* AnimationCreateActivity.m */; };
 		1E9F313C18A2A90D0008ADF1 /* AnimationCreateActivity_local.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9F313818A2A90D0008ADF1 /* AnimationCreateActivity_local.png */; };
@@ -375,6 +390,20 @@
 		1E608BBF188F141F00BED835 /* TutorialStepTribes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialStepTribes.m; path = Views/Tutorial/TutorialStepTribes.m; sourceTree = "<group>"; };
 		1E608BC1188F150800BED835 /* Tutorial_Step2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tutorial_Step2.png; path = Ressources/Backgrounds/Tutorial_Step2.png; sourceTree = "<group>"; };
 		1E608BC2188F150800BED835 /* Tutorial_Step2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tutorial_Step2@2x.png"; path = "Ressources/Backgrounds/Tutorial_Step2@2x.png"; sourceTree = "<group>"; };
+		1E6D2A3818A513CC0066D266 /* F1_add_description.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_add_description.png; path = Ressources/Buttons/F1_add_description.png; sourceTree = "<group>"; };
+		1E6D2A3918A513CC0066D266 /* F1_add_description@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_add_description@2x.png"; path = "Ressources/Buttons/F1_add_description@2x.png"; sourceTree = "<group>"; };
+		1E6D2A3F18A5185E0066D266 /* UICanuButtonSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonSelect.h; path = Vendor/UICanuButton/UICanuButtonSelect.h; sourceTree = "<group>"; };
+		1E6D2A4018A5185E0066D266 /* UICanuButtonSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonSelect.m; path = Vendor/UICanuButton/UICanuButtonSelect.m; sourceTree = "<group>"; };
+		1E6D2A4218A52CDB0066D266 /* F1_calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_calendar.png; path = Ressources/Buttons/F1_calendar.png; sourceTree = "<group>"; };
+		1E6D2A4318A52CDB0066D266 /* F1_calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_calendar@2x.png"; path = "Ressources/Buttons/F1_calendar@2x.png"; sourceTree = "<group>"; };
+		1E6D2A4718A533430066D266 /* UICanuTimePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuTimePicker.h; path = Vendor/UIPicker/UICanuTimePicker.h; sourceTree = "<group>"; };
+		1E6D2A4818A533430066D266 /* UICanuTimePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuTimePicker.m; path = Vendor/UIPicker/UICanuTimePicker.m; sourceTree = "<group>"; };
+		1E6D2A4A18A536FF0066D266 /* UICanuLenghtPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLenghtPicker.h; path = Vendor/UIPicker/UICanuLenghtPicker.h; sourceTree = "<group>"; };
+		1E6D2A4B18A536FF0066D266 /* UICanuLenghtPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLenghtPicker.m; path = Vendor/UIPicker/UICanuLenghtPicker.m; sourceTree = "<group>"; };
+		1E6D2A4D18A5380A0066D266 /* F1_time_picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_time_picker.png; path = Ressources/Backgrounds/F1_time_picker.png; sourceTree = "<group>"; };
+		1E6D2A4E18A5380A0066D266 /* F1_time_picker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_time_picker@2x.png"; path = "Ressources/Backgrounds/F1_time_picker@2x.png"; sourceTree = "<group>"; };
+		1E6D2A5118A53A850066D266 /* UICanuScrollPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuScrollPicker.h; path = Vendor/UIPicker/UICanuScrollPicker.h; sourceTree = "<group>"; };
+		1E6D2A5218A53A850066D266 /* UICanuScrollPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuScrollPicker.m; path = Vendor/UIPicker/UICanuScrollPicker.m; sourceTree = "<group>"; };
 		1E70867918996FE000328F76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1E70867B189A849300328F76 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = CANU/Models/Contact/Contact.h; sourceTree = "<group>"; };
 		1E70867C189A849300328F76 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contact.m; path = CANU/Models/Contact/Contact.m; sourceTree = "<group>"; };
@@ -427,6 +456,12 @@
 		1E814CF7187C495D0013E238 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		1E814CF8187C495D0013E238 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		1E814CFA187C49F30013E238 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1E87E07D18A911DC00840655 /* UICanuAMPMPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuAMPMPicker.h; path = Vendor/UIPicker/UICanuAMPMPicker.h; sourceTree = "<group>"; };
+		1E87E07E18A911DC00840655 /* UICanuAMPMPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuAMPMPicker.m; path = Vendor/UIPicker/UICanuAMPMPicker.m; sourceTree = "<group>"; };
+		1E87E08018A932BB00840655 /* F1_lenght_picker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_lenght_picker.png; path = Ressources/Backgrounds/F1_lenght_picker.png; sourceTree = "<group>"; };
+		1E87E08118A932BB00840655 /* F1_lenght_picker@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_lenght_picker@2x.png"; path = "Ressources/Backgrounds/F1_lenght_picker@2x.png"; sourceTree = "<group>"; };
+		1E87E08418AA33EF00840655 /* F1_open_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_open_map.png; path = Ressources/Buttons/F1_open_map.png; sourceTree = "<group>"; };
+		1E87E08518AA33EF00840655 /* F1_open_map@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_open_map@2x.png"; path = "Ressources/Buttons/F1_open_map@2x.png"; sourceTree = "<group>"; };
 		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
 		1E9F313418A24C470008ADF1 /* AnimationCreateActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationCreateActivity.h; path = Views/AnimationCreateActivity/AnimationCreateActivity.h; sourceTree = "<group>"; };
@@ -742,6 +777,8 @@
 			children = (
 				1E3A6B4C18842610007FB6BA /* UICanuButtonSignBottomBar.h */,
 				1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */,
+				1E6D2A3F18A5185E0066D266 /* UICanuButtonSelect.h */,
+				1E6D2A4018A5185E0066D266 /* UICanuButtonSelect.m */,
 			);
 			name = UICanuButton;
 			sourceTree = "<group>";
@@ -818,6 +855,21 @@
 				1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */,
 			);
 			name = UICanuLabel;
+			sourceTree = "<group>";
+		};
+		1E6D2A4618A5330B0066D266 /* UIPicker */ = {
+			isa = PBXGroup;
+			children = (
+				1E6D2A4718A533430066D266 /* UICanuTimePicker.h */,
+				1E6D2A4818A533430066D266 /* UICanuTimePicker.m */,
+				1E6D2A4A18A536FF0066D266 /* UICanuLenghtPicker.h */,
+				1E6D2A4B18A536FF0066D266 /* UICanuLenghtPicker.m */,
+				1E6D2A5118A53A850066D266 /* UICanuScrollPicker.h */,
+				1E6D2A5218A53A850066D266 /* UICanuScrollPicker.m */,
+				1E87E07D18A911DC00840655 /* UICanuAMPMPicker.h */,
+				1E87E07E18A911DC00840655 /* UICanuAMPMPicker.m */,
+			);
+			name = UIPicker;
 			sourceTree = "<group>";
 		};
 		1E70867E189A849900328F76 /* Contact */ = {
@@ -1176,6 +1228,10 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E87E08018A932BB00840655 /* F1_lenght_picker.png */,
+				1E87E08118A932BB00840655 /* F1_lenght_picker@2x.png */,
+				1E6D2A4D18A5380A0066D266 /* F1_time_picker.png */,
+				1E6D2A4E18A5380A0066D266 /* F1_time_picker@2x.png */,
 				1E7A5699188FD75B00CB5C4A /* Tutorial_Step5_line.png */,
 				1E7A569A188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png */,
 				1E7A569B188FD75B00CB5C4A /* Tutorial_Step5.png */,
@@ -1379,6 +1435,7 @@
 		DEA93B4117204EDC00303BB5 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				1E6D2A4618A5330B0066D266 /* UIPicker */,
 				1E3A6B8718896FC1007FB6BA /* Shadow */,
 				1E3A6B4B188425C9007FB6BA /* UICanuButton */,
 				1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */,
@@ -1548,6 +1605,12 @@
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				1E87E08418AA33EF00840655 /* F1_open_map.png */,
+				1E87E08518AA33EF00840655 /* F1_open_map@2x.png */,
+				1E6D2A4218A52CDB0066D266 /* F1_calendar.png */,
+				1E6D2A4318A52CDB0066D266 /* F1_calendar@2x.png */,
+				1E6D2A3818A513CC0066D266 /* F1_add_description.png */,
+				1E6D2A3918A513CC0066D266 /* F1_add_description@2x.png */,
 				1E3A6B90188976E1007FB6BA /* User_image_edit.png */,
 				1E3A6B91188976E1007FB6BA /* User_image_edit@2x.png */,
 				1E3A6B8C18897549007FB6BA /* User_settings.png */,
@@ -1653,6 +1716,7 @@
 				DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */,
 				1E9F314218A396EA0008ADF1 /* AnimationCreateActivity_cloud.png in Resources */,
 				1E608BC3188F150800BED835 /* Tutorial_Step2.png in Resources */,
+				1E87E08618AA33EF00840655 /* F1_open_map.png in Resources */,
 				1E9FB9FE18619A0400085421 /* loader-11.png in Resources */,
 				1E9FBA0E18619A0400085421 /* loop_2.png in Resources */,
 				DE4D95351742A6F700FB026F /* Lato-Bol.ttf in Resources */,
@@ -1688,6 +1752,7 @@
 				DEFD7A801746CACA0087CB8A /* icon_userpic@2x.png in Resources */,
 				DEFD7A851746F7650087CB8A /* feedback_bad.png in Resources */,
 				1E7A56A0188FD75B00CB5C4A /* Tutorial_Step5@2x.png in Resources */,
+				1E87E08218A932BB00840655 /* F1_lenght_picker.png in Resources */,
 				DE60782D182BD08D0053F23B /* hello_bg.png in Resources */,
 				1E9FB9FF18619A0400085421 /* loader-11@2x.png in Resources */,
 				DEFD7A861746F7650087CB8A /* feedback_bad@2x.png in Resources */,
@@ -1698,6 +1763,7 @@
 				DEFD7A881746F7650087CB8A /* feedback_good@2x.png in Resources */,
 				DEFD7A971747F8370087CB8A /* icon.png in Resources */,
 				1E9FB9F818619A0400085421 /* loader-8.png in Resources */,
+				1E87E08718AA33EF00840655 /* F1_open_map@2x.png in Resources */,
 				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
 				1E7138B6188D5B2900137A48 /* Activity_Empty_feed_illustration_tribes@2x.png in Resources */,
 				DE6A8A2A1786DFD200B220BA /* create_location.png in Resources */,
@@ -1734,7 +1800,9 @@
 				DE774B46184E129100F8C244 /* navmenu_me.png in Resources */,
 				1E9F313D18A2A90D0008ADF1 /* AnimationCreateActivity_local@2x.png in Resources */,
 				DE6ED8BA17BD0FE900C5E72E /* feed_action_edit.png in Resources */,
+				1E6D2A4418A52CDB0066D266 /* F1_calendar.png in Resources */,
 				1EEA9866185B5E7400EA9E02 /* feed_shadow_name@2x.png in Resources */,
+				1E6D2A5018A5380A0066D266 /* F1_time_picker@2x.png in Resources */,
 				DE6ED8BB17BD0FE900C5E72E /* feed_action_edit@2x.png in Resources */,
 				1E9F314318A396EA0008ADF1 /* AnimationCreateActivity_cloud@2x.png in Resources */,
 				DE6ED8BC17BD0FE900C5E72E /* feed_action_go.png in Resources */,
@@ -1768,6 +1836,7 @@
 				DEDACFD217FC58950068DB72 /* icon-60.png in Resources */,
 				DE774B3A184E0FDD00F8C244 /* guide_step_2.png in Resources */,
 				1E3A6B8E18897549007FB6BA /* User_settings.png in Resources */,
+				1E6D2A3B18A513CC0066D266 /* F1_add_description@2x.png in Resources */,
 				DE6ED9C017C2958100C5E72E /* fullview_action_edit@2x.png in Resources */,
 				DE6ED9C117C2958100C5E72E /* fullview_action_go.png in Resources */,
 				DE6ED9C217C2958100C5E72E /* fullview_action_go@2x.png in Resources */,
@@ -1797,6 +1866,7 @@
 				1E9FBA0118619A0400085421 /* loader-12@2x.png in Resources */,
 				DE774B47184E129100F8C244 /* navmenu_local.png in Resources */,
 				DE6ED9DF17C530EB00C5E72E /* attendee_cell@2x.png in Resources */,
+				1E87E08318A932BB00840655 /* F1_lenght_picker@2x.png in Resources */,
 				DE607830182BD08D0053F23B /* intro_bg.png in Resources */,
 				DEAE0B6F17C65D5200EEB078 /* feed_cell.png in Resources */,
 				1E9FB9EF18619A0400085421 /* loader-3@2x.png in Resources */,
@@ -1821,11 +1891,13 @@
 				DE517732184F716500690E2F /* create_bg-568h@2x.png in Resources */,
 				1E9FBA0918619A0400085421 /* loader-16@2x.png in Resources */,
 				DEA7C7F117F1F73C009CBE25 /* button_arrow@2x.png in Resources */,
+				1E6D2A4518A52CDB0066D266 /* F1_calendar@2x.png in Resources */,
 				1E7A5698188F1E4F00CB5C4A /* Tutorial_Step3@2x.png in Resources */,
 				1E3A6B7E1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png in Resources */,
 				DE67FDDC17CA66DD00240E1C /* guide_btn_gotit.png in Resources */,
 				DE67FDDD17CA66DD00240E1C /* guide_btn_gotit@2x.png in Resources */,
 				DE51772E184F70DC00690E2F /* edit_bg@2x.png in Resources */,
+				1E6D2A4F18A5380A0066D266 /* F1_time_picker.png in Resources */,
 				1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */,
 				DE936C81180B39BD0058608D /* Images.xcassets in Resources */,
 				DE67FDDE17CA66DD00240E1C /* guide_btn_start.png in Resources */,
@@ -1849,6 +1921,7 @@
 				1E9FB9F718619A0400085421 /* loader-7@2x.png in Resources */,
 				DE60782C182BD08D0053F23B /* hello_bg-568h@2x.png in Resources */,
 				1E9FB9F318619A0400085421 /* loader-5@2x.png in Resources */,
+				1E6D2A3A18A513CC0066D266 /* F1_add_description.png in Resources */,
 				1E3A6B98188993DE007FB6BA /* NavBox_Tribes@2x.png in Resources */,
 				DE67FE2217CA704F00240E1C /* guide_step_5@2x.png in Resources */,
 				DED1243117CCFDFD000EE414 /* map_pin.png in Resources */,
@@ -1907,12 +1980,14 @@
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
 				1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
+				1E6D2A4C18A536FF0066D266 /* UICanuLenghtPicker.m in Sources */,
 				1E9FB0281892685300B70E8B /* Reachability.m in Sources */,
 				1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
 				1E3A6B84188686EB007FB6BA /* SignUpStep2.m in Sources */,
 				DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */,
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
+				1E87E07F18A911DC00840655 /* UICanuAMPMPicker.m in Sources */,
 				1EEA985F185B44B300EA9E02 /* ChatScrollView.m in Sources */,
 				1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */,
 				DEB29BB317954FDA00D9FFAE /* UIProfileView.m in Sources */,
@@ -1921,8 +1996,10 @@
 				1E4F57E01880020400D5F1F4 /* UICanuLabelTimeEnd.m in Sources */,
 				1E3A6B5918844303007FB6BA /* SignUpViewController.m in Sources */,
 				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
+				1E6D2A4118A5185E0066D266 /* UICanuButtonSelect.m in Sources */,
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
 				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
+				1E6D2A4918A533430066D266 /* UICanuTimePicker.m in Sources */,
 				DE5599B21836491200FE32E9 /* Message.m in Sources */,
 				1E9F313618A24C470008ADF1 /* AnimationCreateActivity.m in Sources */,
 				1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */,
@@ -1932,6 +2009,7 @@
 				DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */,
 				1E9F314A18A3F2460008ADF1 /* CreateEditActivityViewController.m in Sources */,
 				1EEA9850185A033500EA9E02 /* AttendeesScrollViewController.m in Sources */,
+				1E6D2A5318A53A850066D266 /* UICanuScrollPicker.m in Sources */,
 				1E7138B9188DDC1000137A48 /* TutorialViewController.m in Sources */,
 				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,
 				1E3A6B6118853FFC007FB6BA /* TTTAttributedLabel.m in Sources */,
