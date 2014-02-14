@@ -108,6 +108,14 @@
 		<data>
 		M6ZcvMRfFMb07m447HKuJ3ZWHuo=
 		</data>
+		<key>F1_Add_Cell_Location.png</key>
+		<data>
+		/zjV7Bf1EZRe4KHIqjmwRfCmvSs=
+		</data>
+		<key>F1_Add_Cell_Location@2x.png</key>
+		<data>
+		TiyNO8+iS1dKdjl+jSQqIXmk7DI=
+		</data>
 		<key>F1_Calendar_dote_Disable.png</key>
 		<data>
 		j9gPC0PTg85Y8+dcEC7FOtD0000=
@@ -163,6 +171,14 @@
 		<key>F1_calendar_selected@2x.png</key>
 		<data>
 		Liq5bGDwmGpACd41usQnc9V2qFM=
+		</data>
+		<key>F1_input_Location_reset.png</key>
+		<data>
+		eSX2nwhQplc0FX0zBYRZtd0AxWc=
+		</data>
+		<key>F1_input_Location_reset@2x.png</key>
+		<data>
+		lI3hZM0nyh9kSKwRY5U/QQ4PL7I=
 		</data>
 		<key>F1_lenght_picker.png</key>
 		<data>
@@ -942,7 +958,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		2wJba0G1xzkoyBQHhzxWy9ghj6w=
+		tkGZwrHSnLLba+dx4cWFWWPorGQ=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -1579,6 +1595,14 @@
 		<data>
 		M6ZcvMRfFMb07m447HKuJ3ZWHuo=
 		</data>
+		<key>F1_Add_Cell_Location.png</key>
+		<data>
+		/zjV7Bf1EZRe4KHIqjmwRfCmvSs=
+		</data>
+		<key>F1_Add_Cell_Location@2x.png</key>
+		<data>
+		TiyNO8+iS1dKdjl+jSQqIXmk7DI=
+		</data>
 		<key>F1_Calendar_dote_Disable.png</key>
 		<data>
 		j9gPC0PTg85Y8+dcEC7FOtD0000=
@@ -1634,6 +1658,14 @@
 		<key>F1_calendar_selected@2x.png</key>
 		<data>
 		Liq5bGDwmGpACd41usQnc9V2qFM=
+		</data>
+		<key>F1_input_Location_reset.png</key>
+		<data>
+		eSX2nwhQplc0FX0zBYRZtd0AxWc=
+		</data>
+		<key>F1_input_Location_reset@2x.png</key>
+		<data>
+		lI3hZM0nyh9kSKwRY5U/QQ4PL7I=
 		</data>
 		<key>F1_lenght_picker.png</key>
 		<data>
@@ -2413,7 +2445,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		2wJba0G1xzkoyBQHhzxWy9ghj6w=
+		tkGZwrHSnLLba+dx4cWFWWPorGQ=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>

@@ -11,16 +11,22 @@
 #import "Activity.h"
 
 #import "UICanuTextField.h"
+#import "UICanuTextFieldLocation.h"
 #import "UICanuButtonSelect.h"
 #import "UICanuTimePicker.h"
 #import "UICanuLenghtPicker.h"
 #import "CreateEditUserList.h"
 #import "UICanuCalendarPicker.h"
+#import "UICanuSearchLocation.h"
+#import "AppDelegate.h"
 
 @interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
+@property (nonatomic) BOOL searchLocationIsOpen;
+@property (strong, nonatomic) NSTimer *timerSearch;
+@property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
 @property (strong, nonatomic) UIImageView *imgAddDescription;
 @property (strong, nonatomic) UIView *wrapperDescription;
@@ -32,12 +38,13 @@
 @property (strong, nonatomic) CreateEditUserList *userList;
 @property (strong, nonatomic) UICanuTextField *titleInput;
 @property (strong, nonatomic) UICanuTextField *invitInput;
-@property (strong, nonatomic) UICanuTextField *locationInput;
+@property (strong, nonatomic) UICanuTextFieldLocation *locationInput;
 @property (strong, nonatomic) UICanuButtonSelect *todayBtnSelect;
 @property (strong, nonatomic) UICanuButtonSelect *tomorrowBtnSelect;
 @property (strong, nonatomic) UICanuTimePicker *timePicker;
 @property (strong, nonatomic) UICanuLenghtPicker *lenghtPicker;
 @property (strong, nonatomic) UICanuCalendarPicker *calendar;
+@property (strong, nonatomic) UICanuSearchLocation *searchLocation;
 
 @end
 
@@ -66,8 +73,6 @@
     
     self = [super init];
     if (self) {
-        
-        
         
     }
     return self;
@@ -99,6 +104,7 @@
     
     self.descriptionIsOpen = NO;
     self.calendarIsOpen = NO;
+    self.searchLocationIsOpen = NO;
     
     self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     self.wrapper.contentSize = CGSizeMake(320, 800);
@@ -147,16 +153,16 @@
     
     // Time
     
-    self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(10, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 116)];
+    self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(10, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 57)];
     [self.wrapper addSubview:_timePicker];
     
-    self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(10 + 149 + 1, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 116)];
+    self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(10 + 149 + 1, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 57)];
     [self.wrapper addSubview:_lenghtPicker];
     
     // Location
     
-    self.locationInput = [[UICanuTextField alloc]initWithFrame:CGRectMake(10, _timePicker.frame.origin.y + _timePicker.frame.size.height + 5, 250, 47)];
-    self.locationInput.placeholder = NSLocalizedString(@"Location", nil);
+    self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(10, _timePicker.frame.origin.y + _timePicker.frame.size.height + 5, 250, 47)];
+    self.locationInput.placeholder = NSLocalizedString(@"Find a place", nil);
     self.locationInput.delegate = self;
     self.locationInput.returnKeyType = UIReturnKeyNext;
     [self.wrapper addSubview:_locationInput];
@@ -222,12 +228,42 @@
     self.calendar.delegate = self;
     [self.wrapper addSubview:_calendar];
     
+    // Search Location
+    
+    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0)];
+    [self.wrapper addSubview:_searchLocation];
+    
+    // Current Location
+    
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.latitude  longitude:appDelegate.currentLocation.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if (error) {
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
+                                        message:@"The map server is not available."
+                                       delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+        } else {
+            
+            self.currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+            
+            self.searchLocation.currentLocation = _currentLocation;
+            
+        }
+        
+        // Active Map or not
+         
+     }];
+    
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -248,14 +284,44 @@
     
     NSNumber *position = [NSNumber numberWithInt:textField.frame.origin.y - 5];
     
+    if (textField == _locationInput) {
+        if (!_searchLocationIsOpen) {
+            [self openSearchLocationView];
+        }
+    }
+    
     [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (textField == _locationInput) {
+        
+        [self.timerSearch invalidate];
+        self.timerSearch = nil;
+        
+        self.timerSearch = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector:@selector(startSearchLocation) userInfo: nil repeats:NO];
+    }
+    
+    return YES;
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if (textField == _locationInput) {
+        if (_searchLocationIsOpen) {
+            [self openSearchLocationView];
+        }
+    }
     
 }
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    
     if ([textView.text isEqualToString:NSLocalizedString(@"Add a description", nil)]) {
         textView.text = @"";
         textView.textColor = UIColorFromRGB(0x2b4b58);
@@ -268,8 +334,8 @@
     
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    
     if ([textView.text isEqualToString:@""]) {
         textView.text = NSLocalizedString(@"Add a description", nil);
         textView.textColor = UIColorFromRGB(0xabb3b7);
@@ -281,10 +347,9 @@
     
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
-        return YES;
     }
     
-    return NO;
+    return YES;
 }
 
 #pragma mark - UICanuCalendarPickerDelegate
@@ -336,6 +401,7 @@
         self.lenghtPicker.frame = CGRectMake(_lenghtPicker.frame.origin.x, _lenghtPicker.frame.origin.y + heightDescription, _lenghtPicker.frame.size.width, _lenghtPicker.frame.size.height);
         self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y + heightDescription, _locationInput.frame.size.width, _locationInput.frame.size.height);
         self.openMap.frame = CGRectMake(_openMap.frame.origin.x, _openMap.frame.origin.y + heightDescription, _openMap.frame.size.width, _openMap.frame.size.height);
+        self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y + heightDescription, _searchLocation.frame.size.width, _searchLocation.frame.size.height);
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightDescription, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y + heightDescription, _invitInput.frame.size.width, _invitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightDescription, _userList.frame.size.width, _userList.frame.size.height);
@@ -366,6 +432,7 @@
         self.lenghtPicker.frame = CGRectMake(_lenghtPicker.frame.origin.x, _lenghtPicker.frame.origin.y + heightCalendar, _lenghtPicker.frame.size.width, _lenghtPicker.frame.size.height);
         self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y + heightCalendar, _locationInput.frame.size.width, _locationInput.frame.size.height);
         self.openMap.frame = CGRectMake(_openMap.frame.origin.x, _openMap.frame.origin.y + heightCalendar, _openMap.frame.size.width, _openMap.frame.size.height);
+        self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y + heightCalendar, _searchLocation.frame.size.width, _searchLocation.frame.size.height);
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightCalendar, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y + heightCalendar, _invitInput.frame.size.width, _invitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightCalendar, _userList.frame.size.width, _userList.frame.size.height);
@@ -373,6 +440,32 @@
         if (reset) {
             [self.calendar resetCalendar];
         }
+    }];
+    
+}
+
+- (void)openSearchLocationView{
+    
+    self.searchLocationIsOpen = !_searchLocationIsOpen;
+    
+    int heightSearchLocation,margin;
+    
+    if (_searchLocationIsOpen) {
+        heightSearchLocation = 213 + 10;
+        margin = 10;
+    } else {
+        heightSearchLocation = - 213 - 10;
+        margin = - 10;
+    }
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightSearchLocation);
+        self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y, _searchLocation.frame.size.width, _searchLocation.frame.size.height + heightSearchLocation - margin);
+        self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightSearchLocation, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
+        self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y + heightSearchLocation, _invitInput.frame.size.width, _invitInput.frame.size.height);
+        self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightSearchLocation, _userList.frame.size.width, _userList.frame.size.height);
+    } completion:^(BOOL finished) {
+        
     }];
     
 }
@@ -403,8 +496,6 @@
             self.tomorrowBtnSelect.selected = NO;
         }
         
-        
-        
     }
     
     if (calendarGoOpen != _calendarIsOpen) {
@@ -413,6 +504,10 @@
         
     }
     
+}
+
+- (void)startSearchLocation{
+    self.searchLocation.searchLocation = _locationInput.text;
 }
 
 @end

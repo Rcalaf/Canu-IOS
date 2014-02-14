@@ -77,6 +77,9 @@
 		1E3BA46918ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46518ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png */; };
 		1E3BA46A18ACF796003C2BF4 /* F1_Calendar_dote_Enable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46618ACF796003C2BF4 /* F1_Calendar_dote_Enable.png */; };
 		1E3BA46B18ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46718ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png */; };
+		1E3BA46E18AE22F0003C2BF4 /* UICanuSearchLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA46D18AE22F0003C2BF4 /* UICanuSearchLocation.m */; };
+		1E3BA47118AE2979003C2BF4 /* UICANULocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA47018AE2979003C2BF4 /* UICANULocationCell.m */; };
+		1E3BA47418AE4855003C2BF4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA47318AE4855003C2BF4 /* Location.m */; };
 		1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */; };
 		1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */; };
 		1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */; };
@@ -127,6 +130,11 @@
 		1E7138D8188E9BFF00137A48 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7138D7188E9BFF00137A48 /* AVFoundation.framework */; };
 		1E7138DA188E9C2B00137A48 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7138D9188E9C2B00137A48 /* QuartzCore.framework */; };
 		1E7138DD188EDAB000137A48 /* TutorialStepStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7138DC188EDAB000137A48 /* TutorialStepStart.m */; };
+		1E7429E118AE73F200992393 /* UICanuTextFieldLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7429E018AE73F200992393 /* UICanuTextFieldLocation.m */; };
+		1E7429E418AE790C00992393 /* F1_input_Location_reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7429E218AE790C00992393 /* F1_input_Location_reset.png */; };
+		1E7429E518AE790C00992393 /* F1_input_Location_reset@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7429E318AE790C00992393 /* F1_input_Location_reset@2x.png */; };
+		1E7429E818AE7F7200992393 /* F1_Add_Cell_Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7429E618AE7F7200992393 /* F1_Add_Cell_Location.png */; };
+		1E7429E918AE7F7200992393 /* F1_Add_Cell_Location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7429E718AE7F7200992393 /* F1_Add_Cell_Location@2x.png */; };
 		1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E77B94818A1192E00A16845 /* PhoneBook.m */; };
 		1E7A5694188F1BAD00CB5C4A /* TutorialStepProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7A5693188F1BAD00CB5C4A /* TutorialStepProfile.m */; };
 		1E7A5697188F1E4F00CB5C4A /* Tutorial_Step3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E7A5695188F1E4F00CB5C4A /* Tutorial_Step3.png */; };
@@ -503,6 +511,12 @@
 		1E3BA46518ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Calendar_dote_Disable@2x.png"; path = "Ressources/Backgrounds/F1_Calendar_dote_Disable@2x.png"; sourceTree = "<group>"; };
 		1E3BA46618ACF796003C2BF4 /* F1_Calendar_dote_Enable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Calendar_dote_Enable.png; path = Ressources/Backgrounds/F1_Calendar_dote_Enable.png; sourceTree = "<group>"; };
 		1E3BA46718ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Calendar_dote_Enable@2x.png"; path = "Ressources/Backgrounds/F1_Calendar_dote_Enable@2x.png"; sourceTree = "<group>"; };
+		1E3BA46C18AE22F0003C2BF4 /* UICanuSearchLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuSearchLocation.h; path = Vendor/UIPicker/UICanuSearchLocation.h; sourceTree = "<group>"; };
+		1E3BA46D18AE22F0003C2BF4 /* UICanuSearchLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuSearchLocation.m; path = Vendor/UIPicker/UICanuSearchLocation.m; sourceTree = "<group>"; };
+		1E3BA46F18AE2979003C2BF4 /* UICANULocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICANULocationCell.h; path = Vendor/UICanuCell/UICANULocationCell.h; sourceTree = "<group>"; };
+		1E3BA47018AE2979003C2BF4 /* UICANULocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICANULocationCell.m; path = Vendor/UICanuCell/UICANULocationCell.m; sourceTree = "<group>"; };
+		1E3BA47218AE4855003C2BF4 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = CANU/Models/Location/Location.h; sourceTree = "<group>"; };
+		1E3BA47318AE4855003C2BF4 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = CANU/Models/Location/Location.m; sourceTree = "<group>"; };
 		1E4F57D5187FFF1100D5F1F4 /* UICanuLabelUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelUserName.h; path = Vendor/UICanuLabel/UICanuLabelUserName.h; sourceTree = "<group>"; };
 		1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelUserName.m; path = Vendor/UICanuLabel/UICanuLabelUserName.m; sourceTree = "<group>"; };
 		1E4F57D8187FFFCA00D5F1F4 /* UICanuLabelDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDay.h; path = Vendor/UICanuLabel/UICanuLabelDay.h; sourceTree = "<group>"; };
@@ -569,6 +583,12 @@
 		1E7138D9188E9C2B00137A48 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1E7138DB188EDAB000137A48 /* TutorialStepStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialStepStart.h; path = Views/Tutorial/TutorialStepStart.h; sourceTree = "<group>"; };
 		1E7138DC188EDAB000137A48 /* TutorialStepStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TutorialStepStart.m; path = Views/Tutorial/TutorialStepStart.m; sourceTree = "<group>"; };
+		1E7429DF18AE73F200992393 /* UICanuTextFieldLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuTextFieldLocation.h; path = Vendor/UICanuTextField/UICanuTextFieldLocation.h; sourceTree = SOURCE_ROOT; };
+		1E7429E018AE73F200992393 /* UICanuTextFieldLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuTextFieldLocation.m; path = Vendor/UICanuTextField/UICanuTextFieldLocation.m; sourceTree = SOURCE_ROOT; };
+		1E7429E218AE790C00992393 /* F1_input_Location_reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_input_Location_reset.png; path = Ressources/Buttons/F1_input_Location_reset.png; sourceTree = "<group>"; };
+		1E7429E318AE790C00992393 /* F1_input_Location_reset@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_input_Location_reset@2x.png"; path = "Ressources/Buttons/F1_input_Location_reset@2x.png"; sourceTree = "<group>"; };
+		1E7429E618AE7F7200992393 /* F1_Add_Cell_Location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Add_Cell_Location.png; path = Ressources/Buttons/F1_Add_Cell_Location.png; sourceTree = "<group>"; };
+		1E7429E718AE7F7200992393 /* F1_Add_Cell_Location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Add_Cell_Location@2x.png"; path = "Ressources/Buttons/F1_Add_Cell_Location@2x.png"; sourceTree = "<group>"; };
 		1E77B94718A1192E00A16845 /* PhoneBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneBook.h; path = CANU/Models/PhoneBook/PhoneBook.h; sourceTree = "<group>"; };
 		1E77B94818A1192E00A16845 /* PhoneBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneBook.m; path = CANU/Models/PhoneBook/PhoneBook.m; sourceTree = "<group>"; };
 		1E7A5692188F1BAD00CB5C4A /* TutorialStepProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialStepProfile.h; path = Views/Tutorial/TutorialStepProfile.h; sourceTree = "<group>"; };
@@ -1177,6 +1197,8 @@
 				1E3BA3EC18AB8418003C2BF4 /* UICanuCalendarPicker.m */,
 				1E3BA3EE18ABA837003C2BF4 /* UICanuCalendarButtonPicker.h */,
 				1E3BA3EF18ABA837003C2BF4 /* UICanuCalendarButtonPicker.m */,
+				1E3BA46C18AE22F0003C2BF4 /* UICanuSearchLocation.h */,
+				1E3BA46D18AE22F0003C2BF4 /* UICanuSearchLocation.m */,
 			);
 			name = UIPicker;
 			sourceTree = "<group>";
@@ -1537,6 +1559,8 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E7429E218AE790C00992393 /* F1_input_Location_reset.png */,
+				1E7429E318AE790C00992393 /* F1_input_Location_reset@2x.png */,
 				1E3BA46418ACF796003C2BF4 /* F1_Calendar_dote_Disable.png */,
 				1E3BA46518ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png */,
 				1E3BA46618ACF796003C2BF4 /* F1_Calendar_dote_Enable.png */,
@@ -1651,6 +1675,8 @@
 			children = (
 				DE85A6301744FCD400A050E5 /* UICanuTextField.h */,
 				DE85A6311744FCD400A050E5 /* UICanuTextField.m */,
+				1E7429DF18AE73F200992393 /* UICanuTextFieldLocation.h */,
+				1E7429E018AE73F200992393 /* UICanuTextFieldLocation.m */,
 			);
 			name = UICanuTextField;
 			path = CANU;
@@ -1848,6 +1874,8 @@
 				1EEA9852185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m */,
 				1EEA9860185B4CEB00EA9E02 /* UICanuChatCellScroll.h */,
 				1EEA9861185B4CEB00EA9E02 /* UICanuChatCellScroll.m */,
+				1E3BA46F18AE2979003C2BF4 /* UICANULocationCell.h */,
+				1E3BA47018AE2979003C2BF4 /* UICANULocationCell.m */,
 			);
 			name = UICanuCell;
 			sourceTree = "<group>";
@@ -1905,6 +1933,8 @@
 				DEBBDA4C1732BDA0009E9A7D /* Activity */,
 				DE5599B31836491600FE32E9 /* Message */,
 				1E70867E189A849900328F76 /* Contact */,
+				1E3BA47218AE4855003C2BF4 /* Location.h */,
+				1E3BA47318AE4855003C2BF4 /* Location.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1921,6 +1951,8 @@
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				1E7429E618AE7F7200992393 /* F1_Add_Cell_Location.png */,
+				1E7429E718AE7F7200992393 /* F1_Add_Cell_Location@2x.png */,
 				1E3BA3E018AA7544003C2BF4 /* F1_add_description_selected.png */,
 				1E3BA3E118AA7544003C2BF4 /* F1_add_description_selected@2x.png */,
 				1E3BA3DC18AA6EF1003C2BF4 /* F1_calendar_selected.png */,
@@ -2031,6 +2063,7 @@
 			files = (
 				1E9FB9F418619A0400085421 /* loader-6.png in Resources */,
 				DEA93B2817204EA600303BB5 /* InfoPlist.strings in Resources */,
+				1E7429E818AE7F7200992393 /* F1_Add_Cell_Location.png in Resources */,
 				DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */,
 				DE4D95301742A00700FB026F /* scroll_content.png in Resources */,
 				DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */,
@@ -2044,6 +2077,7 @@
 				DE4D95361742A6F700FB026F /* Lato-Reg.ttf in Resources */,
 				DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */,
 				1E3BA3DE18AA6EF1003C2BF4 /* F1_calendar_selected.png in Resources */,
+				1E7429E518AE790C00992393 /* F1_input_Location_reset@2x.png in Resources */,
 				DEFD7A6C174534830087CB8A /* back_arrow@2x.png in Resources */,
 				DEFD7A71174694660087CB8A /* facebook_btn_off.png in Resources */,
 				1E9FB9FD18619A0400085421 /* loader-10@2x.png in Resources */,
@@ -2091,6 +2125,7 @@
 				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
 				1E7138B6188D5B2900137A48 /* Activity_Empty_feed_illustration_tribes@2x.png in Resources */,
 				DE6A8A2A1786DFD200B220BA /* create_location.png in Resources */,
+				1E7429E418AE790C00992393 /* F1_input_Location_reset.png in Resources */,
 				1E7138B1188D5B2900137A48 /* Activity_Empty_feed_illustration_local.png in Resources */,
 				DEA7C7F017F1F73C009CBE25 /* button_arrow.png in Resources */,
 				1E9FBA1018619A0400085421 /* loop_3.png in Resources */,
@@ -2232,6 +2267,7 @@
 				1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */,
 				DE936C81180B39BD0058608D /* Images.xcassets in Resources */,
 				DE67FDDE17CA66DD00240E1C /* guide_btn_start.png in Resources */,
+				1E7429E918AE7F7200992393 /* F1_Add_Cell_Location@2x.png in Resources */,
 				DE67FDDF17CA66DD00240E1C /* guide_btn_start@2x.png in Resources */,
 				1E9F314618A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2.png in Resources */,
 				DE67FDF117CA6AB100240E1C /* guide_btn_skip.png in Resources */,
@@ -2276,6 +2312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
+				1E3BA47418AE4855003C2BF4 /* Location.m in Sources */,
 				1E3BA44718ACBE03003C2BF4 /* NSArray+MK_Misc.m in Sources */,
 				1E3A6B811886839C007FB6BA /* SignUpStep1.m in Sources */,
 				1E3BA3F018ABA837003C2BF4 /* UICanuCalendarButtonPicker.m in Sources */,
@@ -2288,6 +2325,8 @@
 				1E3BA45A18ACBE03003C2BF4 /* NSNumber+MK_Precision.m in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
 				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,
+				1E3BA47118AE2979003C2BF4 /* UICANULocationCell.m in Sources */,
+				1E3BA46E18AE22F0003C2BF4 /* UICanuSearchLocation.m in Sources */,
 				1E3BA3DB18AA639F003C2BF4 /* CreateEditUserList.m in Sources */,
 				1E4F57E31880040800D5F1F4 /* UICanuLabelActivityName.m in Sources */,
 				DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */,
@@ -2297,6 +2336,7 @@
 				DEA93B5A17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				DEA93B5B17204EF100303BB5 /* AFPropertyListRequestOperation.m in Sources */,
 				1E3BA45318ACBE03003C2BF4 /* NSDictionary+MK_Misc.m in Sources */,
+				1E7429E118AE73F200992393 /* UICanuTextFieldLocation.m in Sources */,
 				1EEA9859185A2C1A00EA9E02 /* DetailActivityViewControllerAnimate.m in Sources */,
 				1E4F57E9188005A900D5F1F4 /* UICanuLabelLocation.m in Sources */,
 				1E3BA45718ACBE03003C2BF4 /* NSNumber+MK_Fraction.m in Sources */,
