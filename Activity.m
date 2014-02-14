@@ -274,6 +274,7 @@
 
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
+    NSLog(@"attendWithBlock");
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
@@ -306,6 +307,7 @@
 
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
+    NSLog(@"dontAttendWithBlock");
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];

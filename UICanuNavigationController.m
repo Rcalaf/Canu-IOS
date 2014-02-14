@@ -214,15 +214,15 @@ typedef enum {
             canuCreateActivity = CANUCreateActivityNone;
         }
         
-        if (self.activityFeed.animationCreateActivity.active) {
-            [self.activityFeed.animationCreateActivity stopViewFor:canuCreateActivity];
-        }
-        
         [UIView animateWithDuration:0.3 animations:^{
             _control.frame = CGRectMake(_naveboxPosition, 415.0f + KIphone5Margin,_control.frame.size.width, _control.frame.size.height);
         }completion:^(BOOL finished) {
             
         }];
+        
+        if (self.activityFeed.animationCreateActivity.active) {
+            [self.activityFeed.animationCreateActivity stopViewFor:canuCreateActivity];
+        }
 
     }else{
         

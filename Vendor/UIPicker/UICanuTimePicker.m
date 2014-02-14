@@ -80,6 +80,7 @@
         
         if (!is24hFormat) {
             self.amPmScroll = [[UICanuAMPMPicker alloc] initWithFrame:CGRectMake(100 + 10, 1, 30, self.frame.size.height - 2)];
+            [self.amPmScroll changeCurrentObjectTo:1];
             [self.amPmScroll changeCurrentObjectTo:0];
             [self addSubview:_amPmScroll];
         }

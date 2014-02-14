@@ -34,6 +34,49 @@
 		1E3A6B93188976E1007FB6BA /* User_image_edit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B91188976E1007FB6BA /* User_image_edit@2x.png */; };
 		1E3A6B97188993DE007FB6BA /* NavBox_Tribes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B95188993DE007FB6BA /* NavBox_Tribes.png */; };
 		1E3A6B98188993DE007FB6BA /* NavBox_Tribes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B96188993DE007FB6BA /* NavBox_Tribes@2x.png */; };
+		1E3BA3DB18AA639F003C2BF4 /* CreateEditUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA3DA18AA639F003C2BF4 /* CreateEditUserList.m */; };
+		1E3BA3DE18AA6EF1003C2BF4 /* F1_calendar_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA3DC18AA6EF1003C2BF4 /* F1_calendar_selected.png */; };
+		1E3BA3DF18AA6EF1003C2BF4 /* F1_calendar_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA3DD18AA6EF1003C2BF4 /* F1_calendar_selected@2x.png */; };
+		1E3BA3E218AA7544003C2BF4 /* F1_add_description_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA3E018AA7544003C2BF4 /* F1_add_description_selected.png */; };
+		1E3BA3E318AA7544003C2BF4 /* F1_add_description_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA3E118AA7544003C2BF4 /* F1_add_description_selected@2x.png */; };
+		1E3BA3E918AB7CBE003C2BF4 /* F1_Shadow_Description.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA3E718AB7CBE003C2BF4 /* F1_Shadow_Description.png */; };
+		1E3BA3EA18AB7CBE003C2BF4 /* F1_Shadow_Description@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA3E818AB7CBE003C2BF4 /* F1_Shadow_Description@2x.png */; };
+		1E3BA3ED18AB8418003C2BF4 /* UICanuCalendarPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA3EC18AB8418003C2BF4 /* UICanuCalendarPicker.m */; };
+		1E3BA3F018ABA837003C2BF4 /* UICanuCalendarButtonPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA3EF18ABA837003C2BF4 /* UICanuCalendarButtonPicker.m */; };
+		1E3BA44618ACBE03003C2BF4 /* NSArray+MK_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA3FD18ACBE03003C2BF4 /* NSArray+MK_Block.m */; };
+		1E3BA44718ACBE03003C2BF4 /* NSArray+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA3FF18ACBE03003C2BF4 /* NSArray+MK_Misc.m */; };
+		1E3BA44818ACBE03003C2BF4 /* NSMutableArray+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA40118ACBE03003C2BF4 /* NSMutableArray+MK_Misc.m */; };
+		1E3BA44918ACBE03003C2BF4 /* NSMutableArray+MK_Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA40318ACBE03003C2BF4 /* NSMutableArray+MK_Queue.m */; };
+		1E3BA44A18ACBE03003C2BF4 /* NSMutableArray+MK_Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA40518ACBE03003C2BF4 /* NSMutableArray+MK_Stack.m */; };
+		1E3BA44B18ACBE03003C2BF4 /* NSData+MK_Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA40918ACBE03003C2BF4 /* NSData+MK_Base64.m */; };
+		1E3BA44C18ACBE03003C2BF4 /* NSDate+MK_Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA40D18ACBE03003C2BF4 /* NSDate+MK_Comparison.m */; };
+		1E3BA44D18ACBE03003C2BF4 /* NSDate+MK_Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA40F18ACBE03003C2BF4 /* NSDate+MK_Components.m */; };
+		1E3BA44E18ACBE03003C2BF4 /* NSDate+MK_Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA41118ACBE03003C2BF4 /* NSDate+MK_Creation.m */; };
+		1E3BA44F18ACBE03003C2BF4 /* NSDate+MK_Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA41318ACBE03003C2BF4 /* NSDate+MK_Formatting.m */; };
+		1E3BA45018ACBE03003C2BF4 /* NSDate+MK_Manipulation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA41518ACBE03003C2BF4 /* NSDate+MK_Manipulation.m */; };
+		1E3BA45118ACBE03003C2BF4 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA41718ACBE03003C2BF4 /* .gitkeep */; };
+		1E3BA45218ACBE03003C2BF4 /* NSDictionary+MK_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA41B18ACBE03003C2BF4 /* NSDictionary+MK_Block.m */; };
+		1E3BA45318ACBE03003C2BF4 /* NSDictionary+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA41D18ACBE03003C2BF4 /* NSDictionary+MK_Misc.m */; };
+		1E3BA45418ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA41F18ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.m */; };
+		1E3BA45518ACBE03003C2BF4 /* NSNumber+MK_Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA42318ACBE03003C2BF4 /* NSNumber+MK_Comparison.m */; };
+		1E3BA45618ACBE03003C2BF4 /* NSNumber+MK_Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA42518ACBE03003C2BF4 /* NSNumber+MK_Creation.m */; };
+		1E3BA45718ACBE03003C2BF4 /* NSNumber+MK_Fraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA42718ACBE03003C2BF4 /* NSNumber+MK_Fraction.m */; };
+		1E3BA45818ACBE03003C2BF4 /* NSNumber+MK_Manipulation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA42918ACBE03003C2BF4 /* NSNumber+MK_Manipulation.m */; };
+		1E3BA45918ACBE03003C2BF4 /* NSNumber+MK_Negative.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA42B18ACBE03003C2BF4 /* NSNumber+MK_Negative.m */; };
+		1E3BA45A18ACBE03003C2BF4 /* NSNumber+MK_Precision.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA42D18ACBE03003C2BF4 /* NSNumber+MK_Precision.m */; };
+		1E3BA45B18ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA43118ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.m */; };
+		1E3BA45C18ACBE03003C2BF4 /* NSSet+MK_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA43518ACBE03003C2BF4 /* NSSet+MK_Block.m */; };
+		1E3BA45D18ACBE03003C2BF4 /* NSString+MK_Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA43918ACBE03003C2BF4 /* NSString+MK_Base64.m */; };
+		1E3BA45E18ACBE03003C2BF4 /* NSString+MK_Conversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA43B18ACBE03003C2BF4 /* NSString+MK_Conversion.m */; };
+		1E3BA45F18ACBE03003C2BF4 /* NSString+MK_Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA43D18ACBE03003C2BF4 /* NSString+MK_Empty.m */; };
+		1E3BA46018ACBE03003C2BF4 /* NSString+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA43F18ACBE03003C2BF4 /* NSString+MK_Misc.m */; };
+		1E3BA46118ACBE03003C2BF4 /* NSString+MK_UTF.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA44118ACBE03003C2BF4 /* NSString+MK_UTF.m */; };
+		1E3BA46218ACBE03003C2BF4 /* NSString+MK_UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA44318ACBE03003C2BF4 /* NSString+MK_UUID.m */; };
+		1E3BA46318ACBE03003C2BF4 /* NSString+MK_Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA44518ACBE03003C2BF4 /* NSString+MK_Validation.m */; };
+		1E3BA46818ACF796003C2BF4 /* F1_Calendar_dote_Disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46418ACF796003C2BF4 /* F1_Calendar_dote_Disable.png */; };
+		1E3BA46918ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46518ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png */; };
+		1E3BA46A18ACF796003C2BF4 /* F1_Calendar_dote_Enable.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46618ACF796003C2BF4 /* F1_Calendar_dote_Enable.png */; };
+		1E3BA46B18ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3BA46718ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png */; };
 		1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */; };
 		1E4F57DA187FFFCA00D5F1F4 /* UICanuLabelDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57D9187FFFCA00D5F1F4 /* UICanuLabelDay.m */; };
 		1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57DC1880013000D5F1F4 /* UICanuLabelTimeStart.m */; };
@@ -370,6 +413,96 @@
 		1E3A6B91188976E1007FB6BA /* User_image_edit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "User_image_edit@2x.png"; path = "Ressources/Buttons/User_image_edit@2x.png"; sourceTree = "<group>"; };
 		1E3A6B95188993DE007FB6BA /* NavBox_Tribes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavBox_Tribes.png; sourceTree = "<group>"; };
 		1E3A6B96188993DE007FB6BA /* NavBox_Tribes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavBox_Tribes@2x.png"; sourceTree = "<group>"; };
+		1E3BA3D918AA639F003C2BF4 /* CreateEditUserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateEditUserList.h; path = Views/CreateEdit/CreateEditUserList.h; sourceTree = "<group>"; };
+		1E3BA3DA18AA639F003C2BF4 /* CreateEditUserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateEditUserList.m; path = Views/CreateEdit/CreateEditUserList.m; sourceTree = "<group>"; };
+		1E3BA3DC18AA6EF1003C2BF4 /* F1_calendar_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_calendar_selected.png; path = Ressources/Buttons/F1_calendar_selected.png; sourceTree = "<group>"; };
+		1E3BA3DD18AA6EF1003C2BF4 /* F1_calendar_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_calendar_selected@2x.png"; path = "Ressources/Buttons/F1_calendar_selected@2x.png"; sourceTree = "<group>"; };
+		1E3BA3E018AA7544003C2BF4 /* F1_add_description_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_add_description_selected.png; path = Ressources/Buttons/F1_add_description_selected.png; sourceTree = "<group>"; };
+		1E3BA3E118AA7544003C2BF4 /* F1_add_description_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_add_description_selected@2x.png"; path = "Ressources/Buttons/F1_add_description_selected@2x.png"; sourceTree = "<group>"; };
+		1E3BA3E718AB7CBE003C2BF4 /* F1_Shadow_Description.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Shadow_Description.png; path = Ressources/Backgrounds/F1_Shadow_Description.png; sourceTree = "<group>"; };
+		1E3BA3E818AB7CBE003C2BF4 /* F1_Shadow_Description@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Shadow_Description@2x.png"; path = "Ressources/Backgrounds/F1_Shadow_Description@2x.png"; sourceTree = "<group>"; };
+		1E3BA3EB18AB8418003C2BF4 /* UICanuCalendarPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuCalendarPicker.h; path = Vendor/UIPicker/UICanuCalendarPicker.h; sourceTree = "<group>"; };
+		1E3BA3EC18AB8418003C2BF4 /* UICanuCalendarPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuCalendarPicker.m; path = Vendor/UIPicker/UICanuCalendarPicker.m; sourceTree = "<group>"; };
+		1E3BA3EE18ABA837003C2BF4 /* UICanuCalendarButtonPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuCalendarButtonPicker.h; path = Vendor/UIPicker/UICanuCalendarButtonPicker.h; sourceTree = "<group>"; };
+		1E3BA3EF18ABA837003C2BF4 /* UICanuCalendarButtonPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuCalendarButtonPicker.m; path = Vendor/UIPicker/UICanuCalendarButtonPicker.m; sourceTree = "<group>"; };
+		1E3BA3F318ACBE03003C2BF4 /* MKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro.h; sourceTree = "<group>"; };
+		1E3BA3F418ACBE03003C2BF4 /* MKMacro_Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Geometry.h; sourceTree = "<group>"; };
+		1E3BA3F518ACBE03003C2BF4 /* MKMacro_Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Log.h; sourceTree = "<group>"; };
+		1E3BA3F618ACBE03003C2BF4 /* MKMacro_Method.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Method.h; sourceTree = "<group>"; };
+		1E3BA3F718ACBE03003C2BF4 /* MKMacro_Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Test.h; sourceTree = "<group>"; };
+		1E3BA3F818ACBE03003C2BF4 /* MKMacro_Version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Version.h; sourceTree = "<group>"; };
+		1E3BA3F918ACBE03003C2BF4 /* MKFoundationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKFoundationKit.h; sourceTree = "<group>"; };
+		1E3BA3FB18ACBE03003C2BF4 /* NSArray+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MK.h"; sourceTree = "<group>"; };
+		1E3BA3FC18ACBE03003C2BF4 /* NSArray+MK_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MK_Block.h"; sourceTree = "<group>"; };
+		1E3BA3FD18ACBE03003C2BF4 /* NSArray+MK_Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MK_Block.m"; sourceTree = "<group>"; };
+		1E3BA3FE18ACBE03003C2BF4 /* NSArray+MK_Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MK_Misc.h"; sourceTree = "<group>"; };
+		1E3BA3FF18ACBE03003C2BF4 /* NSArray+MK_Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MK_Misc.m"; sourceTree = "<group>"; };
+		1E3BA40018ACBE03003C2BF4 /* NSMutableArray+MK_Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+MK_Misc.h"; sourceTree = "<group>"; };
+		1E3BA40118ACBE03003C2BF4 /* NSMutableArray+MK_Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+MK_Misc.m"; sourceTree = "<group>"; };
+		1E3BA40218ACBE03003C2BF4 /* NSMutableArray+MK_Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+MK_Queue.h"; sourceTree = "<group>"; };
+		1E3BA40318ACBE03003C2BF4 /* NSMutableArray+MK_Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+MK_Queue.m"; sourceTree = "<group>"; };
+		1E3BA40418ACBE03003C2BF4 /* NSMutableArray+MK_Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+MK_Stack.h"; sourceTree = "<group>"; };
+		1E3BA40518ACBE03003C2BF4 /* NSMutableArray+MK_Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+MK_Stack.m"; sourceTree = "<group>"; };
+		1E3BA40718ACBE03003C2BF4 /* NSData+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MK.h"; sourceTree = "<group>"; };
+		1E3BA40818ACBE03003C2BF4 /* NSData+MK_Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MK_Base64.h"; sourceTree = "<group>"; };
+		1E3BA40918ACBE03003C2BF4 /* NSData+MK_Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MK_Base64.m"; sourceTree = "<group>"; };
+		1E3BA40B18ACBE03003C2BF4 /* NSDate+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MK.h"; sourceTree = "<group>"; };
+		1E3BA40C18ACBE03003C2BF4 /* NSDate+MK_Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MK_Comparison.h"; sourceTree = "<group>"; };
+		1E3BA40D18ACBE03003C2BF4 /* NSDate+MK_Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MK_Comparison.m"; sourceTree = "<group>"; };
+		1E3BA40E18ACBE03003C2BF4 /* NSDate+MK_Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MK_Components.h"; sourceTree = "<group>"; };
+		1E3BA40F18ACBE03003C2BF4 /* NSDate+MK_Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MK_Components.m"; sourceTree = "<group>"; };
+		1E3BA41018ACBE03003C2BF4 /* NSDate+MK_Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MK_Creation.h"; sourceTree = "<group>"; };
+		1E3BA41118ACBE03003C2BF4 /* NSDate+MK_Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MK_Creation.m"; sourceTree = "<group>"; };
+		1E3BA41218ACBE03003C2BF4 /* NSDate+MK_Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MK_Formatting.h"; sourceTree = "<group>"; };
+		1E3BA41318ACBE03003C2BF4 /* NSDate+MK_Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MK_Formatting.m"; sourceTree = "<group>"; };
+		1E3BA41418ACBE03003C2BF4 /* NSDate+MK_Manipulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+MK_Manipulation.h"; sourceTree = "<group>"; };
+		1E3BA41518ACBE03003C2BF4 /* NSDate+MK_Manipulation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+MK_Manipulation.m"; sourceTree = "<group>"; };
+		1E3BA41718ACBE03003C2BF4 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		1E3BA41918ACBE03003C2BF4 /* NSDictionary+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MK.h"; sourceTree = "<group>"; };
+		1E3BA41A18ACBE03003C2BF4 /* NSDictionary+MK_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MK_Block.h"; sourceTree = "<group>"; };
+		1E3BA41B18ACBE03003C2BF4 /* NSDictionary+MK_Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MK_Block.m"; sourceTree = "<group>"; };
+		1E3BA41C18ACBE03003C2BF4 /* NSDictionary+MK_Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MK_Misc.h"; sourceTree = "<group>"; };
+		1E3BA41D18ACBE03003C2BF4 /* NSDictionary+MK_Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MK_Misc.m"; sourceTree = "<group>"; };
+		1E3BA41E18ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+MK_Misc.h"; sourceTree = "<group>"; };
+		1E3BA41F18ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+MK_Misc.m"; sourceTree = "<group>"; };
+		1E3BA42118ACBE03003C2BF4 /* NSNumber+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK.h"; sourceTree = "<group>"; };
+		1E3BA42218ACBE03003C2BF4 /* NSNumber+MK_Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK_Comparison.h"; sourceTree = "<group>"; };
+		1E3BA42318ACBE03003C2BF4 /* NSNumber+MK_Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+MK_Comparison.m"; sourceTree = "<group>"; };
+		1E3BA42418ACBE03003C2BF4 /* NSNumber+MK_Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK_Creation.h"; sourceTree = "<group>"; };
+		1E3BA42518ACBE03003C2BF4 /* NSNumber+MK_Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+MK_Creation.m"; sourceTree = "<group>"; };
+		1E3BA42618ACBE03003C2BF4 /* NSNumber+MK_Fraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK_Fraction.h"; sourceTree = "<group>"; };
+		1E3BA42718ACBE03003C2BF4 /* NSNumber+MK_Fraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+MK_Fraction.m"; sourceTree = "<group>"; };
+		1E3BA42818ACBE03003C2BF4 /* NSNumber+MK_Manipulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK_Manipulation.h"; sourceTree = "<group>"; };
+		1E3BA42918ACBE03003C2BF4 /* NSNumber+MK_Manipulation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+MK_Manipulation.m"; sourceTree = "<group>"; };
+		1E3BA42A18ACBE03003C2BF4 /* NSNumber+MK_Negative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK_Negative.h"; sourceTree = "<group>"; };
+		1E3BA42B18ACBE03003C2BF4 /* NSNumber+MK_Negative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+MK_Negative.m"; sourceTree = "<group>"; };
+		1E3BA42C18ACBE03003C2BF4 /* NSNumber+MK_Precision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+MK_Precision.h"; sourceTree = "<group>"; };
+		1E3BA42D18ACBE03003C2BF4 /* NSNumber+MK_Precision.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+MK_Precision.m"; sourceTree = "<group>"; };
+		1E3BA42F18ACBE03003C2BF4 /* NSObject+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MK.h"; sourceTree = "<group>"; };
+		1E3BA43018ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MK_AutoDescribe.h"; sourceTree = "<group>"; };
+		1E3BA43118ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MK_AutoDescribe.m"; sourceTree = "<group>"; };
+		1E3BA43318ACBE03003C2BF4 /* NSSet+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+MK.h"; sourceTree = "<group>"; };
+		1E3BA43418ACBE03003C2BF4 /* NSSet+MK_Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+MK_Block.h"; sourceTree = "<group>"; };
+		1E3BA43518ACBE03003C2BF4 /* NSSet+MK_Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+MK_Block.m"; sourceTree = "<group>"; };
+		1E3BA43718ACBE03003C2BF4 /* NSString+MK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK.h"; sourceTree = "<group>"; };
+		1E3BA43818ACBE03003C2BF4 /* NSString+MK_Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_Base64.h"; sourceTree = "<group>"; };
+		1E3BA43918ACBE03003C2BF4 /* NSString+MK_Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_Base64.m"; sourceTree = "<group>"; };
+		1E3BA43A18ACBE03003C2BF4 /* NSString+MK_Conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_Conversion.h"; sourceTree = "<group>"; };
+		1E3BA43B18ACBE03003C2BF4 /* NSString+MK_Conversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_Conversion.m"; sourceTree = "<group>"; };
+		1E3BA43C18ACBE03003C2BF4 /* NSString+MK_Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_Empty.h"; sourceTree = "<group>"; };
+		1E3BA43D18ACBE03003C2BF4 /* NSString+MK_Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_Empty.m"; sourceTree = "<group>"; };
+		1E3BA43E18ACBE03003C2BF4 /* NSString+MK_Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_Misc.h"; sourceTree = "<group>"; };
+		1E3BA43F18ACBE03003C2BF4 /* NSString+MK_Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_Misc.m"; sourceTree = "<group>"; };
+		1E3BA44018ACBE03003C2BF4 /* NSString+MK_UTF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_UTF.h"; sourceTree = "<group>"; };
+		1E3BA44118ACBE03003C2BF4 /* NSString+MK_UTF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_UTF.m"; sourceTree = "<group>"; };
+		1E3BA44218ACBE03003C2BF4 /* NSString+MK_UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_UUID.h"; sourceTree = "<group>"; };
+		1E3BA44318ACBE03003C2BF4 /* NSString+MK_UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_UUID.m"; sourceTree = "<group>"; };
+		1E3BA44418ACBE03003C2BF4 /* NSString+MK_Validation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MK_Validation.h"; sourceTree = "<group>"; };
+		1E3BA44518ACBE03003C2BF4 /* NSString+MK_Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MK_Validation.m"; sourceTree = "<group>"; };
+		1E3BA46418ACF796003C2BF4 /* F1_Calendar_dote_Disable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Calendar_dote_Disable.png; path = Ressources/Backgrounds/F1_Calendar_dote_Disable.png; sourceTree = "<group>"; };
+		1E3BA46518ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Calendar_dote_Disable@2x.png"; path = "Ressources/Backgrounds/F1_Calendar_dote_Disable@2x.png"; sourceTree = "<group>"; };
+		1E3BA46618ACF796003C2BF4 /* F1_Calendar_dote_Enable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Calendar_dote_Enable.png; path = Ressources/Backgrounds/F1_Calendar_dote_Enable.png; sourceTree = "<group>"; };
+		1E3BA46718ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Calendar_dote_Enable@2x.png"; path = "Ressources/Backgrounds/F1_Calendar_dote_Enable@2x.png"; sourceTree = "<group>"; };
 		1E4F57D5187FFF1100D5F1F4 /* UICanuLabelUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelUserName.h; path = Vendor/UICanuLabel/UICanuLabelUserName.h; sourceTree = "<group>"; };
 		1E4F57D6187FFF1100D5F1F4 /* UICanuLabelUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelUserName.m; path = Vendor/UICanuLabel/UICanuLabelUserName.m; sourceTree = "<group>"; };
 		1E4F57D8187FFFCA00D5F1F4 /* UICanuLabelDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDay.h; path = Vendor/UICanuLabel/UICanuLabelDay.h; sourceTree = "<group>"; };
@@ -796,6 +929,7 @@
 		1E3A6B76188595C2007FB6BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1E3BA3D818AA630E003C2BF4 /* CreateEdit */,
 				1E9F313318A24BE10008ADF1 /* AnimationCreateActivity */,
 				1E7138BE188DE6BF00137A48 /* Tutorial */,
 				1E3A6B77188595D2007FB6BA /* SignUp */,
@@ -836,6 +970,177 @@
 			path = Ressources/NavBox;
 			sourceTree = "<group>";
 		};
+		1E3BA3D818AA630E003C2BF4 /* CreateEdit */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA3D918AA639F003C2BF4 /* CreateEditUserList.h */,
+				1E3BA3DA18AA639F003C2BF4 /* CreateEditUserList.m */,
+			);
+			name = CreateEdit;
+			sourceTree = "<group>";
+		};
+		1E3BA3F118ACBE03003C2BF4 /* MKFoundationKit */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA3F218ACBE03003C2BF4 /* Macros */,
+				1E3BA3F918ACBE03003C2BF4 /* MKFoundationKit.h */,
+				1E3BA3FA18ACBE03003C2BF4 /* NSArray */,
+				1E3BA40618ACBE03003C2BF4 /* NSData */,
+				1E3BA40A18ACBE03003C2BF4 /* NSDate */,
+				1E3BA41618ACBE03003C2BF4 /* NSDecimalNumber */,
+				1E3BA41818ACBE03003C2BF4 /* NSDictionary */,
+				1E3BA42018ACBE03003C2BF4 /* NSNumber */,
+				1E3BA42E18ACBE03003C2BF4 /* NSObject */,
+				1E3BA43218ACBE03003C2BF4 /* NSSet */,
+				1E3BA43618ACBE03003C2BF4 /* NSString */,
+			);
+			name = MKFoundationKit;
+			path = Framework/MKFoundationKit;
+			sourceTree = "<group>";
+		};
+		1E3BA3F218ACBE03003C2BF4 /* Macros */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA3F318ACBE03003C2BF4 /* MKMacro.h */,
+				1E3BA3F418ACBE03003C2BF4 /* MKMacro_Geometry.h */,
+				1E3BA3F518ACBE03003C2BF4 /* MKMacro_Log.h */,
+				1E3BA3F618ACBE03003C2BF4 /* MKMacro_Method.h */,
+				1E3BA3F718ACBE03003C2BF4 /* MKMacro_Test.h */,
+				1E3BA3F818ACBE03003C2BF4 /* MKMacro_Version.h */,
+			);
+			path = Macros;
+			sourceTree = "<group>";
+		};
+		1E3BA3FA18ACBE03003C2BF4 /* NSArray */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA3FB18ACBE03003C2BF4 /* NSArray+MK.h */,
+				1E3BA3FC18ACBE03003C2BF4 /* NSArray+MK_Block.h */,
+				1E3BA3FD18ACBE03003C2BF4 /* NSArray+MK_Block.m */,
+				1E3BA3FE18ACBE03003C2BF4 /* NSArray+MK_Misc.h */,
+				1E3BA3FF18ACBE03003C2BF4 /* NSArray+MK_Misc.m */,
+				1E3BA40018ACBE03003C2BF4 /* NSMutableArray+MK_Misc.h */,
+				1E3BA40118ACBE03003C2BF4 /* NSMutableArray+MK_Misc.m */,
+				1E3BA40218ACBE03003C2BF4 /* NSMutableArray+MK_Queue.h */,
+				1E3BA40318ACBE03003C2BF4 /* NSMutableArray+MK_Queue.m */,
+				1E3BA40418ACBE03003C2BF4 /* NSMutableArray+MK_Stack.h */,
+				1E3BA40518ACBE03003C2BF4 /* NSMutableArray+MK_Stack.m */,
+			);
+			path = NSArray;
+			sourceTree = "<group>";
+		};
+		1E3BA40618ACBE03003C2BF4 /* NSData */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA40718ACBE03003C2BF4 /* NSData+MK.h */,
+				1E3BA40818ACBE03003C2BF4 /* NSData+MK_Base64.h */,
+				1E3BA40918ACBE03003C2BF4 /* NSData+MK_Base64.m */,
+			);
+			path = NSData;
+			sourceTree = "<group>";
+		};
+		1E3BA40A18ACBE03003C2BF4 /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA40B18ACBE03003C2BF4 /* NSDate+MK.h */,
+				1E3BA40C18ACBE03003C2BF4 /* NSDate+MK_Comparison.h */,
+				1E3BA40D18ACBE03003C2BF4 /* NSDate+MK_Comparison.m */,
+				1E3BA40E18ACBE03003C2BF4 /* NSDate+MK_Components.h */,
+				1E3BA40F18ACBE03003C2BF4 /* NSDate+MK_Components.m */,
+				1E3BA41018ACBE03003C2BF4 /* NSDate+MK_Creation.h */,
+				1E3BA41118ACBE03003C2BF4 /* NSDate+MK_Creation.m */,
+				1E3BA41218ACBE03003C2BF4 /* NSDate+MK_Formatting.h */,
+				1E3BA41318ACBE03003C2BF4 /* NSDate+MK_Formatting.m */,
+				1E3BA41418ACBE03003C2BF4 /* NSDate+MK_Manipulation.h */,
+				1E3BA41518ACBE03003C2BF4 /* NSDate+MK_Manipulation.m */,
+			);
+			path = NSDate;
+			sourceTree = "<group>";
+		};
+		1E3BA41618ACBE03003C2BF4 /* NSDecimalNumber */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA41718ACBE03003C2BF4 /* .gitkeep */,
+			);
+			path = NSDecimalNumber;
+			sourceTree = "<group>";
+		};
+		1E3BA41818ACBE03003C2BF4 /* NSDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA41918ACBE03003C2BF4 /* NSDictionary+MK.h */,
+				1E3BA41A18ACBE03003C2BF4 /* NSDictionary+MK_Block.h */,
+				1E3BA41B18ACBE03003C2BF4 /* NSDictionary+MK_Block.m */,
+				1E3BA41C18ACBE03003C2BF4 /* NSDictionary+MK_Misc.h */,
+				1E3BA41D18ACBE03003C2BF4 /* NSDictionary+MK_Misc.m */,
+				1E3BA41E18ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.h */,
+				1E3BA41F18ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.m */,
+			);
+			path = NSDictionary;
+			sourceTree = "<group>";
+		};
+		1E3BA42018ACBE03003C2BF4 /* NSNumber */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA42118ACBE03003C2BF4 /* NSNumber+MK.h */,
+				1E3BA42218ACBE03003C2BF4 /* NSNumber+MK_Comparison.h */,
+				1E3BA42318ACBE03003C2BF4 /* NSNumber+MK_Comparison.m */,
+				1E3BA42418ACBE03003C2BF4 /* NSNumber+MK_Creation.h */,
+				1E3BA42518ACBE03003C2BF4 /* NSNumber+MK_Creation.m */,
+				1E3BA42618ACBE03003C2BF4 /* NSNumber+MK_Fraction.h */,
+				1E3BA42718ACBE03003C2BF4 /* NSNumber+MK_Fraction.m */,
+				1E3BA42818ACBE03003C2BF4 /* NSNumber+MK_Manipulation.h */,
+				1E3BA42918ACBE03003C2BF4 /* NSNumber+MK_Manipulation.m */,
+				1E3BA42A18ACBE03003C2BF4 /* NSNumber+MK_Negative.h */,
+				1E3BA42B18ACBE03003C2BF4 /* NSNumber+MK_Negative.m */,
+				1E3BA42C18ACBE03003C2BF4 /* NSNumber+MK_Precision.h */,
+				1E3BA42D18ACBE03003C2BF4 /* NSNumber+MK_Precision.m */,
+			);
+			path = NSNumber;
+			sourceTree = "<group>";
+		};
+		1E3BA42E18ACBE03003C2BF4 /* NSObject */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA42F18ACBE03003C2BF4 /* NSObject+MK.h */,
+				1E3BA43018ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.h */,
+				1E3BA43118ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.m */,
+			);
+			path = NSObject;
+			sourceTree = "<group>";
+		};
+		1E3BA43218ACBE03003C2BF4 /* NSSet */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA43318ACBE03003C2BF4 /* NSSet+MK.h */,
+				1E3BA43418ACBE03003C2BF4 /* NSSet+MK_Block.h */,
+				1E3BA43518ACBE03003C2BF4 /* NSSet+MK_Block.m */,
+			);
+			path = NSSet;
+			sourceTree = "<group>";
+		};
+		1E3BA43618ACBE03003C2BF4 /* NSString */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA43718ACBE03003C2BF4 /* NSString+MK.h */,
+				1E3BA43818ACBE03003C2BF4 /* NSString+MK_Base64.h */,
+				1E3BA43918ACBE03003C2BF4 /* NSString+MK_Base64.m */,
+				1E3BA43A18ACBE03003C2BF4 /* NSString+MK_Conversion.h */,
+				1E3BA43B18ACBE03003C2BF4 /* NSString+MK_Conversion.m */,
+				1E3BA43C18ACBE03003C2BF4 /* NSString+MK_Empty.h */,
+				1E3BA43D18ACBE03003C2BF4 /* NSString+MK_Empty.m */,
+				1E3BA43E18ACBE03003C2BF4 /* NSString+MK_Misc.h */,
+				1E3BA43F18ACBE03003C2BF4 /* NSString+MK_Misc.m */,
+				1E3BA44018ACBE03003C2BF4 /* NSString+MK_UTF.h */,
+				1E3BA44118ACBE03003C2BF4 /* NSString+MK_UTF.m */,
+				1E3BA44218ACBE03003C2BF4 /* NSString+MK_UUID.h */,
+				1E3BA44318ACBE03003C2BF4 /* NSString+MK_UUID.m */,
+				1E3BA44418ACBE03003C2BF4 /* NSString+MK_Validation.h */,
+				1E3BA44518ACBE03003C2BF4 /* NSString+MK_Validation.m */,
+			);
+			path = NSString;
+			sourceTree = "<group>";
+		};
 		1E4F57D4187FFE7600D5F1F4 /* UICanuLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,6 +1173,10 @@
 				1E6D2A5218A53A850066D266 /* UICanuScrollPicker.m */,
 				1E87E07D18A911DC00840655 /* UICanuAMPMPicker.h */,
 				1E87E07E18A911DC00840655 /* UICanuAMPMPicker.m */,
+				1E3BA3EB18AB8418003C2BF4 /* UICanuCalendarPicker.h */,
+				1E3BA3EC18AB8418003C2BF4 /* UICanuCalendarPicker.m */,
+				1E3BA3EE18ABA837003C2BF4 /* UICanuCalendarButtonPicker.h */,
+				1E3BA3EF18ABA837003C2BF4 /* UICanuCalendarButtonPicker.m */,
 			);
 			name = UIPicker;
 			sourceTree = "<group>";
@@ -1228,6 +1537,12 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E3BA46418ACF796003C2BF4 /* F1_Calendar_dote_Disable.png */,
+				1E3BA46518ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png */,
+				1E3BA46618ACF796003C2BF4 /* F1_Calendar_dote_Enable.png */,
+				1E3BA46718ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png */,
+				1E3BA3E718AB7CBE003C2BF4 /* F1_Shadow_Description.png */,
+				1E3BA3E818AB7CBE003C2BF4 /* F1_Shadow_Description@2x.png */,
 				1E87E08018A932BB00840655 /* F1_lenght_picker.png */,
 				1E87E08118A932BB00840655 /* F1_lenght_picker@2x.png */,
 				1E6D2A4D18A5380A0066D266 /* F1_time_picker.png */,
@@ -1368,6 +1683,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E3BA3F118ACBE03003C2BF4 /* MKFoundationKit */,
 				1E70867918996FE000328F76 /* AddressBook.framework */,
 				1E9FB0251892685300B70E8B /* Reachability */,
 				1E7138D9188E9C2B00137A48 /* QuartzCore.framework */,
@@ -1605,6 +1921,10 @@
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				1E3BA3E018AA7544003C2BF4 /* F1_add_description_selected.png */,
+				1E3BA3E118AA7544003C2BF4 /* F1_add_description_selected@2x.png */,
+				1E3BA3DC18AA6EF1003C2BF4 /* F1_calendar_selected.png */,
+				1E3BA3DD18AA6EF1003C2BF4 /* F1_calendar_selected@2x.png */,
 				1E87E08418AA33EF00840655 /* F1_open_map.png */,
 				1E87E08518AA33EF00840655 /* F1_open_map@2x.png */,
 				1E6D2A4218A52CDB0066D266 /* F1_calendar.png */,
@@ -1714,6 +2034,7 @@
 				DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */,
 				DE4D95301742A00700FB026F /* scroll_content.png in Resources */,
 				DE4D95311742A00700FB026F /* scroll_content@2x.png in Resources */,
+				1E3BA46A18ACF796003C2BF4 /* F1_Calendar_dote_Enable.png in Resources */,
 				1E9F314218A396EA0008ADF1 /* AnimationCreateActivity_cloud.png in Resources */,
 				1E608BC3188F150800BED835 /* Tutorial_Step2.png in Resources */,
 				1E87E08618AA33EF00840655 /* F1_open_map.png in Resources */,
@@ -1722,6 +2043,7 @@
 				DE4D95351742A6F700FB026F /* Lato-Bol.ttf in Resources */,
 				DE4D95361742A6F700FB026F /* Lato-Reg.ttf in Resources */,
 				DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */,
+				1E3BA3DE18AA6EF1003C2BF4 /* F1_calendar_selected.png in Resources */,
 				DEFD7A6C174534830087CB8A /* back_arrow@2x.png in Resources */,
 				DEFD7A71174694660087CB8A /* facebook_btn_off.png in Resources */,
 				1E9FB9FD18619A0400085421 /* loader-10@2x.png in Resources */,
@@ -1741,10 +2063,12 @@
 				DEFD7A761746CAAB0087CB8A /* icon_password.png in Resources */,
 				DE51772F184F70DC00690E2F /* edit_bg.png in Resources */,
 				DEFD7A7C1746CACA0087CB8A /* icon_password@2x.png in Resources */,
+				1E3BA3E918AB7CBE003C2BF4 /* F1_Shadow_Description.png in Resources */,
 				1E3A6B92188976E1007FB6BA /* User_image_edit.png in Resources */,
 				DEFD7A7D1746CACA0087CB8A /* icon_username.png in Resources */,
 				1E7A569F188FD75B00CB5C4A /* Tutorial_Step5.png in Resources */,
 				DEFD7A7E1746CACA0087CB8A /* icon_username@2x.png in Resources */,
+				1E3BA3DF18AA6EF1003C2BF4 /* F1_calendar_selected@2x.png in Resources */,
 				1E9FBA0818619A0400085421 /* loader-16.png in Resources */,
 				DEFD7A7F1746CACA0087CB8A /* icon_userpic.png in Resources */,
 				1E9FB9F918619A0400085421 /* loader-8@2x.png in Resources */,
@@ -1793,6 +2117,7 @@
 				1E7138A9188D4FC400137A48 /* Activity_Empty_feed_Bakground.png in Resources */,
 				DE6ED8A817BD00D400C5E72E /* bringup_profile_with_arrow@2x.png in Resources */,
 				1E3A6B5118842CA1007FB6BA /* Main_background_cloud.png in Resources */,
+				1E3BA45118ACBE03003C2BF4 /* .gitkeep in Resources */,
 				1E9FB9F018619A0400085421 /* loader-4.png in Resources */,
 				DE517733184F716500690E2F /* edit_bg-568h@2x.png in Resources */,
 				1E9FBA0518619A0400085421 /* loader-14@2x.png in Resources */,
@@ -1842,6 +2167,7 @@
 				DE6ED9C217C2958100C5E72E /* fullview_action_go@2x.png in Resources */,
 				1E608BB9188F13CB00BED835 /* Tutorial_Step2_line.png in Resources */,
 				DE6ED9C317C2958100C5E72E /* fullview_action_ppl.png in Resources */,
+				1E3BA3E318AA7544003C2BF4 /* F1_add_description_selected@2x.png in Resources */,
 				1E9FBA0C18619A0400085421 /* loop_1.png in Resources */,
 				DE51772D184F70DC00690E2F /* create_bg@2x.png in Resources */,
 				DE6ED9C417C2958100C5E72E /* fullview_action_ppl@2x.png in Resources */,
@@ -1853,6 +2179,7 @@
 				1E9F313F18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png in Resources */,
 				DE774B48184E129100F8C244 /* navmenu_me@2x.png in Resources */,
 				1E9FB9F618619A0400085421 /* loader-7.png in Resources */,
+				1E3BA3EA18AB7CBE003C2BF4 /* F1_Shadow_Description@2x.png in Resources */,
 				1E7A569E188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png in Resources */,
 				DE6ED9CD17C3D35000C5E72E /* fullview_bg.png in Resources */,
 				1E9FBA0B18619A0400085421 /* loader-17@2x.png in Resources */,
@@ -1870,6 +2197,7 @@
 				DE607830182BD08D0053F23B /* intro_bg.png in Resources */,
 				DEAE0B6F17C65D5200EEB078 /* feed_cell.png in Resources */,
 				1E9FB9EF18619A0400085421 /* loader-3@2x.png in Resources */,
+				1E3BA46B18ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png in Resources */,
 				DEAE0B7017C65D5200EEB078 /* feed_cell@2x.png in Resources */,
 				1E3A6B7D1885981E007FB6BA /* SignUp_phoneNumber_background.png in Resources */,
 				1E9FBA1118619A0400085421 /* loop_3@2x.png in Resources */,
@@ -1877,16 +2205,19 @@
 				DE774B3C184E0FDD00F8C244 /* guide_step_3-568h@2x.png in Resources */,
 				1E9FBA0218619A0400085421 /* loader-13.png in Resources */,
 				DE774B41184E0FDD00F8C244 /* guide_step_4@2x.png in Resources */,
+				1E3BA46818ACF796003C2BF4 /* F1_Calendar_dote_Disable.png in Resources */,
 				1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */,
 				1E9F313C18A2A90D0008ADF1 /* AnimationCreateActivity_local.png in Resources */,
 				1E9FBA0718619A0400085421 /* loader-15@2x.png in Resources */,
 				DE774B3B184E0FDD00F8C244 /* guide_step_2@2x.png in Resources */,
 				1E3A6B93188976E1007FB6BA /* User_image_edit@2x.png in Resources */,
 				1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */,
+				1E3BA3E218AA7544003C2BF4 /* F1_add_description_selected.png in Resources */,
 				1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */,
 				DE607831182BD08D0053F23B /* intro_bg@2x.png in Resources */,
 				1E9FBA0A18619A0400085421 /* loader-17.png in Resources */,
 				1E7138C9188E906900137A48 /* Tutorial_Step1_line@2x.png in Resources */,
+				1E3BA46918ACF796003C2BF4 /* F1_Calendar_dote_Disable@2x.png in Resources */,
 				1E7138B5188D5B2900137A48 /* Activity_Empty_feed_illustration_tribes.png in Resources */,
 				DE517732184F716500690E2F /* create_bg-568h@2x.png in Resources */,
 				1E9FBA0918619A0400085421 /* loader-16@2x.png in Resources */,
@@ -1945,50 +2276,71 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
+				1E3BA44718ACBE03003C2BF4 /* NSArray+MK_Misc.m in Sources */,
 				1E3A6B811886839C007FB6BA /* SignUpStep1.m in Sources */,
+				1E3BA3F018ABA837003C2BF4 /* UICanuCalendarButtonPicker.m in Sources */,
+				1E3BA44A18ACBE03003C2BF4 /* NSMutableArray+MK_Stack.m in Sources */,
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
 				1EEA97E1185782B000EA9E02 /* ActivityScrollViewController.m in Sources */,
 				1EEA9862185B4CEB00EA9E02 /* UICanuChatCellScroll.m in Sources */,
 				1E9FB02F18929CCE00B70E8B /* AlertViewController.m in Sources */,
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
+				1E3BA45A18ACBE03003C2BF4 /* NSNumber+MK_Precision.m in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
 				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,
+				1E3BA3DB18AA639F003C2BF4 /* CreateEditUserList.m in Sources */,
 				1E4F57E31880040800D5F1F4 /* UICanuLabelActivityName.m in Sources */,
 				DEA93B5717204EF100303BB5 /* AFHTTPRequestOperation.m in Sources */,
 				DEA93B5817204EF100303BB5 /* AFImageRequestOperation.m in Sources */,
+				1E3BA44818ACBE03003C2BF4 /* NSMutableArray+MK_Misc.m in Sources */,
 				DEA93B5917204EF100303BB5 /* AFJSONRequestOperation.m in Sources */,
 				DEA93B5A17204EF100303BB5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				DEA93B5B17204EF100303BB5 /* AFPropertyListRequestOperation.m in Sources */,
+				1E3BA45318ACBE03003C2BF4 /* NSDictionary+MK_Misc.m in Sources */,
 				1EEA9859185A2C1A00EA9E02 /* DetailActivityViewControllerAnimate.m in Sources */,
 				1E4F57E9188005A900D5F1F4 /* UICanuLabelLocation.m in Sources */,
+				1E3BA45718ACBE03003C2BF4 /* NSNumber+MK_Fraction.m in Sources */,
 				1E4F57D7187FFF1100D5F1F4 /* UICanuLabelUserName.m in Sources */,
 				DEA93B5C17204EF100303BB5 /* AFURLConnectionOperation.m in Sources */,
 				DEA93B5D17204EF100303BB5 /* AFXMLRequestOperation.m in Sources */,
 				DEA93B5E17204EF100303BB5 /* UIImageView+AFNetworking.m in Sources */,
 				DEA93B6117204F7C00303BB5 /* AFCanuAPIClient.m in Sources */,
 				1E7A5694188F1BAD00CB5C4A /* TutorialStepProfile.m in Sources */,
+				1E3BA45E18ACBE03003C2BF4 /* NSString+MK_Conversion.m in Sources */,
 				1E7138C1188DE74300137A48 /* TutorialStepLocal.m in Sources */,
+				1E3BA45418ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.m in Sources */,
+				1E3BA44C18ACBE03003C2BF4 /* NSDate+MK_Comparison.m in Sources */,
 				DEA93B721720565700303BB5 /* SignInViewController.m in Sources */,
 				DEA93B791720616500303BB5 /* MainViewController.m in Sources */,
 				DED4901B17298A61005A0BF9 /* User.m in Sources */,
 				DEBBDA4B1732BD9B009E9A7D /* Activity.m in Sources */,
 				1E70867D189A849300328F76 /* Contact.m in Sources */,
+				1E3BA45B18ACBE03003C2BF4 /* NSObject+MK_AutoDescribe.m in Sources */,
+				1E3BA44F18ACBE03003C2BF4 /* NSDate+MK_Formatting.m in Sources */,
 				1E7138DD188EDAB000137A48 /* TutorialStepStart.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
 				1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */,
+				1E3BA45F18ACBE03003C2BF4 /* NSString+MK_Empty.m in Sources */,
+				1E3BA46018ACBE03003C2BF4 /* NSString+MK_Misc.m in Sources */,
 				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
+				1E3BA45D18ACBE03003C2BF4 /* NSString+MK_Base64.m in Sources */,
 				1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
 				1E6D2A4C18A536FF0066D266 /* UICanuLenghtPicker.m in Sources */,
 				1E9FB0281892685300B70E8B /* Reachability.m in Sources */,
+				1E3BA46318ACBE03003C2BF4 /* NSString+MK_Validation.m in Sources */,
 				1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */,
+				1E3BA44B18ACBE03003C2BF4 /* NSData+MK_Base64.m in Sources */,
 				DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */,
+				1E3BA44D18ACBE03003C2BF4 /* NSDate+MK_Components.m in Sources */,
 				1E3A6B84188686EB007FB6BA /* SignUpStep2.m in Sources */,
 				DEA7C7EC17F1F2EF009CBE25 /* EditUserViewController.m in Sources */,
 				DECA169F17807EE8009747E8 /* UICanuNavigationController.m in Sources */,
+				1E3BA45618ACBE03003C2BF4 /* NSNumber+MK_Creation.m in Sources */,
 				1E87E07F18A911DC00840655 /* UICanuAMPMPicker.m in Sources */,
 				1EEA985F185B44B300EA9E02 /* ChatScrollView.m in Sources */,
+				1E3BA45218ACBE03003C2BF4 /* NSDictionary+MK_Block.m in Sources */,
 				1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */,
 				DEB29BB317954FDA00D9FFAE /* UIProfileView.m in Sources */,
 				1E4F57DD1880013000D5F1F4 /* UICanuLabelTimeStart.m in Sources */,
@@ -1996,11 +2348,20 @@
 				1E4F57E01880020400D5F1F4 /* UICanuLabelTimeEnd.m in Sources */,
 				1E3A6B5918844303007FB6BA /* SignUpViewController.m in Sources */,
 				DEB29BC41795700700D9FFAE /* UserSettingsViewController.m in Sources */,
+				1E3BA45C18ACBE03003C2BF4 /* NSSet+MK_Block.m in Sources */,
+				1E3BA46118ACBE03003C2BF4 /* NSString+MK_UTF.m in Sources */,
+				1E3BA44918ACBE03003C2BF4 /* NSMutableArray+MK_Queue.m in Sources */,
 				1E6D2A4118A5185E0066D266 /* UICanuButtonSelect.m in Sources */,
+				1E3BA3ED18AB8418003C2BF4 /* UICanuCalendarPicker.m in Sources */,
 				DEB29BCA1796EE8600D9FFAE /* ActivitiesFeedViewController.m in Sources */,
+				1E3BA45018ACBE03003C2BF4 /* NSDate+MK_Manipulation.m in Sources */,
 				DEB29C141799C2C800D9FFAE /* FindLocationsViewController.m in Sources */,
+				1E3BA44E18ACBE03003C2BF4 /* NSDate+MK_Creation.m in Sources */,
+				1E3BA44618ACBE03003C2BF4 /* NSArray+MK_Block.m in Sources */,
 				1E6D2A4918A533430066D266 /* UICanuTimePicker.m in Sources */,
 				DE5599B21836491200FE32E9 /* Message.m in Sources */,
+				1E3BA45518ACBE03003C2BF4 /* NSNumber+MK_Comparison.m in Sources */,
+				1E3BA46218ACBE03003C2BF4 /* NSString+MK_UUID.m in Sources */,
 				1E9F313618A24C470008ADF1 /* AnimationCreateActivity.m in Sources */,
 				1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */,
 				1E3A6B7A18859649007FB6BA /* CheckPhoneNumber.m in Sources */,
@@ -2008,6 +2369,8 @@
 				DEAE0B7A17C9540200EEB078 /* MKCanuAnnotationView.m in Sources */,
 				DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */,
 				1E9F314A18A3F2460008ADF1 /* CreateEditActivityViewController.m in Sources */,
+				1E3BA45918ACBE03003C2BF4 /* NSNumber+MK_Negative.m in Sources */,
+				1E3BA45818ACBE03003C2BF4 /* NSNumber+MK_Manipulation.m in Sources */,
 				1EEA9850185A033500EA9E02 /* AttendeesScrollViewController.m in Sources */,
 				1E6D2A5318A53A850066D266 /* UICanuScrollPicker.m in Sources */,
 				1E7138B9188DDC1000137A48 /* TutorialViewController.m in Sources */,

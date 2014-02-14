@@ -309,6 +309,7 @@ typedef enum {
     }else if(_feedType == FeedTribeType){
             
         [self.user userActivitiesTribesWithBlock:^(NSArray *activities, NSError *error) {
+            
             if (error) {
                 
                 // Visual information of this error adding by Error Manager
@@ -353,6 +354,7 @@ typedef enum {
     }else if(_feedType == FeedProfileType){
         
         [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+            
             if (error) {
                 
                 // Visual information of this error adding by Error Manager
@@ -531,9 +533,8 @@ typedef enum {
                     [UIView animateWithDuration:0.2 animations:^{
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
-                        cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
                         if (_feedType == FeedLocalType) {
-                            [self showActivities];
+                            [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }else if (_feedType == FeedTribeType) {
@@ -583,9 +584,8 @@ typedef enum {
                     [UIView animateWithDuration:0.2 animations:^{
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
-                        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
                         if (_feedType == FeedLocalType) {
-                            [self showActivities];
+                            [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }else if (_feedType == FeedTribeType) {
