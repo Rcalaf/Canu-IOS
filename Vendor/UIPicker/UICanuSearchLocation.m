@@ -12,8 +12,6 @@
 #import "UICANULocationCell.h"
 #import "UICanuButtonSignBottomBar.h"
 
-static int const KHeightMax = 238;
-
 @interface UICanuSearchLocation () <UICANULocationCellDelegate>
 
 @property (nonatomic) BOOL isMap;
@@ -21,6 +19,7 @@ static int const KHeightMax = 238;
 @property (strong, nonatomic) NSMutableArray *arrayLocation;
 @property (strong, nonatomic) NSMutableArray *arrayCellLocation;
 @property (strong, nonatomic) UILabel *noResults;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UICanuButtonSignBottomBar *searchOnMap;
 
 @end
@@ -40,11 +39,16 @@ static int const KHeightMax = 238;
         
         self.backgroundColor = UIColorFromRGB(0xe9eeee);
         
+        self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 5 - 47 - 5;
+        
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, _maxHeight)];
+        [self addSubview:_scrollView];
+        
         UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
         shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
         [self addSubview:shadowDescription];
         
-        UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, KHeightMax - 6, 320, 6)];
+        UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, _maxHeight - 6, 320, 6)];
         shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
         shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
         [self addSubview:shadowDescriptionReverse];
@@ -63,7 +67,7 @@ static int const KHeightMax = 238;
         self.noResults.text = NSLocalizedString(@"No results ...", nil);
         self.noResults.font = [UIFont fontWithName:@"Lato-Regular" size:15.0];
         self.noResults.alpha = 0;
-        [self addSubview:_noResults];
+        [self.scrollView addSubview:_noResults];
         
     }
     return self;
@@ -165,7 +169,7 @@ static int const KHeightMax = 238;
         
         UICANULocationCell *cellLocation = [[UICANULocationCell alloc]initWithFrame:CGRectMake(10, 10 + i * (47 + 10), 300, 47) WithLocation:location];
         cellLocation.delegate = self;
-        [self addSubview:cellLocation];
+        [self.scrollView addSubview:cellLocation];
         [self.arrayCellLocation addObject:cellLocation];
         
         if (!_selectedLocation && !_isMap && _isFirstTime) {
@@ -196,8 +200,12 @@ static int const KHeightMax = 238;
         }
         
         self.searchOnMap.frame = CGRectMake(10, 10 + i * (47 + 10), 300, 47);
-        [self addSubview:_searchOnMap];
+        [self.scrollView addSubview:_searchOnMap];
+        
+        i++;
     }
+    
+    self.scrollView.contentSize = CGSizeMake(320, i * ( 47 + 10) + 10);
     
 }
 

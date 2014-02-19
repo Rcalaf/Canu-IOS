@@ -21,6 +21,7 @@
 #import "AppDelegate.h"
 #import "Location.h"
 #import "SearchLocationMapViewController.h"
+#import "UICanuButtonCancel.h"
 
 @interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate>
 
@@ -35,6 +36,7 @@
 @property (strong, nonatomic) UIView *wrapperDescription;
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UIButton *openMap;
+@property (strong, nonatomic) UICanuButtonCancel *cancelLocation;
 @property (strong, nonatomic) UIButton *openCalendar;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
@@ -181,6 +183,13 @@
     [self.openMap addSubview:imgOpenMap];
     [self.wrapper addSubview:_openMap];
     
+    self.cancelLocation = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(320 - 10, _openMap.frame.origin.y, 0, 47)];
+    [self.cancelLocation addTarget:self action:@selector(cancelSearchLocation) forControlEvents:UIControlEventTouchDown];
+    [self.cancelLocation detectSize];
+    self.cancelLocation.alpha = 0;
+    self.cancelLocation.titleLabel.alpha = 0;
+    [self.wrapper addSubview:_cancelLocation];
+    
     // Invit
     
     self.titleInvit = [[UILabel alloc]initWithFrame:CGRectMake(10, _locationInput.frame.origin.y + _locationInput.frame.size.height + 51, 300, 18)];
@@ -314,6 +323,18 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     if (textField == _locationInput) {
+        
+        if (self.locationInput.activeSearch) {
+            
+            NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+            
+            if (newString.length != 0) {
+                self.locationInput.activeReset = YES;
+            } else {
+                self.locationInput.activeReset = NO;
+            }
+            
+        }
         
         self.locationInput.activeSearch = YES;
         
@@ -478,6 +499,16 @@
 
 #pragma mark - Private
 
+- (void)cancelSearchLocation{
+    
+    [self.locationInput resignFirstResponder];
+    
+    if (_searchLocationIsOpen) {
+        [self openSearchLocationView];
+    }
+    
+}
+
 - (void)btnSearchWithTheMap{
     
     if (!_mapLocation) {
@@ -591,21 +622,48 @@
     int heightSearchLocation,margin;
     
     if (_searchLocationIsOpen) {
-        heightSearchLocation = 238 + 10;
+        heightSearchLocation = self.searchLocation.maxHeight + 10;
         margin = 10;
+        self.wrapper.scrollEnabled = NO;
     } else {
-        heightSearchLocation = - 238 - 10;
+        heightSearchLocation = - self.searchLocation.maxHeight - 10;
         margin = - 10;
+        self.wrapper.scrollEnabled = YES;
+    }
+    
+    if (_searchLocationIsOpen) {
+        self.cancelLocation.frame = _openMap.frame;
+    } else {
+        
     }
     
     [UIView animateWithDuration:0.4 animations:^{
+        if (_searchLocationIsOpen) {
+            self.cancelLocation.alpha = 1;
+        } else {
+            self.cancelLocation.frame = _openMap.frame;
+            self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y, 250, _locationInput.frame.size.height);
+            self.cancelLocation.titleLabel.alpha = 0;
+        }
         self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightSearchLocation);
         self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y, _searchLocation.frame.size.width, _searchLocation.frame.size.height + heightSearchLocation - margin);
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightSearchLocation, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y + heightSearchLocation, _invitInput.frame.size.width, _invitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightSearchLocation, _userList.frame.size.width, _userList.frame.size.height);
     } completion:^(BOOL finished) {
-        
+        [UIView animateWithDuration:0.4 animations:^{
+            if (_searchLocationIsOpen) {
+                self.cancelLocation.frame = CGRectMake(320 - 10 - self.cancelLocation.maxWidth, _openMap.frame.origin.y, self.cancelLocation.maxWidth, 47);
+                self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y, 300 - 1 - self.cancelLocation.maxWidth, _locationInput.frame.size.height);
+                self.cancelLocation.titleLabel.alpha = 1;
+            } else {
+                self.cancelLocation.alpha = 0;
+            }
+        } completion:^(BOOL finished) {
+            if (!_searchLocationIsOpen) {
+                self.cancelLocation.frame = CGRectMake(320 - 10, _openMap.frame.origin.y, 0, 47);
+            }
+        }];
     }];
     
 }

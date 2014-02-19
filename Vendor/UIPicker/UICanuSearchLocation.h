@@ -15,6 +15,7 @@
 @interface UICanuSearchLocation : UIView
 
 @property (retain) id delegate;
+@property (nonatomic) int maxHeight;
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) MKMapItem *locationPicker;
 @property (strong, nonatomic) NSString *searchLocation;

@@ -14,6 +14,7 @@
 		1E162BEE18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */; };
 		1E162BEF18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */; };
 		1E162BF218B3586800D70FF0 /* SearchLocationMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */; };
+		1E162BF818B4DD4E00D70FF0 /* UICanuButtonCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BF718B4DD4E00D70FF0 /* UICanuButtonCancel.m */; };
 		1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */; };
 		1E3A6B5118842CA1007FB6BA /* Main_background_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */; };
 		1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5018842CA1007FB6BA /* Main_background_cloud@2x.png */; };
@@ -391,6 +392,8 @@
 		1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Add_Cell_Location_checked@2x.png"; path = "Ressources/Buttons/F1_Add_Cell_Location_checked@2x.png"; sourceTree = "<group>"; };
 		1E162BF018B3586800D70FF0 /* SearchLocationMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchLocationMapViewController.h; path = CANU/SearchLocationMapViewController.h; sourceTree = "<group>"; };
 		1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchLocationMapViewController.m; path = CANU/SearchLocationMapViewController.m; sourceTree = "<group>"; };
+		1E162BF618B4DD4E00D70FF0 /* UICanuButtonCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonCancel.h; path = Vendor/UICanuButton/UICanuButtonCancel.h; sourceTree = "<group>"; };
+		1E162BF718B4DD4E00D70FF0 /* UICanuButtonCancel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonCancel.m; path = Vendor/UICanuButton/UICanuButtonCancel.m; sourceTree = "<group>"; };
 		1E3A6B4C18842610007FB6BA /* UICanuButtonSignBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonSignBottomBar.h; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.h; sourceTree = "<group>"; };
 		1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonSignBottomBar.m; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.m; sourceTree = "<group>"; };
 		1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Main_background_cloud.png; path = Ressources/Backgrounds/Main_background_cloud.png; sourceTree = "<group>"; };
@@ -939,6 +942,8 @@
 				1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */,
 				1E6D2A3F18A5185E0066D266 /* UICanuButtonSelect.h */,
 				1E6D2A4018A5185E0066D266 /* UICanuButtonSelect.m */,
+				1E162BF618B4DD4E00D70FF0 /* UICanuButtonCancel.h */,
+				1E162BF718B4DD4E00D70FF0 /* UICanuButtonCancel.m */,
 			);
 			name = UICanuButton;
 			sourceTree = "<group>";
@@ -2338,6 +2343,7 @@
 				1E3BA45A18ACBE03003C2BF4 /* NSNumber+MK_Precision.m in Sources */,
 				DEA93B5617204EF100303BB5 /* AFHTTPClient.m in Sources */,
 				1EEA97E5185868B200EA9E02 /* UIScrollViewReverse.m in Sources */,
+				1E162BF818B4DD4E00D70FF0 /* UICanuButtonCancel.m in Sources */,
 				1E3BA47118AE2979003C2BF4 /* UICANULocationCell.m in Sources */,
 				1E3BA46E18AE22F0003C2BF4 /* UICanuSearchLocation.m in Sources */,
 				1E3BA3DB18AA639F003C2BF4 /* CreateEditUserList.m in Sources */,

@@ -175,22 +175,13 @@
         
         NSArray *arrayJson = [[JSON objectForKey:@"response"] objectForKey:@"venues"];
         
-        int maxObject = 3;
-        
-        if (maxObject > [arrayJson count]) {
-            maxObject = [arrayJson count];
-        }
-        
-        for (int i = 0; i < maxObject; i++) {
+        for (int i = 0; i < [arrayJson count]; i++) {
             
-            if ([arrayLocation count] < 3) {
-                NSDictionary *dic = [arrayJson objectAtIndex:i];
-                
-                Location *location = [[Location alloc]initSearchLocationWithAttributes:dic];
-                if (location.allInformation) {
-                    [arrayLocation addObject:location];
-                }
-                
+            NSDictionary *dic = [arrayJson objectAtIndex:i];
+            
+            Location *location = [[Location alloc]initSearchLocationWithAttributes:dic];
+            if (location.allInformation) {
+                [arrayLocation addObject:location];
             }
             
         }

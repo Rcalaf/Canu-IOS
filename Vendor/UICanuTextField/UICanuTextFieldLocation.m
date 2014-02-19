@@ -21,8 +21,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.delegate = self;
-        
         self.activeSearch = YES;
         
         self.activeReset = NO;
@@ -73,7 +71,9 @@
     
     BOOL returnValue = [super becomeFirstResponder];
     if (returnValue){
-        self.activeReset = YES;
+        if (![self.text isEqualToString:@""]) {
+            self.activeReset = YES;
+        }
     }
     return returnValue;
 }
