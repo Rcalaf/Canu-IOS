@@ -11,6 +11,9 @@
 		1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */; };
 		1E0EDCED187DB6DC00088B8A /* fullview_action_circle_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */; };
 		1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */; };
+		1E162BEE18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */; };
+		1E162BEF18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */; };
+		1E162BF218B3586800D70FF0 /* SearchLocationMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */; };
 		1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */; };
 		1E3A6B5118842CA1007FB6BA /* Main_background_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */; };
 		1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5018842CA1007FB6BA /* Main_background_cloud@2x.png */; };
@@ -384,6 +387,10 @@
 		1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_go@2x.png"; sourceTree = "<group>"; };
 		1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullview_action_circle_yes.png; sourceTree = "<group>"; };
 		1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_yes@2x.png"; sourceTree = "<group>"; };
+		1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Add_Cell_Location_checked.png; path = Ressources/Buttons/F1_Add_Cell_Location_checked.png; sourceTree = "<group>"; };
+		1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Add_Cell_Location_checked@2x.png"; path = "Ressources/Buttons/F1_Add_Cell_Location_checked@2x.png"; sourceTree = "<group>"; };
+		1E162BF018B3586800D70FF0 /* SearchLocationMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchLocationMapViewController.h; path = CANU/SearchLocationMapViewController.h; sourceTree = "<group>"; };
+		1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchLocationMapViewController.m; path = CANU/SearchLocationMapViewController.m; sourceTree = "<group>"; };
 		1E3A6B4C18842610007FB6BA /* UICanuButtonSignBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonSignBottomBar.h; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.h; sourceTree = "<group>"; };
 		1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonSignBottomBar.m; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.m; sourceTree = "<group>"; };
 		1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Main_background_cloud.png; path = Ressources/Backgrounds/Main_background_cloud.png; sourceTree = "<group>"; };
@@ -1655,6 +1662,8 @@
 				DEB29C111799C2C800D9FFAE /* FindLocationsViewController.h */,
 				DEB29C121799C2C800D9FFAE /* FindLocationsViewController.m */,
 				DEB29C131799C2C800D9FFAE /* FindLocationsViewController.xib */,
+				1E162BF018B3586800D70FF0 /* SearchLocationMapViewController.h */,
+				1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */,
 				1E9F314818A3F2460008ADF1 /* CreateEditActivityViewController.h */,
 				1E9F314918A3F2460008ADF1 /* CreateEditActivityViewController.m */,
 				DE81F8AF175E4D9E00AD1071 /* NewActivityViewController.h */,
@@ -1951,6 +1960,8 @@
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */,
+				1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */,
 				1E7429E618AE7F7200992393 /* F1_Add_Cell_Location.png */,
 				1E7429E718AE7F7200992393 /* F1_Add_Cell_Location@2x.png */,
 				1E3BA3E018AA7544003C2BF4 /* F1_add_description_selected.png */,
@@ -2089,6 +2100,7 @@
 				1E608BC4188F150800BED835 /* Tutorial_Step2@2x.png in Resources */,
 				DE60782F182BD08D0053F23B /* intro_bg-568h@2x.png in Resources */,
 				DEFD7A72174694660087CB8A /* facebook_btn_off@2x.png in Resources */,
+				1E162BEF18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png in Resources */,
 				DEFD7A73174694660087CB8A /* facebook_btn_on.png in Resources */,
 				1E0EDCEB187DB6DC00088B8A /* fullview_action_circle_go.png in Resources */,
 				1E9FB9EC18619A0400085421 /* loader-2.png in Resources */,
@@ -2099,6 +2111,7 @@
 				DEFD7A7C1746CACA0087CB8A /* icon_password@2x.png in Resources */,
 				1E3BA3E918AB7CBE003C2BF4 /* F1_Shadow_Description.png in Resources */,
 				1E3A6B92188976E1007FB6BA /* User_image_edit.png in Resources */,
+				1E162BEE18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png in Resources */,
 				DEFD7A7D1746CACA0087CB8A /* icon_username.png in Resources */,
 				1E7A569F188FD75B00CB5C4A /* Tutorial_Step5.png in Resources */,
 				DEFD7A7E1746CACA0087CB8A /* icon_username@2x.png in Resources */,
@@ -2406,6 +2419,7 @@
 				1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */,
 				1E3A6B7A18859649007FB6BA /* CheckPhoneNumber.m in Sources */,
 				1EEA97EB1858721F00EA9E02 /* UICanuActivityCellScroll.m in Sources */,
+				1E162BF218B3586800D70FF0 /* SearchLocationMapViewController.m in Sources */,
 				DEAE0B7A17C9540200EEB078 /* MKCanuAnnotationView.m in Sources */,
 				DEA7C7F417F23858009CBE25 /* EditUserPasswordViewController.m in Sources */,
 				1E9F314A18A3F2460008ADF1 /* CreateEditActivityViewController.m in Sources */,

@@ -19,12 +19,15 @@
 #import "UICanuCalendarPicker.h"
 #import "UICanuSearchLocation.h"
 #import "AppDelegate.h"
+#import "Location.h"
+#import "SearchLocationMapViewController.h"
 
-@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate>
+@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
 @property (nonatomic) BOOL searchLocationIsOpen;
+@property (nonatomic) BOOL mapLocationIsOpen;
 @property (strong, nonatomic) NSTimer *timerSearch;
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
@@ -35,6 +38,7 @@
 @property (strong, nonatomic) UIButton *openCalendar;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
+@property (strong, nonatomic) Location *locationSelected;
 @property (strong, nonatomic) CreateEditUserList *userList;
 @property (strong, nonatomic) UICanuTextField *titleInput;
 @property (strong, nonatomic) UICanuTextField *invitInput;
@@ -45,6 +49,7 @@
 @property (strong, nonatomic) UICanuLenghtPicker *lenghtPicker;
 @property (strong, nonatomic) UICanuCalendarPicker *calendar;
 @property (strong, nonatomic) UICanuSearchLocation *searchLocation;
+@property (strong, nonatomic) SearchLocationMapViewController *mapLocation;
 
 @end
 
@@ -96,8 +101,8 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
+    
     [super viewDidLoad];
 	
     // Init
@@ -105,9 +110,9 @@
     self.descriptionIsOpen = NO;
     self.calendarIsOpen = NO;
     self.searchLocationIsOpen = NO;
+    self.mapLocationIsOpen = NO;
     
     self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-    self.wrapper.contentSize = CGSizeMake(320, 800);
     [self.view addSubview:_wrapper];
     
     // Title
@@ -164,13 +169,14 @@
     self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(10, _timePicker.frame.origin.y + _timePicker.frame.size.height + 5, 250, 47)];
     self.locationInput.placeholder = NSLocalizedString(@"Find a place", nil);
     self.locationInput.delegate = self;
-    self.locationInput.returnKeyType = UIReturnKeyNext;
+    self.locationInput.returnKeyType = UIReturnKeySearch;
     [self.wrapper addSubview:_locationInput];
     
     UIImageView *imgOpenMap = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 49, 47)];
     imgOpenMap.image = [UIImage imageNamed:@"F1_open_map"];
     
     self.openMap = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, _timePicker.frame.origin.y + _timePicker.frame.size.height + 5, 49, 47)];
+    [self.openMap addTarget:self action:@selector(btnSearchWithTheMap) forControlEvents:UIControlEventTouchDown];
     self.openMap.backgroundColor = [UIColor whiteColor];
     [self.openMap addSubview:imgOpenMap];
     [self.wrapper addSubview:_openMap];
@@ -193,6 +199,9 @@
     
     self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(10, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 300, 200)];
     [self.wrapper addSubview:_userList];
+    
+    // Wrapper
+    self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height + 5);
     
 }
 
@@ -230,7 +239,8 @@
     
     // Search Location
     
-    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0)];
+    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0) ForMap:NO];
+    self.searchLocation.delegate = self;
     [self.wrapper addSubview:_searchLocation];
     
     // Current Location
@@ -245,6 +255,9 @@
                                         message:@"The map server is not available."
                                        delegate:nil
                               cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+            
+            self.searchLocation.searchLocation = @"";
+            
         } else {
             
             self.currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
@@ -272,8 +285,6 @@
     
     if (textField == _titleInput) {
         [self.titleInput resignFirstResponder];
-    } else if (textField == _locationInput) {
-        [self.locationInput resignFirstResponder];
     }
     
     return YES;
@@ -286,6 +297,12 @@
     
     if (textField == _locationInput) {
         if (!_searchLocationIsOpen) {
+            
+            if (!self.locationInput.activeSearch) {
+                self.locationInput.text = @"";
+                self.locationInput.activeSearch = YES;
+            }
+            
             [self openSearchLocationView];
         }
     }
@@ -298,10 +315,13 @@
     
     if (textField == _locationInput) {
         
+        self.locationInput.activeSearch = YES;
+        
         [self.timerSearch invalidate];
         self.timerSearch = nil;
         
         self.timerSearch = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector:@selector(startSearchLocation) userInfo: nil repeats:NO];
+        
     }
     
     return YES;
@@ -313,6 +333,11 @@
     if (textField == _locationInput) {
         if (_searchLocationIsOpen) {
             [self openSearchLocationView];
+            if (self.searchLocation.selectedLocation != nil) {
+                self.locationInput.activeSearch = NO;
+                self.locationInput.text = self.searchLocation.selectedLocation.name;
+            }
+            
         }
     }
     
@@ -366,7 +391,122 @@
     
 }
 
+#pragma mark - UICanuSearchLocationDelegate
+
+- (void)locationIsSelected:(Location *)location{
+    
+    if (_mapLocation) {
+        [self.mapLocation willMoveToParentViewController:nil];
+        [self.mapLocation.view removeFromSuperview];
+        [self.mapLocation removeFromParentViewController];
+        self.mapLocation = nil;
+    }
+    
+    self.locationSelected = location;
+    
+    if (_searchLocationIsOpen) {
+        [self openSearchLocationView];
+    }
+    
+    [self.locationInput resignFirstResponder];
+    
+    self.locationInput.activeSearch = NO;
+    self.locationInput.text = location.name;
+    
+}
+
+- (void)searchWithTheMap{
+    
+    if (!_mapLocation) {
+        self.mapLocation = [[SearchLocationMapViewController alloc]initWithLocation:self.locationSelected];
+        self.mapLocation.delegate = self;
+        [self addChildViewController:self.mapLocation];
+        [self.view addSubview:self.mapLocation.view];
+    }
+    
+    if (![_locationInput.text isEqualToString:@""] && ![_locationInput.text isEqualToString:NSLocalizedString(@"Current Location", nil)]) {
+        [self.mapLocation searchAnnotionWithSearch:_locationInput.text];
+    } else {
+        [self.mapLocation searchAnnotionWithSearch:@""];
+    }
+    
+    [self.locationInput resignFirstResponder];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.mapLocation.view.frame = CGRectMake(0, 0, 320, _mapLocation.view.frame.size.height);
+        self.wrapper.frame = CGRectMake(-320, _wrapper.frame.origin.y, _wrapper.frame.size.width, _wrapper.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+#pragma mark - SearchLocationMapViewControllerDelegate
+
+- (void)locationIsSelectedByMap:(Location *)location{
+    
+    [self.searchLocation reset];
+    
+    self.locationSelected = location;
+    
+    if (_searchLocationIsOpen) {
+        [self openSearchLocationView];
+    }
+    
+    [self.locationInput resignFirstResponder];
+    
+    self.locationInput.activeSearch = NO;
+    self.locationInput.text = location.name;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.mapLocation.view.frame = CGRectMake(320, 0, 320, _mapLocation.view.frame.size.height);
+        self.wrapper.frame = CGRectMake(0, _wrapper.frame.origin.y, _wrapper.frame.size.width, _wrapper.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (void)closeTheMap{
+    [UIView animateWithDuration:0.4 animations:^{
+        self.mapLocation.view.frame = CGRectMake(320, 0, 320, _mapLocation.view.frame.size.height);
+        self.wrapper.frame = CGRectMake(0, _wrapper.frame.origin.y, _wrapper.frame.size.width, _wrapper.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 #pragma mark - Private
+
+- (void)btnSearchWithTheMap{
+    
+    if (!_mapLocation) {
+        self.mapLocation = [[SearchLocationMapViewController alloc]initWithLocation:self.locationSelected];
+        self.mapLocation.delegate = self;
+        [self addChildViewController:self.mapLocation];
+        [self.view addSubview:self.mapLocation.view];
+    }
+    
+    if (self.locationSelected && !self.locationInput.activeSearch) {
+        [self.mapLocation searchAnnotionWithLocation:self.locationSelected];
+    } else if (self.locationInput.activeSearch) {
+        [self.mapLocation searchAnnotionWithSearch:self.locationInput.text];
+    } else {
+        [self.mapLocation searchAnnotionWithSearch:@""];
+    }
+    
+    
+    
+    [self.locationInput resignFirstResponder];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.mapLocation.view.frame = CGRectMake(0, 0, 320, _mapLocation.view.frame.size.height);
+        self.wrapper.frame = CGRectMake(-320, _wrapper.frame.origin.y, _wrapper.frame.size.width, _wrapper.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
 
 - (void)changePositionWrapper:(NSNumber *)position{
     
@@ -451,10 +591,10 @@
     int heightSearchLocation,margin;
     
     if (_searchLocationIsOpen) {
-        heightSearchLocation = 213 + 10;
+        heightSearchLocation = 238 + 10;
         margin = 10;
     } else {
-        heightSearchLocation = - 213 - 10;
+        heightSearchLocation = - 238 - 10;
         margin = - 10;
     }
     
@@ -506,7 +646,7 @@
     
 }
 
-- (void)startSearchLocation{
+- (void)startSearchLocation {
     self.searchLocation.searchLocation = _locationInput.text;
 }
 

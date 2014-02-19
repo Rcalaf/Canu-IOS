@@ -13,6 +13,8 @@
 @interface UICANULocationCell : UIView
 
 @property (retain) id delegate;
+@property (strong, nonatomic) Location *location;
+@property (strong, nonatomic) UIImageView *square;
 
 - (id)initWithFrame:(CGRect)frame WithLocation:(Location *)location;
 

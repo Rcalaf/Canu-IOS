@@ -21,10 +21,12 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/FacebookSDK.framework/Headers/FBOpenGraphAction.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/FacebookSDK.framework/Headers/FBNativeDialogs.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/User.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Manager/ErrorManager.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/UICanuNavigationController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/ActivitiesFeedViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/ActivityScrollViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/UICanuCell/UICanuActivityCellScroll.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/AnimationCreateActivity/AnimationCreateActivity.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/NewActivityViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Activity.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Message.h

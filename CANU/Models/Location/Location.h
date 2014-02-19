@@ -12,16 +12,23 @@
 
 @interface Location : NSObject
 
+@property (nonatomic) float latitude;
+@property (nonatomic) float longitude;
+@property (nonatomic) BOOL allInformation;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *street;
 @property (strong, nonatomic) NSString *city;
 @property (strong, nonatomic) NSString *zip;
 @property (strong, nonatomic) NSString *country;
+@property (strong, nonatomic) NSString *displayAdresse;
+@property (strong, nonatomic) MKMapItem *locationMap;
 
 - (id)initCurrentLocation:(MKMapItem *)currentLocation;
 
 - (id)initSearchLocationWithAttributes:(NSDictionary *)attributes;
 
-+ (void)seacrhLocation:(MKMapItem *)currentLocation SearchWords:(NSString *)searchWords Block:(void (^)(NSMutableArray *arrayLocation, NSError *error))block;
++ (void)searchLocation:(MKMapItem *)currentLocation SearchWords:(NSString *)searchWords Block:(void (^)(NSMutableArray *arrayLocation, NSError *error))block;
+
++ (void)searchLocationMap:(MKLocalSearchResponse *)arrayResponses Block:(void (^)(NSMutableArray *arrayLocation, NSError *error))block;
 
 @end

@@ -16,6 +16,7 @@
     if (self) {
         
         self.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:12.0];
+        [self setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 10)];
         
         if (isBlue) {
             [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

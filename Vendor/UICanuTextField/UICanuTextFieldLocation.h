@@ -12,4 +12,6 @@
 
 @property (nonatomic) BOOL activeSearch;
 
+@property (nonatomic) BOOL activeReset;
+
 @end

@@ -84,7 +84,9 @@ typedef enum {
         
         self.loadFirstTime = NO;
         
-        [self.locationManager startUpdatingLocation];
+        if (_feedType == FeedLocalType) {
+            [self.locationManager startUpdatingLocation];
+        }
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
@@ -100,12 +102,6 @@ typedef enum {
         self.feedbackMessage.backgroundColor             = [UIColor clearColor];
         self.feedbackMessage.alpha                       = 0;
         [self.view addSubview:self.feedbackMessage];
-        
-        // To delete after implementation Tribes
-        if (_feedType == FeedTribeType) {
-            [self showFeedback];
-        }
-        ///////////
         
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
         [self.loaderAnimation startAnimation];
@@ -124,6 +120,11 @@ typedef enum {
         self.callBackActionEmptyFeed.alpha = 0;
         self.callBackActionEmptyFeed.hidden = YES;
         [self.view addSubview:_callBackActionEmptyFeed];
+        
+        if (_feedType != FeedLocalType) {
+            self.loadFirstTime = YES;
+            [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+        }
     
     }
     return self;

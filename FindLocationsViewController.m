@@ -239,26 +239,8 @@ NSString *const FindLocationDissmised = @"CANU.CANU:FindLocationDissmised";
         [self.ibMapView addAnnotation:_chosenLocation.placemark];
         [self.ibMapView selectAnnotation:_chosenLocation.placemark animated:YES];
         [self.ibMapView setUserTrackingMode:MKUserTrackingModeNone];
-    }
-    else if (recognizer.state == UIGestureRecognizerStateBegan){
-        //NSLog(@"UIGestureecognizerStateBegan.");
+    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
        CLLocationCoordinate2D coordinate = [self.ibMapView convertPoint:[recognizer locationInView:self.ibMapView] toCoordinateFromView:self.ibMapView];
-       /* [[[CLGeocoder alloc] init] reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude] completionHandler:
-         ^(NSArray *placemarks, NSError *error) {
-             
-             if (error != nil) {
-                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Map Error",nil)
-                                             message:[error localizedDescription]
-                                            delegate:nil
-                                   cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
-                 return;
-             }
-             _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
-            // NSLog(@"%@",[[[[placemarks objectAtIndex:0] addressDictionary] valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "]);
-           
-             
-         }];*/
-        
         _chosenLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coordinate addressDictionary:nil]];
     }
   
