@@ -248,7 +248,7 @@
     
     // Search Location
     
-    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0) ForMap:NO];
+    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0)];
     self.searchLocation.delegate = self;
     [self.wrapper addSubview:_searchLocation];
     
@@ -354,9 +354,9 @@
     if (textField == _locationInput) {
         if (_searchLocationIsOpen) {
             [self openSearchLocationView];
-            if (self.searchLocation.selectedLocation != nil) {
+            if (self.locationSelected != nil) {
                 self.locationInput.activeSearch = NO;
-                self.locationInput.text = self.searchLocation.selectedLocation.name;
+                self.locationInput.text = self.locationSelected.name;
             }
             
         }
@@ -436,32 +436,6 @@
     
 }
 
-- (void)searchWithTheMap{
-    
-    if (!_mapLocation) {
-        self.mapLocation = [[SearchLocationMapViewController alloc]initWithLocation:self.locationSelected];
-        self.mapLocation.delegate = self;
-        [self addChildViewController:self.mapLocation];
-        [self.view addSubview:self.mapLocation.view];
-    }
-    
-    if (![_locationInput.text isEqualToString:@""] && ![_locationInput.text isEqualToString:NSLocalizedString(@"Current Location", nil)]) {
-        [self.mapLocation searchAnnotionWithSearch:_locationInput.text];
-    } else {
-        [self.mapLocation searchAnnotionWithSearch:@""];
-    }
-    
-    [self.locationInput resignFirstResponder];
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.mapLocation.view.frame = CGRectMake(0, 0, 320, _mapLocation.view.frame.size.height);
-        self.wrapper.frame = CGRectMake(-320, _wrapper.frame.origin.y, _wrapper.frame.size.width, _wrapper.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-}
-
 #pragma mark - SearchLocationMapViewControllerDelegate
 
 - (void)locationIsSelectedByMap:(Location *)location{
@@ -503,10 +477,6 @@
     
     [self.locationInput resignFirstResponder];
     
-    if (_searchLocationIsOpen) {
-        [self openSearchLocationView];
-    }
-    
 }
 
 - (void)btnSearchWithTheMap{
@@ -520,10 +490,6 @@
     
     if (self.locationSelected && !self.locationInput.activeSearch) {
         [self.mapLocation searchAnnotionWithLocation:self.locationSelected];
-    } else if (self.locationInput.activeSearch) {
-        [self.mapLocation searchAnnotionWithSearch:self.locationInput.text];
-    } else {
-        [self.mapLocation searchAnnotionWithSearch:@""];
     }
     
     

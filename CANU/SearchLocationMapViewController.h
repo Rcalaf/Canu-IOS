@@ -13,10 +13,9 @@
 @interface SearchLocationMapViewController : UIViewController
 
 @property (retain) id delegate;
+@property (strong, nonatomic) Location *selectedLocation;
 
 - (id)initWithLocation:(Location *)location;
-
-- (void)searchAnnotionWithSearch:(NSString *)search;
 
 - (void)searchAnnotionWithLocation:(Location *)location;
 

@@ -14,24 +14,20 @@
 
 @interface UICanuSearchLocation () <UICANULocationCellDelegate>
 
-@property (nonatomic) BOOL isMap;
 @property (nonatomic) BOOL isFirstTime;
 @property (strong, nonatomic) NSMutableArray *arrayLocation;
 @property (strong, nonatomic) NSMutableArray *arrayCellLocation;
 @property (strong, nonatomic) UILabel *noResults;
 @property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UICanuButtonSignBottomBar *searchOnMap;
 
 @end
 
 @implementation UICanuSearchLocation
 
-- (id)initWithFrame:(CGRect)frame ForMap:(BOOL)isMap{
+- (id)initWithFrame:(CGRect)frame{
     
     self = [super initWithFrame:frame];
     if (self) {
-        
-        self.isMap = isMap;
         
         self.isFirstTime = YES;
         
@@ -52,12 +48,6 @@
         shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
         shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
         [self addSubview:shadowDescriptionReverse];
-        
-        if (!_isMap) {
-            self.searchOnMap = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(10, 10.0, 300, 47.0) andBlue:YES];
-            [self.searchOnMap setTitle:NSLocalizedString(@"SEARCH ON THE MAP", nil) forState:UIControlStateNormal];
-            [self.searchOnMap addTarget:self action:@selector(openTheMap) forControlEvents:UIControlEventTouchDown];
-        }
         
         self.arrayCellLocation = [[NSMutableArray alloc]init];
         
@@ -91,61 +81,53 @@
     
 }
 
-#pragma mark - Private
+#pragma mark - UICANULocationCellDelegate
 
-- (void)createArrayLocation{
+- (void)cellLocationIsTouched:(UICANULocationCell *)cell{
     
-    if (_isMap) {
+    for (int i = 0; i < [_arrayCellLocation count]; i++) {
+        
+        UICANULocationCell *cellArray = [_arrayCellLocation objectAtIndex:i];
+        if (cellArray != cell) {
+            cellArray.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
+        } else {
+            cellArray.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+        }
+        
+    }
     
-        MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
-        request.naturalLanguageQuery = _searchLocation;
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        MKLocalSearch *localSearch = [[MKLocalSearch alloc] initWithRequest:request];
-        
-        [localSearch startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error){
-            
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            
-            if (error && error.code != 4) {
-                NSLog(@"Error 4 %@",error);
-            }
-            
-            [Location searchLocationMap:response Block:^(NSMutableArray *arrayLocation, NSError *error) {
-                if (error) {
-                    NSLog(@"Error %@",error);
-                } else {
-                    
-                    self.arrayLocation = arrayLocation;
-                    
-                    [self showLocation];
-                    
-                }
-            }];
+    self.selectedLocation = cell.location;
+    [self.delegate locationIsSelected:cell.location];
     
-        }];
+    if (_selectedLocation.canuLocation == CANULocationAutocomplete) {
         
-    } else {
-        [Location searchLocation:_currentLocation SearchWords:_searchLocation Block:^(NSMutableArray *arrayLocation, NSError *error) {
-            if (error) {
-                NSLog(@"Error %@",error);
-            } else {
-                
-                self.arrayLocation = arrayLocation;
-                
-                [self showLocation];
-                
-            }
-        }];
+        // Complete the data
+        
+        [NSThread detachNewThreadSelector:@selector(addDataLocationAutocomplete) toTarget:self withObject:nil];
+        
     }
     
 }
 
-- (void)showLocation{
+#pragma mark - Private
+
+- (void)createArrayLocation{
     
-    if (!_isMap) {
-        [self.searchOnMap removeFromSuperview];
-    }
+    [Location searchLocation:_currentLocation SearchWords:_searchLocation Block:^(NSMutableArray *arrayLocation, NSError *error) {
+        if (error) {
+            NSLog(@"Error %@",error);
+        } else {
+            
+            self.arrayLocation = arrayLocation;
+            
+            [self showLocation];
+            
+        }
+    }];
+    
+}
+
+- (void)showLocation{
     
     if ([_arrayCellLocation count] != 0 ) {
         
@@ -172,14 +154,18 @@
         [self.scrollView addSubview:cellLocation];
         [self.arrayCellLocation addObject:cellLocation];
         
-        if (!_selectedLocation && !_isMap && _isFirstTime) {
+        if (!_selectedLocation && _isFirstTime) {
             self.isFirstTime = NO;
             cellLocation.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
             self.selectedLocation = cellLocation.location;
             [self.delegate locationIsSelected:cellLocation.location];
         }
         
-        if ([_selectedLocation.name isEqualToString:cellLocation.location.name]) {
+        if ([_selectedLocation.name isEqualToString:cellLocation.location.name] && [_selectedLocation.name isEqualToString:NSLocalizedString(@"Current Location", nil)]) {
+            cellLocation.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+        }
+        
+        if ([_selectedLocation.referencePlaceDetails isEqualToString:cellLocation.location.referencePlaceDetails]) {
             cellLocation.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
         }
         
@@ -190,27 +176,16 @@
         i++;
     }
     
-    if (!_isMap) {
-        
-        if ([_searchLocation mk_isEmpty] || !_searchLocation) {
-            [self.searchOnMap setTitle:NSLocalizedString(@"SEARCH ON THE MAP", nil) forState:UIControlStateNormal];
-        } else {
-            NSString *word = [NSString stringWithFormat:@"%@ \"%@\" %@",NSLocalizedString(@"SEARCH", nil),_searchLocation,NSLocalizedString(@"ON THE MAP", nil)];
-            [self.searchOnMap setTitle:word forState:UIControlStateNormal];
-        }
-        
-        self.searchOnMap.frame = CGRectMake(10, 10 + i * (47 + 10), 300, 47);
-        [self.scrollView addSubview:_searchOnMap];
-        
-        i++;
-    }
-    
     self.scrollView.contentSize = CGSizeMake(320, i * ( 47 + 10) + 10);
     
 }
 
-- (void)openTheMap{
-    [self.delegate searchWithTheMap];
+- (void)addDataLocationAutocomplete{
+    
+    [self.selectedLocation addDataLocationAutocompleteBlock:^(Location *locationFull, NSError *error) {
+        
+    }];
+    
 }
 
 #pragma mark - Public
@@ -222,34 +197,6 @@
     self.searchLocation = @"";
     
     [self createArrayLocation];
-    
-}
-
-- (void)addResult:(NSMutableArray *)response{
-    
-    self.arrayLocation = response;
-    
-    [self showLocation];
-    
-}
-
-#pragma mark - UICANULocationCellDelegate
-
-- (void)cellLocationIsTouched:(UICANULocationCell *)cell{
-    
-    for (int i = 0; i < [_arrayCellLocation count]; i++) {
-        
-        UICANULocationCell *cellArray = [_arrayCellLocation objectAtIndex:i];
-        if (cellArray != cell) {
-            cellArray.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
-        } else {
-            cellArray.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
-        }
-        
-    }
-    
-    self.selectedLocation = cell.location;
-    [self.delegate locationIsSelected:cell.location];
     
 }
 

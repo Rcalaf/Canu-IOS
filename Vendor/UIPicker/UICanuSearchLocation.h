@@ -21,11 +21,7 @@
 @property (strong, nonatomic) NSString *searchLocation;
 @property (strong, nonatomic) Location *selectedLocation;
 
-- (id)initWithFrame:(CGRect)frame ForMap:(BOOL)isMap;
-
 - (void)reset;
-
-- (void)addResult:(NSMutableArray *)response;
 
 @end
 
@@ -34,9 +30,5 @@
 @required
 
 - (void)locationIsSelected:(Location *)location;
-
-@optional
-
-- (void)searchWithTheMap;
 
 @end
