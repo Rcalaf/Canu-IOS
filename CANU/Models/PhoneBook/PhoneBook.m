@@ -118,11 +118,43 @@
                     
                     NSString *lastNames =  (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
                     
-                    NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstNames,lastNames];
+                    UIImage *image;
                     
-                    Contact *contact = [[Contact alloc]initWithFullName:fullName phoneNumber:theFinalPhoneNumber countryCode:countryCode];
-                    [arrayContact addObject:contact];
+                    if(ABPersonHasImageData(person)){
+                        image = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageData(person)];
+                    }
                     
+                    Contact *contact;
+                    
+                    if (firstNames && ![firstNames mk_isEmpty] && lastNames && ![lastNames mk_isEmpty]) {
+                        NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstNames,lastNames];
+                        contact = [[Contact alloc]initWithFullName:fullName profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];;
+                    } else if (firstNames && ![firstNames mk_isEmpty]) {
+                        contact = [[Contact alloc]initWithFullName:firstNames profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];
+                    } else if (lastNames && ![lastNames mk_isEmpty]) {
+                        contact = [[Contact alloc]initWithFullName:lastNames profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];
+                    }
+                    
+                    if (contact) {
+                        
+                        BOOL isAlreadyIn = NO;
+                        
+                        for (int y = 0; y < [arrayContact count]; y++) {
+                            
+                            Contact *contactData = [arrayContact objectAtIndex:y];
+                            
+                            if ([contactData.convertNumber isEqualToString:contact.convertNumber]) {
+                                isAlreadyIn = YES;
+                            }
+                            
+                        }
+                        
+                        if (!isAlreadyIn) {
+                            [arrayContact addObject:contact];
+                        }
+                        
+                    }
+
                 }
                 
             }

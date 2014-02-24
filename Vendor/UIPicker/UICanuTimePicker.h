@@ -10,4 +10,8 @@
 
 @interface UICanuTimePicker : UIView
 
+- (NSDate *)selectedTime;
+
+- (void)isToday:(BOOL)blockedValue;
+
 @end

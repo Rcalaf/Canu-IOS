@@ -15,6 +15,14 @@
 		1E162BEF18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */; };
 		1E162BF218B3586800D70FF0 /* SearchLocationMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */; };
 		1E162BF818B4DD4E00D70FF0 /* UICanuButtonCancel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BF718B4DD4E00D70FF0 /* UICanuButtonCancel.m */; };
+		1E162BFB18B6330700D70FF0 /* UICanuTextFieldInvit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BFA18B6330700D70FF0 /* UICanuTextFieldInvit.m */; };
+		1E162BFE18B639B000D70FF0 /* UICanuContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BFD18B639B000D70FF0 /* UICanuContactCell.m */; };
+		1E162C0118B6600C00D70FF0 /* UICanuUserInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162C0018B6600C00D70FF0 /* UICanuUserInputCell.m */; };
+		1E162C0418B785CF00D70FF0 /* MessageGhostUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162C0318B785CF00D70FF0 /* MessageGhostUser.m */; };
+		1E162C0718B78F3800D70FF0 /* G5_arrow_.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162C0518B78F3800D70FF0 /* G5_arrow_.png */; };
+		1E162C0818B78F3800D70FF0 /* G5_arrow_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162C0618B78F3800D70FF0 /* G5_arrow_@2x.png */; };
+		1E162C0B18B79A3F00D70FF0 /* G5_Fail_arrow_broke.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162C0918B79A3F00D70FF0 /* G5_Fail_arrow_broke.png */; };
+		1E162C0C18B79A3F00D70FF0 /* G5_Fail_arrow_broke@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162C0A18B79A3F00D70FF0 /* G5_Fail_arrow_broke@2x.png */; };
 		1E3A6B4E18842610007FB6BA /* UICanuButtonSignBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */; };
 		1E3A6B5118842CA1007FB6BA /* Main_background_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */; };
 		1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B5018842CA1007FB6BA /* Main_background_cloud@2x.png */; };
@@ -394,6 +402,18 @@
 		1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchLocationMapViewController.m; path = CANU/SearchLocationMapViewController.m; sourceTree = "<group>"; };
 		1E162BF618B4DD4E00D70FF0 /* UICanuButtonCancel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonCancel.h; path = Vendor/UICanuButton/UICanuButtonCancel.h; sourceTree = "<group>"; };
 		1E162BF718B4DD4E00D70FF0 /* UICanuButtonCancel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonCancel.m; path = Vendor/UICanuButton/UICanuButtonCancel.m; sourceTree = "<group>"; };
+		1E162BF918B6330700D70FF0 /* UICanuTextFieldInvit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuTextFieldInvit.h; path = Vendor/UICanuTextField/UICanuTextFieldInvit.h; sourceTree = SOURCE_ROOT; };
+		1E162BFA18B6330700D70FF0 /* UICanuTextFieldInvit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuTextFieldInvit.m; path = Vendor/UICanuTextField/UICanuTextFieldInvit.m; sourceTree = SOURCE_ROOT; };
+		1E162BFC18B639B000D70FF0 /* UICanuContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuContactCell.h; path = Vendor/UICanuCell/UICanuContactCell.h; sourceTree = "<group>"; };
+		1E162BFD18B639B000D70FF0 /* UICanuContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuContactCell.m; path = Vendor/UICanuCell/UICanuContactCell.m; sourceTree = "<group>"; };
+		1E162BFF18B6600C00D70FF0 /* UICanuUserInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuUserInputCell.h; path = Vendor/UICanuCell/UICanuUserInputCell.h; sourceTree = "<group>"; };
+		1E162C0018B6600C00D70FF0 /* UICanuUserInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuUserInputCell.m; path = Vendor/UICanuCell/UICanuUserInputCell.m; sourceTree = "<group>"; };
+		1E162C0218B785CF00D70FF0 /* MessageGhostUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageGhostUser.h; path = Views/CreateEdit/MessageGhostUser.h; sourceTree = "<group>"; };
+		1E162C0318B785CF00D70FF0 /* MessageGhostUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageGhostUser.m; path = Views/CreateEdit/MessageGhostUser.m; sourceTree = "<group>"; };
+		1E162C0518B78F3800D70FF0 /* G5_arrow_.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = G5_arrow_.png; path = Ressources/Backgrounds/G5_arrow_.png; sourceTree = "<group>"; };
+		1E162C0618B78F3800D70FF0 /* G5_arrow_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G5_arrow_@2x.png"; path = "Ressources/Backgrounds/G5_arrow_@2x.png"; sourceTree = "<group>"; };
+		1E162C0918B79A3F00D70FF0 /* G5_Fail_arrow_broke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = G5_Fail_arrow_broke.png; path = Ressources/Backgrounds/G5_Fail_arrow_broke.png; sourceTree = "<group>"; };
+		1E162C0A18B79A3F00D70FF0 /* G5_Fail_arrow_broke@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G5_Fail_arrow_broke@2x.png"; path = "Ressources/Backgrounds/G5_Fail_arrow_broke@2x.png"; sourceTree = "<group>"; };
 		1E3A6B4C18842610007FB6BA /* UICanuButtonSignBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuButtonSignBottomBar.h; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.h; sourceTree = "<group>"; };
 		1E3A6B4D18842610007FB6BA /* UICanuButtonSignBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuButtonSignBottomBar.m; path = Vendor/UICanuButton/UICanuButtonSignBottomBar.m; sourceTree = "<group>"; };
 		1E3A6B4F18842CA1007FB6BA /* Main_background_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Main_background_cloud.png; path = Ressources/Backgrounds/Main_background_cloud.png; sourceTree = "<group>"; };
@@ -1007,6 +1027,8 @@
 			children = (
 				1E3BA3D918AA639F003C2BF4 /* CreateEditUserList.h */,
 				1E3BA3DA18AA639F003C2BF4 /* CreateEditUserList.m */,
+				1E162C0218B785CF00D70FF0 /* MessageGhostUser.h */,
+				1E162C0318B785CF00D70FF0 /* MessageGhostUser.m */,
 			);
 			name = CreateEdit;
 			sourceTree = "<group>";
@@ -1571,6 +1593,10 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E162C0918B79A3F00D70FF0 /* G5_Fail_arrow_broke.png */,
+				1E162C0A18B79A3F00D70FF0 /* G5_Fail_arrow_broke@2x.png */,
+				1E162C0518B78F3800D70FF0 /* G5_arrow_.png */,
+				1E162C0618B78F3800D70FF0 /* G5_arrow_@2x.png */,
 				1E7429E218AE790C00992393 /* F1_input_Location_reset.png */,
 				1E7429E318AE790C00992393 /* F1_input_Location_reset@2x.png */,
 				1E3BA46418ACF796003C2BF4 /* F1_Calendar_dote_Disable.png */,
@@ -1691,6 +1717,8 @@
 				DE85A6311744FCD400A050E5 /* UICanuTextField.m */,
 				1E7429DF18AE73F200992393 /* UICanuTextFieldLocation.h */,
 				1E7429E018AE73F200992393 /* UICanuTextFieldLocation.m */,
+				1E162BF918B6330700D70FF0 /* UICanuTextFieldInvit.h */,
+				1E162BFA18B6330700D70FF0 /* UICanuTextFieldInvit.m */,
 			);
 			name = UICanuTextField;
 			path = CANU;
@@ -1890,6 +1918,10 @@
 				1EEA9861185B4CEB00EA9E02 /* UICanuChatCellScroll.m */,
 				1E3BA46F18AE2979003C2BF4 /* UICANULocationCell.h */,
 				1E3BA47018AE2979003C2BF4 /* UICANULocationCell.m */,
+				1E162BFC18B639B000D70FF0 /* UICanuContactCell.h */,
+				1E162BFD18B639B000D70FF0 /* UICanuContactCell.m */,
+				1E162BFF18B6600C00D70FF0 /* UICanuUserInputCell.h */,
+				1E162C0018B6600C00D70FF0 /* UICanuUserInputCell.m */,
 			);
 			name = UICanuCell;
 			sourceTree = "<group>";
@@ -2089,6 +2121,7 @@
 				1E87E08618AA33EF00840655 /* F1_open_map.png in Resources */,
 				1E9FB9FE18619A0400085421 /* loader-11.png in Resources */,
 				1E9FBA0E18619A0400085421 /* loop_2.png in Resources */,
+				1E162C0C18B79A3F00D70FF0 /* G5_Fail_arrow_broke@2x.png in Resources */,
 				DE4D95351742A6F700FB026F /* Lato-Bol.ttf in Resources */,
 				DE4D95361742A6F700FB026F /* Lato-Reg.ttf in Resources */,
 				DEFD7A6B174534830087CB8A /* back_arrow.png in Resources */,
@@ -2159,6 +2192,7 @@
 				DEB29BC017955B0600D9FFAE /* settings@2x.png in Resources */,
 				DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */,
 				1E9FBA1218619A0400085421 /* loop_4.png in Resources */,
+				1E162C0718B78F3800D70FF0 /* G5_arrow_.png in Resources */,
 				1E9FB9F218619A0400085421 /* loader-5.png in Resources */,
 				DE6ED8A517BD00D400C5E72E /* bringup_profile_arrow.png in Resources */,
 				DE6ED8A617BD00D400C5E72E /* bringup_profile_arrow@2x.png in Resources */,
@@ -2210,6 +2244,7 @@
 				1E7138AA188D4FC400137A48 /* Activity_Empty_feed_Bakground@2x.png in Resources */,
 				1E9FBA0018619A0400085421 /* loader-12.png in Resources */,
 				1E7138B4188D5B2900137A48 /* Activity_Empty_feed_illustration_profile@2x.png in Resources */,
+				1E162C0818B78F3800D70FF0 /* G5_arrow_@2x.png in Resources */,
 				DE6ED9BF17C2958100C5E72E /* fullview_action_edit.png in Resources */,
 				DEDACFD217FC58950068DB72 /* icon-60.png in Resources */,
 				DE774B3A184E0FDD00F8C244 /* guide_step_2.png in Resources */,
@@ -2267,6 +2302,7 @@
 				1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */,
 				1E3BA3E218AA7544003C2BF4 /* F1_add_description_selected.png in Resources */,
 				1E3A6B5218842CA1007FB6BA /* Main_background_cloud@2x.png in Resources */,
+				1E162C0B18B79A3F00D70FF0 /* G5_Fail_arrow_broke.png in Resources */,
 				DE607831182BD08D0053F23B /* intro_bg@2x.png in Resources */,
 				1E9FBA0A18619A0400085421 /* loader-17.png in Resources */,
 				1E7138C9188E906900137A48 /* Tutorial_Step1_line@2x.png in Resources */,
@@ -2367,7 +2403,9 @@
 				1E7A5694188F1BAD00CB5C4A /* TutorialStepProfile.m in Sources */,
 				1E3BA45E18ACBE03003C2BF4 /* NSString+MK_Conversion.m in Sources */,
 				1E7138C1188DE74300137A48 /* TutorialStepLocal.m in Sources */,
+				1E162C0418B785CF00D70FF0 /* MessageGhostUser.m in Sources */,
 				1E3BA45418ACBE03003C2BF4 /* NSMutableDictionary+MK_Misc.m in Sources */,
+				1E162BFB18B6330700D70FF0 /* UICanuTextFieldInvit.m in Sources */,
 				1E3BA44C18ACBE03003C2BF4 /* NSDate+MK_Comparison.m in Sources */,
 				DEA93B721720565700303BB5 /* SignInViewController.m in Sources */,
 				DEA93B791720616500303BB5 /* MainViewController.m in Sources */,
@@ -2385,6 +2423,7 @@
 				1E9FBA1618619A5800085421 /* LoaderAnimation.m in Sources */,
 				1E3BA45D18ACBE03003C2BF4 /* NSString+MK_Base64.m in Sources */,
 				1E7A56A3188FDB7B00CB5C4A /* TutorialStepFinal.m in Sources */,
+				1E162C0118B6600C00D70FF0 /* UICanuUserInputCell.m in Sources */,
 				1EEA9853185A0B0E00EA9E02 /* UICanuAttendeeCellScroll.m in Sources */,
 				1E6D2A4C18A536FF0066D266 /* UICanuLenghtPicker.m in Sources */,
 				1E9FB0281892685300B70E8B /* Reachability.m in Sources */,
@@ -2435,6 +2474,7 @@
 				1E6D2A5318A53A850066D266 /* UICanuScrollPicker.m in Sources */,
 				1E7138B9188DDC1000137A48 /* TutorialViewController.m in Sources */,
 				DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */,
+				1E162BFE18B639B000D70FF0 /* UICanuContactCell.m in Sources */,
 				1E3A6B6118853FFC007FB6BA /* TTTAttributedLabel.m in Sources */,
 				1E90977E189187F4004501E2 /* ErrorManager.m in Sources */,
 			);

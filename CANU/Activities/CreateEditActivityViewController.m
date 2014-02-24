@@ -12,6 +12,7 @@
 
 #import "UICanuTextField.h"
 #import "UICanuTextFieldLocation.h"
+#import "UICanuTextFieldInvit.h"
 #import "UICanuButtonSelect.h"
 #import "UICanuTimePicker.h"
 #import "UICanuLenghtPicker.h"
@@ -22,13 +23,20 @@
 #import "Location.h"
 #import "SearchLocationMapViewController.h"
 #import "UICanuButtonCancel.h"
+#import "UICanuButtonSignBottomBar.h"
+#import "Contact.h"
+#import "User.h"
+#import "MessageGhostUser.h"
 
-@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate>
+@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
 @property (nonatomic) BOOL searchLocationIsOpen;
+@property (nonatomic) BOOL userListIsOpen;
 @property (nonatomic) BOOL mapLocationIsOpen;
+@property (nonatomic) BOOL isNewActivity;
+@property (nonatomic) BOOL ghostUser;
 @property (strong, nonatomic) NSTimer *timerSearch;
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
@@ -36,22 +44,28 @@
 @property (strong, nonatomic) UIView *wrapperDescription;
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UIButton *openMap;
-@property (strong, nonatomic) UICanuButtonCancel *cancelLocation;
 @property (strong, nonatomic) UIButton *openCalendar;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
+@property (strong, nonatomic) UIView *bottomBar;
+@property (strong, nonatomic) Activity *createActivity;
 @property (strong, nonatomic) Location *locationSelected;
+@property (nonatomic) CANUCreateActivity canuCreateActivity;
 @property (strong, nonatomic) CreateEditUserList *userList;
 @property (strong, nonatomic) UICanuTextField *titleInput;
-@property (strong, nonatomic) UICanuTextField *invitInput;
+@property (strong, nonatomic) UICanuTextFieldInvit *invitInput;
 @property (strong, nonatomic) UICanuTextFieldLocation *locationInput;
 @property (strong, nonatomic) UICanuButtonSelect *todayBtnSelect;
 @property (strong, nonatomic) UICanuButtonSelect *tomorrowBtnSelect;
+@property (strong, nonatomic) UICanuButtonCancel *cancelLocation;
+@property (strong, nonatomic) UICanuButtonCancel *cancelInvit;
 @property (strong, nonatomic) UICanuTimePicker *timePicker;
 @property (strong, nonatomic) UICanuLenghtPicker *lenghtPicker;
 @property (strong, nonatomic) UICanuCalendarPicker *calendar;
 @property (strong, nonatomic) UICanuSearchLocation *searchLocation;
 @property (strong, nonatomic) SearchLocationMapViewController *mapLocation;
+@property (strong, nonatomic) MessageGhostUser *messageGhostUser;
+@property (strong, nonatomic) UICanuButtonSignBottomBar *buttonAction;
 
 @end
 
@@ -80,6 +94,8 @@
     
     self = [super init];
     if (self) {
+        
+        self.canuCreateActivity = canuCreateActivity;
         
     }
     return self;
@@ -112,14 +128,16 @@
     self.descriptionIsOpen = NO;
     self.calendarIsOpen = NO;
     self.searchLocationIsOpen = NO;
+    self.userListIsOpen = NO;
     self.mapLocationIsOpen = NO;
+    self.ghostUser = NO;
     
-    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - 57)];
     [self.view addSubview:_wrapper];
     
     // Title
     
-    self.titleInput = [[UICanuTextField alloc]initWithFrame:CGRectMake(10, 90, 250, 47)];
+    self.titleInput = [[UICanuTextField alloc]initWithFrame:CGRectMake(10, 85, 250, 47)];
     self.titleInput.placeholder = NSLocalizedString(@"What do you want to do?", nil);
     self.titleInput.returnKeyType = UIReturnKeyNext;
     self.titleInput.delegate = self;
@@ -161,6 +179,7 @@
     // Time
     
     self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(10, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 57)];
+    [self.timePicker isToday:YES];
     [self.wrapper addSubview:_timePicker];
     
     self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(10 + 149 + 1, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 57)];
@@ -200,17 +219,38 @@
     self.titleInvit.textAlignment = NSTextAlignmentCenter;
     [self.wrapper addSubview:_titleInvit];
     
-    self.invitInput = [[UICanuTextField alloc]initWithFrame:CGRectMake(10, _titleInvit.frame.origin.y + _titleInvit.frame.size.height + 5, 300, 47)];
+    self.invitInput = [[UICanuTextFieldInvit alloc]initWithFrame:CGRectMake(10, _titleInvit.frame.origin.y + _titleInvit.frame.size.height + 5, 300, 47)];
     self.invitInput.placeholder = NSLocalizedString(@"Who is invited?", nil);
     self.invitInput.delegate = self;
     self.invitInput.returnKeyType = UIReturnKeySearch;
     [self.wrapper addSubview:_invitInput];
     
-    self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(10, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 300, 200)];
-    [self.wrapper addSubview:_userList];
+    self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47)];
+    [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
+    [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
+    [self.cancelInvit detectSize];
+    self.cancelInvit.titleLabel.alpha = 0;
+    [self.wrapper addSubview:_cancelInvit];
+    
+    // Bottom bar
+    
+    self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57)];
+    self.bottomBar.backgroundColor = UIColorFromRGB(0xf4f4f4);
+    [self.view addSubview:_bottomBar];
+    
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
+    [backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+    [_bottomBar addSubview:backButton];
+    
+    self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0) andBlue:YES];
+    [self.buttonAction setTitle:NSLocalizedString(@"CREATE", nil) forState:UIControlStateNormal];
+    [self.buttonAction addTarget:self action:@selector(createEditForm) forControlEvents:UIControlEventTouchDown];
+    [_bottomBar addSubview:_buttonAction];
     
     // Wrapper
-    self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height + 5);
+    self.wrapper.contentSize = CGSizeMake(320, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5);
     
 }
 
@@ -279,6 +319,12 @@
          
      }];
     
+    // User List
+    
+    self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 320, 0)];
+    self.userList.delegate = self;
+    [self.wrapper addSubview:_userList];
+    
 }
 
 - (void)didReceiveMemoryWarning{
@@ -316,6 +362,10 @@
         }
     }
     
+    if (textField == _invitInput) {
+        [self openUserListView];
+    }
+    
     [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
     
 }
@@ -343,6 +393,18 @@
         
         self.timerSearch = [NSTimer scheduledTimerWithTimeInterval: 0.5 target: self selector:@selector(startSearchLocation) userInfo: nil repeats:NO];
         
+    } else if (textField == _invitInput) {
+        
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if (newString.length != 0) {
+            self.invitInput.activeReset = YES;
+        } else {
+            self.invitInput.activeReset = NO;
+        }
+        
+        [self.userList searchPhoneBook:newString];
+        
     }
     
     return YES;
@@ -359,6 +421,12 @@
                 self.locationInput.text = self.locationSelected.name;
             }
             
+        }
+    }
+    
+    if (textField == _invitInput) {
+        if (_userListIsOpen) {
+            [self openUserListView];
         }
     }
     
@@ -471,11 +539,25 @@
     }];
 }
 
+#pragma mark -  CreateEditUserListDelegate
+
+- (void)changeUserSelected:(NSMutableArray *)arrayAllUserSelected{
+    
+    [self.invitInput updateUserSelected:arrayAllUserSelected];
+    
+}
+
 #pragma mark - Private
 
 - (void)cancelSearchLocation{
     
     [self.locationInput resignFirstResponder];
+    
+}
+
+- (void)cancelInvitUser{
+    
+    [self.invitInput resignFirstResponder];
     
 }
 
@@ -634,6 +716,44 @@
     
 }
 
+- (void)openUserListView{
+    
+    self.userListIsOpen = !_userListIsOpen;
+    
+    int height,margin;
+    
+    if (_userListIsOpen) {
+        height = self.userList.maxHeight + 10;
+        margin = 10;
+        self.wrapper.scrollEnabled = NO;
+    } else {
+        height = - self.userList.maxHeight - 10;
+        margin = - 10;
+        self.wrapper.scrollEnabled = YES;
+    }
+    
+    if (_userListIsOpen) {
+        self.cancelInvit.frame = CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47);
+    }
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        if (_userListIsOpen) {
+            self.cancelInvit.frame = CGRectMake(320 - 10 - self.cancelInvit.maxWidth, _invitInput.frame.origin.y, self.cancelInvit.maxWidth, 47);
+            self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y, 300 - 1 - self.cancelInvit.maxWidth, _invitInput.frame.size.height);
+            self.cancelInvit.titleLabel.alpha = 1;
+        } else {
+            self.cancelInvit.frame = CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47);
+            self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y, 300, _invitInput.frame.size.height);
+            self.cancelInvit.titleLabel.alpha = 0;
+        }
+        self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + height);
+        self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y, _userList.frame.size.width, _userList.frame.size.height + height);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
 - (void)buttonSelectManager:(UIButton *)sender{
     
     BOOL calendarGoOpen = NO;
@@ -643,10 +763,12 @@
         self.imgOpenCalendar.image = [UIImage imageNamed:@"F1_calendar"];
         self.todayBtnSelect.selected = YES;
         self.tomorrowBtnSelect.selected = NO;
+        [self.timePicker isToday:YES];
     } else if (sender == _tomorrowBtnSelect){
         self.imgOpenCalendar.image = [UIImage imageNamed:@"F1_calendar"];
         self.todayBtnSelect.selected = NO;
         self.tomorrowBtnSelect.selected = YES;
+        [self.timePicker isToday:NO];
     } else {
         
         if ((_todayBtnSelect.selected || _tomorrowBtnSelect.selected) && _imgOpenCalendar.image == [UIImage imageNamed:@"F1_calendar_selected"]) {
@@ -660,6 +782,8 @@
             self.tomorrowBtnSelect.selected = NO;
         }
         
+        [self.timePicker isToday:NO];
+        
     }
     
     if (calendarGoOpen != _calendarIsOpen) {
@@ -672,6 +796,213 @@
 
 - (void)startSearchLocation {
     self.searchLocation.searchLocation = _locationInput.text;
+}
+
+- (void)goBack{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.alpha = 0;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+}
+
+#pragma mark -- Form
+
+- (void)createEditForm{
+    
+    if ([self checkInputValid]) {
+        
+        self.buttonAction.hidden = YES;
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        dateFormatter.dateFormat = @"yyyy-M-dd HH:mm";
+        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        
+        // Day
+        
+        NSDate *date;
+        
+        if (self.todayBtnSelect.selected) {
+            date = [NSDate date];
+        } else if (self.tomorrowBtnSelect.selected) {
+            date = [NSDate mk_dateTomorrow];
+        } else {
+            date = [self.calendar selectedDate];
+        }
+        
+        // Time
+        
+        NSDate *time = [self.timePicker selectedTime];
+        
+        // Date + Time
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+        
+        [components setHour:[time mk_hour]];
+        [components setMinute:[time mk_minutes]];
+        
+        NSDate *dateFull = [calendar dateFromComponents:components];
+        
+        // Privacy
+        
+        BOOL privateLocation = YES;
+        
+        if (_canuCreateActivity == CANUCreateActivityLocal) {
+            privateLocation = NO;
+        }
+        
+        // Description
+        
+        NSString *description = @"";
+        
+        if (![self.descriptionInput.text isEqualToString:NSLocalizedString(@"Add a description", nil)]) {
+            description = self.descriptionInput.text;
+        }
+        
+        [Activity createActivityForUserWithTitle:self.titleInput.text
+                                     Description:description
+                                       StartDate:[dateFormatter stringFromDate:dateFull]
+                                          Length:[self.lenghtPicker selectedLenght]
+                                          Street:self.locationSelected.street
+                                            City:self.locationSelected.city
+                                             Zip:self.locationSelected.zip
+                                         Country:self.locationSelected.country
+                                        Latitude:[NSString stringWithFormat:@"%f",self.locationSelected.latitude]
+                                       Longitude:[NSString stringWithFormat:@"%f",self.locationSelected.longitude]
+                                          Guests:[self createArrayUserInvited]
+                                 PrivateLocation:privateLocation
+                                           Block:^(Activity *activity, NSError *error) {
+                                     
+                                               if (error) {
+                                                   NSLog(@"%@",error);
+                                               } else {
+                                                   
+                                                   if (!_ghostUser) {
+                                                       
+                                                       [UIView animateWithDuration:0.4 animations:^{
+                                                           self.wrapper.alpha = 0;
+                                                           self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+                                                       } completion:^(BOOL finished) {
+                                                           
+                                                           [self dismissViewControllerAnimated:YES completion:nil];
+                                                           
+                                                       }];
+                                                       
+                                                   } else {
+                                                       
+                                                       self.createActivity = activity;
+                                                       
+                                                       self.messageGhostUser = [[MessageGhostUser alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andArray:self.userList.arrayAllUserSelected andParentViewcontroller:self];
+                                                       self.messageGhostUser.delegate = self;
+                                                       [self.view addSubview:_messageGhostUser];
+                                                       
+                                                   }
+                                                   
+                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+                                                   
+                                               }
+                                               
+                                               self.buttonAction.hidden = NO;
+                                     
+                                 }];
+        
+    }
+    
+}
+
+- (BOOL)checkInputValid{
+    
+    BOOL inputValid = YES;
+    
+    if ([_titleInput.text mk_isEmpty]) {
+        self.titleInput.valueValide = NO;
+        inputValid = NO;
+    } else {
+        self.titleInput.valueValide = YES;
+    }
+    
+    if (self.locationSelected) {
+        self.locationInput.valueValide = YES;
+    } else {
+        self.locationInput.valueValide = NO;
+        inputValid = NO;
+    }
+    
+    if (_canuCreateActivity == CANUCreateActivityTribes) {
+        
+        if ([self.userList.arrayAllUserSelected count] != 0) {
+            self.invitInput.valueValide = YES;
+        } else {
+            self.invitInput.valueValide = NO;
+            inputValid = NO;
+        }
+        
+    }
+    
+    return inputValid;
+    
+}
+
+- (NSMutableArray *)createArrayUserInvited{
+    
+    self.ghostUser = NO;
+    
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < [self.userList.arrayAllUserSelected count]; i++) {
+        
+        if ([[self.userList.arrayAllUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
+            Contact *contactData = [self.userList.arrayAllUserSelected objectAtIndex:i];
+            [array addObject:contactData.convertNumber];
+            self.ghostUser = YES;
+        } else if ([[self.userList.arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
+            User *userData = [self.userList.arrayAllUserSelected objectAtIndex:i];
+            [array addObject:userData.phoneNumber];
+        }
+        
+    }
+    
+    return array;
+    
+}
+
+#pragma mark -- MessageGhostUserDelegate
+
+- (void)messageGhostUserWillDisappear{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.alpha = 0;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+}
+
+- (void)messageGhostUserWillDisappearForDeleteActivity{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.alpha = 0;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+        [self.createActivity removeActivityWithBlock:^(NSError *error) {
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        
+    }];
+    
 }
 
 @end

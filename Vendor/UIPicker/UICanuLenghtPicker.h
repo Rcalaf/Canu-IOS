@@ -10,4 +10,6 @@
 
 @interface UICanuLenghtPicker : UIView
 
+- (NSString *)selectedLenght;
+
 @end

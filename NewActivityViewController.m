@@ -111,11 +111,11 @@ float oldValue;
       
        [self operationInProcess:YES];
        
-       NSDate *start;
+//       NSDate *start;
        if (self.activity) {
-          start = self.activity.start;
+//          start = self.activity.start;
        } else {
-          start = [NSDate date];
+//          start = [NSDate date];
        }
        
        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -176,7 +176,7 @@ float oldValue;
                                           Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude]
                                              Guests:usersInvited
                                     PrivateLocation:true
-                                              Block:^(NSError *error) {
+                                              Block:^(Activity *activity, NSError *error) {
                                                   if (error) {
                                                       NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
                                                       if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {

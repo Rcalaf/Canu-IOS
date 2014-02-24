@@ -64,6 +64,7 @@
 
 - (void)reset{
     self.text = @"";
+    self.activeReset = NO;
     self.activeSearch = YES;
 }
 

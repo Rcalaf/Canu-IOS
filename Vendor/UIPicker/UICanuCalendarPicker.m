@@ -194,6 +194,18 @@
     
 }
 
+- (NSDate *)selectedDate{
+    
+    NSDate *date;
+    
+    if (self.currentSelected) {
+        date = self.currentSelected.date;
+    }
+    
+    return date;
+    
+}
+
 #pragma mark - Private
 
 - (void)dayDidTouch:(UICanuCalendarButtonPicker *)day{

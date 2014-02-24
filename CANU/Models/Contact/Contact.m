@@ -16,11 +16,12 @@
 
 @implementation Contact
 
-- (id)initWithFullName:(NSString *)fullName phoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode {
+- (id)initWithFullName:(NSString *)fullName profilePicture:(UIImage*)profilePicture phoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode{
     self = [super init];
     if (self) {
         
         self.fullName = fullName;
+        self.profilePicture = profilePicture;
         self.initialNumber = phoneNumber;
         self.countryCode = countryCode;
         self.convertNumber = [self convertPhoneNumer:phoneNumber];

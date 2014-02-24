@@ -14,6 +14,8 @@
 
 - (void)resetCalendar;
 
+- (NSDate *)selectedDate;
+
 @end
 
 @protocol UICanuCalendarPickerDelegate <NSObject>

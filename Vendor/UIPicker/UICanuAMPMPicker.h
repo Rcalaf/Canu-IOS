@@ -10,11 +10,26 @@
 
 @interface UICanuAMPMPicker : UIScrollView
 
+@property (retain) id delegatePicker;
+
 /**
  *  Change position Scroll to index
  *
  *  @param currentObject
  */
 - (void)changeCurrentObjectTo:(int)currentObject;
+
+- (int)currentObject;
+
+- (void)blockTo:(int)value;
+
+@end
+
+
+@protocol UICanuAMPMPickerDelegate <NSObject>
+
+@required
+
+- (void)amPmchangeIsBlockedValue:(BOOL)blockedValue;
 
 @end

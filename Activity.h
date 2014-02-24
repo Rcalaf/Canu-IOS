@@ -56,7 +56,7 @@
                              Longitude:(NSString *)longitude
                                 Guests:(NSMutableArray *)arrayGuests
                        PrivateLocation:(BOOL)privatelocation
-                                 Block:(void (^)(NSError *error))block;
+                                 Block:(void (^)(Activity *activity,NSError *error))block;
 
 - (void)editActivityForUserWithTitle:(NSString *)title
                          Description:(NSString *)description

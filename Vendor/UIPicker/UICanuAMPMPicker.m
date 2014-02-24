@@ -10,9 +10,10 @@
 
 @interface UICanuAMPMPicker () <UIScrollViewDelegate>
 
+@property (nonatomic) int currentObject;
+@property (nonatomic) int blockTo;
 @property (strong, nonatomic) UILabel *amLabel;
 @property (strong, nonatomic) UILabel *pmLabel;
-@property (nonatomic) int currentObject;
 
 @end
 
@@ -88,6 +89,24 @@
     
 }
 
+- (int)currentObject{
+    
+    int current = _currentObject;
+    
+    return current;
+    
+}
+
+- (void)blockTo:(int)value{
+    
+    self.blockTo = value;
+    
+    [self scrollViewDidScroll:self];
+    
+    [self adapteCellWithAnimation:YES];
+    
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -105,7 +124,21 @@
         newCurrentObject = nearestNumberCurrent;
     }
     
-    _currentObject = newCurrentObject;
+    if (_blockTo < 2) {
+        if (_blockTo == 1) {
+            _currentObject = _blockTo;
+        } else {
+            _currentObject = newCurrentObject;
+        }
+        
+        if (_currentObject == _blockTo) {
+            [self.delegatePicker amPmchangeIsBlockedValue:YES];
+        } else {
+            [self.delegatePicker amPmchangeIsBlockedValue:NO];
+        }
+    } else {
+        _currentObject = newCurrentObject;
+    }
     
     if (_currentObject == 0) {
         [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
@@ -130,11 +163,11 @@
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
-    if (scrollView.contentOffset.y > 0 && velocity.y == 0) [self adapteCellWithAnimation:YES];
+    [self adapteCellWithAnimation:YES];
 }
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    if (scrollView.contentOffset.y > 0) [self adapteCellWithAnimation:YES];
+    [self adapteCellWithAnimation:YES];
 }
 
 #pragma mark - Private

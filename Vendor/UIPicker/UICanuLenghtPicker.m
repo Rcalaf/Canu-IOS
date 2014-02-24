@@ -172,6 +172,37 @@
     if (scrollView.contentOffset.y > 0) [self adapteCellWithAnimation:YES];
 }
 
+#pragma mark - Public
+
+- (NSString *)selectedLenght{
+    
+    NSString *lenght;
+    
+    int mins = 0,hours = 0;
+    
+    for (int i = 0; i <= _currentObject; i++) {
+        
+        int gap = 15;
+        
+        if (hours >= 6) {
+            gap = 30;
+        }
+        
+        mins += gap;
+        
+        if (mins >= 60) {
+            mins = 0;
+            hours ++;
+        }
+        
+    }
+    
+    lenght = [NSString stringWithFormat:@"%.2d:%.2d", hours,mins];
+    
+    return lenght;
+    
+}
+
 #pragma mark - Private
 
 - (void)addValueLenght{

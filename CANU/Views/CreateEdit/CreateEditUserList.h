@@ -10,4 +10,18 @@
 
 @interface CreateEditUserList : UIView
 
+@property (retain) id delegate;
+@property (nonatomic) int maxHeight;
+@property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
+
+- (void)searchPhoneBook:(NSString *)searchWords;
+
+@end
+
+@protocol CreateEditUserListDelegate <NSObject>
+
+@required
+
+- (void)changeUserSelected:(NSMutableArray *)arrayAllUserSelected;
+
 @end

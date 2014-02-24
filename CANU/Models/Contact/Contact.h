@@ -13,7 +13,8 @@
 @property (nonatomic) NSString *initialNumber;
 @property (nonatomic) NSString *convertNumber;
 @property (nonatomic) NSString *fullName;
+@property (nonatomic) UIImage* profilePicture;
 
-- (id)initWithFullName:(NSString *)fullName phoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode;
+- (id)initWithFullName:(NSString *)fullName profilePicture:(UIImage*)profilePicture phoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode;
 
 @end

@@ -220,6 +220,22 @@
 		<data>
 		7z1kWlp+26Kc9F8mdVHVOsJWKdw=
 		</data>
+		<key>G5_Fail_arrow_broke.png</key>
+		<data>
+		ohOQq2AikqrwVX7jB3BRPQGqJsQ=
+		</data>
+		<key>G5_Fail_arrow_broke@2x.png</key>
+		<data>
+		imZiZV5xjO1xUDUT1KyBm0MEkqM=
+		</data>
+		<key>G5_arrow_.png</key>
+		<data>
+		FONKX/L2W1kBkpsza+eWUQ1nwK8=
+		</data>
+		<key>G5_arrow_@2x.png</key>
+		<data>
+		aIvfO9lQ37+6gq+XOPm94igt04E=
+		</data>
 		<key>Instabug.bundle/Instabug-FloatingButton.png</key>
 		<data>
 		2x5ZSQrwXqGijGQE97gK+3cibMs=
@@ -966,7 +982,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		cH4ryyc9DGEerINENzVnt83JMgw=
+		xN0o08dK4UBvhsYJpRTXzpDBm4w=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -1494,7 +1510,7 @@
 		</data>
 		<key>sv.lproj/Localizable.strings</key>
 		<data>
-		Xr6awDvo3DTzTGxptmQnzoW6e7c=
+		xN0o08dK4UBvhsYJpRTXzpDBm4w=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -1715,6 +1731,22 @@
 		<data>
 		7z1kWlp+26Kc9F8mdVHVOsJWKdw=
 		</data>
+		<key>G5_Fail_arrow_broke.png</key>
+		<data>
+		ohOQq2AikqrwVX7jB3BRPQGqJsQ=
+		</data>
+		<key>G5_Fail_arrow_broke@2x.png</key>
+		<data>
+		imZiZV5xjO1xUDUT1KyBm0MEkqM=
+		</data>
+		<key>G5_arrow_.png</key>
+		<data>
+		FONKX/L2W1kBkpsza+eWUQ1nwK8=
+		</data>
+		<key>G5_arrow_@2x.png</key>
+		<data>
+		aIvfO9lQ37+6gq+XOPm94igt04E=
+		</data>
 		<key>Instabug.bundle/Instabug-FloatingButton.png</key>
 		<data>
 		2x5ZSQrwXqGijGQE97gK+3cibMs=
@@ -2461,7 +2493,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		cH4ryyc9DGEerINENzVnt83JMgw=
+		xN0o08dK4UBvhsYJpRTXzpDBm4w=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -2989,7 +3021,7 @@
 		</data>
 		<key>sv.lproj/Localizable.strings</key>
 		<data>
-		Xr6awDvo3DTzTGxptmQnzoW6e7c=
+		xN0o08dK4UBvhsYJpRTXzpDBm4w=
 		</data>
 	</dict>
 	<key>rules</key>

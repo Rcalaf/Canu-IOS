@@ -440,7 +440,7 @@
                              Longitude:(NSString *)longitude
                                 Guests:(NSMutableArray *)arrayGuests
                        PrivateLocation:(BOOL)privatelocation
-                                 Block:(void (^)(NSError *error))block{
+                                 Block:(void (^)(Activity *activity,NSError *error))block{
     
 
     if (!title) title = @"";
@@ -462,8 +462,10 @@
     
     [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         
+        Activity *activity = [[Activity alloc]initWithAttributes:JSON];
+        
         if (block) {
-            block(nil);
+            block(activity,nil);
         }
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
@@ -474,7 +476,7 @@
             
             // NSLog(@"%@",error);
             // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-            block(error);
+            block(nil,error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         

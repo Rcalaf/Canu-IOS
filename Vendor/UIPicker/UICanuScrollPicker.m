@@ -10,6 +10,7 @@
 
 @interface UICanuScrollPicker () <UIScrollViewDelegate>
 
+@property (nonatomic) int blockedValue;
 @property (nonatomic) int currentObject;
 @property (strong, nonatomic) NSArray *arrayContent;
 @property (strong, nonatomic) NSMutableArray *arrayDataLowDisable;
@@ -24,6 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.blockedValue = [arrayContent count];
         
         self.delegate = self;
         
@@ -127,6 +130,34 @@
     
 }
 
+- (int)currentObject{
+    
+    int current = _currentObject;
+    
+    if (_currentObject < 0) {
+        
+        current = _currentObject + [_arrayContent count];
+        
+    } else if (_currentObject >= [_arrayContent count]) {
+        
+        current = _currentObject - [_arrayContent count];
+        
+    }
+    
+    return current;
+    
+}
+
+- (void)blockScrollTo:(int)value{
+    
+    self.blockedValue = value;
+    
+    [self scrollViewDidScroll:self];
+    
+    [self adapteCellWithAnimation:YES];
+    
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -144,7 +175,7 @@
         newCurrentObject = nearestNumberCurrent;
     }
     
-    _currentObject = newCurrentObject - 3;
+    [self changementCurrentObjectIfBlockedValue:nearestNumberCurrent - 3];
     
     if (_currentObject < 0) {
         [self adapteScrollInfinite];
@@ -215,6 +246,38 @@
         
         self.contentOffset = CGPointMake(0, self.contentOffset.y - [_arrayContent count] * 26.0f);
         
+    }
+    
+}
+
+- (void)changementCurrentObjectIfBlockedValue:(int)value{
+    
+    int current = value;
+    
+    if (value < 0) {
+        
+        current = value + [_arrayContent count];
+        
+    } else if (value >= [_arrayContent count]) {
+        
+        current = value - [_arrayContent count];
+        
+    }
+    
+    if (current >= 0 && current <= _blockedValue && _blockedValue <= [_arrayContent count] - 1) {
+        if (current == 0) {
+            _currentObject = value - 1;
+        } else {
+            _currentObject = _blockedValue;
+        }
+    } else {
+        _currentObject = value;
+    }
+    
+    if (_currentObject == _blockedValue) {
+        [self.delegatePicker blockedValueIsSelected:YES];
+    } else {
+        [self.delegatePicker blockedValueIsSelected:NO];
     }
     
 }

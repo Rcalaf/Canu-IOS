@@ -10,6 +10,8 @@
 
 @interface UICanuScrollPicker : UIScrollView
 
+@property (retain) id delegatePicker;
+
 - (id)initWithFrame:(CGRect)frame WithContent:(NSArray *)arrayContent;
 
 /**
@@ -18,5 +20,17 @@
  *  @param currentObject
  */
 - (void)changeCurrentObjectTo:(int)currentObject;
+
+- (int)currentObject;
+
+- (void)blockScrollTo:(int)value;
+
+@end
+
+@protocol UICanuScrollPickerDelegate <NSObject>
+
+@required
+
+- (void)blockedValueIsSelected:(BOOL)isSelected;
 
 @end

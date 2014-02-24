@@ -84,6 +84,7 @@
 "No Internet Connection" = "No Internet Connection";
 "Please change this little thing" = "Please change this little thing";
 "OK" = "OK";
+"Ok" = "Ok";
 
 // Create
 
@@ -100,3 +101,13 @@
 "ON THE MAP" = "ON THE MAP";
 "No results ..." = "No results ...";
 "Adress" = "Adress";
+"CREATE" = "CREATE";
+"YES" = "YES";
+"NO" = "NO";
+"Those who are not yet on CANU will receive a text message with a link to your activity." = "Those who are not yet on CANU will receive a text message with a link to your activity.";
+"will not be invited if you cancel. Are you sure?" = "will not be invited if you cancel. \n\nAre you sure?";
+"other will not be invited if you cancel. Are you sure?" = "other will not be invited if you cancel. \n\nAre you sure?";
+"others will not be invited if you cancel. Are you sure?" = "others will not be invited if you cancel. \n\nAre you sure?";
+"and" = "and";
+"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?";
+"DELETE" = "DELETE";
