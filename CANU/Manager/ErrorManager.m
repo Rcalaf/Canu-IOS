@@ -142,6 +142,8 @@ static dispatch_once_t oncePredicate;
         case CANUErrorServerDown:
             [self alertForServerDown];
             break;
+            default:
+            break;
     }
     
 }

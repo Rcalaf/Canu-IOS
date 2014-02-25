@@ -185,7 +185,13 @@
     _street              = [attributes valueForKeyPath:@"street"];
     _zip                 = [attributes valueForKeyPath:@"zip_code"];
     
-    _privacyLocation     = [[attributes valueForKeyPath:@"private_location"] boolValue];
+    _privacyLocation     = NO;
+    
+    if ([attributes objectForKey:@"private_location"] != [NSNull null] && [attributes objectForKey:@"private_location"] != nil) {
+        
+        _privacyLocation     = [[attributes valueForKeyPath:@"private_location"] boolValue];
+        
+    }
 
     self.start           = [attributes valueForKeyPath:@"start"];
     self.end             = [attributes valueForKeyPath:@"end_date"];

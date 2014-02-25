@@ -234,6 +234,11 @@
 		1EEA9866185B5E7400EA9E02 /* feed_shadow_name@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9864185B5E7400EA9E02 /* feed_shadow_name@2x.png */; };
 		1EEA9869185B666E00EA9E02 /* chat_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9867185B666E00EA9E02 /* chat_send.png */; };
 		1EEA986A185B666E00EA9E02 /* chat_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EEA9868185B666E00EA9E02 /* chat_send@2x.png */; };
+		1EFDFBB318BCED4600A2A0DC /* F5_tribes_icones.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBB118BCED4600A2A0DC /* F5_tribes_icones.png */; };
+		1EFDFBB418BCED4600A2A0DC /* F5_tribes_icones@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBB218BCED4600A2A0DC /* F5_tribes_icones@2x.png */; };
+		1EFDFBB718BCEE6E00A2A0DC /* F5_local_icones.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBB518BCEE6E00A2A0DC /* F5_local_icones.png */; };
+		1EFDFBB818BCEE6E00A2A0DC /* F5_local_icones@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBB618BCEE6E00A2A0DC /* F5_local_icones@2x.png */; };
+		1EFDFBBB18BCF0CB00A2A0DC /* UICanuTextFieldReset.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFDFBBA18BCF0CB00A2A0DC /* UICanuTextFieldReset.m */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */; };
 		DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */; };
@@ -730,6 +735,12 @@
 		1EEA9864185B5E7400EA9E02 /* feed_shadow_name@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feed_shadow_name@2x.png"; path = "Ressources/Backgrounds/feed_shadow_name@2x.png"; sourceTree = "<group>"; };
 		1EEA9867185B666E00EA9E02 /* chat_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = chat_send.png; path = Ressources/Buttons/chat_send.png; sourceTree = "<group>"; };
 		1EEA9868185B666E00EA9E02 /* chat_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chat_send@2x.png"; path = "Ressources/Buttons/chat_send@2x.png"; sourceTree = "<group>"; };
+		1EFDFBB118BCED4600A2A0DC /* F5_tribes_icones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F5_tribes_icones.png; path = Ressources/Backgrounds/F5_tribes_icones.png; sourceTree = "<group>"; };
+		1EFDFBB218BCED4600A2A0DC /* F5_tribes_icones@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F5_tribes_icones@2x.png"; path = "Ressources/Backgrounds/F5_tribes_icones@2x.png"; sourceTree = "<group>"; };
+		1EFDFBB518BCEE6E00A2A0DC /* F5_local_icones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F5_local_icones.png; path = Ressources/Backgrounds/F5_local_icones.png; sourceTree = "<group>"; };
+		1EFDFBB618BCEE6E00A2A0DC /* F5_local_icones@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F5_local_icones@2x.png"; path = "Ressources/Backgrounds/F5_local_icones@2x.png"; sourceTree = "<group>"; };
+		1EFDFBB918BCF0CB00A2A0DC /* UICanuTextFieldReset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuTextFieldReset.h; path = Vendor/UICanuTextField/UICanuTextFieldReset.h; sourceTree = SOURCE_ROOT; };
+		1EFDFBBA18BCF0CB00A2A0DC /* UICanuTextFieldReset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuTextFieldReset.m; path = Vendor/UICanuTextField/UICanuTextFieldReset.m; sourceTree = SOURCE_ROOT; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
 		DE4064DE17D511BB00B11CE9 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
@@ -1431,6 +1442,15 @@
 			name = Loader;
 			sourceTree = "<group>";
 		};
+		1EFDFBB018BCDE9600A2A0DC /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				1E3BA47218AE4855003C2BF4 /* Location.h */,
+				1E3BA47318AE4855003C2BF4 /* Location.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		DE1549561768EDF200C39E5E /* UIDatePickerActionSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -1593,6 +1613,10 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1EFDFBB518BCEE6E00A2A0DC /* F5_local_icones.png */,
+				1EFDFBB618BCEE6E00A2A0DC /* F5_local_icones@2x.png */,
+				1EFDFBB118BCED4600A2A0DC /* F5_tribes_icones.png */,
+				1EFDFBB218BCED4600A2A0DC /* F5_tribes_icones@2x.png */,
 				1E162C0918B79A3F00D70FF0 /* G5_Fail_arrow_broke.png */,
 				1E162C0A18B79A3F00D70FF0 /* G5_Fail_arrow_broke@2x.png */,
 				1E162C0518B78F3800D70FF0 /* G5_arrow_.png */,
@@ -1719,6 +1743,8 @@
 				1E7429E018AE73F200992393 /* UICanuTextFieldLocation.m */,
 				1E162BF918B6330700D70FF0 /* UICanuTextFieldInvit.h */,
 				1E162BFA18B6330700D70FF0 /* UICanuTextFieldInvit.m */,
+				1EFDFBB918BCF0CB00A2A0DC /* UICanuTextFieldReset.h */,
+				1EFDFBBA18BCF0CB00A2A0DC /* UICanuTextFieldReset.m */,
 			);
 			name = UICanuTextField;
 			path = CANU;
@@ -1974,13 +2000,12 @@
 		DED4901D17298A6F005A0BF9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1EFDFBB018BCDE9600A2A0DC /* Location */,
 				1E77B94618A117ED00A16845 /* PhoneBook */,
 				DED4901C17298A67005A0BF9 /* User */,
 				DEBBDA4C1732BDA0009E9A7D /* Activity */,
 				DE5599B31836491600FE32E9 /* Message */,
 				1E70867E189A849900328F76 /* Contact */,
-				1E3BA47218AE4855003C2BF4 /* Location.h */,
-				1E3BA47318AE4855003C2BF4 /* Location.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2187,7 +2212,9 @@
 				DE774B3D184E0FDD00F8C244 /* guide_step_3.png in Resources */,
 				DEB29BBF17955B0600D9FFAE /* settings.png in Resources */,
 				DE774B3F184E0FDD00F8C244 /* guide_step_4-568h@2x.png in Resources */,
+				1EFDFBB818BCEE6E00A2A0DC /* F5_local_icones@2x.png in Resources */,
 				1E9FBA0418619A0400085421 /* loader-14.png in Resources */,
+				1EFDFBB418BCED4600A2A0DC /* F5_tribes_icones@2x.png in Resources */,
 				1E3A6B8F18897549007FB6BA /* User_settings@2x.png in Resources */,
 				DEB29BC017955B0600D9FFAE /* settings@2x.png in Resources */,
 				DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */,
@@ -2266,6 +2293,7 @@
 				1E9FB9FC18619A0400085421 /* loader-10.png in Resources */,
 				1E9F313F18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png in Resources */,
 				DE774B48184E129100F8C244 /* navmenu_me@2x.png in Resources */,
+				1EFDFBB718BCEE6E00A2A0DC /* F5_local_icones.png in Resources */,
 				1E9FB9F618619A0400085421 /* loader-7.png in Resources */,
 				1E3BA3EA18AB7CBE003C2BF4 /* F1_Shadow_Description@2x.png in Resources */,
 				1E7A569E188FD75B00CB5C4A /* Tutorial_Step5_line@2x.png in Resources */,
@@ -2285,6 +2313,7 @@
 				DE607830182BD08D0053F23B /* intro_bg.png in Resources */,
 				DEAE0B6F17C65D5200EEB078 /* feed_cell.png in Resources */,
 				1E9FB9EF18619A0400085421 /* loader-3@2x.png in Resources */,
+				1EFDFBB318BCED4600A2A0DC /* F5_tribes_icones.png in Resources */,
 				1E3BA46B18ACF796003C2BF4 /* F1_Calendar_dote_Enable@2x.png in Resources */,
 				DEAE0B7017C65D5200EEB078 /* feed_cell@2x.png in Resources */,
 				1E3A6B7D1885981E007FB6BA /* SignUp_phoneNumber_background.png in Resources */,
@@ -2417,6 +2446,7 @@
 				1E7138DD188EDAB000137A48 /* TutorialStepStart.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
 				1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */,
+				1EFDFBBB18BCF0CB00A2A0DC /* UICanuTextFieldReset.m in Sources */,
 				1E3BA45F18ACBE03003C2BF4 /* NSString+MK_Empty.m in Sources */,
 				1E3BA46018ACBE03003C2BF4 /* NSString+MK_Misc.m in Sources */,
 				DE81F8B1175E4D9E00AD1071 /* NewActivityViewController.m in Sources */,

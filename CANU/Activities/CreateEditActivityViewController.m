@@ -13,6 +13,7 @@
 #import "UICanuTextField.h"
 #import "UICanuTextFieldLocation.h"
 #import "UICanuTextFieldInvit.h"
+#import "UICanuTextFieldReset.h"
 #import "UICanuButtonSelect.h"
 #import "UICanuTimePicker.h"
 #import "UICanuLenghtPicker.h"
@@ -58,7 +59,7 @@
 @property (strong, nonatomic) Location *locationSelected;
 @property (nonatomic) CANUCreateActivity canuCreateActivity;
 @property (strong, nonatomic) CreateEditUserList *userList;
-@property (strong, nonatomic) UICanuTextField *titleInput;
+@property (strong, nonatomic) UICanuTextFieldReset *titleInput;
 @property (strong, nonatomic) UICanuTextFieldInvit *invitInput;
 @property (strong, nonatomic) UICanuTextFieldLocation *locationInput;
 @property (strong, nonatomic) UICanuButtonSelect *todayBtnSelect;
@@ -126,6 +127,12 @@
         
         self.editActivity = activity;
         
+        if (self.editActivity.privacyLocation) {
+            self.canuCreateActivity = CANUCreateActivityTribes;
+        } else {
+            self.canuCreateActivity = CANUCreateActivityLocal;
+        }
+        
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:@"Activity Edit"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];;
@@ -148,12 +155,21 @@
     self.mapLocationIsOpen = NO;
     self.ghostUser = NO;
     
-    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height - 57)];
+    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 90, 320, self.view.frame.size.height - 57)];
+    self.wrapper.alpha = 0;
     [self.view addSubview:_wrapper];
+    
+    UIImageView *icone = [[UIImageView alloc]initWithFrame:CGRectMake(138, 21, 43, 43)];
+    if (_canuCreateActivity == CANUCreateActivityLocal) {
+        icone.image = [UIImage imageNamed:@"F5_local_icones"];
+    } else {
+        icone.image = [UIImage imageNamed:@"F5_tribes_icones"];
+    }
+    [self.wrapper addSubview:icone];
     
     // Title
     
-    self.titleInput = [[UICanuTextField alloc]initWithFrame:CGRectMake(10, 85, 250, 47)];
+    self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10, 85, 250, 47)];
     self.titleInput.placeholder = NSLocalizedString(@"What do you want to do?", nil);
     self.titleInput.returnKeyType = UIReturnKeyNext;
     self.titleInput.delegate = self;
@@ -252,7 +268,7 @@
     
     // Bottom bar
     
-    self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57)];
+    self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57)];
     self.bottomBar.backgroundColor = UIColorFromRGB(0xf4f4f4);
     [self.view addSubview:_bottomBar];
     
@@ -290,6 +306,12 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.alpha = 1;
+        self.wrapper.frame = CGRectMake(0, 0, 320, _wrapper.frame.size.height);
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57);
+    }];
     
     // Description
     self.wrapperDescription = [[UIView alloc]initWithFrame:CGRectMake(0, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 320, 0)];
@@ -468,6 +490,16 @@
         }
         
         [self.userList searchPhoneBook:newString];
+        
+    } else if (textField == _titleInput) {
+        
+        NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if (newString.length != 0) {
+            self.titleInput.activeReset = YES;
+        } else {
+            self.titleInput.activeReset = NO;
+        }
         
     }
     
