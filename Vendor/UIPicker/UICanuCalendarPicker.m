@@ -12,6 +12,7 @@
 
 @interface UICanuCalendarPicker () <UICanuCalendarButtonPickerDelegate,UIScrollViewDelegate>
 
+@property (strong, nonatomic) NSMutableArray *arrayCell;
 @property (strong, nonatomic) UIImageView *controleSlide1;
 @property (strong, nonatomic) UIImageView *controleSlide2;
 @property (strong, nonatomic) UICanuCalendarButtonPicker *currentSelected;
@@ -29,6 +30,8 @@
         self.backgroundColor = UIColorFromRGB(0xe9eeee);
         
         self.clipsToBounds = YES;
+        
+        self.arrayCell = [[NSMutableArray alloc]init];
         
         UIView *headerDay = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
         headerDay.backgroundColor = UIColorFromRGB(0xe6ebeb);
@@ -135,6 +138,7 @@
             
             UICanuCalendarButtonPicker *day = [[UICanuCalendarButtonPicker alloc]initWithFrame:CGRectMake(13 + colums * 42 + numberOf2week * 320, row * 42, 42, 42) Date:date Type:canuCalendarButtonType];
             day.delegate = self;
+            [self.arrayCell addObject:day];
             [wrapperCalendar addSubview:day];
             
             if (i == dayOff + 3) {
@@ -203,6 +207,21 @@
     }
     
     return date;
+    
+}
+
+- (void)changeTo:(NSDate *)date{
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuCalendarButtonPicker *cell = [_arrayCell objectAtIndex:i];
+        
+        if ([cell.date mk_day] == [date mk_day] && [cell.date mk_month] == [date mk_month] && [cell.date mk_year] == [date mk_year]) {
+            [self dayDidTouch:cell];
+            return;
+        }
+        
+    }
     
 }
 

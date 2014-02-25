@@ -13,6 +13,7 @@
 @interface DetailActivityViewControllerAnimate : UIViewController
 
 @property (retain) id delegate;
+@property (nonatomic) BOOL closeAfterDelete;
 
 - (id)initFrame:(CGRect)frame andActivity:(Activity *)activity andPosition:(int)positionY;
 

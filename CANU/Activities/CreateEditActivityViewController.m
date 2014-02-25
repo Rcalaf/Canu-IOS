@@ -28,6 +28,10 @@
 #import "User.h"
 #import "MessageGhostUser.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 @interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
@@ -45,10 +49,12 @@
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UIButton *openMap;
 @property (strong, nonatomic) UIButton *openCalendar;
+@property (strong, nonatomic) UIButton *deleteButton;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
 @property (strong, nonatomic) UIView *bottomBar;
 @property (strong, nonatomic) Activity *createActivity;
+@property (strong, nonatomic) Activity *editActivity;
 @property (strong, nonatomic) Location *locationSelected;
 @property (nonatomic) CANUCreateActivity canuCreateActivity;
 @property (strong, nonatomic) CreateEditUserList *userList;
@@ -97,6 +103,11 @@
         
         self.canuCreateActivity = canuCreateActivity;
         
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity New"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Open" value:nil] build]];
+        
     }
     return self;
 }
@@ -113,7 +124,12 @@
     self = [super init];
     if (self) {
         
+        self.editActivity = activity;
         
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Edit"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];;
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Open" value:nil] build]];
         
     }
     return self;
@@ -211,26 +227,28 @@
     
     // Invit
     
-    self.titleInvit = [[UILabel alloc]initWithFrame:CGRectMake(10, _locationInput.frame.origin.y + _locationInput.frame.size.height + 51, 300, 18)];
-    self.titleInvit.backgroundColor = backgroundColorView;
-    self.titleInvit.font = [UIFont fontWithName:@"Lato-Regular" size:16];
-    self.titleInvit.text = NSLocalizedString(@"Who is invited?", nil);
-    self.titleInvit.textColor = UIColorFromRGB(0x2b4b58);
-    self.titleInvit.textAlignment = NSTextAlignmentCenter;
-    [self.wrapper addSubview:_titleInvit];
-    
-    self.invitInput = [[UICanuTextFieldInvit alloc]initWithFrame:CGRectMake(10, _titleInvit.frame.origin.y + _titleInvit.frame.size.height + 5, 300, 47)];
-    self.invitInput.placeholder = NSLocalizedString(@"Who is invited?", nil);
-    self.invitInput.delegate = self;
-    self.invitInput.returnKeyType = UIReturnKeySearch;
-    [self.wrapper addSubview:_invitInput];
-    
-    self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47)];
-    [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
-    [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
-    [self.cancelInvit detectSize];
-    self.cancelInvit.titleLabel.alpha = 0;
-    [self.wrapper addSubview:_cancelInvit];
+    if (!_editActivity) {
+        self.titleInvit = [[UILabel alloc]initWithFrame:CGRectMake(10, _locationInput.frame.origin.y + _locationInput.frame.size.height + 51, 300, 18)];
+        self.titleInvit.backgroundColor = backgroundColorView;
+        self.titleInvit.font = [UIFont fontWithName:@"Lato-Regular" size:16];
+        self.titleInvit.text = NSLocalizedString(@"Who is invited?", nil);
+        self.titleInvit.textColor = UIColorFromRGB(0x2b4b58);
+        self.titleInvit.textAlignment = NSTextAlignmentCenter;
+        [self.wrapper addSubview:_titleInvit];
+        
+        self.invitInput = [[UICanuTextFieldInvit alloc]initWithFrame:CGRectMake(10, _titleInvit.frame.origin.y + _titleInvit.frame.size.height + 5, 300, 47)];
+        self.invitInput.placeholder = NSLocalizedString(@"Who is invited?", nil);
+        self.invitInput.delegate = self;
+        self.invitInput.returnKeyType = UIReturnKeySearch;
+        [self.wrapper addSubview:_invitInput];
+        
+        self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47)];
+        [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
+        [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
+        [self.cancelInvit detectSize];
+        self.cancelInvit.titleLabel.alpha = 0;
+        [self.wrapper addSubview:_cancelInvit];
+    }
     
     // Bottom bar
     
@@ -245,12 +263,29 @@
     [_bottomBar addSubview:backButton];
     
     self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0) andBlue:YES];
-    [self.buttonAction setTitle:NSLocalizedString(@"CREATE", nil) forState:UIControlStateNormal];
+    if (!_editActivity) {
+        [self.buttonAction setTitle:NSLocalizedString(@"CREATE", nil) forState:UIControlStateNormal];
+    } else {
+        [self.buttonAction setTitle:NSLocalizedString(@"SAVE", nil) forState:UIControlStateNormal];
+        self.buttonAction.frame = CGRectMake(194.0f, 10.0f, 116.0f, 37);
+    }
     [self.buttonAction addTarget:self action:@selector(createEditForm) forControlEvents:UIControlEventTouchDown];
-    [_bottomBar addSubview:_buttonAction];
+    [self.bottomBar addSubview:_buttonAction];
+    
+    if (_editActivity) {
+        self.deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.deleteButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
+        [self.deleteButton setImage:[UIImage imageNamed:@"edit_delete.png"] forState:UIControlStateNormal];
+        [self.deleteButton addTarget:self action:@selector(deleteActivity) forControlEvents:UIControlEventTouchUpInside];
+        [self.bottomBar addSubview:_deleteButton];
+    }
     
     // Wrapper
-    self.wrapper.contentSize = CGSizeMake(320, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5);
+    if (!_editActivity) {
+        self.wrapper.contentSize = CGSizeMake(320, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5);
+    } else {
+        self.wrapper.contentSize = CGSizeMake(320, _cancelLocation.frame.origin.y + _cancelLocation.frame.size.height + 5);
+    }
     
 }
 
@@ -313,6 +348,10 @@
             
             self.searchLocation.currentLocation = _currentLocation;
             
+            if (_editActivity) {
+                [self.searchLocation forceLocationTo:[[Location alloc]initLocationWithMKMapItem:_editActivity.location]];
+            }
+    
         }
         
         // Active Map or not
@@ -321,9 +360,34 @@
     
     // User List
     
-    self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 320, 0)];
-    self.userList.delegate = self;
-    [self.wrapper addSubview:_userList];
+    if (!_editActivity) {
+        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 320, 0)];
+        self.userList.delegate = self;
+        [self.wrapper addSubview:_userList];
+    }
+    
+    if (self.editActivity) {
+        
+        self.titleInput.text = _editActivity.title;
+        
+        self.descriptionInput.text = _editActivity.description;
+        
+        [self.timePicker isToday:NO];
+        
+        [self.timePicker changeTo:_editActivity.start];
+        
+        if ([_editActivity.start mk_isToday]) {
+            [self buttonSelectManager:_todayBtnSelect];
+        } else if ([_editActivity.start mk_isTomorrow]) {
+            [self buttonSelectManager:_tomorrowBtnSelect];
+        } else {
+            [self buttonSelectManager:_openCalendar];
+            [self.calendar changeTo:_editActivity.start];
+        }
+        
+        [self.lenghtPicker changeTo:_editActivity.length];
+        
+    }
     
 }
 
@@ -800,6 +864,14 @@
 
 - (void)goBack{
     
+    if (self.editActivity) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Dropout" value:nil] build]];
+    }else{
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Dropout" value:nil] build]];
+    }
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapper.alpha = 0;
         self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
@@ -866,54 +938,129 @@
             description = self.descriptionInput.text;
         }
         
-        [Activity createActivityForUserWithTitle:self.titleInput.text
-                                     Description:description
-                                       StartDate:[dateFormatter stringFromDate:dateFull]
-                                          Length:[self.lenghtPicker selectedLenght]
-                                          Street:self.locationSelected.street
-                                            City:self.locationSelected.city
-                                             Zip:self.locationSelected.zip
-                                         Country:self.locationSelected.country
-                                        Latitude:[NSString stringWithFormat:@"%f",self.locationSelected.latitude]
-                                       Longitude:[NSString stringWithFormat:@"%f",self.locationSelected.longitude]
-                                          Guests:[self createArrayUserInvited]
-                                 PrivateLocation:privateLocation
-                                           Block:^(Activity *activity, NSError *error) {
-                                     
-                                               if (error) {
-                                                   NSLog(@"%@",error);
-                                               } else {
+        if (_editActivity) {
+            
+            self.deleteButton.hidden = YES;
+            
+            [self.editActivity editActivityForUserWithTitle:self.titleInput.text
+                                                Description:description
+                                                  StartDate:[dateFormatter stringFromDate:dateFull]
+                                                     Length:[self.lenghtPicker selectedLenght]
+                                                     Street:self.locationSelected.street
+                                                       City:self.locationSelected.city
+                                                        Zip:self.locationSelected.zip
+                                                    Country:self.locationSelected.country
+                                                   Latitude:[NSString stringWithFormat:@"%f",self.locationSelected.latitude]
+                                                  Longitude:[NSString stringWithFormat:@"%f",self.locationSelected.longitude]
+                                                     Guests:nil
+                                            PrivateLocation:self.editActivity.privacyLocation
+                                                      Block:^(NSError *error) {
+                                                          
+                                                          if (error) {
+                                                              NSLog(@"%@",error);
+                                                          } else {
+                                                              
+                                                              id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                                              [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Save" value:nil] build]];
+                                                              
+                                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+                                                              
+                                                              [UIView animateWithDuration:0.4 animations:^{
+                                                                  self.wrapper.alpha = 0;
+                                                                  self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+                                                              } completion:^(BOOL finished) {
+                                                                  
+                                                                  [self dismissViewControllerAnimated:YES completion:nil];
+                                                                  
+                                                              }];
+                                                              
+                                                          }
+                                                          
+                                                          self.buttonAction.hidden = NO;
+                                                          self.deleteButton.hidden = NO;
+                                                          
+                                                      }];
+            
+        } else {
+            
+            [Activity createActivityForUserWithTitle:self.titleInput.text
+                                         Description:description
+                                           StartDate:[dateFormatter stringFromDate:dateFull]
+                                              Length:[self.lenghtPicker selectedLenght]
+                                              Street:self.locationSelected.street
+                                                City:self.locationSelected.city
+                                                 Zip:self.locationSelected.zip
+                                             Country:self.locationSelected.country
+                                            Latitude:[NSString stringWithFormat:@"%f",self.locationSelected.latitude]
+                                           Longitude:[NSString stringWithFormat:@"%f",self.locationSelected.longitude]
+                                              Guests:[self createArrayUserInvited]
+                                     PrivateLocation:privateLocation
+                                               Block:^(Activity *activity, NSError *error) {
                                                    
-                                                   if (!_ghostUser) {
-                                                       
-                                                       [UIView animateWithDuration:0.4 animations:^{
-                                                           self.wrapper.alpha = 0;
-                                                           self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
-                                                       } completion:^(BOOL finished) {
-                                                           
-                                                           [self dismissViewControllerAnimated:YES completion:nil];
-                                                           
-                                                       }];
-                                                       
+                                                   if (error) {
+                                                       NSLog(@"%@",error);
                                                    } else {
                                                        
-                                                       self.createActivity = activity;
+                                                       id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                                                       [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Save" value:nil] build]];
                                                        
-                                                       self.messageGhostUser = [[MessageGhostUser alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andArray:self.userList.arrayAllUserSelected andParentViewcontroller:self];
-                                                       self.messageGhostUser.delegate = self;
-                                                       [self.view addSubview:_messageGhostUser];
+                                                       if (!_ghostUser) {
+                                                           
+                                                           [UIView animateWithDuration:0.4 animations:^{
+                                                               self.wrapper.alpha = 0;
+                                                               self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+                                                           } completion:^(BOOL finished) {
+                                                               
+                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                               
+                                                           }];
+                                                           
+                                                       } else {
+                                                           
+                                                           self.createActivity = activity;
+                                                           
+                                                           self.messageGhostUser = [[MessageGhostUser alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andArray:self.userList.arrayAllUserSelected andParentViewcontroller:self];
+                                                           self.messageGhostUser.delegate = self;
+                                                           [self.view addSubview:_messageGhostUser];
+                                                           
+                                                       }
+                                                       
+                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                        
                                                    }
                                                    
-                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+                                                   self.buttonAction.hidden = NO;
                                                    
-                                               }
-                                               
-                                               self.buttonAction.hidden = NO;
-                                     
-                                 }];
-        
+                                               }];
+            
+        }
+    
     }
+    
+}
+
+- (IBAction)deleteActivity{
+    
+    [self.editActivity removeActivityWithBlock:^(NSError *error){
+        if (!error) {
+            
+            if (self.delegate) {
+                [self.delegate currentActivityWasDeleted];
+            } else {
+               [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+            }
+            
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Delete" value:nil] build]];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        } else {
+            //[error localizedDescription]
+            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:@"Couldn't delete the activity." delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+        }
+        
+    }];
     
 }
 

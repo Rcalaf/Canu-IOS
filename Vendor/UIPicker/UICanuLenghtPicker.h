@@ -12,4 +12,6 @@
 
 - (NSString *)selectedLenght;
 
+- (void)changeTo:(NSString *)lenght;
+
 @end

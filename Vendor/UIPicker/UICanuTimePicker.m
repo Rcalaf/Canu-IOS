@@ -139,6 +139,32 @@
     
 }
 
+- (void)changeTo:(NSDate *)date{
+    
+    int hours = [date mk_hour];
+    int mins = [date mk_minutes];
+    
+    if ([self timeIs24HourFormat]) {
+        [self.hoursScroll changeCurrentObjectTo:hours];
+        [self.minutesScroll changeCurrentObjectTo:abs(mins/15)];
+    } else {
+        if (hours < 12) {
+            [self.amPmScroll changeCurrentObjectTo:0];
+        } else {
+            [self.amPmScroll changeCurrentObjectTo:1];
+        }
+        
+        if (hours > 12) {
+            hours -= 12;
+        }
+        
+        [self.hoursScroll changeCurrentObjectTo:hours];
+        [self.minutesScroll changeCurrentObjectTo:abs(mins/15)];
+        
+    }
+    
+}
+
 - (void)isToday:(BOOL)blockedValue{
     
     self.isBlokedValue = blockedValue;

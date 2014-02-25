@@ -200,4 +200,11 @@
     
 }
 
+- (void)forceLocationTo:(Location *)location{
+    
+    self.selectedLocation = location;
+    [self.delegate locationIsSelected:location];
+    
+}
+
 @end

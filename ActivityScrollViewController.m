@@ -10,7 +10,7 @@
 
 #import "UIScrollViewReverse.h"
 #import "UICanuActivityCellScroll.h"
-#import "NewActivityViewController.h"
+#import "CreateEditActivityViewController.h"
 #import "DetailActivityViewController.h"
 #import "DetailActivityViewControllerAnimate.h"
 #import "UICanuNavigationController.h"
@@ -553,9 +553,8 @@ typedef enum {
         }];
         
     }else if (cell.activity.status == UICanuActivityCellEditable) {
-        NewActivityViewController *eac = [[NewActivityViewController alloc] init];
-        eac.activity = cell.activity;
-        [self presentViewController:eac animated:YES completion:nil];
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:cell.activity];
+        [self presentViewController:editView animated:YES completion:nil];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
         
         [cell.loadingIndicator startAnimating];
@@ -682,14 +681,28 @@ typedef enum {
         
     }
     
+    if (viewController.closeAfterDelete) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+    }
+    
     [self performSelector:@selector(killViewController:) withObject:viewController afterDelay:0.4];
     
 }
 
 - (void)callBackAction{
     
-    NewActivityViewController *nac = [[NewActivityViewController alloc] init];
-    [self presentViewController:nac animated:YES completion:nil];
+    CANUCreateActivity canuCreateActivity;
+    
+    if (_feedType == FeedLocalType) {
+        canuCreateActivity = CANUCreateActivityLocal;
+    } else if (_feedType == FeedTribeType) {
+        canuCreateActivity = CANUCreateActivityTribes;
+    } else {
+        canuCreateActivity = CANUCreateActivityLocal;
+    }
+    
+    CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
+    [self presentViewController:editView animated:YES completion:nil];
     
 }
 

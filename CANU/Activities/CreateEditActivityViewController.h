@@ -14,6 +14,8 @@
 
 @interface CreateEditActivityViewController : UIViewController
 
+@property (retain) id delegate;
+
 /**
  *  Create activity (local or tribe)
  *
@@ -31,5 +33,13 @@
  *  @return
  */
 - (id)initForEdit:(Activity *)activity;
+
+@end
+
+@protocol CreateEditActivityViewControllerDelegate <NSObject>
+
+@required
+
+- (void)currentActivityWasDeleted;
 
 @end

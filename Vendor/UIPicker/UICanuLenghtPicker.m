@@ -203,6 +203,41 @@
     
 }
 
+- (void)changeTo:(NSString *)lenght{
+    
+    NSArray *dateParts = [lenght componentsSeparatedByString:@"T"];
+    NSArray *timeParts = [[dateParts objectAtIndex:1] componentsSeparatedByString:@":"];
+    NSInteger hoursSave = [[timeParts objectAtIndex:0] integerValue];
+    NSInteger minsSave = [[timeParts objectAtIndex:1] integerValue];
+    
+    int mins = 0,hours = 0;
+    
+    for (int i = 0; i <= 96; i++) {
+        
+        int gap = 15;
+        
+        if (hours >= 6) {
+            gap = 30;
+        }
+        
+        mins += gap;
+        
+        if (mins >= 60) {
+            mins = 0;
+            hours ++;
+        }
+        
+        if (mins == minsSave && hours == hoursSave) {
+            
+            [self changeCurrentObjectTo:i];
+            return;
+            
+        }
+        
+    }
+    
+}
+
 #pragma mark - Private
 
 - (void)addValueLenght{

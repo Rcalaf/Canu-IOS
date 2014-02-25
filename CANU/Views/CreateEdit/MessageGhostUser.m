@@ -11,12 +11,23 @@
 #import "Contact.h"
 #import "User.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMessageComposeViewController.h>
+
+typedef NS_ENUM(NSInteger, CANUG5type) {
+    CANUG5 = 0,
+    CANUG5Fail = 1,
+    CANUG5Failb = 2
+};
 
 @interface MessageGhostUser () <MFMessageComposeViewControllerDelegate>
 
 // All
+@property (nonatomic) CANUG5type canuG5type;
 @property (strong, nonatomic) NSMutableArray *arrayUserSelected;
 @property (strong, nonatomic) UIViewController *parentViewController;
 
@@ -47,6 +58,8 @@
     
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.canuG5type = CANUG5;
         
         self.parentViewController = viewController;
         
@@ -123,6 +136,10 @@
     }
     
     if (ifUser) {
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
+        
         [self.delegate  messageGhostUserWillDisappear];
     } else {
         [self disappearG5Fail];
@@ -132,7 +149,12 @@
 }
 
 - (void)closeAndDelete{
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
+    
     [self.delegate messageGhostUserWillDisappearForDeleteActivity];
+    
 }
 
 #pragma mark -- G5
@@ -148,6 +170,8 @@
 #pragma mark -- G5 fail
 
 - (void)appearG5Fail{
+    
+    self.canuG5type = CANUG5Fail;
     
     NSString *namePeople = @"";
     
@@ -211,6 +235,8 @@
 
 - (void)appearG5failb{
     
+    self.canuG5type = CANUG5Failb;
+    
     self.arrowG5Failb = [[UIImageView alloc]initWithFrame:CGRectMake(46, (self.frame.size.height - 480)/2 + 90, 223, 72)];
     self.arrowG5Failb.image = [UIImage imageNamed:@"G5_Fail_arrow_broke"];
     [self addSubview:_arrowG5Failb];
@@ -270,6 +296,18 @@
     
     if (!messageIsSend) {
         [self appearG5Fail];
+    } else {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Succes" value:nil] build]];
+        
+        if (self.canuG5type == CANUG5) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 Succes" label:@"G5" value:nil] build]];
+        } else if (self.canuG5type == CANUG5Fail) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 Succes" label:@"G5 Fail" value:nil] build]];
+        } else if (self.canuG5type == CANUG5Failb) {
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 Succes" label:@"G5 Failb" value:nil] build]];
+        }
+        
     }
     
 	[self.parentViewController dismissViewControllerAnimated:YES completion:^{

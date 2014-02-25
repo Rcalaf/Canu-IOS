@@ -12,6 +12,8 @@
 
 - (NSDate *)selectedTime;
 
+- (void)changeTo:(NSDate *)date;
+
 - (void)isToday:(BOOL)blockedValue;
 
 @end

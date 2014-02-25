@@ -25,6 +25,7 @@ static int const CANUSizeTransition = 70;
 @property (nonatomic) int heightScreen;
 @property (nonatomic) int middlePosition;
 @property (strong, nonatomic) UIView *backgroundOpacity;
+@property (strong, nonatomic) UIView *backgroundOpacityFinal;
 @property (strong, nonatomic) UIView *wrapperLocal;
 @property (strong, nonatomic) UIView *wrapperTribes;
 @property (strong, nonatomic) UIImageView *cloud;
@@ -186,19 +187,43 @@ static int const CANUSizeTransition = 70;
         [UIView animateWithDuration:0.2 animations:^{
             [self animateWithPosition:position];
         } completion:^(BOOL finished) {
+            
+            self.backgroundOpacityFinal = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, _heightScreen)];
+            self.backgroundOpacityFinal.backgroundColor = backgroundColorView;
+            self.backgroundOpacityFinal.alpha = 0;
+            [self addSubview:_backgroundOpacityFinal];
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                self.backgroundOpacityFinal.alpha = 1;
+            } completion:^(BOOL finished) {
+                if (canuCreateActivity != CANUCreateActivityNone) {
+                    [navigation presentViewController:createView animated:NO completion:nil];
+                    self.active = NO;
+                    self.frame = CGRectMake(0, 0, 0, 0);
+                } else {
+                    [UIView animateWithDuration:0.2 animations:^{
+                        self.alpha = 0;
+                    } completion:^(BOOL finished) {
+                        self.active = NO;
+                        self.frame = CGRectMake(0, 0, 0, 0);
+                        self.alpha = 1;
+                    }];
+                }
+                
+            }];
+        }];
+        
+    } else {
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.backgroundOpacity = 0;
+        } completion:^(BOOL finished) {
             if (canuCreateActivity != CANUCreateActivityNone) {
                 [navigation presentViewController:createView animated:NO completion:nil];
             }
             self.active = NO;
             self.frame = CGRectMake(0, 0, 0, 0);
         }];
-        
-    } else {
-        if (canuCreateActivity != CANUCreateActivityNone) {
-            [navigation presentViewController:createView animated:NO completion:nil];
-        }
-        self.active = NO;
-        self.frame = CGRectMake(0, 0, 0, 0);
     }
     
 }

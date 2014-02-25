@@ -16,6 +16,8 @@
 
 - (NSDate *)selectedDate;
 
+- (void)changeTo:(NSDate *)date;
+
 @end
 
 @protocol UICanuCalendarPickerDelegate <NSObject>

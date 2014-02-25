@@ -15,6 +15,7 @@
 
 @interface Activity : NSObject //<MKAnnotation>
 
+@property (readonly) BOOL privacyLocation;
 @property (readonly) NSUInteger activityId;
 @property (readonly) NSUInteger ownerId;
 @property (readonly) NSString *title;

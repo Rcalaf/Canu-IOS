@@ -18,9 +18,9 @@
 #import "UICanuLabelLocation.h"
 #import "UICanuLabelDescription.h"
 #import "UIImageView+AFNetworking.h"
+#import "CreateEditActivityViewController.h"
 #import "ChatScrollView.h"
 #import "AFCanuAPIClient.h"
-#import "NewActivityViewController.h"
 #import "AttendeesScrollViewController.h"
 #import "LoaderAnimation.h"
 #import <MapKit/MapKit.h>
@@ -35,7 +35,7 @@ typedef enum {
     UICanuActivityCellToGo = 2,
 } UICanuActivityCellStatus;
 
-@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
+@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextFieldDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate>
 
 @property (nonatomic) BOOL chatIsOpen;
 @property (nonatomic) BOOL animationFolder;
@@ -90,6 +90,7 @@ typedef enum {
         self.chatIsOpen      = NO;
         self.keyboardIsOpen  = NO;
         self.animationFolder = NO;
+        self.closeAfterDelete= NO;
     }
     return self;
 }
@@ -574,9 +575,9 @@ typedef enum {
 
     }else if (self.activity.status == UICanuActivityCellEditable){
         // edit
-        NewActivityViewController *eac = [[NewActivityViewController alloc] init];
-        eac.activity = self.activity;
-        [self presentViewController:eac animated:YES completion:nil];
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:self.activity];
+        editView.delegate = self;
+        [self presentViewController:editView animated:YES completion:nil];
     }else{
         [self.loadingIndicator startAnimating];
         self.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
@@ -612,6 +613,14 @@ typedef enum {
             
         }];
     }
+}
+
+- (void)currentActivityWasDeleted{
+    
+    self.closeAfterDelete = YES;
+    
+    [self backAction];
+    
 }
 
 - (void)backAction{

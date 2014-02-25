@@ -184,6 +184,8 @@
     _country             = [attributes valueForKeyPath:@"country"];
     _street              = [attributes valueForKeyPath:@"street"];
     _zip                 = [attributes valueForKeyPath:@"zip_code"];
+    
+    _privacyLocation     = [[attributes valueForKeyPath:@"private_location"] boolValue];
 
     self.start           = [attributes valueForKeyPath:@"start"];
     self.end             = [attributes valueForKeyPath:@"end_date"];

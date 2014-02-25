@@ -23,6 +23,8 @@
 
 - (void)reset;
 
+- (void)forceLocationTo:(Location *)location;
+
 @end
 
 @protocol UICanuSearchLocationDelegate <NSObject>
