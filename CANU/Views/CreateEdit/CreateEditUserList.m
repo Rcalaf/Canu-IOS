@@ -116,9 +116,36 @@
         
     }
     
-    int i = 0;
+    int row = 0;
     
-    for (i = 0; i < [_arrayContact count]; i++) {
+    for (int i = 0; i < [_arrayCanuUser count]; i++) {
+        
+        User *user = [_arrayCanuUser objectAtIndex:i];
+        
+        Contact *contact = nil;
+        
+        for (int y = 0; y < [_arrayContact count]; y ++) {
+            
+            Contact *contactData = [_arrayContact objectAtIndex:y];
+            
+            if ([contactData.convertNumber isEqualToString:user.phoneNumber]) {
+                contact = contactData;
+            }
+            
+        }
+        
+        UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + row * (47 + 10), 300, 47) WithContact:contact AndUser:user];
+        cellContact.delegate = self;
+        [self.scrollView addSubview:cellContact];
+        [self.arrayCellCanuUser addObject:cellContact];
+        
+        row++;
+        
+    }
+    
+    
+    
+    for (int i = 0; i < [_arrayContact count]; i++) {
         
         Contact *contact = [_arrayContact objectAtIndex:i];
         
@@ -134,14 +161,17 @@
             
         }
         
-        UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + i * (47 + 10), 300, 47) WithContact:contact AndUser:user];
-        cellContact.delegate = self;
-        [self.scrollView addSubview:cellContact];
-        [self.arrayCellCanuUser addObject:cellContact];
+        if (!user) {
+            UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + row * (47 + 10), 300, 47) WithContact:contact AndUser:nil];
+            cellContact.delegate = self;
+            [self.scrollView addSubview:cellContact];
+            [self.arrayCellCanuUser addObject:cellContact];
+            row++;
+        }
         
     }
     
-    self.scrollView.contentSize = CGSizeMake(320, i * ( 47 + 10) + 10);
+    self.scrollView.contentSize = CGSizeMake(320, row * ( 47 + 10) + 10);
     
 }
 

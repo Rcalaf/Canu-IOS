@@ -187,16 +187,18 @@
     
     switch (ABAddressBookGetAuthorizationStatus()){
         case  kABAuthorizationStatusAuthorized:
-            
+            NSLog(@"1");
             break;
         case  kABAuthorizationStatusNotDetermined :
-
+            NSLog(@"2");
             break;
         case  kABAuthorizationStatusDenied:
             error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookRestricted userInfo:nil];
+            NSLog(@"3");
             break;
         case  kABAuthorizationStatusRestricted:
             error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookRestricted userInfo:nil];
+            NSLog(@"4");
             break;
         default:
             break;

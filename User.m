@@ -78,7 +78,8 @@
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrlShort];
-    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,self.phoneNumber,nil];
+    NSString *phoneNumber     = [NSString stringWithFormat:@"%@",self.phoneNumber];
+    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,phoneNumber,nil];
     NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",@"phone_number",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
