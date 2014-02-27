@@ -8,6 +8,7 @@
 
 #import "AlertViewController.h"
 #import "UICanuButtonSignBottomBar.h"
+#import "ErrorManager.h"
 
 @interface AlertViewController ()
 
@@ -62,10 +63,10 @@
         self.descriptionError.text = NSLocalizedString(@"Internal Error", nil);
         self.illustration.image = [UIImage imageNamed:@"G1_pipe"];
     } else if (_canuError == CANUErrorPhoneBookRestricted) {
-        self.descriptionError.frame = CGRectMake(30, (self.view.frame.size.height - 480)/2 + 190, 315, 210);
-        self.descriptionError.text = NSLocalizedString(@"Settings > Privacy > Contacts", nil);
-        self.illustration.frame = CGRectMake((320 - 271)/2, (self.view.frame.size.height - 480)/3 + 40, 271, 226);
+        self.illustration.frame = CGRectMake(0, (self.view.frame.size.height - 480)/3 + 40, 271, 226);
         self.illustration.image = [UIImage imageNamed:@"G2_fail_hand"];
+        self.descriptionError.frame = CGRectMake((320 - 315)/2, (self.view.frame.size.height - 480)/2 + 190, 315, 210);
+        self.descriptionError.text = NSLocalizedString(@"Settings > Privacy > Contacts", nil);
     }
     
     self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(40, self.view.frame.size.height - 77, 240, 37.0) andBlue:YES];
@@ -90,8 +91,9 @@
         self.wrapperAlert.alpha = 0;
         self.wrapperAlert.transform = CGAffineTransformMakeScale(0.8, 0.8);
     } completion:^(BOOL finished) {
-        [self willMoveToParentViewController:nil];
+        [[ErrorManager sharedErrorManager] deleteError:_canuError];
         [self.view removeFromSuperview];
+        [self willMoveToParentViewController:nil];
         if (self.parentViewController) {
             [self removeFromParentViewController];
         }
@@ -103,6 +105,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    NSLog(@"Dealloc view");
 }
 
 @end

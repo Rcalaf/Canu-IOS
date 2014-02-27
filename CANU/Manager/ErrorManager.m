@@ -142,6 +142,9 @@ static dispatch_once_t oncePredicate;
         case CANUErrorServerDown:
             [self alertForServerDown];
             break;
+        case CANUErrorPhoneBookRestricted:
+            [self alertForNotification:CANUErrorPhoneBookRestricted];
+            break;
             default:
             break;
     }
@@ -198,8 +201,8 @@ static dispatch_once_t oncePredicate;
         
         [self addError:CANUErrorUnknown];
         
+        [appDelegate.window addSubview:alert.view];
         [appDelegate.window.rootViewController addChildViewController:alert];
-        [appDelegate.window.rootViewController.view addSubview:alert.view];
     }
     
 }
@@ -218,8 +221,8 @@ static dispatch_once_t oncePredicate;
         
         [self addError:CANUErrorNoInternetConnection];
         
+        [appDelegate.window addSubview:alert.view];
         [appDelegate.window.rootViewController addChildViewController:alert];
-        [appDelegate.window.rootViewController.view addSubview:alert.view];
     }
     
 }
@@ -238,9 +241,26 @@ static dispatch_once_t oncePredicate;
         
         [self addError:CANUErrorServerDown];
         
+        [appDelegate.window addSubview:alert.view];
         [appDelegate.window.rootViewController addChildViewController:alert];
-        [appDelegate.window.rootViewController.view addSubview:alert.view];
     }
+    
+}
+
+- (void)alertForNotification:(CANUError)error{
+    
+    CANUAlertViewType canuAlertViewtype = CANUAlertViewPopIn;
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    
+    AlertViewController *alert = [[AlertViewController alloc]init];
+    alert.canuAlertViewType = canuAlertViewtype;
+    alert.canuError = error;
+    
+    [self addError:CANUErrorServerDown];
+    
+    [appDelegate.window addSubview:alert.view];
+    [appDelegate.window.rootViewController addChildViewController:alert];
     
 }
 

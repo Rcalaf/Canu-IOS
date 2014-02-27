@@ -718,16 +718,10 @@
 - (void)syncUserContact{
     
     if (self.userList.canuError == CANUErrorPhoneBookRestricted) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        
-        AlertViewController *alert = [[AlertViewController alloc]init];
-        alert.canuAlertViewType = CANUAlertViewPopIn;
-        alert.canuError = CANUErrorPhoneBookRestricted;
-        
-        [appDelegate.window.rootViewController addChildViewController:alert];
-        [appDelegate.window.rootViewController.view addSubview:alert.view];
+        NSLog(@"YES");
+        [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorPhoneBookRestricted];
     } else {
-        
+        NSLog(@"NO");
     }
     
 }
