@@ -456,6 +456,10 @@
     
     if (textField == _titleInput) {
         [self.titleInput resignFirstResponder];
+    }else if (textField == _locationInput && [_locationInput.text isEqualToString:@""]) {
+        [self.locationInput resignFirstResponder];
+    }else if (textField == _invitInput && ([_invitInput.text isEqualToString:@""] || [_invitInput.text isEqualToString:@" "])) {
+        [self.invitInput resignFirstResponder];
     }
     
     return YES;

@@ -163,7 +163,7 @@ static dispatch_once_t oncePredicate;
 - (void)unknownErrorDetected:(NSError *)errorUnknown ForFile:(NSString *)fileName function:(NSString *)functionName{
     
     if (_feedBackAlert) {
-        
+        NSLog(@"File : %@ Function : %@ Error %@",fileName,functionName,errorUnknown);
     } else {
         NSLog(@"File : %@ Function : %@ Error %@",fileName,functionName,errorUnknown);
     }
@@ -176,7 +176,7 @@ static dispatch_once_t oncePredicate;
 - (void)serverIsDown{
     
     if (_feedBackAlert) {
-        
+        NSLog(@"Server Down");
     } else {
         NSLog(@"Server Down");
     }

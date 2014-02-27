@@ -106,8 +106,6 @@
     
     [self.delegate changeUserSelected:_arrayAllUserSelected];
     
-//    [self searchPhoneBook:@""];
-    
 }
 
 - (void)updateAndDeleteContact:(Contact *)contact{
@@ -135,8 +133,6 @@
     
     [self.delegate changeUserSelected:_arrayAllUserSelected];
     
-//    [self searchPhoneBook:@""];
-    
 }
 
 #pragma mark - Private
@@ -145,24 +141,34 @@
     
     [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
         
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        
         if (error) {
             
         } else {
-            
-            self.arrayContact = arrayContact;
             
             NSMutableArray *phoneNumberClean = [[NSMutableArray alloc]init];
             
             for (int i = 0; i < [arrayContact count]; i++) {
                 
+                
+                
                 Contact *contact = [arrayContact objectAtIndex:i];
-                [phoneNumberClean addObject:contact.convertNumber];
+                
+                if (![contact.convertNumber isEqualToString:appDelegate.user.phoneNumber]) {
+                    [phoneNumberClean addObject:contact.convertNumber];
+                } else {
+                    
+                    // User Number
+                    [arrayContact removeObjectAtIndex:i];
+                    
+                }
                 
             }
             
+            self.arrayContact = arrayContact;
+            
             if ([phoneNumberClean count] != 0) {
-                
-                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
                 
                 [appDelegate.user checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
                     
@@ -262,7 +268,7 @@
 #pragma mark - UICanuContactCellDelegate
 
 - (void)cellLocationIsTouched:(UICanuContactCell *)cell{
-    
+    NSLog(@"%@",cell.user.phoneNumber);
     BOOL isAlreadySelected = NO;
     
     for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
