@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ErrorManager.h"
+
 @interface CreateEditUserList : UIView
 
 @property (retain) id delegate;
 @property (nonatomic) int maxHeight;
+@property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
 
 - (void)searchPhoneBook:(NSString *)searchWords;

@@ -82,9 +82,10 @@
 "Unknown Error" = "Unknown Error";
 "Please restart your action" = "Please try again.";
 "No Internet Connection" = "Can't seem to find an internet connection.";
-"Please change this little thing" = "Please make sure you're connected.";
+"Internal Error" = "Internal Error"; // New
 "OK" = "Ok";
 "Ok" = "Ok";
+"Settings > Privacy > Contacts" = "To sync contacts go to \nSettings > Privacy >Contacts \nand set Canu to On";
 
 // Create
 

@@ -15,6 +15,7 @@
 #import "TTTAttributedLabel.h"
 #import "User.h"
 #import "UICanuButtonSignBottomBar.h"
+#import "MainViewController.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -183,9 +184,19 @@
             [UIView animateWithDuration:0.4 animations:^{
                 self.wrapper.alpha = 0;
             } completion:^(BOOL finished) {
-                appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
-                [appDelegate.canuViewController pushViewController:appDelegate.feedViewController animated:NO];
-                appDelegate.window.rootViewController = appDelegate.canuViewController;
+                
+                if (user.phoneIsVerified) {
+                    NSLog(@"User Active");
+                    appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
+                    [appDelegate.canuViewController pushViewController:appDelegate.feedViewController animated:NO];
+                    appDelegate.window.rootViewController = appDelegate.canuViewController;
+                }else{
+                    NSLog(@"User Not Active");
+                    MainViewController *loginViewController = [[MainViewController alloc] init];
+                    loginViewController.isPhoneCheck = YES;
+                    appDelegate.window.rootViewController = loginViewController;
+                }
+                
             }];
             
         }

@@ -239,6 +239,10 @@
 		1EFDFBB718BCEE6E00A2A0DC /* F5_local_icones.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBB518BCEE6E00A2A0DC /* F5_local_icones.png */; };
 		1EFDFBB818BCEE6E00A2A0DC /* F5_local_icones@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBB618BCEE6E00A2A0DC /* F5_local_icones@2x.png */; };
 		1EFDFBBB18BCF0CB00A2A0DC /* UICanuTextFieldReset.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EFDFBBA18BCF0CB00A2A0DC /* UICanuTextFieldReset.m */; };
+		1EFDFBBE18BE476C00A2A0DC /* G1_pipe.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBBC18BE476B00A2A0DC /* G1_pipe.png */; };
+		1EFDFBBF18BE476C00A2A0DC /* G1_pipe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBBD18BE476C00A2A0DC /* G1_pipe@2x.png */; };
+		1EFDFBC218BE5E1E00A2A0DC /* G2_fail_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */; };
+		1EFDFBC318BE5E1E00A2A0DC /* G2_fail_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBC118BE5E1E00A2A0DC /* G2_fail_hand@2x.png */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */; };
 		DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */; };
@@ -741,6 +745,10 @@
 		1EFDFBB618BCEE6E00A2A0DC /* F5_local_icones@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F5_local_icones@2x.png"; path = "Ressources/Backgrounds/F5_local_icones@2x.png"; sourceTree = "<group>"; };
 		1EFDFBB918BCF0CB00A2A0DC /* UICanuTextFieldReset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuTextFieldReset.h; path = Vendor/UICanuTextField/UICanuTextFieldReset.h; sourceTree = SOURCE_ROOT; };
 		1EFDFBBA18BCF0CB00A2A0DC /* UICanuTextFieldReset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuTextFieldReset.m; path = Vendor/UICanuTextField/UICanuTextFieldReset.m; sourceTree = SOURCE_ROOT; };
+		1EFDFBBC18BE476B00A2A0DC /* G1_pipe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = G1_pipe.png; path = Ressources/Backgrounds/G1_pipe.png; sourceTree = "<group>"; };
+		1EFDFBBD18BE476C00A2A0DC /* G1_pipe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G1_pipe@2x.png"; path = "Ressources/Backgrounds/G1_pipe@2x.png"; sourceTree = "<group>"; };
+		1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = G2_fail_hand.png; path = Ressources/Backgrounds/G2_fail_hand.png; sourceTree = "<group>"; };
+		1EFDFBC118BE5E1E00A2A0DC /* G2_fail_hand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G2_fail_hand@2x.png"; path = "Ressources/Backgrounds/G2_fail_hand@2x.png"; sourceTree = "<group>"; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
 		DE4064DE17D511BB00B11CE9 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
@@ -1613,6 +1621,10 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */,
+				1EFDFBC118BE5E1E00A2A0DC /* G2_fail_hand@2x.png */,
+				1EFDFBBC18BE476B00A2A0DC /* G1_pipe.png */,
+				1EFDFBBD18BE476C00A2A0DC /* G1_pipe@2x.png */,
 				1EFDFBB518BCEE6E00A2A0DC /* F5_local_icones.png */,
 				1EFDFBB618BCEE6E00A2A0DC /* F5_local_icones@2x.png */,
 				1EFDFBB118BCED4600A2A0DC /* F5_tribes_icones.png */,
@@ -2180,6 +2192,7 @@
 				DEFD7A7E1746CACA0087CB8A /* icon_username@2x.png in Resources */,
 				1E3BA3DF18AA6EF1003C2BF4 /* F1_calendar_selected@2x.png in Resources */,
 				1E9FBA0818619A0400085421 /* loader-16.png in Resources */,
+				1EFDFBC318BE5E1E00A2A0DC /* G2_fail_hand@2x.png in Resources */,
 				DEFD7A7F1746CACA0087CB8A /* icon_userpic.png in Resources */,
 				1E9FB9F918619A0400085421 /* loader-8@2x.png in Resources */,
 				DE774B3E184E0FDD00F8C244 /* guide_step_3@2x.png in Resources */,
@@ -2191,6 +2204,7 @@
 				1E9FB9FF18619A0400085421 /* loader-11@2x.png in Resources */,
 				DEFD7A861746F7650087CB8A /* feedback_bad@2x.png in Resources */,
 				1E9F313E18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png in Resources */,
+				1EFDFBBE18BE476C00A2A0DC /* G1_pipe.png in Resources */,
 				1E9FB9EE18619A0400085421 /* loader-3.png in Resources */,
 				DEFD7A871746F7650087CB8A /* feedback_good.png in Resources */,
 				1E9FBA0318619A0400085421 /* loader-13@2x.png in Resources */,
@@ -2216,6 +2230,7 @@
 				1E9FBA0418619A0400085421 /* loader-14.png in Resources */,
 				1EFDFBB418BCED4600A2A0DC /* F5_tribes_icones@2x.png in Resources */,
 				1E3A6B8F18897549007FB6BA /* User_settings@2x.png in Resources */,
+				1EFDFBC218BE5E1E00A2A0DC /* G2_fail_hand.png in Resources */,
 				DEB29BC017955B0600D9FFAE /* settings@2x.png in Resources */,
 				DEB29C151799C2C800D9FFAE /* FindLocationsViewController.xib in Resources */,
 				1E9FBA1218619A0400085421 /* loop_4.png in Resources */,
@@ -2289,6 +2304,7 @@
 				DE6ED9C517C2958100C5E72E /* fullview_action_yes.png in Resources */,
 				1EEA97F41859D34200EA9E02 /* feed_action_circle_go@2x.png in Resources */,
 				1E7A5697188F1E4F00CB5C4A /* Tutorial_Step3.png in Resources */,
+				1EFDFBBF18BE476C00A2A0DC /* G1_pipe@2x.png in Resources */,
 				DE6ED9C617C2958100C5E72E /* fullview_action_yes@2x.png in Resources */,
 				1E9FB9FC18619A0400085421 /* loader-10.png in Resources */,
 				1E9F313F18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png in Resources */,

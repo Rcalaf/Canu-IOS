@@ -111,15 +111,17 @@ typedef enum {
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
         
-        self.callBackActionEmptyFeed = [[UIButton alloc]initWithFrame:CGRectMake(65, (self.view.frame.size.height - 480)/2 + 350, 190, 37)];
-        self.callBackActionEmptyFeed.backgroundColor = UIColorFromRGB(0x20383f);
-        [self.callBackActionEmptyFeed setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"I want to change this", nil) forState:UIControlStateNormal];
-        self.callBackActionEmptyFeed.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
-        [self.callBackActionEmptyFeed addTarget:self action:@selector(callBackAction) forControlEvents:UIControlEventTouchDown];
-        self.callBackActionEmptyFeed.alpha = 0;
-        self.callBackActionEmptyFeed.hidden = YES;
-        [self.view addSubview:_callBackActionEmptyFeed];
+        if (_feedType != FeedProfileType) {
+            self.callBackActionEmptyFeed = [[UIButton alloc]initWithFrame:CGRectMake(65, (self.view.frame.size.height - 480)/2 + 350, 190, 37)];
+            self.callBackActionEmptyFeed.backgroundColor = UIColorFromRGB(0x20383f);
+            [self.callBackActionEmptyFeed setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"I want to change this", nil) forState:UIControlStateNormal];
+            self.callBackActionEmptyFeed.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
+            [self.callBackActionEmptyFeed addTarget:self action:@selector(callBackAction) forControlEvents:UIControlEventTouchDown];
+            self.callBackActionEmptyFeed.alpha = 0;
+            self.callBackActionEmptyFeed.hidden = YES;
+            [self.view addSubview:_callBackActionEmptyFeed];
+        }
         
         if (_feedType != FeedLocalType) {
             self.loadFirstTime = YES;

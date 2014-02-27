@@ -28,6 +28,7 @@
 #import "Contact.h"
 #import "User.h"
 #import "MessageGhostUser.h"
+#import "AlertViewController.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -51,6 +52,7 @@
 @property (strong, nonatomic) UIButton *openMap;
 @property (strong, nonatomic) UIButton *openCalendar;
 @property (strong, nonatomic) UIButton *deleteButton;
+@property (strong, nonatomic) UIButton *synContact;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
 @property (strong, nonatomic) UIView *bottomBar;
@@ -264,6 +266,36 @@
         [self.cancelInvit detectSize];
         self.cancelInvit.titleLabel.alpha = 0;
         [self.wrapper addSubview:_cancelInvit];
+        
+        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 320, 0)];
+        self.userList.frame = CGRectMake(0, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 320, self.userList.maxHeight);
+        self.userList.delegate = self;
+        [self.wrapper addSubview:_userList];
+        
+        // If Phone Book isn't allowed or not determined
+        if (self.userList.canuError) {
+            
+            self.invitInput.alpha = 0;
+            self.invitInput.userInteractionEnabled = NO;
+            
+            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sync contacts", nil)];
+            [attributeString addAttribute:NSUnderlineStyleAttributeName
+                                    value:[NSNumber numberWithInt:1]
+                                    range:(NSRange){0,[attributeString length]}];
+            
+            UILabel *labelSyncContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 37)];
+            labelSyncContact.attributedText = attributeString;
+            labelSyncContact.textAlignment = NSTextAlignmentCenter;
+            labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
+            labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+            
+            self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _invitInput.frame.origin.y + 10, 260, 37)];
+            [self.synContact addSubview:labelSyncContact];
+            [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
+            [self.wrapper addSubview:_synContact];
+            
+        }
+        
     }
     
     // Bottom bar
@@ -271,6 +303,10 @@
     self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57)];
     self.bottomBar.backgroundColor = UIColorFromRGB(0xf4f4f4);
     [self.view addSubview:_bottomBar];
+    
+    UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
+    lineBottomBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
+    [self.bottomBar addSubview:lineBottomBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
@@ -298,9 +334,9 @@
     
     // Wrapper
     if (!_editActivity) {
-        self.wrapper.contentSize = CGSizeMake(320, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5);
+        self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height + 10);
     } else {
-        self.wrapper.contentSize = CGSizeMake(320, _cancelLocation.frame.origin.y + _cancelLocation.frame.size.height + 5);
+        self.wrapper.contentSize = CGSizeMake(320, _cancelLocation.frame.origin.y + _cancelLocation.frame.size.height + 10);
     }
     
 }
@@ -379,14 +415,6 @@
         // Active Map or not
          
      }];
-    
-    // User List
-    
-    if (!_editActivity) {
-        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _invitInput.frame.origin.y + _invitInput.frame.size.height + 5, 320, 0)];
-        self.userList.delegate = self;
-        [self.wrapper addSubview:_userList];
-    }
     
     if (self.editActivity) {
         
@@ -635,7 +663,7 @@
     }];
 }
 
-#pragma mark -  CreateEditUserListDelegate
+#pragma mark - CreateEditUserListDelegate
 
 - (void)changeUserSelected:(NSMutableArray *)arrayAllUserSelected{
     
@@ -643,7 +671,66 @@
     
 }
 
+#pragma mark - MessageGhostUserDelegate
+
+- (void)messageGhostUserWillDisappear{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.alpha = 0;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    }];
+    
+}
+
+- (void)messageGhostUserWillDisappearForDeleteActivity{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.wrapper.alpha = 0;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+        [self.createActivity removeActivityWithBlock:^(NSError *error) {
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        
+    }];
+    
+}
+
 #pragma mark - Private
+
+#pragma mark -- Position Wrapper
+
+- (void)changePositionWrapper:(NSNumber *)position{
+    
+    [self.wrapper setContentOffset:CGPointMake(0, [position intValue]) animated:YES];
+    
+}
+
+#pragma mark -- Sync Contact
+
+- (void)syncUserContact{
+    
+    if (self.userList.canuError == CANUErrorPhoneBookRestricted) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        
+        AlertViewController *alert = [[AlertViewController alloc]init];
+        alert.canuAlertViewType = CANUAlertViewPopIn;
+        alert.canuError = CANUErrorPhoneBookRestricted;
+        
+        [appDelegate.window.rootViewController addChildViewController:alert];
+        [appDelegate.window.rootViewController.view addSubview:alert.view];
+    } else {
+        
+    }
+    
+}
 
 - (void)cancelSearchLocation{
     
@@ -680,12 +767,6 @@
     } completion:^(BOOL finished) {
         
     }];
-    
-}
-
-- (void)changePositionWrapper:(NSNumber *)position{
-    
-    [self.wrapper setContentOffset:CGPointMake(0, [position intValue]) animated:YES];
     
 }
 
@@ -816,15 +897,9 @@
     
     self.userListIsOpen = !_userListIsOpen;
     
-    int height,margin;
-    
     if (_userListIsOpen) {
-        height = self.userList.maxHeight + 10;
-        margin = 10;
         self.wrapper.scrollEnabled = NO;
     } else {
-        height = - self.userList.maxHeight - 10;
-        margin = - 10;
         self.wrapper.scrollEnabled = YES;
     }
     
@@ -841,9 +916,8 @@
             self.cancelInvit.frame = CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47);
             self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y, 300, _invitInput.frame.size.height);
             self.cancelInvit.titleLabel.alpha = 0;
+            self.wrapper.contentOffset = CGPointMake(0, _wrapper.contentSize.height - _wrapper.frame.size.height);
         }
-        self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + height);
-        self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y, _userList.frame.size.width, _userList.frame.size.height + height);
     } completion:^(BOOL finished) {
         
     }];
@@ -1149,38 +1223,6 @@
     }
     
     return array;
-    
-}
-
-#pragma mark -- MessageGhostUserDelegate
-
-- (void)messageGhostUserWillDisappear{
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.wrapper.alpha = 0;
-        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-    }];
-    
-}
-
-- (void)messageGhostUserWillDisappearForDeleteActivity{
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.wrapper.alpha = 0;
-        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-        [self.createActivity removeActivityWithBlock:^(NSError *error) {
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
-        }];
-        
-    }];
     
 }
 

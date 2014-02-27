@@ -19,8 +19,6 @@
 
 @interface PhoneBook ()
 
-@property (nonatomic) ABAddressBookRef addressBook;
-
 @end
 
 @implementation PhoneBook
@@ -50,7 +48,7 @@
     
     NSError *error = [self checkPhoneBookAccess];
     
-    if (error) {
+    if (error && error.code != CANUErrorPhoneBookNotDetermined) {
         
         if (block) {
             block(nil,error);
@@ -179,26 +177,21 @@
     
 }
 
-#pragma mark - Private
-
 + (NSError *)checkPhoneBookAccess{
     
     NSError *error = nil;
     
     switch (ABAddressBookGetAuthorizationStatus()){
         case  kABAuthorizationStatusAuthorized:
-            NSLog(@"1");
             break;
         case  kABAuthorizationStatusNotDetermined :
-            NSLog(@"2");
+            error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookNotDetermined userInfo:nil];
             break;
         case  kABAuthorizationStatusDenied:
             error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookRestricted userInfo:nil];
-            NSLog(@"3");
             break;
         case  kABAuthorizationStatusRestricted:
             error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookRestricted userInfo:nil];
-            NSLog(@"4");
             break;
         default:
             break;
@@ -208,13 +201,23 @@
     
 }
 
--(void)requestPhoneBookAccess{
++ (void)requestPhoneBookAccessBlock:(void (^)(NSError *error))block{
     
-    ABAddressBookRequestAccessWithCompletion(_addressBook, ^(bool granted, CFErrorRef error){
+    ABAddressBookRef addressBook = NULL;
+    
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef errorCF){
         if (granted){
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+                NSError *error = [PhoneBook checkPhoneBookAccess];
+                if (block) {
+                    block(error);
+                }
             });
+        } else {
+            NSError *error = [PhoneBook checkPhoneBookAccess];
+            if (block) {
+                block(error);
+            }
         }
     });
     

@@ -49,7 +49,20 @@
         shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
         [self addSubview:shadowDescriptionReverse];
         
-        [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
+        NSError *error = [PhoneBook checkPhoneBookAccess];
+        
+        if (!error) {
+            [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
+            
+        } else {
+            
+            self.canuError = error.code;
+            
+            if (error.code == CANUErrorPhoneBookRestricted) {
+                self.maxHeight = 10;
+                self.alpha = 0;
+            }
+        }
         
     }
     return self;
@@ -258,12 +271,12 @@
             NSString *name;
             
             if (cell.user) {
-                name = [NSString stringWithFormat:@"%@ %@ %@",cell.user.firstName, cell.user.lastName,cell.user.userName];
+                name = [NSString stringWithFormat:@"%@ %@ %@",[cell.user.firstName lowercaseString], [cell.user.lastName lowercaseString],[cell.user.userName lowercaseString]];
             } else {
-                name = cell.contact.fullName;
+                name = [cell.contact.fullName lowercaseString];
             }
             
-            if ([name rangeOfString:searchWords].location != NSNotFound) {
+            if ([name rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
                 cell.frame = CGRectMake(10, 10 + row * (47 + 10), 300, 47);
                 [self.scrollView addSubview:cell];
                 row++;

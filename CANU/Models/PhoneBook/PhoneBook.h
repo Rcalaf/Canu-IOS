@@ -17,4 +17,8 @@
  */
 + (void)contactPhoneBookWithBlock:(void (^)(NSMutableArray *arrayContact,NSError *error))block;
 
++ (NSError *)checkPhoneBookAccess;
+
++ (void)requestPhoneBookAccessBlock:(void (^)(NSError *error))block;
+
 @end

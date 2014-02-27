@@ -90,25 +90,17 @@ NSString *const FBSessionStateChangedNotification =
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-        if ([AFCanuAPIClient sharedClient].distributionMode) {
-            if (self.user.phoneIsVerified) {
-                NSLog(@"User Active");
-                self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
-                [self.canuViewController pushViewController:self.feedViewController animated:NO];
-                self.window.rootViewController = _canuViewController;
-            }else{
-                NSLog(@"User Not Active");
-                loginViewController = [[MainViewController alloc] init];
-                loginViewController.isPhoneCheck = YES;
-                self.window.rootViewController = loginViewController;
-            }
-        } else {
-            NSLog(@"User not Active but is not distribution mode");
+        if (self.user.phoneIsVerified) {
+            NSLog(@"User Active");
             self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
             [self.canuViewController pushViewController:self.feedViewController animated:NO];
             self.window.rootViewController = _canuViewController;
+        }else{
+            NSLog(@"User Not Active");
+            loginViewController = [[MainViewController alloc] init];
+            loginViewController.isPhoneCheck = YES;
+            self.window.rootViewController = loginViewController;
         }
-        
     } else {
         loginViewController = [[MainViewController alloc] init];
         loginViewController.isPhoneCheck = NO;
