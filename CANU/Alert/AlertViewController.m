@@ -65,7 +65,7 @@
     } else if (_canuError == CANUErrorPhoneBookRestricted) {
         self.illustration.frame = CGRectMake(0, (self.view.frame.size.height - 480)/3 + 40, 271, 226);
         self.illustration.image = [UIImage imageNamed:@"G2_fail_hand"];
-        self.descriptionError.frame = CGRectMake((320 - 315)/2, (self.view.frame.size.height - 480)/2 + 190, 315, 210);
+        self.descriptionError.frame = CGRectMake((320 - 315)/2, (self.view.frame.size.height - 480)/2 + 230, 315, 170);
         self.descriptionError.text = NSLocalizedString(@"Settings > Privacy > Contacts", nil);
     }
     
@@ -105,10 +105,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc{
-    NSLog(@"Dealloc view");
 }
 
 @end
