@@ -13,6 +13,8 @@
 
 @interface UICanuTextFieldInvit ()
 
+@property (nonatomic) CANUTextfieldInvitStep canuTextfieldInvitStep;
+@property (strong, nonatomic) UIView *wrapperTouchResetDeleteUser;
 @property (strong, nonatomic) UIView *wrapperLeft;
 @property (strong, nonatomic) UIButton *resetSearch;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -29,6 +31,8 @@
     if (self) {
         
         self.activeReset = NO;
+        
+        self.canuTextfieldInvitStep = CANUTextfieldInvitStep0;
         
         self.arrayUserCell = [[NSMutableArray alloc]init];
         
@@ -57,9 +61,6 @@
 
 - (void)updateScrollView{
     
-    self.text = @"";
-    self.activeReset = NO;
-    
     if ([_arrayUserCell count] != 0 ) {
         
         for (int i = 0; i < [_arrayUserCell count]; i++) {
@@ -80,8 +81,8 @@
     if ([_arrayAllUserSelected count] >= 3) {
         self.scrollView.frame = CGRectMake(0, 0, 48 * 3 - 24, 47);
     } else if ([_arrayAllUserSelected count] == 0) {
-        self.scrollView.frame = CGRectMake(0, 0, 10, 47);
-        self.scrollView.contentSize = CGSizeMake(10, 47);
+        self.scrollView.frame = CGRectMake(0, 0, 0, 47);
+        self.scrollView.contentSize = CGSizeMake(0, 47);
     }
     
     for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
@@ -103,6 +104,11 @@
     
     self.scrollView.contentOffset = CGPointMake(_scrollView.contentSize.width - _scrollView.frame.size.width, 0);
     self.wrapperLeft.frame = CGRectMake(0, 0, _scrollView.frame.size.width + 10, 47);
+    [self updateSizeWrapperTouchResetDeleteUser];
+    
+    self.activeDeleteUser = NO;
+    
+    [self reset];
     
 }
 
@@ -112,8 +118,43 @@
     
     if (activeReset) {
         self.rightView = _resetSearch;
+        [self updateSizeWrapperTouchResetDeleteUser];
     } else {
+        if ([_arrayUserCell count] != 0 && self.isFirstResponder) {
+            self.activeDeleteUser = YES;
+        } else {
+            self.activeDeleteUser = NO;
+        }
         self.rightView = nil;
+        [self updateSizeWrapperTouchResetDeleteUser];
+    }
+    
+}
+
+- (void)setActiveDeleteUser:(BOOL)activeDeleteUser{
+    
+    _activeDeleteUser = activeDeleteUser;
+    
+    if (activeDeleteUser) {
+        
+        if (_canuTextfieldInvitStep == CANUTextfieldInvitStep0) {
+            self.canuTextfieldInvitStep = CANUTextfieldInvitStep1;
+        }
+        
+        self.text = @" ";
+        
+    } else {
+        
+        if ([_arrayUserCell count] != 0) {
+            UICanuUserInputCell *cell = [_arrayUserCell lastObject];
+            cell.isSelected = NO;
+        }
+        
+        self.canuTextfieldInvitStep = CANUTextfieldInvitStep0;
+        
+        [self.wrapperTouchResetDeleteUser removeFromSuperview];
+        self.wrapperTouchResetDeleteUser = nil;
+        
     }
     
 }
@@ -121,6 +162,21 @@
 - (void)reset{
     self.text = @"";
     self.activeReset = NO;
+    [self.delegateFieldInvit inputFieldInvitIsEmpty];
+}
+
+- (void)updateSizeWrapperTouchResetDeleteUser{
+    if (_wrapperTouchResetDeleteUser) {
+        self.wrapperTouchResetDeleteUser.frame = CGRectMake(self.leftView.frame.size.width, 0, self.frame.size.width - self.leftView.frame.size.width - self.rightView.frame.size.width, self.frame.size.height);
+    }
+}
+
+- (void)resetDeleteUser{
+    
+    self.activeDeleteUser = NO;
+    
+    self.activeDeleteUser = YES;
+    
 }
 
 #pragma mark - Public
@@ -133,12 +189,58 @@
     
 }
 
+- (void)touchDelete{
+    
+    if (_canuTextfieldInvitStep == CANUTextfieldInvitStep1) {
+        self.canuTextfieldInvitStep = CANUTextfieldInvitStep2;
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resetDeleteUser)];
+        
+        self.wrapperTouchResetDeleteUser = [[UIView alloc]initWithFrame:CGRectMake(self.leftView.frame.size.width, 0, self.frame.size.width - self.leftView.frame.size.width - self.rightView.frame.size.width, self.frame.size.height)];
+        self.wrapperTouchResetDeleteUser.backgroundColor = [UIColor whiteColor];
+        [self.wrapperTouchResetDeleteUser addGestureRecognizer:tap];
+        [self addSubview:_wrapperTouchResetDeleteUser];
+        
+        [self selectLastUser];
+        
+    } else if (_canuTextfieldInvitStep == CANUTextfieldInvitStep2) {
+        
+        [self deleteLastUser];
+        
+        [self.wrapperTouchResetDeleteUser removeFromSuperview];
+        self.wrapperTouchResetDeleteUser = nil;
+        
+        self.canuTextfieldInvitStep = CANUTextfieldInvitStep1;
+    }
+
+}
+
+- (void)selectLastUser{
+    
+    UICanuUserInputCell *cell = [_arrayUserCell lastObject];
+    cell.isSelected = YES;
+    
+}
+
+- (void)deleteLastUser{
+    UICanuUserInputCell *cell = [_arrayUserCell lastObject];
+    
+    if (cell.user) {
+        [self.delegateFieldInvit deleteLastUser:cell.user];
+    } else {
+        [self.delegateFieldInvit deleteLastContact:cell.contact];
+    }
+    
+}
+
 - (BOOL)becomeFirstResponder{
     
     BOOL returnValue = [super becomeFirstResponder];
     if (returnValue){
         if (![self.text isEqualToString:@""]) {
             self.activeReset = YES;
+        } else if ([_arrayUserCell count] != 0) {
+            self.activeDeleteUser = YES;
         }
     }
     return returnValue;
@@ -148,6 +250,9 @@
     BOOL returnValue = [super resignFirstResponder];
     if (returnValue){
         self.activeReset = NO;
+        if ([self.text isEqualToString:@" "]) {
+            self.text = @"";
+        }
     }
     return returnValue;
 }

@@ -12,6 +12,11 @@
 
 @interface UICanuUserInputCell : UIView
 
+@property (nonatomic) BOOL isSelected;
+
+@property (strong, nonatomic) Contact *contact;
+@property (strong, nonatomic) User *user;
+
 - (id)initWithFrame:(CGRect)frame WithContact:(Contact *)contact AndUser:(User *)user;
 
 @end

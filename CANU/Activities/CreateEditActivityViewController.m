@@ -35,7 +35,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
-@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate>
+@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
@@ -258,6 +258,7 @@
         self.invitInput = [[UICanuTextFieldInvit alloc]initWithFrame:CGRectMake(10, _titleInvit.frame.origin.y + _titleInvit.frame.size.height + 5, 300, 47)];
         self.invitInput.placeholder = NSLocalizedString(@"Who is invited?", nil);
         self.invitInput.delegate = self;
+        self.invitInput.delegateFieldInvit = self;
         self.invitInput.returnKeyType = UIReturnKeySearch;
         [self.wrapper addSubview:_invitInput];
         
@@ -274,7 +275,7 @@
         [self.wrapper addSubview:_userList];
         
         // If Phone Book isn't allowed or not determined
-        if (self.userList.canuError != CANUErrorPhoneBookNotDetermined || self.userList.canuError != CANUErrorPhoneBookRestricted) {
+        if (self.userList.canuError == CANUErrorPhoneBookNotDetermined || self.userList.canuError == CANUErrorPhoneBookRestricted) {
             
             self.invitInput.alpha = 0;
             self.invitInput.userInteractionEnabled = NO;
@@ -514,8 +515,23 @@
         
         if (newString.length != 0) {
             self.invitInput.activeReset = YES;
+            if ([newString isEqualToString:@" "] && [self.userList.arrayAllUserSelected count] != 0) {
+                [self.invitInput touchDelete];
+                self.invitInput.activeDeleteUser = YES;
+                [self.userList searchPhoneBook:@""];
+                return NO;
+            } else {
+                self.invitInput.activeDeleteUser = NO;
+            }
         } else {
             self.invitInput.activeReset = NO;
+            if ([self.userList.arrayAllUserSelected count] != 0) {
+                self.invitInput.activeDeleteUser = YES;
+                [self.invitInput touchDelete];
+                return NO;
+            } else {
+                self.invitInput.activeDeleteUser = NO;
+            }
         }
         
         [self.userList searchPhoneBook:newString];
@@ -553,8 +569,23 @@
         if (_userListIsOpen) {
             [self openUserListView];
         }
+        self.invitInput.activeDeleteUser = NO;
     }
     
+}
+
+#pragma mark - UICanuTextFieldInvitDelegate
+
+- (void)inputFieldInvitIsEmpty{
+    [self.userList searchPhoneBook:@""];
+}
+
+- (void)deleteLastUser:(User *)user{
+    [self.userList updateAndDeleteUser:user];
+}
+
+- (void)deleteLastContact:(Contact *)contact{
+    [self.userList updateAndDeleteContact:contact];
 }
 
 #pragma mark - UITextViewDelegate
@@ -720,7 +751,7 @@
     
     if (self.userList.canuError == CANUErrorPhoneBookRestricted) {
         [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorPhoneBookRestricted];
-    } else if (self.userList.canuError != CANUErrorPhoneBookNotDetermined) {
+    } else if (self.userList.canuError == CANUErrorPhoneBookNotDetermined) {
         [PhoneBook  requestPhoneBookAccessBlock:^(NSError *error) {
             if (!error) {
                 self.invitInput.userInteractionEnabled = YES;

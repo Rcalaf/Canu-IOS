@@ -243,6 +243,8 @@
 		1EFDFBBF18BE476C00A2A0DC /* G1_pipe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBBD18BE476C00A2A0DC /* G1_pipe@2x.png */; };
 		1EFDFBC218BE5E1E00A2A0DC /* G2_fail_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */; };
 		1EFDFBC318BE5E1E00A2A0DC /* G2_fail_hand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBC118BE5E1E00A2A0DC /* G2_fail_hand@2x.png */; };
+		1EFDFBC618BF809700A2A0DC /* F5_inputCell_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBC418BF809700A2A0DC /* F5_inputCell_selected.png */; };
+		1EFDFBC718BF809700A2A0DC /* F5_inputCell_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1EFDFBC518BF809700A2A0DC /* F5_inputCell_selected@2x.png */; };
 		DE1549551768C84400C39E5E /* UIDatePickerActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */; };
 		DE4064E017D511BB00B11CE9 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4064DF17D511BB00B11CE9 /* PrivacyPolicyViewController.m */; };
 		DE4064E417D51C3800B11CE9 /* privacy_policy.pdf in Resources */ = {isa = PBXBuildFile; fileRef = DE4064E317D51C3800B11CE9 /* privacy_policy.pdf */; };
@@ -749,6 +751,8 @@
 		1EFDFBBD18BE476C00A2A0DC /* G1_pipe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G1_pipe@2x.png"; path = "Ressources/Backgrounds/G1_pipe@2x.png"; sourceTree = "<group>"; };
 		1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = G2_fail_hand.png; path = Ressources/Backgrounds/G2_fail_hand.png; sourceTree = "<group>"; };
 		1EFDFBC118BE5E1E00A2A0DC /* G2_fail_hand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G2_fail_hand@2x.png"; path = "Ressources/Backgrounds/G2_fail_hand@2x.png"; sourceTree = "<group>"; };
+		1EFDFBC418BF809700A2A0DC /* F5_inputCell_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F5_inputCell_selected.png; path = Ressources/Backgrounds/F5_inputCell_selected.png; sourceTree = "<group>"; };
+		1EFDFBC518BF809700A2A0DC /* F5_inputCell_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F5_inputCell_selected@2x.png"; path = "Ressources/Backgrounds/F5_inputCell_selected@2x.png"; sourceTree = "<group>"; };
 		DE1549531768C84400C39E5E /* UIDatePickerActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIDatePickerActionSheet.h; sourceTree = "<group>"; };
 		DE1549541768C84400C39E5E /* UIDatePickerActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIDatePickerActionSheet.m; sourceTree = "<group>"; };
 		DE4064DE17D511BB00B11CE9 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
@@ -1621,6 +1625,8 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1EFDFBC418BF809700A2A0DC /* F5_inputCell_selected.png */,
+				1EFDFBC518BF809700A2A0DC /* F5_inputCell_selected@2x.png */,
 				1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */,
 				1EFDFBC118BE5E1E00A2A0DC /* G2_fail_hand@2x.png */,
 				1EFDFBBC18BE476B00A2A0DC /* G1_pipe.png */,
@@ -2210,6 +2216,7 @@
 				1E9FBA0318619A0400085421 /* loader-13@2x.png in Resources */,
 				DEFD7A881746F7650087CB8A /* feedback_good@2x.png in Resources */,
 				DEFD7A971747F8370087CB8A /* icon.png in Resources */,
+				1EFDFBC618BF809700A2A0DC /* F5_inputCell_selected.png in Resources */,
 				1E9FB9F818619A0400085421 /* loader-8.png in Resources */,
 				1E87E08718AA33EF00840655 /* F1_open_map@2x.png in Resources */,
 				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
@@ -2316,6 +2323,7 @@
 				DE6ED9CD17C3D35000C5E72E /* fullview_bg.png in Resources */,
 				1E9FBA0B18619A0400085421 /* loader-17@2x.png in Resources */,
 				DE6ED9CE17C3D35000C5E72E /* fullview_bg@2x.png in Resources */,
+				1EFDFBC718BF809700A2A0DC /* F5_inputCell_selected@2x.png in Resources */,
 				1E3A6B8A18896FC1007FB6BA /* User_profile_shadow.png in Resources */,
 				1EEA9865185B5E7400EA9E02 /* feed_shadow_name.png in Resources */,
 				DE51772C184F70DC00690E2F /* create_bg.png in Resources */,

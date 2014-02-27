@@ -81,6 +81,64 @@
     [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
 }
 
+- (void)updateAndDeleteUser:(User *)user{
+    
+    for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
+        
+        if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
+            User *userData = [_arrayAllUserSelected objectAtIndex:i];
+            if (userData == user) {
+                [_arrayAllUserSelected removeObjectAtIndex:i];
+            }
+        }
+        
+    }
+    
+    for (int i = 0; i < [_arrayCellCanuUser count]; i++) {
+        
+        UICanuContactCell *cell = [_arrayCellCanuUser objectAtIndex:i];
+        
+        if (cell.user == user) {
+            cell.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
+        }
+        
+    }
+    
+    [self.delegate changeUserSelected:_arrayAllUserSelected];
+    
+//    [self searchPhoneBook:@""];
+    
+}
+
+- (void)updateAndDeleteContact:(Contact *)contact{
+    
+    for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
+        
+        if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
+            Contact *contactData = [_arrayAllUserSelected objectAtIndex:i];
+            if (contactData == contact) {
+                [_arrayAllUserSelected removeObjectAtIndex:i];
+            }
+        }
+        
+    }
+    
+    for (int i = 0; i < [_arrayCellCanuUser count]; i++) {
+        
+        UICanuContactCell *cell = [_arrayCellCanuUser objectAtIndex:i];
+        
+        if (cell.contact == contact) {
+            cell.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
+        }
+        
+    }
+    
+    [self.delegate changeUserSelected:_arrayAllUserSelected];
+    
+//    [self searchPhoneBook:@""];
+    
+}
+
 #pragma mark - Private
 
 - (void)checkPhoneBook{

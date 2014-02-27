@@ -10,6 +10,8 @@
 
 #import "ErrorManager.h"
 
+@class User,Contact;
+
 @interface CreateEditUserList : UIView
 
 @property (retain) id delegate;
@@ -23,6 +25,10 @@
 -(void)phoneBookIsAvailable;
 
 - (void)searchPhoneBook:(NSString *)searchWords;
+
+- (void)updateAndDeleteUser:(User *)user;
+
+- (void)updateAndDeleteContact:(Contact *)contact;
 
 @end
 

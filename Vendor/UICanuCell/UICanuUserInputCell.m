@@ -11,12 +11,21 @@
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
 
+@interface UICanuUserInputCell ()
+
+@property (strong, nonatomic) UIImageView *selectedImage;
+
+@end
+
 @implementation UICanuUserInputCell
 
 - (id)initWithFrame:(CGRect)frame WithContact:(Contact *)contact AndUser:(User *)user{
     
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.user = user;
+        self.contact = contact;
         
         UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 47, 47)];
         avatar.image = [UIImage imageNamed:@"icon_username.png"];
@@ -32,8 +41,25 @@
             }
         }
         
+        self.selectedImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 47, 47)];
+        self.selectedImage.image = [UIImage imageNamed:@"F5_inputCell_selected"];
+        self.selectedImage.alpha = 0;
+        [self addSubview:_selectedImage];
+        
     }
     return self;
+}
+
+- (void)setIsSelected:(BOOL)isSelected{
+    
+    _isSelected = isSelected;
+    
+    if (isSelected) {
+        self.selectedImage.alpha = 1;
+    } else {
+        self.selectedImage.alpha = 0;
+    }
+    
 }
 
 @end
