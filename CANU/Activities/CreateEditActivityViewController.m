@@ -29,6 +29,7 @@
 #import "User.h"
 #import "MessageGhostUser.h"
 #import "AlertViewController.h"
+#import "PhoneBook.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -273,7 +274,7 @@
         [self.wrapper addSubview:_userList];
         
         // If Phone Book isn't allowed or not determined
-        if (self.userList.canuError) {
+        if (self.userList.canuError != CANUErrorPhoneBookNotDetermined || self.userList.canuError != CANUErrorPhoneBookRestricted) {
             
             self.invitInput.alpha = 0;
             self.invitInput.userInteractionEnabled = NO;
@@ -718,10 +719,31 @@
 - (void)syncUserContact{
     
     if (self.userList.canuError == CANUErrorPhoneBookRestricted) {
-        NSLog(@"YES");
         [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorPhoneBookRestricted];
-    } else {
-        NSLog(@"NO");
+    } else if (self.userList.canuError != CANUErrorPhoneBookNotDetermined) {
+        [PhoneBook  requestPhoneBookAccessBlock:^(NSError *error) {
+            if (!error) {
+                self.invitInput.userInteractionEnabled = YES;
+                [self.synContact removeFromSuperview];
+                
+                [self.userList phoneBookIsAvailable];
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.invitInput.alpha = 1;
+                    self.userList.alpha = 1;
+                    self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y, _userList.frame.size.width, self.userList.maxHeight);
+                    self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + self.userList.maxHeight + 10);
+                }];
+                
+            } else {
+                self.userList.canuError = error.code;
+                
+                if (_userList.canuError == CANUErrorPhoneBookRestricted) {
+                    [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorPhoneBookRestricted];
+                }
+                
+            }
+        }];
     }
     
 }

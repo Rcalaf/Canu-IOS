@@ -53,7 +53,6 @@
         
         if (!error) {
             [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
-            
         } else {
             
             self.canuError = error.code;
@@ -66,6 +65,20 @@
         
     }
     return self;
+}
+
+#pragma mark - Public
+
+/**
+ *  Phone book is now available
+ */
+-(void)phoneBookIsAvailable{
+    
+    self.canuError = CANUErrorNoError;
+    
+    self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 5 - 47 - 5;
+    
+    [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
 }
 
 #pragma mark - Private

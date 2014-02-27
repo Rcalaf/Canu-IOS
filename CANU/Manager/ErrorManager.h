@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, CANUError) {
+    CANUErrorNoError = 0,               // No error
     CANUErrorUnknown = 0,               // Unknow error
     CANUErrorNoInternetConnection = 1,  // No internet connection
     CANUErrorServerDown = 2,            // The canu api server is down

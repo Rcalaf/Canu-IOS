@@ -17,6 +17,11 @@
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
 
+/**
+ *  Phone book is now available
+ */
+-(void)phoneBookIsAvailable;
+
 - (void)searchPhoneBook:(NSString *)searchWords;
 
 @end
