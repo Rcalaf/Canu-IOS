@@ -67,6 +67,11 @@
         self.illustration.image = [UIImage imageNamed:@"G2_fail_hand"];
         self.descriptionError.frame = CGRectMake((320 - 315)/2, (self.view.frame.size.height - 480)/2 + 230, 315, 170);
         self.descriptionError.text = NSLocalizedString(@"Settings > Privacy > Contacts", nil);
+    } else if (_canuError == CANUErrorLocationRestricted) {
+        self.illustration.frame = CGRectMake((320 - 85)/2, (self.view.frame.size.height - 480)/3 + 30, 85, 221);
+        self.illustration.image = [UIImage imageNamed:@"G4Fail_eagle"];
+        self.descriptionError.frame = CGRectMake((320 - 315)/2, (self.view.frame.size.height - 480)/2 + 230, 315, 170);
+        self.descriptionError.text = NSLocalizedString(@"Settings > Privacy > Location", nil);
     }
     
     self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(40, self.view.frame.size.height - 77, 240, 37.0) andBlue:YES];

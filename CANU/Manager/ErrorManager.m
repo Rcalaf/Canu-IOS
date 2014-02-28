@@ -145,6 +145,9 @@ static dispatch_once_t oncePredicate;
         case CANUErrorPhoneBookRestricted:
             [self alertForNotification:CANUErrorPhoneBookRestricted];
             break;
+        case CANUErrorLocationRestricted:
+            [self alertForNotification:CANUErrorLocationRestricted];
+            break;
             default:
             break;
     }

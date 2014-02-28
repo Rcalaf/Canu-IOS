@@ -46,6 +46,7 @@ typedef enum {
 @property (strong, nonatomic) UIButton *callBackActionEmptyFeed;
 @property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
+@property (nonatomic) CANUError canuError;
 @property (nonatomic) User *user;
 @property (nonatomic) FeedTypes feedType;
 @property (nonatomic) UIScrollViewReverse *scrollview;
@@ -84,10 +85,6 @@ typedef enum {
         
         self.loadFirstTime = NO;
         
-        if (_feedType == FeedLocalType) {
-            [self.locationManager startUpdatingLocation];
-        }
-        
         self.arrayCell = [[NSMutableArray alloc]init];
         
         self.imageEmptyFeed = [[UIImageView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480)];
@@ -123,9 +120,39 @@ typedef enum {
             [self.view addSubview:_callBackActionEmptyFeed];
         }
         
-        if (_feedType != FeedLocalType) {
+        if (_feedType == FeedLocalType) {
+            
+            switch ([CLLocationManager authorizationStatus]) {
+                case kCLAuthorizationStatusAuthorized:
+                    self.canuError = CANUErrorNoError;
+                    break;
+                case kCLAuthorizationStatusNotDetermined:
+                    self.canuError = CANUErrorLocationNotDetermined;
+                    break;
+                case kCLAuthorizationStatusRestricted:
+                    self.canuError = CANUErrorLocationRestricted;
+                    break;
+                case kCLAuthorizationStatusDenied:
+                    self.canuError = CANUErrorLocationRestricted;
+                    break;
+                default:
+                    break;
+            }
+            
+//            self.canuError = CANUErrorLocationNotDetermined;
+            
+            if (self.canuError == CANUErrorNoError) {
+                [self.locationManager startUpdatingLocation];
+            } else {
+                [self.loaderAnimation stopAnimation];
+                [self showFeedback];
+            }
+            
+        } else {
+            
             self.loadFirstTime = YES;
             [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+            
         }
     
     }
@@ -144,6 +171,7 @@ typedef enum {
 }
 
 - (CLLocationManager *)locationManager{
+    
     if (_locationManager) {
         return _locationManager;
     }
@@ -156,6 +184,9 @@ typedef enum {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    self.canuError = CANUErrorNoError;
+    
     _currentLocation = [[manager location] coordinate];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.currentLocation = _currentLocation;
@@ -171,12 +202,16 @@ typedef enum {
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
-    NSLog(@"loc manager Monitoring...");
     [self.loaderAnimation stopAnimation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    NSLog(@"loc manager Fail...");
+    
+    if (self.canuError == CANUErrorLocationNotDetermined) {
+        [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorLocationRestricted];
+    }
+    
+    self.canuError = CANUErrorLocationRestricted;
     [self showFeedback];
     [self.loaderAnimation stopAnimation];
 }
@@ -402,14 +437,21 @@ typedef enum {
 }
 
 - (void)showFeedback{
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+    if (self.canuError == CANUErrorLocationRestricted || self.canuError == CANUErrorLocationNotDetermined) {
+        
         self.isEmpty = YES;
-        self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
-        self.imageEmptyFeed.alpha = 0;
-        self.callBackActionEmptyFeed.alpha = 0;
-        self.callBackActionEmptyFeed.hidden = YES;
+        
+        self.feedbackMessage.text = NSLocalizedString(@"We need to know where you are", nil);
+        
+        self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_local"];
+        
+        self.callBackActionEmptyFeed.hidden = NO;
+        [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"Enable my GPS", nil) forState:UIControlStateNormal];
+        
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
+            self.imageEmptyFeed.alpha = 1;
+            self.callBackActionEmptyFeed.alpha = 1;
         } completion:nil];
         [self showActivities];
     } else if ([_activities count] == 0){
@@ -508,7 +550,6 @@ typedef enum {
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
-        
         [cell.loadingIndicator startAnimating];
         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
         cell.animationButtonToGo.hidden = NO;
@@ -693,18 +734,24 @@ typedef enum {
 
 - (void)callBackAction{
     
-    CANUCreateActivity canuCreateActivity;
-    
-    if (_feedType == FeedLocalType) {
-        canuCreateActivity = CANUCreateActivityLocal;
-    } else if (_feedType == FeedTribeType) {
-        canuCreateActivity = CANUCreateActivityTribes;
+    if (self.canuError == CANUErrorLocationNotDetermined) {
+        [self.locationManager startUpdatingLocation];
+    } else if (self.canuError == CANUErrorLocationRestricted) {
+        [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorLocationRestricted];
     } else {
-        canuCreateActivity = CANUCreateActivityLocal;
+        CANUCreateActivity canuCreateActivity;
+        
+        if (_feedType == FeedLocalType) {
+            canuCreateActivity = CANUCreateActivityLocal;
+        } else if (_feedType == FeedTribeType) {
+            canuCreateActivity = CANUCreateActivityTribes;
+        } else {
+            canuCreateActivity = CANUCreateActivityLocal;
+        }
+        
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
+        [self presentViewController:editView animated:YES completion:nil];
     }
-    
-    CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
-    [self presentViewController:editView animated:YES completion:nil];
     
 }
 

@@ -11,6 +11,8 @@
 		1E0EDCEC187DB6DC00088B8A /* fullview_action_circle_go@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */; };
 		1E0EDCED187DB6DC00088B8A /* fullview_action_circle_yes.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */; };
 		1E0EDCEE187DB6DC00088B8A /* fullview_action_circle_yes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */; };
+		1E1371D718C0E20D003DE163 /* G4Fail_eagle.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1371D518C0E20D003DE163 /* G4Fail_eagle.png */; };
+		1E1371D818C0E20D003DE163 /* G4Fail_eagle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E1371D618C0E20D003DE163 /* G4Fail_eagle@2x.png */; };
 		1E162BEE18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */; };
 		1E162BEF18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */; };
 		1E162BF218B3586800D70FF0 /* SearchLocationMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E162BF118B3586800D70FF0 /* SearchLocationMapViewController.m */; };
@@ -407,6 +409,8 @@
 		1E0EDCE8187DB6DC00088B8A /* fullview_action_circle_go@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_go@2x.png"; sourceTree = "<group>"; };
 		1E0EDCE9187DB6DC00088B8A /* fullview_action_circle_yes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fullview_action_circle_yes.png; sourceTree = "<group>"; };
 		1E0EDCEA187DB6DC00088B8A /* fullview_action_circle_yes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fullview_action_circle_yes@2x.png"; sourceTree = "<group>"; };
+		1E1371D518C0E20D003DE163 /* G4Fail_eagle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = G4Fail_eagle.png; path = Ressources/Backgrounds/G4Fail_eagle.png; sourceTree = "<group>"; };
+		1E1371D618C0E20D003DE163 /* G4Fail_eagle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "G4Fail_eagle@2x.png"; path = "Ressources/Backgrounds/G4Fail_eagle@2x.png"; sourceTree = "<group>"; };
 		1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = F1_Add_Cell_Location_checked.png; path = Ressources/Buttons/F1_Add_Cell_Location_checked.png; sourceTree = "<group>"; };
 		1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "F1_Add_Cell_Location_checked@2x.png"; path = "Ressources/Buttons/F1_Add_Cell_Location_checked@2x.png"; sourceTree = "<group>"; };
 		1E162BF018B3586800D70FF0 /* SearchLocationMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchLocationMapViewController.h; path = CANU/SearchLocationMapViewController.h; sourceTree = "<group>"; };
@@ -1625,6 +1629,8 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E1371D518C0E20D003DE163 /* G4Fail_eagle.png */,
+				1E1371D618C0E20D003DE163 /* G4Fail_eagle@2x.png */,
 				1EFDFBC418BF809700A2A0DC /* F5_inputCell_selected.png */,
 				1EFDFBC518BF809700A2A0DC /* F5_inputCell_selected@2x.png */,
 				1EFDFBC018BE5E1E00A2A0DC /* G2_fail_hand.png */,
@@ -2212,6 +2218,7 @@
 				1E9F313E18A2A90D0008ADF1 /* AnimationCreateActivity_tribes.png in Resources */,
 				1EFDFBBE18BE476C00A2A0DC /* G1_pipe.png in Resources */,
 				1E9FB9EE18619A0400085421 /* loader-3.png in Resources */,
+				1E1371D818C0E20D003DE163 /* G4Fail_eagle@2x.png in Resources */,
 				DEFD7A871746F7650087CB8A /* feedback_good.png in Resources */,
 				1E9FBA0318619A0400085421 /* loader-13@2x.png in Resources */,
 				DEFD7A881746F7650087CB8A /* feedback_good@2x.png in Resources */,
@@ -2397,6 +2404,7 @@
 				1E9FB9F318619A0400085421 /* loader-5@2x.png in Resources */,
 				1E6D2A3A18A513CC0066D266 /* F1_add_description.png in Resources */,
 				1E3A6B98188993DE007FB6BA /* NavBox_Tribes@2x.png in Resources */,
+				1E1371D718C0E20D003DE163 /* G4Fail_eagle.png in Resources */,
 				DE67FE2217CA704F00240E1C /* guide_step_5@2x.png in Resources */,
 				DED1243117CCFDFD000EE414 /* map_pin.png in Resources */,
 				1E9F314718A3D5BA0008ADF1 /* AnimationCreateActivity_cloud_2@2x.png in Resources */,
