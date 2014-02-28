@@ -568,6 +568,10 @@
         
         NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
         
+        if (newString.length > 20) {
+            return NO;
+        }
+        
         if (newString.length != 0) {
             self.titleInput.activeReset = YES;
         } else {
@@ -645,6 +649,12 @@
     
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
+    }
+    
+    NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    if (newString.length >= 140) {
+        return NO;
     }
     
     return YES;
@@ -890,6 +900,7 @@
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightDescription, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightDescription, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightDescription, _userList.frame.size.width, _userList.frame.size.height);
+        self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightDescription, _synContact.frame.size.width, _synContact.frame.size.height);
     } completion:^(BOOL finished) {
         
     }];
@@ -921,6 +932,7 @@
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightCalendar, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightCalendar, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightCalendar, _userList.frame.size.width, _userList.frame.size.height);
+        self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightCalendar, _synContact.frame.size.width, _synContact.frame.size.height);
     } completion:^(BOOL finished) {
         if (reset) {
             [self.calendar resetCalendar];
@@ -964,6 +976,7 @@
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightSearchLocation, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightSearchLocation, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightSearchLocation, _userList.frame.size.width, _userList.frame.size.height);
+        self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightSearchLocation, _synContact.frame.size.width, _synContact.frame.size.height);
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.4 animations:^{
             if (_searchLocationIsOpen) {
