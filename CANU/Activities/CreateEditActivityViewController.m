@@ -52,6 +52,7 @@
 @property (strong, nonatomic) UIView *wrapperDescription;
 @property (strong, nonatomic) UIView *wrapperInvitInput;
 @property (strong, nonatomic) UILabel *titleInvit;
+@property (strong, nonatomic) UILabel *labelSyncContact;
 @property (strong, nonatomic) UIButton *openMap;
 @property (strong, nonatomic) UIButton *openCalendar;
 @property (strong, nonatomic) UIButton *deleteButton;
@@ -290,14 +291,14 @@
                                     value:[NSNumber numberWithInt:1]
                                     range:(NSRange){0,[attributeString length]}];
             
-            UILabel *labelSyncContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 37)];
-            labelSyncContact.attributedText = attributeString;
-            labelSyncContact.textAlignment = NSTextAlignmentCenter;
-            labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
-            labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+            self.labelSyncContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 37)];
+            self.labelSyncContact.attributedText = attributeString;
+            self.labelSyncContact.textAlignment = NSTextAlignmentCenter;
+            self.labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
+            self.labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
             
             self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperInvitInput.frame.origin.y + 15, 260, 37)];
-            [self.synContact addSubview:labelSyncContact];
+            [self.synContact addSubview:_labelSyncContact];
             [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
             [self.wrapper addSubview:_synContact];
             
@@ -792,9 +793,15 @@
                 self.invitInput.userInteractionEnabled = YES;
                 [self.synContact removeFromSuperview];
                 
+                UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _wrapperInvitInput.frame.size.height, 320, 6)];
+                shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
+                shadowDescription.alpha = 0;
+                [self.wrapperInvitInput addSubview:shadowDescription];
+                
                 [UIView animateWithDuration:0.4 animations:^{
                     self.invitInput.alpha = 1;
                     self.userList.alpha = 1;
+                    shadowDescription.alpha = 1;
                 } completion:^(BOOL finished) {
                     [self.userList phoneBookIsAvailable];
                 }];
@@ -1275,13 +1282,18 @@
         inputValid = NO;
     }
     
-    if (_canuCreateActivity == CANUCreateActivityTribes) {
+    if (_canuCreateActivity == CANUCreateActivityTribes && !self.editActivity) {
         
         if ([self.userList.arrayAllUserSelected count] != 0) {
             self.invitInput.valueValide = YES;
         } else {
             self.invitInput.valueValide = NO;
             inputValid = NO;
+            if (self.userList.canuError && self.userList.canuError != CANUErrorNoError) {
+                self.labelSyncContact.textColor = UIColorFromRGB(0xec5f56);
+            } else {
+                self.labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
+            }
         }
         
     }
