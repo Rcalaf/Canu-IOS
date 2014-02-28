@@ -386,7 +386,7 @@
         NSMutableArray *allAttendees = [[NSMutableArray alloc]init];
         
         for (int i = 0; i < [responseAttendees count]; i++) {
-            NSLog(@"%@",[[responseAttendees objectAtIndex:i] objectForKey:@"user"]);
+            
             User *user = [[User alloc] initWithAttributes:[[responseAttendees objectAtIndex:i] objectForKey:@"user"]];
             [allAttendees addObject:user];
             

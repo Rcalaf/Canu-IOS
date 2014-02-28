@@ -55,18 +55,24 @@
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
         
-        [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
-            
-            if (error) {
+        NSError *error = [PhoneBook checkPhoneBookAccess];
+        
+        if (!error) {
+            [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
                 
-            } else {
+                if (error) {
+                    
+                } else {
+                    
+                    self.allContact = arrayContact;
+                    
+                }
                 
-                self.allContact = arrayContact;
-                
-            }
-            
+                [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+            }];
+        } else {
             [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
-        }];
+        }
         
     }
     return self;
