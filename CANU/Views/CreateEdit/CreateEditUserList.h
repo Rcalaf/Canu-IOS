@@ -16,13 +16,19 @@
 
 @property (retain) id delegate;
 @property (nonatomic) int maxHeight;
+@property (nonatomic) int minHeigt;
 @property (nonatomic) CANUError canuError;
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
 
 /**
  *  Phone book is now available
  */
--(void)phoneBookIsAvailable;
+- (void)phoneBookIsAvailable;
+
+- (void)animateToMaxHeight;
+
+- (void)animateToMinHeight;
 
 - (void)searchPhoneBook:(NSString *)searchWords;
 
@@ -37,5 +43,7 @@
 @required
 
 - (void)changeUserSelected:(NSMutableArray *)arrayAllUserSelected;
+
+- (void)phoneBookIsLoad;
 
 @end

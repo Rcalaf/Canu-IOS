@@ -48,10 +48,10 @@
         [self addSubview:nickname];
         
         if (user) {
-            
+            NSLog(@"%@",_user.profileImageUrl);
             [avatar setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
             
-            username.text = [NSString stringWithFormat:@"%@ %@",_user.firstName,_user.lastName];
+            username.text = _user.firstName;
             
             nickname.text = _user.userName;
             

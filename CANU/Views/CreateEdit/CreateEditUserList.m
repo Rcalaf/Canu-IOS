@@ -14,7 +14,6 @@
 
 @interface CreateEditUserList () <UICanuContactCellDelegate>
 
-@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayContact;
 @property (strong, nonatomic) NSMutableArray *arrayCanuUser;
 @property (strong, nonatomic) NSMutableArray *arrayCellCanuUser;
@@ -28,7 +27,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 5 - 47 - 5;
+        self.maxHeight = 10;
+        self.minHeigt = [[UIScreen mainScreen] bounds].size.height - 216 - 5 - 47 - 5;
         
         self.clipsToBounds = YES;
         
@@ -38,16 +38,8 @@
         self.arrayAllUserSelected = [[NSMutableArray alloc]init];
         
         self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, _maxHeight)];
+        self.scrollView.scrollEnabled = NO;
         [self addSubview:_scrollView];
-        
-        UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
-        shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-        [self addSubview:shadowDescription];
-        
-        UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, _maxHeight - 6, 320, 6)];
-        shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-        shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
-        [self addSubview:shadowDescriptionReverse];
         
         NSError *error = [PhoneBook checkPhoneBookAccess];
         
@@ -57,8 +49,7 @@
             
             self.canuError = error.code;
             
-            if (error.code == CANUErrorPhoneBookRestricted) {
-                self.maxHeight = 10;
+            if (error.code == CANUErrorPhoneBookRestricted || error.code == CANUErrorPhoneBookNotDetermined) {
                 self.alpha = 0;
             }
         }
@@ -72,13 +63,23 @@
 /**
  *  Phone book is now available
  */
--(void)phoneBookIsAvailable{
+- (void)phoneBookIsAvailable{
     
     self.canuError = CANUErrorNoError;
     
-    self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 5 - 47 - 5;
-    
     [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
+}
+
+- (void)animateToMaxHeight{
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, _maxHeight);
+    self.scrollView.contentOffset = CGPointMake(0, 0);
+    self.scrollView.frame = CGRectMake(0, 0, 320, _maxHeight);
+}
+
+- (void)animateToMinHeight{
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, _minHeigt);
+    self.scrollView.contentOffset = CGPointMake(0, 0);
+    self.scrollView.frame = CGRectMake(0, 0, 320, _minHeigt);
 }
 
 - (void)updateAndDeleteUser:(User *)user{
@@ -263,12 +264,18 @@
     
     self.scrollView.contentSize = CGSizeMake(320, row * ( 47 + 10) + 10);
     
+    self.maxHeight = row * ( 47 + 10) + 10;
+    
+    self.scrollView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _maxHeight);
+    
+    [self.delegate phoneBookIsLoad];
+    
 }
 
 #pragma mark - UICanuContactCellDelegate
 
 - (void)cellLocationIsTouched:(UICanuContactCell *)cell{
-    NSLog(@"%@",cell.user.phoneNumber);
+    
     BOOL isAlreadySelected = NO;
     
     for (int i = 0; i < [_arrayAllUserSelected count]; i++) {

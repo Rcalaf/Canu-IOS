@@ -217,12 +217,15 @@
 
 - (void)selectLastUser{
     
+    [self.scrollView setContentOffset:CGPointMake(_scrollView.contentSize.width - _scrollView.frame.size.width, 0) animated:YES];
+    
     UICanuUserInputCell *cell = [_arrayUserCell lastObject];
     cell.isSelected = YES;
     
 }
 
 - (void)deleteLastUser{
+    
     UICanuUserInputCell *cell = [_arrayUserCell lastObject];
     
     if (cell.user) {
