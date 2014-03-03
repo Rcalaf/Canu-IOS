@@ -35,7 +35,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
-@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
+@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
@@ -60,6 +60,7 @@
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
 @property (strong, nonatomic) UIView *bottomBar;
+@property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (strong, nonatomic) Activity *createActivity;
 @property (strong, nonatomic) Activity *editActivity;
 @property (strong, nonatomic) Location *locationSelected;
@@ -83,6 +84,8 @@
 @end
 
 @implementation CreateEditActivityViewController
+
+@synthesize locationManager = _locationManager;
 
 #pragma mark - Lifecycle
 
@@ -401,32 +404,36 @@
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.latitude  longitude:appDelegate.currentLocation.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
-        
-        if (error) {
-            [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
-                                        message:@"The map server is not available."
-                                       delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+    if (appDelegate.currentLocation.latitude == 0 && appDelegate.currentLocation.longitude == 0 ) {
+        [self.locationManager startUpdatingLocation];
+    } else {
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.latitude  longitude:appDelegate.currentLocation.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
             
-            self.searchLocation.searchLocation = @"";
-            
-        } else {
-            
-            self.currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
-            
-            self.searchLocation.currentLocation = _currentLocation;
-            
-            if (_editActivity) {
-                [self.searchLocation forceLocationTo:[[Location alloc]initLocationWithMKMapItem:_editActivity.location]];
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
+                                            message:@"The map server is not available."
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+                
+                self.searchLocation.searchLocation = @"";
+                
+            } else {
+                
+                self.currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+                
+                self.searchLocation.currentLocation = _currentLocation;
+                
+                if (_editActivity) {
+                    [self.searchLocation forceLocationTo:[[Location alloc]initLocationWithMKMapItem:_editActivity.location]];
+                }
+                
             }
-    
-        }
-        
-        // Active Map or not
-         
-     }];
+            
+            // Active Map or not
+            
+        }];
+    }
     
     if (self.editActivity) {
         
@@ -778,6 +785,76 @@
         }];
         
     }];
+    
+}
+
+#pragma mark - 
+
+
+- (CLLocationManager *)locationManager{
+    
+    if (_locationManager) {
+        return _locationManager;
+    }
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 200;
+    
+    return _locationManager;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    BOOL isFirstTime = YES;
+    
+    if (appDelegate.currentLocation.latitude != 0 && appDelegate.currentLocation.longitude != 0 ) {
+        isFirstTime = NO;
+    }
+    
+    CLLocationCoordinate2D location = [[manager location] coordinate];
+    
+    appDelegate.currentLocation = location;
+    [appDelegate.user editLatitude:location.latitude Longitude:location.longitude];
+    
+    [self.locationManager stopUpdatingLocation];
+    
+    if (isFirstTime) {
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation: [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.latitude  longitude:appDelegate.currentLocation.longitude] completionHandler:^(NSArray *placemarks, NSError *error) {
+            
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Cannot Provide Directions",nil)
+                                            message:@"The map server is not available."
+                                           delegate:nil
+                                  cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil] show];
+                
+                self.searchLocation.searchLocation = @"";
+                
+            } else {
+                
+                self.currentLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
+                
+                self.searchLocation.currentLocation = _currentLocation;
+                
+                if (_editActivity) {
+                    [self.searchLocation forceLocationTo:[[Location alloc]initLocationWithMKMapItem:_editActivity.location]];
+                }
+                
+            }
+            
+            // Active Map or not
+            
+        }];
+    }
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    
+    self.searchLocation.searchLocation = @"";
     
 }
 
@@ -1232,7 +1309,7 @@
                                                            
                                                            self.createActivity = activity;
                                                            
-                                                           self.messageGhostUser = [[MessageGhostUser alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andArray:self.userList.arrayAllUserSelected andParentViewcontroller:self];
+                                                           self.messageGhostUser = [[MessageGhostUser alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andArray:self.userList.arrayAllUserSelected andParentViewcontroller:self withActivity:activity];
                                                            self.messageGhostUser.delegate = self;
                                                            [self.view addSubview:_messageGhostUser];
                                                            

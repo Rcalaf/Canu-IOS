@@ -23,6 +23,8 @@
 #import "UIProfileView.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "TTTAttributedLabel.h"
+#import "CounterTextViewController.h"
 #import "GAIFields.h"
 
 #import "AppDelegate.h"
@@ -40,18 +42,24 @@ typedef enum {
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) BOOL loadFirstTime;
-@property (nonatomic) NSMutableArray *arrayCell;
-@property (nonatomic) UIImageView *imageEmptyFeed;
-@property (nonatomic) UITextView *feedbackMessage;
-@property (strong, nonatomic) UIButton *callBackActionEmptyFeed;
+@property (nonatomic) BOOL counterModeEnable; // Counter
+@property (nonatomic) BOOL isCountIn; // Counter
+@property (nonatomic) CANUError canuError;
+@property (nonatomic) FeedTypes feedType;
 @property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
-@property (nonatomic) CANUError canuError;
-@property (nonatomic) User *user;
-@property (nonatomic) FeedTypes feedType;
-@property (nonatomic) UIScrollViewReverse *scrollview;
-@property (nonatomic) LoaderAnimation *loaderAnimation;
-@property (nonatomic) UICanuNavigationController *navigation;
+@property (strong, nonatomic) NSMutableArray *arrayCell;
+@property (strong, nonatomic) UIImageView *imageEmptyFeed;
+@property (strong, nonatomic) UITextView *feedbackMessage;
+@property (strong, nonatomic) UIButton *callBackActionEmptyFeed;
+@property (strong, nonatomic) UILabel *counter; // Counter
+@property (strong, nonatomic) UILabel *peopleInclued; // Counter
+@property (strong, nonatomic) UILabel *earlyBird; // Counter
+@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) TTTAttributedLabel *textCounter; // Counter
+@property (strong, nonatomic) UIScrollViewReverse *scrollview;
+@property (strong, nonatomic) LoaderAnimation *loaderAnimation;
+@property (strong, nonatomic) UICanuNavigationController *navigation;
 
 @end
 
@@ -85,6 +93,12 @@ typedef enum {
         
         self.loadFirstTime = NO;
         
+        self.counterModeEnable = NO;
+        
+        self.isCountIn = NO;
+        
+        self.isUnlock = NO;
+        
         self.arrayCell = [[NSMutableArray alloc]init];
         
         self.imageEmptyFeed = [[UIImageView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480)];
@@ -104,9 +118,102 @@ typedef enum {
         [self.loaderAnimation startAnimation];
         [self.view addSubview:_loaderAnimation];
         
+        if (_feedType == FeedLocalType) {
+            
+            if (true) { // Counter Mode is Enable
+                
+                self.counterModeEnable = YES;
+                
+                self.counter = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50)];
+                self.counter.textColor = [UIColor whiteColor];
+                self.counter.font = [UIFont fontWithName:@"Lato-Bold" size:45];
+                self.counter.textAlignment = NSTextAlignmentCenter;
+                self.counter.backgroundColor = [UIColor clearColor];
+                self.counter.alpha = 0;
+                [self.view addSubview:_counter];
+                
+                self.peopleInclued = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 + 130, 320, 20)];
+                self.peopleInclued.textColor = [UIColor whiteColor];
+                self.peopleInclued.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+                self.peopleInclued.textAlignment = NSTextAlignmentCenter;
+                self.peopleInclued.backgroundColor = [UIColor clearColor];
+                self.peopleInclued.text = NSLocalizedString(@"people inclued", nil);
+                self.peopleInclued.alpha = 0;
+                [self.view addSubview:_peopleInclued];
+                
+                self.earlyBird = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 + 325, 320, 20)];
+                self.earlyBird.textColor = [UIColor whiteColor];
+                self.earlyBird.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+                self.earlyBird.textAlignment = NSTextAlignmentCenter;
+                self.earlyBird.backgroundColor = [UIColor clearColor];
+                self.earlyBird.text = NSLocalizedString(@"Want early access?", nil);
+                self.earlyBird.alpha = 0;
+                [self.view addSubview:_earlyBird];
+                
+                [NSThread detachNewThreadSelector:@selector(checkCounter)toTarget:self withObject:nil];
+                
+            } else {
+                
+                switch ([CLLocationManager authorizationStatus]) {
+                    case kCLAuthorizationStatusAuthorized:
+                        self.canuError = CANUErrorNoError;
+                        break;
+                    case kCLAuthorizationStatusNotDetermined:
+                        self.canuError = CANUErrorLocationNotDetermined;
+                        break;
+                    case kCLAuthorizationStatusRestricted:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    case kCLAuthorizationStatusDenied:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    default:
+                        break;
+                }
+                
+                if (self.canuError == CANUErrorNoError) {
+                    [self.locationManager startUpdatingLocation];
+                } else {
+                    [self.loaderAnimation stopAnimation];
+                    [self showFeedback];
+                }
+                
+            }
+            
+        } else {
+            
+            self.loadFirstTime = YES;
+            [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+            
+        }
+        
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         self.scrollview.delegate = self;
         [self.view addSubview:_scrollview];
+        
+        if (self.counterModeEnable) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openWebViewCounter)];
+            
+            self.textCounter = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(50.0f, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60)];
+            self.textCounter.text = NSLocalizedString(@"Locked until we are enought.\nRead why", nil);
+            self.textCounter.textColor = [UIColor whiteColor];
+            self.textCounter.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+            self.textCounter.textAlignment = NSTextAlignmentCenter;
+            self.textCounter.numberOfLines = 2;
+            self.textCounter.backgroundColor = [UIColor clearColor];
+            [self.textCounter addGestureRecognizer:tap];
+            [self.view addSubview:_textCounter];
+            
+            [self.textCounter setText:self.textCounter.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+                
+                NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Read why", nil) options:NSCaseInsensitiveSearch];
+                
+                [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
+                
+                return mutableAttributedString;
+                
+            }];
+        }
         
         if (_feedType != FeedProfileType) {
             self.callBackActionEmptyFeed = [[UIButton alloc]initWithFrame:CGRectMake(65, (self.view.frame.size.height - 480)/2 + 350, 190, 37)];
@@ -118,41 +225,6 @@ typedef enum {
             self.callBackActionEmptyFeed.alpha = 0;
             self.callBackActionEmptyFeed.hidden = YES;
             [self.view addSubview:_callBackActionEmptyFeed];
-        }
-        
-        if (_feedType == FeedLocalType) {
-            
-            switch ([CLLocationManager authorizationStatus]) {
-                case kCLAuthorizationStatusAuthorized:
-                    self.canuError = CANUErrorNoError;
-                    break;
-                case kCLAuthorizationStatusNotDetermined:
-                    self.canuError = CANUErrorLocationNotDetermined;
-                    break;
-                case kCLAuthorizationStatusRestricted:
-                    self.canuError = CANUErrorLocationRestricted;
-                    break;
-                case kCLAuthorizationStatusDenied:
-                    self.canuError = CANUErrorLocationRestricted;
-                    break;
-                default:
-                    break;
-            }
-            
-//            self.canuError = CANUErrorLocationNotDetermined;
-            
-            if (self.canuError == CANUErrorNoError) {
-                [self.locationManager startUpdatingLocation];
-            } else {
-                [self.loaderAnimation stopAnimation];
-                [self showFeedback];
-            }
-            
-        } else {
-            
-            self.loadFirstTime = YES;
-            [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
-            
         }
     
     }
@@ -247,7 +319,11 @@ typedef enum {
             
             [self.navigation changePosition:value];
             
-            if (self.isEmpty) {
+            if (self.counterModeEnable && !self.isUnlock) {
+                self.textCounter.frame = CGRectMake(50.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                self.counter.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                self.peopleInclued.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2 + 130, 320, 20);
+            } else if (self.isEmpty) {
                 self.imageEmptyFeed.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2, 320, 480);
                 self.feedbackMessage.frame = CGRectMake(40.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
             }
@@ -256,7 +332,11 @@ typedef enum {
             
             [self.navigation changePosition:0];
             
-            if (self.isEmpty) {
+            if (self.counterModeEnable && !self.isUnlock) {
+                self.textCounter.frame = CGRectMake(50.0f, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
+            } else if (self.isEmpty) {
                 self.imageEmptyFeed.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480);
                 self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
             }
@@ -291,7 +371,13 @@ typedef enum {
     [UIView animateWithDuration:0.4 animations:^{
         self.scrollview.frame = CGRectMake(0, - 58, _scrollview.frame.size.width, _scrollview.frame.size.height);
     } completion:^(BOOL finished) {
-        [self load];
+        
+        if (self.counterModeEnable && !self.isUnlock) {
+            [self checkCounter];
+        } else {
+            [self load];
+        }
+        
     }];
     
 }
@@ -437,7 +523,20 @@ typedef enum {
 }
 
 - (void)showFeedback{
-    if (self.canuError == CANUErrorLocationRestricted || self.canuError == CANUErrorLocationNotDetermined) {
+    
+    if (self.counterModeEnable && !self.isUnlock) {
+        
+        self.isEmpty = YES;
+        
+        self.callBackActionEmptyFeed.hidden = NO;
+        
+        [UIView  animateWithDuration:0.4 animations:^{
+            self.callBackActionEmptyFeed.alpha = 1;
+            self.counter.alpha = 1;
+            self.peopleInclued.alpha = 1;
+        } completion:nil];
+        
+    } else if (self.canuError == CANUErrorLocationRestricted || self.canuError == CANUErrorLocationNotDetermined) {
         
         self.isEmpty = YES;
         
@@ -734,7 +833,18 @@ typedef enum {
 
 - (void)callBackAction{
     
-    if (self.canuError == CANUErrorLocationNotDetermined) {
+    if (self.counterModeEnable && !self.isUnlock && !self.isCountIn) {
+        [self.loaderAnimation startAnimation];
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        self.callBackActionEmptyFeed.hidden = YES;
+        [appDelegate.user countMeWithBlock:^(NSError *error) {
+            self.callBackActionEmptyFeed.hidden = NO;
+            [self.loaderAnimation stopAnimation];
+            [NSThread detachNewThreadSelector:@selector(checkCounter)toTarget:self withObject:nil];
+        }];
+    } else if (self.counterModeEnable && !self.isUnlock && self.isCountIn) {
+        [self openWebViewCounter];
+    } else if (self.canuError == CANUErrorLocationNotDetermined) {
         [self.locationManager startUpdatingLocation];
     } else if (self.canuError == CANUErrorLocationRestricted) {
         [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorLocationRestricted];
@@ -748,10 +858,171 @@ typedef enum {
         } else {
             canuCreateActivity = CANUCreateActivityLocal;
         }
-        
         CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
         [self presentViewController:editView animated:YES completion:nil];
     }
+    
+}
+
+- (void)checkCounter{
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    [appDelegate.user checkCounterWithBlock:^(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error) {
+        
+        [self.loaderAnimation stopAnimation];
+        
+        if (error) {
+            
+            self.scrollview.contentSize = CGSizeMake(320, _scrollview.frame.size.height + 1);
+            [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+            
+            self.counter.text = @"0";
+            [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"COUNT ME IN", nil) forState:UIControlStateNormal];
+            self.callBackActionEmptyFeed.userInteractionEnabled = YES;
+            
+            if (_isReload) {
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                        self.textCounter.frame = CGRectMake(50, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                        self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
+                    }
+                } completion:^(BOOL finished) {
+                    [self.loaderAnimation stopAnimation];
+                    
+                    self.isReload = NO;
+                    
+                }];
+            }
+            
+            [self showFeedback];
+            
+        } else {
+            
+            self.isUnlock = [isUnlock boolValue];
+            self.isCountIn = [isCountIn boolValue];
+            
+            if (_isUnlock) {
+                
+                self.counter.alpha = 0;
+                self.counter.hidden = YES;
+                
+                self.peopleInclued.alpha = 0;
+                self.peopleInclued.hidden = YES;
+                
+                self.textCounter.alpha = 0;
+                self.textCounter.hidden = YES;
+                
+                self.earlyBird.alpha = 0;
+                self.earlyBird.hidden = YES;
+                
+                [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"I want to change this", nil) forState:UIControlStateNormal];
+                self.callBackActionEmptyFeed.hidden = YES;
+                
+                switch ([CLLocationManager authorizationStatus]) {
+                    case kCLAuthorizationStatusAuthorized:
+                        self.canuError = CANUErrorNoError;
+                        break;
+                    case kCLAuthorizationStatusNotDetermined:
+                        self.canuError = CANUErrorLocationNotDetermined;
+                        break;
+                    case kCLAuthorizationStatusRestricted:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    case kCLAuthorizationStatusDenied:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    default:
+                        break;
+                }
+                
+                if (self.canuError == CANUErrorNoError) {
+                    [self.locationManager startUpdatingLocation];
+                } else {
+                    [self.loaderAnimation stopAnimation];
+                    [self showFeedback];
+                }
+                
+            } else {
+                
+                self.counter.text = [NSString stringWithFormat:@"%i",[countTotal intValue]];
+                
+                if (_isCountIn) {
+                    self.textCounter.text = NSLocalizedString(@"We’ll let you know once\nnew areas go live.", nil);
+                    [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"BECOME AN EARLY BIRD", nil) forState:UIControlStateNormal];
+                    self.textCounter.gestureRecognizers = nil;
+                    
+                    self.earlyBird.hidden = NO;
+                    self.earlyBird.alpha = 1;
+                    
+                } else {
+                    
+                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openWebViewCounter)];
+                    [self.textCounter addGestureRecognizer:tap];
+                    
+                    self.textCounter.text = NSLocalizedString(@"Locked until we are enought.\nRead why", nil);
+                    
+                    [self.textCounter setText:self.textCounter.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+                        
+                        NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Read why", nil) options:NSCaseInsensitiveSearch];
+                        
+                        [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
+                        
+                        return mutableAttributedString;
+                        
+                    }];
+                    
+                    [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"COUNT ME IN", nil) forState:UIControlStateNormal];
+                    
+                    self.earlyBird.alpha = 0;
+                    self.earlyBird.hidden = YES;
+                    
+                }
+                
+                self.scrollview.contentSize = CGSizeMake(320, _scrollview.frame.size.height + 1);
+                [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+                
+                if (_isReload) {
+                    
+                    [UIView animateWithDuration:0.4 animations:^{
+                        [self.navigation changePosition:0];
+                        if (self.isEmpty) {
+                            self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                            self.textCounter.frame = CGRectMake(50, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                            self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
+                        }
+                    } completion:^(BOOL finished) {
+                        [self.loaderAnimation stopAnimation];
+                        
+                        self.isReload = NO;
+                        
+                    }];
+                }
+                
+                [self showFeedback];
+                
+            }
+            
+        }
+        
+    }];
+    
+}
+
+- (void)openWebViewCounter{
+    
+    BOOL isEarlyBird = NO;
+    
+    if (self.counterModeEnable && self.isCountIn) {
+        isEarlyBird = YES;
+    }
+    
+    CounterTextViewController *counterTextViewController = [[CounterTextViewController alloc]initForEarlyBird:isEarlyBird];
+    
+    [self presentViewController:counterTextViewController animated:YES completion:nil];
     
 }
 

@@ -591,4 +591,63 @@
     
 }
 
+#pragma mark - Counter
+
+- (void)checkCounterWithBlock:(void (^)(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error))block{
+    
+    NSString *url = @"counter/";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:self.userId]] forKeys: [NSArray arrayWithObject:@"user_id"]];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] getPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        if (block) {
+            
+            NSNumber *countTotal = [JSON objectForKey:@"countTotal"];
+            NSNumber *isCountIn = [NSNumber numberWithBool:[[JSON objectForKey:@"isCountIn"] boolValue]];
+            NSNumber *isUnlock = [NSNumber numberWithBool:[[JSON objectForKey:@"isUnlock"] boolValue]];
+            block(countTotal, isCountIn, isUnlock,nil);
+            
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (block) {
+            block(nil, nil, nil,error);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
+- (void)countMeWithBlock:(void (^)(NSError *error))block{
+    
+    NSString *url = @"counter/";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:self.userId]] forKeys: [NSArray arrayWithObject:@"user_id"]];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        if (block) {
+            block(nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (block) {
+            block(error);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
 @end

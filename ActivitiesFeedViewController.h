@@ -23,4 +23,6 @@
 
 - (void)removeAfterlogOut;
 
+- (BOOL)localFeedIsUnlock;
+
 @end

@@ -64,6 +64,14 @@
 		<data>
 		03JLUSZ71eHTNbf4WG/sGHEe+fI=
 		</data>
+		<key>AnimationCreateActivity_local_locked.png</key>
+		<data>
+		zP8RcOmKdII6CIwn/xhQQ6gj2eM=
+		</data>
+		<key>AnimationCreateActivity_local_locked@2x.png</key>
+		<data>
+		dKHk+eitl3OPEoAf1C7obRpnQsg=
+		</data>
 		<key>AnimationCreateActivity_tribes.png</key>
 		<data>
 		hPxXPhA73RfE0yER85CeNQwNkbo=
@@ -908,6 +916,14 @@
 		<data>
 		7hsSj4+tWxyNm/G9H5Sw+1TkjPI=
 		</data>
+		<key>back_cross.png</key>
+		<data>
+		zur5BVQwGOA4s9q3SGNTYJjTcts=
+		</data>
+		<key>back_cross@2x.png</key>
+		<data>
+		9cCoBrGsePbOJqMkcigM7faj6Tk=
+		</data>
 		<key>bringup_profile_arrow.png</key>
 		<data>
 		7SqDV9i+mSHMCqeyl2WydqoFAuE=
@@ -1030,7 +1046,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		bXU7e964hX96ko9dlL2WWzMUUmY=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -1623,6 +1639,14 @@
 		<data>
 		03JLUSZ71eHTNbf4WG/sGHEe+fI=
 		</data>
+		<key>AnimationCreateActivity_local_locked.png</key>
+		<data>
+		zP8RcOmKdII6CIwn/xhQQ6gj2eM=
+		</data>
+		<key>AnimationCreateActivity_local_locked@2x.png</key>
+		<data>
+		dKHk+eitl3OPEoAf1C7obRpnQsg=
+		</data>
 		<key>AnimationCreateActivity_tribes.png</key>
 		<data>
 		hPxXPhA73RfE0yER85CeNQwNkbo=
@@ -2467,6 +2491,14 @@
 		<data>
 		7hsSj4+tWxyNm/G9H5Sw+1TkjPI=
 		</data>
+		<key>back_cross.png</key>
+		<data>
+		zur5BVQwGOA4s9q3SGNTYJjTcts=
+		</data>
+		<key>back_cross@2x.png</key>
+		<data>
+		9cCoBrGsePbOJqMkcigM7faj6Tk=
+		</data>
 		<key>bringup_profile_arrow.png</key>
 		<data>
 		7SqDV9i+mSHMCqeyl2WydqoFAuE=
@@ -2589,7 +2621,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		bXU7e964hX96ko9dlL2WWzMUUmY=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>

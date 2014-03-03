@@ -10,6 +10,7 @@
 #import "UICanuButtonSignBottomBar.h"
 #import "Contact.h"
 #import "User.h"
+#import "Activity.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -30,6 +31,7 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
 @property (nonatomic) CANUG5type canuG5type;
 @property (strong, nonatomic) NSMutableArray *arrayUserSelected;
 @property (strong, nonatomic) UIViewController *parentViewController;
+@property (strong, nonatomic) Activity *activity;
 
 // G5
 @property (strong, nonatomic) UILabel *textG5;
@@ -54,10 +56,12 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
 
 @implementation MessageGhostUser
 
-- (id)initWithFrame:(CGRect)frame andArray:(NSMutableArray *)usersSelected andParentViewcontroller:(UIViewController *)viewController{
+- (id)initWithFrame:(CGRect)frame andArray:(NSMutableArray *)usersSelected andParentViewcontroller:(UIViewController *)viewController withActivity:(Activity *)activity{
     
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.activity = activity;
         
         self.canuG5type = CANUG5;
         
@@ -112,7 +116,11 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
             
         }
         
-        controller.body = @"Text";
+        NSDateFormatter *formatterMonth = [[NSDateFormatter alloc] init];
+        [formatterMonth setDateFormat:@"MMMM"];
+        NSString *stringFromMonth = [formatterMonth stringFromDate:_activity.start];
+        
+        controller.body = [NSString stringWithFormat:@"%@? ( %@, %i | %i.%i | %@, %@ ) www.canu.se/invite/%i ",_activity.title,stringFromMonth,[_activity.start mk_day],[_activity.start mk_hour],[_activity.start mk_minutes],_activity.street,_activity.city,_activity.activityId];
         controller.recipients = phoneNumber;
         controller.messageComposeDelegate = self;
         [self.parentViewController presentViewController:controller animated:YES completion:nil];

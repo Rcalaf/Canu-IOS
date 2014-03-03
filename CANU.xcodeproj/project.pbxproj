@@ -101,6 +101,11 @@
 		1E4F57E31880040800D5F1F4 /* UICanuLabelActivityName.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57E21880040800D5F1F4 /* UICanuLabelActivityName.m */; };
 		1E4F57E9188005A900D5F1F4 /* UICanuLabelLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57E8188005A900D5F1F4 /* UICanuLabelLocation.m */; };
 		1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */; };
+		1E567CB418C49681004442EC /* CounterTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E567CB318C49681004442EC /* CounterTextViewController.m */; };
+		1E567CB718C4B1B4004442EC /* back_cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E567CB518C4B1B4004442EC /* back_cross.png */; };
+		1E567CB818C4B1B4004442EC /* back_cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E567CB618C4B1B4004442EC /* back_cross@2x.png */; };
+		1E567CBB18C52609004442EC /* AnimationCreateActivity_local_locked.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E567CB918C52609004442EC /* AnimationCreateActivity_local_locked.png */; };
+		1E567CBC18C52609004442EC /* AnimationCreateActivity_local_locked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E567CBA18C52609004442EC /* AnimationCreateActivity_local_locked@2x.png */; };
 		1E608BB9188F13CB00BED835 /* Tutorial_Step2_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E608BB7188F13CB00BED835 /* Tutorial_Step2_line.png */; };
 		1E608BBA188F13CB00BED835 /* Tutorial_Step2_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E608BB8188F13CB00BED835 /* Tutorial_Step2_line@2x.png */; };
 		1E608BC0188F141F00BED835 /* TutorialStepTribes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E608BBF188F141F00BED835 /* TutorialStepTribes.m */; };
@@ -576,6 +581,12 @@
 		1E4F57E8188005A900D5F1F4 /* UICanuLabelLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelLocation.m; path = Vendor/UICanuLabel/UICanuLabelLocation.m; sourceTree = "<group>"; };
 		1E4F57EA1880063300D5F1F4 /* UICanuLabelDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuLabelDescription.h; path = Vendor/UICanuLabel/UICanuLabelDescription.h; sourceTree = "<group>"; };
 		1E4F57EB1880063300D5F1F4 /* UICanuLabelDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuLabelDescription.m; path = Vendor/UICanuLabel/UICanuLabelDescription.m; sourceTree = "<group>"; };
+		1E567CB218C49681004442EC /* CounterTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CounterTextViewController.h; path = CounterText/CounterTextViewController.h; sourceTree = "<group>"; };
+		1E567CB318C49681004442EC /* CounterTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CounterTextViewController.m; path = CounterText/CounterTextViewController.m; sourceTree = "<group>"; };
+		1E567CB518C4B1B4004442EC /* back_cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back_cross.png; path = Ressources/Buttons/back_cross.png; sourceTree = "<group>"; };
+		1E567CB618C4B1B4004442EC /* back_cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back_cross@2x.png"; path = "Ressources/Buttons/back_cross@2x.png"; sourceTree = "<group>"; };
+		1E567CB918C52609004442EC /* AnimationCreateActivity_local_locked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AnimationCreateActivity_local_locked.png; path = Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_local_locked.png; sourceTree = "<group>"; };
+		1E567CBA18C52609004442EC /* AnimationCreateActivity_local_locked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AnimationCreateActivity_local_locked@2x.png"; path = "Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_local_locked@2x.png"; sourceTree = "<group>"; };
 		1E608BB7188F13CB00BED835 /* Tutorial_Step2_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tutorial_Step2_line.png; path = Ressources/Backgrounds/Tutorial_Step2_line.png; sourceTree = "<group>"; };
 		1E608BB8188F13CB00BED835 /* Tutorial_Step2_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tutorial_Step2_line@2x.png"; path = "Ressources/Backgrounds/Tutorial_Step2_line@2x.png"; sourceTree = "<group>"; };
 		1E608BBE188F141F00BED835 /* TutorialStepTribes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TutorialStepTribes.h; path = Views/Tutorial/TutorialStepTribes.h; sourceTree = "<group>"; };
@@ -1243,6 +1254,15 @@
 			name = UICanuLabel;
 			sourceTree = "<group>";
 		};
+		1E567CB118C4962C004442EC /* CounterText */ = {
+			isa = PBXGroup;
+			children = (
+				1E567CB218C49681004442EC /* CounterTextViewController.h */,
+				1E567CB318C49681004442EC /* CounterTextViewController.m */,
+			);
+			name = CounterText;
+			sourceTree = "<group>";
+		};
 		1E6D2A4618A5330B0066D266 /* UIPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1629,6 +1649,8 @@
 		DE6ED8A917BD043F00C5E72E /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				1E567CB918C52609004442EC /* AnimationCreateActivity_local_locked.png */,
+				1E567CBA18C52609004442EC /* AnimationCreateActivity_local_locked@2x.png */,
 				1E1371D518C0E20D003DE163 /* G4Fail_eagle.png */,
 				1E1371D618C0E20D003DE163 /* G4Fail_eagle@2x.png */,
 				1EFDFBC418BF809700A2A0DC /* F5_inputCell_selected.png */,
@@ -1845,6 +1867,7 @@
 				DEA93B7517205B2800303BB5 /* MainStoryboard.storyboard */,
 				DEA93B7A1720616A00303BB5 /* Main */,
 				DE4064E117D511C500B11CE9 /* PrivacyPolicy */,
+				1E567CB118C4962C004442EC /* CounterText */,
 				DE936C80180B39BD0058608D /* Images.xcassets */,
 			);
 			path = CANU;
@@ -2046,6 +2069,8 @@
 		DEFD7A891746F79A0087CB8A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				1E567CB518C4B1B4004442EC /* back_cross.png */,
+				1E567CB618C4B1B4004442EC /* back_cross@2x.png */,
 				1E162BEC18B2565300D70FF0 /* F1_Add_Cell_Location_checked.png */,
 				1E162BED18B2565300D70FF0 /* F1_Add_Cell_Location_checked@2x.png */,
 				1E7429E618AE7F7200992393 /* F1_Add_Cell_Location.png */,
@@ -2322,6 +2347,7 @@
 				DE6ED9C617C2958100C5E72E /* fullview_action_yes@2x.png in Resources */,
 				1E9FB9FC18619A0400085421 /* loader-10.png in Resources */,
 				1E9F313F18A2A90D0008ADF1 /* AnimationCreateActivity_tribes@2x.png in Resources */,
+				1E567CBB18C52609004442EC /* AnimationCreateActivity_local_locked.png in Resources */,
 				DE774B48184E129100F8C244 /* navmenu_me@2x.png in Resources */,
 				1EFDFBB718BCEE6E00A2A0DC /* F5_local_icones.png in Resources */,
 				1E9FB9F618619A0400085421 /* loader-7.png in Resources */,
@@ -2354,6 +2380,7 @@
 				1E9FBA0218619A0400085421 /* loader-13.png in Resources */,
 				DE774B41184E0FDD00F8C244 /* guide_step_4@2x.png in Resources */,
 				1E3BA46818ACF796003C2BF4 /* F1_Calendar_dote_Disable.png in Resources */,
+				1E567CB818C4B1B4004442EC /* back_cross@2x.png in Resources */,
 				1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */,
 				1E9F313C18A2A90D0008ADF1 /* AnimationCreateActivity_local.png in Resources */,
 				1E9FBA0718619A0400085421 /* loader-15@2x.png in Resources */,
@@ -2371,6 +2398,7 @@
 				DE517732184F716500690E2F /* create_bg-568h@2x.png in Resources */,
 				1E9FBA0918619A0400085421 /* loader-16@2x.png in Resources */,
 				DEA7C7F117F1F73C009CBE25 /* button_arrow@2x.png in Resources */,
+				1E567CB718C4B1B4004442EC /* back_cross.png in Resources */,
 				1E6D2A4518A52CDB0066D266 /* F1_calendar@2x.png in Resources */,
 				1E7A5698188F1E4F00CB5C4A /* Tutorial_Step3@2x.png in Resources */,
 				1E3A6B7E1885981E007FB6BA /* SignUp_phoneNumber_background@2x.png in Resources */,
@@ -2399,6 +2427,7 @@
 				DE60783D182C007C0053F23B /* Default@2x.png in Resources */,
 				DE67FE2017CA704F00240E1C /* guide_step_5-568h@2x.png in Resources */,
 				DE67FE2117CA704F00240E1C /* guide_step_5.png in Resources */,
+				1E567CBC18C52609004442EC /* AnimationCreateActivity_local_locked@2x.png in Resources */,
 				1E9FB9F718619A0400085421 /* loader-7@2x.png in Resources */,
 				DE60782C182BD08D0053F23B /* hello_bg-568h@2x.png in Resources */,
 				1E9FB9F318619A0400085421 /* loader-5@2x.png in Resources */,
@@ -2478,6 +2507,7 @@
 				1E7138DD188EDAB000137A48 /* TutorialStepStart.m in Sources */,
 				DE85A6321744FCD400A050E5 /* UICanuTextField.m in Sources */,
 				1E4F57EC1880063300D5F1F4 /* UICanuLabelDescription.m in Sources */,
+				1E567CB418C49681004442EC /* CounterTextViewController.m in Sources */,
 				1EFDFBBB18BCF0CB00A2A0DC /* UICanuTextFieldReset.m in Sources */,
 				1E3BA45F18ACBE03003C2BF4 /* NSString+MK_Empty.m in Sources */,
 				1E3BA46018ACBE03003C2BF4 /* NSString+MK_Misc.m in Sources */,

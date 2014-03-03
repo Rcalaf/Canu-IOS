@@ -276,6 +276,12 @@
     
 }
 
+- (BOOL)localFeedIsUnlock{
+    
+    return self.profilFeed.isUnlock;
+    
+}
+
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{

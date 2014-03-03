@@ -11,6 +11,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSNumber+MK_Precision.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/AFHTTPClient.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UIScrollViewReverse.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuButtonCancel.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICANULocationCell.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuSearchLocation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/CreateEditUserList.o
@@ -22,6 +23,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/AFNetworkActivityIndicatorManager.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/AFPropertyListRequestOperation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSDictionary+MK_Misc.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuTextFieldLocation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/DetailActivityViewControllerAnimate.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuLabelLocation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSNumber+MK_Fraction.o
@@ -33,7 +35,9 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/TutorialStepProfile.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSString+MK_Conversion.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/TutorialStepLocal.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/MessageGhostUser.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSMutableDictionary+MK_Misc.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuTextFieldInvit.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSDate+MK_Comparison.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/SignInViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/MainViewController.o
@@ -45,12 +49,14 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/TutorialStepStart.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuTextField.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuLabelDescription.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuTextFieldReset.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSString+MK_Empty.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSString+MK_Misc.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NewActivityViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/LoaderAnimation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/NSString+MK_Base64.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/TutorialStepFinal.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuUserInputCell.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuAttendeeCellScroll.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuLenghtPicker.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/Reachability.o
@@ -91,6 +97,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuButtonSignBottomBar.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/CheckPhoneNumber.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuActivityCellScroll.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/SearchLocationMapViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/MKCanuAnnotationView.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/EditUserPasswordViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/CreateEditActivityViewController.o
@@ -100,5 +107,6 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuScrollPicker.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/TutorialViewController.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/PrivacyPolicyViewController.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/UICanuContactCell.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/TTTAttributedLabel.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphonesimulator/CANU.build/Objects-normal/i386/ErrorManager.o

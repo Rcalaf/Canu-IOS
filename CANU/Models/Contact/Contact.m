@@ -49,6 +49,8 @@
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@" " withString:@""];
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    newNumber = [newNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    newNumber = [newNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@"(0)" withString:@""];
     
     return newNumber;

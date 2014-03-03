@@ -22,6 +22,7 @@ typedef enum {
 
 @property (strong, nonatomic) NSArray *activities;
 @property (nonatomic) BOOL isEmpty;
+@property (nonatomic) BOOL isUnlock; // Counter
 @property (retain) id delegate;
 
 - (void)reload;

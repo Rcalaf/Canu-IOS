@@ -149,6 +149,7 @@ typedef enum {
             
             if (self.view.frame.size.height - _control.frame.origin.y > AreaTribes - 50 && !self.activityFeed.animationCreateActivity.active) {
                 
+                self.activityFeed.animationCreateActivity.localIsUnlock = [self.activityFeed localFeedIsUnlock];
                 [self.activityFeed.animationCreateActivity startView];
                 
             }
@@ -201,15 +202,9 @@ typedef enum {
         CANUCreateActivity canuCreateActivity;
         
         if (positionToBottom > AreaTribes && positionToBottom < AreaLocal) {
-            NSLog(@"Tribes");
             canuCreateActivity = CANUCreateActivityTribes;
-//            NewActivityViewController *nac = [[NewActivityViewController alloc] init];
-//            [self presentViewController:nac animated:YES completion:nil];
         } else if (positionToBottom > AreaTribes) {
-            NSLog(@"Local");
             canuCreateActivity = CANUCreateActivityLocal;
-//            NewActivityViewController *nac = [[NewActivityViewController alloc] init];
-//            [self presentViewController:nac animated:YES completion:nil];
         } else {
             canuCreateActivity = CANUCreateActivityNone;
         }

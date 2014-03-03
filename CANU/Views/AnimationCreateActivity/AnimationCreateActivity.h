@@ -22,6 +22,11 @@ typedef NS_ENUM(NSInteger, CANUCreateActivity) {
 @property (nonatomic) BOOL active;
 
 /**
+ *  If the Local feed if unlock / Counter
+ */
+@property (nonatomic) BOOL localIsUnlock;
+
+/**
  *  Active the view and the animation
  */
 - (void)startView;

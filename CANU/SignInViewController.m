@@ -85,26 +85,26 @@
     title1.font = [UIFont fontWithName:@"Lato-Bold" size:24];
     [self.container addSubview:title1];
     
-    UITapGestureRecognizer *tapForgotPassword = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forgotPassword)];
-    
-    TTTAttributedLabel *labelForgotPassword = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(0, 50, 320, 20)];
-    labelForgotPassword.text = NSLocalizedString(@"Forgot password", nil);
-    labelForgotPassword.textColor = UIColorFromRGB(0x1ca6c3);
-    labelForgotPassword.font = [UIFont fontWithName:@"Lato-Regular" size:14];
-    labelForgotPassword.textAlignment = NSTextAlignmentCenter;
-    labelForgotPassword.backgroundColor = [UIColor clearColor];
-    [labelForgotPassword addGestureRecognizer:tapForgotPassword];
-    [self.container addSubview:labelForgotPassword];
-    
-    [labelForgotPassword setText:labelForgotPassword.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
-        
-        NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Forgot password", nil) options:NSCaseInsensitiveSearch];
-        
-        [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
-        
-        return mutableAttributedString;
-        
-    }];
+//    UITapGestureRecognizer *tapForgotPassword = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forgotPassword)];
+//    
+//    TTTAttributedLabel *labelForgotPassword = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(0, 50, 320, 20)];
+//    labelForgotPassword.text = NSLocalizedString(@"Forgot password", nil);
+//    labelForgotPassword.textColor = UIColorFromRGB(0x1ca6c3);
+//    labelForgotPassword.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+//    labelForgotPassword.textAlignment = NSTextAlignmentCenter;
+//    labelForgotPassword.backgroundColor = [UIColor clearColor];
+//    [labelForgotPassword addGestureRecognizer:tapForgotPassword];
+//    [self.container addSubview:labelForgotPassword];
+//    
+//    [labelForgotPassword setText:labelForgotPassword.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+//        
+//        NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Forgot password", nil) options:NSCaseInsensitiveSearch];
+//        
+//        [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
+//        
+//        return mutableAttributedString;
+//        
+//    }];
     
     UIImageView *iconeUsername = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 47, 47)];
     iconeUsername.image = [UIImage imageNamed:@"icon_username"];

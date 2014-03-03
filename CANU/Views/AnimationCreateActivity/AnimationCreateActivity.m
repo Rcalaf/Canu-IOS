@@ -28,6 +28,7 @@ static int const CANUSizeTransition = 70;
 @property (strong, nonatomic) UIView *backgroundOpacityFinal;
 @property (strong, nonatomic) UIView *wrapperLocal;
 @property (strong, nonatomic) UIView *wrapperTribes;
+@property (strong, nonatomic) UIView *wrapperLocked;
 @property (strong, nonatomic) UIImageView *cloud;
 @property (strong, nonatomic) UIImageView *cloud2;
 @property (strong, nonatomic) UILabel *title;
@@ -107,6 +108,26 @@ static int const CANUSizeTransition = 70;
         self.titleLocal.font = [UIFont fontWithName:@"Lato-Bold" size:20];
         [self.backgroundOpacity addSubview:_titleLocal];
         
+        self.wrapperLocked = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, _heightScreen)];
+        self.wrapperLocked.alpha = 0;
+        [self addSubview:_wrapperLocked];
+        
+        UIView *backgroundBlack = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, _heightScreen)];
+        backgroundBlack.alpha = 0.6;
+        backgroundBlack.backgroundColor = [UIColor blackColor];
+        [self.wrapperLocked addSubview:backgroundBlack];
+        
+        UIImageView *locked = [[UIImageView alloc]initWithFrame:CGRectMake(131, ((_heightScreen - 75)/2)-75/2, 58, 75)];
+        locked.image = [UIImage imageNamed:@"AnimationCreateActivity_local_locked"];
+        [self.wrapperLocked addSubview:locked];
+        
+        UILabel *textLocked = [[UILabel alloc]initWithFrame:CGRectMake(20, ((_heightScreen - 20)/2) + 20, 280, 20)];
+        textLocked.textColor = [UIColor whiteColor];
+        textLocked.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+        textLocked.textAlignment = NSTextAlignmentCenter;
+        textLocked.text = @"Not yet available";
+        [self.wrapperLocked addSubview:textLocked];
+        
     }
     return self;
 }
@@ -118,6 +139,13 @@ static int const CANUSizeTransition = 70;
  */
 - (void)startView{
     self.active = YES;
+    
+    if (_localIsUnlock) {
+        self.wrapperLocked.hidden = YES;
+    } else {
+        self.wrapperLocked.hidden = NO;
+    }
+    
     self.frame = CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height);
 }
 
@@ -131,6 +159,8 @@ static int const CANUSizeTransition = 70;
     if (!_active) {
         return;
     }
+    
+    self.wrapperLocked.alpha = [self opacityLockedWithPosition:position];
     
     self.backgroundOpacity.alpha = [self opacityWithPosition:position];
     
@@ -161,27 +191,45 @@ static int const CANUSizeTransition = 70;
  */
 - (void)stopViewFor:(CANUCreateActivity)canuCreateActivity{
     
+    BOOL rectification = NO;
+    
+    if (!self.localIsUnlock) {
+        
+        if (canuCreateActivity == CANUCreateActivityLocal) {
+            canuCreateActivity = CANUCreateActivityTribes;
+            rectification = YES;
+        }
+        
+    }
+    
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     UINavigationController *navigation = (UINavigationController *)appDelegate.canuViewController;
     
     CreateEditActivityViewController *createView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
     
-    if (_noChoice) {
+    if (_noChoice || rectification) {
         
         int position = 0;
         
-        switch (canuCreateActivity) {
-            case CANUCreateActivityNone:
-                position = 100;
-                break;
-            case CANUCreateActivityLocal:
-                position = 350;
-                break;
-            case CANUCreateActivityTribes:
-                position = 195;
-                break;
-            default:
-                break;
+        float delay = 0;
+        
+        if (rectification) {
+            position = 195;
+            delay = 0.4f;
+        } else {
+            switch (canuCreateActivity) {
+                case CANUCreateActivityNone:
+                    position = 64;
+                    break;
+                case CANUCreateActivityLocal:
+                    position = 350;
+                    break;
+                case CANUCreateActivityTribes:
+                    position = 195;
+                    break;
+                default:
+                    break;
+            }
         }
         
         [UIView animateWithDuration:0.2 animations:^{
@@ -193,26 +241,27 @@ static int const CANUSizeTransition = 70;
             self.backgroundOpacityFinal.alpha = 0;
             [self addSubview:_backgroundOpacityFinal];
             
-            [UIView animateWithDuration:0.2 animations:^{
-                self.backgroundOpacityFinal.alpha = 1;
-            } completion:^(BOOL finished) {
-                if (canuCreateActivity != CANUCreateActivityNone) {
+            if (canuCreateActivity != CANUCreateActivityNone) {
+                [UIView animateWithDuration:0.2 delay:delay options:UIViewAnimationOptionAllowUserInteraction animations:^{
+                    self.backgroundOpacityFinal.alpha = 1;
+                } completion:^(BOOL finished) {
                     [navigation presentViewController:createView animated:NO completion:^{
                         [self.backgroundOpacityFinal removeFromSuperview];
                         self.active = NO;
                         self.frame = CGRectMake(0, 0, 0, 0);
                     }];
-                } else {
-                    [UIView animateWithDuration:0.2 animations:^{
-                        self.backgroundOpacityFinal.alpha = 1;
-                    } completion:^(BOOL finished) {
-                        [self.backgroundOpacityFinal removeFromSuperview];
-                        self.active = NO;
-                        self.frame = CGRectMake(0, 0, 0, 0);
-                    }];
-                }
-                
-            }];
+                }];
+            } else {
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.backgroundOpacityFinal.alpha = 0;
+                } completion:^(BOOL finished) {
+                    [self.backgroundOpacityFinal removeFromSuperview];
+                    self.active = NO;
+                    self.frame = CGRectMake(0, 0, 0, 0);
+                }];
+            }
+            
+            
         }];
         
     } else {
@@ -249,6 +298,24 @@ static int const CANUSizeTransition = 70;
     
     if (position >= AreaTribes) {
         opacity = 1;
+    }
+    
+    return opacity;
+    
+}
+
+- (float)opacityLockedWithPosition:(float)position{
+    
+    float opacity = 0;
+    
+    if (position >= AreaLocal - ( CANUSizeTransition / 2) && position < AreaLocal + ( CANUSizeTransition / 2)) {
+        
+        opacity = (position - ( AreaLocal - ( CANUSizeTransition / 2) )) / CANUSizeTransition;
+        
+    } else if (position >= AreaLocal + ( CANUSizeTransition / 2)) {
+        
+        opacity = 1;
+        
     }
     
     return opacity;

@@ -50,6 +50,13 @@
 "Your friends seem asleep" = "Your friends seem asleep";
 "There isn't much happening around you" = "There isn't much happening around you";
 "I want to change this" = "I want to change this";
+"Locked until we are enought.\nRead why" = "Locked until we are enought.\nRead why"; // New
+"Read why" = "Read why"; // New
+"people inclued" = "people inclued"; // New
+"We’ll let you know once\nnew areas go live." = "We’ll let you know once\nnew areas go live."; // New
+"COUNT ME IN" = "COUNT ME IN"; // New
+"BECOME AN EARLY BIRD" = "BECOME AN EARLY BIRD"; // New
+"Want early access?" = "Want early access?"; // New
 
 //Tutorial
 

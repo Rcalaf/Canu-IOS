@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class Activity;
+
 @interface MessageGhostUser : UIView
 
 @property (retain) id delegate;
 
-- (id)initWithFrame:(CGRect)frame andArray:(NSMutableArray *)usersSelected andParentViewcontroller:(UIViewController *)viewController;
+- (id)initWithFrame:(CGRect)frame andArray:(NSMutableArray *)usersSelected andParentViewcontroller:(UIViewController *)viewController withActivity:(Activity *)activity;
 
 @end
 
