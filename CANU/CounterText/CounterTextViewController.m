@@ -76,7 +76,7 @@
         mailer.mailComposeDelegate = self;
         [mailer setToRecipients:[NSArray arrayWithObjects:@"gettogether@canu.se", nil]];
         [mailer setSubject:[NSString stringWithFormat:@"Early Bird %@",appDeleate.user.userName]];
-        [mailer setMessageBody:@"I'll be a kick-ass early bird because ... /n/n/n/n/n" isHTML:NO];
+        [mailer setMessageBody:@"I'll be a kick-ass early bird because ..." isHTML:NO];
         [self presentViewController:mailer animated:YES completion:nil];
         
     } else {

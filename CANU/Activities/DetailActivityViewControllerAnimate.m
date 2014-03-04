@@ -63,7 +63,6 @@ typedef enum {
 @property (nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic) ChatScrollView *chatView;
 @property (nonatomic) AttendeesScrollViewController *attendeesList;
-@property (nonatomic) Activity *activity;
 
 @end
 
@@ -113,7 +112,7 @@ typedef enum {
     
     // User
     
-    UIView *wrapperUser                          = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 166, 34)];
+    UIView *wrapperUser                          = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 148, 34)];
     wrapperUser.backgroundColor                  = UIColorFromRGB(0xf9f9f9);
     [self.wrapper addSubview:wrapperUser];
 
@@ -121,23 +120,23 @@ typedef enum {
     [avatar setImageWithURL:_activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
     [wrapperUser addSubview:avatar];
 
-    UICanuLabelUserName *userName                = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 128.0f, 25.0f)];
+    UICanuLabelUserName *userName                = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 107.0f, 25.0f)];
     userName.text                                = self.activity.user.userName;
     [wrapperUser addSubview:userName];
 
-    UIView *wrapperTime                          = [[UIView alloc]initWithFrame:CGRectMake(177, 10, 133, 34)];
+    UIView *wrapperTime                          = [[UIView alloc]initWithFrame:CGRectMake(159, 10, 151, 34)];
     wrapperTime.backgroundColor                  = UIColorFromRGB(0xf9f9f9);
     [self.wrapper addSubview:wrapperTime];
 
-    UICanuLabelDay *day                          = [[UICanuLabelDay alloc]initWithFrame:CGRectMake(10, 0, 33, 34)];
+    UICanuLabelDay *day                          = [[UICanuLabelDay alloc]initWithFrame:CGRectMake(5, 0, 33, 34)];
     day.date                                     = self.activity.start;
     [wrapperTime addSubview:day];
 
-    UICanuLabelTimeStart *timeStart              = [[UICanuLabelTimeStart alloc]initWithFrame:CGRectMake(50, 0, 44, 34)];
+    UICanuLabelTimeStart *timeStart              = [[UICanuLabelTimeStart alloc]initWithFrame:CGRectMake(35, 0, 51, 34)];
     timeStart.date                               = self.activity.start;
     [wrapperTime addSubview:timeStart];
 
-    UICanuLabelTimeEnd *timeEnd                  = [[UICanuLabelTimeEnd alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
+    UICanuLabelTimeEnd *timeEnd                  = [[UICanuLabelTimeEnd alloc]initWithFrame:CGRectMake(87, 0, 58, 34)];
     timeEnd.date                                 = self.activity.end;
     [wrapperTime addSubview:timeEnd];
 
@@ -157,7 +156,7 @@ typedef enum {
 
     // Name
     self.wrapperName                             = [[UIView alloc]initWithFrame:CGRectMake(10, 45, 300, 85)];
-    self.wrapperName.backgroundColor             = [UIColor whiteColor];
+    self.wrapperName.backgroundColor      = [UIColor whiteColor];
     [self.wrapper addSubview:_wrapperName];
 
     UICanuLabelActivityName *nameActivity        = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
@@ -167,6 +166,9 @@ typedef enum {
     UICanuLabelLocation *location                = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
     location.text                                = _activity.locationDescription;
     [_wrapperName addSubview:location];
+    
+//    UITapGestureRecognizer *tapOpenInMap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openInMap)];
+//    [self.wrapperName addGestureRecognizer:tapOpenInMap];
 
     self.actionButtonImage                       = [[UIImageView alloc]initWithFrame:CGRectMake(243, 19, 47, 47)];
     [self.wrapperName addSubview:_actionButtonImage];
@@ -735,6 +737,32 @@ typedef enum {
     annotationView.annotation = annotation;
     
     return annotationView;
+    
+}
+
+- (void)openInMap{
+    
+    NSLog(@"openInMap");
+    
+    Class mapItemClass = [MKMapItem class];
+    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        // Create an MKMapItem to pass to the Maps app
+        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:_activity.coordinate
+                                                       addressDictionary:nil];
+        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+        [mapItem setName:_activity.title];
+        
+        // Set the directions mode to "Walking"
+        // Can use MKLaunchOptionsDirectionsModeDriving instead
+        NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
+        // Get the "Current User Location" MKMapItem
+        MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+        // Pass the current location and destination map items to the Maps app
+        // Set the direction mode in the launchOptions dictionary
+        [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
+                       launchOptions:launchOptions];
+    }
     
 }
 

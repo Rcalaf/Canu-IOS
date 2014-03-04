@@ -53,13 +53,15 @@
     
     self.firstAnimationEmptyFeed = NO;
     
+    self.lastPosition = 0.5f;
+    
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Local Feed"];
     [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
     self.appDelegate.oldScreenName = @"Local Feed";
     
     self.view.backgroundColor = backgroundColorView;
-    NSLog(@"Init ActivitiesFeedViewController");
+    
     self.navigationController.navigationBarHidden = YES;
     
     self.appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -99,22 +101,22 @@
         [backgroundImageEmptyFeed addMotionEffect:group];
     }
     
-    self.localFeed = [[ActivityScrollViewController alloc] initFor:FeedLocalType andUser:_user andFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+    self.localFeed = [[ActivityScrollViewController alloc] initFor:FeedLocalType andUser:_user andFrame:CGRectMake(-320, 0, 320, self.view.frame.size.height)];
     self.localFeed.delegate = self;
     [self addChildViewController:_localFeed];
     [self.view addSubview:_localFeed.view];
     
-    self.tribeFeed = [[ActivityScrollViewController alloc] initFor:FeedTribeType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
+    self.tribeFeed = [[ActivityScrollViewController alloc] initFor:FeedTribeType andUser:_user andFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     self.tribeFeed.delegate = self;
     [self addChildViewController:_tribeFeed];
     [self.view addSubview:_tribeFeed.view];
     
-    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(640, 0, 320, self.view.frame.size.height - 119)];
+    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 119)];
     self.profilFeed.delegate = self;
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
     
-    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(640, self.view.frame.size.height - 119, 320, 119) User:self.user];
+    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.view.frame.size.height - 119, 320, 119) User:self.user];
     [self.view addSubview:_profileView];
     
     self.animationCreateActivity = [[AnimationCreateActivity alloc]init];
@@ -257,24 +259,20 @@
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{
-    NSLog(@"All reload");
     [self.localFeed reload];
     [self.tribeFeed reload];
     [self.profilFeed reload];
 }
 
 - (void)reloadLocal{
-    NSLog(@"reloadLocal");
     [self.localFeed reload];
 }
 
 - (void)reloadTribes{
-    NSLog(@"reloadTribes");
     [self.tribeFeed reload];
 }
 
 - (void)reloadProfile{
-    NSLog(@"reloadProfile");
     [self.profilFeed reload];
 }
 
@@ -295,11 +293,9 @@
 }
 
 - (void)activityScrollViewControllerChangementFeed{
-    
     [UIView animateWithDuration:0.4 animations:^{
         [self animationNavBox:self.lastPosition];
     }];
-    
 }
 
 - (void)hiddenProfileView:(BOOL)hidden{

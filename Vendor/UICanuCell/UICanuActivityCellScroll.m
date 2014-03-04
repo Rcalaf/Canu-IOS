@@ -42,7 +42,7 @@ typedef enum {
         
         self.activity                         = activity;
 
-        UIView *wrapperUser                   = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 166, 34)];
+        UIView *wrapperUser                   = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 148, 34)];
         wrapperUser.backgroundColor           = UIColorFromRGB(0xf9f9f9);
         [self addSubview:wrapperUser];
 
@@ -50,23 +50,23 @@ typedef enum {
         [avatar setImageWithURL:_activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
         [wrapperUser addSubview:avatar];
 
-        UICanuLabelUserName *userName         = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 128.0f, 25.0f)];
+        UICanuLabelUserName *userName         = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 107.0f, 25.0f)];
         userName.text                         = self.activity.user.userName;
         [wrapperUser addSubview:userName];
 
-        UIView *wrapperTime                   = [[UIView alloc]initWithFrame:CGRectMake(167, 0, 133, 34)];
+        UIView *wrapperTime                   = [[UIView alloc]initWithFrame:CGRectMake(149, 0, 151, 34)];
         wrapperTime.backgroundColor           = UIColorFromRGB(0xf9f9f9);
         [self addSubview:wrapperTime];
 
-        UICanuLabelDay *day                   = [[UICanuLabelDay alloc]initWithFrame:CGRectMake(10, 0, 33, 34)];
+        UICanuLabelDay *day                   = [[UICanuLabelDay alloc]initWithFrame:CGRectMake(5, 0, 33, 34)];
         day.date                              = self.activity.start;
         [wrapperTime addSubview:day];
 
-        UICanuLabelTimeStart *timeStart       = [[UICanuLabelTimeStart alloc]initWithFrame:CGRectMake(50, 0, 44, 34)];
+        UICanuLabelTimeStart *timeStart       = [[UICanuLabelTimeStart alloc]initWithFrame:CGRectMake(35, 0, 51, 34)];
         timeStart.date                        = self.activity.start;
         [wrapperTime addSubview:timeStart];
 
-        UICanuLabelTimeEnd *timeEnd           = [[UICanuLabelTimeEnd alloc]initWithFrame:CGRectMake(80, 0, 44, 34)];
+        UICanuLabelTimeEnd *timeEnd           = [[UICanuLabelTimeEnd alloc]initWithFrame:CGRectMake(87, 0, 58, 34)];
         timeEnd.date                          = self.activity.end;
         [wrapperTime addSubview:timeEnd];
 

@@ -75,13 +75,13 @@ typedef enum {
         
         self.view.frame = frame;
         
-        if (_feedType == FeedLocalType) {
-            NSLog(@"init ActivityScrollViewController Local");
-        } else if (_feedType == FeedTribeType) {
-            NSLog(@"init ActivityScrollViewController Tribes");
-        } else if (_feedType == FeedProfileType) {
-            NSLog(@"init ActivityScrollViewController Profile");
-        }
+//        if (_feedType == FeedLocalType) {
+//            NSLog(@"init ActivityScrollViewController Local");
+//        } else if (_feedType == FeedTribeType) {
+//            NSLog(@"init ActivityScrollViewController Tribes");
+//        } else if (_feedType == FeedProfileType) {
+//            NSLog(@"init ActivityScrollViewController Profile");
+//        }
         
         self.user = user;
         
@@ -586,7 +586,7 @@ typedef enum {
         }];
     }
     
-    if (self.isEmpty && _feedType == FeedLocalType) {
+    if (self.isEmpty && _feedType == FeedTribeType) {
         [self.delegate activityScrollViewControllerStartWithEmptyFeed];
     }
     
@@ -814,7 +814,9 @@ typedef enum {
         
         [UIView animateWithDuration:0.4 animations:^{
             cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (120 + 10) + 10 ) - 120, 300, 120);
-            cell.alpha = 1;
+            if (cell.activity != viewController.activity) {
+                cell.alpha = 1;
+            }
         }];
         
     }
@@ -1073,13 +1075,13 @@ typedef enum {
 
 - (void)dealloc{
     
-    if (_feedType == FeedLocalType) {
-        NSLog(@"dealloc ActivityScrollViewController Local");
-    }else if (_feedType == FeedTribeType){
-        NSLog(@"dealloc ActivityScrollViewController Tribes");
-    }else if (_feedType == FeedProfileType){
-        NSLog(@"dealloc ActivityScrollViewController Profile");
-    }
+//    if (_feedType == FeedLocalType) {
+//        NSLog(@"dealloc ActivityScrollViewController Local");
+//    }else if (_feedType == FeedTribeType){
+//        NSLog(@"dealloc ActivityScrollViewController Tribes");
+//    }else if (_feedType == FeedProfileType){
+//        NSLog(@"dealloc ActivityScrollViewController Profile");
+//    }
     
 }
 

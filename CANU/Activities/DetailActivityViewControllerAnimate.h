@@ -14,6 +14,7 @@
 
 @property (retain) id delegate;
 @property (nonatomic) BOOL closeAfterDelete;
+@property (nonatomic) Activity *activity;
 
 - (id)initFrame:(CGRect)frame andActivity:(Activity *)activity andPosition:(int)positionY;
 

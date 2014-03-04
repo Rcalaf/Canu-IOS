@@ -57,10 +57,10 @@ typedef enum {
         
         self.areaSize = (320 - 4.0f) / 3.0f;
         
-        self.naveboxPosition = NavBoxLocal;
+        self.naveboxPosition = NavBoxTribes;
         
         self.navigationBarHidden = YES;
-        self.control = [[UIView alloc] initWithFrame:CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0)];
+        self.control = [[UIView alloc] initWithFrame:CGRectMake(NavBoxTribes, 415.0 + KIphone5Margin, 63.0, 63.0)];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
         [self.view addSubview:self.control];
         

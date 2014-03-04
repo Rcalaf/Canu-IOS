@@ -182,9 +182,8 @@
     if (_countRequest <= 20) {
      
         AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        User *currentUser = appDelegate.user;
         
-        [User userWithToken:currentUser.token andBlock:^(User *user, NSError *error) {
+        [User userWithToken:appDelegate.user.token andBlock:^(User *user, NSError *error) {
             
             if (error) {
                 NSLog(@"Error");
@@ -192,6 +191,7 @@
                 if (user.phoneIsVerified) {
                     NSLog(@"Save New User");
                     [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+                    appDelegate.user = nil;
                     [self goToFeedViewController];
                 }else{
                     NSLog(@"Not Valide");
