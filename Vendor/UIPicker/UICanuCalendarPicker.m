@@ -50,6 +50,8 @@
         [dateFormater setLocale: [NSLocale currentLocale]];
         NSArray * weekdays = [dateFormater weekdaySymbols];
         
+        int firstDay = [[NSCalendar currentCalendar] firstWeekday] - 1;
+        
         for (int i = 0; i < [weekdays count]; i ++) {
             
             UILabel *dayName = [[UILabel alloc]initWithFrame:CGRectMake(13 + i * 42, 0, 42, 20)];
@@ -57,8 +59,14 @@
             dayName.textAlignment = NSTextAlignmentCenter;
             dayName.backgroundColor = [UIColor clearColor];
             dayName.textColor = UIColorFromRGB(0xabb3b7);
-            dayName.text = [[weekdays objectAtIndex:i] substringToIndex:1];
+            dayName.text = [[[weekdays objectAtIndex:firstDay] substringToIndex:1] uppercaseString];
             [headerDay addSubview:dayName];
+            
+            firstDay++;
+            
+            if (firstDay >= [weekdays count]) {
+                firstDay = 0;
+            }
             
         }
         
@@ -70,6 +78,15 @@
         
         // Current Date
         NSDateComponents *dateCurrent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+        
+        NSLog(@"%@",[NSDate date]);
+        
+        NSDate *now = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EEEE"];
+        NSLog(@"%@",[dateFormatter stringFromDate:now]);
+        
+        NSLog(@"%i",[[NSCalendar currentCalendar] firstWeekday]);
         
         // Formater for the range of today on this week
         NSDateFormatter * dateFormaterNumberDayForTheWeek = [[NSDateFormatter alloc] init];

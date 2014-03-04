@@ -63,7 +63,7 @@ NSString *const FBSessionStateChangedNotification =
         // Google Analytics //
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 20;
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
         id<GAITracker> tracker;
         tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-46900796-1"];
         NSLog(@"//////// WARNING ////////");
