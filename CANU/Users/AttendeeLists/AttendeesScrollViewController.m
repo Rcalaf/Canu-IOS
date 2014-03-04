@@ -237,25 +237,6 @@
     
 }
 
-- (void)attendeeCellEventProfileView:(User *)user{
-    
-    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:NO OrTutorial:NO];
-    [self.parentViewController.view addSubview:profileView];
-    
-    [profileView hideComponents:profileView.profileHidden];
-    
-    if (profileView.profileHidden) {
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"Activity Attendees"];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    } else {
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"Profile User View"];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    }
-    
-}
-
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view.

@@ -41,12 +41,9 @@ typedef enum {
     if (self) {
         
         self.activity                         = activity;
-        
-        UITapGestureRecognizer *tapUser       = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openProfileView)];
 
         UIView *wrapperUser                   = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 166, 34)];
         wrapperUser.backgroundColor           = UIColorFromRGB(0xf9f9f9);
-        [wrapperUser addGestureRecognizer:tapUser];
         [self addSubview:wrapperUser];
 
         UIImageView *avatar                   = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
@@ -122,10 +119,6 @@ typedef enum {
 
 - (void)touchActionButton{
     [self.delegate cellEventActionButton:self];
-}
-
-- (void)openProfileView{
-    [self.delegate cellEventProfileView:self.activity.user];
 }
 
 @end

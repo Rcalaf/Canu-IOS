@@ -27,5 +27,4 @@
 
 @required
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell;
-- (void)cellEventProfileView:(User*)user;
 @end

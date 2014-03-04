@@ -747,28 +747,8 @@ typedef enum {
     }
 }
 
-- (void)cellEventProfileView:(User *)user{
-    
-    UIProfileView *profileView = [[UIProfileView alloc] initWithUser:user WithBottomBar:YES AndNavigationchangement:YES OrTutorial:NO];
-    [self.view addSubview:profileView];
-    
-    [profileView hideComponents:profileView.profileHidden];
-    
-    if (profileView.profileHidden) {
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:appDelegate.oldScreenName];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    } else {
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"Profile User View"];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    }
-    
-}
-
 - (void)touchCell:(UITapGestureRecognizer *)sender{
-    NSLog(@"touchCell");
+    
     UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
     
     for (int i = 0; i < [_arrayCell count]; i++) {

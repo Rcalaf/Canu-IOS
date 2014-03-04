@@ -48,15 +48,12 @@
         [self addSubview:nickname];
         
         if (user) {
-            NSLog(@"%@",_user.profileImageUrl);
+            
             [avatar setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
             
             username.text = _user.firstName;
             
             nickname.text = _user.userName;
-            
-            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openProfileView)];
-            [self addGestureRecognizer:tapGesture];
             
         } else {
             avatar.image = [UIImage imageNamed:@"icon_username.png"];
@@ -72,12 +69,6 @@
     
     }
     return self;
-}
-
-- (void)openProfileView{
-    
-    [self.delegate attendeeCellEventProfileView:_user];
-    
 }
 
 @end

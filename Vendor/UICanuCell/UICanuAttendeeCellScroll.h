@@ -20,6 +20,4 @@
 
 @protocol UICanuAttendeeCellScrollDelegate <NSObject>
 
-@required
-- (void)attendeeCellEventProfileView:(User*)user;
 @end
