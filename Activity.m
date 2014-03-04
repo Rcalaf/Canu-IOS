@@ -387,7 +387,7 @@
         
         for (int i = 0; i < [responseAttendees count]; i++) {
             
-            User *user = [[User alloc] initWithAttributes:[[responseAttendees objectAtIndex:i] objectForKey:@"user"]];
+            User *user = [[User alloc] initWithAttributes:[responseAttendees objectAtIndex:i]];
             [allAttendees addObject:user];
             
         }
@@ -397,7 +397,7 @@
         
         for (int i = 0; i < [responseInvitationUser count]; i++) {
             
-            User *user = [[User alloc] initWithAttributes:[[responseInvitationUser objectAtIndex:i] objectForKey:@"user"]];
+            User *user = [[User alloc] initWithAttributes:[responseInvitationUser objectAtIndex:i]];
             [allInvitationUser addObject:user];
             
         }
@@ -407,7 +407,7 @@
         
         for (int i = 0; i < [responseInvitationGhostuser count]; i++) {
             
-            [allInvitationGhostuser addObject:[[[responseInvitationGhostuser objectAtIndex:i] objectForKey:@"ghostuser"] objectForKey:@"phone_number"]];
+            [allInvitationGhostuser addObject:[[responseInvitationGhostuser objectAtIndex:i]objectForKey:@"phone_number"]];
             
         }
         
