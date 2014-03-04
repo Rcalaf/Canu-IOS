@@ -1,24 +1,124 @@
-/* 
-  Localizable.strings
-  CANU
-
-  Created by Vivien Cormier on 14/01/14.
-  Copyright (c) 2014 CANU. All rights reserved.
-*/
+/*
+ Localizable.strings
+ CANU
+ 
+ Created by Vivien Cormier on 14/01/14.
+ Copyright (c) 2014 CANU. All rights reserved.
+ */
 
 //Main
 
-"I'M NEW" = "I'M NEW";
-"SIGN IN" = "SIGN IN";
-"Put your future moments\n in one place" = "Put your future moments\n in one place";
+"I'M NEW" = "I'm new";
+"SIGN IN" = "Sign in";
+"Put your future moments\n in one place" = "Get together";
 
 //SignUp
 
 "Create Account" = "Create Account";
-"NEXT" = "NEXT";
-"DONE" = "DONE";
-"By signing up I agree with the Terms and the Privacy Policy" = "By signing up I agree with the Terms and the Privacy Policy";
+"Username" = "Username";
+"Password" = "Password";
+"NEXT" = "Next";
+"DONE" = "Done";
+"By signing up I agree with the" = "By signing up I agree with the";
+"and the" = "and the";
 "Terms" = "Terms";
 "Privacy Policy" = "Privacy Policy";
-"Your Profile" = "Your Profile";
-"Grab my Facebook info" = "Grab my Facebook info";
+"Your Profile" = "Your info";
+"Grab my Facebook info" = "Use my Facebook info";
+"Choose an existing one" = "Choose from library";
+"Take a picture" = "Take a picture";
+"Cancel" = "Cancel";
+"Full name" = "Full name";
+"E-mail" = "E-mail";
+"Phone Check" = "Phone check";
+"I promise that this is my number." = "Press send to verify your phone number.";
+"Reverify my number" = "Try again";
+"Verify my number" = "Verify my number";
+
+//SignIn
+
+"Welcome Back" = "Welcome Back";
+"Forgot password" = "I forgot my password";
+"Reset Password" = "Reset password";
+"your email or phone number" = "E-mail or phone number";
+"Check your email. Contact us if you need help" = "Check your email. Contact us if you need help";
+"RESET" = "Reset";
+
+//Feed
+
+"Looks like you have plenty of spare time" = "Looks like you have plenty of spare time";
+"Your friends seem asleep" = "Your friends seem asleep";
+"There isn't much happening around you" = "There isn't much happening around you";
+"I want to change this" = "I want to change this";
+"Locked until we are enought.\nRead why" = "Locked until we are enought.\nRead why"; // New
+"Read why" = "Read why"; // New
+"people inclued" = "people inclued"; // New
+"We’ll let you know once\nnew areas go live." = "We’ll let you know once\nnew areas go live."; // New
+"COUNT ME IN" = "COUNT ME IN"; // New
+"BECOME AN EARLY BIRD" = "BECOME AN EARLY BIRD"; // New
+"Want early access?" = "Want early access?"; // New
+
+//Tutorial
+
+//Start
+"Welcome" = "Hello and welcome";
+"Let’s see where your upcoming activities are." = "Before you get started, you need to know where you'll find things.";
+
+//Local
+"These are activities where you and everyone around is invited." = "Activites around you.";
+"Move the white box to the right" = "Move this box to continue.";
+"Move" = "Move";
+
+//Tribes
+"These are activities your friends don’t want you to miss." = "Activities where you're invited.";
+
+//Profile
+"These are the activities you are going to." = "Your schedule.";
+"Tap the white box" = "Tap the white box to continue.";
+"Tap" = "Tap";
+"Tap again" = "Tap again";
+"This is you." = "This is your profile.";
+"Move the white box up" = "Move the box up to continue";
+
+//Final
+"That’s how you create an activity of your choice. For your friends or for everyone." = "That’s how you create an activity.";
+"We’re all done. Enjoy." = "All done, time to get together.";
+"GOT IT" = "Finish";
+
+//Error
+"Unknown Error" = "Unknown Error";
+"Please restart your action" = "Please try again.";
+"No Internet Connection" = "Can't seem to find an internet connection.";
+"Internal Error" = "Internal Error"; // New
+"OK" = "Ok";
+"Ok" = "Ok";
+"Settings > Privacy > Contacts" = "To sync contacts go to \nSettings > Privacy >Contacts \nand set Canu to On";
+"We need to know where you are" = "We need to know where you are"; // New
+"Enable my GPS" = "Enable my GPS";
+"Settings > Privacy > Location" = "To use the local feed go to\nSettings > Privacy > Location\nand set Canu to On"; // New
+
+// Create
+
+"What do you want to do?" = "What are you up to?";
+"Today" = "Today";
+"Tomorrow" = "Tomorrow";
+"Find a place" = "Search for a place or location";
+"Who is invited ?" = "With";
+"Add a description" = "Add details (Optional)";
+"Current Location" = "Current position";
+"Somewhere" = "Closeby";
+"SEARCH ON THE MAP" = "Search on the map";
+"SEARCH" = "Search";
+"ON THE MAP" = "on the map";
+"No results ..." = "No results ...";
+"Adress" = "Adress";
+"CREATE" = "Create";
+"YES" = "Yes";
+"NO" = "No";
+"Those who are not yet on CANU will receive a text message with a link to your activity." = "Those who are not yet on CANU will receive a text message with a link to your activity.";
+"will not be invited if you cancel. Are you sure?" = "will not be invited if you cancel. \n\nAre you sure?";
+"other will not be invited if you cancel. Are you sure?" = "other will not be invited if you cancel. \n\nAre you sure?";
+"others will not be invited if you cancel. Are you sure?" = "others will not be invited if you cancel. \n\nAre you sure?";
+"and" = "and";
+"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?";
+"DELETE" = "Delete";

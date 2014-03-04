@@ -79,15 +79,6 @@
         // Current Date
         NSDateComponents *dateCurrent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
         
-        NSLog(@"%@",[NSDate date]);
-        
-        NSDate *now = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"EEEE"];
-        NSLog(@"%@",[dateFormatter stringFromDate:now]);
-        
-        NSLog(@"%i",[[NSCalendar currentCalendar] firstWeekday]);
-        
         // Formater for the range of today on this week
         NSDateFormatter * dateFormaterNumberDayForTheWeek = [[NSDateFormatter alloc] init];
         [dateFormaterNumberDayForTheWeek setLocale: [NSLocale currentLocale]];

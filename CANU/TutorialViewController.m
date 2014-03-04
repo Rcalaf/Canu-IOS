@@ -149,47 +149,23 @@ typedef enum {
     } completion:^(BOOL finished) {
         self.navBox.image = [UIImage imageNamed:@"navmenu_me"];
         
+        self.line.image = [UIImage imageNamed:@"Tutorial_Step5_line"];
+        
         [self.tutorialStepLocal removeFromSuperview];
         self.tutorialStepLocal = nil;
         
         [self.navBox removeGestureRecognizer:sender];
         
-        UITapGestureRecognizer *goProfileView = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapProfileView:)];
+        UISwipeGestureRecognizer *goCreate = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeCreate:)];
+        goCreate.direction = UISwipeGestureRecognizerDirectionUp;
         
-        [self.navBox addGestureRecognizer:goProfileView];
+        [self.navBox addGestureRecognizer:goCreate];
+        
+        [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+            self.line.alpha = 1;
+        } completion:nil];
         
     }];
-    
-}
-
-- (void)tapProfileView:(UIGestureRecognizer *)sender{
-    
-    [self.tutorialStepProfile animationStartProfileView];
-    
-    [self.navBox removeGestureRecognizer:sender];
-    
-    UITapGestureRecognizer *goProfileView2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapProfileView2:)];
-    
-    [self.navBox addGestureRecognizer:goProfileView2];
-    
-}
-
-- (void)tapProfileView2:(UIGestureRecognizer *)sender{
-    
-    self.line.image = [UIImage imageNamed:@"Tutorial_Step5_line"];
-    
-    [self.tutorialStepProfile animationStartProfileViewDisappear];
-    
-    [self.navBox removeGestureRecognizer:sender];
-    
-    UISwipeGestureRecognizer *goCreate = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeCreate:)];
-    goCreate.direction = UISwipeGestureRecognizerDirectionUp;
-    
-    [self.navBox addGestureRecognizer:goCreate];
-    
-    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-        self.line.alpha = 1;
-    } completion:nil];
     
 }
 

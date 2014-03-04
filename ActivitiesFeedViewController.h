@@ -15,11 +15,7 @@
 
 @property (strong, nonatomic) AnimationCreateActivity *animationCreateActivity;
 
-- (void)userInteractionFeedEnable:(BOOL)value;
-
 - (void)changePosition:(float)position;
-
-- (void)showHideProfile;
 
 - (void)removeAfterlogOut;
 

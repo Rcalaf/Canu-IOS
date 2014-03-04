@@ -18,10 +18,6 @@
 
 @interface UIProfileView () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
-@property (nonatomic) BOOL isNavigationChangement;
-@property (nonatomic) BOOL isBottomBar;
-@property (nonatomic) CGRect rect;
-@property (strong, nonatomic) UIView *mask;
 @property (strong, nonatomic) UIView *wrapper;
 @property (strong, nonatomic) UIImageView *profileImage;
 @property (strong, nonatomic) UIImageView *settingsButton;
@@ -32,44 +28,16 @@
 @implementation UIProfileView
 
 
-- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement OrTutorial:(BOOL)isTutorial{
+- (id)initWithFrame:(CGRect)frame User:(User *)user{
     
-    CGRect rectZero = CGRectMake(0, 0, 0, 0);
-    
-    self = [super initWithFrame:rectZero];
+    self = [super initWithFrame:frame];
     if (self) {
-        
-        self.clipsToBounds          = YES;
         
         AppDelegate *appDelegate    = [[UIApplication sharedApplication]delegate];
         
-        CGSize result               = [[UIScreen mainScreen] bounds].size;
-
-        self.rect                   = CGRectMake(0, 0, result.width, result.height);
-
-        BOOL isCurrentUser          = YES;
-        self.isBottomBar            = bottomBar;
-        self.isNavigationChangement = navigationChangement;
-        
-        if (appDelegate.user.userId != user.userId) {
-            isCurrentUser           = NO;
-        }
-
-        self.profileHidden          = YES;
-        
-        if (!isTutorial) {
-            self.mask                   = [[UIView alloc] init];
-            self.mask.alpha             = 0;
-            self.mask.backgroundColor   = [UIColor colorWithRed:(241.0 / 255.0) green:(245.0 / 255.0) blue:(245.0 / 255.0) alpha: 0.8f];
-            [self addSubview:_mask];
-        }
-
-        self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, _rect.size.height, result.width, 119 + 57)];
+        self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, frame.size.height)];
         self.wrapper.backgroundColor = [UIColor whiteColor];
         [self addSubview:_wrapper];
-
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeComponents)];
-        [self.mask addGestureRecognizer:tap];
 
         UIImageView *shadow         = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"User_profile_shadow"]];
         shadow.frame                = CGRectMake(0, - 4, 320, 4);
@@ -80,13 +48,9 @@
         self.profileImage.userInteractionEnabled = YES;
         [self.wrapper addSubview:self.profileImage];
 
-        if (isCurrentUser) {
-            
-            UIImageView *editImage               = [[UIImageView alloc]initWithFrame:CGRectMake(109 - 16, 109 - 16, 14, 14)];
-            editImage.image                      = [UIImage imageNamed:@"User_image_edit"];
-            [self.profileImage addSubview:editImage];
-            
-        }
+        UIImageView *editImage               = [[UIImageView alloc]initWithFrame:CGRectMake(109 - 16, 109 - 16, 14, 14)];
+        editImage.image                      = [UIImage imageNamed:@"User_image_edit"];
+        [self.profileImage addSubview:editImage];
         
         UILabel *name          = [[UILabel alloc] initWithFrame:CGRectMake(129, 21, 160, 18)];
         name.text              = user.firstName;
@@ -103,97 +67,19 @@
         
         self.navigation = appDelegate.canuViewController;
         
-        if (_isBottomBar) {
-            
-            UIView *bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, 119, 320, 57)];
-            bottomBar.backgroundColor = UIColorFromRGB(0xf9f9f9);
-            [self.wrapper addSubview:bottomBar];
-            
-            UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
-            lineBottomBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
-            [bottomBar addSubview:lineBottomBar];
-            
-            UIButton *backButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 57, 57)];
-            [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
-            [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateHighlighted];
-            [backButton addTarget:self action:@selector(closeComponents) forControlEvents:UIControlEventTouchDown];
-            [bottomBar addSubview:backButton];
-            
-        }
+        self.settingsButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"User_settings"]];
+        self.settingsButton.frame = CGRectMake(258, 0, 57, 57);
+        self.settingsButton.userInteractionEnabled = YES;
+        [self.wrapper addSubview:_settingsButton];
         
-        if (isCurrentUser) {
-            
-            self.settingsButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"User_settings"]];
-            self.settingsButton.frame = CGRectMake(258, 0, 57, 57);
-            self.settingsButton.userInteractionEnabled = YES;
-            [self.wrapper addSubview:_settingsButton];
-            
-            if (!isTutorial) {
-                UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
-                [self.settingsButton addGestureRecognizer:tapRecognizer];
-                
-                tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic)];
-                [self.profileImage addGestureRecognizer:tapRecognizer];
-            }
-            
-        }
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
+        [self.settingsButton addGestureRecognizer:tapRecognizer];
+        
+        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic)];
+        [self.profileImage addGestureRecognizer:tapRecognizer];
         
     }
     return self;
-}
-
-- (void)hideComponents:(BOOL)hide{
-    
-    if (hide) {
-        self.mask.frame = [[UIScreen mainScreen] bounds];
-        self.frame = [[UIScreen mainScreen] bounds];
-        [UIView animateWithDuration:0.3 animations:^{
-            if (!_isBottomBar) {
-                self.wrapper.frame = CGRectMake(0, _rect.size.height - 119, 320, 119 + 57);
-            } else {
-                self.wrapper.frame = CGRectMake(0, _rect.size.height - 119 - 57, 320, 119 + 57);
-                [self.navigation changePosition:1];
-            }
-            self.mask.alpha = 1;
-        } completion:^(BOOL finished) {
-            if (_isNavigationChangement) {
-                self.navigation.control.hidden = YES;
-            }
-        }];
-    } else {
-        if (_isNavigationChangement) {
-            self.navigation.control.hidden = NO;
-        }
-        [UIView animateWithDuration:0.3 animations:^{
-            self.wrapper.frame = CGRectMake(0, _rect.size.height, 320, 119 + 57);
-            self.mask.alpha = 0;
-            if (_isNavigationChangement) {
-                [self.navigation changePosition:0];
-            }
-        } completion:^(BOOL finished) {
-            self.mask.frame = CGRectMake(0, 0, 0, 0);
-            self.frame = CGRectMake(0, 0, 0, 0);
-        }];
-    }
-    
-    self.profileHidden = !hide;
-    
-}
-
-- (void)closeComponents{
-    NSLog(@"closeComponents");
-    [self hideComponents:NO];
-    
-    if (_isBottomBar) {
-        [self performSelector:@selector(deleteView) withObject:nil afterDelay:0.3];
-    }
-    
-}
-
-- (void)deleteView{
-    NSLog(@"Delete");
-    [self removeFromSuperview];
-    
 }
 
 - (void)showSettings{
@@ -251,7 +137,6 @@
     }];
     
     [viewController dismissViewControllerAnimated:YES completion:^{
-        NSLog(@"Top");
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }];
     

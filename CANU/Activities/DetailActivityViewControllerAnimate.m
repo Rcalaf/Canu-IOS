@@ -108,6 +108,7 @@ typedef enum {
     [self.view addSubview:_wrapper];
     
     self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 130, 300,0) andActivity:_activity andMaxHeight:self.view.frame.size.height - 130 - 57 andMinHeight:self.view.frame.size.height - 340 - 57];
+    self.chatView.alpha = 0;
     [self.wrapper addSubview:_chatView];
     
     // User
@@ -260,6 +261,7 @@ typedef enum {
         self.wrapperMap.frame = CGRectMake(10, 45, 300, 150);
         self.wrapperName.frame = CGRectMake(10, 195, 300, 85);
         self.wrapperDescription.frame = CGRectMake(10, 280, 300, 60);
+        self.chatView.alpha = 1;
         self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
         self.touchArea.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
         self.wrapperBottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, 320, 57);

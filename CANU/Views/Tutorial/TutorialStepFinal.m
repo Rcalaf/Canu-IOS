@@ -21,7 +21,7 @@
         title.numberOfLines = 4;
         title.textAlignment = NSTextAlignmentCenter;
         title.backgroundColor = [UIColor clearColor];
-        title.text = NSLocalizedString(@"That’s how you instantly create an activity of your choice. For your friends or for everyone.", nil);
+        title.text = NSLocalizedString(@"That’s how you create an activity of your choice. For your friends or for everyone.", nil);
         title.font = [UIFont fontWithName:@"Lato-Bold" size:20];
         [self addSubview:title];
         

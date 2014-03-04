@@ -12,8 +12,6 @@
 
 @interface UIProfileView : UIView
 
-@property (readwrite, nonatomic) BOOL profileHidden;
+- (id)initWithFrame:(CGRect)frame User:(User *)user;
 
-- (id)initWithUser:(User *)user WithBottomBar:(BOOL)bottomBar AndNavigationchangement:(BOOL)navigationChangement OrTutorial:(BOOL)isTutorial;
-- (void)hideComponents:(BOOL)hide;
 @end

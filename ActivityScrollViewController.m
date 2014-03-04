@@ -189,6 +189,9 @@ typedef enum {
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         self.scrollview.delegate = self;
+        if (_feedType == FeedProfileType) {
+            self.scrollview.clipsToBounds = NO;
+        }
         [self.view addSubview:_scrollview];
         
         if (self.counterModeEnable) {
@@ -749,6 +752,11 @@ typedef enum {
 
 - (void)touchCell:(UITapGestureRecognizer *)sender{
     
+    if (_feedType == FeedProfileType) {
+        [self.delegate hiddenProfileView:YES];
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height);
+    }
+    
     UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
     
     for (int i = 0; i < [_arrayCell count]; i++) {
@@ -761,6 +769,7 @@ typedef enum {
             
             [UIView animateWithDuration:0.4 animations:^{
                 cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 0;
             }];
             
         }else if (i == cellTouch.tag){
@@ -769,7 +778,7 @@ typedef enum {
             
             float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
             
-            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andActivity:activity andPosition:position];
+            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity andPosition:position];
             davc.delegate = self;
             davc.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self addChildViewController:davc];
@@ -783,6 +792,7 @@ typedef enum {
             
             [UIView animateWithDuration:0.4 animations:^{
                 cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 0;
             }];
             
         }
@@ -793,12 +803,18 @@ typedef enum {
 
 - (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
     
+    if (_feedType == FeedProfileType) {
+        [self.delegate hiddenProfileView:NO];
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height - 119);
+    }
+    
     for (int i = 0; i < [_arrayCell count]; i++) {
      
         UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
         
         [UIView animateWithDuration:0.4 animations:^{
             cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (120 + 10) + 10 ) - 120, 300, 120);
+            cell.alpha = 1;
         }];
         
     }

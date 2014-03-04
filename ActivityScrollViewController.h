@@ -36,6 +36,7 @@ typedef enum {
 @protocol ActivityScrollViewControllerDelegate <NSObject>
 
 @required
+- (void)hiddenProfileView:(BOOL)hidden;
 - (void)activityScrollViewControllerStartWithEmptyFeed;
 - (void)activityScrollViewControllerChangementFeed;
 @end

@@ -109,10 +109,13 @@
     [self addChildViewController:_tribeFeed];
     [self.view addSubview:_tribeFeed.view];
     
-    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(640, 0, 320, self.view.frame.size.height)];
+    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(640, 0, 320, self.view.frame.size.height - 119)];
     self.profilFeed.delegate = self;
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
+    
+    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(640, self.view.frame.size.height - 119, 320, 119) User:self.user];
+    [self.view addSubview:_profileView];
     
     self.animationCreateActivity = [[AnimationCreateActivity alloc]init];
     [self.view addSubview:_animationCreateActivity];
@@ -176,7 +179,8 @@
     
     self.localFeed.view.frame = CGRectMake( - position * 640, 0, 320, self.view.frame.size.height);
     self.tribeFeed.view.frame = CGRectMake( - ( position - 0.5f ) * 640, 0, 320, self.view.frame.size.height);
-    self.profilFeed.view.frame = CGRectMake( - ( position - 1.0f ) * 640, 0, 320, self.view.frame.size.height);
+    self.profilFeed.view.frame = CGRectMake( - ( position - 1.0f ) * 640, 0, _profilFeed.view.frame.size.width, _profilFeed.view.frame.size.height);
+    self.profileView.frame = CGRectMake( - ( position - 1.0f ) * 640, _profileView.frame.origin.y, _profileView.frame.size.width, _profileView.frame.size.height);
     
     float alphaTribes = position * 2;
     if (alphaTribes > 1) {
@@ -186,6 +190,7 @@
     self.localFeed.view.alpha = 1 - position * 2;
     self.tribeFeed.view.alpha = alphaTribes;
     self.profilFeed.view.alpha = position * 2 -1;
+    self.profileView.alpha = position * 2 -1;
     
     self.viewForEmptyBackground.alpha = [self alphaBackgroundEmptyValueForPosition:position];
     
@@ -214,39 +219,6 @@
         [tracker set:kGAIScreenName value:@"Profile Feed"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         self.appDelegate.oldScreenName = @"Profile Feed";
-    }
-    
-}
-
-- (void)userInteractionFeedEnable:(BOOL)value{
-    
-    if (value == false && _profileView.profileHidden == false && _profileView) {
-        [self showHideProfile];
-    }
-    
-    self.localFeed.view.userInteractionEnabled = value;
-    self.tribeFeed.view.userInteractionEnabled = value;
-    self.profilFeed.view.userInteractionEnabled = value;
-    
-}
-
-- (void)showHideProfile{
-    
-    if (!_profileView) {
-        self.profileView = [[UIProfileView alloc] initWithUser:self.user WithBottomBar:NO AndNavigationchangement:NO OrTutorial:NO];
-        [self.view addSubview:_profileView];
-    }
-    
-    [_profileView hideComponents:_profileView.profileHidden];
-    
-    if (_profileView.profileHidden) {
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:self.appDelegate.oldScreenName];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    } else {
-        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-        [tracker set:kGAIScreenName value:@"Profile User View"];
-        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
     }
     
 }
@@ -327,6 +299,20 @@
     [UIView animateWithDuration:0.4 animations:^{
         [self animationNavBox:self.lastPosition];
     }];
+    
+}
+
+- (void)hiddenProfileView:(BOOL)hidden{
+    
+    if (hidden) {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height, 320, 119);
+        }];
+    } else {
+        [UIView animateWithDuration:0.4 animations:^{
+            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - 119, 320, 119);
+        }];
+    }
     
 }
 
