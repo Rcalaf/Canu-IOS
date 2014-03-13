@@ -342,7 +342,7 @@
     if (_editActivity) {
         self.deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.deleteButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
-        [self.deleteButton setImage:[UIImage imageNamed:@"edit_delete.png"] forState:UIControlStateNormal];
+        [self.deleteButton setImage:[UIImage imageNamed:@"edit_delete"] forState:UIControlStateNormal];
         [self.deleteButton addTarget:self action:@selector(deleteActivity) forControlEvents:UIControlEventTouchUpInside];
         [self.bottomBar addSubview:_deleteButton];
     }
