@@ -18,12 +18,6 @@
 #import "UICanuLabelDescription.h"
 #import "Activity.h"
 
-typedef enum {
-    UICanuActivityCellEditable = 0,
-    UICanuActivityCellGo = 1,
-    UICanuActivityCellToGo = 2,
-} UICanuActivityCellStatus;
-
 @interface UICanuActivityCellScroll ()
 
 

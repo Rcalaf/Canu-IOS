@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    UICanuActivityCellEditable = 0,
+    UICanuActivityCellGo = 1,
+    UICanuActivityCellToGo = 2,
+} UICanuActivityCellStatus;
+
 @class Activity,User;
 
 @interface UICanuActivityCellScroll : UIView
