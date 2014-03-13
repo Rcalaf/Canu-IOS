@@ -23,21 +23,20 @@ typedef enum {
 } NavBoxPosition;
 
 typedef enum {
-    AreaLocal = 110,
-    AreaTribes = 280,
+    AreaTribes = 110,
+    AreaLocal = 280,
 } AreaPosition;
 
 @interface UICanuNavigationController () <UIGestureRecognizerDelegate>
 
-@property (nonatomic) CGPoint oldPositionControl;
 @property (nonatomic) BOOL unknowDirection;
 @property (nonatomic) BOOL verticalDirection;
-@property (nonatomic) NavBoxPosition naveboxPosition;
-@property (nonatomic) BOOL tribesIsEnable;
-@property (nonatomic) float areaSize;
 @property (nonatomic) BOOL panIsDetect;
-@property (nonatomic) float gapTouchControl;
+@property (nonatomic) float areaSize;
 @property (nonatomic) float velocity;
+@property (nonatomic) CGPoint gapTouchControl;
+@property (nonatomic) CGPoint oldPositionControl;
+@property (nonatomic) NavBoxPosition naveboxPosition;
     
 @end
 
@@ -49,25 +48,19 @@ typedef enum {
 {
     self = [super init];
     if (self) {
-        NSLog(@"Init UICanuNavigationController");
-        self.unknowDirection = YES;
         
-        self.tribesIsEnable = NO;
+        self.unknowDirection = YES;
         
         self.panIsDetect = NO;
         
         self.activityFeed = activityFeed;
         
-        if (_tribesIsEnable) {
-            self.areaSize = (320 - 4.0f) / 3.0f;
-        }else{
-            self.areaSize = (320 - 4.0f) / 2.0f;
-        }
+        self.areaSize = (320 - 4.0f) / 3.0f;
         
-        self.naveboxPosition = NavBoxLocal;
+        self.naveboxPosition = NavBoxTribes;
         
         self.navigationBarHidden = YES;
-        self.control = [[UIView alloc] initWithFrame:CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0)];
+        self.control = [[UIView alloc] initWithFrame:CGRectMake(NavBoxTribes, 415.0 + KIphone5Margin, 63.0, 63.0)];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
         [self.view addSubview:self.control];
         
@@ -89,66 +82,28 @@ typedef enum {
     
 }
 
-//- (void)goProfile:(UISwipeGestureRecognizer *)gesture{
-//    
-//    NSLog(@"goProfile");
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        _control.frame = CGRectMake(255.0, 415.0 + KIphone5Margin, 63.0, 63.0);
-//    }completion:^(BOOL finished) {
-//        
-//    }];
-//    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    UserProfileViewController *upvc =  appDelegate.feedViewController;
-//    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
-//    [self pushViewController:upvc animated:YES];
-//    
-//}
-//
-//- (void)goActivities:(UISwipeGestureRecognizer *)gesture{
-//    NSLog(@"goActivities");
-//    [UIView animateWithDuration:0.3 animations:^{
-//        _control.frame = CGRectMake(2.0, 415.0 + KIphone5Margin, 63.0, 63.0);
-//        
-//    }completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    [self popViewControllerAnimated:YES];
-//    
-//    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
-//    
-//}
-
--(void)bounce:(UITapGestureRecognizer *)gesture{
+- (void)bounce:(UITapGestureRecognizer *)gesture{
     
     if (!_panIsDetect) {
         
-        if (_naveboxPosition == NavBoxProfil) {
-            [self.activityFeed showHideProfile];
-        }else{
-           
+        [UIView animateWithDuration:.2 animations:^{
+            CGRect frame = _control.frame;
+            frame.origin.y = 400.0f + KIphone5Margin;
+            _control.frame = frame;
+        } completion:^(BOOL finished){
             [UIView animateWithDuration:.2 animations:^{
                 CGRect frame = _control.frame;
-                frame.origin.y = 400.0f + KIphone5Margin;
+                frame.origin.y = 415.0f + KIphone5Margin;
                 _control.frame = frame;
-            } completion:^(BOOL finished){
-                [UIView animateWithDuration:.2 animations:^{
-                    CGRect frame = _control.frame;
-                    frame.origin.y = 415.0f + KIphone5Margin;
-                    _control.frame = frame;
-                }completion:^(BOOL finished) {
-                }];
+            }completion:^(BOOL finished) {
             }];
-            
-        }
+        }];
         
     }
     
 }
 
--(void)swipeControl:(UIPanGestureRecognizer *)recognizer
-{
+- (void)swipeControl:(UIPanGestureRecognizer *)recognizer{
     
     CGPoint location = [recognizer locationInView:self.view];
     
@@ -159,8 +114,7 @@ typedef enum {
         self.oldPositionControl = location;
         self.unknowDirection = YES;
         self.panIsDetect = YES;
-        self.gapTouchControl = location.x - _control.frame.origin.x;
-        [self.activityFeed userInteractionFeedEnable:NO];
+        self.gapTouchControl = CGPointMake(location.x - _control.frame.origin.x, location.y - _control.frame.origin.y);
         
     }
     
@@ -175,7 +129,7 @@ typedef enum {
             
             if (gapHorizontal < gapVertical) {
                 self.verticalDirection = YES;
-            }else{
+            } else {
                 self.verticalDirection = NO;
             }
             
@@ -184,8 +138,19 @@ typedef enum {
         }
         
         if (_verticalDirection) {
-            _control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl, _control.frame.size.width, _control.frame.size.height);
+            _control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl.y, _control.frame.size.width, _control.frame.size.height);
+            
+            if (self.view.frame.size.height - _control.frame.origin.y > AreaTribes - 50 && !self.activityFeed.animationCreateActivity.active) {
+                
+                self.activityFeed.animationCreateActivity.localIsUnlock = [self.activityFeed localFeedIsUnlock];
+                [self.activityFeed.animationCreateActivity startView];
+                
+            }
+            
+            [self.activityFeed.animationCreateActivity animateWithPosition:self.view.frame.size.height - _control.frame.origin.y];
+            
         }else{
+            
             float horizontalPosition = location.x;
             
             if (horizontalPosition < NavBoxLocal) {
@@ -194,9 +159,9 @@ typedef enum {
                 horizontalPosition = NavBoxProfil;
             }
             
-            _control.frame = CGRectMake(location.x - _gapTouchControl, 415.0 + KIphone5Margin, _control.frame.size.width, _control.frame.size.height);
+            _control.frame = CGRectMake(location.x - _gapTouchControl.x, 415.0 + KIphone5Margin, _control.frame.size.width, _control.frame.size.height);
             
-            float value = ((location.x - _gapTouchControl) - NavBoxLocal) / (NavBoxProfil - NavBoxLocal);
+            float value = ((location.x - _gapTouchControl.x) - NavBoxLocal) / (NavBoxProfil - NavBoxLocal);
             
             if (value < 0) {
                 value = 0;
@@ -227,23 +192,14 @@ typedef enum {
         
         float positionToBottom = self.view.frame.size.height - _control.frame.origin.y;
         
-        if (_tribesIsEnable) {
-            
-            if (positionToBottom < AreaLocal) {
-                NSLog(@"Null");
-            }else if (positionToBottom > AreaLocal && positionToBottom < AreaTribes) {
-                NSLog(@"Local");
-            }else if (positionToBottom > AreaLocal){
-                NSLog(@"Tribes");
-            }
-            
-        }else{
-            
-            if (_control.frame.origin.y < 318.0f + KIphone5Margin) {
-                NewActivityViewController *nac = [[NewActivityViewController alloc] init];
-                [self presentViewController:nac animated:YES completion:nil];
-            }
-            
+        CANUCreateActivity canuCreateActivity;
+        
+        if (positionToBottom > AreaTribes && positionToBottom < AreaLocal) {
+            canuCreateActivity = CANUCreateActivityTribes;
+        } else if (positionToBottom > AreaTribes) {
+            canuCreateActivity = CANUCreateActivityLocal;
+        } else {
+            canuCreateActivity = CANUCreateActivityNone;
         }
         
         [UIView animateWithDuration:0.3 animations:^{
@@ -251,128 +207,80 @@ typedef enum {
         }completion:^(BOOL finished) {
             
         }];
+        
+        if (self.activityFeed.animationCreateActivity.active) {
+            [self.activityFeed.animationCreateActivity stopViewFor:canuCreateActivity];
+        }
 
     }else{
         
         float value = 0, duration = 0;
         
-        if (_tribesIsEnable) {
+        if (fabs(_velocity) > 500) {
             
-            if (fabs(_velocity) > 1000) {
+            duration = 0.2f;
+            
+            if (_velocity > 0) {
                 
-                duration = 0.2f;
-                
-                if (_velocity > 0) {
-                    
-                    if (_naveboxPosition == NavBoxLocal) {
+                if (_naveboxPosition == NavBoxLocal) {
+                    if (_control.frame.origin.x < NavBoxTribes + 30.f) {
                         _naveboxPosition = NavBoxTribes;
                         value = 0.5;
-                    }else if (_naveboxPosition == NavBoxTribes) {
+                    } else {
                         _naveboxPosition = NavBoxProfil;
                         value = 1;
-                    }else{
-                        if (_naveboxPosition == NavBoxProfil) {
-                            value = 1;
-                        }else if (_naveboxPosition == NavBoxTribes) {
-                            value = 0.5;
-                        }else if (_naveboxPosition == NavBoxLocal) {
-                            value = 0;
-                        }
                     }
-                    
+                }else if (_naveboxPosition == NavBoxTribes) {
+                    _naveboxPosition = NavBoxProfil;
+                    value = 1;
                 }else{
-                    
-                    if (_naveboxPosition == NavBoxProfil) {
-                        _naveboxPosition = NavBoxTribes;
-                        value = 0.5;
-                    }else if (_naveboxPosition == NavBoxTribes) {
-                        _naveboxPosition = NavBoxLocal;
-                        value = 0;
-                    }else{
-                        if (_naveboxPosition == NavBoxProfil) {
-                            value = 1;
-                        }else if (_naveboxPosition == NavBoxTribes) {
-                            value = 0.5;
-                        }else if (_naveboxPosition == NavBoxLocal) {
-                            value = 0;
-                        }
-                    }
-                    
+                    _naveboxPosition = NavBoxProfil;
+                    value = 1;
                 }
                 
             }else{
                 
-                duration = 0.3f;
-                
-                if (_control.frame.origin.x + (63/2) >= -20 && _control.frame.origin.x + (63/2) < NavBoxLocal + _areaSize) {
-                    value = 0;
+                if (_naveboxPosition == NavBoxProfil) {
+                    if (_control.frame.origin.x > NavBoxTribes - 30.f) {
+                        _naveboxPosition = NavBoxTribes;
+                        value = 0.5;
+                    } else {
+                        _naveboxPosition = NavBoxLocal;
+                        value = 0;
+                    }
+                }else if (_naveboxPosition == NavBoxTribes) {
                     _naveboxPosition = NavBoxLocal;
-                }else if (_control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize && _control.frame.origin.x + (63/2) <= NavBoxLocal + _areaSize + _areaSize){
-                    value = 0.5;
-                    _naveboxPosition = NavBoxTribes;
-                }else if (_control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize + _areaSize && _control.frame.origin.x + (63/2) <= 340){
-                    value = 1;
-                    _naveboxPosition = NavBoxProfil;
+                    value = 0;
+                }else{
+                    _naveboxPosition = NavBoxLocal;
+                    value = 0;
                 }
                 
             }
             
         }else{
             
-            if (fabs(_velocity) > 1000) {
-                
-                duration = 0.2f;
-                
-                if (_velocity > 0) {
-                    
-                    if (_naveboxPosition == NavBoxLocal) {
-                        _naveboxPosition = NavBoxProfil;
-                        value = 1;
-                    }else{
-                        if (_naveboxPosition == NavBoxProfil) {
-                            value = 1;
-                        }else if (_naveboxPosition == NavBoxLocal) {
-                            value = 0;
-                        }
-                    }
-                    
-                }else{
-                   
-                    if (_naveboxPosition == NavBoxProfil) {
-                        _naveboxPosition = NavBoxLocal;
-                        value = 0;
-                    }else{
-                        if (_naveboxPosition == NavBoxProfil) {
-                            value = 1;
-                        }else if (_naveboxPosition == NavBoxLocal) {
-                            value = 0;
-                        }
-                    }
-                    
-                }
-                
-            }else{
-                
-                duration = 0.3f;
-                
-                if (_control.frame.origin.x + (63/2) >= -20 && _control.frame.origin.x + (63/2) < NavBoxLocal + _areaSize) {
-                    value = 0;
-                    _naveboxPosition = NavBoxLocal;
-                }else if (_control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize && _control.frame.origin.x + (63/2) <= 340){
-                    value = 1;
-                    _naveboxPosition = NavBoxProfil;
-                }
-                
+            duration = 0.3f;
+            
+            if (_control.frame.origin.x + (63/2) >= -20 && _control.frame.origin.x + (63/2) < NavBoxLocal + _areaSize) {
+                value = 0;
+                _naveboxPosition = NavBoxLocal;
+            }else if (_control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize && _control.frame.origin.x + (63/2) <= NavBoxLocal + _areaSize + _areaSize){
+                value = 0.5;
+                _naveboxPosition = NavBoxTribes;
+            }else if (_control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize + _areaSize && _control.frame.origin.x + (63/2) <= 340){
+                value = 1;
+                _naveboxPosition = NavBoxProfil;
             }
             
         }
         
         if (value == 0) {
-            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local.png"]];
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local"]];
         }else if (value == 0.5){
-            
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Tribes"]];
         }else if (value == 1){
-            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me.png"]];
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me"]];
         }
         
         [UIView animateWithDuration:duration animations:^{
@@ -385,7 +293,6 @@ typedef enum {
     }
     
     self.panIsDetect = NO;
-    [self.activityFeed userInteractionFeedEnable:YES];
     
 }
 

@@ -10,9 +10,10 @@
 #import "AFJSONRequestOperation.h"
 
 NSString * const kAFCanuAPIBaseUDistributionRLString = @"http://api.canu.se";
-NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
+//NSString * const kAFCanuAPIDevBaseURLString = @"http://192.168.0.102:3000";
+NSString * const kAFCanuAPIDevBaseURLString = @"http://0.0.0.0:3000";
 
-BOOL const kAFCanuAPIDistributionMode = NO;
+BOOL const kAFCanuAPIDistributionMode = YES;
 
 
 @implementation AFCanuAPIClient
@@ -27,7 +28,7 @@ BOOL const kAFCanuAPIDistributionMode = NO;
         
         if (kAFCanuAPIDistributionMode) {
             _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIBaseUDistributionRLString]];
-        }else{
+        } else {
             _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:kAFCanuAPIDevBaseURLString]];
         }
         
@@ -46,7 +47,7 @@ BOOL const kAFCanuAPIDistributionMode = NO;
     
     if (self.distributionMode) {
         self.urlBase = kAFCanuAPIBaseUDistributionRLString;
-    }else{
+    } else {
         self.urlBase = kAFCanuAPIDevBaseURLString;
     }
     

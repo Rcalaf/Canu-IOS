@@ -4,6 +4,82 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>.gitkeep</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>Activity_Empty_feed_Bakground.png</key>
+		<data>
+		naj6imT33wWuQLGjahJuOueUCD8=
+		</data>
+		<key>Activity_Empty_feed_Bakground@2x.png</key>
+		<data>
+		229BTF3FOTVOcjHDlOIQhj68QcM=
+		</data>
+		<key>Activity_Empty_feed_illustration_local.png</key>
+		<data>
+		hjrGKhmtEa3rP/rA9nuju1oWSUQ=
+		</data>
+		<key>Activity_Empty_feed_illustration_local@2x.png</key>
+		<data>
+		kderFOSXH+1it7n+utHzweZUn/k=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile.png</key>
+		<data>
+		Q75/y8m2VCGTnqEvCcgJKVFpf7c=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile@2x.png</key>
+		<data>
+		43Twm37epHCbOH0vMTC93Bch0KI=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes.png</key>
+		<data>
+		Xl/Q1RSNUD0qrGuyZCoYFe/X2Yw=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes@2x.png</key>
+		<data>
+		kozJWJFSNE8aXnLQaOxguoZ+Dek=
+		</data>
+		<key>AnimationCreateActivity_cloud.png</key>
+		<data>
+		VuUKyWr8shNs52U7RwwttpjK2lk=
+		</data>
+		<key>AnimationCreateActivity_cloud@2x.png</key>
+		<data>
+		HojbtMIK3Wry08midIPLhvgmCmY=
+		</data>
+		<key>AnimationCreateActivity_cloud_2.png</key>
+		<data>
+		DJHYvr2GMuAZea0898qoJ/VAPx0=
+		</data>
+		<key>AnimationCreateActivity_cloud_2@2x.png</key>
+		<data>
+		cOA+UmjcWUnBBF7iDEJK7j89Atk=
+		</data>
+		<key>AnimationCreateActivity_local.png</key>
+		<data>
+		AiUqrBSuB6K1BO6PCtSTMt9sWEU=
+		</data>
+		<key>AnimationCreateActivity_local@2x.png</key>
+		<data>
+		03JLUSZ71eHTNbf4WG/sGHEe+fI=
+		</data>
+		<key>AnimationCreateActivity_local_locked.png</key>
+		<data>
+		zP8RcOmKdII6CIwn/xhQQ6gj2eM=
+		</data>
+		<key>AnimationCreateActivity_local_locked@2x.png</key>
+		<data>
+		dKHk+eitl3OPEoAf1C7obRpnQsg=
+		</data>
+		<key>AnimationCreateActivity_tribes.png</key>
+		<data>
+		hPxXPhA73RfE0yER85CeNQwNkbo=
+		</data>
+		<key>AnimationCreateActivity_tribes@2x.png</key>
+		<data>
+		MkXOYDzmMt0vA9hQmplLinC0Cg8=
+		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
 		wIhTIrL91MPb7ho5LuHkBXNw2Ds=
@@ -26,15 +102,147 @@
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
-		ckL/T/MrVCdjW7ZaoSN+ipYIpMk=
+		NXfY85510R10hSmzU9mL5o9Rpck=
 		</data>
 		<key>Default.png</key>
 		<data>
-		bzWt1cifcZOhb94mbhGkDPAY+q4=
+		gcA7sVr39lUjnhe4+tJdN8FIu88=
 		</data>
 		<key>Default@2x.png</key>
 		<data>
-		HS5vZE51Szq+6MjNkzIK5jOa3Tc=
+		DFzwswD6ZNcRI6btrITPPV0lL8U=
+		</data>
+		<key>DiallingCodes.plist</key>
+		<data>
+		M6ZcvMRfFMb07m447HKuJ3ZWHuo=
+		</data>
+		<key>F1_Add_Cell_Location.png</key>
+		<data>
+		/zjV7Bf1EZRe4KHIqjmwRfCmvSs=
+		</data>
+		<key>F1_Add_Cell_Location@2x.png</key>
+		<data>
+		TiyNO8+iS1dKdjl+jSQqIXmk7DI=
+		</data>
+		<key>F1_Add_Cell_Location_checked.png</key>
+		<data>
+		4JhzV5u02ZVIGPKf5t38vxYa/DM=
+		</data>
+		<key>F1_Add_Cell_Location_checked@2x.png</key>
+		<data>
+		3F0LjUJruGTiCJqOHe1pPb6WbCQ=
+		</data>
+		<key>F1_Calendar_dote_Disable.png</key>
+		<data>
+		j9gPC0PTg85Y8+dcEC7FOtD0000=
+		</data>
+		<key>F1_Calendar_dote_Disable@2x.png</key>
+		<data>
+		v7EpXD+uyq4mmUQiwbwD+zrUEXg=
+		</data>
+		<key>F1_Calendar_dote_Enable.png</key>
+		<data>
+		lMzNfok87qTrjdN9KBFkn19hfdE=
+		</data>
+		<key>F1_Calendar_dote_Enable@2x.png</key>
+		<data>
+		KAT5SHbnjhraSWqIZA14b4RmX54=
+		</data>
+		<key>F1_Shadow_Description.png</key>
+		<data>
+		axIy49irG5Ni3aFbJNcSbcgSlCk=
+		</data>
+		<key>F1_Shadow_Description@2x.png</key>
+		<data>
+		UX1GQudlyxznhHYHJ1rFvboVVbE=
+		</data>
+		<key>F1_add_description.png</key>
+		<data>
+		rapvDHszED5AGZ+6Jci4EkolY7I=
+		</data>
+		<key>F1_add_description@2x.png</key>
+		<data>
+		/invu6Jgb1Gdati8s9HHvl3oghU=
+		</data>
+		<key>F1_add_description_selected.png</key>
+		<data>
+		FXfFpRyo3QV+bw7/OvvwID6RNUQ=
+		</data>
+		<key>F1_add_description_selected@2x.png</key>
+		<data>
+		+naqteaCsX7G3LehSYDFIXfrVc8=
+		</data>
+		<key>F1_calendar.png</key>
+		<data>
+		9CuMvItjepr4JVI64Ud/9fYJwZ0=
+		</data>
+		<key>F1_calendar@2x.png</key>
+		<data>
+		yWsaPxg5d6jKBSE8r6X2jDWNF+0=
+		</data>
+		<key>F1_calendar_selected.png</key>
+		<data>
+		xVmCDlgQUfaJgP60wphH+4rZQLI=
+		</data>
+		<key>F1_calendar_selected@2x.png</key>
+		<data>
+		Liq5bGDwmGpACd41usQnc9V2qFM=
+		</data>
+		<key>F1_input_Location_reset.png</key>
+		<data>
+		eSX2nwhQplc0FX0zBYRZtd0AxWc=
+		</data>
+		<key>F1_input_Location_reset@2x.png</key>
+		<data>
+		lI3hZM0nyh9kSKwRY5U/QQ4PL7I=
+		</data>
+		<key>F1_lenght_picker.png</key>
+		<data>
+		o2nLS/9gvX3HGe79s9ks1gIvG28=
+		</data>
+		<key>F1_lenght_picker@2x.png</key>
+		<data>
+		R+9f1EyyWwa3vjRfcl07DFTJBGI=
+		</data>
+		<key>F1_open_map.png</key>
+		<data>
+		mTxGRzLXxWHCyyWSuP3tYwj+Icc=
+		</data>
+		<key>F1_open_map@2x.png</key>
+		<data>
+		TuZvXqtBim3VBIr8dGbk2MnGQyU=
+		</data>
+		<key>F1_time_picker.png</key>
+		<data>
+		abhV+pi9uyo99e6o27XH24ZnUg0=
+		</data>
+		<key>F1_time_picker@2x.png</key>
+		<data>
+		HM9vCIsLjrXN/BQj7StMsl85D4A=
+		</data>
+		<key>F5_inputCell_selected.png</key>
+		<data>
+		Bagd/hPnMoBstYHzTsmin4XGkcw=
+		</data>
+		<key>F5_inputCell_selected@2x.png</key>
+		<data>
+		TMbap7NZzanRq/4l1vJo/9Um+aQ=
+		</data>
+		<key>F5_local_icones.png</key>
+		<data>
+		0/oXsNxRRrP7So41V6DVKrTi690=
+		</data>
+		<key>F5_local_icones@2x.png</key>
+		<data>
+		lTdq279mYYq+OaAvjF4Kl+tATkE=
+		</data>
+		<key>F5_tribes_icones.png</key>
+		<data>
+		6ay6ZdoM5YLoOLCWVwsm197+xw4=
+		</data>
+		<key>F5_tribes_icones@2x.png</key>
+		<data>
+		KVCQRl06nsvSkz2TWlTd751ZtM8=
 		</data>
 		<key>FindLocationsViewController.nib/objects.nib</key>
 		<data>
@@ -44,9 +252,509 @@
 		<data>
 		7z1kWlp+26Kc9F8mdVHVOsJWKdw=
 		</data>
+		<key>G1_pipe.png</key>
+		<data>
+		Zgj31agxIoTusfn8MH5T9jxEu+U=
+		</data>
+		<key>G1_pipe@2x.png</key>
+		<data>
+		kI1zZtVssaGuj5nJWb6J4x6mYSw=
+		</data>
+		<key>G2_fail_hand.png</key>
+		<data>
+		4SzTmcsXs/VwHV0RDchr0OPhGUM=
+		</data>
+		<key>G2_fail_hand@2x.png</key>
+		<data>
+		+aEwdas5dPCMUfzYEJILbrw2uzU=
+		</data>
+		<key>G4Fail_eagle.png</key>
+		<data>
+		l1Lx87zaCkIQ7HNGDkLAlpLbR/k=
+		</data>
+		<key>G4Fail_eagle@2x.png</key>
+		<data>
+		n6QC1EHQb5vadJ9EYC0q17dMYhI=
+		</data>
+		<key>G5_Fail_arrow_broke.png</key>
+		<data>
+		ohOQq2AikqrwVX7jB3BRPQGqJsQ=
+		</data>
+		<key>G5_Fail_arrow_broke@2x.png</key>
+		<data>
+		imZiZV5xjO1xUDUT1KyBm0MEkqM=
+		</data>
+		<key>G5_arrow_.png</key>
+		<data>
+		FONKX/L2W1kBkpsza+eWUQ1nwK8=
+		</data>
+		<key>G5_arrow_@2x.png</key>
+		<data>
+		aIvfO9lQ37+6gq+XOPm94igt04E=
+		</data>
+		<key>Instabug.bundle/Instabug-FloatingButton.png</key>
+		<data>
+		2x5ZSQrwXqGijGQE97gK+3cibMs=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored@2x~ipad.png</key>
+		<data>
+		y+EXRFlKtGmrxiNavVOk+tSoMa0=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored@2x~iphone.png</key>
+		<data>
+		HN2TR6Spv5aEhsw5G+ogS3a6cDE=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored~ipad.png</key>
+		<data>
+		+9lxO9ecT9j2xb0u1f3ATlnsebY=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored~iphone.png</key>
+		<data>
+		jKi+biX0i+XNv+3s80dRSWt+fp4=
+		</data>
+		<key>Instabug.bundle/Instabug-ShutterSound.aif</key>
+		<data>
+		4pajYikVli2JYPCQuL0XpPFW5eY=
+		</data>
+		<key>Instabug.bundle/Instabug-T@2x~ipad.png</key>
+		<data>
+		0buL0MFlXcp96FmTi6zh/e7sqgA=
+		</data>
+		<key>Instabug.bundle/Instabug-T@2x~iphone.png</key>
+		<data>
+		Cg7GuX+wTVH08IxwtGbNgvnuTiI=
+		</data>
+		<key>Instabug.bundle/Instabug-T~ipad.png</key>
+		<data>
+		zVpOqOstg4xE+JYgxxvgFkOwdc8=
+		</data>
+		<key>Instabug.bundle/Instabug-T~iphone.png</key>
+		<data>
+		d9cYjEJiwrmgkutqXb9env8c2rk=
+		</data>
+		<key>Instabug.bundle/Instabug-color1@2x~ipad.png</key>
+		<data>
+		QySO/9Rh2hvCHRdIQ2UZPy0dD7U=
+		</data>
+		<key>Instabug.bundle/Instabug-color1@2x~iphone.png</key>
+		<data>
+		KWrSrzXcUAjE3JIrelYaOepdBrg=
+		</data>
+		<key>Instabug.bundle/Instabug-color1~ipad.png</key>
+		<data>
+		PweXpVlj/pqqSTcxNcg3E9Djbis=
+		</data>
+		<key>Instabug.bundle/Instabug-color1~iphone.png</key>
+		<data>
+		92oxslJle1I1CodCGKMImEFBK/g=
+		</data>
+		<key>Instabug.bundle/Instabug-color2@2x~ipad.png</key>
+		<data>
+		l9AnMgBsyQKhNDvomr/IpJE/OCc=
+		</data>
+		<key>Instabug.bundle/Instabug-color2@2x~iphone.png</key>
+		<data>
+		3Kjm+QuNy3ko54jli3nJbpzhjXk=
+		</data>
+		<key>Instabug.bundle/Instabug-color2~ipad.png</key>
+		<data>
+		O/tQLgSVMO6BDcGTgsqjM7EwubI=
+		</data>
+		<key>Instabug.bundle/Instabug-color2~iphone.png</key>
+		<data>
+		Y0JlK0AQ/h5sG3yI2jZw3vj+OeM=
+		</data>
+		<key>Instabug.bundle/Instabug-color3@2x~ipad.png</key>
+		<data>
+		aoa9qXOat3/FAHzZuCkFlhRYjM0=
+		</data>
+		<key>Instabug.bundle/Instabug-color3@2x~iphone.png</key>
+		<data>
+		xp4xTnEk1GvBPxuBCBtXAccZae4=
+		</data>
+		<key>Instabug.bundle/Instabug-color3~ipad.png</key>
+		<data>
+		QaAv3ZJpO5X7ie/uuT/j+xF9r8I=
+		</data>
+		<key>Instabug.bundle/Instabug-color3~iphone.png</key>
+		<data>
+		8DjpxuAKwajDV4jZEpNk/4HPy9A=
+		</data>
+		<key>Instabug.bundle/Instabug-color4@2x~ipad.png</key>
+		<data>
+		08SM4XX0zwxlVxDufrwOiZnoeLE=
+		</data>
+		<key>Instabug.bundle/Instabug-color4@2x~iphone.png</key>
+		<data>
+		wu8IAqw3iBo98Or7edxf+TZFyP0=
+		</data>
+		<key>Instabug.bundle/Instabug-color4~ipad.png</key>
+		<data>
+		Vw5bEsATyaP/tacqQi1L6bYVBHI=
+		</data>
+		<key>Instabug.bundle/Instabug-color4~iphone.png</key>
+		<data>
+		tK1o2/LXhQBxO2xmoj76iEBFafE=
+		</data>
+		<key>Instabug.bundle/Instabug-color5@2x~ipad.png</key>
+		<data>
+		MoRZNiVfx9xzyzYo1xpZJtJIPiQ=
+		</data>
+		<key>Instabug.bundle/Instabug-color5@2x~iphone.png</key>
+		<data>
+		IVpjReaSVOxIEGf8XRH4gnpOq2M=
+		</data>
+		<key>Instabug.bundle/Instabug-color5~ipad.png</key>
+		<data>
+		73EmU5kk7YY/jkT9Yk5XGRDIqRc=
+		</data>
+		<key>Instabug.bundle/Instabug-color5~iphone.png</key>
+		<data>
+		pGpAIJg4VGAy/EslXp5t4penUr4=
+		</data>
+		<key>Instabug.bundle/Instabug-color6@2x~ipad.png</key>
+		<data>
+		MTcKRp9zXC1zvhWrJNZnihY5qOY=
+		</data>
+		<key>Instabug.bundle/Instabug-color6@2x~iphone.png</key>
+		<data>
+		6LdjcrJtudi6l84eKkzGCcaEn7c=
+		</data>
+		<key>Instabug.bundle/Instabug-color6~ipad.png</key>
+		<data>
+		+kzgQ+PiJ6hhHLFUqZ4p8B9QklU=
+		</data>
+		<key>Instabug.bundle/Instabug-color6~iphone.png</key>
+		<data>
+		sYecgC2Nm4M2K6aCpzrQQEDf3vo=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer@2x~ipad.png</key>
+		<data>
+		p9v+VksdQn8qroCo+yiFw5tMa5k=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer@2x~iphone.png</key>
+		<data>
+		KiVbf8Nk4ccXRqiELYbCFfsL3+U=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer~ipad.png</key>
+		<data>
+		eFctvjKzPgwv4jTRfs4OCuuFGME=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer~iphone.png</key>
+		<data>
+		joB3VwBuCOWhNhgYT2flVGVjgcc=
+		</data>
+		<key>Instabug.bundle/Instabug-delete@2x~ipad.png</key>
+		<data>
+		C7AnjTG8k1WkzqeoG7U3orayCP8=
+		</data>
+		<key>Instabug.bundle/Instabug-delete@2x~iphone.png</key>
+		<data>
+		V2YEO9AF8239+Hj/CgzhH7HlJXk=
+		</data>
+		<key>Instabug.bundle/Instabug-delete~ipad.png</key>
+		<data>
+		ExyumClQjVgekMlvN7qaCKMPo+M=
+		</data>
+		<key>Instabug.bundle/Instabug-delete~iphone.png</key>
+		<data>
+		sXGF0Xy7Txo4BBQA7SJciG3T+iY=
+		</data>
+		<key>Instabug.bundle/Instabug-pen@2x~ipad.png</key>
+		<data>
+		cjA6n9iqgOnvnSFoyeQdQ0Zw8d4=
+		</data>
+		<key>Instabug.bundle/Instabug-pen@2x~iphone.png</key>
+		<data>
+		8AYWLea01QJxHgKe16otw72WAZg=
+		</data>
+		<key>Instabug.bundle/Instabug-pen~ipad.png</key>
+		<data>
+		ajjIIa9WrpRbv7CeW6HvWUzCj/U=
+		</data>
+		<key>Instabug.bundle/Instabug-pen~iphone.png</key>
+		<data>
+		eIwv69CLyzo5PJ1hBfC+uk4XYCM=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1@2x~ipad.png</key>
+		<data>
+		k7aqlYO5Qjt2vrtzcU8W2ysjG38=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1@2x~iphone.png</key>
+		<data>
+		k7aqlYO5Qjt2vrtzcU8W2ysjG38=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1~ipad.png</key>
+		<data>
+		sHVlrAfIyAVQlnIH7Wko3TGhATA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1~iphone.png</key>
+		<data>
+		sHVlrAfIyAVQlnIH7Wko3TGhATA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2@2x~ipad.png</key>
+		<data>
+		pOGF7xbH3LgHSC8JpnhMPaZ1FQA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2@2x~iphone.png</key>
+		<data>
+		pOGF7xbH3LgHSC8JpnhMPaZ1FQA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2~ipad.png</key>
+		<data>
+		+eA6u571/lxCmMKUqjc8BB7j/sE=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2~iphone.png</key>
+		<data>
+		+eA6u571/lxCmMKUqjc8BB7j/sE=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3@2x~ipad.png</key>
+		<data>
+		dyOHlyBjZKBHVN2xorzSgNE14zY=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3@2x~iphone.png</key>
+		<data>
+		dyOHlyBjZKBHVN2xorzSgNE14zY=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3~ipad.png</key>
+		<data>
+		lUrdki30D2N7wDTYCCuNjytYXNg=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3~iphone.png</key>
+		<data>
+		lUrdki30D2N7wDTYCCuNjytYXNg=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4@2x~ipad.png</key>
+		<data>
+		1KcdK7NaSAMuQVbg7Kq1GqoNkGk=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4@2x~iphone.png</key>
+		<data>
+		1KcdK7NaSAMuQVbg7Kq1GqoNkGk=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4~ipad.png</key>
+		<data>
+		VPWEnvjg1DPsLebcZ3K0Tx3o53I=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4~iphone.png</key>
+		<data>
+		VPWEnvjg1DPsLebcZ3K0Tx3o53I=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5@2x~ipad.png</key>
+		<data>
+		AZ8aWP53TXFDbHeGJ4sGBPCL6jo=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5@2x~iphone.png</key>
+		<data>
+		AZ8aWP53TXFDbHeGJ4sGBPCL6jo=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5~ipad.png</key>
+		<data>
+		neyz+tIJ2EVLyzVdFaTOQE0UIis=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5~iphone.png</key>
+		<data>
+		neyz+tIJ2EVLyzVdFaTOQE0UIis=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6@2x~ipad.png</key>
+		<data>
+		c4NhlnrMOuT1N0l8BHHt9vRxXzM=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6@2x~iphone.png</key>
+		<data>
+		c4NhlnrMOuT1N0l8BHHt9vRxXzM=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6~ipad.png</key>
+		<data>
+		NexoDvfPRsFJi2v1xpmwfv+OLIU=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6~iphone.png</key>
+		<data>
+		NexoDvfPRsFJi2v1xpmwfv+OLIU=
+		</data>
+		<key>Instabug.bundle/Instabug-tick@2x~ipad.png</key>
+		<data>
+		GG3nrCVQbc7rRDpDOexnCfbmdVk=
+		</data>
+		<key>Instabug.bundle/Instabug-tick@2x~iphone.png</key>
+		<data>
+		p5E5W7gPjRHJu8Q0CNJ+kGUqR/U=
+		</data>
+		<key>Instabug.bundle/Instabug-tick~ipad.png</key>
+		<data>
+		yNLahCr+jYEoASrhfQufIhAIxmA=
+		</data>
+		<key>Instabug.bundle/Instabug-tick~iphone.png</key>
+		<data>
+		zmam4xI5LPAFk6gxLO8FBespFtI=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPad.nib/objects.nib</key>
+		<data>
+		h5qS0tiEFYYbxi+l4c/QSWd42hw=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPad.nib/runtime.nib</key>
+		<data>
+		h5qS0tiEFYYbxi+l4c/QSWd42hw=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPhone.nib/objects.nib</key>
+		<data>
+		3WY/++qGXCG0d7/HLqV7biVhDAw=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPhone.nib/runtime.nib</key>
+		<data>
+		WP3scg6Il0te0943JYEGGYekWfo=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPad.nib/objects.nib</key>
+		<data>
+		WhFp2FUfedSP1y2G8Uuyjkd5IMs=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPad.nib/runtime.nib</key>
+		<data>
+		WhFp2FUfedSP1y2G8Uuyjkd5IMs=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPhone.nib/objects.nib</key>
+		<data>
+		rva4GKoJXl/AOmBLNmd5J76EgDY=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPhone.nib/runtime.nib</key>
+		<data>
+		PuBh09xHnFOcnFzoYJfFac9SvOU=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-Landscape-iPad.nib</key>
+		<data>
+		Lg3Xy5tPtoprtBgZPq/k0FAiypY=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-Landscape-iPhone.nib</key>
+		<data>
+		dmSnGw31eBUh7wdPddIEH4z1xHY=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-iPad.nib</key>
+		<data>
+		Mak6pn9QkuJMRGa0igTMzb/Tcg0=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-iPhone.nib/objects.nib</key>
+		<data>
+		7La5eroWhCSDjyZPlRre5uCx88M=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-iPhone.nib/runtime.nib</key>
+		<data>
+		7La5eroWhCSDjyZPlRre5uCx88M=
+		</data>
+		<key>Instabug.bundle/ar.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/ar.lproj/Localizable.strings</key>
+		<data>
+		WKC8cv34Mc4y83rDks63pSx/23c=
+		</data>
+		<key>Instabug.bundle/de.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/de.lproj/Localizable.strings</key>
+		<data>
+		gV9aMS2e20+yAmINyDe07O170Uo=
+		</data>
+		<key>Instabug.bundle/en.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/en.lproj/Localizable.strings</key>
+		<data>
+		lVIr3lIfSA7SgcNQFtTM72bkRwk=
+		</data>
+		<key>Instabug.bundle/es.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/es.lproj/Localizable.strings</key>
+		<data>
+		e6ylzurgmJ65Ie50dXBV6dmURS4=
+		</data>
+		<key>Instabug.bundle/fr.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/fr.lproj/Localizable.strings</key>
+		<data>
+		51uqIUKKRB/aqo5XfPNzhDMaUvA=
+		</data>
+		<key>Instabug.bundle/it.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/it.lproj/Localizable.strings</key>
+		<data>
+		uT1tsLo/N+HzoFKyPLcDr3+UrB4=
+		</data>
+		<key>Instabug.bundle/ja.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/ja.lproj/Localizable.strings</key>
+		<data>
+		8ghMJ6SoisRwbWPoZLZb8Nw8VI4=
+		</data>
+		<key>Instabug.bundle/pt-BR.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/pt-BR.lproj/Localizable.strings</key>
+		<data>
+		8nzJxOqOxdjBKJ1iyPST7NoEbMA=
+		</data>
+		<key>Instabug.bundle/pt.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/pt.lproj/Localizable.strings</key>
+		<data>
+		yl5n/iiFTEDdyPvANX/1jwv94Bo=
+		</data>
+		<key>Instabug.bundle/ru.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/ru.lproj/Localizable.strings</key>
+		<data>
+		XRbeIJ60gSiBwDo/U7dFxYQymL4=
+		</data>
+		<key>Instabug.bundle/tr.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/tr.lproj/Localizable.strings</key>
+		<data>
+		vxji13ceR0wnReaoztLEm0qf4TE=
+		</data>
+		<key>Instabug.bundle/zh-Hans.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/zh-Hans.lproj/Localizable.strings</key>
+		<data>
+		asb+RbQLDFKlGcgPh3r7NqKCYDI=
+		</data>
+		<key>Instabug.bundle/zh-Hant.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/zh-Hant.lproj/Localizable.strings</key>
+		<data>
+		fc2wlg/r8taX6FHJo/ZtDdNeU0Q=
+		</data>
 		<key>Lato-Bol.ttf</key>
 		<data>
 		wzDVnz5k4HolccK6T0EJsgoWj2k=
+		</data>
+		<key>Lato-BolIta.ttf</key>
+		<data>
+		IAf1RmYCIZQOnca5o8rpty++F68=
+		</data>
+		<key>Lato-LigIta.ttf</key>
+		<data>
+		WE80B3ZBL3fwTeBu4ENI74I9UJc=
 		</data>
 		<key>Lato-Reg.ttf</key>
 		<data>
@@ -58,23 +766,23 @@
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
-		ckL/T/MrVCdjW7ZaoSN+ipYIpMk=
+		hhxSy1jALiXvGVhFRqtemwUXm8o=
 		</data>
 		<key>LaunchImage-700-568h@2x.png</key>
 		<data>
-		ckL/T/MrVCdjW7ZaoSN+ipYIpMk=
+		9ItzEvaSt5KCBblS/CrTNkZmyuk=
 		</data>
 		<key>LaunchImage-700@2x.png</key>
 		<data>
-		HS5vZE51Szq+6MjNkzIK5jOa3Tc=
+		D/VOt7/8NzbSe8XNGrd1FeWB+3Q=
 		</data>
 		<key>LaunchImage.png</key>
 		<data>
-		bzWt1cifcZOhb94mbhGkDPAY+q4=
+		gcA7sVr39lUjnhe4+tJdN8FIu88=
 		</data>
 		<key>LaunchImage@2x.png</key>
 		<data>
-		HS5vZE51Szq+6MjNkzIK5jOa3Tc=
+		I9kQIvy3i9z5jTt1PxLV+5hE5uI=
 		</data>
 		<key>Main_background_cloud.png</key>
 		<data>
@@ -92,6 +800,14 @@
 		<data>
 		bUosCN8NCnfQu/GD4g8MWX2UnVQ=
 		</data>
+		<key>NavBox_Tribes.png</key>
+		<data>
+		K8dYW/SFTa2Ort7sDZNivK2zSY0=
+		</data>
+		<key>NavBox_Tribes@2x.png</key>
+		<data>
+		0ItaaIgiphvfVDof+SjdZA9sDws=
+		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
@@ -103,6 +819,86 @@
 		<key>SignUp_phoneNumber_background@2x.png</key>
 		<data>
 		TFLHFNDDuoeMWyzQXYoRFttbrLY=
+		</data>
+		<key>Tutorial_Step1.png</key>
+		<data>
+		yb0fY/m2+HOTXnM8MTHAP/kU8J0=
+		</data>
+		<key>Tutorial_Step1@2x.png</key>
+		<data>
+		lOf8+1HrV4lYkP3ZsFl53DBtbfQ=
+		</data>
+		<key>Tutorial_Step1_line.png</key>
+		<data>
+		OIWPY4Xyz7BjB1QtI/AvD7hPqtQ=
+		</data>
+		<key>Tutorial_Step1_line@2x.png</key>
+		<data>
+		JGF04J4ffaAgrStr2bTaZa68DoA=
+		</data>
+		<key>Tutorial_Step2.png</key>
+		<data>
+		qsKtVqKvAMzwqhXp/yod2TEyZS4=
+		</data>
+		<key>Tutorial_Step2@2x.png</key>
+		<data>
+		5XCMyIzBVPoEE+lWgEz75zDG9ss=
+		</data>
+		<key>Tutorial_Step2_line.png</key>
+		<data>
+		gsLB9mGTRdHCyb5sYy8R5uk0ljY=
+		</data>
+		<key>Tutorial_Step2_line@2x.png</key>
+		<data>
+		jOT+nA0jcQVTBxuutcMwOpiVhNM=
+		</data>
+		<key>Tutorial_Step3.png</key>
+		<data>
+		9Vw1s+q2YhihfPYYADtSNKukoT8=
+		</data>
+		<key>Tutorial_Step3@2x.png</key>
+		<data>
+		TJkzC/uUybpwZsJCrIqbTXZO9DA=
+		</data>
+		<key>Tutorial_Step5.png</key>
+		<data>
+		D4Baf3mhb9QjX/0cCr1oTwsTUAg=
+		</data>
+		<key>Tutorial_Step5@2x.png</key>
+		<data>
+		X+fbnxWXHA6EBKsZSSDuuAIwW9I=
+		</data>
+		<key>Tutorial_Step5_line.png</key>
+		<data>
+		FrE6x5MsQ24SUnTZB9d+GyV/jGQ=
+		</data>
+		<key>Tutorial_Step5_line@2x.png</key>
+		<data>
+		fsLBvaG41mVyGXoKuGPIYQdn/Zk=
+		</data>
+		<key>User_image_edit.png</key>
+		<data>
+		YpNtEtKdgqUA1B40hDX/Mx5pFBk=
+		</data>
+		<key>User_image_edit@2x.png</key>
+		<data>
+		y0HguWs4ThvRxyh9z5wNuR+BH14=
+		</data>
+		<key>User_profile_shadow.png</key>
+		<data>
+		iiDnb/gI/UFJNYHnfkT3mvcBdM8=
+		</data>
+		<key>User_profile_shadow@2x.png</key>
+		<data>
+		hzcpb/ZlqdtZmSQJMiTDJlXu4/I=
+		</data>
+		<key>User_settings.png</key>
+		<data>
+		CX2Rzh7TcCeRx+GE2sjrsyMMttY=
+		</data>
+		<key>User_settings@2x.png</key>
+		<data>
+		tWTpAGWKozNNJ1rz1J8GKu+2P6g=
 		</data>
 		<key>attendee_cell.png</key>
 		<data>
@@ -119,6 +915,14 @@
 		<key>back_arrow@2x.png</key>
 		<data>
 		7hsSj4+tWxyNm/G9H5Sw+1TkjPI=
+		</data>
+		<key>back_cross.png</key>
+		<data>
+		zur5BVQwGOA4s9q3SGNTYJjTcts=
+		</data>
+		<key>back_cross@2x.png</key>
+		<data>
+		9cCoBrGsePbOJqMkcigM7faj6Tk=
 		</data>
 		<key>bringup_profile_arrow.png</key>
 		<data>
@@ -242,7 +1046,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		gKBEdd95f3yn1kQ5Yt41f7XyfP8=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -338,7 +1142,7 @@
 		</data>
 		<key>fr.lproj/Localizable.strings</key>
 		<data>
-		7cMz3+tT3k8MIAblI8Ny2qxS8+w=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>fullview_action_circle_go.png</key>
 		<data>
@@ -738,7 +1542,7 @@
 		</data>
 		<key>pt.lproj/Localizable.strings</key>
 		<data>
-		7cMz3+tT3k8MIAblI8Ny2qxS8+w=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>ru.lproj/InfoPlist.strings</key>
 		<data>
@@ -746,7 +1550,7 @@
 		</data>
 		<key>ru.lproj/Localizable.strings</key>
 		<data>
-		7cMz3+tT3k8MIAblI8Ny2qxS8+w=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>scroll_content.png</key>
 		<data>
@@ -770,11 +1574,87 @@
 		</data>
 		<key>sv.lproj/Localizable.strings</key>
 		<data>
-		Xr6awDvo3DTzTGxptmQnzoW6e7c=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>.gitkeep</key>
+		<data>
+		2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+		</data>
+		<key>Activity_Empty_feed_Bakground.png</key>
+		<data>
+		naj6imT33wWuQLGjahJuOueUCD8=
+		</data>
+		<key>Activity_Empty_feed_Bakground@2x.png</key>
+		<data>
+		229BTF3FOTVOcjHDlOIQhj68QcM=
+		</data>
+		<key>Activity_Empty_feed_illustration_local.png</key>
+		<data>
+		hjrGKhmtEa3rP/rA9nuju1oWSUQ=
+		</data>
+		<key>Activity_Empty_feed_illustration_local@2x.png</key>
+		<data>
+		kderFOSXH+1it7n+utHzweZUn/k=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile.png</key>
+		<data>
+		Q75/y8m2VCGTnqEvCcgJKVFpf7c=
+		</data>
+		<key>Activity_Empty_feed_illustration_profile@2x.png</key>
+		<data>
+		43Twm37epHCbOH0vMTC93Bch0KI=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes.png</key>
+		<data>
+		Xl/Q1RSNUD0qrGuyZCoYFe/X2Yw=
+		</data>
+		<key>Activity_Empty_feed_illustration_tribes@2x.png</key>
+		<data>
+		kozJWJFSNE8aXnLQaOxguoZ+Dek=
+		</data>
+		<key>AnimationCreateActivity_cloud.png</key>
+		<data>
+		VuUKyWr8shNs52U7RwwttpjK2lk=
+		</data>
+		<key>AnimationCreateActivity_cloud@2x.png</key>
+		<data>
+		HojbtMIK3Wry08midIPLhvgmCmY=
+		</data>
+		<key>AnimationCreateActivity_cloud_2.png</key>
+		<data>
+		DJHYvr2GMuAZea0898qoJ/VAPx0=
+		</data>
+		<key>AnimationCreateActivity_cloud_2@2x.png</key>
+		<data>
+		cOA+UmjcWUnBBF7iDEJK7j89Atk=
+		</data>
+		<key>AnimationCreateActivity_local.png</key>
+		<data>
+		AiUqrBSuB6K1BO6PCtSTMt9sWEU=
+		</data>
+		<key>AnimationCreateActivity_local@2x.png</key>
+		<data>
+		03JLUSZ71eHTNbf4WG/sGHEe+fI=
+		</data>
+		<key>AnimationCreateActivity_local_locked.png</key>
+		<data>
+		zP8RcOmKdII6CIwn/xhQQ6gj2eM=
+		</data>
+		<key>AnimationCreateActivity_local_locked@2x.png</key>
+		<data>
+		dKHk+eitl3OPEoAf1C7obRpnQsg=
+		</data>
+		<key>AnimationCreateActivity_tribes.png</key>
+		<data>
+		hPxXPhA73RfE0yER85CeNQwNkbo=
+		</data>
+		<key>AnimationCreateActivity_tribes@2x.png</key>
+		<data>
+		MkXOYDzmMt0vA9hQmplLinC0Cg8=
+		</data>
 		<key>AppIcon57x57.png</key>
 		<data>
 		wIhTIrL91MPb7ho5LuHkBXNw2Ds=
@@ -797,15 +1677,147 @@
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
-		ckL/T/MrVCdjW7ZaoSN+ipYIpMk=
+		NXfY85510R10hSmzU9mL5o9Rpck=
 		</data>
 		<key>Default.png</key>
 		<data>
-		bzWt1cifcZOhb94mbhGkDPAY+q4=
+		gcA7sVr39lUjnhe4+tJdN8FIu88=
 		</data>
 		<key>Default@2x.png</key>
 		<data>
-		HS5vZE51Szq+6MjNkzIK5jOa3Tc=
+		DFzwswD6ZNcRI6btrITPPV0lL8U=
+		</data>
+		<key>DiallingCodes.plist</key>
+		<data>
+		M6ZcvMRfFMb07m447HKuJ3ZWHuo=
+		</data>
+		<key>F1_Add_Cell_Location.png</key>
+		<data>
+		/zjV7Bf1EZRe4KHIqjmwRfCmvSs=
+		</data>
+		<key>F1_Add_Cell_Location@2x.png</key>
+		<data>
+		TiyNO8+iS1dKdjl+jSQqIXmk7DI=
+		</data>
+		<key>F1_Add_Cell_Location_checked.png</key>
+		<data>
+		4JhzV5u02ZVIGPKf5t38vxYa/DM=
+		</data>
+		<key>F1_Add_Cell_Location_checked@2x.png</key>
+		<data>
+		3F0LjUJruGTiCJqOHe1pPb6WbCQ=
+		</data>
+		<key>F1_Calendar_dote_Disable.png</key>
+		<data>
+		j9gPC0PTg85Y8+dcEC7FOtD0000=
+		</data>
+		<key>F1_Calendar_dote_Disable@2x.png</key>
+		<data>
+		v7EpXD+uyq4mmUQiwbwD+zrUEXg=
+		</data>
+		<key>F1_Calendar_dote_Enable.png</key>
+		<data>
+		lMzNfok87qTrjdN9KBFkn19hfdE=
+		</data>
+		<key>F1_Calendar_dote_Enable@2x.png</key>
+		<data>
+		KAT5SHbnjhraSWqIZA14b4RmX54=
+		</data>
+		<key>F1_Shadow_Description.png</key>
+		<data>
+		axIy49irG5Ni3aFbJNcSbcgSlCk=
+		</data>
+		<key>F1_Shadow_Description@2x.png</key>
+		<data>
+		UX1GQudlyxznhHYHJ1rFvboVVbE=
+		</data>
+		<key>F1_add_description.png</key>
+		<data>
+		rapvDHszED5AGZ+6Jci4EkolY7I=
+		</data>
+		<key>F1_add_description@2x.png</key>
+		<data>
+		/invu6Jgb1Gdati8s9HHvl3oghU=
+		</data>
+		<key>F1_add_description_selected.png</key>
+		<data>
+		FXfFpRyo3QV+bw7/OvvwID6RNUQ=
+		</data>
+		<key>F1_add_description_selected@2x.png</key>
+		<data>
+		+naqteaCsX7G3LehSYDFIXfrVc8=
+		</data>
+		<key>F1_calendar.png</key>
+		<data>
+		9CuMvItjepr4JVI64Ud/9fYJwZ0=
+		</data>
+		<key>F1_calendar@2x.png</key>
+		<data>
+		yWsaPxg5d6jKBSE8r6X2jDWNF+0=
+		</data>
+		<key>F1_calendar_selected.png</key>
+		<data>
+		xVmCDlgQUfaJgP60wphH+4rZQLI=
+		</data>
+		<key>F1_calendar_selected@2x.png</key>
+		<data>
+		Liq5bGDwmGpACd41usQnc9V2qFM=
+		</data>
+		<key>F1_input_Location_reset.png</key>
+		<data>
+		eSX2nwhQplc0FX0zBYRZtd0AxWc=
+		</data>
+		<key>F1_input_Location_reset@2x.png</key>
+		<data>
+		lI3hZM0nyh9kSKwRY5U/QQ4PL7I=
+		</data>
+		<key>F1_lenght_picker.png</key>
+		<data>
+		o2nLS/9gvX3HGe79s9ks1gIvG28=
+		</data>
+		<key>F1_lenght_picker@2x.png</key>
+		<data>
+		R+9f1EyyWwa3vjRfcl07DFTJBGI=
+		</data>
+		<key>F1_open_map.png</key>
+		<data>
+		mTxGRzLXxWHCyyWSuP3tYwj+Icc=
+		</data>
+		<key>F1_open_map@2x.png</key>
+		<data>
+		TuZvXqtBim3VBIr8dGbk2MnGQyU=
+		</data>
+		<key>F1_time_picker.png</key>
+		<data>
+		abhV+pi9uyo99e6o27XH24ZnUg0=
+		</data>
+		<key>F1_time_picker@2x.png</key>
+		<data>
+		HM9vCIsLjrXN/BQj7StMsl85D4A=
+		</data>
+		<key>F5_inputCell_selected.png</key>
+		<data>
+		Bagd/hPnMoBstYHzTsmin4XGkcw=
+		</data>
+		<key>F5_inputCell_selected@2x.png</key>
+		<data>
+		TMbap7NZzanRq/4l1vJo/9Um+aQ=
+		</data>
+		<key>F5_local_icones.png</key>
+		<data>
+		0/oXsNxRRrP7So41V6DVKrTi690=
+		</data>
+		<key>F5_local_icones@2x.png</key>
+		<data>
+		lTdq279mYYq+OaAvjF4Kl+tATkE=
+		</data>
+		<key>F5_tribes_icones.png</key>
+		<data>
+		6ay6ZdoM5YLoOLCWVwsm197+xw4=
+		</data>
+		<key>F5_tribes_icones@2x.png</key>
+		<data>
+		KVCQRl06nsvSkz2TWlTd751ZtM8=
 		</data>
 		<key>FindLocationsViewController.nib/objects.nib</key>
 		<data>
@@ -815,9 +1827,509 @@
 		<data>
 		7z1kWlp+26Kc9F8mdVHVOsJWKdw=
 		</data>
+		<key>G1_pipe.png</key>
+		<data>
+		Zgj31agxIoTusfn8MH5T9jxEu+U=
+		</data>
+		<key>G1_pipe@2x.png</key>
+		<data>
+		kI1zZtVssaGuj5nJWb6J4x6mYSw=
+		</data>
+		<key>G2_fail_hand.png</key>
+		<data>
+		4SzTmcsXs/VwHV0RDchr0OPhGUM=
+		</data>
+		<key>G2_fail_hand@2x.png</key>
+		<data>
+		+aEwdas5dPCMUfzYEJILbrw2uzU=
+		</data>
+		<key>G4Fail_eagle.png</key>
+		<data>
+		l1Lx87zaCkIQ7HNGDkLAlpLbR/k=
+		</data>
+		<key>G4Fail_eagle@2x.png</key>
+		<data>
+		n6QC1EHQb5vadJ9EYC0q17dMYhI=
+		</data>
+		<key>G5_Fail_arrow_broke.png</key>
+		<data>
+		ohOQq2AikqrwVX7jB3BRPQGqJsQ=
+		</data>
+		<key>G5_Fail_arrow_broke@2x.png</key>
+		<data>
+		imZiZV5xjO1xUDUT1KyBm0MEkqM=
+		</data>
+		<key>G5_arrow_.png</key>
+		<data>
+		FONKX/L2W1kBkpsza+eWUQ1nwK8=
+		</data>
+		<key>G5_arrow_@2x.png</key>
+		<data>
+		aIvfO9lQ37+6gq+XOPm94igt04E=
+		</data>
+		<key>Instabug.bundle/Instabug-FloatingButton.png</key>
+		<data>
+		2x5ZSQrwXqGijGQE97gK+3cibMs=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored@2x~ipad.png</key>
+		<data>
+		y+EXRFlKtGmrxiNavVOk+tSoMa0=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored@2x~iphone.png</key>
+		<data>
+		HN2TR6Spv5aEhsw5G+ogS3a6cDE=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored~ipad.png</key>
+		<data>
+		+9lxO9ecT9j2xb0u1f3ATlnsebY=
+		</data>
+		<key>Instabug.bundle/Instabug-LogoColored~iphone.png</key>
+		<data>
+		jKi+biX0i+XNv+3s80dRSWt+fp4=
+		</data>
+		<key>Instabug.bundle/Instabug-ShutterSound.aif</key>
+		<data>
+		4pajYikVli2JYPCQuL0XpPFW5eY=
+		</data>
+		<key>Instabug.bundle/Instabug-T@2x~ipad.png</key>
+		<data>
+		0buL0MFlXcp96FmTi6zh/e7sqgA=
+		</data>
+		<key>Instabug.bundle/Instabug-T@2x~iphone.png</key>
+		<data>
+		Cg7GuX+wTVH08IxwtGbNgvnuTiI=
+		</data>
+		<key>Instabug.bundle/Instabug-T~ipad.png</key>
+		<data>
+		zVpOqOstg4xE+JYgxxvgFkOwdc8=
+		</data>
+		<key>Instabug.bundle/Instabug-T~iphone.png</key>
+		<data>
+		d9cYjEJiwrmgkutqXb9env8c2rk=
+		</data>
+		<key>Instabug.bundle/Instabug-color1@2x~ipad.png</key>
+		<data>
+		QySO/9Rh2hvCHRdIQ2UZPy0dD7U=
+		</data>
+		<key>Instabug.bundle/Instabug-color1@2x~iphone.png</key>
+		<data>
+		KWrSrzXcUAjE3JIrelYaOepdBrg=
+		</data>
+		<key>Instabug.bundle/Instabug-color1~ipad.png</key>
+		<data>
+		PweXpVlj/pqqSTcxNcg3E9Djbis=
+		</data>
+		<key>Instabug.bundle/Instabug-color1~iphone.png</key>
+		<data>
+		92oxslJle1I1CodCGKMImEFBK/g=
+		</data>
+		<key>Instabug.bundle/Instabug-color2@2x~ipad.png</key>
+		<data>
+		l9AnMgBsyQKhNDvomr/IpJE/OCc=
+		</data>
+		<key>Instabug.bundle/Instabug-color2@2x~iphone.png</key>
+		<data>
+		3Kjm+QuNy3ko54jli3nJbpzhjXk=
+		</data>
+		<key>Instabug.bundle/Instabug-color2~ipad.png</key>
+		<data>
+		O/tQLgSVMO6BDcGTgsqjM7EwubI=
+		</data>
+		<key>Instabug.bundle/Instabug-color2~iphone.png</key>
+		<data>
+		Y0JlK0AQ/h5sG3yI2jZw3vj+OeM=
+		</data>
+		<key>Instabug.bundle/Instabug-color3@2x~ipad.png</key>
+		<data>
+		aoa9qXOat3/FAHzZuCkFlhRYjM0=
+		</data>
+		<key>Instabug.bundle/Instabug-color3@2x~iphone.png</key>
+		<data>
+		xp4xTnEk1GvBPxuBCBtXAccZae4=
+		</data>
+		<key>Instabug.bundle/Instabug-color3~ipad.png</key>
+		<data>
+		QaAv3ZJpO5X7ie/uuT/j+xF9r8I=
+		</data>
+		<key>Instabug.bundle/Instabug-color3~iphone.png</key>
+		<data>
+		8DjpxuAKwajDV4jZEpNk/4HPy9A=
+		</data>
+		<key>Instabug.bundle/Instabug-color4@2x~ipad.png</key>
+		<data>
+		08SM4XX0zwxlVxDufrwOiZnoeLE=
+		</data>
+		<key>Instabug.bundle/Instabug-color4@2x~iphone.png</key>
+		<data>
+		wu8IAqw3iBo98Or7edxf+TZFyP0=
+		</data>
+		<key>Instabug.bundle/Instabug-color4~ipad.png</key>
+		<data>
+		Vw5bEsATyaP/tacqQi1L6bYVBHI=
+		</data>
+		<key>Instabug.bundle/Instabug-color4~iphone.png</key>
+		<data>
+		tK1o2/LXhQBxO2xmoj76iEBFafE=
+		</data>
+		<key>Instabug.bundle/Instabug-color5@2x~ipad.png</key>
+		<data>
+		MoRZNiVfx9xzyzYo1xpZJtJIPiQ=
+		</data>
+		<key>Instabug.bundle/Instabug-color5@2x~iphone.png</key>
+		<data>
+		IVpjReaSVOxIEGf8XRH4gnpOq2M=
+		</data>
+		<key>Instabug.bundle/Instabug-color5~ipad.png</key>
+		<data>
+		73EmU5kk7YY/jkT9Yk5XGRDIqRc=
+		</data>
+		<key>Instabug.bundle/Instabug-color5~iphone.png</key>
+		<data>
+		pGpAIJg4VGAy/EslXp5t4penUr4=
+		</data>
+		<key>Instabug.bundle/Instabug-color6@2x~ipad.png</key>
+		<data>
+		MTcKRp9zXC1zvhWrJNZnihY5qOY=
+		</data>
+		<key>Instabug.bundle/Instabug-color6@2x~iphone.png</key>
+		<data>
+		6LdjcrJtudi6l84eKkzGCcaEn7c=
+		</data>
+		<key>Instabug.bundle/Instabug-color6~ipad.png</key>
+		<data>
+		+kzgQ+PiJ6hhHLFUqZ4p8B9QklU=
+		</data>
+		<key>Instabug.bundle/Instabug-color6~iphone.png</key>
+		<data>
+		sYecgC2Nm4M2K6aCpzrQQEDf3vo=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer@2x~ipad.png</key>
+		<data>
+		p9v+VksdQn8qroCo+yiFw5tMa5k=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer@2x~iphone.png</key>
+		<data>
+		KiVbf8Nk4ccXRqiELYbCFfsL3+U=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer~ipad.png</key>
+		<data>
+		eFctvjKzPgwv4jTRfs4OCuuFGME=
+		</data>
+		<key>Instabug.bundle/Instabug-colorContainer~iphone.png</key>
+		<data>
+		joB3VwBuCOWhNhgYT2flVGVjgcc=
+		</data>
+		<key>Instabug.bundle/Instabug-delete@2x~ipad.png</key>
+		<data>
+		C7AnjTG8k1WkzqeoG7U3orayCP8=
+		</data>
+		<key>Instabug.bundle/Instabug-delete@2x~iphone.png</key>
+		<data>
+		V2YEO9AF8239+Hj/CgzhH7HlJXk=
+		</data>
+		<key>Instabug.bundle/Instabug-delete~ipad.png</key>
+		<data>
+		ExyumClQjVgekMlvN7qaCKMPo+M=
+		</data>
+		<key>Instabug.bundle/Instabug-delete~iphone.png</key>
+		<data>
+		sXGF0Xy7Txo4BBQA7SJciG3T+iY=
+		</data>
+		<key>Instabug.bundle/Instabug-pen@2x~ipad.png</key>
+		<data>
+		cjA6n9iqgOnvnSFoyeQdQ0Zw8d4=
+		</data>
+		<key>Instabug.bundle/Instabug-pen@2x~iphone.png</key>
+		<data>
+		8AYWLea01QJxHgKe16otw72WAZg=
+		</data>
+		<key>Instabug.bundle/Instabug-pen~ipad.png</key>
+		<data>
+		ajjIIa9WrpRbv7CeW6HvWUzCj/U=
+		</data>
+		<key>Instabug.bundle/Instabug-pen~iphone.png</key>
+		<data>
+		eIwv69CLyzo5PJ1hBfC+uk4XYCM=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1@2x~ipad.png</key>
+		<data>
+		k7aqlYO5Qjt2vrtzcU8W2ysjG38=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1@2x~iphone.png</key>
+		<data>
+		k7aqlYO5Qjt2vrtzcU8W2ysjG38=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1~ipad.png</key>
+		<data>
+		sHVlrAfIyAVQlnIH7Wko3TGhATA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected1~iphone.png</key>
+		<data>
+		sHVlrAfIyAVQlnIH7Wko3TGhATA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2@2x~ipad.png</key>
+		<data>
+		pOGF7xbH3LgHSC8JpnhMPaZ1FQA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2@2x~iphone.png</key>
+		<data>
+		pOGF7xbH3LgHSC8JpnhMPaZ1FQA=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2~ipad.png</key>
+		<data>
+		+eA6u571/lxCmMKUqjc8BB7j/sE=
+		</data>
+		<key>Instabug.bundle/Instabug-selected2~iphone.png</key>
+		<data>
+		+eA6u571/lxCmMKUqjc8BB7j/sE=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3@2x~ipad.png</key>
+		<data>
+		dyOHlyBjZKBHVN2xorzSgNE14zY=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3@2x~iphone.png</key>
+		<data>
+		dyOHlyBjZKBHVN2xorzSgNE14zY=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3~ipad.png</key>
+		<data>
+		lUrdki30D2N7wDTYCCuNjytYXNg=
+		</data>
+		<key>Instabug.bundle/Instabug-selected3~iphone.png</key>
+		<data>
+		lUrdki30D2N7wDTYCCuNjytYXNg=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4@2x~ipad.png</key>
+		<data>
+		1KcdK7NaSAMuQVbg7Kq1GqoNkGk=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4@2x~iphone.png</key>
+		<data>
+		1KcdK7NaSAMuQVbg7Kq1GqoNkGk=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4~ipad.png</key>
+		<data>
+		VPWEnvjg1DPsLebcZ3K0Tx3o53I=
+		</data>
+		<key>Instabug.bundle/Instabug-selected4~iphone.png</key>
+		<data>
+		VPWEnvjg1DPsLebcZ3K0Tx3o53I=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5@2x~ipad.png</key>
+		<data>
+		AZ8aWP53TXFDbHeGJ4sGBPCL6jo=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5@2x~iphone.png</key>
+		<data>
+		AZ8aWP53TXFDbHeGJ4sGBPCL6jo=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5~ipad.png</key>
+		<data>
+		neyz+tIJ2EVLyzVdFaTOQE0UIis=
+		</data>
+		<key>Instabug.bundle/Instabug-selected5~iphone.png</key>
+		<data>
+		neyz+tIJ2EVLyzVdFaTOQE0UIis=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6@2x~ipad.png</key>
+		<data>
+		c4NhlnrMOuT1N0l8BHHt9vRxXzM=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6@2x~iphone.png</key>
+		<data>
+		c4NhlnrMOuT1N0l8BHHt9vRxXzM=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6~ipad.png</key>
+		<data>
+		NexoDvfPRsFJi2v1xpmwfv+OLIU=
+		</data>
+		<key>Instabug.bundle/Instabug-selected6~iphone.png</key>
+		<data>
+		NexoDvfPRsFJi2v1xpmwfv+OLIU=
+		</data>
+		<key>Instabug.bundle/Instabug-tick@2x~ipad.png</key>
+		<data>
+		GG3nrCVQbc7rRDpDOexnCfbmdVk=
+		</data>
+		<key>Instabug.bundle/Instabug-tick@2x~iphone.png</key>
+		<data>
+		p5E5W7gPjRHJu8Q0CNJ+kGUqR/U=
+		</data>
+		<key>Instabug.bundle/Instabug-tick~ipad.png</key>
+		<data>
+		yNLahCr+jYEoASrhfQufIhAIxmA=
+		</data>
+		<key>Instabug.bundle/Instabug-tick~iphone.png</key>
+		<data>
+		zmam4xI5LPAFk6gxLO8FBespFtI=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPad.nib/objects.nib</key>
+		<data>
+		h5qS0tiEFYYbxi+l4c/QSWd42hw=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPad.nib/runtime.nib</key>
+		<data>
+		h5qS0tiEFYYbxi+l4c/QSWd42hw=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPhone.nib/objects.nib</key>
+		<data>
+		3WY/++qGXCG0d7/HLqV7biVhDAw=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-Landscape-iPhone.nib/runtime.nib</key>
+		<data>
+		WP3scg6Il0te0943JYEGGYekWfo=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPad.nib/objects.nib</key>
+		<data>
+		WhFp2FUfedSP1y2G8Uuyjkd5IMs=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPad.nib/runtime.nib</key>
+		<data>
+		WhFp2FUfedSP1y2G8Uuyjkd5IMs=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPhone.nib/objects.nib</key>
+		<data>
+		rva4GKoJXl/AOmBLNmd5J76EgDY=
+		</data>
+		<key>Instabug.bundle/InstabugFeedbackViewController-iPhone.nib/runtime.nib</key>
+		<data>
+		PuBh09xHnFOcnFzoYJfFac9SvOU=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-Landscape-iPad.nib</key>
+		<data>
+		Lg3Xy5tPtoprtBgZPq/k0FAiypY=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-Landscape-iPhone.nib</key>
+		<data>
+		dmSnGw31eBUh7wdPddIEH4z1xHY=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-iPad.nib</key>
+		<data>
+		Mak6pn9QkuJMRGa0igTMzb/Tcg0=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-iPhone.nib/objects.nib</key>
+		<data>
+		7La5eroWhCSDjyZPlRre5uCx88M=
+		</data>
+		<key>Instabug.bundle/InstabugScreenshotViewController-iPhone.nib/runtime.nib</key>
+		<data>
+		7La5eroWhCSDjyZPlRre5uCx88M=
+		</data>
+		<key>Instabug.bundle/ar.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/ar.lproj/Localizable.strings</key>
+		<data>
+		WKC8cv34Mc4y83rDks63pSx/23c=
+		</data>
+		<key>Instabug.bundle/de.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/de.lproj/Localizable.strings</key>
+		<data>
+		gV9aMS2e20+yAmINyDe07O170Uo=
+		</data>
+		<key>Instabug.bundle/en.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/en.lproj/Localizable.strings</key>
+		<data>
+		lVIr3lIfSA7SgcNQFtTM72bkRwk=
+		</data>
+		<key>Instabug.bundle/es.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/es.lproj/Localizable.strings</key>
+		<data>
+		e6ylzurgmJ65Ie50dXBV6dmURS4=
+		</data>
+		<key>Instabug.bundle/fr.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/fr.lproj/Localizable.strings</key>
+		<data>
+		51uqIUKKRB/aqo5XfPNzhDMaUvA=
+		</data>
+		<key>Instabug.bundle/it.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/it.lproj/Localizable.strings</key>
+		<data>
+		uT1tsLo/N+HzoFKyPLcDr3+UrB4=
+		</data>
+		<key>Instabug.bundle/ja.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/ja.lproj/Localizable.strings</key>
+		<data>
+		8ghMJ6SoisRwbWPoZLZb8Nw8VI4=
+		</data>
+		<key>Instabug.bundle/pt-BR.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/pt-BR.lproj/Localizable.strings</key>
+		<data>
+		8nzJxOqOxdjBKJ1iyPST7NoEbMA=
+		</data>
+		<key>Instabug.bundle/pt.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/pt.lproj/Localizable.strings</key>
+		<data>
+		yl5n/iiFTEDdyPvANX/1jwv94Bo=
+		</data>
+		<key>Instabug.bundle/ru.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/ru.lproj/Localizable.strings</key>
+		<data>
+		XRbeIJ60gSiBwDo/U7dFxYQymL4=
+		</data>
+		<key>Instabug.bundle/tr.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/tr.lproj/Localizable.strings</key>
+		<data>
+		vxji13ceR0wnReaoztLEm0qf4TE=
+		</data>
+		<key>Instabug.bundle/zh-Hans.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/zh-Hans.lproj/Localizable.strings</key>
+		<data>
+		asb+RbQLDFKlGcgPh3r7NqKCYDI=
+		</data>
+		<key>Instabug.bundle/zh-Hant.lproj/InfoPlist.strings</key>
+		<data>
+		zmV6UqBSo6r1NOz798vd5O4zTBA=
+		</data>
+		<key>Instabug.bundle/zh-Hant.lproj/Localizable.strings</key>
+		<data>
+		fc2wlg/r8taX6FHJo/ZtDdNeU0Q=
+		</data>
 		<key>Lato-Bol.ttf</key>
 		<data>
 		wzDVnz5k4HolccK6T0EJsgoWj2k=
+		</data>
+		<key>Lato-BolIta.ttf</key>
+		<data>
+		IAf1RmYCIZQOnca5o8rpty++F68=
+		</data>
+		<key>Lato-LigIta.ttf</key>
+		<data>
+		WE80B3ZBL3fwTeBu4ENI74I9UJc=
 		</data>
 		<key>Lato-Reg.ttf</key>
 		<data>
@@ -829,23 +2341,23 @@
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
-		ckL/T/MrVCdjW7ZaoSN+ipYIpMk=
+		hhxSy1jALiXvGVhFRqtemwUXm8o=
 		</data>
 		<key>LaunchImage-700-568h@2x.png</key>
 		<data>
-		ckL/T/MrVCdjW7ZaoSN+ipYIpMk=
+		9ItzEvaSt5KCBblS/CrTNkZmyuk=
 		</data>
 		<key>LaunchImage-700@2x.png</key>
 		<data>
-		HS5vZE51Szq+6MjNkzIK5jOa3Tc=
+		D/VOt7/8NzbSe8XNGrd1FeWB+3Q=
 		</data>
 		<key>LaunchImage.png</key>
 		<data>
-		bzWt1cifcZOhb94mbhGkDPAY+q4=
+		gcA7sVr39lUjnhe4+tJdN8FIu88=
 		</data>
 		<key>LaunchImage@2x.png</key>
 		<data>
-		HS5vZE51Szq+6MjNkzIK5jOa3Tc=
+		I9kQIvy3i9z5jTt1PxLV+5hE5uI=
 		</data>
 		<key>Main_background_cloud.png</key>
 		<data>
@@ -863,6 +2375,14 @@
 		<data>
 		bUosCN8NCnfQu/GD4g8MWX2UnVQ=
 		</data>
+		<key>NavBox_Tribes.png</key>
+		<data>
+		K8dYW/SFTa2Ort7sDZNivK2zSY0=
+		</data>
+		<key>NavBox_Tribes@2x.png</key>
+		<data>
+		0ItaaIgiphvfVDof+SjdZA9sDws=
+		</data>
 		<key>PkgInfo</key>
 		<data>
 		n57qDP4tZfLD1rCS43W0B4LQjzE=
@@ -874,6 +2394,86 @@
 		<key>SignUp_phoneNumber_background@2x.png</key>
 		<data>
 		TFLHFNDDuoeMWyzQXYoRFttbrLY=
+		</data>
+		<key>Tutorial_Step1.png</key>
+		<data>
+		yb0fY/m2+HOTXnM8MTHAP/kU8J0=
+		</data>
+		<key>Tutorial_Step1@2x.png</key>
+		<data>
+		lOf8+1HrV4lYkP3ZsFl53DBtbfQ=
+		</data>
+		<key>Tutorial_Step1_line.png</key>
+		<data>
+		OIWPY4Xyz7BjB1QtI/AvD7hPqtQ=
+		</data>
+		<key>Tutorial_Step1_line@2x.png</key>
+		<data>
+		JGF04J4ffaAgrStr2bTaZa68DoA=
+		</data>
+		<key>Tutorial_Step2.png</key>
+		<data>
+		qsKtVqKvAMzwqhXp/yod2TEyZS4=
+		</data>
+		<key>Tutorial_Step2@2x.png</key>
+		<data>
+		5XCMyIzBVPoEE+lWgEz75zDG9ss=
+		</data>
+		<key>Tutorial_Step2_line.png</key>
+		<data>
+		gsLB9mGTRdHCyb5sYy8R5uk0ljY=
+		</data>
+		<key>Tutorial_Step2_line@2x.png</key>
+		<data>
+		jOT+nA0jcQVTBxuutcMwOpiVhNM=
+		</data>
+		<key>Tutorial_Step3.png</key>
+		<data>
+		9Vw1s+q2YhihfPYYADtSNKukoT8=
+		</data>
+		<key>Tutorial_Step3@2x.png</key>
+		<data>
+		TJkzC/uUybpwZsJCrIqbTXZO9DA=
+		</data>
+		<key>Tutorial_Step5.png</key>
+		<data>
+		D4Baf3mhb9QjX/0cCr1oTwsTUAg=
+		</data>
+		<key>Tutorial_Step5@2x.png</key>
+		<data>
+		X+fbnxWXHA6EBKsZSSDuuAIwW9I=
+		</data>
+		<key>Tutorial_Step5_line.png</key>
+		<data>
+		FrE6x5MsQ24SUnTZB9d+GyV/jGQ=
+		</data>
+		<key>Tutorial_Step5_line@2x.png</key>
+		<data>
+		fsLBvaG41mVyGXoKuGPIYQdn/Zk=
+		</data>
+		<key>User_image_edit.png</key>
+		<data>
+		YpNtEtKdgqUA1B40hDX/Mx5pFBk=
+		</data>
+		<key>User_image_edit@2x.png</key>
+		<data>
+		y0HguWs4ThvRxyh9z5wNuR+BH14=
+		</data>
+		<key>User_profile_shadow.png</key>
+		<data>
+		iiDnb/gI/UFJNYHnfkT3mvcBdM8=
+		</data>
+		<key>User_profile_shadow@2x.png</key>
+		<data>
+		hzcpb/ZlqdtZmSQJMiTDJlXu4/I=
+		</data>
+		<key>User_settings.png</key>
+		<data>
+		CX2Rzh7TcCeRx+GE2sjrsyMMttY=
+		</data>
+		<key>User_settings@2x.png</key>
+		<data>
+		tWTpAGWKozNNJ1rz1J8GKu+2P6g=
 		</data>
 		<key>attendee_cell.png</key>
 		<data>
@@ -890,6 +2490,14 @@
 		<key>back_arrow@2x.png</key>
 		<data>
 		7hsSj4+tWxyNm/G9H5Sw+1TkjPI=
+		</data>
+		<key>back_cross.png</key>
+		<data>
+		zur5BVQwGOA4s9q3SGNTYJjTcts=
+		</data>
+		<key>back_cross@2x.png</key>
+		<data>
+		9cCoBrGsePbOJqMkcigM7faj6Tk=
 		</data>
 		<key>bringup_profile_arrow.png</key>
 		<data>
@@ -1013,7 +2621,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		gKBEdd95f3yn1kQ5Yt41f7XyfP8=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>facebook_btn_off.png</key>
 		<data>
@@ -1109,7 +2717,7 @@
 		</data>
 		<key>fr.lproj/Localizable.strings</key>
 		<data>
-		7cMz3+tT3k8MIAblI8Ny2qxS8+w=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>fullview_action_circle_go.png</key>
 		<data>
@@ -1509,7 +3117,7 @@
 		</data>
 		<key>pt.lproj/Localizable.strings</key>
 		<data>
-		7cMz3+tT3k8MIAblI8Ny2qxS8+w=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>ru.lproj/InfoPlist.strings</key>
 		<data>
@@ -1517,7 +3125,7 @@
 		</data>
 		<key>ru.lproj/Localizable.strings</key>
 		<data>
-		7cMz3+tT3k8MIAblI8Ny2qxS8+w=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 		<key>scroll_content.png</key>
 		<data>
@@ -1541,7 +3149,7 @@
 		</data>
 		<key>sv.lproj/Localizable.strings</key>
 		<data>
-		Xr6awDvo3DTzTGxptmQnzoW6e7c=
+		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
 		</data>
 	</dict>
 	<key>rules</key>

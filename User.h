@@ -12,14 +12,14 @@
 @interface User : NSObject <NSCoding>
 
 @property (readonly) NSUInteger userId;
-@property (strong,nonatomic) NSString *firstName;
-@property (strong,nonatomic) NSString *lastName;
-@property (strong,nonatomic) NSString *password;
-@property (strong,nonatomic) NSString *userName;
-@property (strong,nonatomic) NSString *email;
-@property (strong,nonatomic) NSString *token;
-@property (strong,nonatomic) NSURL *profileImageUrl;
-@property (strong,nonatomic) UIImage *profileImage;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *token;
+@property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSURL *profileImageUrl;
 @property (nonatomic) BOOL phoneIsVerified;
 
 
@@ -43,7 +43,19 @@
             ProfilePicture:(UIImage *)profilePicture
                      Block:(void (^)(User *user, NSError *error))block;
 
+/**
+ *  Get activities of the user
+ *
+ *  @param block Activities's user / Errors
+ */
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
+/**
+ *  Get activities of the tribes's user
+ *
+ *  @param block Activities's user / Errors
+ */
+- (void)userActivitiesTribesWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
 - (void)logOut;
 
@@ -66,6 +78,18 @@
 - (void)updateDevice:(NSString *)device_token
                Badge:(NSInteger)badge
            WithBlock:(void (^)(NSError *))block;
+
+/**
+ *  Detec the CANU User with the phone number in the phone book
+ *
+ *  @param arrayPhoneNumer Array with phone clean number
+ *  @param block
+ */
+- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block;
+
+- (void)checkCounterWithBlock:(void (^)(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error))block;
+
+- (void)countMeWithBlock:(void (^)(NSError *error))block;
 
 
 -(NSDictionary *)serialize;

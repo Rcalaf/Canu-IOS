@@ -15,6 +15,8 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "AFCanuAPIClient.h"
+#import "ErrorManager.h"
+#import <Instabug/Instabug.h>
 
 NSString *const FBSessionStateChangedNotification =
 @"se.canu.canu:FBSessionStateChangedNotification";
@@ -24,12 +26,11 @@ NSString *const FBSessionStateChangedNotification =
     MainViewController *loginViewController;
 }
 
+@synthesize errorManager = _errorManager;
 @synthesize user = _user;
 @synthesize device_token = _device_token;
 @synthesize feedViewController = _feedViewController;
 @synthesize currentLocation = _currentLocation;
-
-
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -48,11 +49,6 @@ NSString *const FBSessionStateChangedNotification =
         NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
         if (savedUserAttributes) {
             _user = [[User alloc] initWithAttributes:savedUserAttributes];
-
-            NSLog(@"appDel: user profile pic url: %@",_user.profileImageUrl);
-            
-            _user.profileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:_user.profileImageUrl]];
-            if (_user.profileImage == nil) _user.profileImage = [UIImage imageNamed:@"icon_userpic.png"];
         }
     }
     return _user;
@@ -67,7 +63,7 @@ NSString *const FBSessionStateChangedNotification =
         // Google Analytics //
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 20;
-        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+        [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
         id<GAITracker> tracker;
         tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-46900796-1"];
         NSLog(@"//////// WARNING ////////");
@@ -75,6 +71,11 @@ NSString *const FBSessionStateChangedNotification =
         NSLog(@"//////// WARNING ////////");
         NSLog(@"DISTRIBUTION MODE ENABLE");
         NSLog(@"//////// WARNING ////////");
+    }
+
+    [Instabug KickOffWithToken:@"c44d12a703b04a0a5e797bba7452c9d5" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:YES];
+    if (self.user) {
+        [Instabug setEmail:self.user.email];
     }
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
@@ -84,13 +85,12 @@ NSString *const FBSessionStateChangedNotification =
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"YES" value:nil] build]];
     }
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (self.user) {
-        
-        if (self.user.phoneIsVerified || ![AFCanuAPIClient sharedClient].distributionMode) {
+        if (self.user.phoneIsVerified) {
             NSLog(@"User Active");
             self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
             [self.canuViewController pushViewController:self.feedViewController animated:NO];
@@ -101,7 +101,6 @@ NSString *const FBSessionStateChangedNotification =
             loginViewController.isPhoneCheck = YES;
             self.window.rootViewController = loginViewController;
         }
-        
     } else {
         loginViewController = [[MainViewController alloc] init];
         loginViewController.isPhoneCheck = NO;
@@ -114,8 +113,7 @@ NSString *const FBSessionStateChangedNotification =
     return YES;
 }
 
-- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
-{
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
     
     const char* data = [deviceToken bytes];
     NSMutableString* token = [NSMutableString string];
@@ -127,18 +125,12 @@ NSString *const FBSessionStateChangedNotification =
     _device_token = token;
     
     if (self.user) {
-        [self.user updateDeviceToken:_device_token Block:^(NSError *error){
-            if (error) {
-                NSLog(@"Device token request FAILED with Error: %@", [error.userInfo valueForKey:@"NSLocalizedDescription"]);
-            }
-        }];
-
+        [self.user updateDeviceToken:_device_token Block:nil];
     }
     
 }
 
-- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
-{
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
 	NSLog(@"Failed to get token, error: %@", error);
 }
 
@@ -146,14 +138,10 @@ NSString *const FBSessionStateChangedNotification =
     NSLog(@"%@",userInfo);
    // application.applicationIconBadgeNumber =application.applicationIconBadgeNumber + 1 ;
     
-
+NSLog(@"didReceiveRemoteNotification");
     if ( application.applicationState == UIApplicationStateActive ){
         
-        [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:^(NSError *error){
-            if (error) {
-               // NSLog(@"Request Failed with Error notification: %@", error);
-            }
-        }];
+        [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
     
 //        if ([[(UICanuNavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
 //            ChatViewController *currentChat = (ChatViewController *)[(UICanuNavigationController *)self.window.rootViewController visibleViewController];
@@ -180,9 +168,9 @@ NSString *const FBSessionStateChangedNotification =
        // NSLog(@"number of staged controllers: %d",[[(UINavigationController *)self.window.rootViewController viewControllers] count]);
        
         //Clean the max top three levels
-        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
-        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
-        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
+//        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
+//        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
+//        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
         
         // move to the main activity feed
 //        [(UICanuNavigationController *)self.window.rootViewController goActivities:nil];
@@ -203,13 +191,6 @@ NSString *const FBSessionStateChangedNotification =
     }
         
 }
-
-/*
-- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
-    // Handle the notificaton when the app is running
-    // app.applicationIconBadgeNumber = app.applicationIconBadgeNumber + 1;
-    NSLog(@"Recieved Notification from background%@",notif);
-}*/
 
 /*
  * Callback for session changes.
@@ -293,60 +274,26 @@ NSString *const FBSessionStateChangedNotification =
     return [FBSession.activeSession handleOpenURL:url];
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application{
 
-
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    // We need to properly handle activation of the application with regards to Facebook Login
-    // (e.g., returning from iOS 6.0 Login Dialog or from fast app switching).
     [FBSession.activeSession handleDidBecomeActive];
     application.applicationIconBadgeNumber = 0;
     if (_device_token) {
-        [self.user updateDevice:_device_token Badge:0 WithBlock:^(NSError *error){
-            if (error) {
-                NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-            }
-        }];
+        [self.user updateDevice:_device_token Badge:0 WithBlock:nil];
     }
-
-     //NSLog(@"%@",[[UIApplication sharedApplication] scheduledLocalNotifications]);
    
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Saves changes in the application's managed object context before the application terminates.
+- (void)applicationWillTerminate:(UIApplication *)application{
     [FBSession.activeSession close];
     [self saveContext];
 }
 
-- (void)saveContext
-{
+- (void)saveContext{
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 
@@ -437,7 +384,7 @@ NSString *const FBSessionStateChangedNotification =
 #pragma mark - User gestion
 
 - (void)logOut{
-    
+    NSLog(@"AppDelegate logOut");
     [self.feedViewController removeAfterlogOut];
     [self.canuViewController popViewControllerAnimated:NO];
     [self.canuViewController popToViewController:_feedViewController animated:NO];

@@ -10,7 +10,7 @@
 
 #import "UIScrollViewReverse.h"
 #import "UICanuActivityCellScroll.h"
-#import "NewActivityViewController.h"
+#import "CreateEditActivityViewController.h"
 #import "DetailActivityViewController.h"
 #import "DetailActivityViewControllerAnimate.h"
 #import "UICanuNavigationController.h"
@@ -19,6 +19,13 @@
 #import "UICanuNavigationController.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
+#import "ErrorManager.h"
+#import "UIProfileView.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "TTTAttributedLabel.h"
+#import "CounterTextViewController.h"
+#import "GAIFields.h"
 
 #import "AppDelegate.h"
 
@@ -32,39 +39,49 @@ typedef enum {
 
 @interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate>
 
-@property (nonatomic) UITextView *feedbackMessage;
-@property (nonatomic, readonly) NSArray *quotes;
-@property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
-@property (nonatomic, readonly) CLLocationManager *locationManager;
-@property (nonatomic) UIScrollViewReverse *scrollview;
-@property (nonatomic) NSMutableArray *arrayCell;
-@property (nonatomic) BOOL isUserProfile;
-@property (nonatomic) LoaderAnimation *loaderAnimation;
-@property (nonatomic) User *user;
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
-@property (nonatomic) UICanuNavigationController *navigation;
+@property (nonatomic) BOOL loadFirstTime;
+@property (nonatomic) BOOL counterModeEnable; // Counter
+@property (nonatomic) BOOL isCountIn; // Counter
+@property (nonatomic) CANUError canuError;
+@property (nonatomic) FeedTypes feedType;
+@property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
+@property (nonatomic, readonly) CLLocationManager *locationManager;
+@property (strong, nonatomic) NSMutableArray *arrayCell;
+@property (strong, nonatomic) UIImageView *imageEmptyFeed;
+@property (strong, nonatomic) UITextView *feedbackMessage;
+@property (strong, nonatomic) UIButton *callBackActionEmptyFeed;
+@property (strong, nonatomic) UILabel *counter; // Counter
+@property (strong, nonatomic) UILabel *peopleInclued; // Counter
+@property (strong, nonatomic) UILabel *earlyBird; // Counter
+@property (strong, nonatomic) User *user;
+@property (strong, nonatomic) TTTAttributedLabel *textCounter; // Counter
+@property (strong, nonatomic) UIScrollViewReverse *scrollview;
+@property (strong, nonatomic) LoaderAnimation *loaderAnimation;
+@property (strong, nonatomic) UICanuNavigationController *navigation;
 
 @end
 
 @implementation ActivityScrollViewController
 
-@synthesize activities = _activities;
-@synthesize quotes = _quotes;
-@synthesize currentLocation = _currentLocation;
 @synthesize locationManager = _locationManager;
 
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame{
+- (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame{
     self = [super init];
     if (self) {
-        if (!isUserProfile) {
-            NSLog(@"init ActivityScrollViewController Local");
-        }else{
-            NSLog(@"init ActivityScrollViewController User");
-        }
+        
+        self.feedType = feedType;
+        
         self.view.frame = frame;
         
-        self.isUserProfile = isUserProfile;
+//        if (_feedType == FeedLocalType) {
+//            NSLog(@"init ActivityScrollViewController Local");
+//        } else if (_feedType == FeedTribeType) {
+//            NSLog(@"init ActivityScrollViewController Tribes");
+//        } else if (_feedType == FeedProfileType) {
+//            NSLog(@"init ActivityScrollViewController Profile");
+//        }
         
         self.user = user;
         
@@ -72,75 +89,156 @@ typedef enum {
         
         self.isFirstTime = YES;
         
-        [self.locationManager startUpdatingLocation];
+        self.isEmpty = YES;
+        
+        self.loadFirstTime = NO;
+        
+        self.counterModeEnable = NO;
+        
+        self.isCountIn = NO;
+        
+        self.isUnlock = NO;
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
-        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(60.0f, 70.0f, 200.0f, 340.0f)];
-        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:25.0];
-        self.feedbackMessage.textColor                   = [UIColor colorWithRed:28.0f/255.0f green:165.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
+        self.imageEmptyFeed = [[UIImageView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480)];
+        self.imageEmptyFeed.alpha = 0;
+        [self.view addSubview:_imageEmptyFeed];
+        
+        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(40.0f, (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f)];
+        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:19.0];
+        self.feedbackMessage.textColor                   = [UIColor whiteColor];
         self.feedbackMessage.allowsEditingTextAttributes = NO;
         self.feedbackMessage.textAlignment               = NSTextAlignmentCenter;
-        self.feedbackMessage.backgroundColor             = self.view.backgroundColor;
+        self.feedbackMessage.backgroundColor             = [UIColor clearColor];
         self.feedbackMessage.alpha                       = 0;
         [self.view addSubview:self.feedbackMessage];
-        
-        [self showFeedback];
         
         self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
         [self.loaderAnimation startAnimation];
         [self.view addSubview:_loaderAnimation];
         
+        if (_feedType == FeedLocalType) {
+            
+            if (true) { // Counter Mode is Enable
+                
+                self.counterModeEnable = YES;
+                
+                self.counter = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50)];
+                self.counter.textColor = [UIColor whiteColor];
+                self.counter.font = [UIFont fontWithName:@"Lato-Bold" size:45];
+                self.counter.textAlignment = NSTextAlignmentCenter;
+                self.counter.backgroundColor = [UIColor clearColor];
+                self.counter.alpha = 0;
+                [self.view addSubview:_counter];
+                
+                self.peopleInclued = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 + 130, 320, 20)];
+                self.peopleInclued.textColor = [UIColor whiteColor];
+                self.peopleInclued.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+                self.peopleInclued.textAlignment = NSTextAlignmentCenter;
+                self.peopleInclued.backgroundColor = [UIColor clearColor];
+                self.peopleInclued.text = NSLocalizedString(@"people included", nil);
+                self.peopleInclued.alpha = 0;
+                [self.view addSubview:_peopleInclued];
+                
+                self.earlyBird = [[UILabel alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 + 325, 320, 20)];
+                self.earlyBird.textColor = [UIColor whiteColor];
+                self.earlyBird.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+                self.earlyBird.textAlignment = NSTextAlignmentCenter;
+                self.earlyBird.backgroundColor = [UIColor clearColor];
+                self.earlyBird.text = NSLocalizedString(@"Want early access?", nil);
+                self.earlyBird.alpha = 0;
+                [self.view addSubview:_earlyBird];
+                
+                [NSThread detachNewThreadSelector:@selector(checkCounter)toTarget:self withObject:nil];
+                
+            } else {
+                
+                switch ([CLLocationManager authorizationStatus]) {
+                    case kCLAuthorizationStatusAuthorized:
+                        self.canuError = CANUErrorNoError;
+                        break;
+                    case kCLAuthorizationStatusNotDetermined:
+                        self.canuError = CANUErrorLocationNotDetermined;
+                        break;
+                    case kCLAuthorizationStatusRestricted:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    case kCLAuthorizationStatusDenied:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    default:
+                        break;
+                }
+                
+                if (self.canuError == CANUErrorNoError) {
+                    [self.locationManager startUpdatingLocation];
+                } else {
+                    [self.loaderAnimation stopAnimation];
+                    [self showFeedback];
+                }
+                
+            }
+            
+        } else {
+            
+            self.loadFirstTime = YES;
+            [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+            
+        }
+        
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         self.scrollview.delegate = self;
+        if (_feedType == FeedProfileType) {
+            self.scrollview.clipsToBounds = NO;
+        }
         [self.view addSubview:_scrollview];
+        
+        if (self.counterModeEnable) {
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openWebViewCounter)];
+            
+            self.textCounter = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(50.0f, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60)];
+            self.textCounter.text = NSLocalizedString(@"Locked until we are enought.\nRead why", nil);
+            self.textCounter.textColor = [UIColor whiteColor];
+            self.textCounter.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+            self.textCounter.textAlignment = NSTextAlignmentCenter;
+            self.textCounter.numberOfLines = 2;
+            self.textCounter.backgroundColor = [UIColor clearColor];
+            [self.textCounter addGestureRecognizer:tap];
+            [self.view addSubview:_textCounter];
+            
+            [self.textCounter setText:self.textCounter.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+                
+                NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Read why", nil) options:NSCaseInsensitiveSearch];
+                
+                [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
+                
+                return mutableAttributedString;
+                
+            }];
+        }
+        
+        if (_feedType != FeedProfileType) {
+            self.callBackActionEmptyFeed = [[UIButton alloc]initWithFrame:CGRectMake(65, (self.view.frame.size.height - 480)/2 + 350, 190, 37)];
+            self.callBackActionEmptyFeed.backgroundColor = UIColorFromRGB(0x20383f);
+            [self.callBackActionEmptyFeed setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"I want to change this", nil) forState:UIControlStateNormal];
+            self.callBackActionEmptyFeed.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
+            [self.callBackActionEmptyFeed addTarget:self action:@selector(callBackAction) forControlEvents:UIControlEventTouchDown];
+            self.callBackActionEmptyFeed.alpha = 0;
+            self.callBackActionEmptyFeed.hidden = YES;
+            [self.view addSubview:_callBackActionEmptyFeed];
+        }
     
     }
     return self;
 }
 
-- (NSArray *)quotes{
-    if (!_quotes) {
-        if (!_isUserProfile) {
-            _quotes = [NSArray arrayWithObjects:@"Where are you living? Move to a better place where people do stuff.",
-                       @"Are you that guy who lives in the forest? Unfortunately the animal version of CANU is not ready.",
-                       @"Get the people in your area going, obviously they can't do anything themselves.",
-                       @"Seriously, you are in a boring city. You are the only one who can change this!",
-                       @"Are you on the moon? There is definitely not much going on around you.",
-                       @"Looks like you are the only one alive. Time to change this!",
-                       @"You are the first to reach America. Conquer this land with your friends.",
-                       @"Don’t wait for for someone to kick your butt. Kick others - create!",
-                       @"\"We have nothing to do\". - The bored people around you",
-                       @"Why do you even live in this town if nothing is happening here?", nil];
-        } else {
-            
-            _quotes = [NSArray arrayWithObjects:@"Why are you sitting on the bench all alone? Invite people to join you.",
-                       @"It’s a lovely day to get together for some boxing.",
-                       @"Your city is doing fun things. Just offer everyone something really boring this time.",
-                       @"Time to predict the future. How about cutting grass in the park?",
-                       @"Your city is doing boring stuff? Just offer them something they never thought of.",
-                       @"If you came here to check out some photos from last night. This is not the place. How about a new night out?",
-                       @"I don’t like us spending this much time together, please create an activity and do something. - Your phone.",
-                       @"Whats on your bucket list? Go do some of these things today with others!",
-                       @"Stop thinking about what your friends did yesterday, just get together again today.",
-                       @"Come on... Just go fishing.",
-                       @"Whats the craziest thing you've ever done? Do it again.",
-                       @"Maybe grab a beer at the zoo? How about a snowball fight?", nil];
-        }
-        
-    }
-    return _quotes;
-}
-
 - (UICanuNavigationController *)navigation{
-    if (_isUserProfile) {
-        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-    }
+    
     if (!_navigation) {
-        
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         _navigation = appDelegate.canuViewController;
-        
     }
     
     return  _navigation;
@@ -148,19 +246,22 @@ typedef enum {
 }
 
 - (CLLocationManager *)locationManager{
-    if (_locationManager != nil) {
-        _locationManager.delegate = self;
+    
+    if (_locationManager) {
         return _locationManager;
     }
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
-    _locationManager.desiredAccuracy=kCLLocationAccuracyBest;
-    _locationManager.distanceFilter=200;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.distanceFilter = 200;
     
     return _locationManager;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    
+    self.canuError = CANUErrorNoError;
+    
     _currentLocation = [[manager location] coordinate];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.currentLocation = _currentLocation;
@@ -168,23 +269,25 @@ typedef enum {
     
     [self.locationManager stopUpdatingLocation];
     
-    [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+    if (!_loadFirstTime) {
+        self.loadFirstTime = YES;
+        [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+    }
     
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region{
-//    if (_isUserProfile) {
-//        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-//    }
-    NSLog(@"loc manager Monitoring...");
     [self.loaderAnimation stopAnimation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-//    if (_isUserProfile) {
-//        self.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
-//    }
-    NSLog(@"loc manager Fail...");
+    
+    if (self.canuError == CANUErrorLocationNotDetermined) {
+        [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorLocationRestricted];
+    }
+    
+    self.canuError = CANUErrorLocationRestricted;
+    [self showFeedback];
     [self.loaderAnimation stopAnimation];
 }
 
@@ -202,11 +305,12 @@ typedef enum {
     [self.loaderAnimation contentOffset:newY];
     
     if (!_isReload) {
+        
         if (newY < 0) {
             
-            newY = fabsf(newY);
-            
             float value = 0,start = 0,end = 50;
+            
+            newY = fabsf(newY);
             
             if (newY > start && newY <= end) {
                 value = (newY - start) / (end - start);
@@ -218,9 +322,30 @@ typedef enum {
             
             [self.navigation changePosition:value];
             
-        }else{
+            if (self.counterModeEnable && !self.isUnlock) {
+                self.textCounter.frame = CGRectMake(50.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                self.counter.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                self.peopleInclued.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2 + 130, 320, 20);
+            } else if (self.isEmpty) {
+                self.imageEmptyFeed.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+            }
+            
+        } else {
+            
             [self.navigation changePosition:0];
+            
+            if (self.counterModeEnable && !self.isUnlock) {
+                self.textCounter.frame = CGRectMake(50.0f, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
+            } else if (self.isEmpty) {
+                self.imageEmptyFeed.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+            }
+            
         }
+        
     }
     
 }
@@ -249,19 +374,29 @@ typedef enum {
     [UIView animateWithDuration:0.4 animations:^{
         self.scrollview.frame = CGRectMake(0, - 58, _scrollview.frame.size.width, _scrollview.frame.size.height);
     } completion:^(BOOL finished) {
-        [self load];
+        
+        if (self.counterModeEnable && !self.isUnlock) {
+            [self checkCounter];
+        } else {
+            [self load];
+        }
+        
     }];
     
 }
 
 - (void)load{
     
-    if (!_isUserProfile) {
+    BOOL isEmptyBefore = self.isEmpty;
+    
+    if (_feedType == FeedLocalType) {
         
         [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
             
             if (error) {
-                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+                
+                // Visual information of this error adding by Error Manager
+                [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
                 
             } else {
                 
@@ -273,11 +408,19 @@ typedef enum {
                 
             }
             
+            if (isEmptyBefore != self.isEmpty) {
+                [self.delegate activityScrollViewControllerChangementFeed];
+            }
+            
             if (_isReload) {
                 
                 [UIView animateWithDuration:0.4 animations:^{
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                    }
                 } completion:^(BOOL finished) {
                     [self.loaderAnimation stopAnimation];
                     
@@ -290,17 +433,15 @@ typedef enum {
             
         }];
         
-    }else{
-        
-        [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+    }else if(_feedType == FeedTribeType){
+            
+        [self.user userActivitiesTribesWithBlock:^(NSArray *activities, NSError *error) {
+            
             if (error) {
-                if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
-                    
-                    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-                    [appDelegate.user logOut];
-                } else {
-                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                }
+                
+                // Visual information of this error adding by Error Manager
+                [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
+                
             } else {
                 
                 _activities = activities;
@@ -311,11 +452,64 @@ typedef enum {
                 
             }
             
+            if (isEmptyBefore != self.isEmpty) {
+                [self.delegate activityScrollViewControllerChangementFeed];
+            }
+            
             if (_isReload) {
                 
                 [UIView animateWithDuration:0.4 animations:^{
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                    }
+                } completion:^(BOOL finished) {
+                    
+                    [self.loaderAnimation stopAnimation];
+                    
+                    self.isReload = NO;
+                    
+                }];
+            }
+            
+            [self.loaderAnimation stopAnimation];
+            
+        }];
+        
+    }else if(_feedType == FeedProfileType){
+        
+        [self.user userActivitiesWithBlock:^(NSArray *activities, NSError *error) {
+            
+            if (error) {
+                
+                // Visual information of this error adding by Error Manager
+                [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
+
+            } else {
+                
+                _activities = activities;
+                
+                [self showActivities];
+                
+                [self showFeedback];
+                
+            }
+            
+            if (isEmptyBefore != self.isEmpty) {
+                [self.delegate activityScrollViewControllerChangementFeed];
+            }
+            
+            if (_isReload) {
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
+                    [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                    }
                 } completion:^(BOOL finished) {
                     
                     [self.loaderAnimation stopAnimation];
@@ -333,24 +527,67 @@ typedef enum {
 
 - (void)showFeedback{
     
-    NSInteger r = arc4random()%[self.quotes count];
-    
-    if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        self.activities = @[];
+    if (self.counterModeEnable && !self.isUnlock) {
+        
+        self.isEmpty = YES;
+        
+        self.callBackActionEmptyFeed.hidden = NO;
+        
+        [UIView  animateWithDuration:0.4 animations:^{
+            self.callBackActionEmptyFeed.alpha = 1;
+            self.counter.alpha = 1;
+            self.peopleInclued.alpha = 1;
+        } completion:nil];
+        
+    } else if (self.canuError == CANUErrorLocationRestricted || self.canuError == CANUErrorLocationNotDetermined) {
+        
+        self.isEmpty = YES;
+        
+        self.feedbackMessage.text = NSLocalizedString(@"We need to know where you are", nil);
+        
+        self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_local"];
+        
+        self.callBackActionEmptyFeed.hidden = NO;
+        [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"Enable my GPS", nil) forState:UIControlStateNormal];
+        
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
+            self.imageEmptyFeed.alpha = 1;
+            self.callBackActionEmptyFeed.alpha = 1;
         } completion:nil];
         [self showActivities];
-        self.feedbackMessage.text = @"Please go to settings > Privacy > Location Services and enable GPS.";
     } else if ([_activities count] == 0){
-        self.feedbackMessage.text = [_quotes objectAtIndex:r];
+        self.isEmpty = YES;
+        if (_feedType == FeedLocalType) {
+            self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_local"];
+            self.feedbackMessage.text = NSLocalizedString(@"There isn't much happening around you", nil);
+        } else if (_feedType == FeedTribeType){
+            self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_tribes"];
+            self.feedbackMessage.text = NSLocalizedString(@"Your friends seem asleep", nil);
+        } else if (_feedType == FeedProfileType){
+            self.imageEmptyFeed.image = [UIImage imageNamed:@"Activity_Empty_feed_illustration_profile"];
+            self.feedbackMessage.text = NSLocalizedString(@"Looks like you have plenty of spare time", nil);
+        }
+        self.callBackActionEmptyFeed.hidden = NO;
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
+            self.imageEmptyFeed.alpha = 1;
+            self.callBackActionEmptyFeed.alpha = 1;
         } completion:nil];
+        [self showActivities];
     } else {
+        self.isEmpty = NO;
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 0;
-        } completion:nil];
+            self.imageEmptyFeed.alpha = 0;
+            self.callBackActionEmptyFeed.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.callBackActionEmptyFeed.hidden = YES;
+        }];
+    }
+    
+    if (self.isEmpty && _feedType == FeedTribeType) {
+        [self.delegate activityScrollViewControllerStartWithEmptyFeed];
     }
     
 }
@@ -415,7 +652,6 @@ typedef enum {
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
-        
         [cell.loadingIndicator startAnimating];
         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
         cell.animationButtonToGo.hidden = NO;
@@ -443,13 +679,18 @@ typedef enum {
                     [UIView animateWithDuration:0.2 animations:^{
                         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
-                        cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-                        if (!_isUserProfile) {
-                            [self showActivities];
+                        if (_feedType == FeedLocalType) {
+                            [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                        }else{
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+                        }else if (_feedType == FeedTribeType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                        }else if (_feedType == FeedProfileType) {
+                            [self load];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }
                     }];
                 }
@@ -457,9 +698,8 @@ typedef enum {
         }];
         
     }else if (cell.activity.status == UICanuActivityCellEditable) {
-        NewActivityViewController *eac = [[NewActivityViewController alloc] init];
-        eac.activity = cell.activity;
-        [self presentViewController:eac animated:YES completion:nil];
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:cell.activity];
+        [self presentViewController:editView animated:YES completion:nil];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
         
         [cell.loadingIndicator startAnimating];
@@ -489,13 +729,18 @@ typedef enum {
                     [UIView animateWithDuration:0.2 animations:^{
                         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
-                        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
-                        if (!_isUserProfile) {
-                            [self showActivities];
+                        if (_feedType == FeedLocalType) {
+                            [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                        }else{
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+                        }else if (_feedType == FeedTribeType) {
                             [self load];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                        }else if (_feedType == FeedProfileType) {
+                            [self load];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                         }
                     }];
                 }
@@ -506,7 +751,12 @@ typedef enum {
 }
 
 - (void)touchCell:(UITapGestureRecognizer *)sender{
-    NSLog(@"touchCell");
+    
+    if (_feedType == FeedProfileType) {
+        [self.delegate hiddenProfileView:YES];
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height);
+    }
+    
     UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
     
     for (int i = 0; i < [_arrayCell count]; i++) {
@@ -519,6 +769,7 @@ typedef enum {
             
             [UIView animateWithDuration:0.4 animations:^{
                 cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 0;
             }];
             
         }else if (i == cellTouch.tag){
@@ -527,7 +778,7 @@ typedef enum {
             
             float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
             
-            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, self.view.frame.size.height) andActivity:activity andPosition:position];
+            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity andPosition:position];
             davc.delegate = self;
             davc.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self addChildViewController:davc];
@@ -541,6 +792,7 @@ typedef enum {
             
             [UIView animateWithDuration:0.4 animations:^{
                 cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 0;
             }];
             
         }
@@ -551,27 +803,232 @@ typedef enum {
 
 - (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
     
+    if (_feedType == FeedProfileType) {
+        [self.delegate hiddenProfileView:NO];
+        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height - 119);
+    }
+    
     for (int i = 0; i < [_arrayCell count]; i++) {
      
         UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
         
         [UIView animateWithDuration:0.4 animations:^{
             cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (120 + 10) + 10 ) - 120, 300, 120);
+            if (cell.activity != viewController.activity) {
+                cell.alpha = 1;
+            }
         }];
         
+    }
+    
+    if (viewController.closeAfterDelete) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
     }
     
     [self performSelector:@selector(killViewController:) withObject:viewController afterDelay:0.4];
     
 }
 
+- (void)callBackAction{
+    
+    if (self.counterModeEnable && !self.isUnlock && !self.isCountIn) {
+        [self.loaderAnimation startAnimation];
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        self.callBackActionEmptyFeed.hidden = YES;
+        [appDelegate.user countMeWithBlock:^(NSError *error) {
+            self.callBackActionEmptyFeed.hidden = NO;
+            [self.loaderAnimation stopAnimation];
+            [NSThread detachNewThreadSelector:@selector(checkCounter)toTarget:self withObject:nil];
+        }];
+    } else if (self.counterModeEnable && !self.isUnlock && self.isCountIn) {
+        [self openWebViewCounter];
+    } else if (self.canuError == CANUErrorLocationNotDetermined) {
+        [self.locationManager startUpdatingLocation];
+    } else if (self.canuError == CANUErrorLocationRestricted) {
+        [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorLocationRestricted];
+    } else {
+        CANUCreateActivity canuCreateActivity;
+        
+        if (_feedType == FeedLocalType) {
+            canuCreateActivity = CANUCreateActivityLocal;
+        } else if (_feedType == FeedTribeType) {
+            canuCreateActivity = CANUCreateActivityTribes;
+        } else {
+            canuCreateActivity = CANUCreateActivityLocal;
+        }
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
+        [self presentViewController:editView animated:YES completion:nil];
+    }
+    
+}
+
+- (void)checkCounter{
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    [appDelegate.user checkCounterWithBlock:^(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error) {
+        
+        [self.loaderAnimation stopAnimation];
+        
+        if (error) {
+            
+            self.scrollview.contentSize = CGSizeMake(320, _scrollview.frame.size.height + 1);
+            [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+            
+            self.counter.text = @"0";
+            [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"COUNT ME IN", nil) forState:UIControlStateNormal];
+            self.callBackActionEmptyFeed.userInteractionEnabled = YES;
+            
+            if (_isReload) {
+                
+                [UIView animateWithDuration:0.4 animations:^{
+                    [self.navigation changePosition:0];
+                    if (self.isEmpty) {
+                        self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                        self.textCounter.frame = CGRectMake(50, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                        self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
+                    }
+                } completion:^(BOOL finished) {
+                    [self.loaderAnimation stopAnimation];
+                    
+                    self.isReload = NO;
+                    
+                }];
+            }
+            
+            [self showFeedback];
+            
+        } else {
+            
+            self.isUnlock = [isUnlock boolValue];
+            self.isCountIn = [isCountIn boolValue];
+            
+            if (_isUnlock) {
+                
+                self.counter.alpha = 0;
+                self.counter.hidden = YES;
+                
+                self.peopleInclued.alpha = 0;
+                self.peopleInclued.hidden = YES;
+                
+                self.textCounter.alpha = 0;
+                self.textCounter.hidden = YES;
+                
+                self.earlyBird.alpha = 0;
+                self.earlyBird.hidden = YES;
+                
+                [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"I want to change this", nil) forState:UIControlStateNormal];
+                self.callBackActionEmptyFeed.hidden = YES;
+                
+                switch ([CLLocationManager authorizationStatus]) {
+                    case kCLAuthorizationStatusAuthorized:
+                        self.canuError = CANUErrorNoError;
+                        break;
+                    case kCLAuthorizationStatusNotDetermined:
+                        self.canuError = CANUErrorLocationNotDetermined;
+                        break;
+                    case kCLAuthorizationStatusRestricted:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    case kCLAuthorizationStatusDenied:
+                        self.canuError = CANUErrorLocationRestricted;
+                        break;
+                    default:
+                        break;
+                }
+                
+                if (self.canuError == CANUErrorNoError) {
+                    [self.locationManager startUpdatingLocation];
+                } else {
+                    [self.loaderAnimation stopAnimation];
+                    [self showFeedback];
+                }
+                
+            } else {
+                
+                self.counter.text = [NSString stringWithFormat:@"%i",[countTotal intValue]];
+                
+                if (_isCountIn) {
+                    self.textCounter.text = NSLocalizedString(@"We’ll let you know once\nnew areas go live.", nil);
+                    [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"BECOME AN EARLY BIRD", nil) forState:UIControlStateNormal];
+                    self.textCounter.gestureRecognizers = nil;
+                    
+                    self.earlyBird.hidden = NO;
+                    self.earlyBird.alpha = 1;
+                    
+                } else {
+                    
+                    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openWebViewCounter)];
+                    [self.textCounter addGestureRecognizer:tap];
+                    
+                    self.textCounter.text = NSLocalizedString(@"Locked until we are enought.\nRead why", nil);
+                    
+                    [self.textCounter setText:self.textCounter.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+                        
+                        NSRange termsRange = [[mutableAttributedString string] rangeOfString:NSLocalizedString(@"Read why", nil) options:NSCaseInsensitiveSearch];
+                        
+                        [mutableAttributedString addAttribute:(NSString *)kCTUnderlineStyleAttributeName value:[NSNumber numberWithInt:1] range:termsRange];
+                        
+                        return mutableAttributedString;
+                        
+                    }];
+                    
+                    [self.callBackActionEmptyFeed setTitle:NSLocalizedString(@"COUNT ME IN", nil) forState:UIControlStateNormal];
+                    
+                    self.earlyBird.alpha = 0;
+                    self.earlyBird.hidden = YES;
+                    
+                }
+                
+                self.scrollview.contentSize = CGSizeMake(320, _scrollview.frame.size.height + 1);
+                [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+                
+                if (_isReload) {
+                    
+                    [UIView animateWithDuration:0.4 animations:^{
+                        [self.navigation changePosition:0];
+                        if (self.isEmpty) {
+                            self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                            self.textCounter.frame = CGRectMake(50, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                            self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
+                        }
+                    } completion:^(BOOL finished) {
+                        [self.loaderAnimation stopAnimation];
+                        
+                        self.isReload = NO;
+                        
+                    }];
+                }
+                
+                [self showFeedback];
+                
+            }
+            
+        }
+        
+    }];
+    
+}
+
+- (void)openWebViewCounter{
+    
+    BOOL isEarlyBird = NO;
+    
+    if (self.counterModeEnable && self.isCountIn) {
+        isEarlyBird = YES;
+    }
+    
+    CounterTextViewController *counterTextViewController = [[CounterTextViewController alloc]initForEarlyBird:isEarlyBird];
+    
+    [self presentViewController:counterTextViewController animated:YES completion:nil];
+    
+}
+
 -(void)killViewController:(id)sender{
     
     for (int i = 0; i < [_arrayCell count]; i++) {
-        
         UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
         cell.alpha = 1;
-        
     }
     
     UIViewController *viewController = (UIViewController *) sender;
@@ -618,11 +1075,13 @@ typedef enum {
 
 - (void)dealloc{
     
-    if (!_isUserProfile) {
-        NSLog(@"dealloc ActivityScrollViewController Local");
-    }else{
-        NSLog(@"dealloc ActivityScrollViewController User");
-    }
+//    if (_feedType == FeedLocalType) {
+//        NSLog(@"dealloc ActivityScrollViewController Local");
+//    }else if (_feedType == FeedTribeType){
+//        NSLog(@"dealloc ActivityScrollViewController Tribes");
+//    }else if (_feedType == FeedProfileType){
+//        NSLog(@"dealloc ActivityScrollViewController Profile");
+//    }
     
 }
 

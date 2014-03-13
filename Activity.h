@@ -15,6 +15,7 @@
 
 @interface Activity : NSObject //<MKAnnotation>
 
+@property (readonly) BOOL privacyLocation;
 @property (readonly) NSUInteger activityId;
 @property (readonly) NSUInteger ownerId;
 @property (readonly) NSString *title;
@@ -26,6 +27,7 @@
 @property (readonly) NSDate *start;
 @property (readonly) NSDate *end;
 @property (readonly) NSString *length;
+@property (readonly) NSString *invitationToken;
 @property (readonly) CLLocationCoordinate2D coordinate;
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;
@@ -36,33 +38,40 @@
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
 
+/**
+ *  All activities around the user
+ *
+ *  @param coordinate
+ *  @param block
+ */
 + (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block;
+
 + (void)createActivityForUserWithTitle:(NSString *)title
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate
                                 Length:(NSString *)length
-                               EndDate:(NSString *)endDate
                                 Street:(NSString *)street
                                   City:(NSString *)city
                                    Zip:(NSString *)zip
                                Country:(NSString *)country
                               Latitude:(NSString *)latitude
                              Longitude:(NSString *)longitude
-                                 Image:(UIImage *)activityImage
-                                 Block:(void (^)(NSError *error))block;
+                                Guests:(NSMutableArray *)arrayGuests
+                       PrivateLocation:(BOOL)privatelocation
+                                 Block:(void (^)(Activity *activity,NSError *error))block;
 
 - (void)editActivityForUserWithTitle:(NSString *)title
                          Description:(NSString *)description
                            StartDate:(NSString *)startDate
                               Length:(NSString *)length
-                             EndDate:(NSString *)endDate
                               Street:(NSString *)street
                                 City:(NSString *)city
                                  Zip:(NSString *)zip
                              Country:(NSString *)country
                             Latitude:(NSString *)latitude
                            Longitude:(NSString *)longitude
-                               Image:(UIImage *)activityImage
+                              Guests:(NSMutableArray *)arrayGuests
+                     PrivateLocation:(BOOL)privatelocation
                                Block:(void (^)(NSError *error))block;
 
 + (void)activityWithId:(NSUInteger)activityId
@@ -70,7 +79,7 @@
 
 - (void)removeActivityWithBlock:(void (^)(NSError *error))block;
 
-- (void)attendees:(void (^)(NSArray *attendees, NSError *error))block;
+- (void)attendees:(void (^)(NSArray *attendees, NSArray *invitationUser, NSArray *invitationGhostuser, NSError *error))block;
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 - (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block;
 

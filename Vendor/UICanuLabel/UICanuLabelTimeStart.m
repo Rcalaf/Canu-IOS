@@ -17,6 +17,7 @@
         
         self.font            = [UIFont fontWithName:@"Lato-Bold" size:11.0];
         self.backgroundColor = UIColorFromRGB(0xf9f9f9);
+        self.textAlignment   = NSTextAlignmentRight;
         self.textColor       = UIColorFromRGB(0x2b4b58);
         
     }
@@ -26,12 +27,29 @@
 - (void)setDate:(NSDate *)date{
     
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-    [timeFormatter setDateStyle:NSDateFormatterMediumStyle];
-    timeFormatter.dateFormat       = @"HH:mm";
+    
+    if ([self timeIs24HourFormat]) {
+        timeFormatter.dateFormat = @"HH:mm";
+    } else {
+        timeFormatter.dateFormat = @"hh:mm a";
+    }
+    
     [timeFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
     
     self.text = [timeFormatter stringFromDate:date];
     
+}
+
+- (BOOL)timeIs24HourFormat {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterNoStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *dateString = [formatter stringFromDate:[NSDate date]];
+    NSRange amRange = [dateString rangeOfString:[formatter AMSymbol]];
+    NSRange pmRange = [dateString rangeOfString:[formatter PMSymbol]];
+    BOOL is24Hour = amRange.location == NSNotFound && pmRange.location == NSNotFound;
+    return is24Hour;
 }
 
 @end

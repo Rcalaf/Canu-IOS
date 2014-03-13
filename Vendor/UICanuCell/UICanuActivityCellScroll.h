@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class Activity;
+@class Activity,User;
 
 @interface UICanuActivityCellScroll : UIView
 

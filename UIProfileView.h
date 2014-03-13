@@ -12,14 +12,6 @@
 
 @interface UIProfileView : UIView
 
-@property (strong, nonatomic) IBOutlet UIImageView *profileImage;
-@property (strong, nonatomic) UILabel *name;
-@property (strong, nonatomic) IBOutlet UIImageView *settingsButton;
-@property (strong, nonatomic) UIView *mask;
-@property (strong, nonatomic) UIImageView *hideArrow;
-@property (readwrite, nonatomic) BOOL profileHidden;
+- (id)initWithFrame:(CGRect)frame User:(User *)user;
 
-
-- (id)initWithUser:(User *)user andFrame:(CGRect)frame;
-- (void)hideComponents:(BOOL)hide;
 @end

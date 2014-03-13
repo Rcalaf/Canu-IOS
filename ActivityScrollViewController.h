@@ -10,16 +10,33 @@
 
 #import "UICanuActivityCellScroll.h"
 
+typedef enum {
+    FeedLocalType = 0,
+    FeedTribeType = 1,
+    FeedProfileType = 2,
+} FeedTypes;
+
 @class User;
 
 @interface ActivityScrollViewController : UIViewController<UICanuActivityCellScrollDelegate>
 
 @property (strong, nonatomic) NSArray *activities;
+@property (nonatomic) BOOL isEmpty;
+@property (nonatomic) BOOL isUnlock; // Counter
+@property (retain) id delegate;
 
 - (void)reload;
 
-- (id)initForUserProfile:(BOOL)isUserProfile andUser:(User *)user andFrame:(CGRect)frame;
+- (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame;
 
 - (void)removeAfterlogOut;
 
+@end
+
+@protocol ActivityScrollViewControllerDelegate <NSObject>
+
+@required
+- (void)hiddenProfileView:(BOOL)hidden;
+- (void)activityScrollViewControllerStartWithEmptyFeed;
+- (void)activityScrollViewControllerChangementFeed;
 @end

@@ -9,15 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "ActivityScrollViewController.h"
 
+#import "AnimationCreateActivity.h"
 
 @interface ActivitiesFeedViewController : UIViewController
 
-- (void)userInteractionFeedEnable:(BOOL)value;
+@property (strong, nonatomic) AnimationCreateActivity *animationCreateActivity;
 
 - (void)changePosition:(float)position;
 
-- (void)showHideProfile;
-
 - (void)removeAfterlogOut;
+
+- (BOOL)localFeedIsUnlock;
 
 @end

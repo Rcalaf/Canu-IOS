@@ -90,6 +90,7 @@
                               //NSLog(@"error: %@",error);
                               if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
                                   [self.user logOut];
+                                  NSLog(@"EditUser Error");
                               } else {
                                   if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound) || self.email.text == nil) {
                                       self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];

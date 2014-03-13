@@ -57,7 +57,7 @@
 - (void)showTutorial:(id)sender
 {
     TutorialViewController *tutorial = [[TutorialViewController alloc] init];
-    [self presentViewController:tutorial animated:YES completion:nil];
+    [self presentViewController:tutorial animated:NO completion:nil];
 }
 
 

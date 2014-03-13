@@ -7,62 +7,54 @@
 //
 
 #import "User.h"
-#import "UIImageView+AFNetworking.h"
 #import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
 #import "Activity.h"
 #import "AFNetworking.h"
 #import "MainViewController.h"
+#import "ErrorManager.h"
 
 @interface User ()
 
-@property (strong,nonatomic) NSString *profileImageUrlShort;
+/**
+ *  Url of the profil picture without the hostname
+ */
+@property (strong, nonatomic) NSString *profileImageUrlShort;
 
 @end
 
 @implementation User
 
-@synthesize userId = _userId;
-@synthesize password = _password;
-@synthesize userName = _userName;
-@synthesize email = _email;
-@synthesize firstName = _firstName;
-@synthesize lastName = _lastName;
-@synthesize profileImageUrl = _profileImageUrl;
-@synthesize profileImage = _profileImage;
-@synthesize token = _token;
-@synthesize phoneIsVerified = _phoneIsVerified;
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    
     [aCoder encodeInteger:_userId forKey:@"userId"];
     [aCoder encodeObject:_userName forKey:@"userName"];
     [aCoder encodeObject:_email forKey:@"email"];
     [aCoder encodeObject:_firstName forKey:@"firstName"];
     [aCoder encodeObject:_lastName forKey:@"lastName"];
     [aCoder encodeObject:_token forKey:@"token"];
+    [aCoder encodeObject:_phoneNumber forKey:@"phone_number"];
     [aCoder encodeBool:_phoneIsVerified forKey:@"phoneIsVerified"];
     
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
+- (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
-        _userId    = [aDecoder decodeIntegerForKey:@"userId"];
-        _userName  = [aDecoder decodeObjectForKey:@"userName"];
-        _email     = [aDecoder decodeObjectForKey:@"email"];
-        _firstName = [aDecoder decodeObjectForKey:@"firstName"];
-        _lastName  = [aDecoder decodeObjectForKey:@"lastName"];
-        _token     = [aDecoder decodeObjectForKey:@"token"];
-        _phoneIsVerified  = [aDecoder decodeBoolForKey:@"phoneIsVerified"];
+        _userId          = [aDecoder decodeIntegerForKey:@"userId"];
+        _userName        = [aDecoder decodeObjectForKey:@"userName"];
+        _email           = [aDecoder decodeObjectForKey:@"email"];
+        _firstName       = [aDecoder decodeObjectForKey:@"firstName"];
+        _lastName        = [aDecoder decodeObjectForKey:@"lastName"];
+        _token           = [aDecoder decodeObjectForKey:@"token"];
+        _phoneNumber     = [aDecoder decodeObjectForKey:@"phone_number"];
+        _phoneIsVerified = [aDecoder decodeBoolForKey:@"phoneIsVerified"];
     }
     return self;
 }
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
-        
         _phoneIsVerified = false;
         
         _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
@@ -71,6 +63,7 @@
         _firstName       = [attributes valueForKeyPath:@"first_name"];
         _lastName        = [attributes valueForKeyPath:@"last_name"];
         _token           = [attributes valueForKeyPath:@"token"];
+        _phoneNumber     = [attributes valueForKeyPath:@"phone_number"];
         if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
             _phoneIsVerified  = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
         }
@@ -85,8 +78,9 @@
 {
     NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
     NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrlShort];
-    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,nil];
-    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",nil];
+    NSString *phoneNumber     = [NSString stringWithFormat:@"%@",self.phoneNumber];
+    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,phoneNumber,nil];
+    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",@"phone_number",nil];
     NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     return user;
@@ -218,7 +212,7 @@
 
 - (void)logOut
 {
-    
+    NSLog(@"logOut");
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.token,@"token", nil];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -325,9 +319,8 @@
     }];
 }
 
-- (void)editUserProfilePicture:(UIImage *)profilePicture
-                         Block:(void (^)(User *user, NSError *error))block
-{
+- (void)editUserProfilePicture:(UIImage *)profilePicture Block:(void (^)(User *user, NSError *error))block{
+    
     NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
     
     NSString *url = [NSString stringWithFormat:@"/users/%d/profile-image",self.userId];
@@ -349,8 +342,6 @@
                                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                             NSLog(@"Process completed %@",JSON);
                                                             User *user= [[User alloc] initWithAttributes:JSON];
-                                                            //[[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-                                                            //appDelegate.user = user;
                                                             if (block) {
                                                                 block(user, nil);
                                                             }
@@ -369,14 +360,22 @@
     
 }
 
-
+/**
+ *  Get activities of the user
+ *
+ *  @param block Activities's user / Errors
+ */
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
+    
     NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
     [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        
         for (NSDictionary *attributes in JSON) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             [mutableActivities addObject:activity];
@@ -384,47 +383,121 @@
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            block([NSArray array], error);
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block([NSArray alloc],customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"userActivitiesWithBlock:"];
+            }
+            
+        }];
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+}
+
+/**
+ *  Get activities of the tribes's user
+ *
+ *  @param block Activities's user / Errors
+ */
+- (void)userActivitiesTribesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%d/activities/tribes/",self.userId];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
+        
+        for (NSDictionary *attributes in JSON) {
+            Activity *activity = [[Activity alloc] initWithAttributes:attributes];
+            [mutableActivities addObject:activity];
         }
+        if (block) {
+            block([NSArray arrayWithArray:mutableActivities], nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block([NSArray alloc],customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"userActivitiesWithBlock:"];
+            }
+            
+        }];
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
 #pragma mark - User/device notification logic
 
-- (void)updateDeviceToken:(NSString *)device_token
-                    Block: (void (^)(NSError *error))block{
+- (void)updateDeviceToken:(NSString *)device_token Block:(void (^)(NSError *error))block{
     
     if (!device_token) device_token = @"";
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:device_token] forKeys: [NSArray arrayWithObject:@"device_token"]];
     
-    NSString *url = [NSString stringWithFormat:@"/users/%d/device_token",self.userId];
+    NSString *path = [NSString stringWithFormat:@"/users/%d/device_token",self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
-    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        //NSLog(@"%@",JSON);
+    [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         if (block) {
             block(nil);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            //NSLog(@"%@",error);
-            // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-            block(error);
-        }
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block(customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDeviceToken:Block:"];
+            }
+            
+        }];
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 }
 
-- (void)updateDevice:(NSString *)device_token Badge:(NSInteger)badge WithBlock:(void (^)(NSError *))block
-{
+- (void)updateDevice:(NSString *)device_token Badge:(NSInteger)badge WithBlock:(void (^)(NSError *))block{
+    
     if (!device_token) device_token = @"";
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:badge]] forKeys: [NSArray arrayWithObject:@"badge"]];
@@ -435,21 +508,146 @@
     
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
     [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        //NSLog(@"%@",JSON);
+        
         if (block) {
             block(nil);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            //NSLog(@"%@",error);
-            // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-            block(error);
-        }
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block(customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDevice:Badge:WithBlock:"];
+            }
+            
+        }];
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
 
 }
 
+#pragma mark Phone Book
+
+/**
+ *  Detec the CANU User with the phone number in the phone book
+ *
+ *  @param arrayPhoneNumer Array with phone clean number
+ *  @param block
+ */
+- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block{
+    
+    NSString *url = @"users/search/phonebook";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:arrayPhoneNumber] forKeys: [NSArray arrayWithObject:@"phone_numbers"]];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        NSArray *respond = (NSArray *)JSON;
+        
+        NSMutableArray *arrayCANUUser = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [respond count]; i++) {
+            User *user = [[User alloc]initWithAttributes:[respond objectAtIndex:i]];
+            [arrayCANUUser addObject:user];
+        }
+        
+        if (block) {
+            block(arrayCANUUser,nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+
+            if (block) {
+                block(nil,customError);
+            }
+
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"checkPhoneBook:WithBlock:"];
+            }
+            
+        }];
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
+#pragma mark - Counter
+
+- (void)checkCounterWithBlock:(void (^)(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error))block{
+    
+    NSString *url = @"counter/";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:self.userId]] forKeys: [NSArray arrayWithObject:@"user_id"]];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] getPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        if (block) {
+            
+            NSNumber *countTotal = [JSON objectForKey:@"countTotal"];
+            NSNumber *isCountIn = [NSNumber numberWithBool:[[JSON objectForKey:@"isCountIn"] boolValue]];
+            NSNumber *isUnlock = [NSNumber numberWithBool:[[JSON objectForKey:@"isUnlock"] boolValue]];
+            block(countTotal, isCountIn, isUnlock,nil);
+            
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (block) {
+            block(nil, nil, nil,error);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
+- (void)countMeWithBlock:(void (^)(NSError *error))block{
+    
+    NSString *url = @"counter/";
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:self.userId]] forKeys: [NSArray arrayWithObject:@"user_id"]];
+    
+    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
+    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+        
+        if (block) {
+            block(nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if (block) {
+            block(error);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
 
 @end

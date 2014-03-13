@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class User;
+@class User,Contact;
 
 @interface UICanuAttendeeCellScroll : UIView
 
-- (id)initWithFrame:(CGRect)frame andUser:(User *)user;
+@property (nonatomic) id delegate;
+
+- (id)initWithFrame:(CGRect)frame andUser:(User *)user orContact:(Contact *)contact;
+
+@end
+
+@protocol UICanuAttendeeCellScrollDelegate <NSObject>
 
 @end

@@ -2,8 +2,8 @@
 //  TutorialViewController.h
 //  CANU
 //
-//  Created by Roger Calaf on 25/08/13.
-//  Copyright (c) 2013 CANU. All rights reserved.
+//  Created by Vivien Cormier on 20/01/14.
+//  Copyright (c) 2014 CANU. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -18,6 +18,10 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
+#import "Contact.h"
+
+#import "PhoneBook.h"
+
 @interface NewActivityViewController () 
 
 
@@ -46,6 +50,8 @@
 @property (strong, nonatomic) MKMapItem *location;
 @property (strong, nonatomic) UILabel *locationName;
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
+
+@property (strong, nonatomic) NSMutableArray *DarrayCANUUser;
 
 //@property (strong, nonatomic) CLLocationManager *locationManager;
 
@@ -105,11 +111,11 @@ float oldValue;
       
        [self operationInProcess:YES];
        
-       NSDate *start;
+//       NSDate *start;
        if (self.activity) {
-          start = self.activity.start;
+//          start = self.activity.start;
        } else {
-          start = [NSDate date];
+//          start = [NSDate date];
        }
        
        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -122,14 +128,14 @@ float oldValue;
                                         Description:self.description.text
                                              StartDate:[dateFormatter stringFromDate:self.dateTime]//self.start.text
                                              Length:self.lengthPicker.text
-                                            EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
                                                City:self.location.placemark.addressDictionary[@"City"]
                                                 Zip:self.location.placemark.addressDictionary[@"ZIP"]
                                             Country:self.location.placemark.addressDictionary[@"Country"]
                                            Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
-                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
-                                              Image:[UIImage imageNamed:@"icon_userpic.png"]
+                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude]
+                                             Guests:nil
+                                    PrivateLocation:true
                                               Block:^(NSError *error) {
                                                   if (error) {
                                                       if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
@@ -143,28 +149,34 @@ float oldValue;
                                                           }
                                                       }
                                                   } else {
-                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                      
                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                       
                                                       id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                                                       [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Save" value:nil] build]];
+                                                      
+                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                      
                                                   }
                                                   [self operationInProcess:NO];
                                               }];
        } else {
+           
+           NSMutableArray *usersInvited = [self createArrayUserInvited];
+           
            [Activity createActivityForUserWithTitle:self.name.text
                                         Description:self.description.text
                                           StartDate:[dateFormatter stringFromDate:self.dateTime]//self.start.text
                                              Length:self.lengthPicker.text
-                                            EndDate:@""//[dateFormatter stringFromDate:end]
                                              Street:self.location.placemark.addressDictionary[@"Street"]
                                                City:self.location.placemark.addressDictionary[@"City"]
                                                 Zip:self.location.placemark.addressDictionary[@"ZIP"]
                                             Country:self.location.placemark.addressDictionary[@"Country"]
                                            Latitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.latitude]
-                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude ]
-                                              Image:[UIImage imageNamed:@"icon_userpic.png"]
-                                              Block:^(NSError *error) {
+                                          Longitude:[NSString stringWithFormat:@"%f",self.location.placemark.coordinate.longitude]
+                                             Guests:usersInvited
+                                    PrivateLocation:true
+                                              Block:^(Activity *activity, NSError *error) {
                                                   if (error) {
                                                       NSLog(@"%lu",(unsigned long)[[error localizedRecoverySuggestion] rangeOfString:@"title"].location);
                                                       if ([[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
@@ -179,11 +191,13 @@ float oldValue;
                                                       }
                                                     
                                                   } else {
-                                                      [self dismissViewControllerAnimated:YES completion:nil];
+                                                      
                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                       
                                                       id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                                                       [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Save" value:nil] build]];
+                                                      
+                                                      [self dismissViewControllerAnimated:YES completion:nil];
                                                       
                                                   }
                                                   [self operationInProcess:NO];
@@ -202,10 +216,13 @@ float oldValue;
     [self operationInProcess:YES];
     [self.activity removeActivityWithBlock:^(NSError *error){
         if (!error) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
             
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Delete" value:nil] build]];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
             
         } else {
             //[error localizedDescription]
@@ -300,6 +317,8 @@ float oldValue;
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Open" value:nil] build]];
         
+        [self checkPhoneBook];
+        
         _length = 15;
          AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
         //_location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:appDelegate.currentLocation addressDictionary:nil]];
@@ -317,13 +336,6 @@ float oldValue;
              
              _location = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]]];
              findLocationButton.userInteractionEnabled = YES;
-             //String to address
-             NSString *locatedaddress = [[_location.placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
-             
-             //Print the location in the console
-             NSLog(@"Currently address is: %@",locatedaddress);
-             
-             
              
          }];
         /*locationManager = appDelegate.locationManager;
@@ -605,45 +617,26 @@ float oldValue;
 }
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
+    
     [super viewDidLoad];
-   
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(itemMap:)
-                                                 name:FindLocationDissmised
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemMap:) name:FindLocationDissmised object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-
-  
-	// Do any additional setup after loading the view.
 }
 
-- (void)viewDidUnload
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:FindLocationDissmised
-                                                  object:nil];
+- (void)viewDidUnload{
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:FindLocationDissmised object:nil];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-     
-                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
      _activity = nil;
      _formGrid = nil;
      _name = nil;
@@ -658,13 +651,13 @@ float oldValue;
      _takePictureButton = nil;
      _location = nil;
      _locationName = nil;
+    
     [super viewDidUnload];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-   
-    
     [super viewWillDisappear:YES];
 }
 
@@ -680,5 +673,60 @@ float oldValue;
     return NO;
 }
 
+#pragma mark - Private
+
+- (void)checkPhoneBook{
+    
+    [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
+        
+        if (error) {
+            
+        } else {
+            
+            NSMutableArray *phoneNumberClean = [[NSMutableArray alloc]init];
+            
+            for (int i = 0; i < [arrayContact count]; i++) {
+                
+                Contact *contact = [arrayContact objectAtIndex:i];
+                [phoneNumberClean addObject:contact.convertNumber];
+                
+            }
+            
+            if ([phoneNumberClean count] != 0) {
+                
+                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+                
+                [appDelegate.user checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
+                    
+                    self.DarrayCANUUser = arrayCANUUser;
+                    
+                }];
+                
+            }
+            
+        }
+        
+    }];
+    
+}
+
+- (NSMutableArray *)createArrayUserInvited{
+    
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < [_DarrayCANUUser count]; i++) {
+        
+        User *user = [_DarrayCANUUser objectAtIndex:i];
+        
+        [array addObject:user.phoneNumber];
+        
+    }
+    
+    [array addObject:[NSString stringWithFormat:@"+33630089952"]];
+    [array addObject:[NSString stringWithFormat:@"+33638365742"]];
+    
+    return array;
+    
+}
 
 @end
