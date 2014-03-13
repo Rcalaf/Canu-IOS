@@ -27,6 +27,7 @@
 @property (readonly) NSDate *start;
 @property (readonly) NSDate *end;
 @property (readonly) NSString *length;
+@property (readonly) NSString *invitationToken;
 @property (readonly) CLLocationCoordinate2D coordinate;
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;

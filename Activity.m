@@ -207,6 +207,7 @@
     }
     _attendeeIds = mutableAssistents;
     
+    _invitationToken = [attributes valueForKeyPath:@"invitation_token"];
     
     return self;
 }

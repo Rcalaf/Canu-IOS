@@ -122,11 +122,12 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
         [formatterMonth setDateFormat:@"MMMM"];
         NSString *stringFromMonth = [formatterMonth stringFromDate:_activity.start];
         
-        NSString *string = [NSString stringWithFormat:@"%icanuGettogether%i",_activity.activityId,_activity.user.userId];
+        //NSString *string = [NSString stringWithFormat:@"%icanuGettogether%i",_activity.activityId,_activity.user.userId];
         
-        NSString *token = [self sha1:string];
+        //NSString *token = [self sha1:string];
         
-        controller.body = [NSString stringWithFormat:@"%@? ( %@, %i | %i.%i | %@, %@ ) canu.se/i/%i?key=%@",_activity.title,stringFromMonth,[_activity.start mk_day],[_activity.start mk_hour],[_activity.start mk_minutes],_activity.street,_activity.city,_activity.activityId,token];
+        //controller.body = [NSString stringWithFormat:@"%@? ( %@, %i | %i.%i | %@, %@ ) canu.se/i/%i?key=%@",_activity.title,stringFromMonth,[_activity.start mk_day],[_activity.start mk_hour],[_activity.start mk_minutes],_activity.street,_activity.city,_activity.activityId,token];
+        controller.body = [NSString stringWithFormat:@"%@? ( %@, %i | %i.%i | %@, %@ ) canu.se/i/%@",_activity.title,stringFromMonth,[_activity.start mk_day],[_activity.start mk_hour],[_activity.start mk_minutes],_activity.street,_activity.city,_activity.invitationToken];
         controller.recipients = phoneNumber;
         controller.messageComposeDelegate = self;
         [self.parentViewController presentViewController:controller animated:YES completion:nil];

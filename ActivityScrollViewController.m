@@ -137,7 +137,7 @@ typedef enum {
                 self.peopleInclued.font = [UIFont fontWithName:@"Lato-Regular" size:12];
                 self.peopleInclued.textAlignment = NSTextAlignmentCenter;
                 self.peopleInclued.backgroundColor = [UIColor clearColor];
-                self.peopleInclued.text = NSLocalizedString(@"people inclued", nil);
+                self.peopleInclued.text = NSLocalizedString(@"people included", nil);
                 self.peopleInclued.alpha = 0;
                 [self.view addSubview:_peopleInclued];
                 
