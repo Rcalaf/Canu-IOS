@@ -6,6 +6,7 @@ cCpResource /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platfo
 cDataModelVersionCompile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU.momd /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/CANU.xcdatamodeld
 cProcessPCH /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch.pch CANU/CANU-Prefix.pch normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/main.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/main.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuSearchLocation.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UIPicker/UICanuSearchLocation.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Message.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/Message.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ActivityScrollViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/C/ActivityScrollViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -37,7 +38,6 @@ cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Messag
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSString+MK_Base64.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/MKFoundationKit/NSString/NSString+MK_Base64.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/SignInViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TTTAttributedLabel.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/TTTAttributedLabel/TTTAttributedLabel.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Contact.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/Contact/Contact.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/MKCanuAnnotationView/MKCanuAnnotationView.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFPropertyListRequestOperation.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/AFNetworking/AFPropertyListRequestOperation.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -110,7 +110,7 @@ cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFURLC
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AttendeesScrollViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/AttendeeLists/AttendeesScrollViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TutorialViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/TutorialViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSelect.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuButton/UICanuButtonSelect.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/PrivacyPolicyViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSNumber+MK_Manipulation.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/MKFoundationKit/NSNumber/NSNumber+MK_Manipulation.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSignBottomBar.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuButton/UICanuButtonSignBottomBar.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 cCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ErrorManager.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Manager/ErrorManager.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
@@ -131,8 +131,6 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-11.png CANU/Ressources/Animations/Loader/loader-11.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loop_2.png CANU/Ressources/Animations/Loader/loop_2.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G5_Fail_arrow_broke@2x.png CANU/Ressources/Backgrounds/G5_Fail_arrow_broke@2x.png
-cCpResource CANU/Lato-Bol.ttf build/Debug-iphoneos/CANU.app/Lato-Bol.ttf
-cCpResource CANU/Lato-Reg.ttf build/Debug-iphoneos/CANU.app/Lato-Reg.ttf
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_calendar_selected.png CANU/Ressources/Buttons/F1_calendar_selected.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_input_Location_reset@2x.png CANU/Ressources/Buttons/F1_input_Location_reset@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-10@2x.png CANU/Ressources/Animations/Loader/loader-10@2x.png
@@ -141,23 +139,16 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/chat_send.png CANU/Ressources/Buttons/chat_send.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step2@2x.png CANU/Ressources/Backgrounds/Tutorial_Step2@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_Add_Cell_Location_checked@2x.png CANU/Ressources/Buttons/F1_Add_Cell_Location_checked@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_go.png CANU/fullview_action_circle_go.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-2.png CANU/Ressources/Animations/Loader/loader-2.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step1@2x.png CANU/Ressources/Backgrounds/Tutorial_Step1@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_password.png CANU/icon_password.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_password@2x.png CANU/icon_password@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_Shadow_Description.png CANU/Ressources/Backgrounds/F1_Shadow_Description.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/User_image_edit.png CANU/Ressources/Buttons/User_image_edit.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_Add_Cell_Location_checked.png CANU/Ressources/Buttons/F1_Add_Cell_Location_checked.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_username.png CANU/icon_username.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step5.png CANU/Ressources/Backgrounds/Tutorial_Step5.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_username@2x.png CANU/icon_username@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_calendar_selected@2x.png CANU/Ressources/Buttons/F1_calendar_selected@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-16.png CANU/Ressources/Animations/Loader/loader-16.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G2_fail_hand@2x.png CANU/Ressources/Backgrounds/G2_fail_hand@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_userpic.png CANU/icon_userpic.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-8@2x.png CANU/Ressources/Animations/Loader/loader-8@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_userpic@2x.png CANU/icon_userpic@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step5@2x.png CANU/Ressources/Backgrounds/Tutorial_Step5@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_lenght_picker.png CANU/Ressources/Backgrounds/F1_lenght_picker.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-11@2x.png CANU/Ressources/Animations/Loader/loader-11@2x.png
@@ -188,15 +179,11 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G5_arrow_.png CANU/Ressources/Backgrounds/G5_arrow_.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-5.png CANU/Ressources/Animations/Loader/loader-5.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Main_background_totem.png CANU/Ressources/Backgrounds/Main_background_totem.png
-cCpResource CANU/Lato-BolIta.ttf build/Debug-iphoneos/CANU.app/Lato-BolIta.ttf
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_local@2x.png CANU/navmenu_local@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loop_4@2x.png CANU/Ressources/Animations/Loader/loop_4@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Activity_Empty_feed_Bakground.png CANU/Ressources/Backgrounds/Activity_Empty_feed_Bakground.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Main_background_cloud.png CANU/Ressources/Backgrounds/Main_background_cloud.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-4.png CANU/Ressources/Animations/Loader/loader-4.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-14@2x.png CANU/Ressources/Animations/Loader/loader-14@2x.png
-cCpResource CANU/Lato-LigIta.ttf build/Debug-iphoneos/CANU.app/Lato-LigIta.ttf
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_me.png CANU/navmenu_me.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_local@2x.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_local@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_calendar.png CANU/Ressources/Buttons/F1_calendar.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_shadow_name@2x.png CANU/Ressources/Backgrounds/feed_shadow_name@2x.png
@@ -208,33 +195,23 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-4@2x.png CANU/Ressources/Animations/Loader/loader-4@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step1.png CANU/Ressources/Backgrounds/Tutorial_Step1.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/User_profile_shadow@2x.png CANU/Ressources/Shadow/User_profile_shadow@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_yes.png CANU/fullview_action_circle_yes.png
 cCpResource CANU/Framework/Instabug/Instabug.bundle build/Debug-iphoneos/CANU.app/Instabug.bundle
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Activity_Empty_feed_Bakground@2x.png CANU/Ressources/Backgrounds/Activity_Empty_feed_Bakground@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-12.png CANU/Ressources/Animations/Loader/loader-12.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Activity_Empty_feed_illustration_profile@2x.png CANU/Ressources/Backgrounds/Activity_Empty_feed_illustration_profile@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G5_arrow_@2x.png CANU/Ressources/Backgrounds/G5_arrow_@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_edit.png CANU/fullview_action_edit.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon-60.png icon-60.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/User_settings.png CANU/Ressources/Buttons/User_settings.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_add_description@2x.png CANU/Ressources/Buttons/F1_add_description@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_edit@2x.png CANU/fullview_action_edit@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_go.png CANU/fullview_action_go.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_go@2x.png CANU/fullview_action_go@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step2_line.png CANU/Ressources/Backgrounds/Tutorial_Step2_line.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_ppl.png CANU/fullview_action_ppl.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_add_description_selected@2x.png CANU/Ressources/Buttons/F1_add_description_selected@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loop_1.png CANU/Ressources/Animations/Loader/loop_1.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_ppl@2x.png CANU/fullview_action_ppl@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_yes.png CANU/fullview_action_yes.png
 cCpResource CANU/Framework/MKFoundationKit/NSDecimalNumber/.gitkeep build/Debug-iphoneos/CANU.app/.gitkeep
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step3.png CANU/Ressources/Backgrounds/Tutorial_Step3.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G1_pipe@2x.png CANU/Ressources/Backgrounds/G1_pipe@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_yes@2x.png CANU/fullview_action_yes@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-10.png CANU/Ressources/Animations/Loader/loader-10.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_tribes@2x.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_tribes@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_local_locked.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_local_locked.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_me@2x.png CANU/navmenu_me@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F5_local_icones.png CANU/Ressources/Backgrounds/F5_local_icones.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-7.png CANU/Ressources/Animations/Loader/loader-7.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_Shadow_Description@2x.png CANU/Ressources/Backgrounds/F1_Shadow_Description@2x.png
@@ -246,7 +223,6 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step5_line.png CANU/Ressources/Backgrounds/Tutorial_Step5_line.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loop_2@2x.png CANU/Ressources/Animations/Loader/loop_2@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-12@2x.png CANU/Ressources/Animations/Loader/loader-12@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_local.png CANU/navmenu_local.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_lenght_picker@2x.png CANU/Ressources/Backgrounds/F1_lenght_picker@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-3@2x.png CANU/Ressources/Animations/Loader/loader-3@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F5_tribes_icones.png CANU/Ressources/Backgrounds/F5_tribes_icones.png
@@ -264,7 +240,6 @@ cCopyStringsFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/buil
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_local.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_local.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-15@2x.png CANU/Ressources/Animations/Loader/loader-15@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/User_image_edit@2x.png CANU/Ressources/Buttons/User_image_edit@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_go@2x.png CANU/fullview_action_circle_go@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_add_description_selected.png CANU/Ressources/Buttons/F1_add_description_selected.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Main_background_cloud@2x.png CANU/Ressources/Backgrounds/Main_background_cloud@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G5_Fail_arrow_broke.png CANU/Ressources/Backgrounds/G5_Fail_arrow_broke.png
@@ -278,14 +253,12 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step3@2x.png CANU/Ressources/Backgrounds/Tutorial_Step3@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/SignUp_phoneNumber_background@2x.png CANU/Ressources/Backgrounds/SignUp_phoneNumber_background@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_time_picker.png CANU/Ressources/Backgrounds/F1_time_picker.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_yes@2x.png CANU/fullview_action_circle_yes@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_Add_Cell_Location@2x.png CANU/Ressources/Buttons/F1_Add_Cell_Location@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_cloud_2.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_cloud_2.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-9@2x.png CANU/Ressources/Animations/Loader/loader-9@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step2_line@2x.png CANU/Ressources/Backgrounds/Tutorial_Step2_line@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Tutorial_Step1_line.png CANU/Ressources/Backgrounds/Tutorial_Step1_line.png
 cCopyPlistFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/DiallingCodes.plist CANU/Supporting\ Files/DiallingCodes.plist
-cCpResource CANU/Lato-RegIta.ttf build/Debug-iphoneos/CANU.app/Lato-RegIta.ttf
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-6@2x.png CANU/Ressources/Animations/Loader/loader-6@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Default@2x.png CANU/Default@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_local_locked@2x.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_local_locked@2x.png
@@ -294,9 +267,7 @@ cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/De
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/F1_add_description.png CANU/Ressources/Buttons/F1_add_description.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/NavBox_Tribes@2x.png CANU/Ressources/NavBox/NavBox_Tribes@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/G4Fail_eagle.png CANU/Ressources/Backgrounds/G4Fail_eagle.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/map_pin.png CANU/map_pin.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AnimationCreateActivity_cloud_2@2x.png CANU/Ressources/Animations/AnimationcreateActivity/AnimationCreateActivity_cloud_2@2x.png
-cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/map_pin@2x.png CANU/map_pin@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Default.png CANU/Default.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/loader-2@2x.png CANU/Ressources/Animations/Loader/loader-2@2x.png
 cCopyPNGFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/NavBox_Tribes.png CANU/Ressources/NavBox/NavBox_Tribes.png
@@ -679,6 +650,16 @@ c00000000532193880000000000001D39
 t1394709384
 s7481
 
+N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.h
+c00000000532193880000000000000100
+t1394709384
+s256
+
+N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m
+c000000005321938800000000000025E2
+t1394709384
+s9698
+
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/C/ActivitiesFeedViewController.h
 c000000005321938800000000000001EA
 t1394709384
@@ -718,6 +699,11 @@ N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/Ed
 c0000000053219388000000000000283B
 t1394709384
 s10299
+
+N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m
+c00000000532193880000000000000911
+t1394709384
+s2321
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/UIProfileView.h
 c00000000532193890000000000000106
@@ -1770,9 +1756,9 @@ t1394709385
 s63470
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Images.xcassets
-c000000005321D5A10000000000000110
-t1394726305
-s272
+c000000005321D91B0000000000000154
+t1394727195
+s340
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Lato-Bol.ttf
 c0000000052A74863000000000001DBBC
@@ -1805,9 +1791,9 @@ t1394724020
 s833
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/MainViewController.h
-c00000000532193880000000000000100
-t1394709384
-s256
+c00000000000000000000000000000000
+t2
+s0
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/MainViewController.m
 c000000005321938800000000000025E2
@@ -1895,9 +1881,9 @@ t1394709384
 s1646
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/PrivacyPolicyViewController.h
-c0000000053219388000000000000010E
-t1394709384
-s270
+c00000000000000000000000000000000
+t2
+s0
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/PrivacyPolicyViewController.m
 c00000000532193880000000000000911
@@ -3355,7 +3341,7 @@ t1394709385
 s685
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent
-t1394726385
+t1394727267
 s456
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFCanuAPIClient.o
@@ -3415,16 +3401,16 @@ t1394724580
 s114148
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o
-t1394724021
-s116052
+t1394727260
+s116132
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AttendeesScrollViewController.o
 t1394724531
 s89056
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CANU.LinkFileList
-c000000005321D3E60000000000003E0A
-t1394725862
+c000000005321D99F0000000000003E0A
+t1394727327
 s15882
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ChatScrollView.o
@@ -3480,8 +3466,8 @@ t1394723426
 s41016
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o
-t1394724176
-s122592
+t1394727261
+s122672
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Message.o
 t1394723620
@@ -3612,8 +3598,8 @@ t1394723430
 s27728
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o
-t1394723436
-s61876
+t1394727328
+s61908
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Reachability.o
 t1394723427
@@ -3624,8 +3610,8 @@ t1394724179
 s100032
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o
-t1394724200
-s141976
+t1394727260
+s142040
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpStep1.o
 t1394724200
@@ -3636,8 +3622,8 @@ t1394724200
 s91748
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o
-t1394724178
-s188528
+t1394727328
+s188592
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TTTAttributedLabel.o
 t1394723426
@@ -3792,11 +3778,11 @@ t1394724527
 s40052
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o
-t1394723624
+t1394727261
 s196464
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o
-t1394725865
+t1394727328
 s75456
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/main.o
@@ -3804,19 +3790,19 @@ t1394723620
 s3448
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_dependencies.txt
-t1394726384
-s3232
+t1394727266
+s5914
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist
-t1394726384
+t1394727266
 s1089
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app
-t1394726385
+t1394727330
 s7446
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM
-t1394726087
+t1394727267
 s102
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/.gitkeep
@@ -3896,8 +3882,8 @@ t1394723444
 s20203
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU
-t1394726087
-s3587200
+t1394727329
+s3559012
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU.momd
 t1394723420
@@ -4088,7 +4074,7 @@ t1394723443
 s6982
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Info.plist
-t1394726384
+t1394727266
 s1811
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Instabug.bundle
@@ -4144,7 +4130,7 @@ t1394723447
 s2817
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/PkgInfo
-t1394726384
+t1394727266
 s8
 
 N/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/ResourceRules.plist
@@ -4710,6 +4696,9 @@ r0
 CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Chat/ChatScrollView.m
 r0
 
+CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m
+r0
+
 CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/C/ActivitiesFeedViewController.m
 r0
 
@@ -4720,6 +4709,9 @@ CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/
 r0
 
 CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/EditUserViewController.m
+r0
+
+CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m
 r0
 
 CBuild AST from /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UIProfileView.m
@@ -5141,21 +5133,20 @@ r0
 
 CCheck dependencies
 r0
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependencies6ce9ad6c0dd2b841^2507c86d0dd2b841^---0#1#1#--18"Check dependencies36"2F8F3894-E6BF-46C8-9A52-E00DCD97BD13-
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciesf4c11e1e11d2b841^643bc31f11d2b841^---0#1#1#--18"Check dependencies36"AE3D0EDB-5627-4CD7-86CD-0B3ED04D14B2-
 
 CCodeSign /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app
-s416419185.088678
-e416419185.672905
+s416420130.366412
+e416420130.809627
 r1
 xCodeSign
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app
-o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app: replacing existing signature
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection38"CodeSign build/Debug-iphoneos/CANU.app38"CodeSign build/Debug-iphoneos/CANU.app6fd416710dd2b841^8d44ac710dd2b841^-118"/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app: replacing existing signature-0#0#1#-19%DVTDocumentLocation2@97"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/0000000000000000^1014"CodeSign build/Debug-iphoneos/CANU.app    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/codesign_allocate    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    Using code signing identity "iPhone Developer: Roger Calaf (WZGVT5H53N)" and provisioning profile "CANU APNS development" (96EEBEF8-505E-4875-BBD2-F25FF2A90FF8)    /usr/bin/codesign --force --sign 08988D95152428F6CD7B52F2CDDDF370BF1AFB21 --resource-rules=/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/ResourceRules.plist --entitlements /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app36"4BDF9D8E-4039-4033-AB4B-6E63C324D540-
-bECFE5D14-44A6-43A5-9C27-CFA9FBD03B16
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection38"CodeSign build/Debug-iphoneos/CANU.app38"CodeSign build/Debug-iphoneos/CANU.appb3f05d2211d2b841^d444cf2211d2b841^---0#0#1#-19%DVTDocumentLocation2@97"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/0000000000000000^1014"CodeSign build/Debug-iphoneos/CANU.app    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/codesign_allocate    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    Using code signing identity "iPhone Developer: Roger Calaf (WZGVT5H53N)" and provisioning profile "CANU APNS development" (96EEBEF8-505E-4875-BBD2-F25FF2A90FF8)    /usr/bin/codesign --force --sign 08988D95152428F6CD7B52F2CDDDF370BF1AFB21 --resource-rules=/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/ResourceRules.plist --entitlements /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app36"10A86C09-472F-4CCD-85D5-7AF8E0B3FE9C-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
 
 CCompileAssetCatalog /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Images.xcassets
-s416419181.892491
-e416419184.344793
+s416420062.661206
+e416420066.255223
 r1
 xCompileAssetCatalog
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app
@@ -5169,6 +5160,10 @@ o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-568h@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_local.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_local@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_me.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_me@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/back_arrow.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/back_arrow@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/button_arrow.png
@@ -5177,6 +5172,14 @@ o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_bad@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_good.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_good@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/map_pin.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/map_pin@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_password.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_password@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_username.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_username@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_userpic.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_userpic@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_go.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_go@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_togo.png
@@ -5187,12 +5190,24 @@ o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_go@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_yes.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_yes@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_go.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_go@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_yes.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_yes@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_edit.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_edit@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_go.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_go@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_ppl.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_ppl@2x.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_yes.png
+o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_yes@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/edit_delete.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/edit_delete@2x.png
 o/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist
 o
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"CompileAssetCatalog build/Debug-iphoneos/CANU.app CANU/Images.xcassets70"CompileAssetCatalog build/Debug-iphoneos/CANU.app CANU/Images.xcassetsfa9be46d0dd2b841^244558700dd2b841^-3234"/* com.apple.actool.compilation-results *//Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AppIcon57x57.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AppIcon57x57@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AppIcon60x60@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-700@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-700-568h@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-568h@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/back_arrow.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/back_arrow@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/button_arrow.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/button_arrow@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_bad.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_bad@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_good.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_good@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_go.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_go@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_togo.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_togo@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_edit.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_edit@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_go.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_go@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_yes.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_yes@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/edit_delete.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/edit_delete@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist-0#0#1#-19%DVTDocumentLocation2@88"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Images.xcassets/0000000000000000^1082"CompileAssetCatalog build/Debug-iphoneos/CANU.app CANU/Images.xcassets    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/usr/bin/actool --output-format human-readable-text --notices --warnings --export-dependency-info /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_dependencies.txt --output-partial-info-plist /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist --app-icon AppIcon --launch-image LaunchImage --platform iphoneos --minimum-deployment-target 6.1 --target-device iphone --compress-pngs --compile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Images.xcassets36"E4C503EB-103C-45E6-8DCE-C25294F9E2D2-
-bECFE5D14-44A6-43A5-9C27-CFA9FBD03B16
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection70"CompileAssetCatalog build/Debug-iphoneos/CANU.app CANU/Images.xcassets70"CompileAssetCatalog build/Debug-iphoneos/CANU.app CANU/Images.xcassetsfa60a9de10d2b841^2e5941e210d2b841^-5892"/* com.apple.actool.compilation-results *//Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AppIcon57x57.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AppIcon57x57@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/AppIcon60x60@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-700@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-700-568h@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/LaunchImage-568h@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_local.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_local@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_me.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/navmenu_me@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/back_arrow.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/back_arrow@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/button_arrow.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/button_arrow@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_bad.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_bad@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_good.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feedback_good@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/map_pin.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/map_pin@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_password.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_password@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_username.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_username@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_userpic.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/icon_userpic@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_go.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_go@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_togo.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_circle_togo@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_edit.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_edit@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_go.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_go@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_yes.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/feed_action_yes@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_go.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_go@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_yes.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_circle_yes@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_edit.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_edit@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_go.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_go@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_ppl.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_ppl@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_yes.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/fullview_action_yes@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/edit_delete.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/edit_delete@2x.png/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist-0#0#1#-19%DVTDocumentLocation2@88"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Images.xcassets/0000000000000000^1082"CompileAssetCatalog build/Debug-iphoneos/CANU.app CANU/Images.xcassets    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/usr/bin/actool --output-format human-readable-text --notices --warnings --export-dependency-info /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_dependencies.txt --output-partial-info-plist /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist --app-icon AppIcon --launch-image LaunchImage --platform iphoneos --minimum-deployment-target 6.1 --target-device iphone --compress-pngs --compile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Images.xcassets36"47728E87-859C-4DB3-A974-1F81D4012E43-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/arm64/AFCanuAPIClient.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Networking\ Extensions/AFCanuAPIClient.m normal arm64 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 r0
@@ -5977,8 +5992,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection126"Compil
 b7E446E19-006A-449C-A1AE-2A172E616E9C
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s416416821.556400
-e416416821.889250
+s416420060.288934
+e416420060.672277
 r1
 xCompileC
 xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o
@@ -6013,7 +6028,7 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Facebo
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBNativeDialogs.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/User.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Manager/ErrorManager.h
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/MainViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/C/ActivitiesFeedViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/C/ActivityScrollViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Custom Classes/UICanuCell/UICanuActivityCellScroll.h
@@ -6026,8 +6041,8 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAITrackedViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAIDictionaryBuilder.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/Canu/Framework/Instabug/Instabug.framework/Headers/Instabug.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/AppDelegate.m174"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o CANU/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compilera2968e3504d2b841^e1b5e33504d2b841^---0#0#1#-19%DVTDocumentLocation2@85"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/AppDelegate.m0000000000000000^3672"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o CANU/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/AppDelegate.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o36"B87CE3EB-52A8-4E70-AD40-855C21790B15-
-bBA12B680-A5D5-429B-92E2-D54B717F1076
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/AppDelegate.m174"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o CANU/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler6b2b4adc10d2b841^e414addc10d2b841^---0#0#1#-19%DVTDocumentLocation2@85"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/AppDelegate.m0000000000000000^3672"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o CANU/AppDelegate.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/AppDelegate.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o36"78175A32-B69A-4702-BFA9-60BA61AB63A1-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AttendeesScrollViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/AttendeeLists/AttendeesScrollViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416417330.861889
@@ -6846,6 +6861,31 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Custom Classes/M
 lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection129"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Custom Classes/MKCanuAnnotationView/MKCanuAnnotationView.m229"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.o CANU/Custom\ Classes/MKCanuAnnotationView/MKCanuAnnotationView.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler861f60e201d2b841^529c7fe201d2b841^---0#0#1#-19%DVTDocumentLocation2@132"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Custom%20Classes/MKCanuAnnotationView/MKCanuAnnotationView.m0000000000000000^3800"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.o CANU/Custom\ Classes/MKCanuAnnotationView/MKCanuAnnotationView.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/MKCanuAnnotationView/MKCanuAnnotationView.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.o36"81EED11C-A40F-4687-885D-AACE36F78F72-
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
+CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController-189D915CBCC7AF4A.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController-27AC259945317C73.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+r0
+
+CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416420060.674258
+e416420061.048693
+r1
+xCompileC
+xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o
+x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/SignInViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Custom Classes/UICanuButton/UICanuButtonSignBottomBar.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection105"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m202"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o CANU/Controllers/A/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compilerbadcacdc10d2b841^d9930cdd10d2b841^---0#0#1#-19%DVTDocumentLocation2@106"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m0000000000000000^3742"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o CANU/Controllers/A/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/A/MainViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o36"9CE52AF7-9BD6-4D82-AA77-9434CCB2ACBA-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
+
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/MainViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416416975.749196
 e416416976.166989
@@ -7362,6 +7402,22 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/Contact/C
 lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection99"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/PhoneBook/PhoneBook.m187"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PhoneBook.o CANU/Models/PhoneBook/PhoneBook.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compilerfda3afe601d2b841^226debe601d2b841^---0#0#1#-19%DVTDocumentLocation2@100"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Models/PhoneBook/PhoneBook.m0000000000000000^3694"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PhoneBook.o CANU/Models/PhoneBook/PhoneBook.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PhoneBook.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PhoneBook.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/PhoneBook/PhoneBook.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PhoneBook.o36"76801344-C6AE-431B-9FB6-4E1B5B303C55-
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
+CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
+s416420128.431677
+e416420128.578434
+r1
+xCompileC
+xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o
+x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m
+xnormal
+xarmv7
+xobjective-c
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection114"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m220"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o CANU/Controllers/D/PrivacyPolicyViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler7cb66e2011d2b841^d72f942011d2b841^---0#0#1#-19%DVTDocumentLocation2@115"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m0000000000000000^3796"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o CANU/Controllers/D/PrivacyPolicyViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o36"8C7EEF95-1AF8-4567-8A3E-A289422AE133-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
+
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/PrivacyPolicyViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416416236.008582
 e416416236.157432
@@ -7415,8 +7471,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection104"Compil
 b55E0D868-E61B-41E4-98D2-503D3FD95ABE
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/SignInViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s416417000.180085
-e416417000.944270
+s416420060.292619
+e416420060.931116
 r1
 xCompileC
 xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o
@@ -7460,15 +7516,15 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/AFNetw
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Custom Classes/UICanuTextField/UICanuTextField.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/TTTAttributedLabel/TTTAttributedLabel.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Custom Classes/UICanuButton/UICanuButtonSignBottomBar.h
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/MainViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAI.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAILogger.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAITracker.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAITrackedViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAIDictionaryBuilder.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAIFields.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/SignInViewController.m192"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o CANU/SignInViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler8e3e2ee804d2b841^f0bff1e804d2b841^---0#0#1#-19%DVTDocumentLocation2@94"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/SignInViewController.m0000000000000000^3726"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o CANU/SignInViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/SignInViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o36"DCE2045A-7621-491F-8ACB-A7B9A66281C1-
-b4D8D7E8D-9200-4D97-81E6-1E61DF1500C0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/SignInViewController.m192"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o CANU/SignInViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compilerb4574bdc10d2b841^aa62eedc10d2b841^---0#0#1#-19%DVTDocumentLocation2@94"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/SignInViewController.m0000000000000000^3726"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o CANU/SignInViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/SignInViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o36"27D7109D-2E54-41C2-AED9-24842FA8DBC4-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpStep1.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/SignUp/SignUpStep1.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416417000.174624
@@ -7535,8 +7591,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Compile
 b4D8D7E8D-9200-4D97-81E6-1E61DF1500C0
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s416416977.535720
-e416416978.281365
+s416420127.801049
+e416420128.704115
 r1
 xCompileC
 xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o
@@ -7574,15 +7630,15 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/User.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Views/SignUp/CheckPhoneNumber.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/AppDelegate.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Manager/ErrorManager.h
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/PrivacyPolicyViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAI.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAILogger.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAITracker.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAITrackedViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAIDictionaryBuilder.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Google Analytics/GAIFields.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m205"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o CANU/Users/SignUp/SignUpViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler6e4e89d104d2b841^4e0d48d204d2b841^---0#0#1#-19%DVTDocumentLocation2@107"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m0000000000000000^3752"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o CANU/Users/SignUp/SignUpViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o36"E323DE5B-D62B-482B-AE79-B15D8B15FEBA-
-b55E0D868-E61B-41E4-98D2-503D3FD95ABE
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection106"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m205"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o CANU/Users/SignUp/SignUpViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler8445cd1f11d2b841^2042b42011d2b841^---0#0#1#-19%DVTDocumentLocation2@107"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m0000000000000000^3752"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o CANU/Users/SignUp/SignUpViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Users/SignUp/SignUpViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignUpViewController.o36"762356BE-6AEB-4744-9D24-DC58649A5917-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TTTAttributedLabel.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/TTTAttributedLabel/TTTAttributedLabel.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416416225.202439
@@ -8891,8 +8947,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection114"Compil
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/User.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s416416423.559637
-e416416424.066517
+s416420061.053022
+e416420061.677231
 r1
 xCompileC
 xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o
@@ -8937,9 +8993,9 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/AFNetw
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/AFNetworking/AFImageRequestOperation.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/AFNetworking/AFNetworkActivityIndicatorManager.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/AFNetworking/UIImageView+AFNetworking.h
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/MainViewController.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/User.m167"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o CANU/Models/User.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compilerc8798fa702d2b841^185e11a802d2b841^---0#0#1#-19%DVTDocumentLocation2@85"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Models/User.m0000000000000000^3644"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o CANU/Models/User.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/User.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o36"3C627AE3-E771-42F7-8906-6848A940CBF0-
-bCA8C5B79-6670-480B-A6A7-0B4FC2A8A852
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.h
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection84"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/User.m167"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o CANU/Models/User.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler7bbb0ddd10d2b841^9a7aaddd10d2b841^---0#0#1#-19%DVTDocumentLocation2@85"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Models/User.m0000000000000000^3644"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o CANU/Models/User.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/User.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o36"192C82CD-40D1-4D6B-981D-6780183FDBF8-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/User.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/User.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416416226.185866
@@ -8993,8 +9049,8 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection72"Compile
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
-s416418664.863583
-e416418665.328673
+s416420127.789199
+e416420128.420303
 r1
 xCompileC
 xbuild/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o
@@ -9004,11 +9060,11 @@ xarmv7
 xobjective-c
 xcom.apple.compilers.llvm.clang.1_0.compiler
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/PrivacyPolicyViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/PrivacyPolicyViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/TutorialViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/EditUserViewController.h
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/MainViewController.h
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/A/MainViewController.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/AppDelegate.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FacebookSDK.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBSession.h
@@ -9031,8 +9087,8 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/Facebo
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBNativeDialogs.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Models/User.h
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Manager/ErrorManager.h
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection113"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m218"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o CANU/Controllers/D/UserSettingsViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler5055dd680bd2b841^392954690bd2b841^---0#0#1#-19%DVTDocumentLocation2@114"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m0000000000000000^3790"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o CANU/Controllers/D/UserSettingsViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o36"42A74A68-6897-40C5-BF71-4A44E0DA4CC7-
-b5DC65CD2-21B8-4F14-AE4E-7526BCE0429B
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection113"Compile /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m218"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o CANU/Controllers/D/UserSettingsViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compilere696ca1f11d2b841^94886c2011d2b841^---0#0#1#-19%DVTDocumentLocation2@114"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m0000000000000000^3790"CompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o CANU/Controllers/D/UserSettingsViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x objective-c -arch armv7 -fmessage-length=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -std=gnu99 -fobjc-arc -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-implicit-atomic-properties -Wno-receiver-is-weak -Wno-arc-repeated-use-of-weak -Wduplicate-method-match -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wempty-body -Wuninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wconstant-conversion -Wint-conversion -Wno-bool-conversion -Wenum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-selector -Wno-strict-selector-match -Wno-undeclared-selector -Wno-deprecated-implementations -DDEBUG=1 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -fstrict-aliasing -Wprotocol -Wdeprecated-declarations -g -Wno-sign-conversion -miphoneos-version-min=6.1 -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-generated-files.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-own-target-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-all-target-headers.hmap -iquote /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU-project-headers.hmap -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources/armv7 -I/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/DerivedSources -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -include /var/folders/th/79qtx3x948z85wb2rq608n440000gn/C/com.apple.DeveloperTools/5.1-5B130a/Xcode/SharedPrecompiledHeaders/CANU-Prefix-fwbdnqhjyiqzfiaivqgrcujeccbc/CANU-Prefix.pch -MMD -MT dependencies -MF /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.d --serialize-diagnostics /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.dia -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.m -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o36"AC21F582-C7F6-4A55-BA94-9A5DCCE2CA98-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
 
 CCompileC build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UserSettingsViewController.o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/UserSettingsViewController.m normal armv7 objective-c com.apple.compilers.llvm.clang.1_0.compiler
 s416416231.415410
@@ -11581,14 +11637,14 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"DataMod
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
 CGenerateDSYMFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU
-s416419184.350784
-e416419185.066400
+s416420129.512594
+e416420130.346804
 r1
 xGenerateDSYMFile
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Generate /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM86"GenerateDSYMFile build/Debug-iphoneos/CANU.app.dSYM build/Debug-iphoneos/CANU.app/CANU82e459700dd2b841^7b1511710dd2b841^---0#0#1#-19%DVTDocumentLocation2@102"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM/0000000000000000^633"GenerateDSYMFile build/Debug-iphoneos/CANU.app.dSYM build/Debug-iphoneos/CANU.app/CANU    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM36"815AD832-3244-422E-8EDC-29EA05D78B72-
-bECFE5D14-44A6-43A5-9C27-CFA9FBD03B16
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection101"Generate /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM86"GenerateDSYMFile build/Debug-iphoneos/CANU.app.dSYM build/Debug-iphoneos/CANU.app/CANUdf51832111d2b841^f0df582211d2b841^---0#0#1#-19%DVTDocumentLocation2@102"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM/0000000000000000^633"GenerateDSYMFile build/Debug-iphoneos/CANU.app.dSYM build/Debug-iphoneos/CANU.app/CANU    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app.dSYM36"6398F8B7-4F42-4903-963B-F85645932D3D-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
 
 CLd /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/arm64/CANU normal arm64
 r0
@@ -11600,8 +11656,8 @@ CLd /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/
 r0
 
 CLd /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU normal armv7
-s416418666.026845
-e416418667.440057
+s416420128.711316
+e416420129.472851
 r1
 xLd
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU
@@ -11609,6 +11665,7 @@ xnormal
 xarmv7
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CANU.LinkFileList
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/main.o
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuSearchLocation.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Message.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ActivityScrollViewController.o
@@ -11640,9 +11697,9 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debu
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSString+MK_Base64.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/SignInViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TTTAttributedLabel.o
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MainViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/Contact.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/MKCanuAnnotationView.o
+d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFPropertyListRequestOperation.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSMutableArray+MK_Queue.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TutorialStepStart.o
@@ -11713,7 +11770,6 @@ d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debu
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AttendeesScrollViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TutorialViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSelect.o
-d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/PrivacyPolicyViewController.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSNumber+MK_Manipulation.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSignBottomBar.o
 d/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ErrorManager.o
@@ -11746,8 +11802,8 @@ d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Develope
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libobjc.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/libSystem.dylib
 d/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/5.1/lib/darwin/libclang_rt.ios.a
-d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/PrivateFrameworks/UIFoundation.framework/UIFoundation
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AVFoundation.framework/libAVFAudio.dylib
+d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/PrivateFrameworks/UIFoundation.framework/UIFoundation
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/system/libcache.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/system/libcommonCrypto.dylib
@@ -11777,18 +11833,18 @@ d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Develope
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/system/libsystem_stats.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/system/libunwind.dylib
 d/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/usr/lib/system/libxpc.dylib
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Link /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU50"Ld build/Debug-iphoneos/CANU.app/CANU normal armv76804076a0bd2b841^7ea8706b0bd2b841^---0#0#1#--2182"Ld build/Debug-iphoneos/CANU.app/CANU normal armv7    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export IPHONEOS_DEPLOYMENT_TARGET=6.1    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch armv7 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -L/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -L/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -filelist /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CANU.LinkFileList -dead_strip -lsqlite3.0 -ObjC -fobjc-arc -fobjc-link-runtime -miphoneos-version-min=6.1 -framework AddressBook -framework QuartzCore -framework AVFoundation -framework OpenGLES -framework CoreTelephony -framework FacebookSDK -framework AudioToolbox -framework GLKit -framework MessageUI -framework CoreText -framework Instabug -lz -framework UIKit -framework CoreLocation -framework MapKit -weak_framework Social -weak_framework AdSupport -weak_framework Accounts -framework MobileCoreServices -framework SystemConfiguration -framework Foundation -lGoogleAnalyticsServices -framework CoreGraphics -framework CoreData -Xlinker -dependency_info -Xlinker /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CANU_dependency_info.dat -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU36"E1E24061-B701-47B2-85ED-92A6CAD48705-
-b5DC65CD2-21B8-4F14-AE4E-7526BCE0429B
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection97"Link /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU50"Ld build/Debug-iphoneos/CANU.app/CANU normal armv7923db62011d2b841^560e792111d2b841^---0#0#1#--2182"Ld build/Debug-iphoneos/CANU.app/CANU normal armv7    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export IPHONEOS_DEPLOYMENT_TARGET=6.1    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -arch armv7 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk -L/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -L/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Canu/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Instabug -F/Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework -filelist /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CANU.LinkFileList -dead_strip -lsqlite3.0 -ObjC -fobjc-arc -fobjc-link-runtime -miphoneos-version-min=6.1 -framework AddressBook -framework QuartzCore -framework AVFoundation -framework OpenGLES -framework CoreTelephony -framework FacebookSDK -framework AudioToolbox -framework GLKit -framework MessageUI -framework CoreText -framework Instabug -lz -framework UIKit -framework CoreLocation -framework MapKit -weak_framework Social -weak_framework AdSupport -weak_framework Accounts -framework MobileCoreServices -framework SystemConfiguration -framework Foundation -lGoogleAnalyticsServices -framework CoreGraphics -framework CoreData -Xlinker -dependency_info -Xlinker /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CANU_dependency_info.dat -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/CANU36"9C8A4A9E-D4E1-4465-AD39-7074F7F8D006-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
 
 CProcessInfoPlistFile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Info.plist /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/CANU-Info.plist
-s416419184.346831
-e416419184.349933
+s416420066.256367
+e416420066.260035
 r1
 xProcessInfoPlistFile
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Info.plist
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/CANU-Info.plist
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Process /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/CANU-Info.plist82"ProcessInfoPlistFile build/Debug-iphoneos/CANU.app/Info.plist CANU/CANU-Info.plist58e358700dd2b841^fc1d5a700dd2b841^---0#0#1#-19%DVTDocumentLocation2@87"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/CANU-Info.plist0000000000000000^1001"ProcessInfoPlistFile build/Debug-iphoneos/CANU.app/Info.plist CANU/CANU-Info.plist    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/CANU-Info.plist -genpkginfo /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/ResourceRules.plist -additionalcontentfile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Info.plist36"3318D374-03A6-480D-82B9-30ACF50B2909-
-bECFE5D14-44A6-43A5-9C27-CFA9FBD03B16
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection86"Process /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/CANU/CANU-Info.plist82"ProcessInfoPlistFile build/Debug-iphoneos/CANU.app/Info.plist CANU/CANU-Info.plist67b841e210d2b841^4b9342e210d2b841^---0#0#1#-19%DVTDocumentLocation2@87"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/CANU/CANU-Info.plist0000000000000000^1001"ProcessInfoPlistFile build/Debug-iphoneos/CANU.app/Info.plist CANU/CANU-Info.plist    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/CANU-Info.plist -genpkginfo /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/ResourceRules.plist -additionalcontentfile /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/assetcatalog_generated_info.plist -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/Info.plist36"04DD01D8-AC15-4BEA-943D-5C11F4D68937-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
 
 CProcessPCH /Volumes/HDD/Utilisateurs/Vivien/Library/Developer/Xcode/DerivedData/CANU-fjixtjzjahfvpdesuvjwkhoelnro/Index/PrecompiledHeaders/CANU-Prefix-bsdolmwognjqcjdyetkodwhtzmcs_ast/CANU-Prefix.pch.pch CANU/CANU-Prefix.pch normal armv7s objective-c com.apple.compilers.llvm.clang.1_0.astbuilder
 r0
@@ -11864,14 +11920,14 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection31"Precomp
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
 CProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent
-s416419185.085916
-e416419185.087912
+s416420067.533915
+e416420067.536751
 r1
 xProcessProductPackaging
 x/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection198"ProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent198"ProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcentca1516710dd2b841^518216710dd2b841^---0#0#1#-19%DVTDocumentLocation2@120"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent0000000000000000^753"ProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-productPackagingUtility /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist -entitlements -format xml -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent36"74DE83EB-6A2B-4731-8DA5-D99CCCDAEA4D-
-bECFE5D14-44A6-43A5-9C27-CFA9FBD03B16
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection198"ProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent198"ProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent6ccf88e310d2b841^7a7289e310d2b841^---0#0#1#-19%DVTDocumentLocation2@120"file:///Volumes/HDD/Utilisateurs/Vivien/Application%20iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent0000000000000000^753"ProcessProductPackaging /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-productPackagingUtility /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/Entitlements.plist -entitlements -format xml -o /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/CANU.xcent36"96AA1053-CF10-4C44-A537-C23C164BE7B6-
+b2BFBD2B9-5DB3-4A33-ABCC-E3A2EF7B3828
 
 CProcessProductPackaging /Volumes/HDD/Utilisateurs/Vivien/Library/MobileDevice/Provisioning\ Profiles/96EEBEF8-505E-4875-BBD2-F25FF2A90FF8.mobileprovision /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app/embedded.mobileprovision
 s416416249.244377
@@ -11884,11 +11940,11 @@ lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection208"Proces
 bA90D940C-044D-4A60-9DE7-169CC3B07284
 
 CTouch /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app
-s416419185.075248
-e416419185.084780
+s416420130.353745
+e416420130.365254
 r1
 xTouch
 x/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app
-lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Touch /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app35"Touch build/Debug-iphoneos/CANU.appb45b13710dd2b841^dbc015710dd2b841^---0#0#1#--402"Touch build/Debug-iphoneos/CANU.app    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app36"BEBE2CC7-1671-4F8F-96F0-32CDC888C4B9-
-bECFE5D14-44A6-43A5-9C27-CFA9FBD03B16
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection93"Touch /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/Debug-iphoneos/CANU.app35"Touch build/Debug-iphoneos/CANU.app11a85a2211d2b841^90845d2211d2b841^---0#0#1#--402"Touch build/Debug-iphoneos/CANU.app    cd "/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS"    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/build/Debug-iphoneos/CANU.app36"47D51BAD-22B7-4484-83BB-DF62D29A8FF0-
+b65E2880E-DA3C-433D-9C88-7774E7D7D44B
 
