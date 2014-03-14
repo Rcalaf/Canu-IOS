@@ -7,13 +7,9 @@
 //
 
 #import "UICanuChatCellScroll.h"
-
 #import "UIImageView+AFNetworking.h"
-
 #import "AFCanuAPIClient.h"
-
-#import "AppDelegate.h"
-
+#import "UserManager.h"
 #import "Message.h"
 
 @interface UICanuChatCellScroll ()
@@ -32,8 +28,6 @@
         
         self.backgroundColor = UIColorFromRGB(0xfafafa);
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        
         self.line = [[UIView alloc]initWithFrame:CGRectMake(10, 0, 280, 1)];
         self.line.backgroundColor = UIColorFromRGB(0xd4e0e0);
         [self addSubview:_line];
@@ -43,7 +37,7 @@
         [self addSubview:avatar];
         
         UILabel *userName = [[UILabel alloc] initWithFrame:CGRectMake(45.0f, 10.0f, 128.0f, 25.0f)];
-        if (appDelegate.user.userId == message.user.userId) {
+        if ([[UserManager sharedUserManager] currentUser].userId == message.user.userId) {
             userName.text = @"You";
         } else {
             userName.text = message.user.userName;

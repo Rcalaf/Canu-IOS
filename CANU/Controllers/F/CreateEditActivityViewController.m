@@ -30,6 +30,7 @@
 #import "MessageGhostUser.h"
 #import "AlertViewController.h"
 #import "PhoneBook.h"
+#import "UserManager.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -817,7 +818,7 @@
     CLLocationCoordinate2D location = [[manager location] coordinate];
     
     appDelegate.currentLocation = location;
-    [appDelegate.user editLatitude:location.latitude Longitude:location.longitude];
+    [[[UserManager sharedUserManager] currentUser] editLatitude:location.latitude Longitude:location.longitude];
     
     [self.locationManager stopUpdatingLocation];
     
@@ -932,8 +933,6 @@
     if (self.locationSelected && !self.locationInput.activeSearch) {
         [self.mapLocation searchAnnotionWithLocation:self.locationSelected];
     }
-    
-    
     
     [self.locationInput resignFirstResponder];
     

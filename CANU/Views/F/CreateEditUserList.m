@@ -9,8 +9,9 @@
 #import "CreateEditUserList.h"
 #import "PhoneBook.h"
 #import "Contact.h"
-#import "AppDelegate.h"
 #import "UICanuContactCell.h"
+#import "User.h"
+#import "UserManager.h"
 
 @interface CreateEditUserList () <UICanuContactCellDelegate>
 
@@ -142,8 +143,6 @@
     
     [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
         if (error) {
             
         } else {
@@ -156,7 +155,7 @@
                 
                 Contact *contact = [arrayContact objectAtIndex:i];
                 
-                if (![contact.convertNumber isEqualToString:appDelegate.user.phoneNumber]) {
+                if (![contact.convertNumber isEqualToString:[[UserManager sharedUserManager] currentUser].phoneNumber]) {
                     [phoneNumberClean addObject:contact.convertNumber];
                 } else {
                     
@@ -171,7 +170,7 @@
             
             if ([phoneNumberClean count] != 0) {
                 
-                [appDelegate.user checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
+                [[[UserManager sharedUserManager] currentUser] checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
                     
                     self.arrayCanuUser = arrayCANUUser;
                     

@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "UICanuTextField.h"
 #import "EditUserPasswordViewController.h"
+#import "UserManager.h"
 
 
 @interface EditUserPasswordViewController () <UITextFieldDelegate>
@@ -79,7 +80,7 @@
         [self.user editUserWithUserName:_user.userName Password:_password.text FirstName:_user.firstName LastName:@"" Email:_user.email Block:^(User *user, NSError *error){
                                   NSLog(@"%@",[error localizedRecoverySuggestion]);
                                   if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
-                                      [self.user logOut];
+                                      [[UserManager sharedUserManager] logOut];
                                       NSLog(@"editUser Error");
                                   } else {
                                       
@@ -134,8 +135,8 @@
 - (void)loadView
 {
     [super loadView];
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.user = appDelegate.user;
+    
+    self.user = [[UserManager sharedUserManager] currentUser];
     
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     

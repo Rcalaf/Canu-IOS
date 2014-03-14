@@ -117,6 +117,7 @@
 		1E279EB618D301A60076C25E /* UICanuAttendeeCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EB518D301A60076C25E /* UICanuAttendeeCellScroll.m */; };
 		1E279EB918D301E70076C25E /* UICanuChatCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EB818D301E70076C25E /* UICanuChatCellScroll.m */; };
 		1E279EBC18D3022C0076C25E /* UICANULocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EBB18D3022C0076C25E /* UICANULocationCell.m */; };
+		1E279EBF18D306BA0076C25E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EBE18D306BA0076C25E /* UserManager.m */; };
 		1E3A6B6318854220007FB6BA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3A6B6218854220007FB6BA /* CoreText.framework */; };
 		1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B7118854F2C007FB6BA /* Localizable.strings */; };
 		1E3A6B8618868EAE007FB6BA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3A6B8518868EAE007FB6BA /* MessageUI.framework */; };
@@ -399,6 +400,8 @@
 		1E279EB818D301E70076C25E /* UICanuChatCellScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuChatCellScroll.m; sourceTree = "<group>"; };
 		1E279EBA18D3022C0076C25E /* UICANULocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICANULocationCell.h; sourceTree = "<group>"; };
 		1E279EBB18D3022C0076C25E /* UICANULocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICANULocationCell.m; sourceTree = "<group>"; };
+		1E279EBD18D306BA0076C25E /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = CANU/Manager/UserManager.h; sourceTree = "<group>"; };
+		1E279EBE18D306BA0076C25E /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = CANU/Manager/UserManager.m; sourceTree = "<group>"; };
 		1E3A6B6218854220007FB6BA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1E3A6B6918854EB4007FB6BA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1E3A6B6A18854EBB007FB6BA /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -1101,41 +1104,16 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		1E70867E189A849900328F76 /* Contact */ = {
-			isa = PBXGroup;
-			children = (
-				1E70867B189A849300328F76 /* Contact.h */,
-				1E70867C189A849300328F76 /* Contact.m */,
-			);
-			name = Contact;
-			sourceTree = "<group>";
-		};
-		1E77B94618A117ED00A16845 /* PhoneBook */ = {
-			isa = PBXGroup;
-			children = (
-				1E77B94718A1192E00A16845 /* PhoneBook.h */,
-				1E77B94818A1192E00A16845 /* PhoneBook.m */,
-			);
-			name = PhoneBook;
-			sourceTree = "<group>";
-		};
 		1E90977B1891879D004501E2 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				1E90977C189187F4004501E2 /* ErrorManager.h */,
 				1E90977D189187F4004501E2 /* ErrorManager.m */,
+				1E279EBD18D306BA0076C25E /* UserManager.h */,
+				1E279EBE18D306BA0076C25E /* UserManager.m */,
 			);
 			name = Manager;
 			path = ..;
-			sourceTree = "<group>";
-		};
-		1EFDFBB018BCDE9600A2A0DC /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				1E3BA47218AE4855003C2BF4 /* Location.h */,
-				1E3BA47318AE4855003C2BF4 /* Location.m */,
-			);
-			name = Location;
 			sourceTree = "<group>";
 		};
 		DEA93B0F17204EA600303BB5 = {
@@ -1239,9 +1217,12 @@
 				1E279DD918D1FFD10076C25E /* Message.m */,
 				1E279DEB18D202190076C25E /* User.h */,
 				1E279DEC18D202190076C25E /* User.m */,
-				1EFDFBB018BCDE9600A2A0DC /* Location */,
-				1E77B94618A117ED00A16845 /* PhoneBook */,
-				1E70867E189A849900328F76 /* Contact */,
+				1E3BA47218AE4855003C2BF4 /* Location.h */,
+				1E3BA47318AE4855003C2BF4 /* Location.m */,
+				1E77B94718A1192E00A16845 /* PhoneBook.h */,
+				1E77B94818A1192E00A16845 /* PhoneBook.m */,
+				1E70867B189A849300328F76 /* Contact.h */,
+				1E70867C189A849300328F76 /* Contact.m */,
 			);
 			name = Models;
 			path = ..;
@@ -1380,6 +1361,7 @@
 				1E279D2618D1F5F60076C25E /* UIImageView+AFNetworking.m in Sources */,
 				1E279DA418D1F96C0076C25E /* NSNumber+MK_Precision.m in Sources */,
 				1E279DEA18D2018A0076C25E /* UIProfileView.m in Sources */,
+				1E279EBF18D306BA0076C25E /* UserManager.m in Sources */,
 				1E279EB218D3015B0076C25E /* UICanuActivityCellScroll.m in Sources */,
 				1E279DA818D1F96C0076C25E /* NSString+MK_Conversion.m in Sources */,
 				1E279DE318D201000076C25E /* UICanuNavigationController.m in Sources */,
@@ -1526,8 +1508,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CANU/Framework/Google",
-					Analytics,
+					"$(PROJECT_DIR)/CANU/Framework/Google\\ Analytics",
 				);
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
@@ -1627,8 +1608,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CANU/Framework/Google",
-					Analytics,
+					"$(PROJECT_DIR)/CANU/Framework/Google\\ Analytics",
 				);
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
@@ -1664,8 +1644,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/CANU/Framework/Google",
-					Analytics,
+					"$(PROJECT_DIR)/CANU/Framework/Google\\ Analytics",
 				);
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",

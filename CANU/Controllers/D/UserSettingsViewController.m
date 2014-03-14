@@ -12,6 +12,7 @@
 #import "EditUserViewController.h"
 #import "MainViewController.h"
 #import "AppDelegate.h"
+#import "UserManager.h"
 
 @interface UserSettingsViewController ()
 
@@ -33,8 +34,7 @@
 @synthesize privacyPolicyButton = _privacyPolicyButton;
 @synthesize logOut = _logOut;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -42,41 +42,35 @@
     return self;
 }
 
--(void)performLogout:(id)sender
-{
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.user logOut];
+-(void)performLogout:(id)sender{
+    [[UserManager sharedUserManager] logOut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)back:(id)sender
-{
+- (void)back:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)showTutorial:(id)sender
-{
+- (void)showTutorial:(id)sender{
     TutorialViewController *tutorial = [[TutorialViewController alloc] init];
     [self presentViewController:tutorial animated:NO completion:nil];
 }
 
 
-- (void)showPrivacyPolicy:(id)sender
-{
+- (void)showPrivacyPolicy:(id)sender{
     PrivacyPolicyViewController *privacyPolicy = [[PrivacyPolicyViewController alloc] initForTerms:NO];
     [self presentViewController:privacyPolicy animated:NO completion:nil];
 }
 
-- (void)editProfile:(id)sender
-{
+- (void)editProfile:(id)sender{
     EditUserViewController *editProfile = [[EditUserViewController alloc] init];
     [self presentViewController:editProfile animated:NO completion:nil];
 }
 
 
 
--(void)loadView
-{
+-(void)loadView{
+    
     [super loadView];
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
 

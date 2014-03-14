@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "UICanuNavigationController.h"
 #import "UserSettingsViewController.h"
+#import "UserManager.h"
 
 @class ActivitiesFeedViewController;
 
@@ -122,17 +123,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    
     UIViewController *viewController = (UIViewController *)self.navigation.activityFeed;
     
     UIImage *newImage = [info valueForKey:UIImagePickerControllerEditedImage];
     
-    [appDelegate.user editUserProfilePicture:newImage Block:^(User *user, NSError *error) {
+    [[[UserManager sharedUserManager] currentUser] editUserProfilePicture:newImage Block:^(User *user, NSError *error) {
         if (!error) {
             self.profileImage.image = newImage;
-            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-            appDelegate.user = nil;
+            [[UserManager sharedUserManager] updateUser:user];
         }
     }];
     

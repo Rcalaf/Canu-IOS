@@ -10,7 +10,7 @@
 
 #import "TTTAttributedLabel.h"
 #import "UIProfileView.h"
-#import "AppDelegate.h"
+#import "UserManager.h"
 
 @interface TutorialStepProfile ()
 
@@ -67,9 +67,7 @@
             
         }];
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
-        self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.frame.size.height - 119, 320, 119) User:appDelegate.user];
+        self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.frame.size.height - 119, 320, 119) User:[[UserManager sharedUserManager] currentUser]];
         self.profileView.userInteractionEnabled = NO;
         self.profileView.alpha = 0;
         [self addSubview:_profileView];

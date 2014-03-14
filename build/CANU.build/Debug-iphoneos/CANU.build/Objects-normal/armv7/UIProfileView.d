@@ -7,7 +7,7 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/AFNetworking/UIImageView+AFNetworking.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/AFNetworking/AFImageRequestOperation.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/AFNetworking/AFHTTPRequestOperation.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Models/User.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Models/User.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/AppDelegate.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FacebookSDK.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBSession.h \
@@ -28,6 +28,7 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBFriendPickerViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBOpenGraphAction.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBNativeDialogs.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Manager/ErrorManager.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/ErrorManager.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuNavigationController/UICanuNavigationController.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UserSettingsViewController.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/UserManager.h

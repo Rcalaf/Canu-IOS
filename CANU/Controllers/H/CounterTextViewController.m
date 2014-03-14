@@ -9,7 +9,8 @@
 #import "CounterTextViewController.h"
 #import "UICanuButtonSignBottomBar.h"
 #import <MessageUI/MessageUI.h>
-#import "AppDelegate.h"
+#import "UserManager.h"
+#import "User.h"
 
 @interface CounterTextViewController () <MFMailComposeViewControllerDelegate>
 
@@ -63,8 +64,6 @@
     
     if ([MFMailComposeViewController canSendMail]){
         
-        AppDelegate *appDeleate = [[UIApplication sharedApplication] delegate];
-        
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         [[mailer navigationBar] setTintColor:[UIColor blackColor]];
         [[mailer navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor clearColor], UITextAttributeTextShadowColor,
@@ -75,7 +74,7 @@
         
         mailer.mailComposeDelegate = self;
         [mailer setToRecipients:[NSArray arrayWithObjects:@"gettogether@canu.se", nil]];
-        [mailer setSubject:[NSString stringWithFormat:@"Early Bird %@",appDeleate.user.userName]];
+        [mailer setSubject:[NSString stringWithFormat:@"Early Bird %@",[[UserManager sharedUserManager] currentUser].userName]];
         [mailer setMessageBody:@"I'll be a kick-ass early bird because ..." isHTML:NO];
         [self presentViewController:mailer animated:YES completion:nil];
         

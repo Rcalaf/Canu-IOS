@@ -16,6 +16,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "AFCanuAPIClient.h"
 #import "ErrorManager.h"
+#import "UserManager.h"
 #import <Instabug/Instabug.h>
 
 NSString *const FBSessionStateChangedNotification =
@@ -27,7 +28,6 @@ NSString *const FBSessionStateChangedNotification =
 }
 
 @synthesize errorManager = _errorManager;
-@synthesize user = _user;
 @synthesize device_token = _device_token;
 @synthesize feedViewController = _feedViewController;
 @synthesize currentLocation = _currentLocation;
@@ -41,17 +41,6 @@ NSString *const FBSessionStateChangedNotification =
         _feedViewController = [[ActivitiesFeedViewController alloc] init];
     } 
     return _feedViewController;
-}
-
-- (User *)user
-{
-    if (!_user) {
-        NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
-        if (savedUserAttributes) {
-            _user = [[User alloc] initWithAttributes:savedUserAttributes];
-        }
-    }
-    return _user;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -74,8 +63,8 @@ NSString *const FBSessionStateChangedNotification =
     }
 
     [Instabug KickOffWithToken:@"c44d12a703b04a0a5e797bba7452c9d5" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:YES];
-    if (self.user) {
-        [Instabug setEmail:self.user.email];
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        [Instabug setEmail:[[UserManager sharedUserManager] currentUser].email];
     }
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
@@ -89,8 +78,8 @@ NSString *const FBSessionStateChangedNotification =
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    if (self.user) {
-        if (self.user.phoneIsVerified) {
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        if ([[UserManager sharedUserManager] currentUser].phoneIsVerified) {
             NSLog(@"User Active");
             self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
             [self.canuViewController pushViewController:self.feedViewController animated:NO];
@@ -124,8 +113,8 @@ NSString *const FBSessionStateChangedNotification =
     
     _device_token = token;
     
-    if (self.user) {
-        [self.user updateDeviceToken:_device_token Block:nil];
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        [[[UserManager sharedUserManager] currentUser] updateDeviceToken:_device_token Block:nil];
     }
     
 }
@@ -141,7 +130,7 @@ NSString *const FBSessionStateChangedNotification =
 NSLog(@"didReceiveRemoteNotification");
     if ( application.applicationState == UIApplicationStateActive ){
         
-        [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
+        [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
     
 //        if ([[(UICanuNavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
 //            ChatViewController *currentChat = (ChatViewController *)[(UICanuNavigationController *)self.window.rootViewController visibleViewController];
@@ -279,7 +268,7 @@ NSLog(@"didReceiveRemoteNotification");
     [FBSession.activeSession handleDidBecomeActive];
     application.applicationIconBadgeNumber = 0;
     if (_device_token) {
-        [self.user updateDevice:_device_token Badge:0 WithBlock:nil];
+        [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:0 WithBlock:nil];
     }
    
 }

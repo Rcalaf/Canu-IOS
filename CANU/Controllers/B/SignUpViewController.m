@@ -17,6 +17,7 @@
 #import "CheckPhoneNumber.h"
 #import "AppDelegate.h"
 #import "PrivacyPolicyViewController.h"
+#import "UserManager.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -311,7 +312,8 @@
             if (user){
                 
                 AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                appDelegate.user = user;
+                
+                [[UserManager sharedUserManager] updateUser:user];
                 
                 [user updateDeviceToken:appDelegate.device_token Block:^(NSError *error){
                     

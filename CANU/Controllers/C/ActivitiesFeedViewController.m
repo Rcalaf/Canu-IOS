@@ -10,6 +10,7 @@
 #import "UICanuNavigationController.h"
 #import "UIProfileView.h"
 #import "User.h"
+#import "UserManager.h"
 #import "Activity.h"
 #import "AppDelegate.h"
 #import "AFCanuAPIClient.h"
@@ -65,7 +66,7 @@
     self.navigationController.navigationBarHidden = YES;
     
     self.appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.user = _appDelegate.user;
+    self.user = [[UserManager sharedUserManager] currentUser];
     
     self.viewForEmptyBackground = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     self.viewForEmptyBackground.backgroundColor = UIColorFromRGB(0x2b4b58);

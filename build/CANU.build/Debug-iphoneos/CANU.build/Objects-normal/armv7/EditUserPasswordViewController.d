@@ -23,4 +23,5 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBNativeDialogs.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/ErrorManager.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuTextField/UICanuTextField.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/EditUserPasswordViewController.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/EditUserPasswordViewController.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/UserManager.h

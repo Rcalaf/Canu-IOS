@@ -1,10 +1,10 @@
 dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/C/ActivityScrollViewController.m \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/C/ActivityScrollViewController.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuCell/UICanuActivityCellScroll.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/C/UICanuActivityCellScroll.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UIScrollViewReverse/UIScrollViewReverse.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/F/CreateEditActivityViewController.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/AnimationCreateActivity/AnimationCreateActivity.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Views/F/AnimationCreateActivity.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/E/DetailActivityViewControllerAnimate.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuNavigationController/UICanuNavigationController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/C/ActivitiesFeedViewController.h \
@@ -19,6 +19,7 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/TTTAttributedLabel/TTTAttributedLabel.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/H/CounterTextViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAIFields.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/UserManager.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/AppDelegate.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FacebookSDK.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/FacebookSDK.framework/Headers/FBSession.h \

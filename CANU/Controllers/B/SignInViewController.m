@@ -16,6 +16,7 @@
 #import "User.h"
 #import "UICanuButtonSignBottomBar.h"
 #import "MainViewController.h"
+#import "UserManager.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -177,7 +178,7 @@
                 }
             }];
             
-            [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
+            [[UserManager sharedUserManager] logIn:user];
             
             [self.delegate signInGoToFeed];
             

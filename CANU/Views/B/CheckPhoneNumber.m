@@ -20,6 +20,7 @@
 #import "TutorialViewController.h"
 #import "ActivitiesFeedViewController.h"
 #import "SignInViewController.h"
+#import "UserManager.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -96,8 +97,7 @@
         MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];
         if([MFMessageComposeViewController canSendText])
         {
-            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-            User *user = appDelegate.user;
+            User *user = [[UserManager sharedUserManager] currentUser];
             
             NSString *string = [NSString stringWithFormat:@"%icanuGettogether%@",user.userId,user.email];
             
@@ -118,8 +118,7 @@
         [self.loadingIndicator startAnimating];
         self.check.hidden = YES;
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        User *currentUser = appDelegate.user;
+        User *currentUser = [[UserManager sharedUserManager] currentUser];
         
         NSArray *objectsArray;
         NSArray *keysArray;
@@ -180,18 +179,15 @@
     self.countRequest += 1;
     
     if (_countRequest <= 20) {
-     
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
-        [User userWithToken:appDelegate.user.token andBlock:^(User *user, NSError *error) {
+        [User userWithToken:[[UserManager sharedUserManager] currentUser].token andBlock:^(User *user, NSError *error) {
             
             if (error) {
                 NSLog(@"Error");
             }else{
                 if (user.phoneIsVerified) {
                     NSLog(@"Save New User");
-                    [[NSUserDefaults standardUserDefaults] setObject:[user serialize] forKey:@"user"];
-                    appDelegate.user = nil;
+                    [[UserManager sharedUserManager] updateUser:user];
                     [self goToFeedViewController];
                 }else{
                     NSLog(@"Not Valide");

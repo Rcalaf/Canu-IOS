@@ -24,6 +24,7 @@
 #import "TTTAttributedLabel.h"
 #import "CounterTextViewController.h"
 #import "GAIFields.h"
+#import "UserManager.h"
 
 #import "AppDelegate.h"
 
@@ -257,7 +258,7 @@
     _currentLocation = [[manager location] coordinate];
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.currentLocation = _currentLocation;
-    [appDelegate.user editLatitude:_currentLocation.latitude Longitude:_currentLocation.longitude];
+    [[[UserManager sharedUserManager] currentUser] editLatitude:_currentLocation.latitude Longitude:_currentLocation.longitude];
     
     [self.locationManager stopUpdatingLocation];
     
@@ -825,9 +826,8 @@
     
     if (self.counterModeEnable && !self.isUnlock && !self.isCountIn) {
         [self.loaderAnimation startAnimation];
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         self.callBackActionEmptyFeed.hidden = YES;
-        [appDelegate.user countMeWithBlock:^(NSError *error) {
+        [[[UserManager sharedUserManager] currentUser] countMeWithBlock:^(NSError *error) {
             self.callBackActionEmptyFeed.hidden = NO;
             [self.loaderAnimation stopAnimation];
             [NSThread detachNewThreadSelector:@selector(checkCounter)toTarget:self withObject:nil];
@@ -856,9 +856,7 @@
 
 - (void)checkCounter{
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    
-    [appDelegate.user checkCounterWithBlock:^(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error) {
+    [[[UserManager sharedUserManager] currentUser] checkCounterWithBlock:^(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error) {
         
         [self.loaderAnimation stopAnimation];
         

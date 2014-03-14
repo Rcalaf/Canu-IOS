@@ -28,6 +28,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "UIProfileView.h"
+#import "UserManager.h"
 
 typedef enum {
     UICanuActivityCellEditable = 0,
@@ -240,9 +241,9 @@ typedef enum {
     [self.actionButton addTarget:self action:@selector(eventActionButton) forControlEvents:UIControlEventTouchDown];
     [_actionButton setFrame:CGRectMake(0, 0, 116, 37)];
 
-    if (appDelegate.user.userId == self.activity.user.userId){
+    if ([[UserManager sharedUserManager] currentUser].userId == self.activity.user.userId){
         [_actionButton setImage:[UIImage imageNamed:@"fullview_action_edit.png"] forState:UIControlStateNormal];
-    }else if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedInteger:appDelegate.user.userId]] == NSNotFound){
+    }else if ([self.activity.attendeeIds indexOfObject:[NSNumber numberWithUnsignedInteger:[[UserManager sharedUserManager] currentUser].userId]] == NSNotFound){
         [_actionButton setImage:[UIImage imageNamed:@"fullview_action_go.png"] forState:UIControlStateNormal];
     }else{
         [_actionButton setImage:[UIImage imageNamed:@"fullview_action_yes.png"] forState:UIControlStateNormal];

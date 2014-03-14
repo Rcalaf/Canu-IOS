@@ -25,37 +25,21 @@
 
 @implementation User
 
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-    
-    [aCoder encodeInteger:_userId forKey:@"userId"];
-    [aCoder encodeObject:_userName forKey:@"userName"];
-    [aCoder encodeObject:_email forKey:@"email"];
-    [aCoder encodeObject:_firstName forKey:@"firstName"];
-    [aCoder encodeObject:_lastName forKey:@"lastName"];
-    [aCoder encodeObject:_token forKey:@"token"];
-    [aCoder encodeObject:_phoneNumber forKey:@"phone_number"];
-    [aCoder encodeBool:_phoneIsVerified forKey:@"phoneIsVerified"];
-    
+-(void)encodeWithCoder:(NSCoder *)encoder{
+    [encoder encodeObject:_attributes forKey:@"dicUser"];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder{
-    self = [super init];
-    if (self) {
-        _userId          = [aDecoder decodeIntegerForKey:@"userId"];
-        _userName        = [aDecoder decodeObjectForKey:@"userName"];
-        _email           = [aDecoder decodeObjectForKey:@"email"];
-        _firstName       = [aDecoder decodeObjectForKey:@"firstName"];
-        _lastName        = [aDecoder decodeObjectForKey:@"lastName"];
-        _token           = [aDecoder decodeObjectForKey:@"token"];
-        _phoneNumber     = [aDecoder decodeObjectForKey:@"phone_number"];
-        _phoneIsVerified = [aDecoder decodeBoolForKey:@"phoneIsVerified"];
-    }
-    return self;
+-(id)initWithCoder:(NSCoder *)decoder{
+    self.attributes = [decoder decodeObjectForKey:@"dicUser"];
+    return [self initWithAttributes:_attributes];
 }
+
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
         _phoneIsVerified = false;
+        
+        _attributes      = attributes;
         
         _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
         _userName        = [attributes valueForKeyPath:@"user_name"];
@@ -73,19 +57,6 @@
     
     return self;
 }
-
-- (NSDictionary *)serialize
-{
-    NSString *userId          = [NSString stringWithFormat:@"%lu",(unsigned long)_userId];
-    NSString *profileImageUrl = [NSString stringWithFormat:@"%@",self.profileImageUrlShort];
-    NSString *phoneNumber     = [NSString stringWithFormat:@"%@",self.phoneNumber];
-    NSArray *objectsArray     = [NSArray arrayWithObjects:userId,self.userName,self.email,self.firstName,self.lastName,self.token,[NSNumber numberWithBool:self.phoneIsVerified],profileImageUrl,phoneNumber,nil];
-    NSArray *keysArray        = [NSArray arrayWithObjects:@"id",@"user_name",@"email",@"first_name",@"last_name",@"token",@"phone_verified",@"profile_pic",@"phone_number",nil];
-    NSDictionary *user        = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
-    
-    return user;
-}
-
 
 + (void)userWithToken:(NSString *)token
              andBlock:(void (^)(User *user, NSError *error))block{
@@ -210,9 +181,9 @@
 
 }
 
-- (void)logOut
-{
+- (void)logOut{
     NSLog(@"logOut");
+    
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:self.token,@"token", nil];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -220,8 +191,6 @@
     [[AFCanuAPIClient sharedClient] postPath:@"session/logout/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         
         AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
-        appDelegate.user = nil;
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
@@ -230,8 +199,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
-        appDelegate.user = nil;
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
@@ -244,7 +211,7 @@
 }
 
 - (void)editLatitude:(CLLocationDegrees)latitude Longitude:(CLLocationDegrees)longitude{
-    
+    NSLog(@"Edit Location");
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (!latitude) { latitude = appDelegate.currentLocation.latitude; }
@@ -261,7 +228,7 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"user"]];
     
     
-    NSString *url = [NSString stringWithFormat:@"/users/%d",self.userId];
+    NSString *url = [NSString stringWithFormat:@"/users/%lu",(unsigned long)self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
@@ -300,7 +267,7 @@
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"user"]];
     
     
-    NSString *url = [NSString stringWithFormat:@"/users/%d",self.userId];
+    NSString *url = [NSString stringWithFormat:@"/users/%lu",(unsigned long)self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:self.token];
@@ -323,7 +290,7 @@
     
     NSData *imageData = UIImageJPEGRepresentation(profilePicture, 1.0);
     
-    NSString *url = [NSString stringWithFormat:@"/users/%d/profile-image",self.userId];
+    NSString *url = [NSString stringWithFormat:@"/users/%lu/profile-image",(unsigned long)self.userId];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
@@ -367,7 +334,7 @@
  */
 - (void)userActivitiesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     
-    NSString *url = [NSString stringWithFormat:@"/users/%d/activities",self.userId];
+    NSString *url = [NSString stringWithFormat:@"/users/%lu/activities",(unsigned long)self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -415,7 +382,7 @@
  */
 - (void)userActivitiesTribesWithBlock:(void (^)(NSArray *activities, NSError *error))block {
     
-    NSString *url = [NSString stringWithFormat:@"/users/%d/activities/tribes/",self.userId];
+    NSString *url = [NSString stringWithFormat:@"/users/%lu/activities/tribes/",(unsigned long)self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
@@ -464,7 +431,7 @@
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:device_token] forKeys: [NSArray arrayWithObject:@"device_token"]];
     
-    NSString *path = [NSString stringWithFormat:@"/users/%d/device_token",self.userId];
+    NSString *path = [NSString stringWithFormat:@"/users/%lu/device_token",(unsigned long)self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     

@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *phoneNumber;
 @property (strong, nonatomic) NSURL *profileImageUrl;
+@property (strong, nonatomic) NSDictionary *attributes;
 @property (nonatomic) BOOL phoneIsVerified;
 
 
@@ -90,9 +91,5 @@
 - (void)checkCounterWithBlock:(void (^)(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error))block;
 
 - (void)countMeWithBlock:(void (^)(NSError *error))block;
-
-
--(NSDictionary *)serialize;
-
 
 @end

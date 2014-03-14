@@ -8,10 +8,10 @@
 
 #import "User.h"
 #import "UICanuTextField.h"
-#import "AppDelegate.h"
 
 #import "EditUserViewController.h"
 #import "EditUserPasswordViewController.h"
+#import "UserManager.h"
 
 @interface EditUserViewController () <UITextFieldDelegate>
 
@@ -89,7 +89,9 @@
                           Block:^(User *user, NSError *error){
                               //NSLog(@"error: %@",error);
                               if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
-                                  [self.user logOut];
+                                  
+                                  [[UserManager sharedUserManager] logOut];
+                                  
                                   NSLog(@"EditUser Error");
                               } else {
                                   if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound) || self.email.text == nil) {
@@ -109,10 +111,9 @@
                                   }
                               }
                               if (user) {
-                                  AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                  appDelegate.user = user;
+                                  
+                                  [[UserManager sharedUserManager] updateUser:user];
                                   self.user = user;
-                                  //[self dismissViewControllerAnimated:YES completion:nil];
                                   
                               }
                               [self operationInProcess:NO];
@@ -151,8 +152,8 @@
 - (void)loadView
 {
     [super loadView];
-    AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.user = appDelegate.user;
+    
+    self.user = [[UserManager sharedUserManager] currentUser];
     
     self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
     UIColor *textColor = [UIColor colorWithRed:28.0f/255.0f green:165.0f/255.0f blue:124.0f/255.0f alpha:1.0f];
