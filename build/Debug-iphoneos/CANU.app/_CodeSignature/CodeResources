@@ -98,7 +98,7 @@
 		</data>
 		<key>CANU.momd/CANU.omo</key>
 		<data>
-		dBkKdwuB7saRb8o+SSpkN2GBFJo=
+		kGODvPIP4izhWiMfC7f9CTFJ9QQ=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -243,14 +243,6 @@
 		<key>F5_tribes_icones@2x.png</key>
 		<data>
 		KVCQRl06nsvSkz2TWlTd751ZtM8=
-		</data>
-		<key>FindLocationsViewController.nib/objects.nib</key>
-		<data>
-		F40XaPE4ypMbMJLVLBtmrv1gCA8=
-		</data>
-		<key>FindLocationsViewController.nib/runtime.nib</key>
-		<data>
-		7z1kWlp+26Kc9F8mdVHVOsJWKdw=
 		</data>
 		<key>G1_pipe.png</key>
 		<data>
@@ -766,15 +758,15 @@
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
-		hhxSy1jALiXvGVhFRqtemwUXm8o=
+		NXfY85510R10hSmzU9mL5o9Rpck=
 		</data>
 		<key>LaunchImage-700-568h@2x.png</key>
 		<data>
-		9ItzEvaSt5KCBblS/CrTNkZmyuk=
+		NXfY85510R10hSmzU9mL5o9Rpck=
 		</data>
 		<key>LaunchImage-700@2x.png</key>
 		<data>
-		D/VOt7/8NzbSe8XNGrd1FeWB+3Q=
+		DFzwswD6ZNcRI6btrITPPV0lL8U=
 		</data>
 		<key>LaunchImage.png</key>
 		<data>
@@ -782,7 +774,7 @@
 		</data>
 		<key>LaunchImage@2x.png</key>
 		<data>
-		I9kQIvy3i9z5jTt1PxLV+5hE5uI=
+		DFzwswD6ZNcRI6btrITPPV0lL8U=
 		</data>
 		<key>Main_background_cloud.png</key>
 		<data>
@@ -900,14 +892,6 @@
 		<data>
 		tWTpAGWKozNNJ1rz1J8GKu+2P6g=
 		</data>
-		<key>attendee_cell.png</key>
-		<data>
-		YBkt4ptbo94HD4Z29AVN98A+o/U=
-		</data>
-		<key>attendee_cell@2x.png</key>
-		<data>
-		SqADSjYOFUAPRfNhuywLPZLeHaY=
-		</data>
 		<key>back_arrow.png</key>
 		<data>
 		jC0FH8yRK4ekgrD9dwtf7KXZFEo=
@@ -924,22 +908,6 @@
 		<data>
 		9cCoBrGsePbOJqMkcigM7faj6Tk=
 		</data>
-		<key>bringup_profile_arrow.png</key>
-		<data>
-		7SqDV9i+mSHMCqeyl2WydqoFAuE=
-		</data>
-		<key>bringup_profile_arrow@2x.png</key>
-		<data>
-		3DtCXJ0L42KeXgfNXvLCV0s3c/g=
-		</data>
-		<key>bringup_profile_with_arrow.png</key>
-		<data>
-		MdyuPhyjmai9ciZDWV2qDvDjJko=
-		</data>
-		<key>bringup_profile_with_arrow@2x.png</key>
-		<data>
-		7GEYTFEPKDA4f8p2KCCZsPbPw+Q=
-		</data>
 		<key>button_arrow.png</key>
 		<data>
 		clxrsYTWwkUpN91Altpnf91XxvA=
@@ -948,14 +916,6 @@
 		<data>
 		m0fKey+WzriKeXgaLOYk5idhKww=
 		</data>
-		<key>chat_cell.png</key>
-		<data>
-		nk+BmbpULghd6hli4Lff61GQclw=
-		</data>
-		<key>chat_cell@2x.png</key>
-		<data>
-		apjGx1GCgtMJfTR4T6mkDgTBD9o=
-		</data>
 		<key>chat_send.png</key>
 		<data>
 		cvR9eZ3KzXT1kjJUoOfii36pDJI=
@@ -963,62 +923,6 @@
 		<key>chat_send@2x.png</key>
 		<data>
 		D+qHWge0U4V12Kfx1VpKXrt/Soo=
-		</data>
-		<key>create_active.png</key>
-		<data>
-		P+KTVV2fLdwKqxPQxQQn36ilzys=
-		</data>
-		<key>create_active@2x.png</key>
-		<data>
-		tL8ip1EKMat6jYN8yMefcniaDFs=
-		</data>
-		<key>create_bg-568h@2x.png</key>
-		<data>
-		TFLRjl+PqWkYxnazzelfDEEW7Y4=
-		</data>
-		<key>create_bg.png</key>
-		<data>
-		MBCixlC+MWUQZRtd8UneVbtnuIg=
-		</data>
-		<key>create_bg@2x.png</key>
-		<data>
-		Z5wnIf18WqQp4F9ChFiCNYZddE8=
-		</data>
-		<key>create_location.png</key>
-		<data>
-		SST9SBqS4GlP/K3K78dfXMCgL4g=
-		</data>
-		<key>create_location@2x.png</key>
-		<data>
-		Ugst0nYFhzFZYLBY4vDZ5PKR3SA=
-		</data>
-		<key>create_passive.png</key>
-		<data>
-		Ajds208FUyd5p26RaAY63wImYSs=
-		</data>
-		<key>create_passive@2x.png</key>
-		<data>
-		7sngjzlm4r3va0UaOezhRFGvfBI=
-		</data>
-		<key>create_world.png</key>
-		<data>
-		vuXJ3UxdiRn1IORpyiHYbKY3iwE=
-		</data>
-		<key>create_world@2x.png</key>
-		<data>
-		MqKBxPoU0er6IPTzGFYNe+u1Nh4=
-		</data>
-		<key>edit_bg-568h@2x.png</key>
-		<data>
-		MCM5yTWzgZnn2yZuZc0zjrklutk=
-		</data>
-		<key>edit_bg.png</key>
-		<data>
-		0RzAK25MP++ybkD/PviiC3ETSHM=
-		</data>
-		<key>edit_bg@2x.png</key>
-		<data>
-		7gPgte2AgFMUoPIPV5wqxZj+9nI=
 		</data>
 		<key>edit_delete.png</key>
 		<data>
@@ -1046,23 +950,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
-		</data>
-		<key>facebook_btn_off.png</key>
-		<data>
-		IlsEau2kMPA2qhe7NDR+fOwWrTk=
-		</data>
-		<key>facebook_btn_off@2x.png</key>
-		<data>
-		6ZWV9of+Z3qI3fyFcqkxy8egaco=
-		</data>
-		<key>facebook_btn_on.png</key>
-		<data>
-		PGq7f+QGyIPGP149t6S0UYVDwro=
-		</data>
-		<key>facebook_btn_on@2x.png</key>
-		<data>
-		N5EMPdk+lyTQ28WiJ5Ol9IGNxmc=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1104,14 +992,6 @@
 		<data>
 		bIYH958OOFWG+EW6X6joLjXTygc=
 		</data>
-		<key>feed_cell.png</key>
-		<data>
-		g2tVJSPXPyyvO2Z0XqmLub7lOfM=
-		</data>
-		<key>feed_cell@2x.png</key>
-		<data>
-		uGEYQFYDexUOwgJo+qKFVsp+wwg=
-		</data>
 		<key>feed_shadow_name.png</key>
 		<data>
 		ifD+I3NArrLGukfvssRzBACAEXg=
@@ -1142,7 +1022,7 @@
 		</data>
 		<key>fr.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>fullview_action_circle_go.png</key>
 		<data>
@@ -1192,114 +1072,6 @@
 		<data>
 		KWZjHNQVqPjwLjUDq5UWHeWsKxI=
 		</data>
-		<key>fullview_bg-568h@2x.png</key>
-		<data>
-		y/ZfHjJQXWeadxSDRBm4VewM8HU=
-		</data>
-		<key>fullview_bg.png</key>
-		<data>
-		hmP/6ZI2v142YvnRaIlDApG8/t4=
-		</data>
-		<key>fullview_bg@2x.png</key>
-		<data>
-		6unN4PhQ1HtKR11bgE1QRNs4+N8=
-		</data>
-		<key>guide_btn_gotit.png</key>
-		<data>
-		+fY1A2hTAF/AEaBnu9N71bpE3l8=
-		</data>
-		<key>guide_btn_gotit@2x.png</key>
-		<data>
-		Xp2rat5PaCs+rvErYQ6Bny8Whdg=
-		</data>
-		<key>guide_btn_skip.png</key>
-		<data>
-		nTq3zijHnTbYFYe8G3c8clAnPHs=
-		</data>
-		<key>guide_btn_skip@2x.png</key>
-		<data>
-		RRYT5a8xWMlRStmytwxZfzbSMdo=
-		</data>
-		<key>guide_btn_start.png</key>
-		<data>
-		MYZl3jrMEts4Ii/edqOxZrpGsZI=
-		</data>
-		<key>guide_btn_start@2x.png</key>
-		<data>
-		noR3w5VoNbHoDemJZlgE/MzaFQs=
-		</data>
-		<key>guide_step_1-568h@2x.png</key>
-		<data>
-		+krhEKsbqCgzrz1mXmYQwJWIJqg=
-		</data>
-		<key>guide_step_1.png</key>
-		<data>
-		4kOM//Hnm5XYlOLi0Da/0VUCX24=
-		</data>
-		<key>guide_step_1@2x.png</key>
-		<data>
-		k4b2tCf3vcHJZnfPZLVOE4jNKiI=
-		</data>
-		<key>guide_step_2-568h@2x.png</key>
-		<data>
-		2qtgRWu7dxfqQ7sJESx7NOhsdLA=
-		</data>
-		<key>guide_step_2.png</key>
-		<data>
-		sTK7pWj1zwAxU2UzZdH6+l3JwgQ=
-		</data>
-		<key>guide_step_2@2x.png</key>
-		<data>
-		fXVp7TfumB0mx/l4xxhE0G1JcPA=
-		</data>
-		<key>guide_step_3-568h@2x.png</key>
-		<data>
-		lOmHJtoahHsn46FdT0FZYHW52fY=
-		</data>
-		<key>guide_step_3.png</key>
-		<data>
-		f7Oe8JEg8D5G4aXUtZy8CUnkICM=
-		</data>
-		<key>guide_step_3@2x.png</key>
-		<data>
-		GFilQF3C8QPI3CTOKl1mHqadXvw=
-		</data>
-		<key>guide_step_4-568h@2x.png</key>
-		<data>
-		HLMkmy8jMWlxAuVJ0vhUZ7jHOXk=
-		</data>
-		<key>guide_step_4.png</key>
-		<data>
-		GswjKi2BktiAubCk3bT/Mh9RAlA=
-		</data>
-		<key>guide_step_4@2x.png</key>
-		<data>
-		CKIE25KoJLs0/F7VYgOcd9PhS9Y=
-		</data>
-		<key>guide_step_5-568h@2x.png</key>
-		<data>
-		BE/HjbV6W1SInAl3hQLxBq0nLec=
-		</data>
-		<key>guide_step_5.png</key>
-		<data>
-		qaO+hRNDdoVUTUtU8x+ZRLZy/yE=
-		</data>
-		<key>guide_step_5@2x.png</key>
-		<data>
-		l8RljeQtW6i8pCrPm3WhIMMCoFg=
-		</data>
-		<key>hello_bg-568h@2x.png</key>
-		<data>
-		mK7Fhez4k3eZKTc3hHwP0eJZj1Y=
-		</data>
-		<key>hello_bg.png</key>
-		<data>
-		0I15P1Lcn9yaPWdwCkzeGj0V1aQ=
-		</data>
-		<key>hello_bg@2x.png</key>
-		<data>
-		RCdVQYwRwg54vbVm87LqbRX+EJU=
-		</data>
 		<key>icon-60.png</key>
 		<data>
 		NoQJV8cLdIi9kRq/n4uZP0TzKAk=
@@ -1335,18 +1107,6 @@
 		<key>icon_userpic@2x.png</key>
 		<data>
 		mR9NY/PDuNTmwDmZdAtkNY+9iPo=
-		</data>
-		<key>intro_bg-568h@2x.png</key>
-		<data>
-		mK7Fhez4k3eZKTc3hHwP0eJZj1Y=
-		</data>
-		<key>intro_bg.png</key>
-		<data>
-		0I15P1Lcn9yaPWdwCkzeGj0V1aQ=
-		</data>
-		<key>intro_bg@2x.png</key>
-		<data>
-		RCdVQYwRwg54vbVm87LqbRX+EJU=
 		</data>
 		<key>loader-10.png</key>
 		<data>
@@ -1532,17 +1292,13 @@
 		<data>
 		/Hi9OalhgWu7KKOs/5+UzCK/zlU=
 		</data>
-		<key>privacy_policy.pdf</key>
-		<data>
-		15v0vJ20IourTIbFLG2QSZmN3PQ=
-		</data>
 		<key>pt.lproj/InfoPlist.strings</key>
 		<data>
 		zmV6UqBSo6r1NOz798vd5O4zTBA=
 		</data>
 		<key>pt.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>ru.lproj/InfoPlist.strings</key>
 		<data>
@@ -1550,15 +1306,7 @@
 		</data>
 		<key>ru.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
-		</data>
-		<key>scroll_content.png</key>
-		<data>
-		yhfZEYR4L40ehM/AdeLhnADuM+g=
-		</data>
-		<key>scroll_content@2x.png</key>
-		<data>
-		0VDLcT8jyfa7alRjZ4LT2uL1Yv4=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>settings.png</key>
 		<data>
@@ -1574,7 +1322,7 @@
 		</data>
 		<key>sv.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -1673,7 +1421,7 @@
 		</data>
 		<key>CANU.momd/CANU.omo</key>
 		<data>
-		dBkKdwuB7saRb8o+SSpkN2GBFJo=
+		kGODvPIP4izhWiMfC7f9CTFJ9QQ=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -1818,14 +1566,6 @@
 		<key>F5_tribes_icones@2x.png</key>
 		<data>
 		KVCQRl06nsvSkz2TWlTd751ZtM8=
-		</data>
-		<key>FindLocationsViewController.nib/objects.nib</key>
-		<data>
-		F40XaPE4ypMbMJLVLBtmrv1gCA8=
-		</data>
-		<key>FindLocationsViewController.nib/runtime.nib</key>
-		<data>
-		7z1kWlp+26Kc9F8mdVHVOsJWKdw=
 		</data>
 		<key>G1_pipe.png</key>
 		<data>
@@ -2341,15 +2081,15 @@
 		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
-		hhxSy1jALiXvGVhFRqtemwUXm8o=
+		NXfY85510R10hSmzU9mL5o9Rpck=
 		</data>
 		<key>LaunchImage-700-568h@2x.png</key>
 		<data>
-		9ItzEvaSt5KCBblS/CrTNkZmyuk=
+		NXfY85510R10hSmzU9mL5o9Rpck=
 		</data>
 		<key>LaunchImage-700@2x.png</key>
 		<data>
-		D/VOt7/8NzbSe8XNGrd1FeWB+3Q=
+		DFzwswD6ZNcRI6btrITPPV0lL8U=
 		</data>
 		<key>LaunchImage.png</key>
 		<data>
@@ -2357,7 +2097,7 @@
 		</data>
 		<key>LaunchImage@2x.png</key>
 		<data>
-		I9kQIvy3i9z5jTt1PxLV+5hE5uI=
+		DFzwswD6ZNcRI6btrITPPV0lL8U=
 		</data>
 		<key>Main_background_cloud.png</key>
 		<data>
@@ -2475,14 +2215,6 @@
 		<data>
 		tWTpAGWKozNNJ1rz1J8GKu+2P6g=
 		</data>
-		<key>attendee_cell.png</key>
-		<data>
-		YBkt4ptbo94HD4Z29AVN98A+o/U=
-		</data>
-		<key>attendee_cell@2x.png</key>
-		<data>
-		SqADSjYOFUAPRfNhuywLPZLeHaY=
-		</data>
 		<key>back_arrow.png</key>
 		<data>
 		jC0FH8yRK4ekgrD9dwtf7KXZFEo=
@@ -2499,22 +2231,6 @@
 		<data>
 		9cCoBrGsePbOJqMkcigM7faj6Tk=
 		</data>
-		<key>bringup_profile_arrow.png</key>
-		<data>
-		7SqDV9i+mSHMCqeyl2WydqoFAuE=
-		</data>
-		<key>bringup_profile_arrow@2x.png</key>
-		<data>
-		3DtCXJ0L42KeXgfNXvLCV0s3c/g=
-		</data>
-		<key>bringup_profile_with_arrow.png</key>
-		<data>
-		MdyuPhyjmai9ciZDWV2qDvDjJko=
-		</data>
-		<key>bringup_profile_with_arrow@2x.png</key>
-		<data>
-		7GEYTFEPKDA4f8p2KCCZsPbPw+Q=
-		</data>
 		<key>button_arrow.png</key>
 		<data>
 		clxrsYTWwkUpN91Altpnf91XxvA=
@@ -2523,14 +2239,6 @@
 		<data>
 		m0fKey+WzriKeXgaLOYk5idhKww=
 		</data>
-		<key>chat_cell.png</key>
-		<data>
-		nk+BmbpULghd6hli4Lff61GQclw=
-		</data>
-		<key>chat_cell@2x.png</key>
-		<data>
-		apjGx1GCgtMJfTR4T6mkDgTBD9o=
-		</data>
 		<key>chat_send.png</key>
 		<data>
 		cvR9eZ3KzXT1kjJUoOfii36pDJI=
@@ -2538,62 +2246,6 @@
 		<key>chat_send@2x.png</key>
 		<data>
 		D+qHWge0U4V12Kfx1VpKXrt/Soo=
-		</data>
-		<key>create_active.png</key>
-		<data>
-		P+KTVV2fLdwKqxPQxQQn36ilzys=
-		</data>
-		<key>create_active@2x.png</key>
-		<data>
-		tL8ip1EKMat6jYN8yMefcniaDFs=
-		</data>
-		<key>create_bg-568h@2x.png</key>
-		<data>
-		TFLRjl+PqWkYxnazzelfDEEW7Y4=
-		</data>
-		<key>create_bg.png</key>
-		<data>
-		MBCixlC+MWUQZRtd8UneVbtnuIg=
-		</data>
-		<key>create_bg@2x.png</key>
-		<data>
-		Z5wnIf18WqQp4F9ChFiCNYZddE8=
-		</data>
-		<key>create_location.png</key>
-		<data>
-		SST9SBqS4GlP/K3K78dfXMCgL4g=
-		</data>
-		<key>create_location@2x.png</key>
-		<data>
-		Ugst0nYFhzFZYLBY4vDZ5PKR3SA=
-		</data>
-		<key>create_passive.png</key>
-		<data>
-		Ajds208FUyd5p26RaAY63wImYSs=
-		</data>
-		<key>create_passive@2x.png</key>
-		<data>
-		7sngjzlm4r3va0UaOezhRFGvfBI=
-		</data>
-		<key>create_world.png</key>
-		<data>
-		vuXJ3UxdiRn1IORpyiHYbKY3iwE=
-		</data>
-		<key>create_world@2x.png</key>
-		<data>
-		MqKBxPoU0er6IPTzGFYNe+u1Nh4=
-		</data>
-		<key>edit_bg-568h@2x.png</key>
-		<data>
-		MCM5yTWzgZnn2yZuZc0zjrklutk=
-		</data>
-		<key>edit_bg.png</key>
-		<data>
-		0RzAK25MP++ybkD/PviiC3ETSHM=
-		</data>
-		<key>edit_bg@2x.png</key>
-		<data>
-		7gPgte2AgFMUoPIPV5wqxZj+9nI=
 		</data>
 		<key>edit_delete.png</key>
 		<data>
@@ -2621,23 +2273,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
-		</data>
-		<key>facebook_btn_off.png</key>
-		<data>
-		IlsEau2kMPA2qhe7NDR+fOwWrTk=
-		</data>
-		<key>facebook_btn_off@2x.png</key>
-		<data>
-		6ZWV9of+Z3qI3fyFcqkxy8egaco=
-		</data>
-		<key>facebook_btn_on.png</key>
-		<data>
-		PGq7f+QGyIPGP149t6S0UYVDwro=
-		</data>
-		<key>facebook_btn_on@2x.png</key>
-		<data>
-		N5EMPdk+lyTQ28WiJ5Ol9IGNxmc=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -2679,14 +2315,6 @@
 		<data>
 		bIYH958OOFWG+EW6X6joLjXTygc=
 		</data>
-		<key>feed_cell.png</key>
-		<data>
-		g2tVJSPXPyyvO2Z0XqmLub7lOfM=
-		</data>
-		<key>feed_cell@2x.png</key>
-		<data>
-		uGEYQFYDexUOwgJo+qKFVsp+wwg=
-		</data>
 		<key>feed_shadow_name.png</key>
 		<data>
 		ifD+I3NArrLGukfvssRzBACAEXg=
@@ -2717,7 +2345,7 @@
 		</data>
 		<key>fr.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>fullview_action_circle_go.png</key>
 		<data>
@@ -2767,114 +2395,6 @@
 		<data>
 		KWZjHNQVqPjwLjUDq5UWHeWsKxI=
 		</data>
-		<key>fullview_bg-568h@2x.png</key>
-		<data>
-		y/ZfHjJQXWeadxSDRBm4VewM8HU=
-		</data>
-		<key>fullview_bg.png</key>
-		<data>
-		hmP/6ZI2v142YvnRaIlDApG8/t4=
-		</data>
-		<key>fullview_bg@2x.png</key>
-		<data>
-		6unN4PhQ1HtKR11bgE1QRNs4+N8=
-		</data>
-		<key>guide_btn_gotit.png</key>
-		<data>
-		+fY1A2hTAF/AEaBnu9N71bpE3l8=
-		</data>
-		<key>guide_btn_gotit@2x.png</key>
-		<data>
-		Xp2rat5PaCs+rvErYQ6Bny8Whdg=
-		</data>
-		<key>guide_btn_skip.png</key>
-		<data>
-		nTq3zijHnTbYFYe8G3c8clAnPHs=
-		</data>
-		<key>guide_btn_skip@2x.png</key>
-		<data>
-		RRYT5a8xWMlRStmytwxZfzbSMdo=
-		</data>
-		<key>guide_btn_start.png</key>
-		<data>
-		MYZl3jrMEts4Ii/edqOxZrpGsZI=
-		</data>
-		<key>guide_btn_start@2x.png</key>
-		<data>
-		noR3w5VoNbHoDemJZlgE/MzaFQs=
-		</data>
-		<key>guide_step_1-568h@2x.png</key>
-		<data>
-		+krhEKsbqCgzrz1mXmYQwJWIJqg=
-		</data>
-		<key>guide_step_1.png</key>
-		<data>
-		4kOM//Hnm5XYlOLi0Da/0VUCX24=
-		</data>
-		<key>guide_step_1@2x.png</key>
-		<data>
-		k4b2tCf3vcHJZnfPZLVOE4jNKiI=
-		</data>
-		<key>guide_step_2-568h@2x.png</key>
-		<data>
-		2qtgRWu7dxfqQ7sJESx7NOhsdLA=
-		</data>
-		<key>guide_step_2.png</key>
-		<data>
-		sTK7pWj1zwAxU2UzZdH6+l3JwgQ=
-		</data>
-		<key>guide_step_2@2x.png</key>
-		<data>
-		fXVp7TfumB0mx/l4xxhE0G1JcPA=
-		</data>
-		<key>guide_step_3-568h@2x.png</key>
-		<data>
-		lOmHJtoahHsn46FdT0FZYHW52fY=
-		</data>
-		<key>guide_step_3.png</key>
-		<data>
-		f7Oe8JEg8D5G4aXUtZy8CUnkICM=
-		</data>
-		<key>guide_step_3@2x.png</key>
-		<data>
-		GFilQF3C8QPI3CTOKl1mHqadXvw=
-		</data>
-		<key>guide_step_4-568h@2x.png</key>
-		<data>
-		HLMkmy8jMWlxAuVJ0vhUZ7jHOXk=
-		</data>
-		<key>guide_step_4.png</key>
-		<data>
-		GswjKi2BktiAubCk3bT/Mh9RAlA=
-		</data>
-		<key>guide_step_4@2x.png</key>
-		<data>
-		CKIE25KoJLs0/F7VYgOcd9PhS9Y=
-		</data>
-		<key>guide_step_5-568h@2x.png</key>
-		<data>
-		BE/HjbV6W1SInAl3hQLxBq0nLec=
-		</data>
-		<key>guide_step_5.png</key>
-		<data>
-		qaO+hRNDdoVUTUtU8x+ZRLZy/yE=
-		</data>
-		<key>guide_step_5@2x.png</key>
-		<data>
-		l8RljeQtW6i8pCrPm3WhIMMCoFg=
-		</data>
-		<key>hello_bg-568h@2x.png</key>
-		<data>
-		mK7Fhez4k3eZKTc3hHwP0eJZj1Y=
-		</data>
-		<key>hello_bg.png</key>
-		<data>
-		0I15P1Lcn9yaPWdwCkzeGj0V1aQ=
-		</data>
-		<key>hello_bg@2x.png</key>
-		<data>
-		RCdVQYwRwg54vbVm87LqbRX+EJU=
-		</data>
 		<key>icon-60.png</key>
 		<data>
 		NoQJV8cLdIi9kRq/n4uZP0TzKAk=
@@ -2910,18 +2430,6 @@
 		<key>icon_userpic@2x.png</key>
 		<data>
 		mR9NY/PDuNTmwDmZdAtkNY+9iPo=
-		</data>
-		<key>intro_bg-568h@2x.png</key>
-		<data>
-		mK7Fhez4k3eZKTc3hHwP0eJZj1Y=
-		</data>
-		<key>intro_bg.png</key>
-		<data>
-		0I15P1Lcn9yaPWdwCkzeGj0V1aQ=
-		</data>
-		<key>intro_bg@2x.png</key>
-		<data>
-		RCdVQYwRwg54vbVm87LqbRX+EJU=
 		</data>
 		<key>loader-10.png</key>
 		<data>
@@ -3107,17 +2615,13 @@
 		<data>
 		/Hi9OalhgWu7KKOs/5+UzCK/zlU=
 		</data>
-		<key>privacy_policy.pdf</key>
-		<data>
-		15v0vJ20IourTIbFLG2QSZmN3PQ=
-		</data>
 		<key>pt.lproj/InfoPlist.strings</key>
 		<data>
 		zmV6UqBSo6r1NOz798vd5O4zTBA=
 		</data>
 		<key>pt.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>ru.lproj/InfoPlist.strings</key>
 		<data>
@@ -3125,15 +2629,7 @@
 		</data>
 		<key>ru.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
-		</data>
-		<key>scroll_content.png</key>
-		<data>
-		yhfZEYR4L40ehM/AdeLhnADuM+g=
-		</data>
-		<key>scroll_content@2x.png</key>
-		<data>
-		0VDLcT8jyfa7alRjZ4LT2uL1Yv4=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 		<key>settings.png</key>
 		<data>
@@ -3149,7 +2645,7 @@
 		</data>
 		<key>sv.lproj/Localizable.strings</key>
 		<data>
-		gLGQK+Z3bOQYC3Rijjt45mU+gfk=
+		8dHUWK4BYfslYfF1CqwulhdZhwM=
 		</data>
 	</dict>
 	<key>rules</key>

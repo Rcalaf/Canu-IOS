@@ -1,2 +1,2 @@
 dependencies: \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Framework/MKFoundationKit/NSDictionary/NSDictionary+MK_Block.m
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/MKFoundationKit/NSDictionary/NSDictionary+MK_Block.m
