@@ -253,7 +253,7 @@
 
 - (BOOL)localFeedIsUnlock{
     
-    return self.profilFeed.isUnlock;
+    return self.localFeed.isUnlock;
     
 }
 

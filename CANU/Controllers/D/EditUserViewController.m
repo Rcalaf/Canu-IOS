@@ -34,27 +34,14 @@
 
 @implementation EditUserViewController
 
-@synthesize user = _user;
-
-@synthesize toolBar = _toolBar;
-@synthesize backButton = _backButton;
-@synthesize saveButton = _saveButton;
-
-@synthesize userName = _userName;
-@synthesize changePasswordButton = _changePasswordButton;
-@synthesize name = _name;
-@synthesize email = _email;
-
-@synthesize loadingIndicator = _loadingIndicator;
-
 - (void)operationInProcess:(BOOL)isInProcess
 {
     if (isInProcess) {
-        [_loadingIndicator startAnimating];
-        _saveButton.hidden = YES;
+        [self.loadingIndicator startAnimating];
+        self.saveButton.hidden = YES;
     }else{
-        [_loadingIndicator stopAnimating];
-        _saveButton.hidden = NO;
+        [self.loadingIndicator stopAnimating];
+        self.saveButton.hidden = NO;
     }
 }
 
@@ -67,25 +54,25 @@
     return self;
 }
 
-- (IBAction)back:(id)sender
+- (void)back:(id)sender
 {
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-- (IBAction)showEditPassword:(id)sender
+- (void)showEditPassword:(id)sender
 {
     EditUserPasswordViewController *editPasswordController = [[EditUserPasswordViewController alloc] init];
     [self presentViewController:editPasswordController animated:YES completion:nil];
 }
 
-- (IBAction)updateUser:(id)sender
+- (void)updateUser:(id)sender
 {
     [self operationInProcess:YES];
     [self.user editUserWithUserName:_userName.text
                        Password:nil
-                      FirstName:_name.text
+                      FirstName:self.name.text
                        LastName:@""
-                          Email:_email.text
+                          Email:self.email.text
                           Block:^(User *user, NSError *error){
                               //NSLog(@"error: %@",error);
                               if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
@@ -175,17 +162,17 @@
     
     [self.view addSubview:passImage];
     
-    _changePasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_changePasswordButton setTitle:@"Change Password" forState:UIControlStateNormal];
-    [_changePasswordButton setFrame:CGRectMake(57.5f, 67.0f, 252.5f, 47.0f)];
-    [_changePasswordButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
-    _changePasswordButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    _changePasswordButton.titleEdgeInsets = UIEdgeInsetsMake(0, -120, 0, 0);
-    [_changePasswordButton setBackgroundColor:[UIColor whiteColor]];
-    [_changePasswordButton  addTarget:self action:@selector(showEditPassword:) forControlEvents:UIControlEventTouchUpInside];
+    self.changePasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.changePasswordButton setTitle:@"Change Password" forState:UIControlStateNormal];
+    [self.changePasswordButton setFrame:CGRectMake(57.5f, 67.0f, 252.5f, 47.0f)];
+    [self.changePasswordButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+    self.changePasswordButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+    self.changePasswordButton.titleEdgeInsets = UIEdgeInsetsMake(0, -120, 0, 0);
+    [self.changePasswordButton setBackgroundColor:[UIColor whiteColor]];
+    [self.changePasswordButton  addTarget:self action:@selector(showEditPassword:) forControlEvents:UIControlEventTouchUpInside];
     UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button_arrow"]];
     arrow.frame = CGRectMake(205.5f, 0.0f, 47.0f, 47.0f);
-    [_changePasswordButton addSubview:arrow];
+    [self.changePasswordButton addSubview:arrow];
     [self.view addSubview:_changePasswordButton];
     
     self.name = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 124.0f, 300.0f, 47.0f)];
@@ -204,31 +191,31 @@
     self.email.delegate = self;
     [self.view addSubview:self.email];
 
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
-    _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    self.toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
+    self.toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
-    _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
     [self.backButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
-    _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [_saveButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
-    [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _saveButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [_saveButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 255.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+    self.saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
+    [self.saveButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
+    [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.saveButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+    [self.saveButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 255.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
     [self.saveButton  addTarget:self action:@selector(updateUser:) forControlEvents:UIControlEventTouchUpInside];
     
-    [_toolBar addSubview:_saveButton];
+    [self.toolBar addSubview:_saveButton];
     
     // Activity Indicator
     
-    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
-    [_toolBar addSubview:_loadingIndicator];
+    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [self.toolBar addSubview:_loadingIndicator];
     
-    [_toolBar addSubview:_backButton];
+    [self.toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];
     
 }

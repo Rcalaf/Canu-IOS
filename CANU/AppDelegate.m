@@ -27,9 +27,6 @@ NSString *const FBSessionStateChangedNotification =
     MainViewController *loginViewController;
 }
 
-@synthesize errorManager = _errorManager;
-@synthesize device_token = _device_token;
-@synthesize feedViewController = _feedViewController;
 @synthesize currentLocation = _currentLocation;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;

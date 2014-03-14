@@ -32,25 +32,14 @@
 
 @implementation EditUserPasswordViewController
 
-@synthesize user = _user;
-
-@synthesize toolBar = _toolBar;
-@synthesize backButton = _backButton;
-@synthesize saveButton = _saveButton;
-
-@synthesize password = _password;
-@synthesize proxyPassword = _proxyPassword;
-
-@synthesize loadingIndicator = _loadingIndicator;
-
 - (void)operationInProcess:(BOOL)isInProcess
 {
     if (isInProcess) {
-        [_loadingIndicator startAnimating];
-        _saveButton.hidden = YES;
+        [self.loadingIndicator startAnimating];
+        self.saveButton.hidden = YES;
     }else{
-        [_loadingIndicator stopAnimating];
-        _saveButton.hidden = NO;
+        [self.loadingIndicator stopAnimating];
+        self.saveButton.hidden = NO;
     }
 }
 
@@ -70,10 +59,10 @@
 
 - (void)updatePassword:(id)sender
 {
-    _password.rightView = nil;
-    _proxyPassword.rightView = nil;
+    self.password.rightView = nil;
+   self.proxyPassword.rightView = nil;
     //NSLog(@" %@ %@",_password.text,_proxyPassword.text);
-    if ([_password.text isEqualToString:_proxyPassword.text]) {
+    if ([self.password.text isEqualToString:_proxyPassword.text]) {
     
         [self operationInProcess:YES];
         
@@ -85,14 +74,14 @@
                                   } else {
                                       
                                       if (error && [[error localizedRecoverySuggestion] rangeOfString:@"proxy_password"].location != NSNotFound) {
-                                          _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                          self.proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
                                       }else{
-                                          _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                          self.proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
                                       }
                                       if (error && [[error localizedRecoverySuggestion] rangeOfString:@"password"].location != NSNotFound){
-                                          _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                          self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
                                       }else{
-                                          _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                          self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
                                       }
                                   }
                                   
@@ -105,8 +94,8 @@
                                  [self operationInProcess:NO];
                         }];
     } else {
-        if (!_password.text)  _password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
-        _proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+        if (!_password.text)  self.password.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+        self.proxyPassword.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
     }
     
 }
@@ -154,31 +143,31 @@
     self.proxyPassword.delegate = self;
     [self.view addSubview:self.proxyPassword];
     
-    _toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
-    _toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    self.toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
+    self.toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
-    _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [_backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
     [self.backButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
-    _saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [_saveButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
-    [_saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _saveButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [_saveButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 255.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+    self.saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
+    [self.saveButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
+    [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.saveButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+    [self.saveButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 255.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
     [self.saveButton  addTarget:self action:@selector(updatePassword:) forControlEvents:UIControlEventTouchUpInside];
     
-    [_toolBar addSubview:_saveButton];
+    [self.toolBar addSubview:_saveButton];
     
     // Activity Indicator
     
-    _loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    _loadingIndicator.center = CGPointMake(188.5f, 28.5f);
-    [_toolBar addSubview:_loadingIndicator];
+    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.loadingIndicator.center = CGPointMake(188.5f, 28.5f);
+    [self.toolBar addSubview:_loadingIndicator];
     
-    [_toolBar addSubview:_backButton];
+    [self.toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];
     
     

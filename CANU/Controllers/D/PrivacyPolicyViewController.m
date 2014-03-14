@@ -20,11 +20,6 @@
 
 @implementation PrivacyPolicyViewController
 
-@synthesize browser = _browser;
-@synthesize toolBar = _toolBar;
-@synthesize closeButton = _closeButton;
-@synthesize backButton = _backButton;
-
 - (id)initForTerms:(BOOL)isForTerms{
     self = [super init];
     if (self) {
@@ -42,24 +37,24 @@
     [super loadView];
     self.view.backgroundColor = backgroundColorView;
     
-    _browser = [[UIWebView alloc] initWithFrame:self.view.frame];
-    _browser.scalesPageToFit = YES;
+    self.browser = [[UIWebView alloc] initWithFrame:self.view.frame];
+    self.browser.scalesPageToFit = YES;
     
     if (!_isForTerms) {
-        [_browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/privacyapp"]]];
+        [self.browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/privacyapp"]]];
     }else{
-        [_browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/termsapp"]]];
+        [self.browser loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.canu.se/termsapp"]]];
     }
     
     [self.view addSubview:_browser];
     
-    _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_closeButton setTitle:@"Close" forState:UIControlStateNormal];
-    [_closeButton setFrame:CGRectMake(0, self.view.frame.size.height - 47, 320.0f, 47.0f)];
-    [_closeButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
-    _closeButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [_closeButton setBackgroundColor:[UIColor whiteColor]];
-    [_closeButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchDown];
+    self.closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.closeButton setTitle:@"Close" forState:UIControlStateNormal];
+    [self.closeButton setFrame:CGRectMake(0, self.view.frame.size.height - 47, 320.0f, 47.0f)];
+    [self.closeButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
+    self.closeButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+    [self.closeButton setBackgroundColor:[UIColor whiteColor]];
+    [self.closeButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchDown];
     
     [self.view addSubview:_closeButton];
 }

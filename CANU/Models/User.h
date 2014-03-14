@@ -24,7 +24,7 @@
 @property (nonatomic) BOOL phoneIsVerified;
 
 
--(id)initWithAttributes:(NSDictionary *)attributes;
+- (id)initWithAttributes:(NSDictionary *)attributes;
 
 + (void)userWithToken:(NSString *)token
              andBlock:(void (^)(User *user, NSError *error))block;

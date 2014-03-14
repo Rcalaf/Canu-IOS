@@ -1328,7 +1328,7 @@
     
 }
 
-- (IBAction)deleteActivity{
+- (void)deleteActivity{
     
     [self.editActivity removeActivityWithBlock:^(NSError *error){
         if (!error) {

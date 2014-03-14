@@ -161,7 +161,7 @@
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-                                            NSLog(@"Process completed %@",JSON);
+                                            
                                             User *user= [[User alloc] initWithAttributes:JSON];
                                             if (block) {
                                                 block(user, nil);
@@ -204,14 +204,12 @@
         
         [appDelegate logOut];
         
-        NSLog(@"logout Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-        
     }];
 
 }
 
 - (void)editLatitude:(CLLocationDegrees)latitude Longitude:(CLLocationDegrees)longitude{
-    NSLog(@"Edit Location");
+    
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     if (!latitude) { latitude = appDelegate.currentLocation.latitude; }

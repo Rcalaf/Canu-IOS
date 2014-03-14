@@ -26,9 +26,6 @@
 
 @implementation UICanuActivityCellScroll
 
-@synthesize activity = _activity;
-@synthesize delegate;
-
 - (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity
 {
     self = [super initWithFrame:frame];

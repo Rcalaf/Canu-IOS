@@ -9,6 +9,7 @@
 #import "Location.h"
 
 #import "AppDelegate.h"
+#import "UserManager.h"
 
 #import "AFCanuAPIClient.h"
 
@@ -329,7 +330,7 @@
     NSString *url;
     
     if (!searchWords || [searchWords mk_isEmpty]) {
-        url = @"https://api.foursquare.com/v2/venues/search?ll=59.292874,17.993225&query=&limit=10&intent=browse&radius=800&oauth_token=01SK0VSRTMIFZUMB0DWDJRZBE00S2FNSKX0SFK3ZXBJDR5IA&v=20140217";
+        url = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&query=&limit=10&intent=browse&radius=800&oauth_token=01SK0VSRTMIFZUMB0DWDJRZBE00S2FNSKX0SFK3ZXBJDR5IA&v=20140217",appDelegate.currentLocation.latitude,appDelegate.currentLocation.longitude];
     } else {
         
         NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
