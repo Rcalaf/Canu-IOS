@@ -25,6 +25,11 @@
 @property (strong, nonatomic) NSMutableArray *arrayError;
 
 /**
+ *  Alert G3b for Push notification
+ */
+@property (strong, nonatomic) NSMutableDictionary *alertPush;
+
+/**
  *  For test the Global Internet Connection
  */
 @property (strong, nonatomic) Reachability *globalInternetReachable;
@@ -68,6 +73,12 @@ static dispatch_once_t oncePredicate;
 {
     self = [super init];
     if (self) {
+        
+        _alertPush = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AlertPush"] mutableCopy];
+
+        if (!_alertPush) {
+            _alertPush = [[NSMutableDictionary alloc]init];
+        }
         
         self.arrayError = [[NSMutableArray alloc]init];
         self.feedBackAlert = [AFCanuAPIClient sharedClient].distributionMode;
@@ -120,6 +131,57 @@ static dispatch_once_t oncePredicate;
             block(CANUErrorUnknown);
         }
     }
+    
+}
+
+#pragma mark - - Detect Manager Error Push Notification
+
+/**
+ *  Show the G3b Alert if necessary
+ */
+- (void)showG3bAlertIfNecessary{
+    
+    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+    if (types & UIRemoteNotificationTypeAlert){
+        
+        
+        
+    } else {
+       
+        if (![_alertPush objectForKey:@"G3b"]) {
+            
+            [self.alertPush setObject:[NSNumber numberWithBool:YES] forKey:@"G3b"];
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults removeObjectForKey:@"AlertPush"];
+            [defaults setObject:_alertPush forKey:@"AlertPush"];
+            [defaults synchronize];
+            
+            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            
+            AlertViewController *alert = [[AlertViewController alloc]init];
+            alert.canuAlertViewType = CANUAlertViewHeader;
+            alert.canuError = CANUErrorPushG3b;
+            
+            [self addError:CANUErrorUnknown];
+            
+            [appDelegate.window addSubview:alert.view];
+            [appDelegate.window.rootViewController addChildViewController:alert];
+            
+        }
+        
+    }
+    
+}
+
+/**
+ *  Reset and delete the dic after logout
+ */
+- (void)resetAlertPushNotification{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:@"AlertPush"];
+    [defaults synchronize];
     
 }
 

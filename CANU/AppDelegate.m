@@ -19,8 +19,7 @@
 #import "UserManager.h"
 #import <Instabug/Instabug.h>
 
-NSString *const FBSessionStateChangedNotification =
-@"se.canu.canu:FBSessionStateChangedNotification";
+NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStateChangedNotification";
 
 
 @implementation AppDelegate{
@@ -40,8 +39,7 @@ NSString *const FBSessionStateChangedNotification =
     return _feedViewController;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     id<GAITracker> tracker;
     
@@ -65,13 +63,11 @@ NSString *const FBSessionStateChangedNotification =
     }
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    if (types == UIRemoteNotificationTypeNone){
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"NO" value:nil] build]];
-    } else {
+    if (types & UIRemoteNotificationTypeAlert){
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"YES" value:nil] build]];
+    } else {
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"NO" value:nil] build]];
     }
-    
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
@@ -100,7 +96,7 @@ NSString *const FBSessionStateChangedNotification =
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
-    
+    NSLog(@"Check Token");
     const char* data = [deviceToken bytes];
     NSMutableString* token = [NSMutableString string];
     

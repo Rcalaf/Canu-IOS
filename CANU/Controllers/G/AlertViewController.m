@@ -72,6 +72,16 @@
         self.illustration.image = [UIImage imageNamed:@"G4Fail_eagle"];
         self.descriptionError.frame = CGRectMake((320 - 315)/2, (self.view.frame.size.height - 480)/2 + 230, 315, 170);
         self.descriptionError.text = NSLocalizedString(@"Settings > Privacy > Location", nil);
+    } else if (_canuError == CANUErrorPushNotDetermined) {
+        self.illustration.image = [UIImage imageNamed:@"G3a_illustration"];
+        self.illustration.frame = CGRectMake((320 - 85)/2, (self.view.frame.size.height - 480)/3 + 50, 85, 196);
+        self.descriptionError.text = NSLocalizedString(@"Would you like to be notified \n\nwhen your friends invite you ?", nil);
+        self.descriptionError.frame = CGRectMake(30, (self.view.frame.size.height - 480)/2 + 230, 260, 210);
+    } else if (_canuError == CANUErrorPushG3b) {
+        self.illustration.image = [UIImage imageNamed:@"G3a_illustration"];
+        self.illustration.frame = CGRectMake((320 - 85)/2, (self.view.frame.size.height - 480)/3 + 50, 85, 196);
+        self.descriptionError.text = NSLocalizedString(@"To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners", nil);
+        self.descriptionError.frame = CGRectMake(30, (self.view.frame.size.height - 480)/2 + 230, 260, 210);
     }
     
     self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(40, self.view.frame.size.height - 77, 240, 37.0) andBlue:YES];
@@ -96,6 +106,11 @@
         self.wrapperAlert.alpha = 0;
         self.wrapperAlert.transform = CGAffineTransformMakeScale(0.8, 0.8);
     } completion:^(BOOL finished) {
+        
+        if (_canuError == CANUErrorPushNotDetermined) {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+        }
+        
         [[ErrorManager sharedErrorManager] deleteError:_canuError];
         [self.view removeFromSuperview];
         [self willMoveToParentViewController:nil];

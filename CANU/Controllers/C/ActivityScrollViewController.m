@@ -191,7 +191,7 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openWebViewCounter)];
             
             self.textCounter = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(50.0f, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60)];
-            self.textCounter.text = NSLocalizedString(@"Locked until we are enought.\nRead why", nil);
+            self.textCounter.text = NSLocalizedString(@"Locked until we are enougth.\nRead why", nil);
             self.textCounter.textColor = [UIColor whiteColor];
             self.textCounter.font = [UIFont fontWithName:@"Lato-Regular" size:14];
             self.textCounter.textAlignment = NSTextAlignmentCenter;
@@ -645,6 +645,7 @@
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
+        
         [cell.loadingIndicator startAnimating];
         cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
         cell.animationButtonToGo.hidden = NO;
@@ -694,6 +695,8 @@
         CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:cell.activity];
         [self presentViewController:editView animated:YES completion:nil];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
+        
+        [[ErrorManager sharedErrorManager] showG3bAlertIfNecessary];
         
         [cell.loadingIndicator startAnimating];
         cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
