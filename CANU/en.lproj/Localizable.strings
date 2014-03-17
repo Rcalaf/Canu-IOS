@@ -96,8 +96,8 @@
 "We need to know where you are" = "We need to know where you are"; // New
 "Enable my GPS" = "Enable my GPS";
 "Settings > Privacy > Location" = "To use the local feed go to\nSettings > Privacy > Location\nand set Canu to On"; // New
-"Would you like to be notified \n\nwhen your friends invite you ?" = "Would you like to be notified \n\nwhen your friends invite you ?"; // New
-
+"Would you like to be notified \n\nwhen your friends invite you ?" = "Would you like to be notified \nwhen your friends invite you ?"; // New
+"To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners" = "To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners";
 // Create
 
 "What do you want to do?" = "What are you up to?";

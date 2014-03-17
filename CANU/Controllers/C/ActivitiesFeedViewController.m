@@ -57,9 +57,9 @@
     self.lastPosition = 0.5f;
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"Local Feed"];
+    [tracker set:kGAIScreenName value:@"Tribes Feed"];
     [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
-    self.appDelegate.oldScreenName = @"Local Feed";
+    self.appDelegate.oldScreenName = @"Tribes Feed";
     
     self.view.backgroundColor = backgroundColorView;
     

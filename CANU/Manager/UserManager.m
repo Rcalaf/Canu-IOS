@@ -7,6 +7,7 @@
 //
 
 #import "UserManager.h"
+#import "ErrorManager.h"
 #import "AFCanuAPIClient.h"
 #import "User.h"
 
@@ -113,6 +114,8 @@ static UserManager* _sharedUserManager = nil;
     [defaults setBool:NO forKey:@"logToDistributionMode"];
     
     [defaults synchronize];
+    
+    [[ErrorManager sharedErrorManager] resetAlertPushNotification];
     
     return YES;
     
