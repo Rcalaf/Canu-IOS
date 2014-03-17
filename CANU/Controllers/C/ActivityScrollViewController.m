@@ -191,7 +191,7 @@
             UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openWebViewCounter)];
             
             self.textCounter = [[TTTAttributedLabel alloc]initWithFrame:CGRectMake(50.0f, (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60)];
-            self.textCounter.text = NSLocalizedString(@"Locked until we are enought.\nRead why", nil);
+            self.textCounter.text = NSLocalizedString(@"Locked until we are enougth.\nRead why", nil);
             self.textCounter.textColor = [UIColor whiteColor];
             self.textCounter.font = [UIFont fontWithName:@"Lato-Regular" size:14];
             self.textCounter.textAlignment = NSTextAlignmentCenter;
