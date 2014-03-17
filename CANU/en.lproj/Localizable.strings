@@ -96,6 +96,7 @@
 "We need to know where you are" = "We need to know where you are"; // New
 "Enable my GPS" = "Enable my GPS";
 "Settings > Privacy > Location" = "To use the local feed go to\nSettings > Privacy > Location\nand set Canu to On"; // New
+"Would you like to be notified \n\nwhen your friends invite you ?" = "Would you like to be notified \n\nwhen your friends invite you ?"; // New
 
 // Create
 

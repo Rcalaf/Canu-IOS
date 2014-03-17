@@ -16,7 +16,8 @@ typedef NS_ENUM(NSInteger, CANUError) {
     CANUErrorPhoneBookRestricted = 3,   // If We don't have access to the phone book
     CANUErrorPhoneBookNotDetermined = 4,// If We don't have access to the phone book
     CANUErrorLocationRestricted = 5,    // If We don't have access to the phone book
-    CANUErrorLocationNotDetermined = 6  // If We don't have access to the phone book
+    CANUErrorLocationNotDetermined = 6, // If We don't have access to the phone book
+    CANUErrorPushNotDetermined = 7      // If We don't have access to the phone book
 };
 
 @interface ErrorManager : NSObject

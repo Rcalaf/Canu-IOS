@@ -19,6 +19,8 @@ typedef enum {
 #import "TutorialStepTribes.h"
 #import "TutorialStepProfile.h"
 #import "TutorialStepFinal.h"
+#import "AppDelegate.h"
+#import "AlertViewController.h"
 
 @interface TutorialViewController () <TutorialStepStartDelegate,TutorialStepFinalDelegate>
 
@@ -216,7 +218,26 @@ typedef enum {
 
 - (void)tutorialStepFinalEnd{
     
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:NO completion:^{
+        // Add notification for the push
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        if (types & UIRemoteNotificationTypeAlert){
+            
+            
+            
+        } else {
+            
+            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            
+            AlertViewController *alert = [[AlertViewController alloc]init];
+            alert.canuAlertViewType = CANUAlertViewPopIn;
+            alert.canuError = CANUErrorPushNotDetermined;
+            
+            [appDelegate.window addSubview:alert.view];
+            [appDelegate.window.rootViewController addChildViewController:alert];
+            
+        }
+    }];
     
 }
 

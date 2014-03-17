@@ -17,6 +17,7 @@
 #import "UICanuButtonSignBottomBar.h"
 #import "MainViewController.h"
 #import "UserManager.h"
+#import "AlertViewController.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -191,6 +192,22 @@
                     appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
                     [appDelegate.canuViewController pushViewController:appDelegate.feedViewController animated:NO];
                     appDelegate.window.rootViewController = appDelegate.canuViewController;
+                    
+                    UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+                    if (types & UIRemoteNotificationTypeAlert){
+                    } else {
+                        
+                        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+                        
+                        AlertViewController *alert = [[AlertViewController alloc]init];
+                        alert.canuAlertViewType = CANUAlertViewPopIn;
+                        alert.canuError = CANUErrorPushNotDetermined;
+                        
+                        [appDelegate.window addSubview:alert.view];
+                        [appDelegate.window.rootViewController addChildViewController:alert];
+                        
+                    }
+                    
                 }else{
                     NSLog(@"User Not Active");
                     MainViewController *loginViewController = [[MainViewController alloc] init];

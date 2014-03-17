@@ -99,11 +99,11 @@
         {
             User *user = [[UserManager sharedUserManager] currentUser];
             
-            NSString *string = [NSString stringWithFormat:@"%icanuGettogether%@",user.userId,user.email];
+            NSString *string = [NSString stringWithFormat:@"%lucanuGettogether%@",(unsigned long)user.userId,user.email];
             
             NSString *token = [self sha1:string];
             
-            NSString *text = [NSString stringWithFormat:@"%@ %@#%i",NSLocalizedString(@"I promise that this is my number.", nil),token,user.userId];
+            NSString *text = [NSString stringWithFormat:@"%@ %@#%lu",NSLocalizedString(@"I promise that this is my number.", nil),token,(unsigned long)user.userId];
             
             controller.body = text;
             controller.recipients = [NSArray arrayWithObjects:@"+46769438333", nil];
@@ -123,7 +123,7 @@
         NSArray *objectsArray;
         NSArray *keysArray;
         
-        objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithInt:currentUser.userId],self.phoneNumber.text,@"097c4qw87ryn02tnc2",nil];
+        objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:currentUser.userId],self.phoneNumber.text,@"097c4qw87ryn02tnc2",nil];
         keysArray = [NSArray arrayWithObjects:@"user_id",@"phone_number",@"key",nil];
         
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
@@ -233,7 +233,7 @@
     
     uint8_t digest[CC_SHA1_DIGEST_LENGTH];
     
-    CC_SHA1(data.bytes, data.length, digest);
+    CC_SHA1(data.bytes, (int)data.length, digest);
     
     NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
     
