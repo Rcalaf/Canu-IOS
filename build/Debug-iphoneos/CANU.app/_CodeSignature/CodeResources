@@ -40,6 +40,22 @@
 		<data>
 		kozJWJFSNE8aXnLQaOxguoZ+Dek=
 		</data>
+		<key>All_bottom_bar_background.png</key>
+		<data>
+		X0P0J2OrcPKEfHJSGTE8QfHQyLs=
+		</data>
+		<key>All_bottom_bar_background@2x.png</key>
+		<data>
+		8Ok5aTWKV4/tHArBqmSlSZbHLzg=
+		</data>
+		<key>All_button_red_normal.png</key>
+		<data>
+		y+X10XshCMmrlsc3O1XehNdo1PQ=
+		</data>
+		<key>All_button_red_normal@2x.png</key>
+		<data>
+		vd8xo7m/kg2SKnJjUxxfVJ00hk0=
+		</data>
 		<key>AnimationCreateActivity_cloud.png</key>
 		<data>
 		VuUKyWr8shNs52U7RwwttpjK2lk=
@@ -902,11 +918,11 @@
 		</data>
 		<key>back_arrow.png</key>
 		<data>
-		jC0FH8yRK4ekgrD9dwtf7KXZFEo=
+		7VLQnUwG1rCuCZTbem0dJYoSqeQ=
 		</data>
 		<key>back_arrow@2x.png</key>
 		<data>
-		7hsSj4+tWxyNm/G9H5Sw+1TkjPI=
+		bmFyDGXSCEKMRauBcG/sstAGym8=
 		</data>
 		<key>back_cross.png</key>
 		<data>
@@ -958,7 +974,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		oE3D9yVxvuu45bvN2K/5vQ1CCOA=
+		A8K1LT59X82aRCsr168n3Wu335k=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1371,6 +1387,22 @@
 		<data>
 		kozJWJFSNE8aXnLQaOxguoZ+Dek=
 		</data>
+		<key>All_bottom_bar_background.png</key>
+		<data>
+		X0P0J2OrcPKEfHJSGTE8QfHQyLs=
+		</data>
+		<key>All_bottom_bar_background@2x.png</key>
+		<data>
+		8Ok5aTWKV4/tHArBqmSlSZbHLzg=
+		</data>
+		<key>All_button_red_normal.png</key>
+		<data>
+		y+X10XshCMmrlsc3O1XehNdo1PQ=
+		</data>
+		<key>All_button_red_normal@2x.png</key>
+		<data>
+		vd8xo7m/kg2SKnJjUxxfVJ00hk0=
+		</data>
 		<key>AnimationCreateActivity_cloud.png</key>
 		<data>
 		VuUKyWr8shNs52U7RwwttpjK2lk=
@@ -2233,11 +2265,11 @@
 		</data>
 		<key>back_arrow.png</key>
 		<data>
-		jC0FH8yRK4ekgrD9dwtf7KXZFEo=
+		7VLQnUwG1rCuCZTbem0dJYoSqeQ=
 		</data>
 		<key>back_arrow@2x.png</key>
 		<data>
-		7hsSj4+tWxyNm/G9H5Sw+1TkjPI=
+		bmFyDGXSCEKMRauBcG/sstAGym8=
 		</data>
 		<key>back_cross.png</key>
 		<data>
@@ -2289,7 +2321,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		oE3D9yVxvuu45bvN2K/5vQ1CCOA=
+		A8K1LT59X82aRCsr168n3Wu335k=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>

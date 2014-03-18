@@ -113,7 +113,7 @@
 "ON THE MAP" = "on the map";
 "No results ..." = "No results ...";
 "Adress" = "Adress";
-"CREATE" = "Create";
+"Send activity" = "Send activity"; // New
 "YES" = "Yes";
 "NO" = "No";
 "Those who are not yet on CANU will receive a text message with a link to your activity." = "Those who are not yet on CANU will receive a text message with a link to your activity.";

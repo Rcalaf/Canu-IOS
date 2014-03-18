@@ -24,7 +24,9 @@
 #import "Location.h"
 #import "SearchLocationMapViewController.h"
 #import "UICanuButtonCancel.h"
-#import "UICanuButtonSignBottomBar.h"
+#import "UICanuButtonSignBottomBar.h" // TO Delete
+#import "UICanuButton.h"
+#import "UICanuBottomBar.h"
 #import "Contact.h"
 #import "User.h"
 #import "MessageGhostUser.h"
@@ -60,7 +62,7 @@
 @property (strong, nonatomic) UIButton *synContact;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
-@property (strong, nonatomic) UIView *bottomBar;
+@property (strong, nonatomic) UICanuBottomBar *bottomBar;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (strong, nonatomic) Activity *createActivity;
 @property (strong, nonatomic) Activity *editActivity;
@@ -80,7 +82,7 @@
 @property (strong, nonatomic) UICanuSearchLocation *searchLocation;
 @property (strong, nonatomic) SearchLocationMapViewController *mapLocation;
 @property (strong, nonatomic) MessageGhostUser *messageGhostUser;
-@property (strong, nonatomic) UICanuButtonSignBottomBar *buttonAction;
+@property (strong, nonatomic) UICanuButton *buttonAction;
 
 @end
 
@@ -168,14 +170,6 @@
     self.wrapper.alpha = 0;
     self.wrapper.delegate = self;
     [self.view addSubview:_wrapper];
-    
-    UIImageView *icone = [[UIImageView alloc]initWithFrame:CGRectMake(138, 21, 43, 43)];
-    if (_canuCreateActivity == CANUCreateActivityLocal) {
-        icone.image = [UIImage imageNamed:@"F5_local_icones"];
-    } else {
-        icone.image = [UIImage imageNamed:@"F5_tribes_icones"];
-    }
-    [self.wrapper addSubview:icone];
     
     // Title
     
@@ -316,13 +310,8 @@
     
     // Bottom bar
     
-    self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57)];
-    self.bottomBar.backgroundColor = UIColorFromRGB(0xf4f4f4);
+    self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57)];
     [self.view addSubview:_bottomBar];
-    
-    UIView *lineBottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, -1, 320, 1)];
-    lineBottomBar.backgroundColor = UIColorFromRGB(0xd4e0e0);
-    [self.bottomBar addSubview:lineBottomBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
@@ -330,9 +319,9 @@
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
     [_bottomBar addSubview:backButton];
     
-    self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0) andBlue:YES];
+    self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(57 + 10, 10.0, (self.view.frame.size.width - (57 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
     if (!_editActivity) {
-        [self.buttonAction setTitle:NSLocalizedString(@"CREATE", nil) forState:UIControlStateNormal];
+        [self.buttonAction setTitle:NSLocalizedString(@"Send activity", nil) forState:UIControlStateNormal];
     } else {
         [self.buttonAction setTitle:NSLocalizedString(@"SAVE", nil) forState:UIControlStateNormal];
         self.buttonAction.frame = CGRectMake(194.0f, 10.0f, 116.0f, 37);
