@@ -33,6 +33,7 @@
 #import "AlertViewController.h"
 #import "PhoneBook.h"
 #import "UserManager.h"
+#import "UIImageView+AFNetworking.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -41,6 +42,7 @@
 @interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
+@property (nonatomic) BOOL activityIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
 @property (nonatomic) BOOL searchLocationIsOpen;
 @property (nonatomic) BOOL userListIsOpen;
@@ -52,8 +54,10 @@
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
 @property (strong, nonatomic) UIImageView *imgAddDescription;
-@property (strong, nonatomic) UIView *wrapperDescription;
+@property (strong, nonatomic) UIImageView *wrapperDescription;
 @property (strong, nonatomic) UIView *wrapperInvitInput;
+@property (strong, nonatomic) UIView *wrapperActivity;
+@property (strong, nonatomic) UIView *backgroundDark;
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UILabel *labelSyncContact;
 @property (strong, nonatomic) UIButton *openMap;
@@ -62,6 +66,7 @@
 @property (strong, nonatomic) UIButton *synContact;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
+@property (strong, nonatomic) UILabel *counterLength;
 @property (strong, nonatomic) UICanuBottomBar *bottomBar;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (strong, nonatomic) Activity *createActivity;
@@ -165,26 +170,26 @@
     self.mapLocationIsOpen = NO;
     self.ghostUser = NO;
     self.invitInputIsStick = NO;
+    self.activityIsOpen = NO;
     
     self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 90, 320, self.view.frame.size.height - 57)];
     self.wrapper.alpha = 0;
     self.wrapper.delegate = self;
     [self.view addSubview:_wrapper];
     
-    // Title
+    // Wrapper Activity
     
-    self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10, 85, 250, 47)];
-    self.titleInput.placeholder = NSLocalizedString(@"What do you want to do?", nil);
-    self.titleInput.returnKeyType = UIReturnKeyNext;
-    self.titleInput.delegate = self;
-    [self.wrapper addSubview:_titleInput];
+    self.wrapperActivity = [self initializationWrapperActivity];
+    [self.wrapper addSubview:_wrapperActivity];
+    
+    // Title
     
     // Description
     
     self.imgAddDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 49, 47)];
     self.imgAddDescription.image = [UIImage imageNamed:@"F1_add_description"];
     
-    UIButton *addDescription = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, _titleInput.frame.origin.y, 49, 47)];
+    UIButton *addDescription = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, 185, 49, 47)];
     [addDescription addTarget:self action:@selector(openDescriptionView) forControlEvents:UIControlEventTouchDown];
     addDescription.backgroundColor = [UIColor whiteColor];
     [addDescription addSubview:_imgAddDescription];
@@ -192,13 +197,13 @@
     
     // Date
     
-    self.todayBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(10, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 100, 47)];
+    self.todayBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(10, 240, 100, 47)];
     self.todayBtnSelect.textButton = NSLocalizedString(@"Today", nil);
     self.todayBtnSelect.selected = YES;
     [self.todayBtnSelect addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
     [self.wrapper addSubview:_todayBtnSelect];
     
-    self.tomorrowBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(10 + 100, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 100, 47)];
+    self.tomorrowBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(10 + 100, 240, 100, 47)];
     self.tomorrowBtnSelect.textButton = NSLocalizedString(@"Tomorrow", nil);
     [self.tomorrowBtnSelect addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
     [self.wrapper addSubview:_tomorrowBtnSelect];
@@ -206,7 +211,7 @@
     self.imgOpenCalendar = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 47)];
     self.imgOpenCalendar.image = [UIImage imageNamed:@"F1_calendar"];
     
-    self.openCalendar = [[UIButton alloc]initWithFrame:CGRectMake(200 + 10, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 100, 47)];
+    self.openCalendar = [[UIButton alloc]initWithFrame:CGRectMake(200 + 10, 240, 100, 47)];
     self.openCalendar.backgroundColor = [UIColor clearColor];
     [self.openCalendar addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
     [self.openCalendar addSubview:_imgOpenCalendar];
@@ -355,28 +360,28 @@
     }];
     
     // Description
-    self.wrapperDescription = [[UIView alloc]initWithFrame:CGRectMake(0, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 320, 0)];
-    self.wrapperDescription.backgroundColor = UIColorFromRGB(0xe9eeee);
-    self.wrapperDescription.clipsToBounds = YES;
-    [self.wrapper addSubview:_wrapperDescription];
+//    self.wrapperDescription = [[UIView alloc]initWithFrame:CGRectMake(0, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 320, 0)];
+//    self.wrapperDescription.backgroundColor = UIColorFromRGB(0xe9eeee);
+//    self.wrapperDescription.clipsToBounds = YES;
+//    [self.wrapper addSubview:_wrapperDescription];
     
-    self.descriptionInput = [[UITextView alloc]initWithFrame:CGRectMake(20, 10, 280, 80)];
-    self.descriptionInput.textColor = UIColorFromRGB(0xabb3b7);
-    self.descriptionInput.text = NSLocalizedString(@"Add a description", nil);
-    self.descriptionInput.backgroundColor = UIColorFromRGB(0xe9eeee);
-    self.descriptionInput.font = [UIFont fontWithName:@"Lato-Regular" size:12];
-    self.descriptionInput.returnKeyType = UIReturnKeyNext;
-    self.descriptionInput.delegate = self;
-    [self.wrapperDescription addSubview:_descriptionInput];
+//    self.descriptionInput = [[UITextView alloc]initWithFrame:CGRectMake(20, 10, 280, 80)];
+//    self.descriptionInput.textColor = UIColorFromRGB(0xabb3b7);
+//    self.descriptionInput.text = NSLocalizedString(@"Add a description", nil);
+//    self.descriptionInput.backgroundColor = UIColorFromRGB(0xe9eeee);
+//    self.descriptionInput.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+//    self.descriptionInput.returnKeyType = UIReturnKeyNext;
+//    self.descriptionInput.delegate = self;
+//    [self.wrapperDescription addSubview:_descriptionInput];
     
-    UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
-    shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-    [self.wrapperDescription addSubview:shadowDescription];
-    
-    UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, 100 - 6, 320, 6)];
-    shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-    shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
-    [self.wrapperDescription addSubview:shadowDescriptionReverse];
+//    UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
+//    shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
+//    [self.wrapperDescription addSubview:shadowDescription];
+//    
+//    UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, 100 - 6, 320, 6)];
+//    shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
+//    shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
+//    [self.wrapperDescription addSubview:shadowDescriptionReverse];
     
     // Calendar
     
@@ -474,6 +479,7 @@
     
     if (textField == _titleInput) {
         [self.titleInput resignFirstResponder];
+        [self openActivity];
     }else if (textField == _locationInput && [_locationInput.text isEqualToString:@""]) {
         [self.locationInput resignFirstResponder];
     }else if (textField == _invitInput && ([_invitInput.text isEqualToString:@""] || [_invitInput.text isEqualToString:@" "])) {
@@ -507,7 +513,13 @@
         [self openUserListView];
     }
     
-    [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
+    if (textField != _titleInput) {
+        [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
+    } else {
+        if (!_activityIsOpen) {
+            [self openActivity];
+        }
+    }
     
 }
 
@@ -620,39 +632,49 @@
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    
-    if ([textView.text isEqualToString:NSLocalizedString(@"Add a description", nil)]) {
+    NSLog(@"textViewDidBeginEditing");
+    if ([textView.text isEqualToString:NSLocalizedString(@"Add details (Optional)", nil)]) {
         textView.text = @"";
         textView.textColor = UIColorFromRGB(0x2b4b58);
+        self.counterLength.text = @"140";
     }
     [textView becomeFirstResponder];
-    
-    NSNumber *position = [NSNumber numberWithInt:_titleInput.frame.origin.y - 5];
-    
-    [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
     
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
     if ([textView.text isEqualToString:@""]) {
-        textView.text = NSLocalizedString(@"Add a description", nil);
+        textView.text = NSLocalizedString(@"Add details (Optional)", nil);
         textView.textColor = UIColorFromRGB(0xabb3b7);
+        self.counterLength.text = @"";
     }
     [textView resignFirstResponder];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
+    NSLog(@"shouldChangeTextInRange");
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
+        [self openActivity];
     }
     
     NSString *newString = [textView.text stringByReplacingCharactersInRange:range withString:text];
     
-    if (newString.length >= 140) {
+    int numberOfLine = (int)textView.contentSize.height / textView.font.lineHeight;
+    
+    if (_activityIsOpen) {
+        self.wrapperDescription.frame = CGRectMake(-2, 99, 304, 23 + 16 * numberOfLine);
+        self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y, _wrapperActivity.frame.size.width, 100 + 23 + 16 * numberOfLine);
+        self.counterLength.frame = CGRectMake(302 - 30, _wrapperDescription.frame.size.height - 2 - 20, 20, 10);
+        self.descriptionInput.frame = CGRectMake(10, 10, 280, 16 * numberOfLine);
+    }
+    
+    if (newString.length > 140) {
         return NO;
     }
+    
+    self.counterLength.text = [NSString stringWithFormat:@"%i",140 - newString.length];
     
     return YES;
 }
@@ -850,6 +872,67 @@
 
 #pragma mark - Private
 
+#pragma mark -- Init View
+
+- (UIView *)initializationWrapperActivity{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 100)];
+    
+    UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 105)];
+    background.image = [UIImage imageNamed:@"F_activity_background"];
+    [view addSubview:background];
+    
+    // Profile picture
+    UIImageView *profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
+    [profilePicture setImageWithURL:[[UserManager sharedUserManager] currentUser].profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    [view addSubview:profilePicture];
+    
+    // Stroke profile picture
+    UIImageView *strokePicture = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+    strokePicture.image = [UIImage imageNamed:@"All_stroke_profile_picture_35"];
+    [profilePicture addSubview:strokePicture];
+    
+    // Name
+    UILabel *username = [[UILabel alloc]initWithFrame:CGRectMake(55, 18, 200, 17)];
+    username.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+    username.text = [[UserManager sharedUserManager] currentUser].firstName;
+    username.textColor = UIColorFromRGB(0x2b4b58);
+    [view addSubview:username];
+    
+    self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
+    self.titleInput.font = [UIFont fontWithName:@"Lato-Bold" size:23];
+    self.titleInput.textColor = UIColorFromRGB(0x2b4b58);
+    self.titleInput.placeholder = NSLocalizedString(@"What do you want to do?", nil);
+    self.titleInput.returnKeyType = UIReturnKeyDone;
+    self.titleInput.leftView = nil;
+    self.titleInput.delegate = self;
+    [view addSubview:_titleInput];
+    
+    self.wrapperDescription = [[UIImageView alloc]initWithFrame:CGRectMake(-2, 99, 304, 0)];
+    self.wrapperDescription.image = [[UIImage imageNamed:@"F_activity_description"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:10.0f];
+    self.wrapperDescription.clipsToBounds = YES;
+    self.wrapperDescription.userInteractionEnabled = YES;
+    [view addSubview:_wrapperDescription];
+    
+    self.descriptionInput = [[UITextView alloc]initWithFrame:CGRectMake(10, 10, 280, 32)];
+    self.descriptionInput.textColor = UIColorFromRGB(0xabb3b7);
+    [self.descriptionInput setTintColor:UIColorFromRGB(0x2b4b58)];
+    self.descriptionInput.text = NSLocalizedString(@"Add details (Optional)", nil);
+    self.descriptionInput.backgroundColor = [UIColor clearColor];
+    self.descriptionInput.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+    self.descriptionInput.returnKeyType = UIReturnKeyDone;
+    self.descriptionInput.delegate = self;
+    [self.wrapperDescription addSubview:_descriptionInput];
+
+    self.counterLength = [[UILabel alloc]initWithFrame:CGRectMake(302 - 30, 55 - 2 - 20, 20, 10)];
+    self.counterLength.textColor = UIColorFromRGB(0xbfc9cd);
+    self.counterLength.font = [UIFont fontWithName:@"Lato-Regular" size:10];
+    self.counterLength.textAlignment = NSTextAlignmentRight;
+    [self.wrapperDescription addSubview:_counterLength];
+    
+    return view;
+}
+
 #pragma mark -- Position Wrapper
 
 - (void)changePositionWrapper:(NSNumber *)position{
@@ -931,6 +1014,64 @@
     } completion:^(BOOL finished) {
         
     }];
+    
+}
+
+- (void)openActivity:(UIGestureRecognizer *)sender{
+    UIView* view = sender.view;
+    CGPoint loc = [sender locationInView:view];
+    UIView* subview = [view hitTest:loc withEvent:nil];
+    
+    if (subview == _backgroundDark) {
+        
+        [self openActivity];
+        
+    }
+    
+}
+
+- (void)openActivity{
+    
+    self.activityIsOpen = !_activityIsOpen;
+    
+    if (!_activityIsOpen) {
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.backgroundDark.backgroundColor = [UIColor colorWithRed:43.0f/255.0f green:75.0f/255.0f blue:88.0f/255.0f alpha:0.0f];
+            self.wrapperDescription.frame = CGRectMake(-2, 99, 304, 0);
+        } completion:^(BOOL finished) {
+            [self.wrapperActivity removeFromSuperview];
+            [self.backgroundDark removeFromSuperview];
+            self.backgroundDark = nil;
+            [self.wrapper addSubview:_wrapperActivity];
+            self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y, _wrapperActivity.frame.size.width, 100);
+        }];
+        
+    } else {
+        
+        self.backgroundDark = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height)];
+        self.backgroundDark.backgroundColor = [UIColor colorWithRed:43/255 green:75/255 blue:88/255 alpha:0];
+        [self.view addSubview:_backgroundDark];
+        
+        UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openActivity:)];
+        [self.backgroundDark addGestureRecognizer:tapBackground];
+        
+        [self.wrapperActivity removeFromSuperview];
+        
+        [self.backgroundDark addSubview:_wrapperActivity];
+        
+        [self.titleInput becomeFirstResponder];
+        
+        int numberOfLine = (int)_descriptionInput.contentSize.height / _descriptionInput.font.lineHeight;
+        self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y, _wrapperActivity.frame.size.width, 100 + 23 + 16 * numberOfLine);
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.backgroundDark.backgroundColor = [UIColor colorWithRed:43.0f/255.0f green:75.0f/255.0f blue:88.0f/255.0f alpha:0.5f];
+            self.wrapperDescription.frame = CGRectMake(-2, 99, 304, 23 + 16 * numberOfLine);
+        }];
+    }
+    
+    
     
 }
 
