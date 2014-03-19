@@ -53,10 +53,10 @@
 @property (strong, nonatomic) NSTimer *timerSearch;
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
-@property (strong, nonatomic) UIImageView *imgAddDescription;
 @property (strong, nonatomic) UIImageView *wrapperDescription;
 @property (strong, nonatomic) UIView *wrapperInvitInput;
 @property (strong, nonatomic) UIView *wrapperActivity;
+@property (strong, nonatomic) UIView *wrapperButtonDaySelected;
 @property (strong, nonatomic) UIView *backgroundDark;
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UILabel *labelSyncContact;
@@ -182,48 +182,18 @@
     self.wrapperActivity = [self initializationWrapperActivity];
     [self.wrapper addSubview:_wrapperActivity];
     
-    // Title
-    
-    // Description
-    
-    self.imgAddDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 49, 47)];
-    self.imgAddDescription.image = [UIImage imageNamed:@"F1_add_description"];
-    
-    UIButton *addDescription = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, 185, 49, 47)];
-    [addDescription addTarget:self action:@selector(openDescriptionView) forControlEvents:UIControlEventTouchDown];
-    addDescription.backgroundColor = [UIColor whiteColor];
-    [addDescription addSubview:_imgAddDescription];
-    [self.wrapper addSubview:addDescription];
-    
     // Date
     
-    self.todayBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(10, 240, 100, 47)];
-    self.todayBtnSelect.textButton = NSLocalizedString(@"Today", nil);
-    self.todayBtnSelect.selected = YES;
-    [self.todayBtnSelect addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
-    [self.wrapper addSubview:_todayBtnSelect];
-    
-    self.tomorrowBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(10 + 100, 240, 100, 47)];
-    self.tomorrowBtnSelect.textButton = NSLocalizedString(@"Tomorrow", nil);
-    [self.tomorrowBtnSelect addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
-    [self.wrapper addSubview:_tomorrowBtnSelect];
-    
-    self.imgOpenCalendar = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 47)];
-    self.imgOpenCalendar.image = [UIImage imageNamed:@"F1_calendar"];
-    
-    self.openCalendar = [[UIButton alloc]initWithFrame:CGRectMake(200 + 10, 240, 100, 47)];
-    self.openCalendar.backgroundColor = [UIColor clearColor];
-    [self.openCalendar addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
-    [self.openCalendar addSubview:_imgOpenCalendar];
-    [self.wrapper addSubview:_openCalendar];
+    self.wrapperButtonDaySelected = [self initializationWrapperButtonDaySelected];
+    [self.wrapper addSubview:_wrapperButtonDaySelected];
     
     // Time
     
-    self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(10, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 57)];
+    self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(10, 270, 149, 57)];
     [self.timePicker isToday:YES];
     [self.wrapper addSubview:_timePicker];
     
-    self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(10 + 149 + 1, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 149, 57)];
+    self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(10 + 149 + 1, 270, 149, 57)];
     [self.wrapper addSubview:_lenghtPicker];
     
     // Location
@@ -360,28 +330,6 @@
     }];
     
     // Description
-//    self.wrapperDescription = [[UIView alloc]initWithFrame:CGRectMake(0, _titleInput.frame.origin.y + _titleInput.frame.size.height + 5, 320, 0)];
-//    self.wrapperDescription.backgroundColor = UIColorFromRGB(0xe9eeee);
-//    self.wrapperDescription.clipsToBounds = YES;
-//    [self.wrapper addSubview:_wrapperDescription];
-    
-//    self.descriptionInput = [[UITextView alloc]initWithFrame:CGRectMake(20, 10, 280, 80)];
-//    self.descriptionInput.textColor = UIColorFromRGB(0xabb3b7);
-//    self.descriptionInput.text = NSLocalizedString(@"Add a description", nil);
-//    self.descriptionInput.backgroundColor = UIColorFromRGB(0xe9eeee);
-//    self.descriptionInput.font = [UIFont fontWithName:@"Lato-Regular" size:12];
-//    self.descriptionInput.returnKeyType = UIReturnKeyNext;
-//    self.descriptionInput.delegate = self;
-//    [self.wrapperDescription addSubview:_descriptionInput];
-    
-//    UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
-//    shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-//    [self.wrapperDescription addSubview:shadowDescription];
-//    
-//    UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, 100 - 6, 320, 6)];
-//    shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-//    shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
-//    [self.wrapperDescription addSubview:shadowDescriptionReverse];
     
     // Calendar
     
@@ -933,6 +881,38 @@
     return view;
 }
 
+- (UIView *)initializationWrapperButtonDaySelected{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperActivity.frame.origin.y + _wrapperActivity.frame.size.height + 5, 300, 47)];
+    
+    UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 50)];
+    background.image = [UIImage imageNamed:@"F_Button_Day_Selected"];
+    [view addSubview:background];
+    
+    self.todayBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    self.todayBtnSelect.textButton = NSLocalizedString(@"Today", nil);
+    self.todayBtnSelect.selected = YES;
+    [self.todayBtnSelect addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
+    [view addSubview:_todayBtnSelect];
+    
+    self.tomorrowBtnSelect = [[UICanuButtonSelect alloc]initWithFrame:CGRectMake(100, 0, 100, 44)];
+    self.tomorrowBtnSelect.textButton = NSLocalizedString(@"Tomorrow", nil);
+    [self.tomorrowBtnSelect addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
+    [view addSubview:_tomorrowBtnSelect];
+    
+    self.imgOpenCalendar = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 100, 44)];
+    self.imgOpenCalendar.image = [UIImage imageNamed:@"F1_calendar"];
+    
+    self.openCalendar = [[UIButton alloc]initWithFrame:CGRectMake(200, 0, 100, 44)];
+    self.openCalendar.backgroundColor = [UIColor clearColor];
+    [self.openCalendar addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
+    [self.openCalendar addSubview:_imgOpenCalendar];
+    [view addSubview:_openCalendar];
+    
+    return view;
+    
+}
+
 #pragma mark -- Position Wrapper
 
 - (void)changePositionWrapper:(NSNumber *)position{
@@ -1072,44 +1052,6 @@
     }
     
     
-    
-}
-
-- (void)openDescriptionView{
-    
-    self.descriptionIsOpen = !_descriptionIsOpen;
-    
-    int heightDescription;
-    
-    if (_descriptionIsOpen) {
-        self.imgAddDescription.image = [UIImage imageNamed:@"F1_add_description_selected"];
-        
-        heightDescription = 100;
-    } else {
-        self.imgAddDescription.image = [UIImage imageNamed:@"F1_add_description"];
-        
-        heightDescription = - 100;
-    }
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightDescription);
-        self.wrapperDescription.frame = CGRectMake(_wrapperDescription.frame.origin.x, _wrapperDescription.frame.origin.y, _wrapperDescription.frame.size.width, _wrapperDescription.frame.size.height + heightDescription);
-        self.todayBtnSelect.frame = CGRectMake(_todayBtnSelect.frame.origin.x, _todayBtnSelect.frame.origin.y + heightDescription, _todayBtnSelect.frame.size.width, _todayBtnSelect.frame.size.height);
-        self.tomorrowBtnSelect.frame = CGRectMake(_tomorrowBtnSelect.frame.origin.x, _tomorrowBtnSelect.frame.origin.y + heightDescription, _tomorrowBtnSelect.frame.size.width, _tomorrowBtnSelect.frame.size.height);
-        self.openCalendar.frame = CGRectMake(_openCalendar.frame.origin.x, _openCalendar.frame.origin.y + heightDescription, _openCalendar.frame.size.width, _openCalendar.frame.size.height);
-        self.calendar.frame = CGRectMake(_calendar.frame.origin.x, _calendar.frame.origin.y + heightDescription, _calendar.frame.size.width, _calendar.frame.size.height);
-        self.timePicker.frame = CGRectMake(_timePicker.frame.origin.x, _timePicker.frame.origin.y + heightDescription, _timePicker.frame.size.width, _timePicker.frame.size.height);
-        self.lenghtPicker.frame = CGRectMake(_lenghtPicker.frame.origin.x, _lenghtPicker.frame.origin.y + heightDescription, _lenghtPicker.frame.size.width, _lenghtPicker.frame.size.height);
-        self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y + heightDescription, _locationInput.frame.size.width, _locationInput.frame.size.height);
-        self.openMap.frame = CGRectMake(_openMap.frame.origin.x, _openMap.frame.origin.y + heightDescription, _openMap.frame.size.width, _openMap.frame.size.height);
-        self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y + heightDescription, _searchLocation.frame.size.width, _searchLocation.frame.size.height);
-        self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightDescription, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
-        self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightDescription, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
-        self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightDescription, _userList.frame.size.width, _userList.frame.size.height);
-        self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightDescription, _synContact.frame.size.width, _synContact.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-    }];
     
 }
 
@@ -1271,7 +1213,7 @@
     
     if (calendarGoOpen != _calendarIsOpen) {
         
-        [self openCalendarViewWithReset:reset];
+//        [self openCalendarViewWithReset:reset];
         
     }
     

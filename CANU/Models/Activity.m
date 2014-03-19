@@ -555,7 +555,6 @@
     [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
         NSMutableArray *mutableMessages = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
-            //NSLog(@"%@",attributes);
             Message *message = [[Message alloc] initWithAttributes:attributes];
             [mutableMessages addObject:message];
         }
