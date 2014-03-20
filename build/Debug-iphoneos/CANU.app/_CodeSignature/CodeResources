@@ -270,11 +270,11 @@
 		</data>
 		<key>F_Button_Day_Selected.png</key>
 		<data>
-		4g7qDd+SpMyQmsXX8PGQyw20+lE=
+		wQ7clGzRPo6Mvu90S882sQfe5dg=
 		</data>
 		<key>F_Button_Day_Selected@2x.png</key>
 		<data>
-		XpCjxQmL+YpxKQtiFkeXhBQyjDY=
+		j1X02s+NNhdhc13PTICkJQ4ZwAE=
 		</data>
 		<key>F_activity_background.png</key>
 		<data>
@@ -291,6 +291,38 @@
 		<key>F_activity_description@2x.png</key>
 		<data>
 		CIi7P8b2t9483q359cl3zl9ysbs=
+		</data>
+		<key>F_calendar_background.png</key>
+		<data>
+		urPwpht01bYlhdAy14ClyySAd2I=
+		</data>
+		<key>F_calendar_background@2x.png</key>
+		<data>
+		u/Sr3R2D3+ByBsMXEM0nShaMfDU=
+		</data>
+		<key>F_calendar_button_background_selected.png</key>
+		<data>
+		YI/ofTZkfkH0wkUZ3Of7RyJ+AZ4=
+		</data>
+		<key>F_calendar_button_background_selected@2x.png</key>
+		<data>
+		V67vuS6PlimG+tI0jkM30vbkMC0=
+		</data>
+		<key>F_calendar_button_background_today.png</key>
+		<data>
+		kmf43fPUCE+lU4edVcaGBg15ako=
+		</data>
+		<key>F_calendar_button_background_today@2x.png</key>
+		<data>
+		ENe5WPmWb5nElKyDL6ZMOLDZOWs=
+		</data>
+		<key>F_calendar_header.png</key>
+		<data>
+		ff+Gf8EUyUliyn6w35a9hsMc4k0=
+		</data>
+		<key>F_calendar_header@2x.png</key>
+		<data>
+		eT4Vrg0cHj9KyrjWxWINUhlx1DQ=
 		</data>
 		<key>G1_pipe.png</key>
 		<data>
@@ -1649,11 +1681,11 @@
 		</data>
 		<key>F_Button_Day_Selected.png</key>
 		<data>
-		4g7qDd+SpMyQmsXX8PGQyw20+lE=
+		wQ7clGzRPo6Mvu90S882sQfe5dg=
 		</data>
 		<key>F_Button_Day_Selected@2x.png</key>
 		<data>
-		XpCjxQmL+YpxKQtiFkeXhBQyjDY=
+		j1X02s+NNhdhc13PTICkJQ4ZwAE=
 		</data>
 		<key>F_activity_background.png</key>
 		<data>
@@ -1670,6 +1702,38 @@
 		<key>F_activity_description@2x.png</key>
 		<data>
 		CIi7P8b2t9483q359cl3zl9ysbs=
+		</data>
+		<key>F_calendar_background.png</key>
+		<data>
+		urPwpht01bYlhdAy14ClyySAd2I=
+		</data>
+		<key>F_calendar_background@2x.png</key>
+		<data>
+		u/Sr3R2D3+ByBsMXEM0nShaMfDU=
+		</data>
+		<key>F_calendar_button_background_selected.png</key>
+		<data>
+		YI/ofTZkfkH0wkUZ3Of7RyJ+AZ4=
+		</data>
+		<key>F_calendar_button_background_selected@2x.png</key>
+		<data>
+		V67vuS6PlimG+tI0jkM30vbkMC0=
+		</data>
+		<key>F_calendar_button_background_today.png</key>
+		<data>
+		kmf43fPUCE+lU4edVcaGBg15ako=
+		</data>
+		<key>F_calendar_button_background_today@2x.png</key>
+		<data>
+		ENe5WPmWb5nElKyDL6ZMOLDZOWs=
+		</data>
+		<key>F_calendar_header.png</key>
+		<data>
+		ff+Gf8EUyUliyn6w35a9hsMc4k0=
+		</data>
+		<key>F_calendar_header@2x.png</key>
+		<data>
+		eT4Vrg0cHj9KyrjWxWINUhlx1DQ=
 		</data>
 		<key>G1_pipe.png</key>
 		<data>

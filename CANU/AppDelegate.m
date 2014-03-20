@@ -18,6 +18,7 @@
 #import "ErrorManager.h"
 #import "UserManager.h"
 #import <Instabug/Instabug.h>
+#import <Crashlytics/Crashlytics.h>
 
 NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStateChangedNotification";
 
@@ -61,6 +62,8 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
     if ([[UserManager sharedUserManager] userIsLogIn]) {
         [Instabug setEmail:[[UserManager sharedUserManager] currentUser].email];
     }
+    
+    [Crashlytics startWithAPIKey:@"ae60e89fbce25a631c3a5caa83362eff69f3d6fb"];
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
     if (types & UIRemoteNotificationTypeAlert){

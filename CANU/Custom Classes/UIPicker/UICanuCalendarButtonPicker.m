@@ -13,7 +13,7 @@
 @property (nonatomic) CANUCalendarButtonType canuCalendarButtonType;
 @property (strong, nonatomic) UILabel *labelDay;
 @property (strong, nonatomic) UILabel *labelMonth;
-@property (strong, nonatomic) UIView *buttonBackground;
+@property (strong, nonatomic) UIImageView *buttonBackground;
 
 @end
 
@@ -24,7 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = UIColorFromRGB(0xe9eeee);
+        self.backgroundColor = [UIColor whiteColor];
         
         self.clipsToBounds = YES;
         
@@ -38,13 +38,15 @@
         [formatDayNumber setLocale: [NSLocale currentLocale]];
         [formatDayNumber setDateFormat:@"MMM"];
         
-        self.buttonBackground = [[UIView alloc]initWithFrame:CGRectMake((frame.size.width - 37)/2, frame.size.height - 37, 37, 37)];
-        self.buttonBackground.backgroundColor = UIColorFromRGB(0xe9eeee);
+        self.buttonBackground = [[UIImageView alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, frame.size.height - 25, 25, 25)];
+        if (canuCalendarButtonType == CANUCalendarButtonWithMonth) {
+           self.buttonBackground.image = [UIImage imageNamed:@"F_calendar_button_background_today"];
+        }
         [self addSubview:_buttonBackground];
         
         self.labelDay = [[UILabel alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, (frame.size.height - 25)/2, 25, 25)];
         self.labelDay.text = [NSString stringWithFormat:@"%i",[date mk_day]];
-        self.labelDay.font = [UIFont fontWithName:@"Lato-Regular" size:12];
+        self.labelDay.font = [UIFont fontWithName:@"Lato-Regular" size:13];
         self.labelDay.textAlignment = NSTextAlignmentCenter;
         self.labelDay.textColor = UIColorFromRGB(0xabb3b7);
         if (canuCalendarButtonType == CANUCalendarButtonOff) {
@@ -85,7 +87,7 @@
     if (_canuCalendarButtonType != CANUCalendarButtonOff) {
         
         if (selected) {
-            self.buttonBackground.backgroundColor = UIColorFromRGB(0x1ca6c3);
+            self.buttonBackground.image = [UIImage imageNamed:@"F_calendar_button_background_selected"];
             
             self.labelDay.textColor = [UIColor whiteColor];
             
@@ -96,12 +98,13 @@
             
         } else {
             
-            self.buttonBackground.backgroundColor = UIColorFromRGB(0xe9eeee);
-            
             self.labelDay.textColor = UIColorFromRGB(0xabb3b7);
             
             if (_canuCalendarButtonType != CANUCalendarButtonWithMonth) {
                 self.labelMonth.alpha = 0;
+                self.buttonBackground.image = nil;
+            } else {
+                self.buttonBackground.image = [UIImage imageNamed:@"F_calendar_button_background_today"];
             }
             
             self.labelMonth.textColor = UIColorFromRGB(0xabb3b7);

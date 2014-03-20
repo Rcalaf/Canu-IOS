@@ -124,6 +124,7 @@
 		1E3BA47418AE4855003C2BF4 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3BA47318AE4855003C2BF4 /* Location.m */; };
 		1E62AE2C18D83F2200520AA0 /* UICanuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE2B18D83F2200520AA0 /* UICanuButton.m */; };
 		1E62AE3018D84DD300520AA0 /* UICanuBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE2F18D84DD300520AA0 /* UICanuBottomBar.m */; };
+		1E62AE3718DAE0B200520AA0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */; };
 		1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E70867918996FE000328F76 /* AddressBook.framework */; };
 		1E70867D189A849300328F76 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70867C189A849300328F76 /* Contact.m */; };
 		1E7138D0188E9BA000137A48 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7138CF188E9BA000137A48 /* GLKit.framework */; };
@@ -421,6 +422,7 @@
 		1E62AE2B18D83F2200520AA0 /* UICanuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuButton.m; sourceTree = "<group>"; };
 		1E62AE2E18D84DD300520AA0 /* UICanuBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuBottomBar.h; path = "Custom Classes/UICanuBottomBar/UICanuBottomBar.h"; sourceTree = "<group>"; };
 		1E62AE2F18D84DD300520AA0 /* UICanuBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuBottomBar.m; path = "Custom Classes/UICanuBottomBar/UICanuBottomBar.m"; sourceTree = "<group>"; };
+		1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = CANU/Framework/Crashlytics.framework; sourceTree = "<group>"; };
 		1E70867918996FE000328F76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1E70867B189A849300328F76 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = CANU/Models/Contact/Contact.h; sourceTree = "<group>"; };
 		1E70867C189A849300328F76 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contact.m; path = CANU/Models/Contact/Contact.m; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				DEA93B4017204ECA00303BB5 /* MobileCoreServices.framework in Frameworks */,
 				DEA93B3E17204EC400303BB5 /* SystemConfiguration.framework in Frameworks */,
 				DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */,
+				1E62AE3718DAE0B200520AA0 /* Crashlytics.framework in Frameworks */,
 				1E279DD318D1FE820076C25E /* libGoogleAnalyticsServices.a in Frameworks */,
 				DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */,
 				DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */,
@@ -1158,6 +1161,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */,
 				1E279DC818D1FE820076C25E /* Google Analytics */,
 				1E279DD018D1FE820076C25E /* Instabug */,
 				1E279DB218D1F9A60076C25E /* TTTAttributedLabel */,
@@ -1256,6 +1260,7 @@
 				DEA93B1417204EA600303BB5 /* Sources */,
 				DEA93B1517204EA600303BB5 /* Frameworks */,
 				DEA93B1617204EA600303BB5 /* Resources */,
+				1E62AE3118DADF0C00520AA0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1323,6 +1328,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E62AE3118DADF0C00520AA0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./CANU/Framework/Crashlytics.framework/run ae60e89fbce25a631c3a5caa83362eff69f3d6fb 51f85cd6d3ad2b5376b67f1343e910e021c9eba79a990f9a59ad05f4e0777c7c";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DEA93B1417204EA600303BB5 /* Sources */ = {
@@ -1510,6 +1531,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1517,10 +1542,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS/Canu/Framework/Instabug",
+					/Volumes/HDD/Utilisateurs/Vivien/Application,
+					"iOS/Canu-IOS",
+					/Volumes/HDD/Utilisateurs/Vivien/Application,
+					"iOS/Canu-IOS/Canu/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1610,6 +1638,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1617,10 +1649,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS/Canu/Framework/Instabug",
+					/Volumes/HDD/Utilisateurs/Vivien/Application,
+					"iOS/Canu-IOS",
+					/Volumes/HDD/Utilisateurs/Vivien/Application,
+					"iOS/Canu-IOS/Canu/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1646,6 +1681,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv7s,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1653,10 +1692,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS/Canu/Framework/Instabug",
+					/Volumes/HDD/Utilisateurs/Vivien/Application,
+					"iOS/Canu-IOS",
+					/Volumes/HDD/Utilisateurs/Vivien/Application,
+					"iOS/Canu-IOS/Canu/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";

@@ -333,10 +333,6 @@
     
     // Calendar
     
-    self.calendar = [[UICanuCalendarPicker alloc]initWithFrame:CGRectMake(0, _todayBtnSelect.frame.origin.y + _todayBtnSelect.frame.size.height + 5, 320, 0)];
-    self.calendar.delegate = self;
-    [self.wrapper addSubview:_calendar];
-    
     // Search Location
     
     self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0)];
@@ -885,7 +881,7 @@
     
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperActivity.frame.origin.y + _wrapperActivity.frame.size.height + 5, 300, 47)];
     
-    UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 50)];
+    UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 47)];
     background.image = [UIImage imageNamed:@"F_Button_Day_Selected"];
     [view addSubview:background];
     
@@ -908,6 +904,10 @@
     [self.openCalendar addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
     [self.openCalendar addSubview:_imgOpenCalendar];
     [view addSubview:_openCalendar];
+    
+    self.calendar = [[UICanuCalendarPicker alloc]initWithFrame:CGRectMake(-10, 39, 320, 0)];
+    self.calendar.delegate = self;
+    [view addSubview:_calendar];
     
     return view;
     
@@ -1059,19 +1059,18 @@
     
     self.calendarIsOpen = !_calendarIsOpen;
     
-    int heightCalendar,margin;
+    int heightCalendar;
     
     if (_calendarIsOpen) {
-        heightCalendar = 116 + 10;
-        margin = 10;
+        heightCalendar = 126;
     } else {
-        heightCalendar = - 116 - 10;
-        margin = - 10;
+        heightCalendar = - 126;
     }
     
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightCalendar);
-        self.calendar.frame = CGRectMake(_calendar.frame.origin.x, _calendar.frame.origin.y, _calendar.frame.size.width, _calendar.frame.size.height + heightCalendar - margin);
+        self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height + heightCalendar);
+        self.calendar.frame = CGRectMake(_calendar.frame.origin.x, _calendar.frame.origin.y, _calendar.frame.size.width, _calendar.frame.size.height + heightCalendar);
         self.timePicker.frame = CGRectMake(_timePicker.frame.origin.x, _timePicker.frame.origin.y + heightCalendar, _timePicker.frame.size.width, _timePicker.frame.size.height);
         self.lenghtPicker.frame = CGRectMake(_lenghtPicker.frame.origin.x, _lenghtPicker.frame.origin.y + heightCalendar, _lenghtPicker.frame.size.width, _lenghtPicker.frame.size.height);
         self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y + heightCalendar, _locationInput.frame.size.width, _locationInput.frame.size.height);
@@ -1213,7 +1212,7 @@
     
     if (calendarGoOpen != _calendarIsOpen) {
         
-//        [self openCalendarViewWithReset:reset];
+        [self openCalendarViewWithReset:reset];
         
     }
     
