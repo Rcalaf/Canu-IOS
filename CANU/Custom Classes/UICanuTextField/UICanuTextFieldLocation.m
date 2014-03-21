@@ -21,6 +21,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+        
         self.activeSearch = YES;
         
         self.activeReset = NO;

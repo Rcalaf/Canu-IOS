@@ -25,7 +25,7 @@
         self.titleLabel.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         self.titleLabel.textColor = [UIColor clearColor];
         
-        self.backgroundButton = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"All_button_red_normal"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:0.0]];
+        self.backgroundButton = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"All_button_red_normal"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0]];
         [self addSubview:_backgroundButton];
         
         self.titleButton = [[UILabel alloc]init];

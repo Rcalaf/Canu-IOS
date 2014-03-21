@@ -23,18 +23,20 @@
     self = [super initWithFrame:frame];
     if (self) {
     
-        self.backgroundColor = [UIColor whiteColor];
+        UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 55)];
+        background.image = [UIImage imageNamed:@"F_location_cell"];
+        [self addSubview:background];
         
         self.location = location;
         
-        UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(10, 6, 233, 20)];
-        name.font = [UIFont fontWithName:@"Lato-Bold" size:13];
-        name.textColor = UIColorFromRGB(0x1a8d9e);
+        UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(10, 9, 233, 20)];
+        name.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+        name.textColor = UIColorFromRGB(0x2b4b58);
         name.text = location.name;
         [self addSubview:name];
         
-        UILabel *adress = [[UILabel alloc]initWithFrame:CGRectMake(10, 26, 233, 10)];
-        adress.font = [UIFont fontWithName:@"Lato-Regular" size:8];
+        UILabel *adress = [[UILabel alloc]initWithFrame:CGRectMake(10, 31, 233, 11)];
+        adress.font = [UIFont fontWithName:@"Lato-Italic" size:10];
         adress.textColor = UIColorFromRGB(0x2b4b58);
         adress.text = location.displayAdresse;
         [self addSubview:adress];

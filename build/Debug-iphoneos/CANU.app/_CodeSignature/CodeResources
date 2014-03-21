@@ -142,19 +142,19 @@
 		</data>
 		<key>F1_Add_Cell_Location.png</key>
 		<data>
-		/zjV7Bf1EZRe4KHIqjmwRfCmvSs=
+		1caHb8xtkgWHEXCAdHS3aIEyJNQ=
 		</data>
 		<key>F1_Add_Cell_Location@2x.png</key>
 		<data>
-		TiyNO8+iS1dKdjl+jSQqIXmk7DI=
+		+44gVYjCRgb79m0oJ3lGJf7rLjY=
 		</data>
 		<key>F1_Add_Cell_Location_checked.png</key>
 		<data>
-		4JhzV5u02ZVIGPKf5t38vxYa/DM=
+		601KM5/JtRf+zZlNTqvlG4UvrZA=
 		</data>
 		<key>F1_Add_Cell_Location_checked@2x.png</key>
 		<data>
-		3F0LjUJruGTiCJqOHe1pPb6WbCQ=
+		Cpq7bXqvxAiN4FGMqwqCV53c7+Y=
 		</data>
 		<key>F1_Calendar_dote_Disable.png</key>
 		<data>
@@ -222,11 +222,11 @@
 		</data>
 		<key>F1_open_map.png</key>
 		<data>
-		mTxGRzLXxWHCyyWSuP3tYwj+Icc=
+		hpbqlXw2GtRdTqLUX5gWhRX/XsE=
 		</data>
 		<key>F1_open_map@2x.png</key>
 		<data>
-		TuZvXqtBim3VBIr8dGbk2MnGQyU=
+		0JrULISqu9wiyd48gGUsLQMh3zw=
 		</data>
 		<key>F5_inputCell_selected.png</key>
 		<data>
@@ -323,6 +323,22 @@
 		<key>F_location_background@2x.png</key>
 		<data>
 		hhMCp9bkvWWxWd6Pq2nCl1dnv94=
+		</data>
+		<key>F_location_background_selected.png</key>
+		<data>
+		SG2XKgI2r0crJyIEI+3wWLW3t08=
+		</data>
+		<key>F_location_background_selected@2x.png</key>
+		<data>
+		BmwWAwU9PMee0bnls+WZNZ183Mg=
+		</data>
+		<key>F_location_cell.png</key>
+		<data>
+		SYAVA9tySgo4yF0PVE17Xn+uwOM=
+		</data>
+		<key>F_location_cell@2x.png</key>
+		<data>
+		FRRunx952lQKAl+L8q+kRJOioJg=
 		</data>
 		<key>F_time_length_shadow.png</key>
 		<data>
@@ -1533,19 +1549,19 @@
 		</data>
 		<key>F1_Add_Cell_Location.png</key>
 		<data>
-		/zjV7Bf1EZRe4KHIqjmwRfCmvSs=
+		1caHb8xtkgWHEXCAdHS3aIEyJNQ=
 		</data>
 		<key>F1_Add_Cell_Location@2x.png</key>
 		<data>
-		TiyNO8+iS1dKdjl+jSQqIXmk7DI=
+		+44gVYjCRgb79m0oJ3lGJf7rLjY=
 		</data>
 		<key>F1_Add_Cell_Location_checked.png</key>
 		<data>
-		4JhzV5u02ZVIGPKf5t38vxYa/DM=
+		601KM5/JtRf+zZlNTqvlG4UvrZA=
 		</data>
 		<key>F1_Add_Cell_Location_checked@2x.png</key>
 		<data>
-		3F0LjUJruGTiCJqOHe1pPb6WbCQ=
+		Cpq7bXqvxAiN4FGMqwqCV53c7+Y=
 		</data>
 		<key>F1_Calendar_dote_Disable.png</key>
 		<data>
@@ -1613,11 +1629,11 @@
 		</data>
 		<key>F1_open_map.png</key>
 		<data>
-		mTxGRzLXxWHCyyWSuP3tYwj+Icc=
+		hpbqlXw2GtRdTqLUX5gWhRX/XsE=
 		</data>
 		<key>F1_open_map@2x.png</key>
 		<data>
-		TuZvXqtBim3VBIr8dGbk2MnGQyU=
+		0JrULISqu9wiyd48gGUsLQMh3zw=
 		</data>
 		<key>F5_inputCell_selected.png</key>
 		<data>
@@ -1714,6 +1730,22 @@
 		<key>F_location_background@2x.png</key>
 		<data>
 		hhMCp9bkvWWxWd6Pq2nCl1dnv94=
+		</data>
+		<key>F_location_background_selected.png</key>
+		<data>
+		SG2XKgI2r0crJyIEI+3wWLW3t08=
+		</data>
+		<key>F_location_background_selected@2x.png</key>
+		<data>
+		BmwWAwU9PMee0bnls+WZNZ183Mg=
+		</data>
+		<key>F_location_cell.png</key>
+		<data>
+		SYAVA9tySgo4yF0PVE17Xn+uwOM=
+		</data>
+		<key>F_location_cell@2x.png</key>
+		<data>
+		FRRunx952lQKAl+L8q+kRJOioJg=
 		</data>
 		<key>F_time_length_shadow.png</key>
 		<data>

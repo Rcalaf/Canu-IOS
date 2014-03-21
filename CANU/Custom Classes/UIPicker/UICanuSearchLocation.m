@@ -33,9 +33,7 @@
         
         self.clipsToBounds = YES;
         
-        self.backgroundColor = UIColorFromRGB(0xe9eeee);
-        
-        self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 5 - 47 - 5;
+        self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 65;
         
         self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, _maxHeight)];
         [self addSubview:_scrollView];
@@ -43,11 +41,6 @@
         UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
         shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
         [self addSubview:shadowDescription];
-        
-        UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, _maxHeight - 6, 320, 6)];
-        shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-        shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
-        [self addSubview:shadowDescriptionReverse];
         
         self.arrayCellLocation = [[NSMutableArray alloc]init];
         
@@ -149,7 +142,7 @@
         
         Location *location = [_arrayLocation objectAtIndex:i];
         
-        UICANULocationCell *cellLocation = [[UICANULocationCell alloc]initWithFrame:CGRectMake(10, 10 + i * (47 + 10), 300, 47) WithLocation:location];
+        UICANULocationCell *cellLocation = [[UICANULocationCell alloc]initWithFrame:CGRectMake(10, 10 + i * (55 + 10), 300, 55) WithLocation:location];
         cellLocation.delegate = self;
         [self.scrollView addSubview:cellLocation];
         [self.arrayCellLocation addObject:cellLocation];
@@ -176,7 +169,7 @@
         i++;
     }
     
-    self.scrollView.contentSize = CGSizeMake(320, i * ( 47 + 10) + 10);
+    self.scrollView.contentSize = CGSizeMake(320, i * ( 55 + 10) + 10);
     
 }
 

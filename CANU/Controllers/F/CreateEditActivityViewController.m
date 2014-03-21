@@ -50,14 +50,18 @@
 @property (nonatomic) BOOL invitInputIsStick;
 @property (nonatomic) BOOL isNewActivity;
 @property (nonatomic) BOOL ghostUser;
+@property (nonatomic) int previousScrollOffsetWrapper;
 @property (strong, nonatomic) NSTimer *timerSearch;
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
 @property (strong, nonatomic) UIImageView *wrapperDescription;
+@property (strong, nonatomic) UIImageView *locationBackground;
+@property (strong, nonatomic) UIImageView *locationBackgroundSelected;
 @property (strong, nonatomic) UIView *wrapperInvitInput;
 @property (strong, nonatomic) UIView *wrapperActivity;
 @property (strong, nonatomic) UIView *wrapperButtonDaySelected;
 @property (strong, nonatomic) UIView *wrapperTimeLengthPicker;
+@property (strong, nonatomic) UIView *wrapperLocation;
 @property (strong, nonatomic) UIView *backgroundDark;
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UILabel *labelSyncContact;
@@ -195,32 +199,13 @@
     
     // Location
     
-    self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(10, _wrapperTimeLengthPicker.frame.origin.y + _wrapperTimeLengthPicker.frame.size.height + 5, 250, 47)];
-    self.locationInput.placeholder = NSLocalizedString(@"Find a place", nil);
-    self.locationInput.delegate = self;
-    self.locationInput.returnKeyType = UIReturnKeySearch;
-    [self.wrapper addSubview:_locationInput];
-    
-    UIImageView *imgOpenMap = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 49, 47)];
-    imgOpenMap.image = [UIImage imageNamed:@"F1_open_map"];
-    
-    self.openMap = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, _wrapperTimeLengthPicker.frame.origin.y + _wrapperTimeLengthPicker.frame.size.height + 5, 49, 47)];
-    [self.openMap addTarget:self action:@selector(btnSearchWithTheMap) forControlEvents:UIControlEventTouchDown];
-    self.openMap.backgroundColor = [UIColor whiteColor];
-    [self.openMap addSubview:imgOpenMap];
-    [self.wrapper addSubview:_openMap];
-    
-    self.cancelLocation = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(320 - 10, _openMap.frame.origin.y, 0, 47)];
-    [self.cancelLocation addTarget:self action:@selector(cancelSearchLocation) forControlEvents:UIControlEventTouchDown];
-    [self.cancelLocation detectSize];
-    self.cancelLocation.alpha = 0;
-    self.cancelLocation.titleLabel.alpha = 0;
-    [self.wrapper addSubview:_cancelLocation];
+    self.wrapperLocation = [self initializationWrapperLocation];
+    [self.wrapper addSubview:_wrapperLocation];
     
     // Invit
     
     if (!_editActivity) {
-        self.titleInvit = [[UILabel alloc]initWithFrame:CGRectMake(10, _locationInput.frame.origin.y + _locationInput.frame.size.height + 51, 300, 18)];
+        self.titleInvit = [[UILabel alloc]initWithFrame:CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 51, 300, 18)];
         self.titleInvit.backgroundColor = backgroundColorView;
         self.titleInvit.font = [UIFont fontWithName:@"Lato-Regular" size:16];
         self.titleInvit.text = NSLocalizedString(@"Who is invited?", nil);
@@ -332,7 +317,7 @@
     
     // Search Location
     
-    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _locationInput.frame.origin.y + _locationInput.frame.size.height + 5, 320, 0)];
+    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 20, 320, 0)];
     self.searchLocation.delegate = self;
     [self.wrapper addSubview:_searchLocation];
     
@@ -455,7 +440,9 @@
     }
     
     if (textField != _titleInput) {
-        [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
+        if (textField != _locationInput) {
+            [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
+        }
     } else {
         if (!_activityIsOpen) {
             [self openActivity];
@@ -943,6 +930,44 @@
     
 }
 
+- (UIView *)initializationWrapperLocation{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperTimeLengthPicker.frame.origin.y + _wrapperTimeLengthPicker.frame.size.height, 300, 45)];
+    
+    self.locationBackground = [[UIImageView alloc]initWithFrame:CGRectMake(-2, 0, 304, 48)];
+    self.locationBackground.image = [UIImage imageNamed:@"F_location_background"];
+    [view addSubview:_locationBackground];
+    
+    self.locationBackgroundSelected = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 49)];
+    self.locationBackgroundSelected.image = [UIImage imageNamed:@"F_location_background_selected"];
+    self.locationBackgroundSelected.alpha = 0;
+    [view addSubview:_locationBackgroundSelected];
+    
+    self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(1, 1, 250, 43)];
+    self.locationInput.placeholder = NSLocalizedString(@"Find a place", nil);
+    self.locationInput.delegate = self;
+    self.locationInput.returnKeyType = UIReturnKeySearch;
+    [view addSubview:_locationInput];
+    
+    UIImageView *imgOpenMap = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 49, 43)];
+    imgOpenMap.image = [UIImage imageNamed:@"F1_open_map"];
+    
+    self.openMap = [[UIButton alloc]initWithFrame:CGRectMake(250, 1, 49, 43)];
+    [self.openMap addTarget:self action:@selector(btnSearchWithTheMap) forControlEvents:UIControlEventTouchDown];
+    self.openMap.backgroundColor = [UIColor whiteColor];
+    [self.openMap addSubview:imgOpenMap];
+    [view addSubview:_openMap];
+    
+    self.cancelLocation = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(300, 5, 0, 33)];
+    [self.cancelLocation addTarget:self action:@selector(cancelSearchLocation) forControlEvents:UIControlEventTouchDown];
+    [self.cancelLocation detectSize];
+    self.cancelLocation.alpha = 0;
+    [view addSubview:_cancelLocation];
+    
+    return view;
+    
+}
+
 #pragma mark -- Position Wrapper
 
 - (void)changePositionWrapper:(NSNumber *)position{
@@ -1104,8 +1129,7 @@
         self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height + heightCalendar);
         self.calendar.frame = CGRectMake(_calendar.frame.origin.x, _calendar.frame.origin.y, _calendar.frame.size.width, _calendar.frame.size.height + realSize);
         self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y + heightCalendar, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
-        self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y + heightCalendar, _locationInput.frame.size.width, _locationInput.frame.size.height);
-        self.openMap.frame = CGRectMake(_openMap.frame.origin.x, _openMap.frame.origin.y + heightCalendar, _openMap.frame.size.width, _openMap.frame.size.height);
+        self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + heightCalendar, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
         self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y + heightCalendar, _searchLocation.frame.size.width, _searchLocation.frame.size.height);
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightCalendar, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightCalendar, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
@@ -1123,34 +1147,37 @@
     
     self.searchLocationIsOpen = !_searchLocationIsOpen;
     
-    int heightSearchLocation,margin;
+    int heightSearchLocation,margin,positionWrapper;
     
     if (_searchLocationIsOpen) {
-        heightSearchLocation = self.searchLocation.maxHeight + 10;
+        heightSearchLocation = self.searchLocation.maxHeight;
         margin = 10;
         self.wrapper.scrollEnabled = NO;
+        self.previousScrollOffsetWrapper = _wrapper.contentOffset.y;
+        positionWrapper = _wrapperLocation.frame.origin.y;
     } else {
-        heightSearchLocation = - self.searchLocation.maxHeight - 10;
+        heightSearchLocation = - self.searchLocation.maxHeight;
         margin = - 10;
         self.wrapper.scrollEnabled = YES;
-    }
-    
-    if (_searchLocationIsOpen) {
-        self.cancelLocation.frame = _openMap.frame;
-    } else {
-        
+        positionWrapper = _previousScrollOffsetWrapper;
     }
     
     [UIView animateWithDuration:0.4 animations:^{
         if (_searchLocationIsOpen) {
-            self.cancelLocation.alpha = 1;
-        } else {
-            self.cancelLocation.frame = _openMap.frame;
             self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y, 250, _locationInput.frame.size.height);
-            self.cancelLocation.titleLabel.alpha = 0;
+            self.locationBackground.alpha = 0;
+            self.locationBackgroundSelected.alpha = 1;
+            self.openMap.alpha = 0;
+        } else {
+            self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y, 250, _locationInput.frame.size.height);
+            self.locationBackground.alpha = 1;
+            self.locationBackgroundSelected.alpha = 0;
+            self.cancelLocation.alpha = 0;
         }
+        self.wrapper.contentOffset = CGPointMake(0, positionWrapper);
         self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightSearchLocation);
-        self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y, _searchLocation.frame.size.width, _searchLocation.frame.size.height + heightSearchLocation - margin);
+        self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + margin, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
+        self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y, _searchLocation.frame.size.width, _searchLocation.frame.size.height + heightSearchLocation);
         self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightSearchLocation, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
         self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightSearchLocation, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightSearchLocation, _userList.frame.size.width, _userList.frame.size.height);
@@ -1158,16 +1185,13 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.4 animations:^{
             if (_searchLocationIsOpen) {
-                self.cancelLocation.frame = CGRectMake(320 - 10 - self.cancelLocation.maxWidth, _openMap.frame.origin.y, self.cancelLocation.maxWidth, 47);
+                self.cancelLocation.alpha = 1;
                 self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y, 300 - 1 - self.cancelLocation.maxWidth, _locationInput.frame.size.height);
-                self.cancelLocation.titleLabel.alpha = 1;
             } else {
-                self.cancelLocation.alpha = 0;
+                self.openMap.alpha = 1;
             }
         } completion:^(BOOL finished) {
-            if (!_searchLocationIsOpen) {
-                self.cancelLocation.frame = CGRectMake(320 - 10, _openMap.frame.origin.y, 0, 47);
-            }
+            
         }];
     }];
     
