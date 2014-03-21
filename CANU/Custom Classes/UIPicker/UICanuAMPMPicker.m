@@ -25,45 +25,31 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         self.delegate = self;
         
         self.showsVerticalScrollIndicator = NO;
         
         self.decelerationRate = UIScrollViewDecelerationRateFast;
         
-        self.contentSize = CGSizeMake(frame.size.width, 19 + 2 * 26 + 9);
+        self.contentSize = CGSizeMake(frame.size.width, 29 + 2 * 55 + 29);
         
-        UILabel *amData = [[UILabel alloc]initWithFrame:CGRectMake(0, 19, frame.size.width, 16)];
-        amData.font = [UIFont fontWithName:@"Lato-Bold" size:10];
-        amData.textColor = UIColorFromRGB(0xe0e3e4);
-        amData.textAlignment = NSTextAlignmentCenter;
-        amData.text = @"AM";
-        amData.backgroundColor = [UIColor whiteColor];
-        [self addSubview:amData];
-        
-        UILabel *pmData = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + 26, frame.size.width, 16)];
-        pmData.font = [UIFont fontWithName:@"Lato-Bold" size:10];
-        pmData.textColor = UIColorFromRGB(0xe0e3e4);
-        pmData.textAlignment = NSTextAlignmentCenter;
-        pmData.text = @"PM";
-        pmData.backgroundColor = [UIColor whiteColor];
-        [self addSubview:pmData];
-        
-        self.amLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 19, frame.size.width, 16)];
+        self.amLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 30, frame.size.width - 5, 55)];
         self.amLabel.font = [UIFont fontWithName:@"Lato-Bold" size:10];
-        self.amLabel.textColor = UIColorFromRGB(0x1ca6c3);
+        self.amLabel.textColor = UIColorFromRGB(0x2b4b58);
         self.amLabel.textAlignment = NSTextAlignmentCenter;
         self.amLabel.text = @"AM";
-        self.amLabel.backgroundColor = [UIColor whiteColor];
+        self.amLabel.backgroundColor = [UIColor clearColor];
+        self.amLabel.alpha = 0.3f;
         [self addSubview:_amLabel];
         
-        self.pmLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + 26, frame.size.width, 16)];
+        self.pmLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 30 + 55, frame.size.width - 5, 55)];
         self.pmLabel.font = [UIFont fontWithName:@"Lato-Bold" size:10];
-        self.pmLabel.textColor = UIColorFromRGB(0x1ca6c3);
+        self.pmLabel.textColor = UIColorFromRGB(0x2b4b58);
         self.pmLabel.textAlignment = NSTextAlignmentCenter;
         self.pmLabel.text = @"PM";
-        self.pmLabel.backgroundColor = [UIColor whiteColor];
+        self.pmLabel.backgroundColor = [UIColor clearColor];
+        self.pmLabel.alpha = 0.3f;
         [self addSubview:_pmLabel];
         
     }
@@ -111,7 +97,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float fractionalPage = scrollView.contentOffset.y/ 26.0f ;
+    float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
     int newCurrentObject = 0;
@@ -147,12 +133,12 @@
                          }completion:^(BOOL finished) {}];
         [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
                          animations:^{
-                             self.pmLabel.alpha = 0;
+                             self.pmLabel.alpha = 0.3f;
                          }completion:^(BOOL finished) {}];
     } else {
         [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
                          animations:^{
-                             self.amLabel.alpha = 0;
+                             self.amLabel.alpha = 0.3f;
                          }completion:^(BOOL finished) {}];
         [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
                          animations:^{
@@ -163,10 +149,14 @@
 }
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
-    [self adapteCellWithAnimation:YES];
+    [self performSelector:@selector(performScrollView) withObject:nil afterDelay:0.05];
 }
 
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self performSelector:@selector(performScrollView) withObject:nil afterDelay:0.05];
+}
+
+- (void)performScrollView{
     [self adapteCellWithAnimation:YES];
 }
 
@@ -174,7 +164,7 @@
 
 - (void)adapteCellWithAnimation:(BOOL)animation{
     
-    int scrollContentOffeset = _currentObject * 26;
+    int scrollContentOffeset = _currentObject * 55;
     
     float delay = 0.15f;
     

@@ -24,4 +24,5 @@
 
 @required
 - (void)calendarTouchTodayOrTomorrowDay:(NSDate *)date;
+- (void)calendarTouchAnotherDay;
 @end

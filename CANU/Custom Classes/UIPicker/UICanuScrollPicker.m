@@ -13,7 +13,7 @@
 @property (nonatomic) int blockedValue;
 @property (nonatomic) int currentObject;
 @property (strong, nonatomic) NSArray *arrayContent;
-@property (strong, nonatomic) NSMutableArray *arrayDataLowDisable;
+@property (strong, nonatomic) NSMutableArray *arrayLabel;
 
 @end
 
@@ -38,72 +38,51 @@
         
         int maxContent = [arrayContent count];
         
-        self.contentSize = CGSizeMake(frame.size.width, 19 + ( maxContent + 6 ) * 26 + 16);
+        self.contentSize = CGSizeMake(frame.size.width, 29 + ( maxContent + 6 ) * 55 + 55);
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
-        self.arrayDataLowDisable = [[NSMutableArray alloc]init];
+        self.arrayLabel = [[NSMutableArray alloc]init];
         
         for (int i = [arrayContent count] - 3; i < [arrayContent count]; i ++) {
             
-            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + ( 2 - ( maxContent - 1 - i ) ) * 26, frame.size.width, 16)];
-            data.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            data.textColor = UIColorFromRGB(0x1ca6c3);
+            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 29 + ( 2 - ( maxContent - 1 - i ) ) * 55, frame.size.width, 55)];
+            data.font = [UIFont fontWithName:@"Lato-Regular" size:18];
+            data.textColor = UIColorFromRGB(0x2b4b58);
             data.textAlignment = NSTextAlignmentCenter;
             data.text = [arrayContent objectAtIndex:i];
-            data.backgroundColor = [UIColor whiteColor];
+            data.backgroundColor = [UIColor clearColor];
+            data.alpha = 0.3f;
             [self addSubview:data];
-            
-            UILabel *dataGray = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + ( 2 - ( maxContent - 1 - i ) ) * 26, frame.size.width, 16)];
-            dataGray.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            dataGray.textColor = UIColorFromRGB(0xe0e3e4);
-            dataGray.textAlignment = NSTextAlignmentCenter;
-            dataGray.text = [arrayContent objectAtIndex:i];
-            dataGray.backgroundColor = [UIColor whiteColor];
-            [self addSubview:dataGray];
-            [self.arrayDataLowDisable addObject:dataGray];
+            [self.arrayLabel addObject:data];
             
         }
 
         for (int i = 0; i < maxContent; i ++) {
             
-            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + ( i + 3 ) * 26, frame.size.width, 16)];
-            data.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            data.textColor = UIColorFromRGB(0x1ca6c3);
+            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 29 + ( i + 3 ) * 55, frame.size.width, 55)];
+            data.font = [UIFont fontWithName:@"Lato-Regular" size:18];
+            data.textColor = UIColorFromRGB(0x2b4b58);
             data.textAlignment = NSTextAlignmentCenter;
             data.text = [arrayContent objectAtIndex:i];
-            data.backgroundColor = [UIColor whiteColor];
+            data.backgroundColor = [UIColor clearColor];
+            data.alpha = 0.3f;
             [self addSubview:data];
-            
-            UILabel *dataGray = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + ( i + 3 ) * 26, frame.size.width, 16)];
-            dataGray.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            dataGray.textColor = UIColorFromRGB(0xe0e3e4);
-            dataGray.textAlignment = NSTextAlignmentCenter;
-            dataGray.text = [arrayContent objectAtIndex:i];
-            dataGray.backgroundColor = [UIColor whiteColor];
-            [self addSubview:dataGray];
-            [self.arrayDataLowDisable addObject:dataGray];
+            [self.arrayLabel addObject:data];
             
         }
         
         for (int i = 0; i < 3; i ++) {
             
-            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 +  (i + 3 + maxContent) * 26, frame.size.width, 16)];
-            data.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            data.textColor = UIColorFromRGB(0x1ca6c3);
+            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 29 +  (i + 3 + maxContent) * 55, frame.size.width, 55)];
+            data.font = [UIFont fontWithName:@"Lato-Regular" size:18];
+            data.textColor = UIColorFromRGB(0x2b4b58);
             data.textAlignment = NSTextAlignmentCenter;
             data.text = [arrayContent objectAtIndex:i];
-            data.backgroundColor = [UIColor whiteColor];
+            data.backgroundColor = [UIColor clearColor];
+            data.alpha = 0.3f;
             [self addSubview:data];
-            
-            UILabel *dataGray = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 +  (i + 3 + maxContent) * 26, frame.size.width, 16)];
-            dataGray.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            dataGray.textColor = UIColorFromRGB(0xe0e3e4);
-            dataGray.textAlignment = NSTextAlignmentCenter;
-            dataGray.text = [arrayContent objectAtIndex:i];
-            dataGray.backgroundColor = [UIColor whiteColor];
-            [self addSubview:dataGray];
-            [self.arrayDataLowDisable addObject:dataGray];
+            [self.arrayLabel addObject:data];
             
         }
         
@@ -162,7 +141,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float fractionalPage = scrollView.contentOffset.y/ 26.0f ;
+    float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
     int newCurrentObject = 0;
@@ -185,19 +164,19 @@
         [self adapteScrollInfinite];
     }
     
-    for (int i = 0; i < [_arrayDataLowDisable count]; i++) {
+    for (int i = 0; i < [_arrayLabel count]; i++) {
         
-        UILabel *data = [_arrayDataLowDisable objectAtIndex:i];
+        UILabel *data = [_arrayLabel objectAtIndex:i];
         
         if (i - 3 != _currentObject) {
             [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 data.alpha = 1;
+                                 data.alpha = 0.3f;
                              }completion:^(BOOL finished) {}];
         } else {
             [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 data.alpha = 0;
+                                 data.alpha = 1;
                              }completion:^(BOOL finished) {}];
         }
         
@@ -217,7 +196,7 @@
 
 - (void)adapteCellWithAnimation:(BOOL)animation{
     
-    int scrollContentOffeset = ( _currentObject + 3 ) * 26;
+    int scrollContentOffeset = ( _currentObject + 3 ) * 55;
     
     float delay = 0.15f;
     
@@ -238,13 +217,13 @@
         
         _currentObject = _currentObject + [_arrayContent count];
         
-        self.contentOffset = CGPointMake(0, self.contentOffset.y + [_arrayContent count] * 26.0f);
+        self.contentOffset = CGPointMake(0, self.contentOffset.y + [_arrayContent count] * 55.0f);
         
     } else if (_currentObject > [_arrayContent count]) {
         
         _currentObject = _currentObject - [_arrayContent count];
         
-        self.contentOffset = CGPointMake(0, self.contentOffset.y - [_arrayContent count] * 26.0f);
+        self.contentOffset = CGPointMake(0, self.contentOffset.y - [_arrayContent count] * 55.0f);
         
     }
     

@@ -103,6 +103,8 @@
 "What do you want to do?" = "What are you up to?";
 "Today" = "Today";
 "Tomorrow" = "Tomorrow";
+"At :" = "At :";
+"For :" = "For :";
 "Find a place" = "Search for a place or location";
 "Who is invited ?" = "With";
 "Add details (Optional)" = "Add details (Optional)";

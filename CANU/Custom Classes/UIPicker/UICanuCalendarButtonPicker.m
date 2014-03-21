@@ -38,34 +38,35 @@
         [formatDayNumber setLocale: [NSLocale currentLocale]];
         [formatDayNumber setDateFormat:@"MMM"];
         
-        self.buttonBackground = [[UIImageView alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, frame.size.height - 25, 25, 25)];
+        self.buttonBackground = [[UIImageView alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, frame.size.height - 34, 25, 25)];
         if (canuCalendarButtonType == CANUCalendarButtonWithMonth) {
            self.buttonBackground.image = [UIImage imageNamed:@"F_calendar_button_background_today"];
         }
         [self addSubview:_buttonBackground];
         
-        self.labelDay = [[UILabel alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, (frame.size.height - 25)/2, 25, 25)];
+        self.labelDay = [[UILabel alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, 7, 25, 25)];
         self.labelDay.text = [NSString stringWithFormat:@"%i",[date mk_day]];
         self.labelDay.font = [UIFont fontWithName:@"Lato-Regular" size:13];
         self.labelDay.textAlignment = NSTextAlignmentCenter;
-        self.labelDay.textColor = UIColorFromRGB(0xabb3b7);
+        self.labelDay.textColor = UIColorFromRGB(0x2b4b58);
+        self.labelDay.alpha = 0.3f;
         if (canuCalendarButtonType == CANUCalendarButtonOff) {
-            self.labelDay.textColor = UIColorFromRGB(0xdce3e6);
+            self.labelDay.alpha = 0.1f;
         }
         self.labelDay.backgroundColor = [UIColor clearColor];
         [self addSubview:_labelDay];
         
-        self.labelMonth = [[UILabel alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, frame.size.height - 13, 25, 8)];
+        self.labelMonth = [[UILabel alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, frame.size.height - 7, 25, 7)];
         self.labelMonth.text = [[formatDayNumber stringFromDate:date] uppercaseString];
-        self.labelMonth.font = [UIFont fontWithName:@"Lato-Regular" size:8];
+        self.labelMonth.font = [UIFont fontWithName:@"Lato-Regular" size:7];
         self.labelMonth.textAlignment = NSTextAlignmentCenter;
-        self.labelMonth.textColor = UIColorFromRGB(0xabb3b7);
+        self.labelMonth.textColor = UIColorFromRGB(0x2b4b58);
         self.labelMonth.backgroundColor = [UIColor clearColor];
         self.labelMonth.alpha = 0;
         [self addSubview:_labelMonth];
         
         if (canuCalendarButtonType == CANUCalendarButtonWithMonth) {
-            self.labelMonth.alpha = 1;
+            self.labelMonth.alpha = 0.4f;
         }
         
         if (canuCalendarButtonType != CANUCalendarButtonOff) {
@@ -90,15 +91,20 @@
             self.buttonBackground.image = [UIImage imageNamed:@"F_calendar_button_background_selected"];
             
             self.labelDay.textColor = [UIColor whiteColor];
+            self.labelDay.alpha = 1;
             
             self.labelMonth.alpha = 1;
-            self.labelMonth.textColor = [UIColor whiteColor];
+            self.labelMonth.textColor = UIColorFromRGB(0x2b4b58);
             
             [self.delegate  dayDidTouch:self];
             
         } else {
             
-            self.labelDay.textColor = UIColorFromRGB(0xabb3b7);
+            self.labelDay.textColor = UIColorFromRGB(0x2b4b58);
+            self.labelDay.alpha = 0.3f;
+            
+            self.labelMonth.textColor = UIColorFromRGB(0x2b4b58);
+            self.labelMonth.alpha = 0.4f;
             
             if (_canuCalendarButtonType != CANUCalendarButtonWithMonth) {
                 self.labelMonth.alpha = 0;
@@ -106,8 +112,6 @@
             } else {
                 self.buttonBackground.image = [UIImage imageNamed:@"F_calendar_button_background_today"];
             }
-            
-            self.labelMonth.textColor = UIColorFromRGB(0xabb3b7);
             
         }
     

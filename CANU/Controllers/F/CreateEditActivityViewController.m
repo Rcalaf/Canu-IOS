@@ -57,6 +57,7 @@
 @property (strong, nonatomic) UIView *wrapperInvitInput;
 @property (strong, nonatomic) UIView *wrapperActivity;
 @property (strong, nonatomic) UIView *wrapperButtonDaySelected;
+@property (strong, nonatomic) UIView *wrapperTimeLengthPicker;
 @property (strong, nonatomic) UIView *backgroundDark;
 @property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UILabel *labelSyncContact;
@@ -189,16 +190,12 @@
     
     // Time
     
-    self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(10, 270, 149, 57)];
-    [self.timePicker isToday:YES];
-    [self.wrapper addSubview:_timePicker];
-    
-    self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(10 + 149 + 1, 270, 149, 57)];
-    [self.wrapper addSubview:_lenghtPicker];
+    self.wrapperTimeLengthPicker = [self initializationWrapperTimeLengthPicker];
+    [self.wrapper addSubview:_wrapperTimeLengthPicker];
     
     // Location
     
-    self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(10, _timePicker.frame.origin.y + _timePicker.frame.size.height + 5, 250, 47)];
+    self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(10, _wrapperTimeLengthPicker.frame.origin.y + _wrapperTimeLengthPicker.frame.size.height + 5, 250, 47)];
     self.locationInput.placeholder = NSLocalizedString(@"Find a place", nil);
     self.locationInput.delegate = self;
     self.locationInput.returnKeyType = UIReturnKeySearch;
@@ -207,7 +204,7 @@
     UIImageView *imgOpenMap = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 49, 47)];
     imgOpenMap.image = [UIImage imageNamed:@"F1_open_map"];
     
-    self.openMap = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, _timePicker.frame.origin.y + _timePicker.frame.size.height + 5, 49, 47)];
+    self.openMap = [[UIButton alloc]initWithFrame:CGRectMake(10 + 250 + 1, _wrapperTimeLengthPicker.frame.origin.y + _wrapperTimeLengthPicker.frame.size.height + 5, 49, 47)];
     [self.openMap addTarget:self action:@selector(btnSearchWithTheMap) forControlEvents:UIControlEventTouchDown];
     self.openMap.backgroundColor = [UIColor whiteColor];
     [self.openMap addSubview:imgOpenMap];
@@ -637,6 +634,11 @@
     
 }
 
+- (void)calendarTouchAnotherDay{
+    self.todayBtnSelect.selected = NO;
+    self.tomorrowBtnSelect.selected = NO;
+}
+
 #pragma mark - UICanuSearchLocationDelegate
 
 - (void)locationIsSelected:(Location *)location{
@@ -879,7 +881,7 @@
 
 - (UIView *)initializationWrapperButtonDaySelected{
     
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperActivity.frame.origin.y + _wrapperActivity.frame.size.height + 5, 300, 47)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperActivity.frame.origin.y + _wrapperActivity.frame.size.height + 5, 300, 45)];
     
     UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 47)];
     background.image = [UIImage imageNamed:@"F_Button_Day_Selected"];
@@ -908,6 +910,34 @@
     self.calendar = [[UICanuCalendarPicker alloc]initWithFrame:CGRectMake(-10, 39, 320, 0)];
     self.calendar.delegate = self;
     [view addSubview:_calendar];
+    
+    return view;
+    
+}
+
+- (UIView *)initializationWrapperTimeLengthPicker{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperButtonDaySelected.frame.origin.y + _wrapperButtonDaySelected.frame.size.height, 300, 114)];
+    
+    UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, 0, 304, 114)];
+    background.image = [[UIImage imageNamed:@"F_calendar_background"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:1.0f];
+    [view addSubview:background];
+    
+    self.timePicker = [[UICanuTimePicker alloc]initWithFrame:CGRectMake(1, 0, 149, 114)];
+    [self.timePicker isToday:YES];
+    [view addSubview:_timePicker];
+    
+    self.lenghtPicker = [[UICanuLenghtPicker alloc]initWithFrame:CGRectMake(150, 0, 149, 114)];
+    [view addSubview:_lenghtPicker];
+    
+    UIImageView *shadowTop = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 6)];
+    shadowTop.image = [UIImage imageNamed:@"F_time_length_shadow"];
+    [view addSubview:shadowTop];
+    
+    UIImageView *shadowBottom = [[UIImageView alloc]initWithFrame:CGRectMake(0, 114 - 6, 300, 6)];
+    shadowBottom.image = [UIImage imageNamed:@"F_time_length_shadow"];
+    shadowBottom.transform = CGAffineTransformMakeRotation(M_PI);
+    [view addSubview:shadowBottom];
     
     return view;
     
@@ -1059,20 +1089,21 @@
     
     self.calendarIsOpen = !_calendarIsOpen;
     
-    int heightCalendar;
+    int heightCalendar,realSize;
     
     if (_calendarIsOpen) {
-        heightCalendar = 126;
+        heightCalendar = 120;
+        realSize = 126;
     } else {
-        heightCalendar = - 126;
+        heightCalendar = - 120;
+        realSize = - 126;
     }
     
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightCalendar);
         self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height + heightCalendar);
-        self.calendar.frame = CGRectMake(_calendar.frame.origin.x, _calendar.frame.origin.y, _calendar.frame.size.width, _calendar.frame.size.height + heightCalendar);
-        self.timePicker.frame = CGRectMake(_timePicker.frame.origin.x, _timePicker.frame.origin.y + heightCalendar, _timePicker.frame.size.width, _timePicker.frame.size.height);
-        self.lenghtPicker.frame = CGRectMake(_lenghtPicker.frame.origin.x, _lenghtPicker.frame.origin.y + heightCalendar, _lenghtPicker.frame.size.width, _lenghtPicker.frame.size.height);
+        self.calendar.frame = CGRectMake(_calendar.frame.origin.x, _calendar.frame.origin.y, _calendar.frame.size.width, _calendar.frame.size.height + realSize);
+        self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y + heightCalendar, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
         self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y + heightCalendar, _locationInput.frame.size.width, _locationInput.frame.size.height);
         self.openMap.frame = CGRectMake(_openMap.frame.origin.x, _openMap.frame.origin.y + heightCalendar, _openMap.frame.size.width, _openMap.frame.size.height);
         self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y + heightCalendar, _searchLocation.frame.size.width, _searchLocation.frame.size.height);

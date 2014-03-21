@@ -122,7 +122,7 @@
 		</data>
 		<key>CANU.momd/CANU.omo</key>
 		<data>
-		kGODvPIP4izhWiMfC7f9CTFJ9QQ=
+		dBkKdwuB7saRb8o+SSpkN2GBFJo=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -171,14 +171,6 @@
 		<key>F1_Calendar_dote_Enable@2x.png</key>
 		<data>
 		KAT5SHbnjhraSWqIZA14b4RmX54=
-		</data>
-		<key>F1_Shadow_Description.png</key>
-		<data>
-		axIy49irG5Ni3aFbJNcSbcgSlCk=
-		</data>
-		<key>F1_Shadow_Description@2x.png</key>
-		<data>
-		UX1GQudlyxznhHYHJ1rFvboVVbE=
 		</data>
 		<key>F1_add_description.png</key>
 		<data>
@@ -236,14 +228,6 @@
 		<data>
 		TuZvXqtBim3VBIr8dGbk2MnGQyU=
 		</data>
-		<key>F1_time_picker.png</key>
-		<data>
-		abhV+pi9uyo99e6o27XH24ZnUg0=
-		</data>
-		<key>F1_time_picker@2x.png</key>
-		<data>
-		HM9vCIsLjrXN/BQj7StMsl85D4A=
-		</data>
 		<key>F5_inputCell_selected.png</key>
 		<data>
 		Bagd/hPnMoBstYHzTsmin4XGkcw=
@@ -300,6 +284,14 @@
 		<data>
 		u/Sr3R2D3+ByBsMXEM0nShaMfDU=
 		</data>
+		<key>F_calendar_bottom_line.png</key>
+		<data>
+		IsLkD6/HLgUgi5qxXf1OMdBGCIE=
+		</data>
+		<key>F_calendar_bottom_line@2x.png</key>
+		<data>
+		Aqwx7Jm4heVlMyi3R8MxyqbP0bQ=
+		</data>
 		<key>F_calendar_button_background_selected.png</key>
 		<data>
 		YI/ofTZkfkH0wkUZ3Of7RyJ+AZ4=
@@ -323,6 +315,22 @@
 		<key>F_calendar_header@2x.png</key>
 		<data>
 		eT4Vrg0cHj9KyrjWxWINUhlx1DQ=
+		</data>
+		<key>F_location_background.png</key>
+		<data>
+		YFNBfWO8LuJk+cuqRo944vsVpgc=
+		</data>
+		<key>F_location_background@2x.png</key>
+		<data>
+		hhMCp9bkvWWxWd6Pq2nCl1dnv94=
+		</data>
+		<key>F_time_length_shadow.png</key>
+		<data>
+		PGuB5tfln16zSTVo1/JiahL7bPY=
+		</data>
+		<key>F_time_length_shadow@2x.png</key>
+		<data>
+		E1Xeoar2nvZ1t7f9nTbO6vezHLQ=
 		</data>
 		<key>G1_pipe.png</key>
 		<data>
@@ -824,26 +832,6 @@
 		<data>
 		fc2wlg/r8taX6FHJo/ZtDdNeU0Q=
 		</data>
-		<key>Lato-Bol.ttf</key>
-		<data>
-		wzDVnz5k4HolccK6T0EJsgoWj2k=
-		</data>
-		<key>Lato-BolIta.ttf</key>
-		<data>
-		IAf1RmYCIZQOnca5o8rpty++F68=
-		</data>
-		<key>Lato-LigIta.ttf</key>
-		<data>
-		WE80B3ZBL3fwTeBu4ENI74I9UJc=
-		</data>
-		<key>Lato-Reg.ttf</key>
-		<data>
-		En8kGHGp/kLNjQc6CDVBDzgk1Xw=
-		</data>
-		<key>Lato-RegIta.ttf</key>
-		<data>
-		5M6oA1olioaaYTn7905tDCR71Js=
-		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
 		NXfY85510R10hSmzU9mL5o9Rpck=
@@ -1020,14 +1008,6 @@
 		<data>
 		yut8L/4tzXY5G+nLjQLPCXeUuNU=
 		</data>
-		<key>edit_save.png</key>
-		<data>
-		wlalu6gLP4Gd+9p++gK/JPKrDUU=
-		</data>
-		<key>edit_save@2x.png</key>
-		<data>
-		+bxra9U5bl3+q1mO27tK0FL5s4Y=
-		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		PqAMlXoLGMC0fnMScARQw7W3xhU=
@@ -1038,7 +1018,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		NzyQrtohPpfso5TBJTVW6bv8Lqc=
+		KSLJYfkjipa1Zbxjyz9ascm03ss=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1533,7 +1513,7 @@
 		</data>
 		<key>CANU.momd/CANU.omo</key>
 		<data>
-		kGODvPIP4izhWiMfC7f9CTFJ9QQ=
+		dBkKdwuB7saRb8o+SSpkN2GBFJo=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -1582,14 +1562,6 @@
 		<key>F1_Calendar_dote_Enable@2x.png</key>
 		<data>
 		KAT5SHbnjhraSWqIZA14b4RmX54=
-		</data>
-		<key>F1_Shadow_Description.png</key>
-		<data>
-		axIy49irG5Ni3aFbJNcSbcgSlCk=
-		</data>
-		<key>F1_Shadow_Description@2x.png</key>
-		<data>
-		UX1GQudlyxznhHYHJ1rFvboVVbE=
 		</data>
 		<key>F1_add_description.png</key>
 		<data>
@@ -1647,14 +1619,6 @@
 		<data>
 		TuZvXqtBim3VBIr8dGbk2MnGQyU=
 		</data>
-		<key>F1_time_picker.png</key>
-		<data>
-		abhV+pi9uyo99e6o27XH24ZnUg0=
-		</data>
-		<key>F1_time_picker@2x.png</key>
-		<data>
-		HM9vCIsLjrXN/BQj7StMsl85D4A=
-		</data>
 		<key>F5_inputCell_selected.png</key>
 		<data>
 		Bagd/hPnMoBstYHzTsmin4XGkcw=
@@ -1711,6 +1675,14 @@
 		<data>
 		u/Sr3R2D3+ByBsMXEM0nShaMfDU=
 		</data>
+		<key>F_calendar_bottom_line.png</key>
+		<data>
+		IsLkD6/HLgUgi5qxXf1OMdBGCIE=
+		</data>
+		<key>F_calendar_bottom_line@2x.png</key>
+		<data>
+		Aqwx7Jm4heVlMyi3R8MxyqbP0bQ=
+		</data>
 		<key>F_calendar_button_background_selected.png</key>
 		<data>
 		YI/ofTZkfkH0wkUZ3Of7RyJ+AZ4=
@@ -1734,6 +1706,22 @@
 		<key>F_calendar_header@2x.png</key>
 		<data>
 		eT4Vrg0cHj9KyrjWxWINUhlx1DQ=
+		</data>
+		<key>F_location_background.png</key>
+		<data>
+		YFNBfWO8LuJk+cuqRo944vsVpgc=
+		</data>
+		<key>F_location_background@2x.png</key>
+		<data>
+		hhMCp9bkvWWxWd6Pq2nCl1dnv94=
+		</data>
+		<key>F_time_length_shadow.png</key>
+		<data>
+		PGuB5tfln16zSTVo1/JiahL7bPY=
+		</data>
+		<key>F_time_length_shadow@2x.png</key>
+		<data>
+		E1Xeoar2nvZ1t7f9nTbO6vezHLQ=
 		</data>
 		<key>G1_pipe.png</key>
 		<data>
@@ -2235,26 +2223,6 @@
 		<data>
 		fc2wlg/r8taX6FHJo/ZtDdNeU0Q=
 		</data>
-		<key>Lato-Bol.ttf</key>
-		<data>
-		wzDVnz5k4HolccK6T0EJsgoWj2k=
-		</data>
-		<key>Lato-BolIta.ttf</key>
-		<data>
-		IAf1RmYCIZQOnca5o8rpty++F68=
-		</data>
-		<key>Lato-LigIta.ttf</key>
-		<data>
-		WE80B3ZBL3fwTeBu4ENI74I9UJc=
-		</data>
-		<key>Lato-Reg.ttf</key>
-		<data>
-		En8kGHGp/kLNjQc6CDVBDzgk1Xw=
-		</data>
-		<key>Lato-RegIta.ttf</key>
-		<data>
-		5M6oA1olioaaYTn7905tDCR71Js=
-		</data>
 		<key>LaunchImage-568h@2x.png</key>
 		<data>
 		NXfY85510R10hSmzU9mL5o9Rpck=
@@ -2431,14 +2399,6 @@
 		<data>
 		yut8L/4tzXY5G+nLjQLPCXeUuNU=
 		</data>
-		<key>edit_save.png</key>
-		<data>
-		wlalu6gLP4Gd+9p++gK/JPKrDUU=
-		</data>
-		<key>edit_save@2x.png</key>
-		<data>
-		+bxra9U5bl3+q1mO27tK0FL5s4Y=
-		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
 		PqAMlXoLGMC0fnMScARQw7W3xhU=
@@ -2449,7 +2409,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		NzyQrtohPpfso5TBJTVW6bv8Lqc=
+		KSLJYfkjipa1Zbxjyz9ascm03ss=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>

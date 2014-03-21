@@ -39,6 +39,10 @@
         header.image = [UIImage imageNamed:@"F_calendar_header"];
         [self addSubview:header];
         
+        UIImageView *bottom = [[UIImageView alloc]initWithFrame:CGRectMake(10, 125, 300, 1)];
+        bottom.image = [UIImage imageNamed:@"F_calendar_bottom_line"];
+        [self addSubview:bottom];
+        
         UIView *headerDay = [[UIView alloc]initWithFrame:CGRectMake(10, 6, 300, 26)];
         [self addSubview:headerDay];
         
@@ -50,7 +54,7 @@
         
         for (int i = 0; i < [weekdays count]; i ++) {
             
-            UILabel *dayName = [[UILabel alloc]initWithFrame:CGRectMake(3 + i * 42, 0, 42, 20)];
+            UILabel *dayName = [[UILabel alloc]initWithFrame:CGRectMake(3 + i * 42, 2, 42, 20)];
             dayName.font = [UIFont fontWithName:@"Lato-Regular" size:7];
             dayName.textAlignment = NSTextAlignmentCenter;
             dayName.backgroundColor = [UIColor clearColor];
@@ -66,7 +70,7 @@
             
         }
         
-        UIScrollView *wrapperCalendar = [[UIScrollView alloc]initWithFrame:CGRectMake(10, 26, 300, 116 - headerDay.frame.size.height)];
+        UIScrollView *wrapperCalendar = [[UIScrollView alloc]initWithFrame:CGRectMake(11, 27, 298, 120 - headerDay.frame.size.height)];
         wrapperCalendar.pagingEnabled = YES;
         wrapperCalendar.showsHorizontalScrollIndicator = NO;
         wrapperCalendar.delegate = self;
@@ -180,13 +184,13 @@
             
         }
         
-        wrapperCalendar.contentSize = CGSizeMake(320 * numberOf2week, 87);
+        wrapperCalendar.contentSize = CGSizeMake(298 * numberOf2week, 87);
         
-        self.controleSlide1 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 - 6, 116 - 8, 4, 4)];
+        self.controleSlide1 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 - 5, 120 - 8, 4, 4)];
         self.controleSlide1.image = [UIImage imageNamed:@"F1_Calendar_dote_Enable"];
         [self addSubview:_controleSlide1];
         
-        self.controleSlide2 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 + 6, 116 - 8, 4, 4)];
+        self.controleSlide2 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 + 5, 120 - 8, 4, 4)];
         self.controleSlide2.image = [UIImage imageNamed:@"F1_Calendar_dote_Disable"];
         [self addSubview:_controleSlide2];
         
@@ -240,6 +244,8 @@
     
     if ([day.date mk_isToday] || [day.date mk_isTomorrow]) {
         [self.delegate calendarTouchTodayOrTomorrowDay:day.date];
+    } else {
+        [self.delegate calendarTouchAnotherDay];
     }
     
 }
@@ -270,7 +276,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float fractionalPage = scrollView.contentOffset.x/ 300.0f;
+    float fractionalPage = scrollView.contentOffset.x/ 298.0f;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
     if (nearestNumberCurrent == 0) {
