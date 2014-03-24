@@ -19,11 +19,11 @@
  *
  *  @param currentObject
  */
-- (void)changeCurrentObjectTo:(int)currentObject;
+- (void)changeCurrentObjectTo:(NSInteger)currentObject;
 
-- (int)currentObject;
+- (NSInteger)currentObject;
 
-- (void)blockScrollTo:(int)value;
+- (void)blockScrollTo:(NSInteger)value;
 
 @end
 

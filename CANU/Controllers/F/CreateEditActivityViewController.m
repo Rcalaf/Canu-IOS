@@ -601,8 +601,8 @@
     if (newString.length > 140) {
         return NO;
     }
-    
-    self.counterLength.text = [NSString stringWithFormat:@"%i",140 - newString.length];
+
+    self.counterLength.text = [NSString stringWithFormat:@"%i",140 - (int)newString.length];
     
     return YES;
 }

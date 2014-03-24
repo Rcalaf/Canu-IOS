@@ -10,7 +10,7 @@
 
 @interface UICanuAMPMPicker () <UIScrollViewDelegate>
 
-@property (nonatomic) int currentObject;
+@property (nonatomic) NSInteger currentObject;
 @property (nonatomic) int blockTo;
 @property (strong, nonatomic) UILabel *amLabel;
 @property (strong, nonatomic) UILabel *pmLabel;
@@ -75,11 +75,9 @@
     
 }
 
-- (int)currentObject{
+- (NSInteger)currentObject{
     
-    int current = _currentObject;
-    
-    return current;
+    return _currentObject;
     
 }
 
@@ -100,7 +98,7 @@
     float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
-    int newCurrentObject = 0;
+    NSInteger newCurrentObject = 0;
     
     if (nearestNumberCurrent < 0) {
         newCurrentObject = 0;
@@ -164,7 +162,7 @@
 
 - (void)adapteCellWithAnimation:(BOOL)animation{
     
-    int scrollContentOffeset = _currentObject * 55;
+    int scrollContentOffeset = (int)_currentObject * 55;
     
     float delay = 0.15f;
     

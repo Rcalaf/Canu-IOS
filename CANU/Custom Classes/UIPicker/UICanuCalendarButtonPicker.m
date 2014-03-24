@@ -45,7 +45,7 @@
         [self addSubview:_buttonBackground];
         
         self.labelDay = [[UILabel alloc]initWithFrame:CGRectMake((frame.size.width - 25)/2, 7, 25, 25)];
-        self.labelDay.text = [NSString stringWithFormat:@"%i",[date mk_day]];
+        self.labelDay.text = [NSString stringWithFormat:@"%li",(long)[date mk_day]];
         self.labelDay.font = [UIFont fontWithName:@"Lato-Regular" size:13];
         self.labelDay.textAlignment = NSTextAlignmentCenter;
         self.labelDay.textColor = UIColorFromRGB(0x2b4b58);

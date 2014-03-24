@@ -298,7 +298,7 @@ typedef enum {
     [self.wrapperDescription addSubview:description];
     
     self.numberOfAssistents = [[UILabel alloc]initWithFrame:CGRectMake(68, 0, 44, 37)];
-    self.numberOfAssistents.text = [NSString stringWithFormat:@"%i",[self.activity.attendeeIds count]];
+    self.numberOfAssistents.text = [NSString stringWithFormat:@"%lu",(unsigned long)[self.activity.attendeeIds count]];
     self.numberOfAssistents.textColor = UIColorFromRGB(0x2b4b58);
     self.numberOfAssistents.font = [UIFont fontWithName:@"Lato-Bold" size:16.0];
     self.numberOfAssistents.backgroundColor = [UIColor colorWithWhite:255.0f alpha:0.0f];
@@ -566,7 +566,7 @@ typedef enum {
                         self.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         self.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-                        _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
+                        _numberOfAssistents.text = [NSString stringWithFormat:@"%lu",(unsigned long)[self.activity.attendeeIds count]];
                         self.actionButton.hidden = NO;
                     }];
                     
@@ -606,7 +606,7 @@ typedef enum {
                         self.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
                     } completion:^(BOOL finished) {
                         self.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
-                        _numberOfAssistents.text = [NSString stringWithFormat:@"%u",[self.activity.attendeeIds count]];
+                        _numberOfAssistents.text = [NSString stringWithFormat:@"%lu",(unsigned long)[self.activity.attendeeIds count]];
                         self.actionButton.hidden = NO;
                     }];
                     

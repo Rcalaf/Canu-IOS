@@ -10,8 +10,8 @@
 
 @interface UICanuScrollPicker () <UIScrollViewDelegate>
 
-@property (nonatomic) int blockedValue;
-@property (nonatomic) int currentObject;
+@property (nonatomic) NSInteger blockedValue;
+@property (nonatomic) NSInteger currentObject;
 @property (strong, nonatomic) NSArray *arrayContent;
 @property (strong, nonatomic) NSMutableArray *arrayLabel;
 
@@ -36,7 +36,7 @@
         
         self.arrayContent = arrayContent;
         
-        int maxContent = [arrayContent count];
+        NSInteger maxContent = [arrayContent count];
         
         self.contentSize = CGSizeMake(frame.size.width, 29 + ( maxContent + 6 ) * 55 + 55);
         
@@ -44,7 +44,7 @@
         
         self.arrayLabel = [[NSMutableArray alloc]init];
         
-        for (int i = [arrayContent count] - 3; i < [arrayContent count]; i ++) {
+        for (int i = (int)[arrayContent count] - 3; i < [arrayContent count]; i ++) {
             
             UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 29 + ( 2 - ( maxContent - 1 - i ) ) * 55, frame.size.width, 55)];
             data.font = [UIFont fontWithName:@"Lato-Regular" size:18];
@@ -97,7 +97,7 @@
  *
  *  @param currentObject
  */
-- (void)changeCurrentObjectTo:(int)currentObject{
+- (void)changeCurrentObjectTo:(NSInteger)currentObject{
     
     if (_currentObject >= -3 && _currentObject <= [_arrayContent count] + 3) {
         
@@ -109,9 +109,9 @@
     
 }
 
-- (int)currentObject{
+- (NSInteger)currentObject{
     
-    int current = _currentObject;
+    NSInteger current = _currentObject;
     
     if (_currentObject < 0) {
         
@@ -127,7 +127,7 @@
     
 }
 
-- (void)blockScrollTo:(int)value{
+- (void)blockScrollTo:(NSInteger)value{
     
     self.blockedValue = value;
     
@@ -144,7 +144,7 @@
     float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
-    int newCurrentObject = 0;
+    NSInteger newCurrentObject = 0;
     
     if (nearestNumberCurrent < 0) {
         newCurrentObject = 0;
@@ -196,7 +196,7 @@
 
 - (void)adapteCellWithAnimation:(BOOL)animation{
     
-    int scrollContentOffeset = ( _currentObject + 3 ) * 55;
+    NSInteger scrollContentOffeset = ( _currentObject + 3 ) * 55;
     
     float delay = 0.15f;
     
@@ -229,9 +229,9 @@
     
 }
 
-- (void)changementCurrentObjectIfBlockedValue:(int)value{
+- (void)changementCurrentObjectIfBlockedValue:(NSInteger)value{
     
-    int current = value;
+    NSInteger current = value;
     
     if (value < 0) {
         

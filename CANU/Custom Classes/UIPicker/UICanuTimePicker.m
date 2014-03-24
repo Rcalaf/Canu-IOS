@@ -124,7 +124,7 @@
         
         NSArray *hours24 = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"];
         
-        int indexhours24 = [self.hoursScroll currentObject];
+        NSInteger indexhours24 = [self.hoursScroll currentObject];
         
         if ([self.amPmScroll currentObject] == 1) {
             indexhours24 += 12;
@@ -148,12 +148,12 @@
 
 - (void)changeTo:(NSDate *)date{
     
-    int hours = [date mk_hour];
-    int mins = [date mk_minutes];
+    NSInteger hours = [date mk_hour];
+    NSInteger mins = [date mk_minutes];
     
     if ([self timeIs24HourFormat]) {
         [self.hoursScroll changeCurrentObjectTo:hours];
-        [self.minutesScroll changeCurrentObjectTo:abs(mins/15)];
+        [self.minutesScroll changeCurrentObjectTo:ABS(mins/15)];
     } else {
         if (hours < 12) {
             [self.amPmScroll changeCurrentObjectTo:0];
@@ -166,7 +166,7 @@
         }
         
         [self.hoursScroll changeCurrentObjectTo:hours];
-        [self.minutesScroll changeCurrentObjectTo:abs(mins/15)];
+        [self.minutesScroll changeCurrentObjectTo:ABS(mins/15)];
         
     }
     
@@ -176,9 +176,9 @@
     
     self.isBlokedValue = blockedValue;
     
-    int maxHours = [[NSDate date] mk_hour];
+    NSInteger maxHours = [[NSDate date] mk_hour];
     
-    int maxMins = abs([[NSDate date] mk_minutes]/15) + 1;
+    NSInteger maxMins = ABS([[NSDate date] mk_minutes]/15) + 1;
     
     if (maxMins >= [_arrayMinutes count]) {
         maxMins = 0;
@@ -226,9 +226,9 @@
         
         self.valueIsChanged = isSelected;
         
-        int maxHours = [[NSDate date] mk_hour];
+        NSInteger maxHours = [[NSDate date] mk_hour];
         
-        int maxMins = abs([[NSDate date] mk_minutes]/15) + 1;
+        NSInteger maxMins = ABS([[NSDate date] mk_minutes]/15) + 1;
         
         if (maxMins >= [_arrayMinutes count]) {
             maxMins = 0;
@@ -280,9 +280,9 @@
         
         self.valueIsChangedAmPm = blockedValue;
         
-        int maxHours = [[NSDate date] mk_hour];
+        NSInteger maxHours = [[NSDate date] mk_hour];
         
-        int maxMins = abs([[NSDate date] mk_minutes]/15) + 1;
+        NSInteger maxMins = ABS([[NSDate date] mk_minutes]/15) + 1;
         
         if (maxMins >= [_arrayMinutes count]) {
             maxMins = 0;

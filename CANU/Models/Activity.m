@@ -144,7 +144,7 @@
 {
     NSInteger hours = length/60;
     NSInteger minuts = length%60;
-    return [NSString stringWithFormat:@"%.2d:%.2d", hours,minuts];
+    return [NSString stringWithFormat:@"%.2ld:%.2ld", (long)hours,(long)minuts];
     
 }
 
@@ -371,7 +371,7 @@
 
 - (void)attendees:(void (^)(NSArray *attendees, NSArray *invitationUser, NSArray *invitationGhostuser, NSError *error))block{
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:[[UserManager sharedUserManager] currentUser].userId],@"user_id", nil];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:[[UserManager sharedUserManager] currentUser].userId],@"user_id", nil];
     
     NSString *path = [NSString stringWithFormat:@"/activities/%lu/attendees",(unsigned long)self.activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -462,7 +462,7 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    NSString *url = [NSString stringWithFormat:@"users/%i/activities",[[UserManager sharedUserManager] currentUser].userId];
+    NSString *url = [NSString stringWithFormat:@"users/%lu/activities",(unsigned long)[[UserManager sharedUserManager] currentUser].userId];
     
     [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         
@@ -521,7 +521,7 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    NSString *url = [NSString stringWithFormat:@"users/%i/activities/%i",[[UserManager sharedUserManager] currentUser].userId,self.activityId];
+    NSString *url = [NSString stringWithFormat:@"users/%lu/activities/%lu",(unsigned long)[[UserManager sharedUserManager] currentUser].userId,(unsigned long)self.activityId];
     
     [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
         

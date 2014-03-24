@@ -50,7 +50,7 @@
         [dateFormater setLocale: [NSLocale currentLocale]];
         NSArray * weekdays = [dateFormater weekdaySymbols];
         
-        int firstDay = [[NSCalendar currentCalendar] firstWeekday] - 1;
+        NSUInteger firstDay = [[NSCalendar currentCalendar] firstWeekday] - 1;
         
         for (int i = 0; i < [weekdays count]; i ++) {
             
@@ -84,11 +84,11 @@
         [dateFormaterNumberDayForTheWeek setLocale: [NSLocale currentLocale]];
         [dateFormaterNumberDayForTheWeek setDateFormat:@"c"];
         
-        int yearCalendar = [dateCurrent year];
+        NSInteger yearCalendar = [dateCurrent year];
         
-        int monthCalendar = [dateCurrent month];
+        NSInteger monthCalendar = [dateCurrent month];
         
-        int dayCalendar = [dateCurrent day] - [[dateFormaterNumberDayForTheWeek stringFromDate:[NSDate date]] intValue] + 1;
+        NSInteger dayCalendar = [dateCurrent day] - [[dateFormaterNumberDayForTheWeek stringFromDate:[NSDate date]] intValue] + 1;
         
         int dayOff = [[dateFormaterNumberDayForTheWeek stringFromDate:[NSDate date]] intValue] - 2;
         

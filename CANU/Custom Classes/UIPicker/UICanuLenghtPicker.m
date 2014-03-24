@@ -10,7 +10,7 @@
 
 @interface UICanuLenghtPicker () <UIScrollViewDelegate>
 
-@property (nonatomic) int currentObject;
+@property (nonatomic) NSInteger currentObject;
 @property (strong, nonatomic) UIScrollView *lenghtScroll;
 @property (strong, nonatomic) NSMutableArray *arrayDataLowDisable;
 
@@ -99,7 +99,7 @@
     float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
-    int newCurrentObject = 0;
+    NSInteger newCurrentObject = 0;
     
     if (nearestNumberCurrent < 0) {
         newCurrentObject = 0;
@@ -235,7 +235,7 @@
 
 - (void)adapteCellWithAnimation:(BOOL)animation{
     
-    int scrollContentOffeset = _currentObject * 55;
+    NSInteger scrollContentOffeset = _currentObject * 55;
     
     float delay = 0.15f;
     
