@@ -41,7 +41,7 @@
         adress.text = location.displayAdresse;
         [self addSubview:adress];
         
-        self.square = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - 28 - 10, (frame.size.height - 27)/2, 28, 27)];
+        self.square = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - 28 - 15, (frame.size.height - 27)/2, 28, 27)];
         self.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
         [self addSubview:_square];
         

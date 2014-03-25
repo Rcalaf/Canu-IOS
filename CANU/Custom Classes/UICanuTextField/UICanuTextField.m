@@ -23,7 +23,9 @@
         self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         self.textColor = UIColorFromRGB(0x2b4b58);
         self.rightViewMode = UITextFieldViewModeAlways;
-        [self setTintColor:UIColorFromRGB(0x2b4b58)];
+        if (IS_OS_7_OR_LATER) {
+            [self setTintColor:UIColorFromRGB(0x2b4b58)];
+        }
     }
     return self;
 }

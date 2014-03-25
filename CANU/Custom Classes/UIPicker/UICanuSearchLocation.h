@@ -32,5 +32,6 @@
 @required
 
 - (void)locationIsSelected:(Location *)location;
+- (void)hiddenKeyboardSearchLocation;
 
 @end

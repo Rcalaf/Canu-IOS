@@ -57,13 +57,13 @@
 @property (strong, nonatomic) UIImageView *wrapperDescription;
 @property (strong, nonatomic) UIImageView *locationBackground;
 @property (strong, nonatomic) UIImageView *locationBackgroundSelected;
-@property (strong, nonatomic) UIView *wrapperInvitInput;
+@property (strong, nonatomic) UIView *backgroundUserList;
 @property (strong, nonatomic) UIView *wrapperActivity;
 @property (strong, nonatomic) UIView *wrapperButtonDaySelected;
 @property (strong, nonatomic) UIView *wrapperTimeLengthPicker;
 @property (strong, nonatomic) UIView *wrapperLocation;
+@property (strong, nonatomic) UIView *wrapperUserList;
 @property (strong, nonatomic) UIView *backgroundDark;
-@property (strong, nonatomic) UILabel *titleInvit;
 @property (strong, nonatomic) UILabel *labelSyncContact;
 @property (strong, nonatomic) UIButton *openMap;
 @property (strong, nonatomic) UIButton *openCalendar;
@@ -177,7 +177,7 @@
     self.invitInputIsStick = NO;
     self.activityIsOpen = NO;
     
-    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 90, 320, self.view.frame.size.height - 57)];
+    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 90, 320, self.view.frame.size.height)];
     self.wrapper.alpha = 0;
     self.wrapper.delegate = self;
     [self.view addSubview:_wrapper];
@@ -205,35 +205,13 @@
     // Invit
     
     if (!_editActivity) {
-        self.titleInvit = [[UILabel alloc]initWithFrame:CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 51, 300, 18)];
-        self.titleInvit.backgroundColor = backgroundColorView;
-        self.titleInvit.font = [UIFont fontWithName:@"Lato-Regular" size:16];
-        self.titleInvit.text = NSLocalizedString(@"Who is invited?", nil);
-        self.titleInvit.textColor = UIColorFromRGB(0x2b4b58);
-        self.titleInvit.textAlignment = NSTextAlignmentCenter;
-        [self.wrapper addSubview:_titleInvit];
         
-        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _titleInvit.frame.origin.y + _titleInvit.frame.size.height + 57, 320, 10)];
+        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5 + 45 + 10, 320, 10)];
         self.userList.delegate = self;
         [self.wrapper addSubview:_userList];
         
-        self.wrapperInvitInput = [[UIView alloc]initWithFrame:CGRectMake(0, _titleInvit.frame.origin.y + _titleInvit.frame.size.height, 320, 47 + 10)];
-        self.wrapperInvitInput.backgroundColor = backgroundColorView;
-        [self.wrapper addSubview:_wrapperInvitInput];
-        
-        self.invitInput = [[UICanuTextFieldInvit alloc]initWithFrame:CGRectMake(10, 5, 300, 47)];
-        self.invitInput.placeholder = NSLocalizedString(@"Who is invited?", nil);
-        self.invitInput.delegate = self;
-        self.invitInput.delegateFieldInvit = self;
-        self.invitInput.returnKeyType = UIReturnKeySearch;
-        [self.wrapperInvitInput addSubview:_invitInput];
-        
-        self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(320 - 10, 5, 0, 47)];
-        [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
-        [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
-        [self.cancelInvit detectSize];
-        self.cancelInvit.titleLabel.alpha = 0;
-        [self.wrapperInvitInput addSubview:_cancelInvit];
+        self.wrapperUserList = [self initializationWrapperUserList];
+        [self.wrapper addSubview:_wrapperUserList];
         
         // If Phone Book isn't allowed or not determined
         if (self.userList.canuError == CANUErrorPhoneBookNotDetermined || self.userList.canuError == CANUErrorPhoneBookRestricted) {
@@ -252,31 +230,31 @@
             self.labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
             self.labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
             
-            self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperInvitInput.frame.origin.y + 15, 260, 37)];
+            self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperUserList.frame.origin.y + 15, 260, 37)];
             [self.synContact addSubview:_labelSyncContact];
             [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
             [self.wrapper addSubview:_synContact];
             
         } else {
-            UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _wrapperInvitInput.frame.size.height, 320, 6)];
+            UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _backgroundUserList.frame.size.height, 320, 6)];
             shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-            [self.wrapperInvitInput addSubview:shadowDescription];
+            [self.backgroundUserList addSubview:shadowDescription];
         }
         
     }
     
     // Bottom bar
     
-    self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 57)];
+    self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45)];
     [self.view addSubview:_bottomBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    [backButton setFrame:CGRectMake(0.0, 0.0, 45, 45)];
+    [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
     [_bottomBar addSubview:backButton];
     
-    self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(57 + 10, 10.0, (self.view.frame.size.width - (57 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
+    self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
     if (!_editActivity) {
         [self.buttonAction setTitle:NSLocalizedString(@"Send activity", nil) forState:UIControlStateNormal];
     } else {
@@ -308,7 +286,7 @@
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapper.alpha = 1;
         self.wrapper.frame = CGRectMake(0, 0, 320, _wrapper.frame.size.height);
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57);
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45);
     }];
     
     // Description
@@ -392,11 +370,20 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    if (scrollView.contentOffset.y >= _titleInvit.frame.origin.y + _titleInvit.frame.size.height) {
-        self.wrapperInvitInput.frame = CGRectMake(0, scrollView.contentOffset.y, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
+    if (scrollView.contentOffset.y >= _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5) {
+        self.wrapperUserList.frame = CGRectMake(10, scrollView.contentOffset.y + 10, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+        
+        float alpha = (scrollView.contentOffset.y - (_wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5))/10;
+        
+        self.backgroundUserList.alpha = alpha;
+        
     }else {
-        self.wrapperInvitInput.frame = CGRectMake(0, _titleInvit.frame.origin.y + _titleInvit.frame.size.height, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
+        self.wrapperUserList.frame = CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+        self.backgroundUserList.alpha = 0;
     }
+    
+    
+    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -407,9 +394,21 @@
         [self.titleInput resignFirstResponder];
         [self openActivity];
     }else if (textField == _locationInput && [_locationInput.text isEqualToString:@""]) {
+        
         [self.locationInput resignFirstResponder];
+        if (_searchLocationIsOpen) {
+            [self openSearchLocationView];
+            if (self.locationSelected != nil) {
+                self.locationInput.activeSearch = NO;
+                self.locationInput.text = self.locationSelected.name;
+            }
+        }
     }else if (textField == _invitInput && ([_invitInput.text isEqualToString:@""] || [_invitInput.text isEqualToString:@" "])) {
         [self.invitInput resignFirstResponder];
+        if (_userListIsOpen) {
+            [self openUserListView];
+        }
+        self.invitInput.activeDeleteUser = NO;
     }
     
     return YES;
@@ -427,20 +426,21 @@
                 self.locationInput.text = @"";
                 self.locationInput.activeSearch = YES;
             }
-            
             [self openSearchLocationView];
         }
+        
     }
     
     if (textField == _invitInput) {
         
-        position = [NSNumber numberWithInt:_titleInvit.frame.origin.y + _titleInvit.frame.size.height];
+        if (!_userListIsOpen) {
+            [self openUserListView];
+        }
         
-        [self openUserListView];
     }
     
     if (textField != _titleInput) {
-        if (textField != _locationInput) {
+        if (textField != _locationInput && textField != _invitInput) {
             [self performSelector:@selector(changePositionWrapper:) withObject:position afterDelay:0.4];
         }
     } else {
@@ -521,28 +521,6 @@
     
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    if (textField == _locationInput) {
-        if (_searchLocationIsOpen) {
-            [self openSearchLocationView];
-            if (self.locationSelected != nil) {
-                self.locationInput.activeSearch = NO;
-                self.locationInput.text = self.locationSelected.name;
-            }
-            
-        }
-    }
-    
-    if (textField == _invitInput) {
-        if (_userListIsOpen) {
-            [self openUserListView];
-        }
-        self.invitInput.activeDeleteUser = NO;
-    }
-    
-}
-
 #pragma mark - UICanuTextFieldInvitDelegate
 
 - (void)inputFieldInvitIsEmpty{
@@ -581,7 +559,7 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    NSLog(@"shouldChangeTextInRange");
+    
     if ([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
         [self openActivity];
@@ -650,6 +628,12 @@
     
 }
 
+- (void)hiddenKeyboardSearchLocation{
+    
+    [self.locationInput resignFirstResponder];
+    
+}
+
 #pragma mark - SearchLocationMapViewControllerDelegate
 
 - (void)locationIsSelectedByMap:(Location *)location{
@@ -699,6 +683,10 @@
     
     self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + self.userList.maxHeight - 10);
     
+}
+
+- (void)hiddenKeyboardUserList{
+    [self.invitInput resignFirstResponder];
 }
 
 #pragma mark - MessageGhostUserDelegate
@@ -968,6 +956,37 @@
     
 }
 
+- (UIView *)initializationWrapperUserList{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5, 300, 45)];
+    
+    self.backgroundUserList = [[UIView alloc]initWithFrame:CGRectMake(-10, -10, 320, 65)];
+    self.backgroundUserList.backgroundColor = backgroundColorView;
+    self.backgroundUserList.alpha = 0;
+    [view addSubview:_backgroundUserList];
+    
+    UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 49)];
+    background.image = [UIImage imageNamed:@"F_location_background_selected"];
+    [view addSubview:background];
+    
+    self.invitInput = [[UICanuTextFieldInvit alloc]initWithFrame:CGRectMake(1, 1, 240, 43)];
+    self.invitInput.placeholder = NSLocalizedString(@"Search for a companion", nil);
+    self.invitInput.delegate = self;
+    self.invitInput.delegateFieldInvit = self;
+    self.invitInput.returnKeyType = UIReturnKeySearch;
+    [view addSubview:_invitInput];
+    
+    self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(300, 5, 0, 47)];
+    [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
+    [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
+    [self.cancelInvit detectSize];
+    self.cancelInvit.alpha = 0;
+    [view addSubview:_cancelInvit];
+    
+    return view;
+    
+}
+
 #pragma mark -- Position Wrapper
 
 - (void)changePositionWrapper:(NSNumber *)position{
@@ -988,15 +1007,13 @@
                 self.invitInput.userInteractionEnabled = YES;
                 [self.synContact removeFromSuperview];
                 
-                UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _wrapperInvitInput.frame.size.height, 320, 6)];
+                UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _backgroundUserList.frame.size.height, 320, 6)];
                 shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-                shadowDescription.alpha = 0;
-                [self.wrapperInvitInput addSubview:shadowDescription];
+                [self.backgroundUserList addSubview:shadowDescription];
                 
                 [UIView animateWithDuration:0.4 animations:^{
                     self.invitInput.alpha = 1;
                     self.userList.alpha = 1;
-                    shadowDescription.alpha = 1;
                 } completion:^(BOOL finished) {
                     [self.userList phoneBookIsAvailable];
                 }];
@@ -1018,6 +1035,16 @@
     
     [self.locationInput resignFirstResponder];
     
+    if (_searchLocationIsOpen) {
+        
+        if (!self.locationInput.activeSearch) {
+            self.locationInput.text = @"";
+            self.locationInput.activeSearch = YES;
+        }
+        
+        [self openSearchLocationView];
+    }
+    
 }
 
 - (void)cancelInvitUser{
@@ -1025,6 +1052,8 @@
     self.invitInput.text = @"";
     [self.userList searchPhoneBook:@""];
     [self.invitInput resignFirstResponder];
+    self.invitInput.activeDeleteUser = NO;
+    [self openUserListView];
     
 }
 
@@ -1131,8 +1160,7 @@
         self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y + heightCalendar, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
         self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + heightCalendar, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
         self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y + heightCalendar, _searchLocation.frame.size.width, _searchLocation.frame.size.height);
-        self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightCalendar, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
-        self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightCalendar, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
+        self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + heightCalendar, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightCalendar, _userList.frame.size.width, _userList.frame.size.height);
         self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightCalendar, _synContact.frame.size.width, _synContact.frame.size.height);
     } completion:^(BOOL finished) {
@@ -1168,18 +1196,19 @@
             self.locationBackground.alpha = 0;
             self.locationBackgroundSelected.alpha = 1;
             self.openMap.alpha = 0;
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45);
         } else {
             self.locationInput.frame = CGRectMake(_locationInput.frame.origin.x, _locationInput.frame.origin.y, 250, _locationInput.frame.size.height);
             self.locationBackground.alpha = 1;
             self.locationBackgroundSelected.alpha = 0;
             self.cancelLocation.alpha = 0;
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45);
         }
         self.wrapper.contentOffset = CGPointMake(0, positionWrapper);
         self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightSearchLocation);
         self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + margin, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
         self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y, _searchLocation.frame.size.width, _searchLocation.frame.size.height + heightSearchLocation);
-        self.titleInvit.frame = CGRectMake(_titleInvit.frame.origin.x, _titleInvit.frame.origin.y + heightSearchLocation, _titleInvit.frame.size.width, _titleInvit.frame.size.height);
-        self.wrapperInvitInput.frame = CGRectMake(_wrapperInvitInput.frame.origin.x, _wrapperInvitInput.frame.origin.y + heightSearchLocation, _wrapperInvitInput.frame.size.width, _wrapperInvitInput.frame.size.height);
+        self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + heightSearchLocation, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightSearchLocation, _userList.frame.size.width, _userList.frame.size.height);
         self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightSearchLocation, _synContact.frame.size.width, _synContact.frame.size.height);
     } completion:^(BOOL finished) {
@@ -1209,23 +1238,17 @@
         self.userList.scrollView.scrollEnabled = NO;
     }
     
-    if (_userListIsOpen) {
-        self.cancelInvit.frame = CGRectMake(320 - 10, _invitInput.frame.origin.y, 0, 47);
-    }
-    
     [UIView animateWithDuration:0.4 animations:^{
         if (_userListIsOpen) {
-            self.cancelInvit.frame = CGRectMake(320 - 10 - self.cancelInvit.maxWidth, _cancelInvit.frame.origin.y, self.cancelInvit.maxWidth, 47);
-            self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y, 300 - 1 - self.cancelInvit.maxWidth, _invitInput.frame.size.height);
-            self.cancelInvit.titleLabel.alpha = 1;
-            self.wrapper.contentOffset = CGPointMake(0, _titleInvit.frame.origin.y + _titleInvit.frame.size.height);
+            self.cancelInvit.alpha = 1;
+            self.wrapper.contentOffset = CGPointMake(0, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5);
             [self.userList animateToMinHeight];
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45);
         } else {
-            self.cancelInvit.frame = CGRectMake(320 - 10, _cancelInvit.frame.origin.y, 0, 47);
-            self.invitInput.frame = CGRectMake(_invitInput.frame.origin.x, _invitInput.frame.origin.y, 300, _invitInput.frame.size.height);
-            self.cancelInvit.titleLabel.alpha = 0;
-            self.wrapper.contentOffset = CGPointMake(0, _titleInvit.frame.origin.y - 20);
+            self.cancelInvit.alpha = 0;
+            self.wrapper.contentOffset = CGPointMake(0, _wrapperLocation.frame.origin.y - 20);
             [self.userList animateToMaxHeight];
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45);
         }
     } completion:^(BOOL finished) {
         
@@ -1349,7 +1372,7 @@
         
         NSString *description = @"";
         
-        if (![self.descriptionInput.text isEqualToString:NSLocalizedString(@"Add a description", nil)]) {
+        if (![self.descriptionInput.text isEqualToString:NSLocalizedString(@"Add details (Optional)", nil)]) {
             description = self.descriptionInput.text;
         }
         

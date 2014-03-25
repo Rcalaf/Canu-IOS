@@ -10,6 +10,7 @@
 #import "Contact.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
+#import "ProfilePicture.h"
 
 @implementation UICanuContactCell
 
@@ -18,24 +19,30 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor whiteColor];
+        UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 55)];
+        background.image = [UIImage imageNamed:@"F_location_cell"];
+        [self addSubview:background];
         
         self.contact = contact;
         
-        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 37, 37)];
-        avatar.image = [UIImage imageNamed:@"icon_username.png"];
+        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
+        avatar.image = [ProfilePicture defaultProfilePicture35];
         avatar.contentMode = UIViewContentModeScaleAspectFill;
         avatar.clipsToBounds = YES;
         [self addSubview:avatar];
         
-        UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(47, 6, 186, 20)];
-        name.font = [UIFont fontWithName:@"Lato-Bold" size:13];
-        name.textColor = UIColorFromRGB(0x1a8d9e);
+        UIImageView *strokePicture = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        strokePicture.image = [UIImage imageNamed:@"All_stroke_profile_picture_35"];
+        [avatar addSubview:strokePicture];
+        
+        UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(55, 9, 233, 20)];
+        name.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+        name.textColor = UIColorFromRGB(0x2b4b58);
         name.text = contact.fullName;
         [self addSubview:name];
         
-        UILabel *adress = [[UILabel alloc]initWithFrame:CGRectMake(47, 26, 186, 10)];
-        adress.font = [UIFont fontWithName:@"Lato-Regular" size:8];
+        UILabel *adress = [[UILabel alloc]initWithFrame:CGRectMake(55, 31, 233, 11)];
+        adress.font = [UIFont fontWithName:@"Lato-Italic" size:10];
         adress.textColor = UIColorFromRGB(0x2b4b58);
         adress.text = contact.convertNumber;
         [self addSubview:adress];
@@ -44,14 +51,14 @@
             self.user = user;
             name.text = user.firstName;
             adress.text = user.userName;
-            [avatar setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+            [avatar setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
         } else {
             if (contact.profilePicture) {
                 avatar.image = contact.profilePicture;
             }
         }
         
-        self.square = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - 28 - 10, (frame.size.height - 27)/2, 28, 27)];
+        self.square = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width - 28 - 15, (frame.size.height - 27)/2, 28, 27)];
         self.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
         [self addSubview:_square];
         

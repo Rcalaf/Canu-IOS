@@ -46,4 +46,6 @@
 
 - (void)phoneBookIsLoad;
 
+- (void)hiddenKeyboardUserList;
+
 @end

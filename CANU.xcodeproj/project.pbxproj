@@ -135,6 +135,7 @@
 		1E8A339418E045230049A6B7 /* NSString+MK_Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A337618E045230049A6B7 /* NSString+MK_Validation.m */; };
 		1E8A339818E045320049A6B7 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A339718E045320049A6B7 /* TTTAttributedLabel.m */; };
 		1E8A339C18E0455E0049A6B7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A339B18E0455E0049A6B7 /* Reachability.m */; };
+		1E8A33A018E182200049A6B7 /* ProfilePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A339F18E182200049A6B7 /* ProfilePicture.m */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
 		DE517723184EA69100690E2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
 		DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607838182C007C0053F23B /* Default-568h@2x.png */; };
@@ -435,6 +436,8 @@
 		1E8A339718E045320049A6B7 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		1E8A339A18E0455E0049A6B7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1E8A339B18E0455E0049A6B7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		1E8A339E18E182200049A6B7 /* ProfilePicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilePicture.h; path = "Custom Classes/ProfilePicture/ProfilePicture.h"; sourceTree = "<group>"; };
+		1E8A339F18E182200049A6B7 /* ProfilePicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilePicture.m; path = "Custom Classes/ProfilePicture/ProfilePicture.m"; sourceTree = "<group>"; };
 		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
 		DE607838182C007C0053F23B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -595,6 +598,7 @@
 		1E279DDB18D200960076C25E /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1E8A339D18E181EE0049A6B7 /* ProfilePicture */,
 				1E62AE2D18D84DA300520AA0 /* UICanuBottomBar */,
 				1E279E4C18D2055B0076C25E /* UIScrollViewReverse */,
 				1E279E3618D205310076C25E /* UIPicker */,
@@ -1125,6 +1129,15 @@
 			path = CANU/Framework/Reachability;
 			sourceTree = "<group>";
 		};
+		1E8A339D18E181EE0049A6B7 /* ProfilePicture */ = {
+			isa = PBXGroup;
+			children = (
+				1E8A339E18E182200049A6B7 /* ProfilePicture.h */,
+				1E8A339F18E182200049A6B7 /* ProfilePicture.m */,
+			);
+			name = ProfilePicture;
+			sourceTree = "<group>";
+		};
 		1E90977B1891879D004501E2 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1432,6 +1445,7 @@
 				1E279E9D18D300D60076C25E /* SignUpStep1.m in Sources */,
 				1E279DED18D202190076C25E /* User.m in Sources */,
 				1E279E9C18D300D60076C25E /* CheckPhoneNumber.m in Sources */,
+				1E8A33A018E182200049A6B7 /* ProfilePicture.m in Sources */,
 				1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */,
 				1E8A338618E045230049A6B7 /* NSNumber+MK_Comparison.m in Sources */,
 				1E279EAA18D300ED0076C25E /* TutorialStepFinal.m in Sources */,

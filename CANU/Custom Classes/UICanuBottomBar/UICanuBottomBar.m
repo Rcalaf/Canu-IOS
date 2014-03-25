@@ -22,7 +22,7 @@
     if (self) {
      
         self.backgroundImage = [[UIImageView alloc]initWithImage:[[UIImage imageNamed:@"All_bottom_bar_background"] stretchableImageWithLeftCapWidth:5.0 topCapHeight:0.0]];
-        self.backgroundImage.frame = CGRectMake(0, -2, frame.size.width, frame.size.height);
+        self.backgroundImage.frame = CGRectMake(0, -2, frame.size.width, 47);
         [self addSubview:_backgroundImage];
         
     }
@@ -33,7 +33,7 @@
     
     [super setFrame:frame];
     
-    self.backgroundImage.frame = CGRectMake(0, -2, frame.size.width, frame.size.height);
+    self.backgroundImage.frame = CGRectMake(0, -2, frame.size.width, 47);
     
 }
 

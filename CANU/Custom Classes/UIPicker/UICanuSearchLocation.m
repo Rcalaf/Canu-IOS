@@ -12,7 +12,7 @@
 #import "UICANULocationCell.h"
 #import "UICanuButtonSignBottomBar.h"
 
-@interface UICanuSearchLocation () <UICANULocationCellDelegate>
+@interface UICanuSearchLocation () <UICANULocationCellDelegate, UIScrollViewDelegate>
 
 @property (nonatomic) BOOL isFirstTime;
 @property (strong, nonatomic) NSMutableArray *arrayLocation;
@@ -33,9 +33,10 @@
         
         self.clipsToBounds = YES;
         
-        self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 216 - 65;
+        self.maxHeight = [[UIScreen mainScreen] bounds].size.height - 65;
         
         self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, _maxHeight)];
+        self.scrollView.delegate = self;
         [self addSubview:_scrollView];
         
         UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
@@ -100,6 +101,12 @@
         
     }
     
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.delegate hiddenKeyboardSearchLocation];
 }
 
 #pragma mark - Private
@@ -169,7 +176,13 @@
         i++;
     }
     
-    self.scrollView.contentSize = CGSizeMake(320, i * ( 55 + 10) + 10);
+    NSInteger heightScroll = i * ( 55 + 10) + 10;
+    
+    if (heightScroll < _maxHeight) {
+        heightScroll = _maxHeight + 1;
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(320, heightScroll);
     
 }
 

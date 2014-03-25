@@ -41,7 +41,7 @@
 }
 
 - (void)setActiveReset:(BOOL)activeReset{
-    
+    NSLog(@"Reset");
     _activeReset = activeReset;
     
     if (activeReset) {
@@ -58,8 +58,10 @@
     
     if (activeSearch) {
         self.textColor = UIColorFromRGB(0xabb3b7);
+        NSLog(@"Active Search");
     } else {
         self.textColor = UIColorFromRGB(0x2b4b58);
+        NSLog(@"Not Active Search");
     }
     
 }
