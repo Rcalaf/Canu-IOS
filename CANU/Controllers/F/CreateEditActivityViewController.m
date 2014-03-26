@@ -116,16 +116,14 @@
 /**
  *  Create activity (local or tribe)
  *
- *  @param activity
- *
  *  @return
  */
-- (id)initForCreate:(CANUCreateActivity)canuCreateActivity{
+- (id)initForCreate{
     
     self = [super init];
     if (self) {
         
-        self.canuCreateActivity = canuCreateActivity;
+        self.canuCreateActivity = CANUCreateActivityTribes;
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:@"Activity New"];

@@ -19,11 +19,9 @@
 /**
  *  Create activity (local or tribe)
  *
- *  @param activity
- *
  *  @return
  */
-- (id)initForCreate:(CANUCreateActivity)canuCreateActivity;
+- (id)initForCreate;
 
 /**
  *  Edit a activity

@@ -842,16 +842,7 @@
     } else if (self.canuError == CANUErrorLocationRestricted) {
         [[ErrorManager sharedErrorManager] visualAlertFor:CANUErrorLocationRestricted];
     } else {
-        CANUCreateActivity canuCreateActivity;
-        
-        if (_feedType == FeedLocalType) {
-            canuCreateActivity = CANUCreateActivityLocal;
-        } else if (_feedType == FeedTribeType) {
-            canuCreateActivity = CANUCreateActivityTribes;
-        } else {
-            canuCreateActivity = CANUCreateActivityLocal;
-        }
-        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate:canuCreateActivity];
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForCreate];
         [self presentViewController:editView animated:YES completion:nil];
     }
     

@@ -916,13 +916,21 @@
 		<data>
 		bUosCN8NCnfQu/GD4g8MWX2UnVQ=
 		</data>
+		<key>NavBox_Create.png</key>
+		<data>
+		UA691AFtyX+ewG1/9I2NL7iqlH8=
+		</data>
+		<key>NavBox_Create@2x.png</key>
+		<data>
+		GLQBRf/uWpGvFwODDRmbpHfmWNw=
+		</data>
 		<key>NavBox_Tribes.png</key>
 		<data>
-		K8dYW/SFTa2Ort7sDZNivK2zSY0=
+		sHFPw4Nc+tMCQ6noNhyIKWK8k+8=
 		</data>
 		<key>NavBox_Tribes@2x.png</key>
 		<data>
-		0ItaaIgiphvfVDof+SjdZA9sDws=
+		uzi1PUvrBDfI4X/xHBBJigToYi4=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -1066,7 +1074,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		z17hgTX52bpqBE4f4rjAmQ5gltk=
+		TFg7xSf6SfhVZDRCljiclMrOU8w=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1394,19 +1402,19 @@
 		</data>
 		<key>navmenu_local.png</key>
 		<data>
-		BgynnmLi1dGpbCwm5wGOI7kmQaw=
+		IeZlxgK8Pj4g/gJXYY0yV9BmXuQ=
 		</data>
 		<key>navmenu_local@2x.png</key>
 		<data>
-		pajscTIC1XaVPh1q0SVVCYuEFtY=
+		5fQ+lT2c+C9RX2q5sP661SmiZI8=
 		</data>
 		<key>navmenu_me.png</key>
 		<data>
-		+MWB5y3tI7AXtLQQLNdoEWa1Lys=
+		ypNuQ8ex9ZNR5JUs+UB9HuYVODM=
 		</data>
 		<key>navmenu_me@2x.png</key>
 		<data>
-		/Hi9OalhgWu7KKOs/5+UzCK/zlU=
+		jDAvr84nbcNVH7acYe6B39YlOJY=
 		</data>
 		<key>pt.lproj/InfoPlist.strings</key>
 		<data>
@@ -2355,13 +2363,21 @@
 		<data>
 		bUosCN8NCnfQu/GD4g8MWX2UnVQ=
 		</data>
+		<key>NavBox_Create.png</key>
+		<data>
+		UA691AFtyX+ewG1/9I2NL7iqlH8=
+		</data>
+		<key>NavBox_Create@2x.png</key>
+		<data>
+		GLQBRf/uWpGvFwODDRmbpHfmWNw=
+		</data>
 		<key>NavBox_Tribes.png</key>
 		<data>
-		K8dYW/SFTa2Ort7sDZNivK2zSY0=
+		sHFPw4Nc+tMCQ6noNhyIKWK8k+8=
 		</data>
 		<key>NavBox_Tribes@2x.png</key>
 		<data>
-		0ItaaIgiphvfVDof+SjdZA9sDws=
+		uzi1PUvrBDfI4X/xHBBJigToYi4=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -2505,7 +2521,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		z17hgTX52bpqBE4f4rjAmQ5gltk=
+		TFg7xSf6SfhVZDRCljiclMrOU8w=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -2833,19 +2849,19 @@
 		</data>
 		<key>navmenu_local.png</key>
 		<data>
-		BgynnmLi1dGpbCwm5wGOI7kmQaw=
+		IeZlxgK8Pj4g/gJXYY0yV9BmXuQ=
 		</data>
 		<key>navmenu_local@2x.png</key>
 		<data>
-		pajscTIC1XaVPh1q0SVVCYuEFtY=
+		5fQ+lT2c+C9RX2q5sP661SmiZI8=
 		</data>
 		<key>navmenu_me.png</key>
 		<data>
-		+MWB5y3tI7AXtLQQLNdoEWa1Lys=
+		ypNuQ8ex9ZNR5JUs+UB9HuYVODM=
 		</data>
 		<key>navmenu_me@2x.png</key>
 		<data>
-		/Hi9OalhgWu7KKOs/5+UzCK/zlU=
+		jDAvr84nbcNVH7acYe6B39YlOJY=
 		</data>
 		<key>pt.lproj/InfoPlist.strings</key>
 		<data>

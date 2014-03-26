@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, CANUCreateActivity) {
     CANUCreateActivityNone = 0,     // Action abort
     CANUCreateActivityLocal = 1,    // Local activity
-    CANUCreateActivityTribes = 2    // Tribes Activity
+    CANUCreateActivityTribes = 2,   // Tribes Activity
+    CANUCreateActivityAcitve = 3    // Create activity
 };
 
 @interface AnimationCreateActivity : UIView
@@ -20,11 +21,6 @@ typedef NS_ENUM(NSInteger, CANUCreateActivity) {
  *  If the view is active for the animation
  */
 @property (nonatomic) BOOL active;
-
-/**
- *  If the Local feed if unlock / Counter
- */
-@property (nonatomic) BOOL localIsUnlock;
 
 /**
  *  Active the view and the animation
