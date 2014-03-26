@@ -13,6 +13,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSString+MK_Base64.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuLabelUserName.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuLabelActivityName.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/easing.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuContactCell.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuAMPMPicker.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/TutorialStepProfile.o
@@ -21,6 +22,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AppDelegate.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSNumber+MK_Creation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuCalendarPicker.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UIView+EasingFunctions.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFNetworkActivityIndicatorManager.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFXMLRequestOperation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UIScrollViewReverse.o
@@ -105,6 +107,7 @@
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuBottomBar.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/AFURLConnectionOperation.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSelect.o
+/Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/CAKeyframeAnimation+AHEasing.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/UICanuButtonSignBottomBar.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/ErrorManager.o
 /Volumes/HDD/Utilisateurs/Vivien/Application iOS/Canu-IOS/build/CANU.build/Debug-iphoneos/CANU.build/Objects-normal/armv7/NSDate+MK_Components.o

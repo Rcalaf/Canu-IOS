@@ -136,6 +136,9 @@
 		1E8A339818E045320049A6B7 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A339718E045320049A6B7 /* TTTAttributedLabel.m */; };
 		1E8A339C18E0455E0049A6B7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A339B18E0455E0049A6B7 /* Reachability.m */; };
 		1E8A33A018E182200049A6B7 /* ProfilePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A339F18E182200049A6B7 /* ProfilePicture.m */; };
+		1E8A33A918E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A318E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.m */; };
+		1E8A33AA18E1DA9A0049A6B7 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A418E1DA9A0049A6B7 /* easing.c */; };
+		1E8A33AB18E1DA9A0049A6B7 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
 		DE517723184EA69100690E2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
 		DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607838182C007C0053F23B /* Default-568h@2x.png */; };
@@ -438,6 +441,12 @@
 		1E8A339B18E0455E0049A6B7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		1E8A339E18E182200049A6B7 /* ProfilePicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilePicture.h; path = "Custom Classes/ProfilePicture/ProfilePicture.h"; sourceTree = "<group>"; };
 		1E8A339F18E182200049A6B7 /* ProfilePicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilePicture.m; path = "Custom Classes/ProfilePicture/ProfilePicture.m"; sourceTree = "<group>"; };
+		1E8A33A218E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAKeyframeAnimation+AHEasing.h"; sourceTree = "<group>"; };
+		1E8A33A318E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAKeyframeAnimation+AHEasing.m"; sourceTree = "<group>"; };
+		1E8A33A418E1DA9A0049A6B7 /* easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = easing.c; sourceTree = "<group>"; };
+		1E8A33A518E1DA9A0049A6B7 /* easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = easing.h; sourceTree = "<group>"; };
+		1E8A33A718E1DA9A0049A6B7 /* UIView+EasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasingFunctions.h"; sourceTree = "<group>"; };
+		1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasingFunctions.m"; sourceTree = "<group>"; };
 		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
 		DE607838182C007C0053F23B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1138,6 +1147,28 @@
 			name = ProfilePicture;
 			sourceTree = "<group>";
 		};
+		1E8A33A118E1DA9A0049A6B7 /* AHEasing */ = {
+			isa = PBXGroup;
+			children = (
+				1E8A33A218E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.h */,
+				1E8A33A318E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.m */,
+				1E8A33A418E1DA9A0049A6B7 /* easing.c */,
+				1E8A33A518E1DA9A0049A6B7 /* easing.h */,
+			);
+			name = AHEasing;
+			path = CANU/Framework/AHEasing;
+			sourceTree = "<group>";
+		};
+		1E8A33A618E1DA9A0049A6B7 /* UIView+EasingFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				1E8A33A718E1DA9A0049A6B7 /* UIView+EasingFunctions.h */,
+				1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */,
+			);
+			name = "UIView+EasingFunctions";
+			path = "CANU/Framework/UIView+EasingFunctions";
+			sourceTree = "<group>";
+		};
 		1E90977B1891879D004501E2 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1174,6 +1205,8 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E8A33A118E1DA9A0049A6B7 /* AHEasing */,
+				1E8A33A618E1DA9A0049A6B7 /* UIView+EasingFunctions */,
 				1E8A339918E0455E0049A6B7 /* Reachability */,
 				1E8A339518E045320049A6B7 /* TTTAttributedLabel */,
 				1E8A332218E045230049A6B7 /* MKFoundationKit */,
@@ -1378,6 +1411,7 @@
 				1E8A338E18E045230049A6B7 /* NSString+MK_Base64.m in Sources */,
 				1E279E1E18D203DB0076C25E /* UICanuLabelUserName.m in Sources */,
 				1E279E1818D203DB0076C25E /* UICanuLabelActivityName.m in Sources */,
+				1E8A33AA18E1DA9A0049A6B7 /* easing.c in Sources */,
 				1E279E0618D203BB0076C25E /* UICanuContactCell.m in Sources */,
 				1E279E4518D205310076C25E /* UICanuAMPMPicker.m in Sources */,
 				1E279EAC18D300ED0076C25E /* TutorialStepProfile.m in Sources */,
@@ -1387,6 +1421,7 @@
 				DEA93B3717204EA600303BB5 /* CANU.xcdatamodeld in Sources */,
 				1E8A338718E045230049A6B7 /* NSNumber+MK_Creation.m in Sources */,
 				1E279E4718D205310076C25E /* UICanuCalendarPicker.m in Sources */,
+				1E8A33AB18E1DA9A0049A6B7 /* UIView+EasingFunctions.m in Sources */,
 				1E279D2218D1F5F60076C25E /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1E279D2518D1F5F60076C25E /* AFXMLRequestOperation.m in Sources */,
 				1E279E4F18D2055B0076C25E /* UIScrollViewReverse.m in Sources */,
@@ -1471,6 +1506,7 @@
 				1E62AE3018D84DD300520AA0 /* UICanuBottomBar.m in Sources */,
 				1E279D2418D1F5F60076C25E /* AFURLConnectionOperation.m in Sources */,
 				1E279E2E18D204320076C25E /* UICanuButtonSelect.m in Sources */,
+				1E8A33A918E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				1E279E2F18D204320076C25E /* UICanuButtonSignBottomBar.m in Sources */,
 				1E90977E189187F4004501E2 /* ErrorManager.m in Sources */,
 				1E8A337E18E045230049A6B7 /* NSDate+MK_Components.m in Sources */,

@@ -24,7 +24,6 @@
 #import "Location.h"
 #import "SearchLocationMapViewController.h"
 #import "UICanuButtonCancel.h"
-#import "UICanuButtonSignBottomBar.h" // TO Delete
 #import "UICanuButton.h"
 #import "UICanuBottomBar.h"
 #import "Contact.h"
@@ -39,12 +38,16 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
+#import "UIView+EasingFunctions.h"
+#import "easing.h"
+
 @interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL activityIsOpen;
 @property (nonatomic) BOOL calendarIsOpen;
 @property (nonatomic) BOOL searchLocationIsOpen;
+@property (nonatomic) BOOL searchLocationAnimation;
 @property (nonatomic) BOOL userListIsOpen;
 @property (nonatomic) BOOL mapLocationIsOpen;
 @property (nonatomic) BOOL invitInputIsStick;
@@ -176,9 +179,9 @@
     self.ghostUser = NO;
     self.invitInputIsStick = NO;
     self.activityIsOpen = NO;
+    self.searchLocationAnimation = NO;
     
-    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 90, 320, self.view.frame.size.height)];
-    self.wrapper.alpha = 0;
+    self.wrapper = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     self.wrapper.delegate = self;
     [self.view addSubview:_wrapper];
     
@@ -284,20 +287,12 @@
 - (void)viewDidAppear:(BOOL)animated{
     
     [UIView animateWithDuration:0.4 animations:^{
-        self.wrapper.alpha = 1;
-        self.wrapper.frame = CGRectMake(0, 0, 320, _wrapper.frame.size.height);
         self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45);
     }];
     
     // Description
     
     // Calendar
-    
-    // Search Location
-    
-    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 20, 320, 0)];
-    self.searchLocation.delegate = self;
-    [self.wrapper addSubview:_searchLocation];
     
     // Current Location
     
@@ -370,19 +365,20 @@
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    if (scrollView.contentOffset.y >= _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5) {
-        self.wrapperUserList.frame = CGRectMake(10, scrollView.contentOffset.y + 10, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
-        
-        float alpha = (scrollView.contentOffset.y - (_wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5))/10;
-        
-        self.backgroundUserList.alpha = alpha;
-        
-    }else {
-        self.wrapperUserList.frame = CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
-        self.backgroundUserList.alpha = 0;
+    if (!_searchLocationAnimation) {
+        if (scrollView.contentOffset.y >= _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5) {
+            
+            self.wrapperUserList.frame = CGRectMake(10, scrollView.contentOffset.y + 10, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+            
+            float alpha = (scrollView.contentOffset.y - (_wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5))/10;
+            
+            self.backgroundUserList.alpha = alpha;
+            
+        }else {
+            self.wrapperUserList.frame = CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+            self.backgroundUserList.alpha = 0;
+        }
     }
-    
-    
     
 }
 
@@ -952,6 +948,12 @@
     self.cancelLocation.alpha = 0;
     [view addSubview:_cancelLocation];
     
+    // Search Location
+    
+    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, view.frame.origin.y + view.frame.size.height + 20, 320, 0)];
+    self.searchLocation.delegate = self;
+    [self.wrapper addSubview:_searchLocation];
+    
     return view;
     
 }
@@ -1034,17 +1036,14 @@
 - (void)cancelSearchLocation{
     
     [self.locationInput resignFirstResponder];
-    
     if (_searchLocationIsOpen) {
-        
-        if (!self.locationInput.activeSearch) {
-            self.locationInput.text = @"";
-            self.locationInput.activeSearch = YES;
-        }
-        
         [self openSearchLocationView];
+        if (self.locationSelected != nil) {
+            self.locationInput.activeSearch = NO;
+            self.locationInput.text = self.locationSelected.name;
+        }
     }
-    
+
 }
 
 - (void)cancelInvitUser{
@@ -1173,13 +1172,16 @@
 
 - (void)openSearchLocationView{
     
+    self.searchLocationAnimation = YES;
+    
     self.searchLocationIsOpen = !_searchLocationIsOpen;
     
-    int heightSearchLocation,margin,positionWrapper;
+    int heightSearchLocation,margin,positionWrapper,marginWrapperUserList;
     
     if (_searchLocationIsOpen) {
         heightSearchLocation = self.searchLocation.maxHeight;
         margin = 10;
+        marginWrapperUserList = 20;
         self.wrapper.scrollEnabled = NO;
         self.previousScrollOffsetWrapper = _wrapper.contentOffset.y;
         positionWrapper = _wrapperLocation.frame.origin.y;
@@ -1188,6 +1190,7 @@
         margin = - 10;
         self.wrapper.scrollEnabled = YES;
         positionWrapper = _previousScrollOffsetWrapper;
+        marginWrapperUserList = - 20;
     }
     
     [UIView animateWithDuration:0.4 animations:^{
@@ -1208,7 +1211,7 @@
         self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + heightSearchLocation);
         self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + margin, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
         self.searchLocation.frame = CGRectMake(_searchLocation.frame.origin.x, _searchLocation.frame.origin.y, _searchLocation.frame.size.width, _searchLocation.frame.size.height + heightSearchLocation);
-        self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + heightSearchLocation, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+        self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + heightSearchLocation + marginWrapperUserList, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
         self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y + heightSearchLocation, _userList.frame.size.width, _userList.frame.size.height);
         self.synContact.frame = CGRectMake(_synContact.frame.origin.x, _synContact.frame.origin.y + heightSearchLocation, _synContact.frame.size.width, _synContact.frame.size.height);
     } completion:^(BOOL finished) {
@@ -1220,7 +1223,7 @@
                 self.openMap.alpha = 1;
             }
         } completion:^(BOOL finished) {
-            
+            self.searchLocationAnimation = NO;
         }];
     }];
     

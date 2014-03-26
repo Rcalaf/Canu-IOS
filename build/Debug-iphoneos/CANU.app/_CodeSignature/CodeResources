@@ -364,6 +364,14 @@
 		<data>
 		FRRunx952lQKAl+L8q+kRJOioJg=
 		</data>
+		<key>F_search_location_pin_background.png</key>
+		<data>
+		sEGt9I9mX+EjkwrEMRqq5L6HNAg=
+		</data>
+		<key>F_search_location_pin_background@2x.png</key>
+		<data>
+		FJvBlO4x818x6/PawbAlOnISQxc=
+		</data>
 		<key>F_time_length_shadow.png</key>
 		<data>
 		PGuB5tfln16zSTVo1/JiahL7bPY=
@@ -1058,7 +1066,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		qu8LnjTw1unVGDRl43e425yk48s=
+		z17hgTX52bpqBE4f4rjAmQ5gltk=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1378,11 +1386,11 @@
 		</data>
 		<key>map_pin.png</key>
 		<data>
-		TzSHLbgo9PTznBEt+jSHTKBI/Ps=
+		GtxZDtWlLy2JLzmUeS2dhhIIdbc=
 		</data>
 		<key>map_pin@2x.png</key>
 		<data>
-		G99DhulYAk+Vk5umSEhGpJV/bBs=
+		0P8AeoGowlXib8kxoNG7Hif75G4=
 		</data>
 		<key>navmenu_local.png</key>
 		<data>
@@ -1795,6 +1803,14 @@
 		<data>
 		FRRunx952lQKAl+L8q+kRJOioJg=
 		</data>
+		<key>F_search_location_pin_background.png</key>
+		<data>
+		sEGt9I9mX+EjkwrEMRqq5L6HNAg=
+		</data>
+		<key>F_search_location_pin_background@2x.png</key>
+		<data>
+		FJvBlO4x818x6/PawbAlOnISQxc=
+		</data>
 		<key>F_time_length_shadow.png</key>
 		<data>
 		PGuB5tfln16zSTVo1/JiahL7bPY=
@@ -2489,7 +2505,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		qu8LnjTw1unVGDRl43e425yk48s=
+		z17hgTX52bpqBE4f4rjAmQ5gltk=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -2809,11 +2825,11 @@
 		</data>
 		<key>map_pin.png</key>
 		<data>
-		TzSHLbgo9PTznBEt+jSHTKBI/Ps=
+		GtxZDtWlLy2JLzmUeS2dhhIIdbc=
 		</data>
 		<key>map_pin@2x.png</key>
 		<data>
-		G99DhulYAk+Vk5umSEhGpJV/bBs=
+		0P8AeoGowlXib8kxoNG7Hif75G4=
 		</data>
 		<key>navmenu_local.png</key>
 		<data>

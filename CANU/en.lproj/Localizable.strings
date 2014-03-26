@@ -117,6 +117,9 @@
 "No results ..." = "No results ...";
 "Adress" = "Adress";
 "Send activity" = "Send activity"; // New
+"Save location" = "Save location"; // New
+"Pin location" = "Pin location"; // New
+"Long press at a new place t0 move the pin" = "Long press at a new place to move the pin"; // New
 "YES" = "Yes";
 "NO" = "No";
 "Those who are not yet on CANU will receive a text message with a link to your activity." = "Those who are not yet on CANU will receive a text message with a link to your activity.";
