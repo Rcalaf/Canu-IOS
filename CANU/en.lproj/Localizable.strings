@@ -98,8 +98,9 @@
 "Settings > Privacy > Location" = "To use the local feed go to\nSettings > Privacy > Location\nand set Canu to On"; // New
 "Would you like to be notified \n\nwhen your friends invite you ?" = "Would you like to be notified \nwhen your friends invite you ?"; // New
 "To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners" = "To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners";
-// Create
 
+// Create
+"Release for create a activity" = "Release for create a activity"; // New
 "What do you want to do?" = "What are you up to?";
 "Today" = "Today";
 "Tomorrow" = "Tomorrow";

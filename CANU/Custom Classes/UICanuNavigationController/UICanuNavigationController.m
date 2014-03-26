@@ -22,7 +22,7 @@ typedef enum {
 } NavBoxPosition;
 
 typedef enum {
-    AreaCreate = 110
+    AreaCreate = 150
 } AreaPosition;
 
 @interface UICanuNavigationController () <UIGestureRecognizerDelegate>
