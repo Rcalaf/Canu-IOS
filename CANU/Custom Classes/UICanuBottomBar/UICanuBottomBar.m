@@ -25,6 +25,10 @@
         self.backgroundImage.frame = CGRectMake(0, -2, frame.size.width, 47);
         [self addSubview:_backgroundImage];
         
+        UIView *marginForBounce = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height, frame.size.width, frame.size.height)];
+        marginForBounce.backgroundColor = [UIColor whiteColor];
+        [self addSubview:marginForBounce];
+        
     }
     return self;
 }

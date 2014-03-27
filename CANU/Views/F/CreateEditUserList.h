@@ -17,9 +17,12 @@
 @property (retain) id delegate;
 @property (nonatomic) int maxHeight;
 @property (nonatomic) int minHeigt;
+@property (nonatomic) int active;
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
+
+- (void)lauchView;
 
 /**
  *  Phone book is now available

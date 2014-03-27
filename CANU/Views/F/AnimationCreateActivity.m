@@ -12,8 +12,12 @@
 
 #import "CreateEditActivityViewController.h"
 
+#import "ActivitiesFeedViewController.h"
+
 #import "UserManager.h"
 #import "UIImageView+AFNetworking.h"
+
+#import "UICanuNavigationController.h"
 
 typedef enum {
     AreaCreate = 150
@@ -143,14 +147,22 @@ typedef enum {
     } else {
         
         AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        UINavigationController *navigation = (UINavigationController *)appDelegate.canuViewController;
+        UICanuNavigationController *navigation = appDelegate.canuViewController;
         
         CreateEditActivityViewController *createView = [[CreateEditActivityViewController alloc]initForCreate];
         
-        [navigation presentViewController:createView animated:NO completion:^{
-            self.active = NO;
-            self.frame = CGRectMake(0, 0, 0, 0);
+        [appDelegate.feedViewController addChildViewController:createView];
+        [appDelegate.feedViewController.view addSubview:createView.view];
+        
+        self.active = NO;
+        self.frame = CGRectMake(0, 0, 0, 0);
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            navigation.control.alpha = 0;
+        } completion:^(BOOL finished) {
+            navigation.control.hidden = YES;
         }];
+
     }
     
 }

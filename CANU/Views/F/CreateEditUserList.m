@@ -39,19 +39,18 @@
         self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 320, _maxHeight)];
         self.scrollView.scrollEnabled = NO;
         self.scrollView.delegate = self;
+        
+        self.active = NO;
+        
         [self addSubview:_scrollView];
+        
+        self.alpha = 0;
         
         NSError *error = [PhoneBook checkPhoneBookAccess];
         
-        if (!error) {
-            [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
-        } else {
+        if (error) {
             
             self.canuError = error.code;
-            
-            if (error.code == CANUErrorPhoneBookRestricted || error.code == CANUErrorPhoneBookNotDetermined) {
-                self.alpha = 0;
-            }
             
         }
         
@@ -66,6 +65,14 @@
 }
 
 #pragma mark - Public
+
+- (void)lauchView{
+    
+    if (!_canuError) {
+        [NSThread detachNewThreadSelector:@selector(checkPhoneBook) toTarget:self withObject:nil];
+    }
+    
+}
 
 /**
  *  Phone book is now available
@@ -269,9 +276,11 @@
     
     self.scrollView.contentSize = CGSizeMake(320, row * ( 55 + 5) + 15);
     
-    self.maxHeight = row * ( 55 + 10) + 10;
+    self.maxHeight = row * ( 55 + 5) + 15;
     
     self.scrollView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _maxHeight);
+    
+    self.active = YES;
     
     [self.delegate phoneBookIsLoad];
     

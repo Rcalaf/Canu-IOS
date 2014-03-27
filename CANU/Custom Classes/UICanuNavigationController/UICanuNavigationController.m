@@ -178,7 +178,8 @@ typedef enum {
         
         self.velocity = [recognizer velocityInView:self.view].x;
         
-        [self performSelectorOnMainThread:@selector(releaseNavBox) withObject:self waitUntilDone:NO];
+        [self releaseNavBox];
+        
         
     }
     

@@ -71,6 +71,7 @@ AHFloat ElasticEaseInOut(AHFloat p);
 // Overshooting cubic easing; 
 AHFloat BackEaseIn(AHFloat p);
 AHFloat BackEaseOut(AHFloat p);
+AHFloat BackEaseOutLight(AHFloat p);
 AHFloat BackEaseInOut(AHFloat p);
 
 // Exponentially-decaying bounce easing

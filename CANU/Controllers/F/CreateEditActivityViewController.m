@@ -33,6 +33,7 @@
 #import "PhoneBook.h"
 #import "UserManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "UICanuNavigationController.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -40,6 +41,10 @@
 
 #import "UIView+EasingFunctions.h"
 #import "easing.h"
+
+typedef enum {
+    AreaCreate = 150
+} AreaPosition;
 
 @interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
 
@@ -53,7 +58,9 @@
 @property (nonatomic) BOOL invitInputIsStick;
 @property (nonatomic) BOOL isNewActivity;
 @property (nonatomic) BOOL ghostUser;
+@property (nonatomic) BOOL finishAnimationCreate;
 @property (nonatomic) int previousScrollOffsetWrapper;
+@property (nonatomic) int distanceFirstAnimation;
 @property (strong, nonatomic) NSTimer *timerSearch;
 @property (strong, nonatomic) MKMapItem *currentLocation;
 @property (strong, nonatomic) UIImageView *imgOpenCalendar;
@@ -123,12 +130,16 @@
     self = [super init];
     if (self) {
         
+        self.finishAnimationCreate = NO;
+        
         self.canuCreateActivity = CANUCreateActivityTribes;
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:@"Activity New"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Open" value:nil] build]];
+        
+        self.distanceFirstAnimation = [[UIScreen mainScreen] bounds].size.height - (AreaCreate - 64);
         
     }
     return self;
@@ -158,6 +169,8 @@
         [tracker set:kGAIScreenName value:@"Activity Edit"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];;
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Open" value:nil] build]];
+        
+        self.distanceFirstAnimation = 0;
         
     }
     return self;
@@ -207,7 +220,7 @@
     
     if (!_editActivity) {
         
-        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5 + 45 + 10, 320, 10)];
+        self.userList = [[CreateEditUserList alloc]initWithFrame:CGRectMake(0, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5 + 45 + 10 - _distanceFirstAnimation, 320, 10)];
         self.userList.delegate = self;
         [self.wrapper addSubview:_userList];
         
@@ -231,7 +244,7 @@
             self.labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
             self.labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
             
-            self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperUserList.frame.origin.y + 15, 260, 37)];
+            self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperUserList.frame.origin.y + 15 - _distanceFirstAnimation, 260, 37)];
             [self.synContact addSubview:_labelSyncContact];
             [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
             [self.wrapper addSubview:_synContact];
@@ -246,6 +259,41 @@
     
     // Bottom bar
     
+    // Wrapper
+    if (!_editActivity) {
+        self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height);
+    } else {
+        self.wrapper.contentSize = CGSizeMake(320, _cancelLocation.frame.origin.y + _cancelLocation.frame.size.height + 10);
+    }
+    
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y - _distanceFirstAnimation, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
+    } completion:^(BOOL finished) {
+
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y - _distanceFirstAnimation, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height);
+        self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y - _distanceFirstAnimation, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
+        self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y - _distanceFirstAnimation, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
+    } completion:^(BOOL finished) {
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y - _distanceFirstAnimation, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+        if (self.userList.active) {
+            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.userList.alpha = 1;
+            } completion:^(BOOL finished) {}];
+        }
+        
+        self.finishAnimationCreate = YES;
+    }];
+    
+    // Bottom bar
+    
     self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45)];
     [self.view addSubview:_bottomBar];
     
@@ -253,9 +301,11 @@
     [backButton setFrame:CGRectMake(0.0, 0.0, 45, 45)];
     [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchDown];
+    backButton.alpha = 0;
     [_bottomBar addSubview:backButton];
     
     self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
+    self.buttonAction.alpha = 0;
     if (!_editActivity) {
         [self.buttonAction setTitle:NSLocalizedString(@"Send activity", nil) forState:UIControlStateNormal];
     } else {
@@ -273,26 +323,78 @@
         [self.bottomBar addSubview:_deleteButton];
     }
     
-    // Wrapper
-    if (!_editActivity) {
-        self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height);
-    } else {
-        self.wrapper.contentSize = CGSizeMake(320, _cancelLocation.frame.origin.y + _cancelLocation.frame.size.height + 10);
-    }
+    [UIView animateWithDuration:0.6 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.bottomBar setEasingFunction:BackEaseOut forKeyPath:@"frame"];
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 47, 320, 47);
+    } completion:^(BOOL finished) {
+        [self.bottomBar removeEasingFunctionForKeyPath:@"frame"];
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            backButton.alpha = 1;
+            self.buttonAction.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
+    }];
     
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     
-    [UIView animateWithDuration:0.4 animations:^{
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45);
-    }];
     
-    // Description
+    // initializationWrapperActivity
     
-    // Calendar
+    self.wrapperDescription = [[UIImageView alloc]initWithFrame:CGRectMake(-2, 99, 304, 0)];
+    self.wrapperDescription.image = [[UIImage imageNamed:@"F_activity_description"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:10.0f];
+    self.wrapperDescription.clipsToBounds = YES;
+    self.wrapperDescription.userInteractionEnabled = YES;
+    [self.wrapperActivity addSubview:_wrapperDescription];
     
-    // Current Location
+    self.descriptionInput = [[UITextView alloc]initWithFrame:CGRectMake(10, 10, 280, 32)];
+    self.descriptionInput.textColor = UIColorFromRGB(0xabb3b7);
+    if (IS_OS_7_OR_LATER) {
+        [self.descriptionInput setTintColor:UIColorFromRGB(0x2b4b58)];
+    }
+    self.descriptionInput.text = NSLocalizedString(@"Add details (Optional)", nil);
+    self.descriptionInput.backgroundColor = [UIColor clearColor];
+    self.descriptionInput.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+    self.descriptionInput.returnKeyType = UIReturnKeyDone;
+    self.descriptionInput.delegate = self;
+    [self.wrapperDescription addSubview:_descriptionInput];
+    
+    self.counterLength = [[UILabel alloc]initWithFrame:CGRectMake(302 - 30, 55 - 2 - 20, 20, 10)];
+    self.counterLength.textColor = UIColorFromRGB(0xbfc9cd);
+    self.counterLength.font = [UIFont fontWithName:@"Lato-Regular" size:10];
+    self.counterLength.textAlignment = NSTextAlignmentRight;
+    [self.wrapperDescription addSubview:_counterLength];
+    
+    // initializationWrapperButtonDaySelected
+    
+    self.calendar = [[UICanuCalendarPicker alloc]initWithFrame:CGRectMake(-10, 39, 320, 0)];
+    self.calendar.delegate = self;
+    [self.wrapperButtonDaySelected addSubview:_calendar];
+    
+    // initializationWrapperLocation
+    
+    self.cancelLocation = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(300, 5, 0, 33)];
+    [self.cancelLocation addTarget:self action:@selector(cancelSearchLocation) forControlEvents:UIControlEventTouchDown];
+    [self.cancelLocation detectSize];
+    self.cancelLocation.alpha = 0;
+    [self.wrapperLocation addSubview:_cancelLocation];
+    
+    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, self.wrapperLocation.frame.origin.y + self.wrapperLocation.frame.size.height + 20, 320, 0)];
+    self.searchLocation.delegate = self;
+    [self.wrapper addSubview:_searchLocation];
+    
+    // initializationWrapperUserList
+    
+    self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(300, 5, 0, 47)];
+    [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
+    [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
+    [self.cancelInvit detectSize];
+    self.cancelInvit.alpha = 0;
+    [self.wrapperUserList addSubview:_cancelInvit];
+    
+    // Lauch the view request
+    [self.userList lauchView];
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
@@ -677,6 +779,12 @@
     
     self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + self.userList.maxHeight - 10);
     
+    if (_finishAnimationCreate) {
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.userList.alpha = 1;
+        } completion:^(BOOL finished) {}];
+    }
+    
 }
 
 - (void)hiddenKeyboardUserList{
@@ -791,7 +899,7 @@
 
 - (UIView *)initializationWrapperActivity{
     
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 10, 300, 100)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(10, 10 + _distanceFirstAnimation, 300, 100)];
     
     UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 105)];
     background.image = [UIImage imageNamed:@"F_activity_background"];
@@ -823,28 +931,6 @@
     self.titleInput.delegate = self;
     [view addSubview:_titleInput];
     
-    self.wrapperDescription = [[UIImageView alloc]initWithFrame:CGRectMake(-2, 99, 304, 0)];
-    self.wrapperDescription.image = [[UIImage imageNamed:@"F_activity_description"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:10.0f];
-    self.wrapperDescription.clipsToBounds = YES;
-    self.wrapperDescription.userInteractionEnabled = YES;
-    [view addSubview:_wrapperDescription];
-    
-    self.descriptionInput = [[UITextView alloc]initWithFrame:CGRectMake(10, 10, 280, 32)];
-    self.descriptionInput.textColor = UIColorFromRGB(0xabb3b7);
-    [self.descriptionInput setTintColor:UIColorFromRGB(0x2b4b58)];
-    self.descriptionInput.text = NSLocalizedString(@"Add details (Optional)", nil);
-    self.descriptionInput.backgroundColor = [UIColor clearColor];
-    self.descriptionInput.font = [UIFont fontWithName:@"Lato-Regular" size:13];
-    self.descriptionInput.returnKeyType = UIReturnKeyDone;
-    self.descriptionInput.delegate = self;
-    [self.wrapperDescription addSubview:_descriptionInput];
-
-    self.counterLength = [[UILabel alloc]initWithFrame:CGRectMake(302 - 30, 55 - 2 - 20, 20, 10)];
-    self.counterLength.textColor = UIColorFromRGB(0xbfc9cd);
-    self.counterLength.font = [UIFont fontWithName:@"Lato-Regular" size:10];
-    self.counterLength.textAlignment = NSTextAlignmentRight;
-    [self.wrapperDescription addSubview:_counterLength];
-    
     return view;
 }
 
@@ -875,10 +961,6 @@
     [self.openCalendar addTarget:self action:@selector(buttonSelectManager:) forControlEvents:UIControlEventTouchDown];
     [self.openCalendar addSubview:_imgOpenCalendar];
     [view addSubview:_openCalendar];
-    
-    self.calendar = [[UICanuCalendarPicker alloc]initWithFrame:CGRectMake(-10, 39, 320, 0)];
-    self.calendar.delegate = self;
-    [view addSubview:_calendar];
     
     return view;
     
@@ -940,18 +1022,6 @@
     [self.openMap addSubview:imgOpenMap];
     [view addSubview:_openMap];
     
-    self.cancelLocation = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(300, 5, 0, 33)];
-    [self.cancelLocation addTarget:self action:@selector(cancelSearchLocation) forControlEvents:UIControlEventTouchDown];
-    [self.cancelLocation detectSize];
-    self.cancelLocation.alpha = 0;
-    [view addSubview:_cancelLocation];
-    
-    // Search Location
-    
-    self.searchLocation = [[UICanuSearchLocation alloc]initWithFrame:CGRectMake(0, view.frame.origin.y + view.frame.size.height + 20, 320, 0)];
-    self.searchLocation.delegate = self;
-    [self.wrapper addSubview:_searchLocation];
-    
     return view;
     
 }
@@ -975,13 +1045,6 @@
     self.invitInput.delegateFieldInvit = self;
     self.invitInput.returnKeyType = UIReturnKeySearch;
     [view addSubview:_invitInput];
-    
-    self.cancelInvit = [[UICanuButtonCancel alloc]initWithFrame:CGRectMake(300, 5, 0, 47)];
-    [self.cancelInvit setTitle:NSLocalizedString(@"Ok", nil) forState:UIControlStateNormal];
-    [self.cancelInvit addTarget:self action:@selector(cancelInvitUser) forControlEvents:UIControlEventTouchDown];
-    [self.cancelInvit detectSize];
-    self.cancelInvit.alpha = 0;
-    [view addSubview:_cancelInvit];
     
     return view;
     
@@ -1311,13 +1374,51 @@
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Create" label:@"Dropout" value:nil] build]];
     }
     
-    [UIView animateWithDuration:0.4 animations:^{
-        self.wrapper.alpha = 0;
-        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    int distanceAnimationClose = self.view.frame.size.height + self.wrapper.contentOffset.y;
+    
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.userList.alpha = 0;
     } completion:^(BOOL finished) {
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + distanceAnimationClose, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+        }];
         
+        [UIView animateWithDuration:0.4 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y + distanceAnimationClose, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height);
+            self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y + distanceAnimationClose, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
+            self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + distanceAnimationClose, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y + distanceAnimationClose, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
+        } completion:^(BOOL finished) {
+            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+            UICanuNavigationController *navigation = appDelegate.canuViewController;
+            
+            navigation.control.hidden = NO;
+            
+            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.view.alpha = 0;
+                navigation.control.alpha = 1;
+            } completion:^(BOOL finished) {
+                [self willMoveToParentViewController:nil];
+                [self.view removeFromSuperview];
+                [self removeFromParentViewController];
+            }];
+        }];
+        
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self.bottomBar setEasingFunction:BackEaseIn forKeyPath:@"frame"];
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 47);
+    } completion:^(BOOL finished) {
+        [self.bottomBar removeEasingFunctionForKeyPath:@"frame"];
     }];
     
 }
@@ -1445,12 +1546,20 @@
                                                        
                                                        if (!_ghostUser) {
                                                            
+                                                           AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+                                                           UICanuNavigationController *navigation = appDelegate.canuViewController;
+                                                           
+                                                           navigation.control.hidden = NO;
+                                                           
                                                            [UIView animateWithDuration:0.4 animations:^{
                                                                self.wrapper.alpha = 0;
                                                                self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+                                                               navigation.control.alpha = 1;
                                                            } completion:^(BOOL finished) {
                                                                
-                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                               [self willMoveToParentViewController:nil];
+                                                               [self.view removeFromSuperview];
+                                                               [self removeFromParentViewController];
                                                                
                                                            }];
                                                            
@@ -1492,7 +1601,23 @@
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Delete" value:nil] build]];
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+            UICanuNavigationController *navigation = appDelegate.canuViewController;
+            
+            navigation.control.hidden = NO;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                self.wrapper.alpha = 0;
+                self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+                navigation.control.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+                [self willMoveToParentViewController:nil];
+                [self.view removeFromSuperview];
+                [self removeFromParentViewController];
+                
+            }];
+
             
         } else {
             //[error localizedDescription]
