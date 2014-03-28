@@ -34,6 +34,8 @@
 #import "UserManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "UICanuNavigationController.h"
+#import "ProfilePicture.h"
+#import "UICanuLabelUserName.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -259,41 +261,6 @@ typedef enum {
     
     // Bottom bar
     
-    // Wrapper
-    if (!_editActivity) {
-        self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height);
-    } else {
-        self.wrapper.contentSize = CGSizeMake(320, _cancelLocation.frame.origin.y + _cancelLocation.frame.size.height + 10);
-    }
-    
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y - _distanceFirstAnimation, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
-    } completion:^(BOOL finished) {
-
-    }];
-    
-    [UIView animateWithDuration:0.4 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y - _distanceFirstAnimation, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height);
-        self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y - _distanceFirstAnimation, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
-        self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y - _distanceFirstAnimation, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
-    } completion:^(BOOL finished) {
-    }];
-    
-    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y - _distanceFirstAnimation, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
-    } completion:^(BOOL finished) {
-        
-        if (self.userList.active) {
-            [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.userList.alpha = 1;
-            } completion:^(BOOL finished) {}];
-        }
-        
-        self.finishAnimationCreate = YES;
-    }];
-    
-    // Bottom bar
-    
     self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45)];
     [self.view addSubview:_bottomBar];
     
@@ -304,23 +271,79 @@ typedef enum {
     backButton.alpha = 0;
     [_bottomBar addSubview:backButton];
     
+    NSInteger maxWidthButton = (self.view.frame.size.width - (45 + 10)*2);
+    
     self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
     self.buttonAction.alpha = 0;
     if (!_editActivity) {
         [self.buttonAction setTitle:NSLocalizedString(@"Send activity", nil) forState:UIControlStateNormal];
     } else {
-        [self.buttonAction setTitle:NSLocalizedString(@"SAVE", nil) forState:UIControlStateNormal];
-        self.buttonAction.frame = CGRectMake(194.0f, 10.0f, 116.0f, 37);
+        maxWidthButton = (self.view.frame.size.width - (45 + 10)) / 2;
+        self.buttonAction.frame = CGRectMake(45 + 10 + maxWidthButton, 4, maxWidthButton, 37);
+        [self.buttonAction setTitle:NSLocalizedString(@"Save", nil) forState:UIControlStateNormal];
     }
     [self.buttonAction addTarget:self action:@selector(createEditForm) forControlEvents:UIControlEventTouchDown];
     [self.bottomBar addSubview:_buttonAction];
     
     if (_editActivity) {
-        self.deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.deleteButton.frame = CGRectMake(67.0f, 10.0f, 116.0f, 36.0f);
-        [self.deleteButton setImage:[UIImage imageNamed:@"edit_delete"] forState:UIControlStateNormal];
+        self.deleteButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, maxWidthButton , 37) forStyle:UICanuButtonStyleNormal];
+        self.deleteButton.alpha = 0;
+        [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
         [self.deleteButton addTarget:self action:@selector(deleteActivity) forControlEvents:UIControlEventTouchUpInside];
         [self.bottomBar addSubview:_deleteButton];
+    }
+    
+    // Wrapper
+    if (!_editActivity) {
+        self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + _userList.frame.size.height);
+    } else {
+        self.wrapper.contentSize = CGSizeMake(320, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 10 + 47);
+    }
+    
+    // Animation
+    
+    if (!_editActivity) {
+        
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y - _distanceFirstAnimation, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:0.4 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y - _distanceFirstAnimation, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height);
+            self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y - _distanceFirstAnimation, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
+            self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y - _distanceFirstAnimation, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
+        } completion:^(BOOL finished) {
+        }];
+        
+        [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y - _distanceFirstAnimation, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+            if (self.userList.active) {
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.userList.alpha = 1;
+                } completion:^(BOOL finished) {}];
+            }
+            
+            self.finishAnimationCreate = YES;
+        }];
+        
+    } else {
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        UICanuNavigationController *navigation = appDelegate.canuViewController;
+        
+        self.view.alpha = 0;
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            navigation.control.alpha = 0;
+            self.view.alpha = 1;
+        } completion:^(BOOL finished) {
+            navigation.control.hidden = YES;
+        }];
+        
     }
     
     [UIView animateWithDuration:0.6 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -331,6 +354,7 @@ typedef enum {
         [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             backButton.alpha = 1;
             self.buttonAction.alpha = 1;
+            self.deleteButton.alpha = 1;
         } completion:^(BOOL finished) {
         }];
     }];
@@ -446,6 +470,9 @@ typedef enum {
         } else {
             [self buttonSelectManager:_openCalendar];
             [self.calendar changeTo:_editActivity.start];
+            
+            self.wrapper.contentSize = CGSizeMake(320, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 10 + 47);
+            
         }
         
         [self.lenghtPicker changeTo:_editActivity.length];
@@ -907,7 +934,7 @@ typedef enum {
     
     // Profile picture
     UIImageView *profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
-    [profilePicture setImageWithURL:[[UserManager sharedUserManager] currentUser].profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+    [profilePicture setImageWithURL:[[UserManager sharedUserManager] currentUser].profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
     [view addSubview:profilePicture];
     
     // Stroke profile picture
@@ -916,10 +943,8 @@ typedef enum {
     [profilePicture addSubview:strokePicture];
     
     // Name
-    UILabel *username = [[UILabel alloc]initWithFrame:CGRectMake(55, 18, 200, 17)];
-    username.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+    UICanuLabelUserName *username = [[UICanuLabelUserName alloc]initWithFrame:CGRectMake(55, 18, 200, 17)];
     username.text = [[UserManager sharedUserManager] currentUser].firstName;
-    username.textColor = UIColorFromRGB(0x2b4b58);
     [view addSubview:username];
     
     self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];

@@ -20,12 +20,12 @@ typedef NS_ENUM(NSInteger, UICanuActivityCellStatus) {
 
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) UIButton *actionButton;
-@property (strong, nonatomic) UIImageView *animationButtonGo;
-@property (strong, nonatomic) UIImageView *animationButtonToGo;
 @property (strong, nonatomic) Activity *activity;
 @property (retain) id delegate;
 
 - (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity;
+
+- (void)animateAfterDelay:(float)delay;
 
 @end
 

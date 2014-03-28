@@ -96,6 +96,14 @@
 		<data>
 		7S3gZ9FWy8h57zhmIoLVCLzPRso=
 		</data>
+		<key>All_stroke_profile_picture_95.png</key>
+		<data>
+		sAEL2mDFfLCeIgINhJGGe0G/D1Y=
+		</data>
+		<key>All_stroke_profile_picture_95@2x.png</key>
+		<data>
+		leyvQWdxNdrMWs1fKGyfGv8lwFo=
+		</data>
 		<key>AnimationCreateActivity_cloud.png</key>
 		<data>
 		VuUKyWr8shNs52U7RwwttpjK2lk=
@@ -154,7 +162,15 @@
 		</data>
 		<key>CANU.momd/CANU.omo</key>
 		<data>
-		EN94Fk8OJTdrmpLp5wKd4cEFhv0=
+		M5YFoqI3oEH8BrpXY9SXTHlpSpc=
+		</data>
+		<key>C_activity_background.png</key>
+		<data>
+		j2tCxpIME43x0c6I+QWapFt6Vik=
+		</data>
+		<key>C_activity_background@2x.png</key>
+		<data>
+		1C4XexSQs5Ikw56sxT+cjxat2tY=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -251,14 +267,6 @@
 		<key>F1_open_map@2x.png</key>
 		<data>
 		0JrULISqu9wiyd48gGUsLQMh3zw=
-		</data>
-		<key>F5_inputCell_selected.png</key>
-		<data>
-		Bagd/hPnMoBstYHzTsmin4XGkcw=
-		</data>
-		<key>F5_inputCell_selected@2x.png</key>
-		<data>
-		TMbap7NZzanRq/4l1vJo/9Um+aQ=
 		</data>
 		<key>F5_local_icones.png</key>
 		<data>
@@ -1018,11 +1026,11 @@
 		</data>
 		<key>User_settings.png</key>
 		<data>
-		CX2Rzh7TcCeRx+GE2sjrsyMMttY=
+		T8yRqK5HEGOA7wslqvZ5VRuWmCU=
 		</data>
 		<key>User_settings@2x.png</key>
 		<data>
-		tWTpAGWKozNNJ1rz1J8GKu+2P6g=
+		8FfLZeDTsBh6hh/hMA8B083ETk8=
 		</data>
 		<key>back_arrow.png</key>
 		<data>
@@ -1066,7 +1074,7 @@
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		PqAMlXoLGMC0fnMScARQw7W3xhU=
+		8Edw+VsrzFYaEA/zEhojFIEH7BU=
 		</data>
 		<key>en.lproj/InfoPlist.strings</key>
 		<data>
@@ -1074,7 +1082,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		kbM5D9hubCqIDH2thyr20lcyEWE=
+		PMOjStVa+mQFM1tZakWMNqrLc/Q=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1094,27 +1102,27 @@
 		</data>
 		<key>feed_action_edit.png</key>
 		<data>
-		LDi+qLbnyFmRkTsy1F/QgfSfgM0=
+		09dAFSkN4EMWThZL5je5bYx0sP4=
 		</data>
 		<key>feed_action_edit@2x.png</key>
 		<data>
-		+sTfTO/fY2b6FDkGHi+IN2eHdZk=
+		lSuWGFRGUY83y6jlIW2RNbDTo1A=
 		</data>
 		<key>feed_action_go.png</key>
 		<data>
-		MQa0csEEgr0ZoA0FJjTf7awb/SI=
+		8dyJ4TW9WpE97ctC2TaNfcSyRG4=
 		</data>
 		<key>feed_action_go@2x.png</key>
 		<data>
-		MP9dfnjDsdrGaJcHwkhyaTCTFOU=
+		4KM8isfV7ecFPRJcuxq/x/OFHUU=
 		</data>
 		<key>feed_action_yes.png</key>
 		<data>
-		E38ZKH6TT0kx8Lh4HQNn7x1045Y=
+		BEtiTIpUou/Ax49vo/4SzHZFbwY=
 		</data>
 		<key>feed_action_yes@2x.png</key>
 		<data>
-		bIYH958OOFWG+EW6X6joLjXTygc=
+		o7T6WxY6+9GbOIaYA/J4OLQEBMg=
 		</data>
 		<key>feed_shadow_name.png</key>
 		<data>
@@ -1543,6 +1551,14 @@
 		<data>
 		7S3gZ9FWy8h57zhmIoLVCLzPRso=
 		</data>
+		<key>All_stroke_profile_picture_95.png</key>
+		<data>
+		sAEL2mDFfLCeIgINhJGGe0G/D1Y=
+		</data>
+		<key>All_stroke_profile_picture_95@2x.png</key>
+		<data>
+		leyvQWdxNdrMWs1fKGyfGv8lwFo=
+		</data>
 		<key>AnimationCreateActivity_cloud.png</key>
 		<data>
 		VuUKyWr8shNs52U7RwwttpjK2lk=
@@ -1601,7 +1617,15 @@
 		</data>
 		<key>CANU.momd/CANU.omo</key>
 		<data>
-		EN94Fk8OJTdrmpLp5wKd4cEFhv0=
+		M5YFoqI3oEH8BrpXY9SXTHlpSpc=
+		</data>
+		<key>C_activity_background.png</key>
+		<data>
+		j2tCxpIME43x0c6I+QWapFt6Vik=
+		</data>
+		<key>C_activity_background@2x.png</key>
+		<data>
+		1C4XexSQs5Ikw56sxT+cjxat2tY=
 		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
@@ -1698,14 +1722,6 @@
 		<key>F1_open_map@2x.png</key>
 		<data>
 		0JrULISqu9wiyd48gGUsLQMh3zw=
-		</data>
-		<key>F5_inputCell_selected.png</key>
-		<data>
-		Bagd/hPnMoBstYHzTsmin4XGkcw=
-		</data>
-		<key>F5_inputCell_selected@2x.png</key>
-		<data>
-		TMbap7NZzanRq/4l1vJo/9Um+aQ=
 		</data>
 		<key>F5_local_icones.png</key>
 		<data>
@@ -2465,11 +2481,11 @@
 		</data>
 		<key>User_settings.png</key>
 		<data>
-		CX2Rzh7TcCeRx+GE2sjrsyMMttY=
+		T8yRqK5HEGOA7wslqvZ5VRuWmCU=
 		</data>
 		<key>User_settings@2x.png</key>
 		<data>
-		tWTpAGWKozNNJ1rz1J8GKu+2P6g=
+		8FfLZeDTsBh6hh/hMA8B083ETk8=
 		</data>
 		<key>back_arrow.png</key>
 		<data>
@@ -2513,7 +2529,7 @@
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
-		PqAMlXoLGMC0fnMScARQw7W3xhU=
+		8Edw+VsrzFYaEA/zEhojFIEH7BU=
 		</data>
 		<key>en.lproj/InfoPlist.strings</key>
 		<data>
@@ -2521,7 +2537,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		kbM5D9hubCqIDH2thyr20lcyEWE=
+		PMOjStVa+mQFM1tZakWMNqrLc/Q=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -2541,27 +2557,27 @@
 		</data>
 		<key>feed_action_edit.png</key>
 		<data>
-		LDi+qLbnyFmRkTsy1F/QgfSfgM0=
+		09dAFSkN4EMWThZL5je5bYx0sP4=
 		</data>
 		<key>feed_action_edit@2x.png</key>
 		<data>
-		+sTfTO/fY2b6FDkGHi+IN2eHdZk=
+		lSuWGFRGUY83y6jlIW2RNbDTo1A=
 		</data>
 		<key>feed_action_go.png</key>
 		<data>
-		MQa0csEEgr0ZoA0FJjTf7awb/SI=
+		8dyJ4TW9WpE97ctC2TaNfcSyRG4=
 		</data>
 		<key>feed_action_go@2x.png</key>
 		<data>
-		MP9dfnjDsdrGaJcHwkhyaTCTFOU=
+		4KM8isfV7ecFPRJcuxq/x/OFHUU=
 		</data>
 		<key>feed_action_yes.png</key>
 		<data>
-		E38ZKH6TT0kx8Lh4HQNn7x1045Y=
+		BEtiTIpUou/Ax49vo/4SzHZFbwY=
 		</data>
 		<key>feed_action_yes@2x.png</key>
 		<data>
-		bIYH958OOFWG+EW6X6joLjXTygc=
+		o7T6WxY6+9GbOIaYA/J4OLQEBMg=
 		</data>
 		<key>feed_shadow_name.png</key>
 		<data>

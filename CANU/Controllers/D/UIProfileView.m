@@ -14,14 +14,17 @@
 #import "UICanuNavigationController.h"
 #import "UserSettingsViewController.h"
 #import "UserManager.h"
+#import "ProfilePicture.h"
+#import <QuartzCore/QuartzCore.h>
 
 @class ActivitiesFeedViewController;
 
 @interface UIProfileView () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
-@property (strong, nonatomic) UIView *wrapper;
 @property (strong, nonatomic) UIImageView *profileImage;
 @property (strong, nonatomic) UIImageView *settingsButton;
+@property (strong, nonatomic) UILabel *pseudo;
+@property (strong, nonatomic) UILabel *name;
 @property (strong, nonatomic) UICanuNavigationController *navigation;
 
 @end
@@ -34,44 +37,56 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        AppDelegate *appDelegate    = [[UIApplication sharedApplication]delegate];
-        
-        self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, frame.size.height)];
-        self.wrapper.backgroundColor = [UIColor whiteColor];
-        [self addSubview:_wrapper];
+        AppDelegate *appDelegate                   = [[UIApplication sharedApplication]delegate];
 
-        UIImageView *shadow         = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"User_profile_shadow"]];
-        shadow.frame                = CGRectMake(0, - 4, 320, 4);
-        [self.wrapper addSubview:shadow];
+        self.profileImage                          = [[UIImageView alloc] initWithFrame:CGRectMake(113, 10, 95, 95)];
+        [self.profileImage setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture95]];
+        self.profileImage.userInteractionEnabled   = YES;
+        self.profileImage.clipsToBounds            = YES;
+        [self setRoundedView:_profileImage];
+        [self addSubview:self.profileImage];
 
-        self.profileImage                        = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 109, 109)];
-        [self.profileImage setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username"]];
-        self.profileImage.userInteractionEnabled = YES;
-        [self.wrapper addSubview:self.profileImage];
+        UIImageView *strokeProfile                 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 95, 95)];
+        strokeProfile.image                        = [UIImage imageNamed:@"All_stroke_profile_picture_95"];
+        [self.profileImage addSubview:strokeProfile];
 
-        UIImageView *editImage               = [[UIImageView alloc]initWithFrame:CGRectMake(109 - 16, 109 - 16, 14, 14)];
-        editImage.image                      = [UIImage imageNamed:@"User_image_edit"];
-        [self.profileImage addSubview:editImage];
-        
-        UILabel *name          = [[UILabel alloc] initWithFrame:CGRectMake(129, 21, 160, 18)];
-        name.text              = user.firstName;
-        name.font              = [UIFont fontWithName:@"Lato-Bold" size:16.0];
-        name.textColor         = [UIColor colorWithRed:(26.0 / 255.0) green:(146.0 / 255.0) blue:(163.0 / 255.0) alpha: 1];
-        [self.wrapper addSubview:name];
+        self.pseudo                                = [[UILabel alloc] initWithFrame:CGRectMake((320 - 160)/2, 110, 160, 18)];
+        self.pseudo.text                           = user.userName;
+        self.pseudo.textAlignment                  = NSTextAlignmentCenter;
+        self.pseudo.font                           = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+        self.pseudo.textColor                      = UIColorFromRGB(0x2b4b58);
+        self.pseudo.backgroundColor                = [UIColor clearColor];
+        [self addSubview:_pseudo];
 
-        UILabel *pseudo        = [[UILabel alloc]initWithFrame:CGRectMake(129, 45, 160, 12)];
-        pseudo.backgroundColor = [UIColor whiteColor];
-        pseudo.textColor       = UIColorFromRGB(0x2b4b58);
-        pseudo.font            = [UIFont fontWithName:@"Lato-Bold" size:10.0];
-        pseudo.text            = user.userName;
-        [self.wrapper addSubview:pseudo];
+        self.name                                  = [[UILabel alloc]initWithFrame:CGRectMake((320 - 160)/2, 135, 160, 12)];
+        self.name.backgroundColor                  = [UIColor clearColor];
+        self.name.textAlignment                    = NSTextAlignmentCenter;
+        self.name.textColor                        = UIColorFromRGB(0x2b4b58);
+        self.name.alpha                            = 0.3;
+        self.name.font                             = [UIFont fontWithName:@"Lato-Regular" size:10.0];
+        self.name.text                             = user.firstName;
+        [self addSubview:_name];
         
-        self.navigation = appDelegate.canuViewController;
-        
-        self.settingsButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"User_settings"]];
-        self.settingsButton.frame = CGRectMake(258, 0, 57, 57);
+        if (!user.firstName || [user.firstName mk_isEmpty]) {
+            
+            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Add name", nil)];
+            [attributeString addAttribute:NSUnderlineStyleAttributeName
+                                    value:[NSNumber numberWithInt:1]
+                                    range:(NSRange){0,[attributeString length]}];
+            
+            self.name.attributedText = attributeString;
+            
+            UITapGestureRecognizer *tapRecognizerName = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
+            [self.name addGestureRecognizer:tapRecognizerName];
+            
+        }
+
+        self.navigation                            = appDelegate.canuViewController;
+
+        self.settingsButton                        = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"User_settings"]];
+        self.settingsButton.frame                  = CGRectMake(0, -10, 57, 57);
         self.settingsButton.userInteractionEnabled = YES;
-        [self.wrapper addSubview:_settingsButton];
+        [self addSubview:_settingsButton];
         
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
         [self.settingsButton addGestureRecognizer:tapRecognizer];
@@ -81,6 +96,17 @@
         
     }
     return self;
+}
+
+- (void)animationProfileViewWithScroll:(float)offset{
+    
+    float value = fabsf(offset) / 2;
+    
+    self.settingsButton.frame = CGRectMake(0, -10 + value * 0.2f, 57, 57);
+    self.profileImage.frame = CGRectMake(113, 10 + value * 0.6f, 95, 95);
+    self.pseudo.frame = CGRectMake((320 - 160)/2, 110 + value * 0.8f, 160, 18);
+    self.name.frame = CGRectMake((320 - 160)/2, 135 + value * 0.85f, 160, 12);
+    
 }
 
 - (void)showSettings{
@@ -147,6 +173,16 @@
     [viewController dismissViewControllerAnimated:YES completion:^{
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }];
+}
+
+-(void)setRoundedView:(UIImageView *)roundedView{
+    
+    CGPoint saveCenter = roundedView.center;
+    CGRect newFrame = CGRectMake(roundedView.frame.origin.x, roundedView.frame.origin.y, roundedView.frame.size.width, roundedView.frame.size.width);
+    roundedView.frame = newFrame;
+    roundedView.layer.cornerRadius = roundedView.frame.size.width / 2.0;
+    roundedView.center = saveCenter;
+    
 }
 
 - (void)dealloc{

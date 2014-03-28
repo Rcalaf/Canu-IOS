@@ -37,6 +37,7 @@
 @property (nonatomic) BOOL loadFirstTime;
 @property (nonatomic) BOOL counterModeEnable; // Counter
 @property (nonatomic) BOOL isCountIn; // Counter
+@property (nonatomic) int marginFirstActivity;
 @property (nonatomic) CANUError canuError;
 @property (nonatomic) FeedTypes feedType;
 @property (nonatomic, readonly) CLLocationCoordinate2D currentLocation;
@@ -68,14 +69,6 @@
         
         self.view.frame = frame;
         
-//        if (_feedType == FeedLocalType) {
-//            NSLog(@"init ActivityScrollViewController Local");
-//        } else if (_feedType == FeedTribeType) {
-//            NSLog(@"init ActivityScrollViewController Tribes");
-//        } else if (_feedType == FeedProfileType) {
-//            NSLog(@"init ActivityScrollViewController Profile");
-//        }
-        
         self.user = user;
         
         self.isReload = NO;
@@ -91,6 +84,12 @@
         self.isCountIn = NO;
         
         self.isUnlock = NO;
+        
+        if (_feedType == FeedProfileType) {
+            _marginFirstActivity = 10 + 165;
+        } else {
+            _marginFirstActivity = 20;
+        }
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
@@ -301,27 +300,27 @@
         
         if (newY < 0) {
             
-            float value = 0,start = 0,end = 50;
+            float value = 0,start = 0,end = 50,newYAbs;
             
-            newY = fabsf(newY);
+            newYAbs = fabsf(newY);
             
-            if (newY > start && newY <= end) {
-                value = (newY - start) / (end - start);
-            }else if (newY > end){
+            if (newYAbs > start && newYAbs <= end) {
+                value = (newYAbs - start) / (end - start);
+            }else if (newYAbs > end){
                 value = 1;
-            }else if (newY <= start){
+            }else if (newYAbs <= start){
                 value = 0;
             }
             
             [self.navigation changePosition:value];
             
             if (self.counterModeEnable && !self.isUnlock) {
-                self.textCounter.frame = CGRectMake(50.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
-                self.counter.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
-                self.peopleInclued.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2 + 130, 320, 20);
+                self.textCounter.frame = CGRectMake(50.0f, - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 230.0f, 220.0f, 60);
+                self.counter.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
+                self.peopleInclued.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2 + 130, 320, 20);
             } else if (self.isEmpty) {
-                self.imageEmptyFeed.frame = CGRectMake(0, - newY + (self.view.frame.size.height - 480)/2, 320, 480);
-                self.feedbackMessage.frame = CGRectMake(40.0f, - newY * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                self.imageEmptyFeed.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f, - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
             }
             
         } else {
@@ -341,6 +340,12 @@
         
     }
     
+    if (_feedType == FeedProfileType) {
+        
+        [self.delegate moveProfileView:newY];
+        
+    }
+    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -354,6 +359,42 @@
     
     if( newY <= -100.0f ){
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
+    }
+    
+    if (_feedType == FeedProfileType) {
+        if (newY > 0 && newY < 165/3) {
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+            }];
+            
+        } else if (newY >= 165/3 && newY < 165){
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+            }];
+        }
+    }
+    
+}
+
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    float newX,newY;
+    
+    newX = scrollView.contentOffset.x;
+    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    
+    if (_feedType == FeedProfileType) {
+        if (newY > 0 && newY < 165/3) {
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+            }];
+            
+        } else if (newY >= 165/3 && newY < 165){
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+            }];
+        }
     }
     
 }
@@ -601,10 +642,16 @@
     
     }
     
-    float heightContentScrollView = [_activities count] * (120 + 10) + 10;
+    float heightContentScrollView = [_activities count] * (130 + 10) + _marginFirstActivity;
     
     if (heightContentScrollView <= _scrollview.frame.size.height) {
         heightContentScrollView = _scrollview.frame.size.height + 1;
+    }
+    
+    if (_feedType == FeedProfileType) {
+        if (heightContentScrollView <= _scrollview.frame.size.height + 165) {
+            heightContentScrollView = _scrollview.frame.size.height + 165;
+        }
     }
     
     self.scrollview.contentSize = CGSizeMake(320, heightContentScrollView);
@@ -616,7 +663,7 @@
         
         Activity *activity= [_activities objectAtIndex:i];
         
-        UICanuActivityCellScroll *cell = [[UICanuActivityCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( i * (120 + 10) + 10 ) - 120, 300, 120) andActivity:activity];
+        UICanuActivityCellScroll *cell = [[UICanuActivityCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130) andActivity:activity];
         cell.activity = activity;
         cell.delegate = self;
         cell.tag = i;
@@ -626,14 +673,12 @@
         [_arrayCell addObject:cell];
         
         if (_isFirstTime) {
-            cell.alpha = 0;
-            [UIView animateWithDuration:0.4 delay:0.1 + i * 0.15 options:UIViewAnimationOptionAllowUserInteraction animations:^{
-                cell.alpha = 1;
-            } completion:^(BOOL finished) {
-                if (i == [_activities count] - 1) {
-                    self.isFirstTime = NO;
-                }
-            }];
+            
+            [cell animateAfterDelay:0.1 + i * 0.15];
+            
+            if (i == [_activities count] - 1) {
+                self.isFirstTime = NO;
+            }
         }
         
     }
@@ -647,100 +692,74 @@
     if (cell.activity.status == UICanuActivityCellGo) {
         
         [cell.loadingIndicator startAnimating];
-        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
-        cell.animationButtonToGo.hidden = NO;
         cell.actionButton.hidden = YES;
         
-        [UIView animateWithDuration:0.2 animations:^{
-            cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
-        } completion:^(BOOL finished) {
-            
-            cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
-            cell.animationButtonToGo.hidden = YES;
-            
-            [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
-                if (error) {
-                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                } else {
-                    
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Unsubscribe" value:nil] build]];
-                    
-                    _activities = activities;
-                    cell.animationButtonGo.hidden = NO;
-                    cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-                    
-                    [UIView animateWithDuration:0.2 animations:^{
-                        cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
-                    } completion:^(BOOL finished) {
-                        if (_feedType == FeedLocalType) {
-                            [self load];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
-                        }else if (_feedType == FeedTribeType) {
-                            [self load];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                        }else if (_feedType == FeedProfileType) {
-                            [self load];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
-                        }
-                    }];
+        [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Unsubscribe" value:nil] build]];
+                
+                _activities = activities;
+                
+                if (_feedType == FeedLocalType) {
+                    [self load];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+                }else if (_feedType == FeedTribeType) {
+                    [self load];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                }else if (_feedType == FeedProfileType) {
+                    [self load];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                 }
-            }];
+            }
         }];
         
     }else if (cell.activity.status == UICanuActivityCellEditable) {
+        
         CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:cell.activity];
-        [self presentViewController:editView animated:YES completion:nil];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        
+        [appDelegate.feedViewController addChildViewController:editView];
+        [appDelegate.feedViewController.view addSubview:editView.view];
+        
     }else if (cell.activity.status == UICanuActivityCellToGo) {
         
         [[ErrorManager sharedErrorManager] showG3bAlertIfNecessary];
         
         [cell.loadingIndicator startAnimating];
-        cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
-        cell.animationButtonGo.hidden = NO;
         cell.actionButton.hidden = YES;
         
-        [UIView animateWithDuration:0.2 animations:^{
-            cell.animationButtonGo.transform = CGAffineTransformMakeScale(0,0);
-        } completion:^(BOOL finished) {
-            
-            cell.animationButtonGo.transform = CGAffineTransformMakeScale(1,1);
-            cell.animationButtonGo.hidden = YES;
-            
-            [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
-                if (error) {
-                    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                } else {
-                    
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Subscribe" value:nil] build]];
-                    
-                    _activities = activities;
-                    cell.animationButtonToGo.hidden = NO;
-                    cell.animationButtonToGo.transform = CGAffineTransformMakeScale(0,0);
-                    
-                    [UIView animateWithDuration:0.2 animations:^{
-                        cell.animationButtonToGo.transform = CGAffineTransformMakeScale(1,1);
-                    } completion:^(BOOL finished) {
-                        if (_feedType == FeedLocalType) {
-                            [self load];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
-                        }else if (_feedType == FeedTribeType) {
-                            [self load];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
-                        }else if (_feedType == FeedProfileType) {
-                            [self load];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
-                        }
-                    }];
+        [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
+            if (error) {
+                [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
+            } else {
+                
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Subscribe" value:nil] build]];
+                
+                _activities = activities;
+                
+                if (_feedType == FeedLocalType) {
+                    [self load];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+                }else if (_feedType == FeedTribeType) {
+                    [self load];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                }else if (_feedType == FeedProfileType) {
+                    [self load];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
                 }
-            }];
+            }
         }];
 
     }
@@ -750,7 +769,6 @@
     
     if (_feedType == FeedProfileType) {
         [self.delegate hiddenProfileView:YES];
-        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height);
     }
     
     UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
@@ -801,7 +819,6 @@
     
     if (_feedType == FeedProfileType) {
         [self.delegate hiddenProfileView:NO];
-        self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, [[UIScreen mainScreen] bounds].size.height - 119);
     }
     
     for (int i = 0; i < [_arrayCell count]; i++) {
@@ -809,7 +826,7 @@
         UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
         
         [UIView animateWithDuration:0.4 animations:^{
-            cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (120 + 10) + 10 ) - 120, 300, 120);
+            cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130);
             if (cell.activity != viewController.activity) {
                 cell.alpha = 1;
             }

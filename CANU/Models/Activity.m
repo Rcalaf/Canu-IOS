@@ -163,7 +163,6 @@
     NSString *description = @"";
     if (self.street) description = [description stringByAppendingString:self.street];
     if (self.city) description = [description stringByAppendingFormat:@", %@",self.city];
-    if (self.zip) description = [description stringByAppendingFormat:@", %@",self.zip];
     return description;
 }
 

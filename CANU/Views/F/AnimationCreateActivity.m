@@ -7,17 +7,14 @@
 //
 
 #import "AnimationCreateActivity.h"
-
 #import "AppDelegate.h"
-
 #import "CreateEditActivityViewController.h"
-
 #import "ActivitiesFeedViewController.h"
-
 #import "UserManager.h"
 #import "UIImageView+AFNetworking.h"
-
 #import "UICanuNavigationController.h"
+#import "UICanuLabelUserName.h"
+#import "UICanuLabelActivityName.h"
 
 typedef enum {
     AreaCreate = 150
@@ -79,15 +76,11 @@ typedef enum {
         [profilePicture addSubview:strokePicture];
         
         // Name
-        UILabel *username = [[UILabel alloc]initWithFrame:CGRectMake(55, 18, 200, 17)];
-        username.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+        UICanuLabelUserName *username = [[UICanuLabelUserName alloc]initWithFrame:CGRectMake(55, 18, 200, 17)];
         username.text = [[UserManager sharedUserManager] currentUser].firstName;
-        username.textColor = UIColorFromRGB(0x2b4b58);
         [self.wrapperActivity addSubview:username];
         
-        UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
-        title.font = [UIFont fontWithName:@"Lato-Bold" size:23];
-        title.textColor = UIColorFromRGB(0x2b4b58);
+        UICanuLabelActivityName *title = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
         title.text = NSLocalizedString(@"What do you want to do?", nil);
         title.alpha = 0.3;
         [self.wrapperActivity addSubview:title];

@@ -10,17 +10,19 @@
 #import "UIImageView+AFNetworking.h"
 #import "AFCanuAPIClient.h"
 #import "UICanuLabelUserName.h"
-#import "UICanuLabelDay.h"
-#import "UICanuLabelTimeStart.h"
-#import "UICanuLabelTimeEnd.h"
 #import "UICanuLabelActivityName.h"
 #import "UICanuLabelLocation.h"
-#import "UICanuLabelDescription.h"
 #import "Activity.h"
+#import "ProfilePicture.h"
+#import "UICanuLabelDate.h"
 
 @interface UICanuActivityCellScroll ()
 
-
+@property (nonatomic, strong) UIImageView *profilePicture;
+@property (nonatomic, strong) UICanuLabelUserName *userName;
+@property (nonatomic, strong) UICanuLabelActivityName *nameActivity;
+@property (nonatomic, strong) UICanuLabelLocation *location;
+@property (nonatomic, strong) UICanuLabelDate *date;
 
 @end
 
@@ -33,75 +35,51 @@
         
         self.activity                         = activity;
 
-        UIView *wrapperUser                   = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 148, 34)];
-        wrapperUser.backgroundColor           = UIColorFromRGB(0xf9f9f9);
-        [self addSubview:wrapperUser];
+        UIImageView *background               = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 134)];
+        background.image                      = [UIImage imageNamed:@"C_activity_background"];
+        background.userInteractionEnabled     = YES;
+        [self addSubview:background];
 
-        UIImageView *avatar                   = [[UIImageView alloc]initWithFrame:CGRectMake(5, 5, 25, 25)];
-        [avatar setImageWithURL:_activity.user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-        [wrapperUser addSubview:avatar];
+        self.profilePicture                   = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
+        [self.profilePicture setImageWithURL:_activity.user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
+        [background addSubview:_profilePicture];
 
-        UICanuLabelUserName *userName         = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(37.0f, 5.0f, 107.0f, 25.0f)];
-        userName.text                         = self.activity.user.userName;
-        [wrapperUser addSubview:userName];
+        UIImageView *strokePicture            = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        strokePicture.image                   = [UIImage imageNamed:@"All_stroke_profile_picture_35"];
+        [self.profilePicture addSubview:strokePicture];
 
-        UIView *wrapperTime                   = [[UIView alloc]initWithFrame:CGRectMake(149, 0, 151, 34)];
-        wrapperTime.backgroundColor           = UIColorFromRGB(0xf9f9f9);
-        [self addSubview:wrapperTime];
+        self.userName                         = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(55, 18, 200, 17)];
+        self.userName.text                    = self.activity.user.userName;
+        [background addSubview:_userName];
 
-        UICanuLabelDay *day                   = [[UICanuLabelDay alloc]initWithFrame:CGRectMake(5, 0, 33, 34)];
-        day.date                              = self.activity.start;
-        [wrapperTime addSubview:day];
+        self.nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
+        self.nameActivity.text                     = _activity.title;
+        [background addSubview:_nameActivity];
 
-        UICanuLabelTimeStart *timeStart       = [[UICanuLabelTimeStart alloc]initWithFrame:CGRectMake(35, 0, 51, 34)];
-        timeStart.date                        = self.activity.start;
-        [wrapperTime addSubview:timeStart];
+        self.location         = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, frame.size.height - 29, 210, 30)];
+        self.location.text                         = _activity.locationDescription;
+        [background addSubview:_location];
 
-        UICanuLabelTimeEnd *timeEnd           = [[UICanuLabelTimeEnd alloc]initWithFrame:CGRectMake(87, 0, 58, 34)];
-        timeEnd.date                          = self.activity.end;
-        [wrapperTime addSubview:timeEnd];
-
-        UIView *wrapperName                   = [[UIView alloc]initWithFrame:CGRectMake(0, 35, 300, 85)];
-        wrapperName.backgroundColor           = [UIColor whiteColor];
-        [self addSubview:wrapperName];
-
-        UICanuLabelActivityName *nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(16, 15, 210, 28)];
-        nameActivity.text                     = _activity.title;
-        [wrapperName addSubview:nameActivity];
-
-        UICanuLabelLocation *location         = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(16, 52, 210, 16)];
-        location.text                         = _activity.locationDescription;
-        [wrapperName addSubview:location];
+        self.date                 = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(frame.size.width - 310, frame.size.height - 29, 300, 30)];
+        [self.date setDate:_activity];
+        [background addSubview:_date];
 
         self.loadingIndicator                 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.loadingIndicator.frame           = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
-        [wrapperName addSubview:_loadingIndicator];
-
-        UIView *wrapperAnimationButton        = [[UIView alloc]initWithFrame:CGRectMake(243.0f, 19.0f, 47.0f, 47.0f)];
-        wrapperAnimationButton.clipsToBounds  = YES;
-        [wrapperName addSubview:wrapperAnimationButton];
-
-        self.animationButtonGo                = [[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 67, 67)];
-        self.animationButtonGo.image          = [UIImage imageNamed:@"feed_action_circle_go"];
-        self.animationButtonGo.hidden         = YES;
-        [wrapperAnimationButton addSubview:_animationButtonGo];
-
-        self.animationButtonToGo              = [[UIImageView alloc]initWithFrame:CGRectMake(-10, -10, 67, 67)];
-        self.animationButtonToGo.image        = [UIImage imageNamed:@"feed_action_circle_togo"];
-        self.animationButtonToGo.hidden       = YES;
-        [wrapperAnimationButton addSubview:_animationButtonToGo];
+        self.loadingIndicator.frame           = CGRectMake(243.0f, 45, 45, 45);
+        [background addSubview:_loadingIndicator];
 
         self.actionButton                     = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.actionButton.frame               = CGRectMake(243.0f, 19.0f, 47.0f, 47.0f);
+        self.actionButton.frame               = CGRectMake(frame.size.width - 10 - 45, 45, 45, 45);
         [self.actionButton addTarget:self action:@selector(touchActionButton) forControlEvents:UIControlEventTouchDown];
-        [wrapperName addSubview:_actionButton];
+        [background addSubview:_actionButton];
         
         if ( _activity.status == UICanuActivityCellGo ) {
-            [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes.png"] forState:UIControlStateNormal];
+            [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
         } else if ( _activity.status == UICanuActivityCellToGo ){
-            [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go.png"] forState:UIControlStateNormal];
+            [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
         } else {
-            [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit.png"] forState:UIControlStateNormal];
+            [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
+            self.actionButton.frame = CGRectMake(frame.size.width - 23 - 18, 17, 18, 18);
         }
         
     }
@@ -110,6 +88,48 @@
 
 - (void)touchActionButton{
     [self.delegate cellEventActionButton:self];
+}
+
+- (void)animateAfterDelay:(float)delay{
+    
+    self.alpha = 0;
+    self.profilePicture.transform = CGAffineTransformMakeScale(0, 0);
+    self.userName.frame = CGRectMake( 20 + _userName.frame.origin.x, _userName.frame.origin.y, _userName.frame.size.width, _userName.frame.size.height);
+    self.userName.alpha = 0;
+    self.nameActivity.frame = CGRectMake( 20 + _nameActivity.frame.origin.x, _nameActivity.frame.origin.y, _nameActivity.frame.size.width, _nameActivity.frame.size.height);
+    self.nameActivity.alpha = 0;
+    self.location.alpha = 0;
+    self.date.alpha = 0;
+    self.actionButton.transform = CGAffineTransformMakeScale(0, 0);
+    
+    [UIView animateWithDuration:0.4 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.profilePicture.transform = CGAffineTransformMakeScale(1, 1);
+            self.userName.frame = CGRectMake( - 20 + _userName.frame.origin.x, _userName.frame.origin.y, _userName.frame.size.width, _userName.frame.size.height);
+            self.userName.alpha = 1;
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.location.alpha = 1;
+                self.date.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        [UIView animateWithDuration:0.4 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.nameActivity.frame = CGRectMake( - 20 + _nameActivity.frame.origin.x, _nameActivity.frame.origin.y, _nameActivity.frame.size.width, _nameActivity.frame.size.height);
+            self.nameActivity.alpha = 1;
+        } completion:^(BOOL finished) {
+            
+        }];
+        [UIView animateWithDuration:0.3 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.actionButton.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+    
 }
 
 @end

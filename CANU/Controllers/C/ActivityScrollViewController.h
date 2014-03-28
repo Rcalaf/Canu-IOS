@@ -37,6 +37,7 @@ typedef enum {
 
 @required
 - (void)hiddenProfileView:(BOOL)hidden;
+- (void)moveProfileView:(float)offset;
 - (void)activityScrollViewControllerStartWithEmptyFeed;
 - (void)activityScrollViewControllerChangementFeed;
 @end

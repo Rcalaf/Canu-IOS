@@ -102,6 +102,7 @@
 		1E7138DA188E9C2B00137A48 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7138D9188E9C2B00137A48 /* QuartzCore.framework */; };
 		1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E77B94818A1192E00A16845 /* PhoneBook.m */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
+		1E891CA118E439F2003B45F8 /* UICanuLabelDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E891CA018E439F2003B45F8 /* UICanuLabelDate.m */; };
 		1E8A332118E03F980049A6B7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8A332018E03F980049A6B7 /* FacebookSDK.framework */; };
 		1E8A337718E045230049A6B7 /* NSArray+MK_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A332E18E045230049A6B7 /* NSArray+MK_Block.m */; };
 		1E8A337818E045230049A6B7 /* NSArray+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A333018E045230049A6B7 /* NSArray+MK_Misc.m */; };
@@ -360,6 +361,8 @@
 		1E77B94718A1192E00A16845 /* PhoneBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneBook.h; path = CANU/Models/PhoneBook/PhoneBook.h; sourceTree = "<group>"; };
 		1E77B94818A1192E00A16845 /* PhoneBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneBook.m; path = CANU/Models/PhoneBook/PhoneBook.m; sourceTree = "<group>"; };
 		1E814CFA187C49F30013E238 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		1E891C9F18E439F2003B45F8 /* UICanuLabelDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuLabelDate.h; sourceTree = "<group>"; };
+		1E891CA018E439F2003B45F8 /* UICanuLabelDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuLabelDate.m; sourceTree = "<group>"; };
 		1E8A332018E03F980049A6B7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = CANU/Framework/FacebookSDK.framework; sourceTree = "<group>"; };
 		1E8A332418E045230049A6B7 /* MKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro.h; sourceTree = "<group>"; };
 		1E8A332518E045230049A6B7 /* MKMacro_Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Geometry.h; sourceTree = "<group>"; };
@@ -706,6 +709,8 @@
 				1E279E1518D203DB0076C25E /* UICanuLabelTimeStart.m */,
 				1E279E1618D203DB0076C25E /* UICanuLabelUserName.h */,
 				1E279E1718D203DB0076C25E /* UICanuLabelUserName.m */,
+				1E891C9F18E439F2003B45F8 /* UICanuLabelDate.h */,
+				1E891CA018E439F2003B45F8 /* UICanuLabelDate.m */,
 			);
 			name = UICanuLabel;
 			path = "Custom Classes/UICanuLabel";
@@ -1502,6 +1507,7 @@
 				1E279E6218D209790076C25E /* CounterTextViewController.m in Sources */,
 				1E8A338818E045230049A6B7 /* NSNumber+MK_Fraction.m in Sources */,
 				1E279E1B18D203DB0076C25E /* UICanuLabelLocation.m in Sources */,
+				1E891CA118E439F2003B45F8 /* UICanuLabelDate.m in Sources */,
 				1E279E5E18D2090C0076C25E /* ChatScrollView.m in Sources */,
 				1E62AE3018D84DD300520AA0 /* UICanuBottomBar.m in Sources */,
 				1E279D2418D1F5F60076C25E /* AFURLConnectionOperation.m in Sources */,
@@ -1608,7 +1614,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39471160-250D-4BE4-962D-44BB19FED94C";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1709,7 +1715,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39471160-250D-4BE4-962D-44BB19FED94C";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1746,7 +1752,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96EEBEF8-505E-4875-BBD2-F25FF2A90FF8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39471160-250D-4BE4-962D-44BB19FED94C";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};

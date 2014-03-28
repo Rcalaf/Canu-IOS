@@ -240,6 +240,7 @@
     if (_currentSelected != day) {
         self.currentSelected.selected = NO;
         _currentSelected = day;
+        self.currentSelected.selected = YES;
     }
     
     if ([day.date mk_isToday] || [day.date mk_isTomorrow]) {

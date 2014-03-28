@@ -57,6 +57,7 @@
 "COUNT ME IN" = "COUNT ME IN"; // New
 "BECOME AN EARLY BIRD" = "BECOME AN EARLY BIRD"; // New
 "Want early access?" = "Want early access?"; // New
+"Add name" = "Add name"; // New
 
 //Tutorial
 
@@ -120,6 +121,8 @@
 "Send activity" = "Send activity"; // New
 "Save location" = "Save location"; // New
 "Pin location" = "Pin location"; // New
+"Save" = "Save"; // New
+"Delete" = "Delete";
 "Long press at a new place t0 move the pin" = "Long press at a new place to move the pin"; // New
 "YES" = "Yes";
 "NO" = "No";

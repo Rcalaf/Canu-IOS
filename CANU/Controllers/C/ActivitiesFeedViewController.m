@@ -112,12 +112,12 @@
     [self addChildViewController:_tribeFeed];
     [self.view addSubview:_tribeFeed.view];
     
-    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 119)];
+    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
     self.profilFeed.delegate = self;
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
     
-    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.view.frame.size.height - 119, 320, 119) User:self.user];
+    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.view.frame.size.height - 165, 320, 165) User:self.user];
     [self.view addSubview:_profileView];
     
     self.animationCreateActivity = [[AnimationCreateActivity alloc]init];
@@ -303,13 +303,20 @@
     
     if (hidden) {
         [UIView animateWithDuration:0.4 animations:^{
-            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height, 320, 119);
+            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
         }];
     } else {
         [UIView animateWithDuration:0.4 animations:^{
-            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - 119, 320, 119);
+            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - _profileView.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
         }];
     }
+    
+}
+
+- (void)moveProfileView:(float)offset{
+    
+    [self.profileView animationProfileViewWithScroll:offset];
+    self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - (_profileView.frame.size.height - offset), _profileView.frame.size.width, _profileView.frame.size.height);
     
 }
 

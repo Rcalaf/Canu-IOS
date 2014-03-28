@@ -14,4 +14,6 @@
 
 - (id)initWithFrame:(CGRect)frame User:(User *)user;
 
+- (void)animationProfileViewWithScroll:(float)offset;
+
 @end

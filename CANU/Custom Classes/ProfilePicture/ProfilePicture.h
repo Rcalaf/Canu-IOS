@@ -12,4 +12,6 @@
 
 + (UIImage *)defaultProfilePicture35;
 
++ (UIImage *)defaultProfilePicture95;
+
 @end
