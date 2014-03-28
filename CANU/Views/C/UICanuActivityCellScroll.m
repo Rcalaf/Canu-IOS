@@ -19,6 +19,7 @@
 @interface UICanuActivityCellScroll ()
 
 @property (nonatomic, strong) UIImageView *profilePicture;
+@property (nonatomic, strong) UILabel *counterInvit;
 @property (nonatomic, strong) UICanuLabelUserName *userName;
 @property (nonatomic, strong) UICanuLabelActivityName *nameActivity;
 @property (nonatomic, strong) UICanuLabelLocation *location;
@@ -51,6 +52,20 @@
         self.userName                         = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(55, 18, 200, 17)];
         self.userName.text                    = self.activity.user.userName;
         [background addSubview:_userName];
+        
+        CGSize expectedLabelSize = [self.userName.text sizeWithFont:self.userName.font
+                                          constrainedToSize:self.userName.frame.size
+                                              lineBreakMode:self.userName.lineBreakMode];
+        
+        self.counterInvit = [[UILabel alloc]initWithFrame:CGRectMake( 55 + 5 + expectedLabelSize.width, 18, 70, 17)];
+        self.counterInvit.textColor = UIColorFromRGB(0x2b4b58);
+        self.counterInvit.alpha = 0.3;
+        self.counterInvit.backgroundColor = [UIColor clearColor];
+        self.counterInvit.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+        if ([_activity.attendeeIds count] != 1) {
+            self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[_activity.attendeeIds count]];
+        }
+        [background addSubview:_counterInvit];
 
         self.nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
         self.nameActivity.text                     = _activity.title;
@@ -96,6 +111,8 @@
     self.profilePicture.transform = CGAffineTransformMakeScale(0, 0);
     self.userName.frame = CGRectMake( 20 + _userName.frame.origin.x, _userName.frame.origin.y, _userName.frame.size.width, _userName.frame.size.height);
     self.userName.alpha = 0;
+    self.counterInvit.frame = CGRectMake( 20 + _counterInvit.frame.origin.x, _counterInvit.frame.origin.y, _counterInvit.frame.size.width, _counterInvit.frame.size.height);
+    self.counterInvit.alpha = 0;
     self.nameActivity.frame = CGRectMake( 20 + _nameActivity.frame.origin.x, _nameActivity.frame.origin.y, _nameActivity.frame.size.width, _nameActivity.frame.size.height);
     self.nameActivity.alpha = 0;
     self.location.alpha = 0;
@@ -109,6 +126,8 @@
             self.profilePicture.transform = CGAffineTransformMakeScale(1, 1);
             self.userName.frame = CGRectMake( - 20 + _userName.frame.origin.x, _userName.frame.origin.y, _userName.frame.size.width, _userName.frame.size.height);
             self.userName.alpha = 1;
+            self.counterInvit.frame = CGRectMake( - 20 + _counterInvit.frame.origin.x, _counterInvit.frame.origin.y, _counterInvit.frame.size.width, _counterInvit.frame.size.height);
+            self.counterInvit.alpha = 1;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.location.alpha = 1;
