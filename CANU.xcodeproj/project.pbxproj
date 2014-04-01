@@ -103,6 +103,9 @@
 		1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E77B94818A1192E00A16845 /* PhoneBook.m */; };
 		1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E814CFA187C49F30013E238 /* libz.dylib */; };
 		1E891CA118E439F2003B45F8 /* UICanuLabelDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E891CA018E439F2003B45F8 /* UICanuLabelDate.m */; };
+		1E891CA318E96709003B45F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E891CA218E96709003B45F8 /* Images.xcassets */; };
+		1E891CA818E96ABF003B45F8 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E891CA618E96ABF003B45F8 /* NSDate+TimeAgo.m */; };
+		1E891CA918E96ABF003B45F8 /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1E891CA718E96ABF003B45F8 /* NSDateTimeAgo.bundle */; };
 		1E8A332118E03F980049A6B7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E8A332018E03F980049A6B7 /* FacebookSDK.framework */; };
 		1E8A337718E045230049A6B7 /* NSArray+MK_Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A332E18E045230049A6B7 /* NSArray+MK_Block.m */; };
 		1E8A337818E045230049A6B7 /* NSArray+MK_Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A333018E045230049A6B7 /* NSArray+MK_Misc.m */; };
@@ -146,7 +149,6 @@
 		DE60783C182C007C0053F23B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607839182C007C0053F23B /* Default.png */; };
 		DE60783D182C007C0053F23B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE60783A182C007C0053F23B /* Default@2x.png */; };
 		DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE713962179D47FE00EBCB91 /* CoreLocation.framework */; };
-		DE936C81180B39BD0058608D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE936C80180B39BD0058608D /* Images.xcassets */; };
 		DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1D17204EA600303BB5 /* Foundation.framework */; };
 		DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1F17204EA600303BB5 /* CoreGraphics.framework */; };
 		DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B2117204EA600303BB5 /* CoreData.framework */; };
@@ -363,6 +365,10 @@
 		1E814CFA187C49F30013E238 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		1E891C9F18E439F2003B45F8 /* UICanuLabelDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuLabelDate.h; sourceTree = "<group>"; };
 		1E891CA018E439F2003B45F8 /* UICanuLabelDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuLabelDate.m; sourceTree = "<group>"; };
+		1E891CA218E96709003B45F8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1E891CA518E96ABF003B45F8 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
+		1E891CA618E96ABF003B45F8 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
+		1E891CA718E96ABF003B45F8 /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		1E8A332018E03F980049A6B7 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = CANU/Framework/FacebookSDK.framework; sourceTree = "<group>"; };
 		1E8A332418E045230049A6B7 /* MKMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro.h; sourceTree = "<group>"; };
 		1E8A332518E045230049A6B7 /* MKMacro_Geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMacro_Geometry.h; sourceTree = "<group>"; };
@@ -456,7 +462,6 @@
 		DE607839182C007C0053F23B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DE60783A182C007C0053F23B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		DE713962179D47FE00EBCB91 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		DE936C80180B39BD0058608D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DEA93B1817204EA600303BB5 /* CANU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CANU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEA93B1B17204EA600303BB5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		DEA93B1D17204EA600303BB5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -961,6 +966,17 @@
 			name = UICanuBottomBar;
 			sourceTree = "<group>";
 		};
+		1E891CA418E96ABF003B45F8 /* TimeAgo */ = {
+			isa = PBXGroup;
+			children = (
+				1E891CA518E96ABF003B45F8 /* NSDate+TimeAgo.h */,
+				1E891CA618E96ABF003B45F8 /* NSDate+TimeAgo.m */,
+				1E891CA718E96ABF003B45F8 /* NSDateTimeAgo.bundle */,
+			);
+			name = TimeAgo;
+			path = CANU/Framework/TimeAgo;
+			sourceTree = "<group>";
+		};
 		1E8A332218E045230049A6B7 /* MKFoundationKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1210,6 +1226,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E891CA418E96ABF003B45F8 /* TimeAgo */,
 				1E8A33A118E1DA9A0049A6B7 /* AHEasing */,
 				1E8A33A618E1DA9A0049A6B7 /* UIView+EasingFunctions */,
 				1E8A339918E0455E0049A6B7 /* Reachability */,
@@ -1257,8 +1274,8 @@
 				1E279DDB18D200960076C25E /* Custom Classes */,
 				1E90977B1891879D004501E2 /* Manager */,
 				1E279D0618D1F3D10076C25E /* Networking Extensions */,
+				1E891CA218E96709003B45F8 /* Images.xcassets */,
 				DEA93B2417204EA600303BB5 /* Supporting Files */,
-				DE936C80180B39BD0058608D /* Images.xcassets */,
 			);
 			path = CANU;
 			sourceTree = "<group>";
@@ -1365,13 +1382,14 @@
 				DEA93B2817204EA600303BB5 /* InfoPlist.strings in Resources */,
 				DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */,
 				DEFD7A971747F8370087CB8A /* icon.png in Resources */,
+				1E891CA918E96ABF003B45F8 /* NSDateTimeAgo.bundle in Resources */,
+				1E891CA318E96709003B45F8 /* Images.xcassets in Resources */,
 				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
 				DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */,
 				1E279DD418D1FE830076C25E /* Instabug.bundle in Resources */,
 				DEDACFD217FC58950068DB72 /* icon-60.png in Resources */,
 				1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */,
 				1E8A338218E045230049A6B7 /* .gitkeep in Resources */,
-				DE936C81180B39BD0058608D /* Images.xcassets in Resources */,
 				1E279D2A18D1F86D0076C25E /* DiallingCodes.plist in Resources */,
 				DE60783D182C007C0053F23B /* Default@2x.png in Resources */,
 				DE60783C182C007C0053F23B /* Default.png in Resources */,
@@ -1436,6 +1454,7 @@
 				1E279EAD18D300ED0076C25E /* TutorialStepStart.m in Sources */,
 				1E279E1A18D203DB0076C25E /* UICanuLabelDescription.m in Sources */,
 				1E279E1918D203DB0076C25E /* UICanuLabelDay.m in Sources */,
+				1E891CA818E96ABF003B45F8 /* NSDate+TimeAgo.m in Sources */,
 				1E279E3218D204320076C25E /* UICanuTextFieldReset.m in Sources */,
 				1E8A338A18E045230049A6B7 /* NSNumber+MK_Negative.m in Sources */,
 				1E8A338F18E045230049A6B7 /* NSString+MK_Conversion.m in Sources */,

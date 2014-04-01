@@ -44,7 +44,8 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Models/Message.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuNavigationController/UICanuNavigationController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelUserName.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelDay.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelDate.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/TTTAttributedLabel/TTTAttributedLabel.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelTimeStart.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelTimeEnd.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelActivityName.h \
@@ -61,11 +62,13 @@ dependencies: \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/AFNetworking/AFHTTPClient.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/E/AttendeesScrollViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/LoaderAnimation/LoaderAnimation.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuBottomBar/UICanuBottomBar.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAI.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAILogger.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAITracker.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAITrackedViewController.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAIDictionaryBuilder.h \
   /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Framework/Google\ Analytics/GAIFields.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Controllers/D/UIProfileView.h \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/UserManager.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/../CANU/Manager/UserManager.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/ProfilePicture/ProfilePicture.h \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuButton/UICanuButton.h

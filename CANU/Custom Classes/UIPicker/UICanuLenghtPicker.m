@@ -111,19 +111,19 @@
     
     _currentObject = newCurrentObject;
     
-    int minIndex = _currentObject - 2;
+    NSInteger minIndex = _currentObject - 2;
     
     if (minIndex < 0) {
         minIndex = 0;
     }
     
-    int maxIndex = _currentObject + 2;
+    NSInteger maxIndex = _currentObject + 2;
     
     if (maxIndex > [_arrayDataLowDisable count]) {
         maxIndex = [_arrayDataLowDisable count];
     }
     
-    for (int i = minIndex; i < maxIndex; i++) {
+    for (NSInteger i = minIndex; i < maxIndex; i++) {
         
         UILabel *data = [_arrayDataLowDisable objectAtIndex:i];
         

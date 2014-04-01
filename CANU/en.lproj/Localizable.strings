@@ -133,3 +133,8 @@
 "and" = "and";
 "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?";
 "DELETE" = "Delete";
+
+// Full
+
+"Send" = "Send";
+"Write something nice..." = "Write something nice...";

@@ -11,14 +11,13 @@
 #import "UICanuChatCellScroll.h"
 #import "UIScrollViewReverse.h"
 #import "LoaderAnimation.h"
+#import "UserManager.h"
 
 @interface ChatScrollView ()<UIScrollViewDelegate>
 
 @property (nonatomic) Activity *activity;
 @property (nonatomic) UIScrollViewReverse *scrollview;
 @property (nonatomic) NSArray *messages;
-@property (nonatomic) int smallSize;
-@property (nonatomic) float yOriginLastMessage;
 @property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) UILabel *emptyChat;
 @property (nonatomic) BOOL isReload;
@@ -27,15 +26,10 @@
 
 @implementation ChatScrollView
 
-- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight andMinHeight:(int)minHeight
-{
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity{
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
-        self.smallSize = minHeight;
-        
-        self.backgroundColor = UIColorFromRGB(0xf8fafa);
         
         self.isFirstTime = YES;
         
@@ -45,14 +39,10 @@
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
-        UIView *background = [[UIView alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, maxHeight + 57)];
-        background.backgroundColor = UIColorFromRGB(0xf8fafa);
-        [self addSubview:background];
-        
-        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, maxHeight - 40, 30, 30) withStart:-20 andEnd:-80];
+        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, frame.size.height - 40, 30, 30) withStart:-20 andEnd:-80];
         [self addSubview:_loaderAnimation];
         
-        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -2, frame.size.width, maxHeight)];
+        self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -2, frame.size.width, frame.size.height)];
         self.scrollview.alpha = 0;
         self.scrollview.delegate = self;
         [self addSubview:_scrollview];
@@ -68,6 +58,14 @@
     
     // Reload Animation
     [self.loaderAnimation contentOffset:newY];
+    
+    if (newY <= 0) {
+        [self.delegate openDesciption];
+    }
+    
+    if (newY >= 20) {
+        [self.delegate closeDescription];
+    }
     
 }
 
@@ -154,21 +152,63 @@
         
     }
     
+    NSInteger previousSpeaker;
+    
     float heightTotalContent = 2;
     
     for (int i = 0; i < [_messages count]; i++) {
         
-        self.yOriginLastMessage = heightTotalContent;
-        
         Message *message = [_messages objectAtIndex:i];
         
-        UICanuChatCellScroll *cell = [[UICanuChatCellScroll alloc]initWithFrame:CGRectMake(0, heightTotalContent, 300, 40) andMessage:message];
-        heightTotalContent += [cell heightContent];
-        [self.scrollview addSubview:cell];
+        BOOL isFirst = NO,isLast = NO, isTheUser = NO,addTime = NO;
         
         if (i == 0) {
-            cell.line.alpha = 0;
+            isLast = YES;
         }
+        
+        if (message.user.userId != previousSpeaker) {
+            isLast = YES;
+        }
+        
+        if (i + 1 < [_messages count]) {
+            
+            Message *messageNext = [_messages objectAtIndex:i+1];
+            
+            if (message.user.userId != messageNext.user.userId) {
+                isFirst = YES;
+            }
+            
+        } else {
+            isFirst = YES;
+        }
+        
+        previousSpeaker = message.user.userId;
+        
+        if (message.user.userId == [[UserManager sharedUserManager] currentUser].userId) {
+            isTheUser = YES;
+        }
+        
+        if (!isLast) {
+            if (i - 1 >= 0) {
+                
+                NSDate *dateLimit = [message.date mk_dateByAddingMinutes:-5];
+                
+                Message *messageNext = [_messages objectAtIndex:i-1];
+                
+                if ([messageNext.date mk_isEarlierThanDate:dateLimit]) {
+                    addTime = YES;
+                }
+                
+            }
+        }
+        
+        UICanuChatCellScroll *cell = [[UICanuChatCellScroll alloc]initWithFrame:CGRectMake(0, heightTotalContent, 300, 40) andMessage:message addTime:addTime isFirst:isFirst isLast:isLast isTheUser:isTheUser];
+        heightTotalContent += [cell heightContent];
+        if (i + 1 == [_messages count]) {
+            cell.frame = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height + 10);
+            heightTotalContent += 10;
+        }
+        [self.scrollview addSubview:cell];
         
         [_arrayCell addObject:cell];
         
@@ -185,19 +225,12 @@
             
         }
         
-        UIView *background = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, (_scrollview.frame.size.height - heightTotalContent))];
-        background.backgroundColor = UIColorFromRGB(0xf8fafa);
-        [self.scrollview addSubview:background];
-        
-        self.yOriginLastMessage = _yOriginLastMessage + (_scrollview.frame.size.height - heightTotalContent);
-        
         self.scrollview.contentSize = CGSizeMake(_scrollview.frame.size.width, _scrollview.frame.size.height + 1);
+        
     }
     
     if ([_messages count] == 0) {
         
-        self.yOriginLastMessage = _scrollview.frame.size.height - _smallSize;
-        self.emptyChat = [[UILabel alloc]initWithFrame:CGRectMake(10, _scrollview.frame.size.height - _smallSize, 280, _smallSize)];
         self.emptyChat.text = @"Say something";
         self.emptyChat.font = [UIFont fontWithName:@"Lato-Regular" size:12.0];
         self.emptyChat.alpha = 0.5;
@@ -209,7 +242,7 @@
     
     if (_isFirstTime) {
         self.isFirstTime = !_isFirstTime;
-        [self scrollToLastMessage];
+        [self scrollToBottom];
         
         [UIView animateWithDuration:0.4 animations:^{
             self.scrollview.alpha = 1;
@@ -227,21 +260,23 @@
     
 }
 
--(void)scrollToLastMessage{
+- (void)addSendMessage:(NSString *)text{
     
-    self.scrollview.contentOffset = CGPointMake(0, _yOriginLastMessage);
+    Message *message = [[Message alloc]init];
+    message.text = text;
+    [message addDate:[NSDate date]];
+    message.user = [[UserManager sharedUserManager]currentUser];
+    NSLog(@"%@",message.date);
     
-}
-
-- (void)scrollAnimationFolderFor:(int)contentOffset{
+    NSMutableArray *arrayMessage = [[NSMutableArray alloc]initWithArray:_messages];
+    [arrayMessage addObject:message];
     
-    self.scrollview.contentOffset = CGPointMake(0, _yOriginLastMessage - contentOffset);
+    NSArray *array = [[NSArray alloc]initWithArray:arrayMessage];
     
-}
-
-- (void)killScroll{
-    CGPoint offset = _scrollview.contentOffset;
-    [_scrollview setContentOffset:offset animated:NO];
+    _messages = array;
+    
+    [self showMessages];
+    
 }
 
 @end

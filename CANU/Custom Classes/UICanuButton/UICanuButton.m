@@ -10,6 +10,7 @@
 
 @interface UICanuButton ()
 
+@property (nonatomic) int maxWidth;
 @property (nonatomic) UICanuButtonStyle canuButtonStyle;
 @property (nonatomic, strong) UIImageView *backgroundButton;
 @property (nonatomic, strong) UILabel *titleButton;
@@ -32,6 +33,7 @@
         self.titleButton.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         self.titleButton.textColor = [UIColor whiteColor];
         self.titleButton.backgroundColor = [UIColor clearColor];
+        self.titleButton.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleButton];
         
     }
@@ -48,12 +50,20 @@
     
     float maxWidth = self.titleLabel.frame.size.width + 40;
     
+    self.maxWidth = maxWidth;
+    
     if (maxWidth > self.frame.size.width) {
         maxWidth = self.frame.size.width;
     }
     
     self.backgroundButton.frame = CGRectMake((self.frame.size.width - maxWidth )/2, 0, maxWidth, self.frame.size.height);
     
+}
+
+- (void)sizeToFit{
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _maxWidth, self.frame.size.height);
+    self.backgroundButton.frame = CGRectMake(0, 0, _maxWidth, self.frame.size.height);
+    self.titleButton.frame = CGRectMake(0, 0, _maxWidth, self.frame.size.height);
 }
 
 @end

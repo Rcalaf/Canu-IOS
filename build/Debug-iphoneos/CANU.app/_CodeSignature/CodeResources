@@ -196,6 +196,14 @@
 		<data>
 		1C4XexSQs5Ikw56sxT+cjxat2tY=
 		</data>
+		<key>C_activity_description_background.png</key>
+		<data>
+		2xV17EFRGMwXeYk7pGn7wa+EB0I=
+		</data>
+		<key>C_activity_description_background@2x.png</key>
+		<data>
+		G9Hj1D5q1aQ8R/ZJNjk7YSHmuaE=
+		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
 		NXfY85510R10hSmzU9mL5o9Rpck=
@@ -211,6 +219,38 @@
 		<key>DiallingCodes.plist</key>
 		<data>
 		M6ZcvMRfFMb07m447HKuJ3ZWHuo=
+		</data>
+		<key>E_Activity_bottom.png</key>
+		<data>
+		D6RgG1fEHzjBMFloGUwLkACEyCM=
+		</data>
+		<key>E_Activity_bottom@2x.png</key>
+		<data>
+		zwIyllhTdFGqInoI/gxTR6DJB/8=
+		</data>
+		<key>E_Message_background.png</key>
+		<data>
+		RH/ucm4Dx37gsHG1ccrAm4VdSpg=
+		</data>
+		<key>E_Message_background@2x.png</key>
+		<data>
+		9u5bp4jRj1kOYMofmJeXoobBx50=
+		</data>
+		<key>E_Message_background_arrow.png</key>
+		<data>
+		pr4hyLujVLiD29PbYSZCvi2H6u8=
+		</data>
+		<key>E_Message_background_arrow@2x.png</key>
+		<data>
+		w5pT7zx4Q0WkdgCl0H8WV1S8XuM=
+		</data>
+		<key>E_activity_description.png</key>
+		<data>
+		2xV17EFRGMwXeYk7pGn7wa+EB0I=
+		</data>
+		<key>E_activity_description@2x.png</key>
+		<data>
+		b9r3/hhBRH7kgwZjSXcZI8X8+5w=
 		</data>
 		<key>F1_Add_Cell_Location.png</key>
 		<data>
@@ -948,6 +988,130 @@
 		<data>
 		bUosCN8NCnfQu/GD4g8MWX2UnVQ=
 		</data>
+		<key>NSDateTimeAgo.bundle/ar.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		3wcGYI0z2dVGt8lq7lO7QBWAxTo=
+		</data>
+		<key>NSDateTimeAgo.bundle/bg.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		44B3s45HmfGzwF6wRsHGKGMMQzw=
+		</data>
+		<key>NSDateTimeAgo.bundle/cs.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		tbhRriXBb603+9ebKAUvw0q/9vE=
+		</data>
+		<key>NSDateTimeAgo.bundle/da.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		IUFXGhN68m1Cqs01BVOXssLI+kA=
+		</data>
+		<key>NSDateTimeAgo.bundle/de.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		INXudJjTqU4Ik3ZoKCOHp7FUZRA=
+		</data>
+		<key>NSDateTimeAgo.bundle/en.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		HvU+csjOSKjsHe8Ro5C1GahoWfo=
+		</data>
+		<key>NSDateTimeAgo.bundle/es.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		azmgZtbq/eOyOPHVbg6EFcJ1Wa4=
+		</data>
+		<key>NSDateTimeAgo.bundle/fi.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		azVwC1Sxirf4F89bhrOKICgA2Uo=
+		</data>
+		<key>NSDateTimeAgo.bundle/fr.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		HRCW7VJtKqZOtuWwyxyGUO8ExzE=
+		</data>
+		<key>NSDateTimeAgo.bundle/gre.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		9XsnW3/P8BoaZBM0HyifwKar5hI=
+		</data>
+		<key>NSDateTimeAgo.bundle/he.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		e8Czxl9NL2sH3dmuTRCgxfFv+Lg=
+		</data>
+		<key>NSDateTimeAgo.bundle/hu.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		BMHBwarFlzNDQmHYykAyvFl4Tak=
+		</data>
+		<key>NSDateTimeAgo.bundle/is.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		BRGNEP493CB1VgUZBFOD77U4FVY=
+		</data>
+		<key>NSDateTimeAgo.bundle/it.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		nTBIpUCOAdtdNvryaejQPwNxetg=
+		</data>
+		<key>NSDateTimeAgo.bundle/ja.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		T3eSKOZlNDnTWlnRjDa4Oj4Q710=
+		</data>
+		<key>NSDateTimeAgo.bundle/ko.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		oqtb64DL92duaxSnoHHL/yYtuGs=
+		</data>
+		<key>NSDateTimeAgo.bundle/lv.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		ZkgF+xCZj/Hdgw7q2IVmvD4oy2w=
+		</data>
+		<key>NSDateTimeAgo.bundle/nb.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		+9gZvN62FS5URxkGOfDrvBoJ6BM=
+		</data>
+		<key>NSDateTimeAgo.bundle/nl.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		xy8ahIN67NQd1zzQGgovpomLzjI=
+		</data>
+		<key>NSDateTimeAgo.bundle/pl.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		MarOgCpxZLwzSucvqEn58wSij80=
+		</data>
+		<key>NSDateTimeAgo.bundle/pt-PT.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		eYMYpL2pZaPPCGoSdTp0d+Gx9+E=
+		</data>
+		<key>NSDateTimeAgo.bundle/pt.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		kZlAY37yECMxWU22GcwGc0f+gQw=
+		</data>
+		<key>NSDateTimeAgo.bundle/ro.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		BoOTd4nHs1gvsXhe19IA61qtWVg=
+		</data>
+		<key>NSDateTimeAgo.bundle/ru.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		cV/SPHSkU70H9JiwEPCvip6WTtY=
+		</data>
+		<key>NSDateTimeAgo.bundle/sv.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		rozUVrKDyUyDCy/2QxUfqi/pCM4=
+		</data>
+		<key>NSDateTimeAgo.bundle/th.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		K5tvcopHoh35FVZnIPXAYhWDjiI=
+		</data>
+		<key>NSDateTimeAgo.bundle/tr.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		NiK+hB8xwfXbw+UbNqYnz/f83FU=
+		</data>
+		<key>NSDateTimeAgo.bundle/uk.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		yqidiYIoX3cBV4xtjZ8lwlvGc1A=
+		</data>
+		<key>NSDateTimeAgo.bundle/vi.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		udcSVuBnAhTcqA+H8quJgqzllqA=
+		</data>
+		<key>NSDateTimeAgo.bundle/zh-Hans.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		PCcvnEvPKhVrrH4tdrkl9/2+Ee8=
+		</data>
+		<key>NSDateTimeAgo.bundle/zh-Hant.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		ZRFuuNOJc4/Y8Exsz62YzLViB8g=
+		</data>
 		<key>NavBox_Create.png</key>
 		<data>
 		UA691AFtyX+ewG1/9I2NL7iqlH8=
@@ -1106,7 +1270,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		WQKzAWstrUSJZ0w/TBHHndQo3HI=
+		Y9zCFpYX5UY6Be/VWa5iXHMe99Y=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>
@@ -1675,6 +1839,14 @@
 		<data>
 		1C4XexSQs5Ikw56sxT+cjxat2tY=
 		</data>
+		<key>C_activity_description_background.png</key>
+		<data>
+		2xV17EFRGMwXeYk7pGn7wa+EB0I=
+		</data>
+		<key>C_activity_description_background@2x.png</key>
+		<data>
+		G9Hj1D5q1aQ8R/ZJNjk7YSHmuaE=
+		</data>
 		<key>Default-568h@2x.png</key>
 		<data>
 		NXfY85510R10hSmzU9mL5o9Rpck=
@@ -1690,6 +1862,38 @@
 		<key>DiallingCodes.plist</key>
 		<data>
 		M6ZcvMRfFMb07m447HKuJ3ZWHuo=
+		</data>
+		<key>E_Activity_bottom.png</key>
+		<data>
+		D6RgG1fEHzjBMFloGUwLkACEyCM=
+		</data>
+		<key>E_Activity_bottom@2x.png</key>
+		<data>
+		zwIyllhTdFGqInoI/gxTR6DJB/8=
+		</data>
+		<key>E_Message_background.png</key>
+		<data>
+		RH/ucm4Dx37gsHG1ccrAm4VdSpg=
+		</data>
+		<key>E_Message_background@2x.png</key>
+		<data>
+		9u5bp4jRj1kOYMofmJeXoobBx50=
+		</data>
+		<key>E_Message_background_arrow.png</key>
+		<data>
+		pr4hyLujVLiD29PbYSZCvi2H6u8=
+		</data>
+		<key>E_Message_background_arrow@2x.png</key>
+		<data>
+		w5pT7zx4Q0WkdgCl0H8WV1S8XuM=
+		</data>
+		<key>E_activity_description.png</key>
+		<data>
+		2xV17EFRGMwXeYk7pGn7wa+EB0I=
+		</data>
+		<key>E_activity_description@2x.png</key>
+		<data>
+		b9r3/hhBRH7kgwZjSXcZI8X8+5w=
 		</data>
 		<key>F1_Add_Cell_Location.png</key>
 		<data>
@@ -2427,6 +2631,130 @@
 		<data>
 		bUosCN8NCnfQu/GD4g8MWX2UnVQ=
 		</data>
+		<key>NSDateTimeAgo.bundle/ar.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		3wcGYI0z2dVGt8lq7lO7QBWAxTo=
+		</data>
+		<key>NSDateTimeAgo.bundle/bg.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		44B3s45HmfGzwF6wRsHGKGMMQzw=
+		</data>
+		<key>NSDateTimeAgo.bundle/cs.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		tbhRriXBb603+9ebKAUvw0q/9vE=
+		</data>
+		<key>NSDateTimeAgo.bundle/da.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		IUFXGhN68m1Cqs01BVOXssLI+kA=
+		</data>
+		<key>NSDateTimeAgo.bundle/de.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		INXudJjTqU4Ik3ZoKCOHp7FUZRA=
+		</data>
+		<key>NSDateTimeAgo.bundle/en.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		HvU+csjOSKjsHe8Ro5C1GahoWfo=
+		</data>
+		<key>NSDateTimeAgo.bundle/es.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		azmgZtbq/eOyOPHVbg6EFcJ1Wa4=
+		</data>
+		<key>NSDateTimeAgo.bundle/fi.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		azVwC1Sxirf4F89bhrOKICgA2Uo=
+		</data>
+		<key>NSDateTimeAgo.bundle/fr.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		HRCW7VJtKqZOtuWwyxyGUO8ExzE=
+		</data>
+		<key>NSDateTimeAgo.bundle/gre.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		9XsnW3/P8BoaZBM0HyifwKar5hI=
+		</data>
+		<key>NSDateTimeAgo.bundle/he.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		e8Czxl9NL2sH3dmuTRCgxfFv+Lg=
+		</data>
+		<key>NSDateTimeAgo.bundle/hu.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		BMHBwarFlzNDQmHYykAyvFl4Tak=
+		</data>
+		<key>NSDateTimeAgo.bundle/is.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		BRGNEP493CB1VgUZBFOD77U4FVY=
+		</data>
+		<key>NSDateTimeAgo.bundle/it.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		nTBIpUCOAdtdNvryaejQPwNxetg=
+		</data>
+		<key>NSDateTimeAgo.bundle/ja.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		T3eSKOZlNDnTWlnRjDa4Oj4Q710=
+		</data>
+		<key>NSDateTimeAgo.bundle/ko.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		oqtb64DL92duaxSnoHHL/yYtuGs=
+		</data>
+		<key>NSDateTimeAgo.bundle/lv.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		ZkgF+xCZj/Hdgw7q2IVmvD4oy2w=
+		</data>
+		<key>NSDateTimeAgo.bundle/nb.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		+9gZvN62FS5URxkGOfDrvBoJ6BM=
+		</data>
+		<key>NSDateTimeAgo.bundle/nl.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		xy8ahIN67NQd1zzQGgovpomLzjI=
+		</data>
+		<key>NSDateTimeAgo.bundle/pl.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		MarOgCpxZLwzSucvqEn58wSij80=
+		</data>
+		<key>NSDateTimeAgo.bundle/pt-PT.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		eYMYpL2pZaPPCGoSdTp0d+Gx9+E=
+		</data>
+		<key>NSDateTimeAgo.bundle/pt.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		kZlAY37yECMxWU22GcwGc0f+gQw=
+		</data>
+		<key>NSDateTimeAgo.bundle/ro.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		BoOTd4nHs1gvsXhe19IA61qtWVg=
+		</data>
+		<key>NSDateTimeAgo.bundle/ru.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		cV/SPHSkU70H9JiwEPCvip6WTtY=
+		</data>
+		<key>NSDateTimeAgo.bundle/sv.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		rozUVrKDyUyDCy/2QxUfqi/pCM4=
+		</data>
+		<key>NSDateTimeAgo.bundle/th.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		K5tvcopHoh35FVZnIPXAYhWDjiI=
+		</data>
+		<key>NSDateTimeAgo.bundle/tr.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		NiK+hB8xwfXbw+UbNqYnz/f83FU=
+		</data>
+		<key>NSDateTimeAgo.bundle/uk.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		yqidiYIoX3cBV4xtjZ8lwlvGc1A=
+		</data>
+		<key>NSDateTimeAgo.bundle/vi.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		udcSVuBnAhTcqA+H8quJgqzllqA=
+		</data>
+		<key>NSDateTimeAgo.bundle/zh-Hans.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		PCcvnEvPKhVrrH4tdrkl9/2+Ee8=
+		</data>
+		<key>NSDateTimeAgo.bundle/zh-Hant.lproj/NSDateTimeAgo.strings</key>
+		<data>
+		ZRFuuNOJc4/Y8Exsz62YzLViB8g=
+		</data>
 		<key>NavBox_Create.png</key>
 		<data>
 		UA691AFtyX+ewG1/9I2NL7iqlH8=
@@ -2585,7 +2913,7 @@
 		</data>
 		<key>en.lproj/Localizable.strings</key>
 		<data>
-		WQKzAWstrUSJZ0w/TBHHndQo3HI=
+		Y9zCFpYX5UY6Be/VWa5iXHMe99Y=
 		</data>
 		<key>feed_action_circle_go.png</key>
 		<data>

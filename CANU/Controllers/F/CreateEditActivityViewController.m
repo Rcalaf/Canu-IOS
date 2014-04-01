@@ -348,7 +348,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.6 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.bottomBar setEasingFunction:BackEaseOut forKeyPath:@"frame"];
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 47, 320, 47);
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, 320, 45);
     } completion:^(BOOL finished) {
         [self.bottomBar removeEasingFunctionForKeyPath:@"frame"];
         [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -1441,7 +1441,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self.bottomBar setEasingFunction:BackEaseIn forKeyPath:@"frame"];
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 47);
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 45);
     } completion:^(BOOL finished) {
         [self.bottomBar removeEasingFunctionForKeyPath:@"frame"];
     }];

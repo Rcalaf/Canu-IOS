@@ -314,9 +314,8 @@
 
 }
 
-- (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block
-{
-    NSLog(@"dontAttendWithBlock");
+- (void)dontAttendWithBlock:(void (^)(NSArray *activities, NSError *error))block{
+    
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
@@ -328,11 +327,16 @@
 
        // [self removeNotification];
         
+        NSLog(@"dontAttendWithBlock");
+        NSLog(@"JSON %@",JSON);
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
         for (NSDictionary *attributes in JSON) {
-            //NSLog(@"%@",attributes);
+            NSLog(@"Loop");
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
-            if (activity.activityId == self.activityId) _attendeeIds = activity.attendeeIds;
+            if (activity.activityId == self.activityId){
+                _attendeeIds = activity.attendeeIds;
+                NSLog(@"dontAttendWithBlock %@",activity.attendeeIds);
+            }
             [mutableActivities addObject:activity];
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

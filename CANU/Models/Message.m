@@ -31,6 +31,10 @@
     
 }
 
+- (void)addDate:(NSDate *)date{
+    _date = date;
+}
+
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (!self) {

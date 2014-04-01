@@ -181,6 +181,8 @@
             
             self.arrayContact = arrayContact;
             
+            [self showUser];
+            
             if ([phoneNumberClean count] != 0) {
                 
                 [[[UserManager sharedUserManager] currentUser] checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {

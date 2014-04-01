@@ -792,7 +792,7 @@
             
             float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
             
-            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity andPosition:position];
+            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity For:CANUOpenDetailsActivityAfterPush andPosition:position];
             davc.delegate = self;
             davc.modalPresentationStyle = UIModalPresentationCurrentContext;
             [self addChildViewController:davc];

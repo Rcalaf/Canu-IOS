@@ -31,7 +31,7 @@
 @property (readonly) CLLocationCoordinate2D coordinate;
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;
-@property (readonly) int status;
+@property (readonly) NSInteger status;
 @property (readonly) NSArray *attendeeIds;
 
 @property (readonly) User *user;
@@ -89,10 +89,6 @@
 
 + (NSString *)lengthToString:(NSInteger)length;
 - (NSInteger)lengthToInteger;
-//- (NSDate *)startDate;
 - (NSString *)locationDescription;
-//- (void)populateLocationDataWith:(MKMapItem *)mapItem;
-
-
 
 @end

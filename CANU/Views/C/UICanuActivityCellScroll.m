@@ -63,7 +63,7 @@
         self.counterInvit.backgroundColor = [UIColor clearColor];
         self.counterInvit.font = [UIFont fontWithName:@"Lato-Regular" size:14];
         if ([_activity.attendeeIds count] != 1) {
-            self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[_activity.attendeeIds count]];
+            self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[_activity.attendeeIds count] -1];
         }
         [background addSubview:_counterInvit];
 
@@ -71,7 +71,7 @@
         self.nameActivity.text                     = _activity.title;
         [background addSubview:_nameActivity];
 
-        self.location         = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, frame.size.height - 29, 210, 30)];
+        self.location         = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake( 2 + 10, frame.size.height - 29, 210, 30)];
         self.location.text                         = _activity.locationDescription;
         [background addSubview:_location];
 
@@ -127,7 +127,7 @@
             self.userName.frame = CGRectMake( - 20 + _userName.frame.origin.x, _userName.frame.origin.y, _userName.frame.size.width, _userName.frame.size.height);
             self.userName.alpha = 1;
             self.counterInvit.frame = CGRectMake( - 20 + _counterInvit.frame.origin.x, _counterInvit.frame.origin.y, _counterInvit.frame.size.width, _counterInvit.frame.size.height);
-            self.counterInvit.alpha = 1;
+            self.counterInvit.alpha = 0.3;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.location.alpha = 1;
