@@ -11,9 +11,12 @@
 #import "AFCanuAPIClient.h"
 #import "User.h"
 
+NSInteger const kVersionData = 1; // If you want a automatic logout for the next release, add +1 to this value
+
 @interface UserManager ()
 
-@property (nonatomic) BOOL logToDistributionMode;
+@property (nonatomic) NSString *urlApi;
+@property (nonatomic) NSInteger versionData;
 @property (strong, nonatomic) User *user;
 
 @end
@@ -43,7 +46,9 @@
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"User"];
         NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
-        _logToDistributionMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"logToDistributionMode"];
+        _urlApi = [[NSUserDefaults standardUserDefaults] objectForKey:@"urlApi"];
+        
+        _versionData = [[NSUserDefaults standardUserDefaults] integerForKey:@"versionData"];
 
         if([dic count] == 0) {
             _user = nil;
@@ -51,10 +56,14 @@
             _user = [[User alloc]initWithAttributes:dic];
         }
         
-        if (_logToDistributionMode != [[AFCanuAPIClient sharedClient] distributionMode]) {
-            
+        if (_urlApi != [[AFCanuAPIClient sharedClient] urlBase]) {
+            NSLog(@"Logout : Not connect to the same api");
             [self logOut];
-            
+        }
+        
+        if (_versionData != kVersionData) {
+            NSLog(@"Logout : New version of the user data");
+            [self logOut];
         }
         
     }
@@ -83,7 +92,9 @@
     [defaults removeObjectForKey:@"User"];
     [defaults setObject:data forKey:@"User"];
     
-    [defaults setBool:[[AFCanuAPIClient sharedClient] distributionMode] forKey:@"logToDistributionMode"];
+    [defaults setObject:[[AFCanuAPIClient sharedClient] urlBase] forKey:@"urlApi"];
+    
+    [defaults setInteger:kVersionData forKey:@"versionData"];
     
     [defaults synchronize];
     
@@ -111,6 +122,10 @@
     
     [defaults removeObjectForKey:@"logToDistributionMode"];
     [defaults setBool:NO forKey:@"logToDistributionMode"];
+    
+    [defaults removeObjectForKey:@"urlApi"];
+    
+    [defaults removeObjectForKey:@"versionData"];
     
     [defaults synchronize];
     
@@ -153,13 +168,13 @@
  *  @return
  */
 - (BOOL)userIsLogIn{
-     NSLog(@"start userIsLogIn");
+    
     BOOL isLogIn = false;
     
     if (_user) {
         isLogIn = true;
     }
-    NSLog(@"userIsLogIn");
+    
     return isLogIn;
     
 }
