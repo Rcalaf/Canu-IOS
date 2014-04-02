@@ -13,10 +13,15 @@ NSString * const kAFCanuAPIBaseUDistributionRLString = @"http://api.canu.se";
 NSString * const kAFCanuAPIDevBaseURLString = @"http://api.canu.se";
 //NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
 
-BOOL const kAFCanuAPIDistributionMode = NO;
+
+// Change with Product / Scheme / Edit Scheme / Run CANU.app / Build Configuration / (Release | Debug)
+#ifdef DEBUG
+    BOOL const kAFCanuAPIDistributionMode = NO;
+#else
+    BOOL const kAFCanuAPIDistributionMode = YES;
+#endif
 
 @implementation AFCanuAPIClient
-
 
 + (AFCanuAPIClient *)sharedClient {
   
