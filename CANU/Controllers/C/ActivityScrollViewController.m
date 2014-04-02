@@ -35,6 +35,7 @@
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) BOOL loadFirstTime;
+@property (nonatomic) BOOL profileViewHidden;
 @property (nonatomic) BOOL counterModeEnable; // Counter
 @property (nonatomic) BOOL isCountIn; // Counter
 @property (nonatomic) int marginFirstActivity;
@@ -68,6 +69,8 @@
         self.feedType = feedType;
         
         self.view.frame = frame;
+        
+        self.profileViewHidden = NO;
         
         self.user = user;
         
@@ -366,11 +369,15 @@
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+            } completion:^(BOOL finished) {
+                self.profileViewHidden = NO;
             }];
             
         } else if (newY >= 165/3 && newY < 165){
             [UIView animateWithDuration:0.3 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+            } completion:^(BOOL finished) {
+                self.profileViewHidden = YES;
             }];
         }
     }
@@ -768,7 +775,9 @@
 - (void)touchCell:(UITapGestureRecognizer *)sender{
     
     if (_feedType == FeedProfileType) {
-        [self.delegate hiddenProfileView:YES];
+        if (!_profileViewHidden) {
+            [self.delegate hiddenProfileView:YES];
+        }
     }
     
     UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
@@ -818,7 +827,9 @@
 - (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
     
     if (_feedType == FeedProfileType) {
-        [self.delegate hiddenProfileView:NO];
+        if (!_profileViewHidden) {
+            [self.delegate hiddenProfileView:NO];
+        }
     }
     
     for (int i = 0; i < [_arrayCell count]; i++) {
