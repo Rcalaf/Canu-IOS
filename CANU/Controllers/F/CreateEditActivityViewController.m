@@ -232,8 +232,8 @@ typedef enum {
         // If Phone Book isn't allowed or not determined
         if (self.userList.canuError == CANUErrorPhoneBookNotDetermined || self.userList.canuError == CANUErrorPhoneBookRestricted) {
             
-            self.invitInput.alpha = 0;
-            self.invitInput.userInteractionEnabled = NO;
+            self.wrapperUserList.alpha = 0;
+            self.wrapperUserList.userInteractionEnabled = NO;
             
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sync contacts", nil)];
             [attributeString addAttribute:NSUnderlineStyleAttributeName
@@ -247,6 +247,7 @@ typedef enum {
             self.labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
             
             self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperUserList.frame.origin.y + 15 - _distanceFirstAnimation, 260, 37)];
+            self.synContact.alpha = 0;
             [self.synContact addSubview:_labelSyncContact];
             [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
             [self.wrapper addSubview:_synContact];
@@ -324,6 +325,7 @@ typedef enum {
             if (self.userList.active) {
                 [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.userList.alpha = 1;
+                    self.synContact.alpha = 1;
                 } completion:^(BOOL finished) {}];
             }
             
@@ -1092,7 +1094,7 @@ typedef enum {
     } else if (self.userList.canuError == CANUErrorPhoneBookNotDetermined) {
         [PhoneBook  requestPhoneBookAccessBlock:^(NSError *error) {
             if (!error) {
-                self.invitInput.userInteractionEnabled = YES;
+                self.wrapperUserList.userInteractionEnabled = YES;
                 [self.synContact removeFromSuperview];
                 
                 UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _backgroundUserList.frame.size.height, 320, 6)];
@@ -1100,7 +1102,7 @@ typedef enum {
                 [self.backgroundUserList addSubview:shadowDescription];
                 
                 [UIView animateWithDuration:0.4 animations:^{
-                    self.invitInput.alpha = 1;
+                    self.wrapperUserList.alpha = 1;
                     self.userList.alpha = 1;
                 } completion:^(BOOL finished) {
                     [self.userList phoneBookIsAvailable];

@@ -56,7 +56,7 @@ NSInteger const kVersionData = 1; // If you want a automatic logout for the next
             _user = [[User alloc]initWithAttributes:dic];
         }
         
-        if (_urlApi != [[AFCanuAPIClient sharedClient] urlBase]) {
+        if (![_urlApi isEqualToString:[[AFCanuAPIClient sharedClient] urlBase]]) {
             NSLog(@"Logout : Not connect to the same api");
             [self logOut];
         }

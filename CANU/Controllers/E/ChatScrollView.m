@@ -43,7 +43,6 @@
         [self addSubview:_loaderAnimation];
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -2, frame.size.width, frame.size.height)];
-        self.scrollview.alpha = 0;
         self.scrollview.delegate = self;
         [self addSubview:_scrollview];
         
@@ -244,9 +243,39 @@
         self.isFirstTime = !_isFirstTime;
         [self scrollToBottom];
         
-        [UIView animateWithDuration:0.4 animations:^{
-            self.scrollview.alpha = 1;
-        }];
+        // Animation
+        
+        int final = [_arrayCell count] - 6;
+        float correction = 0;
+        
+        if (final < 0) {
+            final = 0;
+            correction = 0.3f;
+        }
+        
+        for (int i = [_arrayCell count] - 1; i >= final; i--) {
+            
+            float delay = (([_arrayCell count] - 1) - i) * 0.1 + correction;
+            
+            int gap = 20;
+            
+            UICanuChatCellScroll *cell = [_arrayCell objectAtIndex:i];
+            
+            if (!cell.isTheUser) {
+                gap = -20;
+            }
+            
+            cell.frame = CGRectMake(cell.frame.origin.x + gap, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
+            cell.alpha = 0;
+            
+            [UIView animateWithDuration:0.2 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                cell.frame = CGRectMake(cell.frame.origin.x - gap, cell.frame.origin.y, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+            }];
+            
+        }
         
     }else{
         [self scrollToBottom];

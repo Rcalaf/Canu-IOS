@@ -18,7 +18,6 @@
 
 @property (nonatomic) BOOL isFirst;
 @property (nonatomic) BOOL isLast;
-@property (nonatomic) BOOL isTheUser;
 @property (nonatomic) BOOL addTime;
 @property (nonatomic, strong) UIImageView *arrowBackgroundMessage;
 @property (nonatomic, strong) UIImageView *profilePicture;

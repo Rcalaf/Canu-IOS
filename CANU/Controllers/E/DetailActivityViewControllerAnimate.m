@@ -48,8 +48,6 @@ typedef enum {
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *actionButton;
 @property (nonatomic, strong) UIButton *touchQuitKeyboard;
-@property (nonatomic, strong) UIImageView *shadow;
-@property (nonatomic, strong) UIImageView *actionButtonImage;
 @property (nonatomic, strong) UIView *wrapperActivity;
 @property (nonatomic, strong) UITextView *descriptionTextView;
 @property (nonatomic, strong) UIImageView *wrapperActivityDescription;
@@ -112,6 +110,9 @@ typedef enum {
     [self.view addSubview:_wrapper];
     
     self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 10 + 130, 300,self.view.frame.size.height - 10 - 130 - 45 + 2) andActivity:_activity];
+//    if (_canuOpenDetailsActivityAfter == CANUOpenDetailsActivityAfterFeedView) {
+//        self.chatView.frame = CGRectMake(10, 10 + 130 + 50, 300,self.view.frame.size.height - 10 - 130 - 45 + 2);
+//    }
     self.chatView.delegate = self;
     [self.wrapper addSubview:_chatView];
     
@@ -157,12 +158,9 @@ typedef enum {
         [UIView animateWithDuration:0.4 animations:^{
             [navigation changePosition:1];
             self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-            self.actionButtonImage.alpha = 0;
-            self.chatView.alpha = 1;
-            self.chatView.frame = CGRectMake(10, 340, 300, self.view.frame.size.height - 340 - 57);
+//            self.chatView.alpha = 1;
+//            self.chatView.frame = CGRectMake(10, 10 + 130, 300,self.view.frame.size.height - 10 - 130 - 45 + 2);
             self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, 320, 45);
-            self.shadow.alpha = 1;
-            self.shadow.frame = CGRectMake(0, 85 + 60, 300, 4);
         } completion:^(BOOL finished) {
             navigation.control.hidden = YES;
             self.view.backgroundColor = backgroundColorView;
@@ -283,11 +281,11 @@ typedef enum {
     backgroundBottom.userInteractionEnabled = YES;
     [self.wrapperActivityBottom addSubview:backgroundBottom];
     
-    UICanuLabelLocation *location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -2, 210, 30)];
+    UICanuLabelLocation *location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
     location.text = _activity.locationDescription;
     [self.wrapperActivityBottom addSubview:location];
     
-    UICanuLabelDate *date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310, -2, 300, 30)];
+    UICanuLabelDate *date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310 -2, -1, 300, 30)];
     [date setDate:_activity];
     [self.wrapperActivityBottom addSubview:date];
     
@@ -557,27 +555,28 @@ typedef enum {
 
 - (void)animationBack{
     
-    [self.delegate closeDetailActivity:self];
-    
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
     UICanuNavigationController *navigation = appDelegate.canuViewController;
     
     navigation.control.hidden = NO;
     
-    self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:0.0];
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        [navigation changePosition:0];
-        self.wrapper.frame = CGRectMake(0, _positionY - 10, 320, _wrapper.frame.size.height);
-        self.actionButtonImage.alpha = 1;
-        self.chatView.frame = CGRectMake(10, 130, 300,0);
+    [UIView animateWithDuration:0.3 animations:^{
         self.chatView.alpha = 0;
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 45);
-        self.shadow.alpha = 0;
-        self.shadow.frame = CGRectMake(0, 85, 300, 4);
     } completion:^(BOOL finished) {
-        
+        [self.delegate closeDetailActivity:self];
+        [UIView animateWithDuration:0.4 animations:^{
+            [navigation changePosition:0];
+            self.wrapper.frame = CGRectMake(0, _positionY - 10, 320, _wrapper.frame.size.height);
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 45);
+            self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, 0);
+            self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130);
+            self.wrapperActivityBottom.frame = CGRectMake(0, 100, 300, 30);
+            self.descriptionTextView.alpha = 0;
+            self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:0.0];
+        } completion:^(BOOL finished) {
+            self.descriptionIsOpen = YES;
+        }];
     }];
     
 }
