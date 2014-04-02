@@ -703,7 +703,7 @@
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Unsubscribe" value:nil] build]];
                 
                 _activities = activities;
-                
+                NSLog(@"Array %@",activities);
                 if (_feedType == FeedLocalType) {
                     [self load];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];

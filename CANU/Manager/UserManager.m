@@ -20,20 +20,19 @@
 
 @implementation UserManager
 
-static UserManager* _sharedUserManager = nil;
-
 #pragma mark - Lifecycle
 
 +(UserManager*)sharedUserManager
 {
-	@synchronized([UserManager class])
-	{
-		if (!_sharedUserManager) _sharedUserManager = [[self alloc] init];
-        
-		return _sharedUserManager;
-	}
     
-	return nil;
+    static UserManager* _sharedUserManager = nil;
+    static dispatch_once_t oncePredicate;
+    
+    dispatch_once(&oncePredicate, ^{
+        _sharedUserManager = [[self alloc] init];
+    });
+    
+	return _sharedUserManager;
 }
 
 - (id)init{
@@ -45,7 +44,7 @@ static UserManager* _sharedUserManager = nil;
         NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         
         _logToDistributionMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"logToDistributionMode"];
-        
+
         if([dic count] == 0) {
             _user = nil;
         } else {
@@ -154,13 +153,13 @@ static UserManager* _sharedUserManager = nil;
  *  @return
  */
 - (BOOL)userIsLogIn{
-    
+     NSLog(@"start userIsLogIn");
     BOOL isLogIn = false;
     
     if (_user) {
         isLogIn = true;
     }
-    
+    NSLog(@"userIsLogIn");
     return isLogIn;
     
 }

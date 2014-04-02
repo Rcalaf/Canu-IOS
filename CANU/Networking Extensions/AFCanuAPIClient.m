@@ -7,14 +7,13 @@
 //
 
 #import "AFCanuAPIClient.h"
-#import "AFJSONRequestOperation.h"
+#import "AFURLResponseSerialization.h"
 
 NSString * const kAFCanuAPIBaseUDistributionRLString = @"http://api.canu.se";
 NSString * const kAFCanuAPIDevBaseURLString = @"http://api.canu.se";
 //NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
 
 BOOL const kAFCanuAPIDistributionMode = NO;
-
 
 @implementation AFCanuAPIClient
 
@@ -43,6 +42,7 @@ BOOL const kAFCanuAPIDistributionMode = NO;
         return nil;
     }
     
+    
     self.distributionMode = kAFCanuAPIDistributionMode;
     
     if (self.distributionMode) {
@@ -51,10 +51,10 @@ BOOL const kAFCanuAPIDistributionMode = NO;
         self.urlBase = kAFCanuAPIDevBaseURLString;
     }
     
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
+    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
+
     // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
-	[self setDefaultHeader:@"Accept" value:@"application/json"];
+	[self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     return self;
 }

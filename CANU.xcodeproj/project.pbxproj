@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E1DA34218EC25F3004301DA /* Lato-Bol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6A18D20F5B0076C25E /* Lato-Bol.ttf */; };
+		1E1DA34318EC25F3004301DA /* Lato-BolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6B18D20F5B0076C25E /* Lato-BolIta.ttf */; };
+		1E1DA34418EC25F3004301DA /* Lato-LigIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6C18D20F5B0076C25E /* Lato-LigIta.ttf */; };
+		1E1DA34518EC25F3004301DA /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6D18D20F5B0076C25E /* Lato-Reg.ttf */; };
+		1E1DA34618EC25F3004301DA /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6E18D20F5B0076C25E /* Lato-RegIta.ttf */; };
 		1E279CF618D1F0F70076C25E /* ActivitiesFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CF518D1F0F70076C25E /* ActivitiesFeedViewController.m */; };
 		1E279CF918D1F16E0076C25E /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CF818D1F16E0076C25E /* Activity.m */; };
 		1E279CFF18D1F2400076C25E /* ActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CFE18D1F2400076C25E /* ActivityScrollViewController.m */; };
@@ -1331,6 +1336,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E1DA34218EC25F3004301DA /* Lato-Bol.ttf in Resources */,
+				1E1DA34318EC25F3004301DA /* Lato-BolIta.ttf in Resources */,
+				1E1DA34418EC25F3004301DA /* Lato-LigIta.ttf in Resources */,
+				1E1DA34518EC25F3004301DA /* Lato-Reg.ttf in Resources */,
+				1E1DA34618EC25F3004301DA /* Lato-RegIta.ttf in Resources */,
 				DEA93B2817204EA600303BB5 /* InfoPlist.strings in Resources */,
 				DEA93B7617205B2800303BB5 /* MainStoryboard.storyboard in Resources */,
 				DEFD7A971747F8370087CB8A /* icon.png in Resources */,

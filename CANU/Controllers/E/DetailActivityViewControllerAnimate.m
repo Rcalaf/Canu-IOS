@@ -481,7 +481,7 @@ typedef enum {
 }
 
 - (void)eventActionButton{
-    NSLog(@"%lu",(unsigned long)self.activity.status);
+    
     if (self.activity.status == UICanuActivityCellGo) {
         // don't attend
         [self.loadingIndicator startAnimating];

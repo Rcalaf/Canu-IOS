@@ -229,9 +229,10 @@
     
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] getPath:@"activities" parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
-        for (NSDictionary *attributes in JSON) {
+    
+    [[AFCanuAPIClient sharedClient] GET:@"activities" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[responseObject count]];
+        for (NSDictionary *attributes in responseObject) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             [mutableActivities addObject:activity];
         }
@@ -240,7 +241,6 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
             
             NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
@@ -264,10 +264,11 @@
 
 
 + (void)activityWithId:(NSUInteger)activityId andBlock:(void (^)(Activity *activity, NSError *error))block{
-    NSString *path = [NSString stringWithFormat:@"activities/%lu",(unsigned long)activityId];
+    NSString *url = [NSString stringWithFormat:@"activities/%lu",(unsigned long)activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        Activity *activity = [[Activity alloc] initWithAttributes:JSON];
+    
+    [[AFCanuAPIClient sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Activity *activity = [[Activity alloc] initWithAttributes:responseObject];
         if (block) {
             block(activity, nil);
         }
@@ -278,34 +279,48 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+
 }
 
 
 - (void)attendWithBlock:(void (^)(NSArray *activities, NSError *error))block
 {
-    NSLog(@"attendWithBlock");
+    
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
+    float latitude = appDelegate.currentLocation.latitude, longitude = appDelegate.currentLocation.longitude;
     
-    NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)[[UserManager sharedUserManager] currentUser].userId];
+    if (latitude == 0 && longitude == 0) {
+        latitude = self.coordinate.latitude;
+        longitude = self.coordinate.longitude;
+    }
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:latitude ],@"latitude",[NSNumber numberWithDouble:longitude],@"longitude", nil];
+    
+    NSString *url = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)[[UserManager sharedUserManager] currentUser].userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:[[UserManager sharedUserManager] currentUser].token];
-    [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
-        for (NSDictionary *attributes in JSON) {
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];
+    
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[responseObject count]];
+        for (NSDictionary *attributes in responseObject) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
-            if (activity.activityId == self.activityId) _attendeeIds = activity.attendeeIds;
-            //NSLog(@"%@",activity.attendeeIds);
+            if (activity.activityId == self.activityId){
+                _attendeeIds = activity.attendeeIds;
+            }
+            
             [mutableActivities addObject:activity];
         }
         //[self addNotification];
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
-
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
         if (block) {
             block([NSArray array],error);
         }
@@ -318,48 +333,53 @@
     
     AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
     
-    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:appDelegate.currentLocation.latitude ],@"latitude",[NSNumber numberWithDouble:appDelegate.currentLocation.longitude],@"longitude", nil];
+    float latitude = appDelegate.currentLocation.latitude, longitude = appDelegate.currentLocation.longitude;
     
-    NSString *path = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)[[UserManager sharedUserManager] currentUser].userId];
+    if (latitude == 0 && longitude == 0) {
+        latitude = self.coordinate.latitude;
+        longitude = self.coordinate.longitude;
+    }
+    
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithDouble:latitude ],@"latitude",[NSNumber numberWithDouble:longitude],@"longitude", nil];
+    
+    NSString *url = [NSString stringWithFormat:@"activities/%lu/users/%lu/attend",(unsigned long)self.activityId,(unsigned long)[[UserManager sharedUserManager] currentUser].userId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:[[UserManager sharedUserManager] currentUser].token];
-    [[AFCanuAPIClient sharedClient] deletePath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-
-       // [self removeNotification];
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];
+    
+    [[AFCanuAPIClient sharedClient] DELETE:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"dontAttendWithBlock");
-        NSLog(@"JSON %@",JSON);
-        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[JSON count]];
-        for (NSDictionary *attributes in JSON) {
-            NSLog(@"Loop");
+        NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[responseObject count]];
+        for (NSDictionary *attributes in responseObject) {
+            ;
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
             if (activity.activityId == self.activityId){
                 _attendeeIds = activity.attendeeIds;
-                NSLog(@"dontAttendWithBlock %@",activity.attendeeIds);
             }
             [mutableActivities addObject:activity];
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-       
-       
+        
+        
         if (block) {
             block([NSArray arrayWithArray:mutableActivities], nil);
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (block) {
             block([NSArray array],error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+    
 }
 
 
 - (void)removeActivityWithBlock:(void (^)(NSError *error))block{
 
-    NSString *path = [NSString stringWithFormat:@"/users/%lu/activities/%lu",(unsigned long)[[UserManager sharedUserManager] currentUser].userId,(unsigned long)self.activityId];
+    NSString *url = [NSString stringWithFormat:@"/users/%lu/activities/%lu",(unsigned long)[[UserManager sharedUserManager] currentUser].userId,(unsigned long)self.activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] deletePath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+    
+    [[AFCanuAPIClient sharedClient] DELETE:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block) {
             block(nil);
         }
@@ -370,18 +390,20 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+
 }
 
 - (void)attendees:(void (^)(NSArray *attendees, NSArray *invitationUser, NSArray *invitationGhostuser, NSError *error))block{
     
     NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:[[UserManager sharedUserManager] currentUser].userId],@"user_id", nil];
     
-    NSString *path = [NSString stringWithFormat:@"/activities/%lu/attendees",(unsigned long)self.activityId];
+    NSString *url = [NSString stringWithFormat:@"/activities/%lu/attendees",(unsigned long)self.activityId];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:[[UserManager sharedUserManager] currentUser].token];
-    [[AFCanuAPIClient sharedClient] getPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        
-        NSMutableDictionary *mutableResponse = [NSMutableDictionary dictionaryWithDictionary:JSON];
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];
+    
+    [[AFCanuAPIClient sharedClient] GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableDictionary *mutableResponse = [NSMutableDictionary dictionaryWithDictionary:responseObject];
         
         NSMutableArray *responseAttendees = [mutableResponse objectForKey:@"attendees"];
         NSMutableArray *allAttendees = [[NSMutableArray alloc]init];
@@ -435,6 +457,7 @@
         }];
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+
 }
 
 + (void)createActivityForUserWithTitle:(NSString *)title
@@ -467,26 +490,19 @@
     
     NSString *url = [NSString stringWithFormat:@"users/%lu/activities",(unsigned long)[[UserManager sharedUserManager] currentUser].userId];
     
-    [[AFCanuAPIClient sharedClient] postPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        
-        Activity *activity = [[Activity alloc]initWithAttributes:JSON];
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        Activity *activity = [[Activity alloc]initWithAttributes:responseObject];
         
         if (block) {
             block(activity,nil);
         }
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         if (block) {
-            
-            // NSLog(@"%@",error);
-            // NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
             block(nil,error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
     }];
 
 }
@@ -520,22 +536,19 @@
     NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length", @"street", @"city", @"zip", @"country", @"latitude", @"longitude", nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:[[UserManager sharedUserManager] currentUser].token];
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSString *url = [NSString stringWithFormat:@"users/%lu/activities/%lu",(unsigned long)[[UserManager sharedUserManager] currentUser].userId,(unsigned long)self.activityId];
     
-    [[AFCanuAPIClient sharedClient] putPath:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        
+    [[AFCanuAPIClient sharedClient] PUT:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block) {
             block(nil);
         }
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         if (block) {
             
             NSLog(@"%@",error);
@@ -543,7 +556,6 @@
             block(error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
     }];
     
 }
@@ -551,13 +563,15 @@
 
 - (void)messagesWithBlock:(void (^)(NSArray *messages, NSError *error))block {
     
-    NSString *path = [NSString stringWithFormat:@"activities/%lu/chat",(unsigned long)self.activityId];
+    NSString *url = [NSString stringWithFormat:@"activities/%lu/chat",(unsigned long)self.activityId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:[[UserManager sharedUserManager] currentUser].token];
-    [[AFCanuAPIClient sharedClient] getPath:path parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        NSMutableArray *mutableMessages = [NSMutableArray arrayWithCapacity:[JSON count]];
-        for (NSDictionary *attributes in JSON) {
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];
+    
+    [[AFCanuAPIClient sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableArray *mutableMessages = [NSMutableArray arrayWithCapacity:[responseObject count]];
+        for (NSDictionary *attributes in responseObject) {
             Message *message = [[Message alloc] initWithAttributes:attributes];
             [mutableMessages addObject:message];
         }
@@ -571,6 +585,7 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+    
 }
 
 - (void)newMessage:(NSString *)message WithBlock:(void (^)(NSError *error))block{
@@ -584,12 +599,13 @@
     NSDictionary *user = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:user] forKeys: [NSArray arrayWithObject:@"message"]];
     
-    NSString *path = [NSString stringWithFormat:@"activities/%lu/chat",(unsigned long)self.activityId];
+    NSString *url = [NSString stringWithFormat:@"activities/%lu/chat",(unsigned long)self.activityId];
     
-    [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:[[UserManager sharedUserManager] currentUser].token];
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[[UserManager sharedUserManager] currentUser].token forHTTPHeaderField:@"X-XSRF-TOKEN"];
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
-        // NSLog(@"%@",JSON);
+    
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (block) {
             block(nil);
         }
