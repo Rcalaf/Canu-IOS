@@ -395,11 +395,15 @@
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+            } completion:^(BOOL finished) {
+                self.profileViewHidden = NO;
             }];
             
         } else if (newY >= 165/3 && newY < 165){
             [UIView animateWithDuration:0.3 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+            } completion:^(BOOL finished) {
+                self.profileViewHidden = YES;
             }];
         }
     }
