@@ -245,7 +245,7 @@
         
         // Animation
         
-        int final = [_arrayCell count] - 6;
+        NSInteger final = [_arrayCell count] - 6;
         float correction = 0;
         
         if (final < 0) {
@@ -253,7 +253,7 @@
             correction = 0.3f;
         }
         
-        for (int i = [_arrayCell count] - 1; i >= final; i--) {
+        for (NSInteger i = [_arrayCell count] - 1; i >= final; i--) {
             
             float delay = (([_arrayCell count] - 1) - i) * 0.1 + correction;
             

@@ -330,6 +330,7 @@ typedef enum {
             }
             
             self.finishAnimationCreate = YES;
+            
         }];
         
     } else {

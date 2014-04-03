@@ -353,10 +353,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    float newX,newY;
-    
-    newX = scrollView.contentOffset.x;
-    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    float newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     //Refresh
     
@@ -364,8 +361,8 @@
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
     }
     
-    if (_feedType == FeedProfileType) {
-        if (newY > 0 && newY < 165/3) {
+    if (_feedType == FeedProfileType && !decelerate) {
+        if (newY >= 0 && newY < 165/3) {
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
@@ -373,25 +370,25 @@
                 self.profileViewHidden = NO;
             }];
             
-        } else if (newY >= 165/3 && newY < 165){
+        } else if (newY >= 165/3 && newY <= 165) {
+            
             [UIView animateWithDuration:0.3 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
             } completion:^(BOOL finished) {
                 self.profileViewHidden = YES;
             }];
         }
+        
     }
     
 }
 
-- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    float newX,newY;
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     
-    newX = scrollView.contentOffset.x;
-    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    float newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     if (_feedType == FeedProfileType) {
-        if (newY > 0 && newY < 165/3) {
+        if (newY >= 0 && newY < 165/3) {
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
@@ -399,13 +396,15 @@
                 self.profileViewHidden = NO;
             }];
             
-        } else if (newY >= 165/3 && newY < 165){
+        } else if (newY >= 165/3 && newY <= 165) {
+            
             [UIView animateWithDuration:0.3 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
             } completion:^(BOOL finished) {
                 self.profileViewHidden = YES;
             }];
         }
+        
     }
     
 }
