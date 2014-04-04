@@ -238,8 +238,8 @@ typedef enum {
     [background addSubview:userName];
     
     CGSize expectedLabelSize = [userName.text sizeWithFont:userName.font
-                                              constrainedToSize:userName.frame.size
-                                                  lineBreakMode:userName.lineBreakMode];
+                                         constrainedToSize:userName.frame.size
+                                             lineBreakMode:userName.lineBreakMode];
     
     self.counterInvit = [[UILabel alloc]initWithFrame:CGRectMake( 55 + 5 + expectedLabelSize.width, 18, 70, 17)];
     self.counterInvit.textColor = UIColorFromRGB(0x2b4b58);
@@ -270,7 +270,7 @@ typedef enum {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
     } else {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
-        self.actionButton.frame = CGRectMake(view.frame.size.width - 23 - 18, 17, 18, 18);
+        self.actionButton.frame = CGRectMake(view.frame.size.width - 23 - 25, 13, 35, 35);
     }
     
     self.wrapperActivityBottom = [[UIView alloc]initWithFrame:CGRectMake(0, 100, 300, 30)];
@@ -284,6 +284,9 @@ typedef enum {
     UICanuLabelLocation *location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
     location.text = _activity.locationDescription;
     [self.wrapperActivityBottom addSubview:location];
+    
+    UITapGestureRecognizer *tapMap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openInMap)];
+    [location addGestureRecognizer:tapMap];
     
     UICanuLabelDate *date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310 -2, -1, 300, 30)];
     [date setDate:_activity];
@@ -414,8 +417,6 @@ typedef enum {
 
 - (void)sendMessage{
     
-    [self.input resignFirstResponder];
-    
     NSString *message = _input.text;
     if ([message length] != 0 && ![message isEqualToString:NSLocalizedString(@"Write something nice...", nil)]) {
         [self.chatView addSendMessage:message];
@@ -428,26 +429,41 @@ typedef enum {
                 
                 id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chat" action:@"Send" label:nil value:nil] build]];
+                
+                self.input.text = NSLocalizedString(@"Write something nice...", nil);
+                self.input.textColor = UIColorFromRGB(0xabb3b7);
+                
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height);
+                    self.input.frame = CGRectMake(_input.frame.origin.x, _input.frame.origin.y, _input.frame.size.width, 30);
+                    self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, 4, self.sendButton.frame.size.width, self.sendButton.frame.size.height);
+                    self.backButton.frame = CGRectMake(0.0, 0, 45, 45);
+                }];
+                
             }
             
         }];
+    } else {
+        
+        [self.input resignFirstResponder];
+        
+        self.input.text = NSLocalizedString(@"Write something nice...", nil);
+        self.input.textColor = UIColorFromRGB(0xabb3b7);
+        
+        self.keyboardIsOpen = NO;
+        
+        [self.touchQuitKeyboard removeFromSuperview];
+        self.touchQuitKeyboard = nil;
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height);
+            self.input.frame = CGRectMake(_input.frame.origin.x, _input.frame.origin.y, _input.frame.size.width, 30);
+            self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, 4, self.sendButton.frame.size.width, self.sendButton.frame.size.height);
+            self.backButton.frame = CGRectMake(0.0, 0, 45, 45);
+        }];
+        
     }
-    
-    self.input.text = NSLocalizedString(@"Write something nice...", nil);
-    self.input.textColor = UIColorFromRGB(0xabb3b7);
-    
-    self.keyboardIsOpen = NO;
-    
-    [self.touchQuitKeyboard removeFromSuperview];
-    self.touchQuitKeyboard = nil;
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height);
-        self.input.frame = CGRectMake(_input.frame.origin.x, _input.frame.origin.y, _input.frame.size.width, 30);
-        self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, 4, self.sendButton.frame.size.width, self.sendButton.frame.size.height);
-        self.backButton.frame = CGRectMake(0.0, 0, 45, 45);
-    }];
     
 }
 
@@ -617,28 +633,6 @@ typedef enum {
             self.attendeesList = nil;
         }];
     }
-    
-}
-
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
-    
-    static NSString *AnnotationViewID = @"annotationViewID";
-    
-    MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
-    
-    if (annotationView == nil)
-    {
-        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-    }
-    if(annotation != mapView.userLocation) {
-        
-        annotationView.image = [UIImage imageNamed:@"map_pin"];
-        
-    }
-    
-    annotationView.annotation = annotation;
-    
-    return annotationView;
     
 }
 

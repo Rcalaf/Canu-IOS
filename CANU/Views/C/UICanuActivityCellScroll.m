@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UICanuLabelActivityName *nameActivity;
 @property (nonatomic, strong) UICanuLabelLocation *location;
 @property (nonatomic, strong) UICanuLabelDate *date;
+@property (nonatomic, strong) UIView *wrapperActivityBottom;
 
 @end
 
@@ -36,8 +37,8 @@
         
         self.activity                         = activity;
 
-        UIImageView *background               = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 134)];
-        background.image                      = [UIImage imageNamed:@"C_activity_background"];
+        UIImageView *background               = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 105)];
+        background.image                      = [UIImage imageNamed:@"F_activity_background"];
         background.userInteractionEnabled     = YES;
         [self addSubview:background];
 
@@ -68,16 +69,8 @@
         [background addSubview:_counterInvit];
 
         self.nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
-        self.nameActivity.text                     = _activity.title;
+        self.nameActivity.text                     = self.activity.title;
         [background addSubview:_nameActivity];
-
-        self.location         = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake( 2 + 10, frame.size.height - 29, 210, 30)];
-        self.location.text                         = _activity.locationDescription;
-        [background addSubview:_location];
-
-        self.date                 = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(frame.size.width - 310, frame.size.height - 29, 300, 30)];
-        [self.date setDate:_activity];
-        [background addSubview:_date];
 
         self.loadingIndicator                 = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         self.loadingIndicator.frame           = CGRectMake(243.0f, 45, 45, 45);
@@ -94,8 +87,24 @@
             [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
         } else {
             [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
-            self.actionButton.frame = CGRectMake(frame.size.width - 23 - 18, 17, 18, 18);
+            self.actionButton.frame = CGRectMake(frame.size.width - 23 - 25, 13, 35, 35);
         }
+        
+        self.wrapperActivityBottom = [[UIView alloc]initWithFrame:CGRectMake(2, 102, 300, 30)];
+        [background addSubview:_wrapperActivityBottom];
+        
+        UIImageView *backgroundBottom = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -1, 304, 33)];
+        backgroundBottom.image = [UIImage imageNamed:@"E_Activity_bottom"];
+        backgroundBottom.userInteractionEnabled = YES;
+        [self.wrapperActivityBottom addSubview:backgroundBottom];
+        
+        self.location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
+        self.location.text = _activity.locationDescription;
+        [self.wrapperActivityBottom addSubview:_location];
+        
+        self.date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(frame.size.width - 310 -2, -1, 300, 30)];
+        [self.date setDate:_activity];
+        [self.wrapperActivityBottom addSubview:_date];
         
     }
     return self;
@@ -148,6 +157,37 @@
             
         }];
     }];
+    
+}
+
+- (void)hiddenBottomBar:(BOOL)hidden{
+    
+    if (hidden) {
+        self.counterInvit.alpha = 0;
+        self.actionButton.alpha = 0;
+        self.wrapperActivityBottom.alpha = 0;
+        self.wrapperActivityBottom.frame = CGRectMake(_wrapperActivityBottom.frame.origin.x, _wrapperActivityBottom.frame.origin.y + 100, _wrapperActivityBottom.frame.size.width, _wrapperActivityBottom.frame.size.height);
+    } else {
+        self.counterInvit.alpha = 0.3;
+        self.actionButton.alpha = 1;
+        self.wrapperActivityBottom.alpha = 1;
+        self.wrapperActivityBottom.frame = CGRectMake(2, 102, 300, 30);
+    }
+    
+    
+}
+
+- (void)updateWithActivity:(Activity *)activity{
+    
+    self.activity = activity;
+    
+    self.userName.text     = activity.user.userName;
+    if ([_activity.attendeeIds count] != 1) {
+    self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[activity.attendeeIds count] -1];
+    }
+    self.nameActivity.text = activity.title;
+    self.location.text     = activity.locationDescription;
+    [self.date setDate:_activity];
     
 }
 

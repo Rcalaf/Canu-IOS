@@ -27,6 +27,10 @@ typedef NS_ENUM(NSInteger, UICanuActivityCellStatus) {
 
 - (void)animateAfterDelay:(float)delay;
 
+- (void)hiddenBottomBar:(BOOL)hidden;
+
+- (void)updateWithActivity:(Activity *)activity;
+
 @end
 
 @protocol UICanuActivityCellScrollDelegate <NSObject>

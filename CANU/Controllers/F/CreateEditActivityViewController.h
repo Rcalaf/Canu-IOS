@@ -36,8 +36,10 @@
 
 @protocol CreateEditActivityViewControllerDelegate <NSObject>
 
-@required
+@optional
 
 - (void)currentActivityWasDeleted;
+
+- (void)createEditActivityIsFinish:(Activity *)activity;
 
 @end

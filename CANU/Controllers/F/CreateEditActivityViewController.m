@@ -252,10 +252,6 @@ typedef enum {
             [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
             [self.wrapper addSubview:_synContact];
             
-        } else {
-            UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _backgroundUserList.frame.size.height, 320, 6)];
-            shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-            [self.backgroundUserList addSubview:shadowDescription];
         }
         
     }
@@ -325,6 +321,9 @@ typedef enum {
             if (self.userList.active) {
                 [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.userList.alpha = 1;
+                } completion:^(BOOL finished) {}];
+            } else {
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.synContact.alpha = 1;
                 } completion:^(BOOL finished) {}];
             }
@@ -338,14 +337,9 @@ typedef enum {
         AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         UICanuNavigationController *navigation = appDelegate.canuViewController;
         
-        self.view.alpha = 0;
+        self.titleInput.text = _editActivity.title;
         
-        [UIView animateWithDuration:0.4 animations:^{
-            navigation.control.alpha = 0;
-            self.view.alpha = 1;
-        } completion:^(BOOL finished) {
-            navigation.control.hidden = YES;
-        }];
+        navigation.control.hidden = YES;
         
     }
     
@@ -451,16 +445,19 @@ typedef enum {
                 
             }
             
-            // Active Map or not
-            
         }];
     }
     
     if (self.editActivity) {
         
-        self.titleInput.text = _editActivity.title;
-        
         self.descriptionInput.text = _editActivity.description;
+        
+//        int numberOfLine = (int)self.descriptionInput.contentSize.height / self.descriptionInput.font.lineHeight;
+//        NSLog(@"%i",numberOfLine);
+////        self.wrapperDescription.frame = CGRectMake(-2, 99, 304, 23 + 16 * numberOfLine);
+//        self.counterLength.frame = CGRectMake(302 - 30, _wrapperDescription.frame.size.height - 2 - 20, 20, 10);
+//        self.descriptionInput.frame = CGRectMake(10, 10, 280, 16 * numberOfLine);
+//        self.counterLength.text = [NSString stringWithFormat:@"%i",140 - (int)_editActivity.description.length];
         
         [self.timePicker isToday:NO];
         
@@ -936,7 +933,7 @@ typedef enum {
     [view addSubview:background];
     
     // Profile picture
-    UIImageView *profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
+    UIImageView *profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10 - 2, 10 - 2, 35, 35)];
     [profilePicture setImageWithURL:[[UserManager sharedUserManager] currentUser].profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
     [view addSubview:profilePicture];
     
@@ -946,11 +943,11 @@ typedef enum {
     [profilePicture addSubview:strokePicture];
     
     // Name
-    UICanuLabelUserName *username = [[UICanuLabelUserName alloc]initWithFrame:CGRectMake(55, 18, 200, 17)];
-    username.text = [[UserManager sharedUserManager] currentUser].firstName;
+    UICanuLabelUserName *username = [[UICanuLabelUserName alloc]initWithFrame:CGRectMake(55 - 2, 18 - 2, 200, 17)];
+    username.text = [[UserManager sharedUserManager] currentUser].userName;
     [view addSubview:username];
     
-    self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
+    self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10 - 2, 57 - 1, 280, 25)];
     self.titleInput.font = [UIFont fontWithName:@"Lato-Bold" size:23];
     self.titleInput.textColor = UIColorFromRGB(0x2b4b58);
     self.titleInput.placeholder = NSLocalizedString(@"What do you want to do?", nil);
@@ -1063,6 +1060,10 @@ typedef enum {
     self.backgroundUserList.alpha = 0;
     [view addSubview:_backgroundUserList];
     
+    UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _backgroundUserList.frame.size.height, 320, 6)];
+    shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
+    [self.backgroundUserList addSubview:shadowDescription];
+    
     UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 49)];
     background.image = [UIImage imageNamed:@"F_location_background_selected"];
     [view addSubview:background];
@@ -1097,10 +1098,6 @@ typedef enum {
             if (!error) {
                 self.wrapperUserList.userInteractionEnabled = YES;
                 [self.synContact removeFromSuperview];
-                
-                UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, _backgroundUserList.frame.size.height, 320, 6)];
-                shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-                [self.backgroundUserList addSubview:shadowDescription];
                 
                 [UIView animateWithDuration:0.4 animations:^{
                     self.wrapperUserList.alpha = 1;
@@ -1216,6 +1213,8 @@ typedef enum {
         
         int numberOfLine = (int)_descriptionInput.contentSize.height / _descriptionInput.font.lineHeight;
         self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y, _wrapperActivity.frame.size.width, 100 + 23 + 16 * numberOfLine);
+        self.descriptionInput.frame = CGRectMake(10, 10, 280, 16 * numberOfLine);
+        self.counterLength.text = [NSString stringWithFormat:@"%i",140 - (int)_editActivity.description.length];
         
         [UIView animateWithDuration:0.4 animations:^{
             self.backgroundDark.backgroundColor = [UIColor colorWithRed:43.0f/255.0f green:75.0f/255.0f blue:88.0f/255.0f alpha:0.5f];
@@ -1392,6 +1391,38 @@ typedef enum {
     self.searchLocation.searchLocation = _locationInput.text;
 }
 
+- (void)transitionEndAfterEdit{
+    
+    [self.delegate createEditActivityIsFinish:_editActivity];
+    
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.userList.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+            self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:0.4 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height);
+            self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
+            self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
+            self.view.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+            [self willMoveToParentViewController:nil];
+            [self.view removeFromSuperview];
+            [self removeFromParentViewController];
+            
+        }];
+        
+    }];
+    
+}
+
 - (void)goBack{
     
     if (self.editActivity) {
@@ -1422,13 +1453,14 @@ typedef enum {
             
         }];
         
-        [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y + distanceAnimationClose, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
-        } completion:^(BOOL finished) {
+        if (_editActivity) {
+            
             AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
             UICanuNavigationController *navigation = appDelegate.canuViewController;
             
             navigation.control.hidden = NO;
+            
+            [self.delegate createEditActivityIsFinish:_editActivity];
             
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.view.alpha = 0;
@@ -1438,7 +1470,26 @@ typedef enum {
                 [self.view removeFromSuperview];
                 [self removeFromParentViewController];
             }];
-        }];
+            
+        } else {
+            [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y + distanceAnimationClose, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
+            } completion:^(BOOL finished) {
+                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+                UICanuNavigationController *navigation = appDelegate.canuViewController;
+                
+                navigation.control.hidden = NO;
+                
+                [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.view.alpha = 0;
+                    navigation.control.alpha = 1;
+                } completion:^(BOOL finished) {
+                    [self willMoveToParentViewController:nil];
+                    [self.view removeFromSuperview];
+                    [self removeFromParentViewController];
+                }];
+            }];
+        }
         
     }];
     
@@ -1531,16 +1582,9 @@ typedef enum {
                                                               id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                                                               [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Save" value:nil] build]];
                                                               
-                                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
+//                                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
                                                               
-                                                              [UIView animateWithDuration:0.4 animations:^{
-                                                                  self.wrapper.alpha = 0;
-                                                                  self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
-                                                              } completion:^(BOOL finished) {
-                                                                  
-                                                                  [self dismissViewControllerAnimated:YES completion:nil];
-                                                                  
-                                                              }];
+                                                              [self transitionEndAfterEdit];
                                                               
                                                           }
                                                           

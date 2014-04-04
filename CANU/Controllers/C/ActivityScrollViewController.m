@@ -30,7 +30,7 @@
 
 #import "Activity.h"
 
-@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate>
+@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate,CreateEditActivityViewControllerDelegate>
 
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
@@ -55,12 +55,15 @@
 @property (strong, nonatomic) UIScrollViewReverse *scrollview;
 @property (strong, nonatomic) LoaderAnimation *loaderAnimation;
 @property (strong, nonatomic) UICanuNavigationController *navigation;
+@property (strong, nonatomic) UICanuActivityCellScroll *cellSaveForEdit;
 
 @end
 
 @implementation ActivityScrollViewController
 
 @synthesize locationManager = _locationManager;
+
+#pragma mark - Lifecycle
 
 - (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame{
     self = [super init];
@@ -229,6 +232,32 @@
     return self;
 }
 
+- (void)viewDidLoad{
+    
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning{
+    
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc{
+    
+//    if (_feedType == FeedLocalType) {
+//        NSLog(@"dealloc ActivityScrollViewController Local");
+//    }else if (_feedType == FeedTribeType){
+//        NSLog(@"dealloc ActivityScrollViewController Tribes");
+//    }else if (_feedType == FeedProfileType){
+//        NSLog(@"dealloc ActivityScrollViewController Profile");
+//    }
+    
+}
+
+#pragma mark - Custom Accessors
+
 - (UICanuNavigationController *)navigation{
     
     if (!_navigation) {
@@ -252,6 +281,8 @@
     
     return _locationManager;
 }
+
+#pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     
@@ -286,11 +317,7 @@
     [self.loaderAnimation stopAnimation];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
+#pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -409,6 +436,32 @@
     
 }
 
+#pragma mark - CreateEditActivityViewControllerDelegate
+
+- (void)createEditActivityIsFinish:(Activity *)activity{
+    
+    [self.cellSaveForEdit updateWithActivity:activity];
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        [UIView animateWithDuration:0.4 delay:0.6 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130);
+            cell.alpha = 1;
+            [cell hiddenBottomBar:NO];
+            [self.navigation changePosition:0];
+        } completion:nil];
+        
+    }
+    
+}
+
+#pragma mark - Public
+
+/**
+ *  Reload the feed view
+ */
 - (void)reload{
     
     self.isReload = YES;
@@ -428,6 +481,39 @@
     }];
     
 }
+
+/**
+ *  Remove the view after logout / and children
+ */
+- (void)removeAfterlogOut{
+    
+    [self.feedbackMessage removeFromSuperview];
+    [self.scrollview removeFromSuperview];
+    [self.loaderAnimation removeFromSuperview];
+    
+    if ([_arrayCell count] != 0 ) {
+        
+        for (int i = 0; i < [_arrayCell count]; i++) {
+            
+            UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+            [cell removeFromSuperview];
+            cell = nil;
+            
+        }
+        
+        [_arrayCell removeAllObjects];
+        
+    }
+    
+    self.loaderAnimation = nil;
+    self.arrayCell = nil;
+    self.feedbackMessage = nil;
+    
+}
+
+#pragma mark - Private
+
+#pragma mark -- Load
 
 - (void)load{
     
@@ -697,6 +783,8 @@
     
 }
 
+#pragma mark -- Event
+
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell{
     
     if (cell.activity.status == UICanuActivityCellGo) {
@@ -731,14 +819,7 @@
         }];
         
     }else if (cell.activity.status == UICanuActivityCellEditable) {
-        
-        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:cell.activity];
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-        
-        [appDelegate.feedViewController addChildViewController:editView];
-        [appDelegate.feedViewController.view addSubview:editView.view];
-        
+        [self editCell:cell];
     }else if (cell.activity.status == UICanuActivityCellToGo) {
         
         [[ErrorManager sharedErrorManager] showG3bAlertIfNecessary];
@@ -826,6 +907,60 @@
     }
     
 }
+
+- (void)editCell:(UICanuActivityCellScroll *)cellTouch{
+    
+    self.cellSaveForEdit = cellTouch;
+    
+    float cellPositionY = cellTouch.frame.origin.y;
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        if (i < cellTouch.tag) {
+            
+            float distance = cell.frame.origin.y + cellPositionY + cellTouch.frame.size.height + 10;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 0;
+            }];
+            
+        }else if (i == cellTouch.tag){
+            
+            float position = self.scrollview.contentOffset.y + 10;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                cellTouch.frame = CGRectMake(cell.frame.origin.x, position, cell.frame.size.width, cell.frame.size.height);
+                [cellTouch hiddenBottomBar:YES];
+                [self.navigation changePosition:1];
+            } completion:^(BOOL finished) {
+                CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:cell.activity];
+                editView.delegate = self;
+                
+                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+                
+                [appDelegate.feedViewController addChildViewController:editView];
+                [appDelegate.feedViewController.view addSubview:editView.view];
+            }];
+            
+        }else{
+            
+            float distance = cell.frame.origin.y - cellPositionY;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+                cell.alpha = 0;
+            }];
+            
+        }
+        
+    }
+    
+}
+
+#pragma mark -- Others
 
 - (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
     
@@ -1052,51 +1187,6 @@
     [viewController.view removeFromSuperview];
     [viewController removeFromParentViewController];
     viewController = nil;
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)removeAfterlogOut{
-    NSLog(@"ActivityScrollViewController removeAfterlogOut");
-    
-    [self.feedbackMessage removeFromSuperview];
-    [self.scrollview removeFromSuperview];
-    [self.loaderAnimation removeFromSuperview];
-    
-    if ([_arrayCell count] != 0 ) {
-        
-        for (int i = 0; i < [_arrayCell count]; i++) {
-            
-            UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
-            [cell removeFromSuperview];
-            cell = nil;
-            
-        }
-        
-        [_arrayCell removeAllObjects];
-        
-    }
-    
-    self.loaderAnimation = nil;
-    self.arrayCell = nil;
-    self.feedbackMessage = nil;
-    
-}
-
-- (void)dealloc{
-    
-//    if (_feedType == FeedLocalType) {
-//        NSLog(@"dealloc ActivityScrollViewController Local");
-//    }else if (_feedType == FeedTribeType){
-//        NSLog(@"dealloc ActivityScrollViewController Tribes");
-//    }else if (_feedType == FeedProfileType){
-//        NSLog(@"dealloc ActivityScrollViewController Profile");
-//    }
     
 }
 

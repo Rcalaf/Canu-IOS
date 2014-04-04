@@ -25,10 +25,16 @@ typedef enum {
 @property (nonatomic) BOOL isUnlock; // Counter
 @property (retain) id delegate;
 
-- (void)reload;
-
 - (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame;
 
+/**
+ *  Reload the feed view
+ */
+- (void)reload;
+
+/**
+ *  Remove the view after logout / and children
+ */
 - (void)removeAfterlogOut;
 
 @end

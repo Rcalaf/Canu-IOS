@@ -173,13 +173,20 @@
         return nil;
     }
     
+    [self updateWithAttributes:attributes];
+    
+    return self;
+}
+
+- (void)updateWithAttributes:(NSDictionary *)attributes{
+    
     _activityId          = [[attributes valueForKeyPath:@"id"] unsignedIntegerValue];
     _title               = [attributes valueForKeyPath:@"title"];
     _ownerId             = [[[attributes valueForKeyPath:@"user"] valueForKeyPath:@"id"] unsignedIntegerValue];
     _user                = [[User alloc] initWithAttributes:[attributes valueForKeyPath:@"user"]];
-
+    
     _description         = [attributes valueForKeyPath:@"description"];
-
+    
     _city                = [attributes valueForKeyPath:@"city"];
     _country             = [attributes valueForKeyPath:@"country"];
     _street              = [attributes valueForKeyPath:@"street"];
@@ -192,12 +199,12 @@
         _privacyLocation     = [[attributes valueForKeyPath:@"private_location"] boolValue];
         
     }
-
+    
     self.start           = [attributes valueForKeyPath:@"start"];
     self.end             = [attributes valueForKeyPath:@"end_date"];
-
+    
     _length              = [attributes valueForKeyPath:@"length"];
-
+    
     _coordinate.latitude = [[attributes valueForKeyPath:@"latitude"] floatValue];
     _coordinate.longitude =[[attributes valueForKeyPath:@"longitude"] floatValue];
     
@@ -209,7 +216,6 @@
     
     _invitationToken = [attributes valueForKeyPath:@"invitation_token"];
     
-    return self;
 }
 
 /**
@@ -543,6 +549,9 @@
     NSString *url = [NSString stringWithFormat:@"users/%lu/activities/%lu",(unsigned long)[[UserManager sharedUserManager] currentUser].userId,(unsigned long)self.activityId];
     
     [[AFCanuAPIClient sharedClient] PUT:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self updateWithAttributes:responseObject];
+        
         if (block) {
             block(nil);
         }
