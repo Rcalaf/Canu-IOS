@@ -22,3 +22,7 @@ CANU/Vendor/export/*
 
 #CocoaPods
 Pods
+
+/Podfile.lock
+
+/CANU.xcworkspace/
