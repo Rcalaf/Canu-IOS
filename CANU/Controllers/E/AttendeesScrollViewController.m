@@ -69,6 +69,7 @@
                 }
                 
                 [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
+                
             }];
         } else {
             [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
@@ -168,7 +169,7 @@
         
     }
     
-    float heightContentScrollView = ([_attendees count] + [_invitationUser count] + [_invitationGhostuser count]) * (57 + 10) + 10;
+    float heightContentScrollView = ([_attendees count] + [_invitationUser count] + [_invitationGhostuser count]) * (55 + 5) + 5;
     
     if (heightContentScrollView <= _scrollview.frame.size.height) {
         heightContentScrollView = _scrollview.frame.size.height + 1;
@@ -183,7 +184,7 @@
         
         User *user = [_attendees objectAtIndex:i];
         
-        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (57 + 10) + 10 ) - 57, 300, 57) andUser:user orContact:nil];
+        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:user orContact:nil];
         cell.delegate = self;
         [self.scrollview addSubview:cell];
         
@@ -197,7 +198,7 @@
         
         User *user = [_invitationUser objectAtIndex:i];
         
-        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (57 + 10) + 10 ) - 57, 300, 57) andUser:user orContact:nil];
+        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:user orContact:nil];
         cell.alpha = 0.5;
         cell.delegate = self;
         [self.scrollview addSubview:cell];
@@ -224,7 +225,7 @@
             
         }
         
-        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (57 + 10) + 10 ) - 57, 300, 57) andUser:nil orContact:contact];
+        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:nil orContact:contact];
         cell.alpha = 0.5;
         cell.delegate = self;
         [self.scrollview addSubview:cell];

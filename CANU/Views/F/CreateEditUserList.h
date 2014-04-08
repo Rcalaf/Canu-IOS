@@ -39,6 +39,8 @@
 
 - (void)updateAndDeleteContact:(Contact *)contact;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol CreateEditUserListDelegate <NSObject>

@@ -10,7 +10,6 @@
 
 #import "Activity.h"
 
-#import "UICanuTextField.h"
 #import "UICanuTextFieldLocation.h"
 #import "UICanuTextFieldInvit.h"
 #import "UICanuTextFieldReset.h"
@@ -259,6 +258,7 @@ typedef enum {
     // Bottom bar
     
     self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45)];
+    self.bottomBar.clipsToBounds = YES;
     [self.view addSubview:_bottomBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -485,6 +485,69 @@ typedef enum {
     
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+}
+
+- (void)dealloc{
+    
+    NSLog(@"Dealloc Create");
+    
+}
+
+- (void)forceDealloc{
+    
+    if (_userList) {
+        [self.userList forceDealloc];
+    }
+    [self.calendar forceDealloc];
+    [self.timePicker forceDealloc];
+    [self.searchLocation forceDealloc];
+    
+    [self.wrapperActivity removeFromSuperview];
+    [self.wrapperButtonDaySelected removeFromSuperview];
+    [self.wrapperTimeLengthPicker removeFromSuperview];
+    [self.wrapperLocation removeFromSuperview];
+    [self.wrapperUserList removeFromSuperview];
+    [self.wrapper removeFromSuperview];
+    [self.descriptionInput removeFromSuperview];
+    [self.bottomBar  removeFromSuperview];
+    [self.userList removeFromSuperview];
+    [self.titleInput removeFromSuperview];
+    [self.invitInput removeFromSuperview];
+    [self.locationInput removeFromSuperview];
+    [self.timePicker removeFromSuperview];
+    [self.lenghtPicker removeFromSuperview];
+    [self.calendar removeFromSuperview];
+    [self.searchLocation removeFromSuperview];
+    [self.messageGhostUser removeFromSuperview];
+    
+    if (_mapLocation) {
+        [self.mapLocation willMoveToParentViewController:nil];
+        [self.mapLocation.view removeFromSuperview];
+        [self.mapLocation removeFromParentViewController];
+        self.mapLocation = nil;
+    }
+    
+    _timePicker = nil;
+    _currentLocation = nil;
+    _wrapperActivity = nil;
+    _wrapperButtonDaySelected = nil;
+    _wrapperTimeLengthPicker = nil;
+    _wrapperLocation = nil;
+    _wrapperUserList = nil;
+    _wrapper = nil;
+    _descriptionInput = nil;
+    _bottomBar = nil;
+    _locationManager = nil;
+    _userList = nil;
+    _titleInput = nil;
+    _invitInput = nil;
+    _locationInput = nil;
+    _timePicker = nil;
+    _lenghtPicker = nil;
+    _calendar = nil;
+    _searchLocation = nil;
+    _messageGhostUser = nil;
     
 }
 
@@ -822,12 +885,22 @@ typedef enum {
 
 - (void)messageGhostUserWillDisappear{
     
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    UICanuNavigationController *navigation = appDelegate.canuViewController;
+    
+    navigation.control.hidden = NO;
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapper.alpha = 0;
         self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+        navigation.control.alpha = 1;
     } completion:^(BOOL finished) {
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self forceDealloc];
+        
+        [self willMoveToParentViewController:nil];
+        [self.view removeFromSuperview];
+        [self removeFromParentViewController];
         
     }];
     
@@ -835,22 +908,32 @@ typedef enum {
 
 - (void)messageGhostUserWillDisappearForDeleteActivity{
     
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    UICanuNavigationController *navigation = appDelegate.canuViewController;
+    
+    navigation.control.hidden = NO;
+    
     [UIView animateWithDuration:0.4 animations:^{
         self.wrapper.alpha = 0;
         self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+        navigation.control.alpha = 1;
     } completion:^(BOOL finished) {
         
         [self.createActivity removeActivityWithBlock:^(NSError *error) {
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [self forceDealloc];
+            
+            [self willMoveToParentViewController:nil];
+            [self.view removeFromSuperview];
+            [self removeFromParentViewController];
             
         }];
-        
+
     }];
     
 }
 
-#pragma mark - 
+#pragma mark -
 
 
 - (CLLocationManager *)locationManager{
@@ -1393,10 +1476,13 @@ typedef enum {
 
 - (void)transitionEndAfterEdit{
     
-    [self.delegate createEditActivityIsFinish:_editActivity];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(createEditActivityIsFinish:)]) {
+        [self.delegate createEditActivityIsFinish:_editActivity];
+    }
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.userList.alpha = 0;
+        self.wrapper.contentOffset = CGPointMake(0, 0);
     } completion:^(BOOL finished) {
         
         [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -1412,6 +1498,8 @@ typedef enum {
             self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
             self.view.alpha = 0;
         } completion:^(BOOL finished) {
+            
+            [self forceDealloc];
             
             [self willMoveToParentViewController:nil];
             [self.view removeFromSuperview];
@@ -1437,6 +1525,9 @@ typedef enum {
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.userList.alpha = 0;
+        if (_editActivity) {
+            self.wrapper.contentOffset = CGPointMake(0, 0);
+        }
     } completion:^(BOOL finished) {
         
         [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -1460,12 +1551,17 @@ typedef enum {
             
             navigation.control.hidden = NO;
             
-            [self.delegate createEditActivityIsFinish:_editActivity];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(createEditActivityIsFinish:)]) {
+                [self.delegate createEditActivityIsFinish:_editActivity];
+            }
             
             [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.view.alpha = 0;
                 navigation.control.alpha = 1;
             } completion:^(BOOL finished) {
+                
+                [self forceDealloc];
+                
                 [self willMoveToParentViewController:nil];
                 [self.view removeFromSuperview];
                 [self removeFromParentViewController];
@@ -1484,6 +1580,9 @@ typedef enum {
                     self.view.alpha = 0;
                     navigation.control.alpha = 1;
                 } completion:^(BOOL finished) {
+                    
+                    [self forceDealloc];
+                    
                     [self willMoveToParentViewController:nil];
                     [self.view removeFromSuperview];
                     [self removeFromParentViewController];
@@ -1629,6 +1728,8 @@ typedef enum {
                                                                navigation.control.alpha = 1;
                                                            } completion:^(BOOL finished) {
                                                                
+                                                               [self forceDealloc];
+                                                               
                                                                [self willMoveToParentViewController:nil];
                                                                [self.view removeFromSuperview];
                                                                [self removeFromParentViewController];
@@ -1664,7 +1765,7 @@ typedef enum {
     [self.editActivity removeActivityWithBlock:^(NSError *error){
         if (!error) {
             
-            if (self.delegate) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(currentActivityWasDeleted)]) {
                 [self.delegate currentActivityWasDeleted];
             } else {
                [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
@@ -1683,6 +1784,8 @@ typedef enum {
                 self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
                 navigation.control.alpha = 1;
             } completion:^(BOOL finished) {
+                
+                [self forceDealloc];
                 
                 [self willMoveToParentViewController:nil];
                 [self.view removeFromSuperview];

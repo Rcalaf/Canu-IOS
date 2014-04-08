@@ -58,6 +58,27 @@
     return self;
 }
 
+- (void)forceDealloc{
+    
+    [self.scrollView removeFromSuperview];
+    
+    [self.arrayContact removeAllObjects];
+    [self.arrayCanuUser removeAllObjects];
+    [self.arrayCellCanuUser removeAllObjects];
+    [self.arrayAllUserSelected removeAllObjects];
+    
+    _scrollView = nil;
+    _arrayContact = nil;
+    _arrayCanuUser = nil;
+    _arrayCellCanuUser = nil;
+    _arrayAllUserSelected = nil;
+    
+}
+
+- (void)dealloc{
+    NSLog(@"CreateEditUserList dealloc");
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{

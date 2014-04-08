@@ -57,6 +57,28 @@
     return self;
 }
 
+- (void)forceDealloc{
+    
+    [self.arrayCellLocation removeAllObjects];
+    
+    [self.arrayLocation removeAllObjects];
+    
+    [self.scrollView removeFromSuperview];
+    
+    _arrayLocation = nil;
+    _arrayCellLocation = nil;
+    _scrollView = nil;
+    _currentLocation = nil;
+    _locationPicker = nil;
+    _selectedLocation = nil;
+    
+}
+
+- (void)dealloc
+{
+    NSLog(@"Dealloc UICanuSearchLocation");
+}
+
 #pragma mark - Custom Accessors
 
 - (void)setCurrentLocation:(MKMapItem *)currentLocation{

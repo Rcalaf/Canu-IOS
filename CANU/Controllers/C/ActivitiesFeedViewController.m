@@ -294,8 +294,10 @@
 }
 
 - (void)activityScrollViewControllerChangementFeed{
+    
     [UIView animateWithDuration:0.4 animations:^{
         [self animationNavBox:self.lastPosition];
+        [self.profileView forEmptyFeed:self.profilFeed.isEmpty];
     }];
 }
 

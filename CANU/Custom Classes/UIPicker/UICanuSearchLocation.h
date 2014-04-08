@@ -25,6 +25,8 @@
 
 - (void)forceLocationTo:(Location *)location;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol UICanuSearchLocationDelegate <NSObject>

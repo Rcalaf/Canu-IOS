@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *arrayCell;
 @property (strong, nonatomic) UIImageView *controleSlide1;
 @property (strong, nonatomic) UIImageView *controleSlide2;
+@property (strong, nonatomic) UIScrollView *wrapperCalendar;
 @property (strong, nonatomic) UICanuCalendarButtonPicker *currentSelected;
 @property (strong, nonatomic) UICanuCalendarButtonPicker *firstDay;
 
@@ -70,11 +71,11 @@
             
         }
         
-        UIScrollView *wrapperCalendar = [[UIScrollView alloc]initWithFrame:CGRectMake(11, 27, 298, 120 - headerDay.frame.size.height)];
-        wrapperCalendar.pagingEnabled = YES;
-        wrapperCalendar.showsHorizontalScrollIndicator = NO;
-        wrapperCalendar.delegate = self;
-        [self addSubview:wrapperCalendar];
+        self.wrapperCalendar = [[UIScrollView alloc]initWithFrame:CGRectMake(11, 27, 298, 120 - headerDay.frame.size.height)];
+        self.wrapperCalendar.pagingEnabled = YES;
+        self.wrapperCalendar.showsHorizontalScrollIndicator = NO;
+        self.wrapperCalendar.delegate = self;
+        [self addSubview:_wrapperCalendar];
         
         // Current Date
         NSDateComponents *dateCurrent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -147,7 +148,7 @@
             UICanuCalendarButtonPicker *day = [[UICanuCalendarButtonPicker alloc]initWithFrame:CGRectMake(3 + colums * 42 + numberOf2week * 300, row * 42, 42, 42) Date:date Type:canuCalendarButtonType];
             day.delegate = self;
             [self.arrayCell addObject:day];
-            [wrapperCalendar addSubview:day];
+            [self.wrapperCalendar addSubview:day];
             
             if (i == dayOff + 3) {
                 day.selected = YES;
@@ -184,7 +185,7 @@
             
         }
         
-        wrapperCalendar.contentSize = CGSizeMake(298 * numberOf2week, 87);
+        self.wrapperCalendar.contentSize = CGSizeMake(298 * numberOf2week, 87);
         
         self.controleSlide1 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 - 5, 120 - 8, 4, 4)];
         self.controleSlide1.image = [UIImage imageNamed:@"F1_Calendar_dote_Enable"];
@@ -196,6 +197,25 @@
         
     }
     return self;
+}
+
+- (void)forceDealloc{
+    
+    [self.arrayCell removeAllObjects];
+    
+    [self.currentSelected removeFromSuperview];
+    [self.firstDay removeFromSuperview];
+    [self.wrapperCalendar removeFromSuperview];
+    
+    _arrayCell = nil;
+    _currentSelected = nil;
+    _firstDay = nil;
+    _wrapperCalendar = nil;
+    
+}
+
+- (void)dealloc{
+    NSLog(@"Dealloc Calendar");
 }
 
 #pragma mark - Public

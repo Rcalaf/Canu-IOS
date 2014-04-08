@@ -92,6 +92,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    NSLog(@"Dealloc UICanuLenghtPicker");
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

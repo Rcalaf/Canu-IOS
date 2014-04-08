@@ -101,6 +101,25 @@
     return self;
 }
 
+- (void)forceDealloc{
+    
+    [self.hoursScroll removeFromSuperview];
+    [self.minutesScroll removeFromSuperview];
+    [self.amPmScroll removeFromSuperview];
+    
+    _arrayHours = nil;
+    _arrayMinutes = nil;
+    _hoursScroll = nil;
+    _minutesScroll = nil;
+    _amPmScroll = nil;
+    
+}
+
+- (void)dealloc
+{
+    NSLog(@"Dealloc UICanuTimePicker");
+}
+
 - (BOOL)timeIs24HourFormat {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterNoStyle];

@@ -16,4 +16,6 @@
 
 - (void)isToday:(BOOL)blockedValue;
 
+- (void)forceDealloc;
+
 @end

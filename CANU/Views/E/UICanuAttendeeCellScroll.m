@@ -14,6 +14,8 @@
 #import "User.h"
 #import "Contact.h"
 
+#import "ProfilePicture.h"
+
 @interface UICanuAttendeeCellScroll ()
 
 @property (nonatomic) User *user;
@@ -28,44 +30,54 @@
         
         self.user = user;
         
-        self.userInteractionEnabled = YES;
+        UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 55)];
+        background.image = [UIImage imageNamed:@"F_location_cell"];
+        [self addSubview:background];
         
-        self.backgroundColor = [UIColor whiteColor];
-        
-        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 37, 37)];
+        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
+        avatar.image = [ProfilePicture defaultProfilePicture35];
+        avatar.contentMode = UIViewContentModeScaleAspectFill;
+        avatar.clipsToBounds = YES;
         [self addSubview:avatar];
         
-        UILabel *username = [[UILabel alloc]initWithFrame:CGRectMake(57, 12, 200, 15)];
-        username.font = [UIFont fontWithName:@"Lato-Bold" size:13.0];
-        username.backgroundColor = [UIColor whiteColor];
-        username.textColor = UIColorFromRGB(0x1a8d9e);
-        [self addSubview:username];
+        UIImageView *strokePicture = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        strokePicture.image = [UIImage imageNamed:@"All_stroke_profile_picture_35"];
+        [avatar addSubview:strokePicture];
         
-        UILabel *nickname = [[UILabel alloc]initWithFrame:CGRectMake(57, 34, 200, 10)];
-        nickname.font = [UIFont fontWithName:@"Lato-Bold" size:8.0];
-        nickname.backgroundColor = [UIColor whiteColor];
-        nickname.textColor = UIColorFromRGB(0x6d6e7a);
-        [self addSubview:nickname];
+        UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(55, 9, 233, 20)];
+        name.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+        name.textColor = UIColorFromRGB(0x2b4b58);
+        name.text = contact.fullName;
+        [self addSubview:name];
+        
+        UILabel *adress = [[UILabel alloc]initWithFrame:CGRectMake(55, 31, 233, 11)];
+        adress.font = [UIFont fontWithName:@"Lato-Italic" size:10];
+        adress.textColor = UIColorFromRGB(0x2b4b58);
+        adress.text = contact.convertNumber;
+        [self addSubview:adress];
         
         if (user) {
-            
-            [avatar setImageWithURL:_user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
-            
-            username.text = _user.firstName;
-            
-            nickname.text = _user.userName;
-            
+            self.user = user;
+            name.text = user.firstName;
+            adress.text = user.userName;
+            [avatar setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
         } else {
-            avatar.image = [UIImage imageNamed:@"icon_username.png"];
-            
-            if (contact.fullName) {
-                username.text = contact.fullName;
+            if (contact.profilePicture) {
+                avatar.image = contact.profilePicture;
             } else {
-                username.text = @"Little Boy";
+                avatar.image = [ProfilePicture defaultProfilePicture35];
             }
             
-            nickname.text = @"";
+            if (contact.fullName) {
+                name.text = contact.fullName;
+            } else {
+                name.text = @"Little Boy";
+            }
+            
         }
+        
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cellIsTouched)];
+//        [self addGestureRecognizer:tap];
     
     }
     return self;

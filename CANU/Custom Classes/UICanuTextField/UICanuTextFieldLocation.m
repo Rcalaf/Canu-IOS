@@ -40,6 +40,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    NSLog(@"UICanuTextFieldLocation dealloc");
+}
+
 - (void)setActiveReset:(BOOL)activeReset{
     
     _activeReset = activeReset;

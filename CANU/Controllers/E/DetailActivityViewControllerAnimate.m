@@ -80,16 +80,16 @@ typedef enum {
     if (self) {
         
         self.canuOpenDetailsActivityAfter = canuOpenDetailsActivityAfter;
-        
-        self.frame           = frame;
 
-        self.activity        = activity;
+        self.frame                        = frame;
 
-        self.positionY       = positionY;
+        self.activity                     = activity;
 
-        self.keyboardIsOpen  = NO;
-        self.descriptionIsOpen = NO;
-        self.closeAfterDelete= NO;
+        self.positionY                    = positionY;
+
+        self.keyboardIsOpen               = NO;
+        self.descriptionIsOpen            = NO;
+        self.closeAfterDelete             = NO;
     }
     return self;
 }
@@ -110,9 +110,6 @@ typedef enum {
     [self.view addSubview:_wrapper];
     
     self.chatView = [[ChatScrollView alloc]initWithFrame:CGRectMake(10, 10 + 130, 300,self.view.frame.size.height - 10 - 130 - 45 + 2) andActivity:_activity];
-//    if (_canuOpenDetailsActivityAfter == CANUOpenDetailsActivityAfterFeedView) {
-//        self.chatView.frame = CGRectMake(10, 10 + 130 + 50, 300,self.view.frame.size.height - 10 - 130 - 45 + 2);
-//    }
     self.chatView.delegate = self;
     [self.wrapper addSubview:_chatView];
     
@@ -145,7 +142,7 @@ typedef enum {
     self.input.font = [UIFont fontWithName:@"Lato-Regular" size:13];
     self.input.backgroundColor = [UIColor whiteColor];
     self.input.textColor = UIColorFromRGB(0xabb3b7);
-    [self.input setReturnKeyType:UIReturnKeySend];
+    self.input.returnKeyType = UIReturnKeyDefault;
     self.input.delegate = self;
     if (IS_OS_7_OR_LATER) {
         [self.input setTintColor:UIColorFromRGB(0x2b4b58)];
@@ -158,8 +155,6 @@ typedef enum {
         [UIView animateWithDuration:0.4 animations:^{
             [navigation changePosition:1];
             self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
-//            self.chatView.alpha = 1;
-//            self.chatView.frame = CGRectMake(10, 10 + 130, 300,self.view.frame.size.height - 10 - 130 - 45 + 2);
             self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, 320, 45);
         } completion:^(BOOL finished) {
             navigation.control.hidden = YES;
@@ -251,6 +246,12 @@ typedef enum {
     }
     [background addSubview:_counterInvit];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAttendees)];
+    
+    UIView *areaShowAttendees = [[UIView alloc]initWithFrame:CGRectMake(5, 5, 250, 40)];
+    [areaShowAttendees addGestureRecognizer:tap];
+    [view addSubview:areaShowAttendees];
+    
     UICanuLabelActivityName *nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
     nameActivity.text = _activity.title;
     [background addSubview:nameActivity];
@@ -278,19 +279,18 @@ typedef enum {
     
     UIImageView *backgroundBottom = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -1, 304, 33)];
     backgroundBottom.image = [UIImage imageNamed:@"E_Activity_bottom"];
-    backgroundBottom.userInteractionEnabled = YES;
     [self.wrapperActivityBottom addSubview:backgroundBottom];
+    
+    UICanuLabelDate *date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310 -2, -1, 300, 30)];
+    [date setDate:_activity];
+    [self.wrapperActivityBottom addSubview:date];
     
     UICanuLabelLocation *location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
     location.text = _activity.locationDescription;
     [self.wrapperActivityBottom addSubview:location];
     
     UITapGestureRecognizer *tapMap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openInMap)];
-    [location addGestureRecognizer:tapMap];
-    
-    UICanuLabelDate *date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310 -2, -1, 300, 30)];
-    [date setDate:_activity];
-    [self.wrapperActivityBottom addSubview:date];
+    [self.wrapperActivityBottom addGestureRecognizer:tapMap];
     
     return view;
     
@@ -345,7 +345,7 @@ typedef enum {
         
         self.keyboardIsOpen = YES;
         
-        self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 57, 320, 216 + 57)];
+        self.touchQuitKeyboard = [[UIButton alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 216 - 45, 320, 216 + 45)];
         [self.touchQuitKeyboard addTarget:self action:@selector(touchChatView) forControlEvents:UIControlEventTouchDown];
         [self.wrapper addSubview:_touchQuitKeyboard];
         
@@ -392,13 +392,9 @@ typedef enum {
     return YES;
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+- (void)textViewDidChange:(UITextView *)textView{
     
     if (_keyboardIsOpen) {
-        
-        if ([text isEqualToString:@"\n"]) {
-            [textView resignFirstResponder];
-        }
         
         int numberOfLine = (int)textView.contentSize.height / textView.font.lineHeight;
         
@@ -406,13 +402,12 @@ typedef enum {
             numberOfLine = 6;
         }
         
-        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 216 - 45 - ((numberOfLine - 2) * 15), 320, 45);
+        self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 216 - 45 - ((numberOfLine - 2) * 15), 320, 45 + ((numberOfLine - 2) * 15));
         self.input.frame = CGRectMake(_input.frame.origin.x, _input.frame.origin.y, _input.frame.size.width, 30 + ((numberOfLine - 2) * 15));
         self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, 4 + (numberOfLine - 2) * 15, self.sendButton.frame.size.width, self.sendButton.frame.size.height);
         self.backButton.frame = CGRectMake(0.0, ((numberOfLine - 2) * 15), 45, 45);
     }
     
-    return YES;
 }
 
 - (void)sendMessage{
@@ -420,6 +415,16 @@ typedef enum {
     NSString *message = _input.text;
     if ([message length] != 0 && ![message isEqualToString:NSLocalizedString(@"Write something nice...", nil)]) {
         [self.chatView addSendMessage:message];
+        
+        self.input.text = @"";
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height);
+            self.input.frame = CGRectMake(_input.frame.origin.x, _input.frame.origin.y, _input.frame.size.width, 30);
+            self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, 4, self.sendButton.frame.size.width, self.sendButton.frame.size.height);
+            self.backButton.frame = CGRectMake(0.0, 0, 45, 45);
+        }];
+        
         [_activity newMessage:message WithBlock:^(NSError *error){
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
@@ -429,16 +434,6 @@ typedef enum {
                 
                 id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chat" action:@"Send" label:nil value:nil] build]];
-                
-                self.input.text = NSLocalizedString(@"Write something nice...", nil);
-                self.input.textColor = UIColorFromRGB(0xabb3b7);
-                
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, self.bottomBar.frame.size.width, self.bottomBar.frame.size.height);
-                    self.input.frame = CGRectMake(_input.frame.origin.x, _input.frame.origin.y, _input.frame.size.width, 30);
-                    self.sendButton.frame = CGRectMake(self.sendButton.frame.origin.x, 4, self.sendButton.frame.size.width, self.sendButton.frame.size.height);
-                    self.backButton.frame = CGRectMake(0.0, 0, 45, 45);
-                }];
                 
             }
             
@@ -580,6 +575,10 @@ typedef enum {
     [UIView animateWithDuration:0.3 animations:^{
         self.chatView.alpha = 0;
     } completion:^(BOOL finished) {
+        
+        [self.chatView removeFromSuperview];
+        self.chatView = nil;
+        
         [self.delegate closeDetailActivity:self];
         [UIView animateWithDuration:0.4 animations:^{
             [navigation changePosition:0];
@@ -605,14 +604,18 @@ typedef enum {
         [tracker set:kGAIScreenName value:@"Activity Attendees"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        self.attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 57) andActivity:_activity];
+        self.attendeesList = [[AttendeesScrollViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 45) andActivity:_activity];
         [self addChildViewController:self.attendeesList];
         [self.view addSubview:self.attendeesList.view];
+        self.attendeesList.view.alpha = 0;
         
         [UIView animateWithDuration:0.4 animations:^{
+            self.attendeesList.view.alpha = 1;
+            self.wrapper.alpha = 0;
             self.wrapper.frame = CGRectMake(- 320, 0, 320, self.wrapper.frame.size.height);
             self.attendeesList.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height - 57);
-            self.actionButton.alpha = 0;
+            self.input.alpha = 0;
+            self.sendButton.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
@@ -623,9 +626,12 @@ typedef enum {
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         
         [UIView animateWithDuration:0.4 animations:^{
+            self.attendeesList.view.alpha = 0;
+            self.wrapper.alpha = 1;
             self.wrapper.frame = CGRectMake(0, 0, 320, self.wrapper.frame.size.height);
             self.attendeesList.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height - 57);
-            self.actionButton.alpha = 1;
+            self.input.alpha = 1;
+            self.sendButton.alpha = 1;
         } completion:^(BOOL finished) {
             [self.attendeesList willMoveToParentViewController:nil];
             [self.attendeesList.view removeFromSuperview];
@@ -637,8 +643,6 @@ typedef enum {
 }
 
 - (void)openInMap{
-    
-    NSLog(@"openInMap");
     
     Class mapItemClass = [MKMapItem class];
     if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]){

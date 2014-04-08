@@ -16,4 +16,6 @@
 
 - (void)animationProfileViewWithScroll:(float)offset;
 
+- (void)forEmptyFeed:(BOOL)isEmptyFeed;
+
 @end

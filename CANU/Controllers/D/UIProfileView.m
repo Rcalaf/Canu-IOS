@@ -54,14 +54,14 @@
         self.pseudo.text                           = user.userName;
         self.pseudo.textAlignment                  = NSTextAlignmentCenter;
         self.pseudo.font                           = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-        self.pseudo.textColor                      = UIColorFromRGB(0x2b4b58);
+        self.pseudo.textColor                      = [UIColor whiteColor];
         self.pseudo.backgroundColor                = [UIColor clearColor];
         [self addSubview:_pseudo];
 
         self.name                                  = [[UILabel alloc]initWithFrame:CGRectMake((320 - 160)/2, 135, 160, 12)];
         self.name.backgroundColor                  = [UIColor clearColor];
         self.name.textAlignment                    = NSTextAlignmentCenter;
-        self.name.textColor                        = UIColorFromRGB(0x2b4b58);
+        self.name.textColor                        = [UIColor whiteColor];
         self.name.alpha                            = 0.3;
         self.name.font                             = [UIFont fontWithName:@"Lato-Regular" size:10.0];
         self.name.text                             = user.firstName;
@@ -106,6 +106,18 @@
     self.profileImage.frame = CGRectMake(113, 10 + value * 0.6f, 95, 95);
     self.pseudo.frame = CGRectMake((320 - 160)/2, 110 + value * 0.8f, 160, 18);
     self.name.frame = CGRectMake((320 - 160)/2, 135 + value * 0.85f, 160, 12);
+    
+}
+
+- (void)forEmptyFeed:(BOOL)isEmptyFeed{
+    
+    if (isEmptyFeed) {
+        self.name.textColor = [UIColor whiteColor];
+        self.pseudo.textColor = [UIColor whiteColor];
+    } else {
+        self.name.textColor = UIColorFromRGB(0x2b4b58);
+        self.pseudo.textColor = UIColorFromRGB(0x2b4b58);
+    }
     
 }
 

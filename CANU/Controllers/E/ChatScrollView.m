@@ -295,7 +295,6 @@
     message.text = text;
     [message addDate:[NSDate date]];
     message.user = [[UserManager sharedUserManager]currentUser];
-    NSLog(@"%@",message.date);
     
     NSMutableArray *arrayMessage = [[NSMutableArray alloc]initWithArray:_messages];
     [arrayMessage addObject:message];

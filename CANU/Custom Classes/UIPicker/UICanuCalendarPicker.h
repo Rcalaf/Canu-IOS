@@ -18,6 +18,8 @@
 
 - (void)changeTo:(NSDate *)date;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol UICanuCalendarPickerDelegate <NSObject>
