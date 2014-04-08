@@ -99,12 +99,12 @@
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
-        self.imageEmptyFeed = [[UIImageView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480)];
+        self.imageEmptyFeed = [[UIImageView alloc]initWithFrame:CGRectMake(0, (self.view.frame.size.height - 480)/2 - 20, 320, 480)];
         self.imageEmptyFeed.alpha = 0;
         [self.view addSubview:_imageEmptyFeed];
         
-        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(40.0f, (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f)];
-        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:19.0];
+        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(40.0f, (self.view.frame.size.height - 480)/2 + 250.0f, 240.0f, 100.0f)];
+        self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Bold" size:13.0];
         self.feedbackMessage.textColor                   = [UIColor whiteColor];
         self.feedbackMessage.allowsEditingTextAttributes = NO;
         self.feedbackMessage.textAlignment               = NSTextAlignmentCenter;
@@ -349,8 +349,8 @@
                 self.counter.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
                 self.peopleInclued.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2 + 130, 320, 20);
             } else if (self.isEmpty) {
-                self.imageEmptyFeed.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2, 320, 480);
-                self.feedbackMessage.frame = CGRectMake(40.0f, - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                self.imageEmptyFeed.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2 - 20, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f, - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 250.0f, 240.0f, 100.0f);
             }
             
         } else {
@@ -362,8 +362,8 @@
                 self.counter.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 80.0f, 320, 50);
                 self.peopleInclued.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 130, 320, 20);
             } else if (self.isEmpty) {
-                self.imageEmptyFeed.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2, 320, 480);
-                self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                self.imageEmptyFeed.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 - 20, 320, 480);
+                self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 250.0f, 240.0f, 100.0f);
             }
             
         }
@@ -548,8 +548,8 @@
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
                     if (self.isEmpty) {
-                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
-                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 - 20, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 250.0f, 240.0f, 100.0f);
                     }
                 } completion:^(BOOL finished) {
                     [self.loaderAnimation stopAnimation];
@@ -592,8 +592,8 @@
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
                     if (self.isEmpty) {
-                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
-                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 - 20, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 250.0f, 240.0f, 100.0f);
                     }
                 } completion:^(BOOL finished) {
                     
@@ -637,8 +637,8 @@
                     self.scrollview.frame = CGRectMake( 0, 0, _scrollview.frame.size.width, _scrollview.frame.size.height);
                     [self.navigation changePosition:0];
                     if (self.isEmpty) {
-                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2, 320, 480);
-                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 270.0f, 240.0f, 100.0f);
+                        self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 - 20, 320, 480);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 250.0f, 240.0f, 100.0f);
                     }
                 } completion:^(BOOL finished) {
                     
