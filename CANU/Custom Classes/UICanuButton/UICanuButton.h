@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, UICanuButtonStyle) {
-    UICanuButtonStyleNormal = 0
+    UICanuButtonStyleNormal = 0,
+    UICanuButtonStyleLarge = 1,
 };
 
 @interface UICanuButton : UIButton

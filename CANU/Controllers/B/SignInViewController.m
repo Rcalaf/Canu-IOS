@@ -11,13 +11,14 @@
 #import "UICanuNavigationController.h"
 #import "ActivitiesFeedViewController.h"
 #import "AFCanuAPIClient.h"
-#import "UICanuTextField.h"
+#import "UICanuTextFieldLine.h"
 #import "TTTAttributedLabel.h"
 #import "User.h"
-#import "UICanuButtonSignBottomBar.h"
+#import "UICanuButton.h"
 #import "MainViewController.h"
 #import "UserManager.h"
 #import "AlertViewController.h"
+#import "UICanuBottomBar.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -29,11 +30,11 @@
 @property (nonatomic) UIView *wrapper;
 @property (nonatomic) UIView *container;
 @property (nonatomic) UIView *resetContainer;
-@property (nonatomic) UIView *bottomBar;
+@property (nonatomic) UICanuBottomBar *bottomBar;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicator;
-@property (nonatomic) UICanuTextField *userName;
-@property (nonatomic) UICanuTextField *password;
-@property (nonatomic) UICanuButtonSignBottomBar *buttonAction;
+@property (nonatomic) UICanuTextFieldLine *userName;
+@property (nonatomic) UICanuTextFieldLine *password;
+@property (nonatomic) UICanuButton *buttonAction;
 
 @end
 
@@ -60,17 +61,16 @@
     self.container = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 185 - 57, self.view.frame.size.width, 185)];
     [self.wrapper addSubview:self.container];
     
-    self.bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57)];
-    self.bottomBar .backgroundColor = UIColorFromRGB(0xf4f4f4);
+    self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
     [self.wrapper addSubview:self.bottomBar];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [self.backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    [self.backButton setFrame:CGRectMake(0.0, 0.0, 45, 45)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(goToHome) forControlEvents:UIControlEventTouchDown];
     [self.bottomBar  addSubview:self.backButton];
     
-    self.buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0) andBlue:YES];
+    self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleLarge];
     [self.buttonAction setTitle:NSLocalizedString(@"SIGN IN", nil) forState:UIControlStateNormal];
     [self.buttonAction addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchDown];
     [self.bottomBar  addSubview:_buttonAction];
@@ -83,8 +83,8 @@
     title1.text = NSLocalizedString(@"Welcome Back", nil);
     title1.textAlignment = NSTextAlignmentCenter;
     title1.backgroundColor = [UIColor clearColor];
-    title1.textColor = UIColorFromRGB(0x1ca6c3);
-    title1.font = [UIFont fontWithName:@"Lato-Bold" size:24];
+    title1.textColor = UIColorFromRGB(0x2b4b58);
+    title1.font = [UIFont fontWithName:@"Lato-Regular" size:18];
     [self.container addSubview:title1];
     
 //    UITapGestureRecognizer *tapForgotPassword = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forgotPassword)];
@@ -108,22 +108,14 @@
 //        
 //    }];
     
-    UIImageView *iconeUsername = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 47, 47)];
-    iconeUsername.image = [UIImage imageNamed:@"icon_username"];
-    [self.container addSubview:iconeUsername];
-    
-    self.userName = [[UICanuTextField alloc] initWithFrame:CGRectMake(57.5, 80, 252.5, 47.0)];
+    self.userName = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 60, 280, 45)];
     self.userName.placeholder = NSLocalizedString(@"Username", nil);
     self.userName.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.userName setReturnKeyType:UIReturnKeyNext];
     self.userName.delegate = self;
     [self.container addSubview:self.userName];
     
-    UIImageView *iconePassword = [[UIImageView alloc]initWithFrame:CGRectMake(10, 128, 47, 47)];
-    iconePassword.image = [UIImage imageNamed:@"icon_password"];
-    [self.container addSubview:iconePassword];
-    
-    self.password = [[UICanuTextField alloc] initWithFrame:CGRectMake(57.5, 128, 252.5, 47.0)];
+    self.password = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 118, 280, 45)];
     self.password.placeholder = NSLocalizedString(@"Password", nil);
     [self.password setReturnKeyType:UIReturnKeyGo];
     self.password.secureTextEntry = YES;
@@ -317,7 +309,7 @@
             
         }];
         
-        UICanuTextField *email = [[UICanuTextField alloc] initWithFrame:CGRectMake(10, 128, 300, 47.0)];
+        UICanuTextFieldLine *email = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(10, 128, 300, 47.0)];
         email.placeholder = NSLocalizedString(@"your email or phone number", nil);
         [email setReturnKeyType:UIReturnKeyGo];
         [_resetContainer addSubview:email];
