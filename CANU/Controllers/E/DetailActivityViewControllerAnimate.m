@@ -413,7 +413,8 @@ typedef enum {
 - (void)sendMessage{
     
     NSString *message = _input.text;
-    if ([message length] != 0 && ![message isEqualToString:NSLocalizedString(@"Write something nice...", nil)]) {
+    
+    if ([message length] != 0 && ![message isEqualToString:NSLocalizedString(@"Write something nice...", nil)] && ![message isEqualToString:@"\n"]) {
         [self.chatView addSendMessage:message];
         
         self.input.text = @"";

@@ -12,6 +12,8 @@
 		1E1DA34418EC25F3004301DA /* Lato-LigIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6C18D20F5B0076C25E /* Lato-LigIta.ttf */; };
 		1E1DA34518EC25F3004301DA /* Lato-Reg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6D18D20F5B0076C25E /* Lato-Reg.ttf */; };
 		1E1DA34618EC25F3004301DA /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6E18D20F5B0076C25E /* Lato-RegIta.ttf */; };
+		1E235EA518F52FC200F57059 /* PulseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E235EA418F52FC200F57059 /* PulseSDK.framework */; };
+		1E235EA718F52FEB00F57059 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E235EA618F52FEB00F57059 /* CFNetwork.framework */; };
 		1E279CF618D1F0F70076C25E /* ActivitiesFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CF518D1F0F70076C25E /* ActivitiesFeedViewController.m */; };
 		1E279CF918D1F16E0076C25E /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CF818D1F16E0076C25E /* Activity.m */; };
 		1E279CFF18D1F2400076C25E /* ActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CFE18D1F2400076C25E /* ActivityScrollViewController.m */; };
@@ -167,6 +169,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E235EA418F52FC200F57059 /* PulseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PulseSDK.framework; path = CANU/Framework/PulseSDK.framework; sourceTree = "<group>"; };
+		1E235EA618F52FEB00F57059 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		1E279CF418D1F0F70076C25E /* ActivitiesFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesFeedViewController.h; sourceTree = "<group>"; };
 		1E279CF518D1F0F70076C25E /* ActivitiesFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesFeedViewController.m; sourceTree = "<group>"; };
 		1E279CF718D1F16E0076C25E /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = CANU/Models/Activity.h; sourceTree = "<group>"; };
@@ -475,6 +479,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E235EA718F52FEB00F57059 /* CFNetwork.framework in Frameworks */,
 				1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */,
 				1E7138DA188E9C2B00137A48 /* QuartzCore.framework in Frameworks */,
 				1E7138D8188E9BFF00137A48 /* AVFoundation.framework in Frameworks */,
@@ -496,6 +501,7 @@
 				DEA93B3E17204EC400303BB5 /* SystemConfiguration.framework in Frameworks */,
 				DEA93B1E17204EA600303BB5 /* Foundation.framework in Frameworks */,
 				1E62AE3718DAE0B200520AA0 /* Crashlytics.framework in Frameworks */,
+				1E235EA518F52FC200F57059 /* PulseSDK.framework in Frameworks */,
 				1E8A332118E03F980049A6B7 /* FacebookSDK.framework in Frameworks */,
 				1E279DD318D1FE820076C25E /* libGoogleAnalyticsServices.a in Frameworks */,
 				DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */,
@@ -1186,6 +1192,8 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E235EA618F52FEB00F57059 /* CFNetwork.framework */,
+				1E235EA418F52FC200F57059 /* PulseSDK.framework */,
 				1E891CA418E96ABF003B45F8 /* TimeAgo */,
 				1E8A33A118E1DA9A0049A6B7 /* AHEasing */,
 				1E8A33A618E1DA9A0049A6B7 /* UIView+EasingFunctions */,
