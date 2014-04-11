@@ -13,7 +13,14 @@ typedef NS_ENUM(NSInteger, UICanuButtonStyle) {
     UICanuButtonStyleLarge = 1,
 };
 
+typedef NS_ENUM(NSInteger, UICanuButtonStatus) {
+    UICanuButtonStatusNormal = 0,
+    UICanuButtonStatusDisable = 1,
+};
+
 @interface UICanuButton : UIButton
+
+@property (nonatomic) UICanuButtonStatus buttonStatus;
 
 - (id)initWithFrame:(CGRect)frame forStyle:(UICanuButtonStyle)canuButtonStyle;
 

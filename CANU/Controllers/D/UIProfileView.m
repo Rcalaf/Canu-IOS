@@ -67,7 +67,7 @@
         self.name.text                             = user.firstName;
         [self addSubview:_name];
         
-        if (!user.firstName || [user.firstName mk_isEmpty]) {
+        if (!user.firstName) {
             
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Add name", nil)];
             [attributeString addAttribute:NSUnderlineStyleAttributeName

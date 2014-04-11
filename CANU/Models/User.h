@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSString *token;
 @property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSString *codePhone;
 @property (strong, nonatomic) NSURL *profileImageUrl;
 @property (strong, nonatomic) NSDictionary *attributes;
 @property (nonatomic) BOOL phoneIsVerified;
@@ -34,7 +35,7 @@
                  Block:(void (^)(User *user, NSError *error))block;
 
 + (void)checkUsername:(NSString *)username
-                Block:(void (^)(NSError *error))block;
+                Block:(void (^)(NSError *error))block; // To delete
 
 + (void)SignUpWithUserName:(NSString *)userName
                   Password:(NSString*)password
@@ -43,6 +44,12 @@
                      Email:(NSString *)email
             ProfilePicture:(UIImage *)profilePicture
                      Block:(void (^)(User *user, NSError *error))block;
+
++ (void)SignUpWithUserName:(NSString *)userName
+                  Password:(NSString*)password
+                     Block:(void (^)(User *user, NSError *error))block;
+
+- (void)phoneNumber:(NSString *)phoneNumber isVerifiedBlock:(void (^)(User *user, NSError *error))block;
 
 /**
  *  Get activities of the user

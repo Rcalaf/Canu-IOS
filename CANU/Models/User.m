@@ -38,15 +38,27 @@
 - (id)initWithAttributes:(NSDictionary *)attributes {
     self = [super init];
     if (self) {
+        
+        _firstName = @"";
+        _lastName = @"";
+        _email = @"";
+        
         _phoneIsVerified = false;
         
         _attributes      = attributes;
         
         _userId          = [[attributes valueForKeyPath:@"id"] integerValue];
         _userName        = [attributes valueForKeyPath:@"user_name"];
-        _email           = [attributes valueForKeyPath:@"email"];
-        _firstName       = [attributes valueForKeyPath:@"first_name"];
-        _lastName        = [attributes valueForKeyPath:@"last_name"];
+        if ([attributes objectForKey:@"email"] != [NSNull null] && [attributes objectForKey:@"email"] != nil) {
+            _email           = [attributes valueForKeyPath:@"email"];
+        }
+        
+        if ([attributes objectForKey:@"first_name"] != [NSNull null] && [attributes objectForKey:@"first_name"] != nil) {
+            _firstName   = [attributes valueForKeyPath:@"first_name"];
+        }
+        if ([attributes objectForKey:@"last_name"] != [NSNull null] && [attributes objectForKey:@"last_name"] != nil) {
+            _lastName    = [attributes valueForKeyPath:@"last_name"];
+        }
         _token           = [attributes valueForKeyPath:@"token"];
         _phoneNumber     = [attributes valueForKeyPath:@"phone_number"];
         if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
@@ -105,7 +117,7 @@
 
 }
 
-+ (void)checkUsername:(NSString *)username Block:(void (^)(NSError *error))block {
++ (void)checkUsername:(NSString *)username Block:(void (^)(NSError *error))block{
     
     if (!username) username = @"";
     
@@ -197,6 +209,80 @@
         
     }
 
+}
+
+- (void)phoneNumber:(NSString *)phoneNumber isVerifiedBlock:(void (^)(User *user, NSError *error))block{
+    
+    NSArray *objectsArray;
+    NSArray *keysArray;
+    
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:self.userId],phoneNumber,nil];
+    keysArray = [NSArray arrayWithObjects:@"user_id",@"phone_number",nil];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    
+    NSString *url = @"users/sms-verification-v2";
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        User *user= [[User alloc] initWithAttributes:responseObject];
+        if (block) {
+            block(user, nil);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        if (block) {
+            NSLog(@"Request Failed with Error: %@", error);
+            block(nil, error);
+        }
+    }];
+    
+}
+
++ (void)SignUpWithUserName:(NSString *)userName
+                  Password:(NSString*)password
+                     Block:(void (^)(User *user, NSError *error))block
+{
+    
+    if (!userName) userName = @"";
+    if (!password) password = @"";
+    
+    NSArray *objectsArray = [NSArray arrayWithObjects:userName,password,nil];
+    NSArray *keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    dateFormatter.dateFormat = @"YYYYddHHmm";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] POST:@"users/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        User *user= [[User alloc] initWithAttributes:responseObject];
+        if (block) {
+            block(user, nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",operation.responseObject);
+        
+        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
+        
+        NSLog(@"%@",json);
+        
+        if (block) {
+            NSLog(@"%@",error);
+            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(nil, error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
 }
 
 - (void)logOut{

@@ -30,7 +30,9 @@
 "Cancel" = "Cancel";
 "Full name" = "Full name";
 "E-mail" = "E-mail";
-"Phone Check" = "Phone check";
+"Phone check" = "Phone check";
+"Please confirm your country code/nand enter your phone number" = "Please confirm your country code/nand enter your phone number"; // New
+"Check the sms that has been send to you" = "Check the sms that has been send to you"; // New
 "I promise that this is my number." = "Press send to verify your phone number.";
 "Reverify my number" = "Try again";
 "Verify my number" = "Verify my number";

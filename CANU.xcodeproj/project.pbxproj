@@ -14,6 +14,8 @@
 		1E1DA34618EC25F3004301DA /* Lato-RegIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E279E6E18D20F5B0076C25E /* Lato-RegIta.ttf */; };
 		1E235EA518F52FC200F57059 /* PulseSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E235EA418F52FC200F57059 /* PulseSDK.framework */; };
 		1E235EA718F52FEB00F57059 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E235EA618F52FEB00F57059 /* CFNetwork.framework */; };
+		1E235EAB18F5815E00F57059 /* MCC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E235EAA18F5815E00F57059 /* MCC.m */; };
+		1E235EAE18F68A2200F57059 /* CheckPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E235EAD18F68A2200F57059 /* CheckPhoneNumberViewController.m */; };
 		1E279CF618D1F0F70076C25E /* ActivitiesFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CF518D1F0F70076C25E /* ActivitiesFeedViewController.m */; };
 		1E279CF918D1F16E0076C25E /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CF818D1F16E0076C25E /* Activity.m */; };
 		1E279CFF18D1F2400076C25E /* ActivityScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279CFE18D1F2400076C25E /* ActivityScrollViewController.m */; };
@@ -171,6 +173,10 @@
 /* Begin PBXFileReference section */
 		1E235EA418F52FC200F57059 /* PulseSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PulseSDK.framework; path = CANU/Framework/PulseSDK.framework; sourceTree = "<group>"; };
 		1E235EA618F52FEB00F57059 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		1E235EA918F5815E00F57059 /* MCC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCC.h; path = "Custom Classes/MCC/MCC.h"; sourceTree = "<group>"; };
+		1E235EAA18F5815E00F57059 /* MCC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCC.m; path = "Custom Classes/MCC/MCC.m"; sourceTree = "<group>"; };
+		1E235EAC18F68A2200F57059 /* CheckPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPhoneNumberViewController.h; sourceTree = "<group>"; };
+		1E235EAD18F68A2200F57059 /* CheckPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckPhoneNumberViewController.m; sourceTree = "<group>"; };
 		1E279CF418D1F0F70076C25E /* ActivitiesFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivitiesFeedViewController.h; sourceTree = "<group>"; };
 		1E279CF518D1F0F70076C25E /* ActivitiesFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivitiesFeedViewController.m; sourceTree = "<group>"; };
 		1E279CF718D1F16E0076C25E /* Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Activity.h; path = CANU/Models/Activity.h; sourceTree = "<group>"; };
@@ -479,13 +485,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E7138D2188E9BC200137A48 /* AudioToolbox.framework in Frameworks */,
+				1E7138D4188E9BD400137A48 /* CoreTelephony.framework in Frameworks */,
 				1E235EA718F52FEB00F57059 /* CFNetwork.framework in Frameworks */,
 				1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */,
 				1E7138DA188E9C2B00137A48 /* QuartzCore.framework in Frameworks */,
 				1E7138D8188E9BFF00137A48 /* AVFoundation.framework in Frameworks */,
 				1E7138D6188E9BE400137A48 /* OpenGLES.framework in Frameworks */,
-				1E7138D4188E9BD400137A48 /* CoreTelephony.framework in Frameworks */,
-				1E7138D2188E9BC200137A48 /* AudioToolbox.framework in Frameworks */,
 				1E7138D0188E9BA000137A48 /* GLKit.framework in Frameworks */,
 				1E3A6B8618868EAE007FB6BA /* MessageUI.framework in Frameworks */,
 				1E3A6B6318854220007FB6BA /* CoreText.framework in Frameworks */,
@@ -513,6 +519,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E235EA818F5814400F57059 /* MCC */ = {
+			isa = PBXGroup;
+			children = (
+				1E235EA918F5815E00F57059 /* MCC.h */,
+				1E235EAA18F5815E00F57059 /* MCC.m */,
+			);
+			name = MCC;
+			sourceTree = "<group>";
+		};
 		1E279CF218D1EDB20076C25E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -578,6 +593,7 @@
 		1E279DDB18D200960076C25E /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1E235EA818F5814400F57059 /* MCC */,
 				1E8A339D18E181EE0049A6B7 /* ProfilePicture */,
 				1E62AE2D18D84DA300520AA0 /* UICanuBottomBar */,
 				1E279E4C18D2055B0076C25E /* UIScrollViewReverse */,
@@ -825,6 +841,8 @@
 				1E279E8918D2FDB90076C25E /* SignUpViewController.m */,
 				1E279E7E18D2FBA50076C25E /* SignInViewController.h */,
 				1E279E7F18D2FBA50076C25E /* SignInViewController.m */,
+				1E235EAC18F68A2200F57059 /* CheckPhoneNumberViewController.h */,
+				1E235EAD18F68A2200F57059 /* CheckPhoneNumberViewController.m */,
 			);
 			name = B;
 			path = Controllers/B;
@@ -1427,6 +1445,7 @@
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
 				1E8A339118E045230049A6B7 /* NSString+MK_Misc.m in Sources */,
 				1E8A337D18E045230049A6B7 /* NSDate+MK_Comparison.m in Sources */,
+				1E235EAB18F5815E00F57059 /* MCC.m in Sources */,
 				1E8A337A18E045230049A6B7 /* NSMutableArray+MK_Queue.m in Sources */,
 				1E279E7618D210020076C25E /* MainViewController.m in Sources */,
 				1E279E8418D2FC380076C25E /* TutorialViewController.m in Sources */,
@@ -1465,6 +1484,7 @@
 				1ED1457A18F42F7A007F4640 /* UICanuTextFieldLine.m in Sources */,
 				1E279DDF18D200A60076C25E /* MKCanuAnnotationView.m in Sources */,
 				1E279E7918D2111B0076C25E /* PrivacyPolicyViewController.m in Sources */,
+				1E235EAE18F68A2200F57059 /* CheckPhoneNumberViewController.m in Sources */,
 				1E8A339318E045230049A6B7 /* NSString+MK_UUID.m in Sources */,
 				1E279E6818D20ADE0076C25E /* EditUserViewController.m in Sources */,
 				1E279E9318D300A80076C25E /* CreateEditUserList.m in Sources */,

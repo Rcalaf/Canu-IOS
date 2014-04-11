@@ -84,6 +84,7 @@
             self.phoneNumber.backgroundColor = [UIColor whiteColor];
             self.phoneNumber.placeholder = @"Put your phone numer : +46 00";
             [self addSubview:_phoneNumber];
+            
         }
         
     }

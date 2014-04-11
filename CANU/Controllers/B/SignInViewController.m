@@ -108,14 +108,14 @@
 //        
 //    }];
     
-    self.userName = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 60, 280, 45)];
+    self.userName = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 80, 280, 45)];
     self.userName.placeholder = NSLocalizedString(@"Username", nil);
     self.userName.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.userName setReturnKeyType:UIReturnKeyNext];
     self.userName.delegate = self;
     [self.container addSubview:self.userName];
     
-    self.password = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 118, 280, 45)];
+    self.password = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 125, 280, 45)];
     self.password.placeholder = NSLocalizedString(@"Password", nil);
     [self.password setReturnKeyType:UIReturnKeyGo];
     self.password.secureTextEntry = YES;

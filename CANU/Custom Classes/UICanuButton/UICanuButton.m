@@ -73,4 +73,16 @@
     self.titleButton.frame = CGRectMake(0, 0, _maxWidth, self.frame.size.height);
 }
 
+- (void)setButtonStatus:(UICanuButtonStatus)buttonStatus{
+    
+    if (buttonStatus == UICanuButtonStatusNormal) {
+        self.userInteractionEnabled = YES;
+        self.titleButton.alpha = 1;
+    } else if (buttonStatus == UICanuButtonStatusDisable) {
+        self.userInteractionEnabled = NO;
+        self.titleButton.alpha = 0.3f;
+    }
+    
+}
+
 @end
