@@ -269,11 +269,7 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",operation.responseObject);
         
-        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:operation.responseData options:kNilOptions error:&error];
-        
-        NSLog(@"%@",json);
         
         if (block) {
             NSLog(@"%@",error);

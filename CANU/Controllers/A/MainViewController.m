@@ -311,7 +311,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     self.viewType = MainViewControllerViewCheckPhoneNumber;
     
     if (!_checkPhoneNumberViewController) {
-        self.checkPhoneNumberViewController = [[CheckPhoneNumberViewController alloc]initForUser:user ForceVerified:NO];
+        self.checkPhoneNumberViewController = [[CheckPhoneNumberViewController alloc]initForUser:user ForceVerified:_isPhoneCheck];
         self.checkPhoneNumberViewController.nextButton = _nextButton;
         self.checkPhoneNumberViewController.backButton = _backButton;
         [self addChildViewController:_checkPhoneNumberViewController];

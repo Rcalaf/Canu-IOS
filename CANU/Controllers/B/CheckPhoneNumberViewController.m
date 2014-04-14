@@ -138,7 +138,7 @@
     self.codePhone.keyboardType = UIKeyboardTypeNumberPad;
     [self.wrapperCodePhone addSubview:_codePhone];
     
-    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(115, 40, 100, 1)];
+    UIView *line = [[UIView alloc]initWithFrame:CGRectMake(115, 40, 90, 1)];
     line.backgroundColor = UIColorFromRGB(0xd1dadc);
     [self.wrapperCodePhone addSubview:line];
     
