@@ -21,6 +21,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 @interface CheckPhoneNumberViewController ()<UIPickerViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic) NSInteger code;
@@ -199,6 +203,11 @@
 
 - (void)checkPhoneCode{
     
+    if (!_isForceVerified) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"TryPhoneCode" value:nil] build]];
+    }
+    
     NSString *codeString = [NSString stringWithFormat:@"%u",(unsigned)_code];
     
     if ([codeString isEqualToString:_codePhone.text]) {
@@ -216,6 +225,8 @@
                 if (_isForceVerified) {
                     [[UserManager sharedUserManager] updateUser:user];
                 } else {
+                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Finish" value:nil] build]];
                     [[UserManager sharedUserManager] logIn:user];
                 }
                 
@@ -233,6 +244,8 @@
 }
 
 - (void)checkPhoneNumber{
+    
+    NSLog(@"Google Start SignUp PhoneCode");
     
     self.nextButton.buttonStatus = UICanuButtonStatusDisable;
     

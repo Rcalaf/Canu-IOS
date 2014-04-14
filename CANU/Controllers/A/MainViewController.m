@@ -15,6 +15,10 @@
 #import "CheckPhoneNumberViewController.h"
 #import "UserManager.h"
 
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAIFields.h"
+
 typedef NS_ENUM(NSInteger, MainViewControllerView) {
     MainViewControllerViewMain = 1,
     MainViewControllerViewSignUp = 2,
@@ -268,6 +272,13 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     
     if (isAppear) {
         
+        if (_viewType != MainViewControllerViewSignUp) {
+            if (!_isPhoneCheck) {
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Username/Password" value:nil] build]];
+            }
+        }
+        
         self.viewType = MainViewControllerViewSignUp;
         
         [UIView animateWithDuration:0.4 animations:^{
@@ -310,7 +321,13 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     
     self.viewType = MainViewControllerViewCheckPhoneNumber;
     
+    if (!_isPhoneCheck) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"PhoneNumber" value:nil] build]];
+    }
+    
     if (!_checkPhoneNumberViewController) {
+        
         self.checkPhoneNumberViewController = [[CheckPhoneNumberViewController alloc]initForUser:user ForceVerified:_isPhoneCheck];
         self.checkPhoneNumberViewController.nextButton = _nextButton;
         self.checkPhoneNumberViewController.backButton = _backButton;

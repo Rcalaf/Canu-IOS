@@ -15,6 +15,7 @@
 #import "UICanuNavigationController.h"
 #import "UICanuLabelUserName.h"
 #import "UICanuLabelActivityName.h"
+#import "ProfilePicture.h"
 
 typedef enum {
     AreaCreate = 150
@@ -67,7 +68,7 @@ typedef enum {
         
         // Profile picture
         UIImageView *profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 35, 35)];
-        [profilePicture setImageWithURL:[[UserManager sharedUserManager] currentUser].profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+        [profilePicture setImageWithURL:[[UserManager sharedUserManager] currentUser].profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
         [self.wrapperActivity addSubview:profilePicture];
         
         // Stroke profile picture
