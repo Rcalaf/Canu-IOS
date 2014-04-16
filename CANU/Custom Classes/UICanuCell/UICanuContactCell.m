@@ -49,7 +49,9 @@
         
         if (user) {
             self.user = user;
-            name.text = user.firstName;
+            if (![user.firstName mk_isEmpty]) {
+                name.text = user.firstName;
+            }
             adress.text = user.userName;
             [avatar setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
         } else {

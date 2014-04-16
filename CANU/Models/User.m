@@ -64,8 +64,16 @@
         if ([attributes objectForKey:@"phone_verified"] != [NSNull null] && [attributes objectForKey:@"phone_verified"] != nil) {
             _phoneIsVerified  = [[attributes valueForKeyPath:@"phone_verified"] boolValue];
         }
-        _profileImageUrlShort = [attributes valueForKey:@"profile_pic"];
-        _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
+        
+        if ([attributes objectForKey:@"profile_pic"] != [NSNull null] && [attributes objectForKey:@"profile_pic"] != nil) {
+            
+            if (![[attributes objectForKey:@"profile_pic"] isEqualToString:@"/profile_images/default/missing.png"] && ![[attributes objectForKey:@"profile_pic"] isEqualToString:@"/profile_images/thumb/missing.png"] ) {
+                _profileImageUrlShort = [attributes valueForKey:@"profile_pic"];
+                _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
+            }
+            
+        }
+        
     }
     
     return self;
@@ -646,6 +654,7 @@
         }];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
     }];
     
 }

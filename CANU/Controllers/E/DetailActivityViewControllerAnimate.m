@@ -165,6 +165,8 @@ typedef enum {
         navigation.control.hidden = YES;
         self.view.backgroundColor = backgroundColorView;
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentChat) name:@"reloadCurrentChat" object:nil];
 
 }
 
@@ -271,7 +273,7 @@ typedef enum {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
     } else {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
-        self.actionButton.frame = CGRectMake(view.frame.size.width - 23 - 25, 13, 35, 35);
+        self.actionButton.frame = CGRectMake(view.frame.size.width - 23 - 30, 8, 45, 45);
     }
     
     self.wrapperActivityBottom = [[UIView alloc]initWithFrame:CGRectMake(0, 100, 300, 30)];
@@ -293,6 +295,26 @@ typedef enum {
     [self.wrapperActivityBottom addGestureRecognizer:tapMap];
     
     return view;
+    
+}
+
+- (void)editActivity{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.counterInvit.alpha = 0;
+        self.actionButton.alpha = 0;
+        self.wrapperActivityBottom.alpha = 0;
+        self.wrapperActivityBottom.frame = CGRectMake(_wrapperActivityBottom.frame.origin.x, _wrapperActivityBottom.frame.origin.y + 100, _wrapperActivityBottom.frame.size.width, _wrapperActivityBottom.frame.size.height);
+        self.chatView.frame = CGRectMake(_chatView.frame.origin.x, _chatView.frame.origin.y + 100, _chatView.frame.size.width, _chatView.frame.size.height);
+        self.chatView.alpha = 0;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, _bottomBar.frame.origin.y + 45, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:_activity];
+        editView.delegate = self;
+        
+        [self addChildViewController:editView];
+        [self.view addSubview:editView.view];
+    }];
     
 }
 
@@ -490,56 +512,67 @@ typedef enum {
     
 }
 
+- (void)reloadCurrentChat{
+    [self.chatView load];
+}
+
 - (void)eventActionButton{
     
     if (self.activity.status == UICanuActivityCellGo) {
         // don't attend
-        [self.loadingIndicator startAnimating];
-        self.actionButton.hidden = YES;
+        [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
         
         [self.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                self.actionButton.hidden = NO;
+                [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
             } else {
                 
-                [_actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
                 if ([_activity.attendeeIds count] != 1) {
                     self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[self.activity.attendeeIds count] -1];
                 }
-                self.actionButton.hidden = NO;
                 
             }
         }];
 
     }else if (self.activity.status == UICanuActivityCellEditable){
-        // edit
-        CreateEditActivityViewController *editView = [[CreateEditActivityViewController alloc]initForEdit:self.activity];
-        editView.delegate = self;
-        [self presentViewController:editView animated:YES completion:nil];
+        [self editActivity];
     }else{
-        [self.loadingIndicator startAnimating];
-        self.actionButton.hidden = YES;
+        
+        [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
         
         [self.activity attendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error localizedDescription] delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil] show];
-                self.actionButton.hidden = NO;
+                [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
             } else {
-                
-                [_actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
                 
                 if ([_activity.attendeeIds count] != 1) {
                     self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[self.activity.attendeeIds count] -1];
                 }
-                self.actionButton.hidden = NO;
                 
             }
         }];
     }
 }
 
-- (void)currentActivityWasDeleted{
+- (void)createEditActivityIsFinish:(Activity *)activity{
+    
+    [UIView animateWithDuration:0.4 delay:0.6 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.counterInvit.alpha = 1;
+        self.actionButton.alpha = 1;
+        self.wrapperActivityBottom.alpha = 1;
+        self.wrapperActivityBottom.frame = CGRectMake(_wrapperActivityBottom.frame.origin.x, _wrapperActivityBottom.frame.origin.y - 100, _wrapperActivityBottom.frame.size.width, _wrapperActivityBottom.frame.size.height);
+        self.chatView.frame = CGRectMake(_chatView.frame.origin.x, _chatView.frame.origin.y - 100, _chatView.frame.size.width, _chatView.frame.size.height);
+        self.chatView.alpha = 1;
+        self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, _bottomBar.frame.origin.y - 45, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (void)currentActivityWasDeleted:(Activity *)activity{
     
     self.closeAfterDelete = YES;
     

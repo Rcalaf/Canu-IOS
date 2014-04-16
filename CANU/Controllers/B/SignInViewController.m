@@ -112,6 +112,7 @@
     self.userName.placeholder = NSLocalizedString(@"Username", nil);
     self.userName.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.userName setReturnKeyType:UIReturnKeyNext];
+    self.userName.autocorrectionType = UITextAutocorrectionTypeNo;
     self.userName.delegate = self;
     [self.container addSubview:self.userName];
     

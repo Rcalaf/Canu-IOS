@@ -56,6 +56,7 @@
 @property (strong, nonatomic) LoaderAnimation *loaderAnimation;
 @property (strong, nonatomic) UICanuNavigationController *navigation;
 @property (strong, nonatomic) UICanuActivityCellScroll *cellSaveForEdit;
+@property (strong, nonatomic) DetailActivityViewControllerAnimate *detailActivity;
 
 @end
 
@@ -440,6 +441,12 @@
 
 - (void)createEditActivityIsFinish:(Activity *)activity{
     
+    if (_feedType == FeedProfileType) {
+        if (!_profileViewHidden) {
+            [self.delegate hiddenProfileView:NO Animated:YES];
+        }
+    }
+    
     [self.cellSaveForEdit updateWithActivity:activity];
     
     for (int i = 0; i < [_arrayCell count]; i++) {
@@ -452,6 +459,75 @@
             [cell hiddenBottomBar:NO];
             [self.navigation changePosition:0];
         } completion:nil];
+        
+    }
+    
+}
+
+- (void)currentActivityWasDeleted:(Activity *)activity{
+    
+    if (_feedType == FeedProfileType) {
+        if (!_profileViewHidden) {
+            [self.delegate hiddenProfileView:YES Animated:YES];
+        }
+    }
+    
+    NSMutableArray *newArrayCell = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < [_activities count]; i++) {
+        
+        Activity *act = [_activities objectAtIndex:i];
+        
+        if (act != activity) {
+            [newArrayCell addObject:act];
+        }
+        
+    }
+    
+    self.activities = [NSArray arrayWithArray:newArrayCell];
+    
+    [self.arrayCell removeObject:self.cellSaveForEdit];
+    [self.cellSaveForEdit removeFromSuperview];
+    
+    float heightContentScrollView = [_arrayCell count] * (130 + 10) + _marginFirstActivity;
+    
+    if (heightContentScrollView <= _scrollview.frame.size.height) {
+        heightContentScrollView = _scrollview.frame.size.height + 1;
+    }
+    
+    if (_feedType == FeedProfileType) {
+        if (heightContentScrollView <= _scrollview.frame.size.height + 165) {
+            heightContentScrollView = _scrollview.frame.size.height + 165;
+        }
+    }
+    
+    self.scrollview.contentSize = CGSizeMake(320, heightContentScrollView);
+    [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        [UIView animateWithDuration:0.4 delay:0.4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130);
+            cell.alpha = 1;
+            [cell hiddenBottomBar:NO];
+            [self.navigation changePosition:0];
+        } completion:^(BOOL finished) {
+            if (i == 0) {
+                [NSThread detachNewThreadSelector:@selector(showActivities) toTarget:self withObject:nil];
+                if (_feedType == FeedLocalType) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+                }else if (_feedType == FeedTribeType) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+                }else if (_feedType == FeedProfileType) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+                }
+            }
+        }];
         
     }
     
@@ -511,11 +587,25 @@
     
 }
 
+- (void)killCurrentDetailsViewController{
+    
+    if (_detailActivity) {
+        [self killViewController:_detailActivity];
+    }
+    
+}
+
 #pragma mark - Private
 
 #pragma mark -- Load
 
 - (void)load{
+    
+    [self loadWithCompletion:nil];
+
+}
+
+- (void)loadWithCompletion:(void (^)(NSError *error))block{
     
     BOOL isEmptyBefore = self.isEmpty;
     
@@ -561,10 +651,14 @@
             
             [self.loaderAnimation stopAnimation];
             
+            if (block) {
+                block(error);
+            }
+            
         }];
         
     }else if(_feedType == FeedTribeType){
-            
+        
         [self.user userActivitiesTribesWithBlock:^(NSArray *activities, NSError *error) {
             
             if (error) {
@@ -606,6 +700,10 @@
             
             [self.loaderAnimation stopAnimation];
             
+            if (block) {
+                block(error);
+            }
+            
         }];
         
     }else if(_feedType == FeedProfileType){
@@ -616,7 +714,7 @@
                 
                 // Visual information of this error adding by Error Manager
                 [[ErrorManager sharedErrorManager] visualAlertFor:error.code];
-
+                
             } else {
                 
                 _activities = activities;
@@ -651,8 +749,13 @@
             
             [self.loaderAnimation stopAnimation];
             
+            if (block) {
+                block(error);
+            }
+            
         }];
     }
+    
 }
 
 - (void)showFeedback{
@@ -789,8 +892,7 @@
     
     if (cell.activity.status == UICanuActivityCellGo) {
         
-        [cell.loadingIndicator startAnimating];
-        cell.actionButton.hidden = YES;
+        [cell.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
         
         [cell.activity dontAttendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
@@ -801,7 +903,7 @@
                 [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Action" label:@"Unsubscribe" value:nil] build]];
                 
                 _activities = activities;
-                NSLog(@"Array %@",activities);
+                
                 if (_feedType == FeedLocalType) {
                     [self load];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
@@ -824,8 +926,7 @@
         
         [[ErrorManager sharedErrorManager] showG3bAlertIfNecessary];
         
-        [cell.loadingIndicator startAnimating];
-        cell.actionButton.hidden = YES;
+        [cell.actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
         
         [cell.activity attendWithBlock:^(NSArray *activities, NSError *error) {
             if (error) {
@@ -860,7 +961,7 @@
     
     if (_feedType == FeedProfileType) {
         if (!_profileViewHidden) {
-            [self.delegate hiddenProfileView:YES];
+            [self.delegate hiddenProfileView:YES Animated:YES];
         }
     }
     
@@ -891,6 +992,8 @@
             [self addChildViewController:davc];
             [self.view addSubview:davc.view];
             
+            self.detailActivity = davc;
+            
             cellTouch.alpha = 0;
             
         }else{
@@ -908,7 +1011,99 @@
     
 }
 
+- (void)openActivityAfterPush:(NSInteger)activityId{
+    
+    UICanuActivityCellScroll *cellTouch;
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        if (cell.activity.activityId == activityId) {
+            cellTouch = cell;
+        }
+        
+    }
+    
+    if (!cellTouch) {
+        
+        [self loadWithCompletion:^(NSError *error) {
+            
+            BOOL activityIsFind = false;
+            
+            for (int i = 0; i < [_arrayCell count]; i++) {
+                
+                UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+                
+                if (cell.activity.activityId == activityId) {
+                    activityIsFind = true;
+                }
+                
+            }
+            
+            if (!error && activityIsFind) {
+                [self openActivityAfterPush:activityId];
+            }
+            
+        }];
+        
+        return;
+        
+    }
+    
+    if (_feedType == FeedProfileType) {
+        if (!_profileViewHidden) {
+            [self.delegate hiddenProfileView:YES Animated:NO];
+        }
+    }
+    
+    for (int i = 0; i < [_arrayCell count]; i++) {
+        
+        UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+        
+        if (i < cellTouch.tag) {
+            
+            float distance = cell.frame.origin.y + cellTouch.frame.origin.y + cellTouch.frame.size.height + 10;
+            
+            cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+            cell.alpha = 0;
+            
+        }else if (i == cellTouch.tag){
+            
+            Activity *activity = [_activities objectAtIndex:cellTouch.tag];
+            
+            float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
+            
+            DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity For:CANUOpenDetailsActivityAfterPush andPosition:position];
+            davc.delegate = self;
+            davc.modalPresentationStyle = UIModalPresentationCurrentContext;
+            [self addChildViewController:davc];
+            [self.view addSubview:davc.view];
+            
+            self.detailActivity = davc;
+            
+            cellTouch.alpha = 0;
+            
+        }else{
+            
+            float distance = cell.frame.origin.y - cellTouch.frame.origin.y;
+            
+            cell.frame = CGRectMake(cell.frame.origin.x, distance, cell.frame.size.width, cell.frame.size.height);
+            cell.alpha = 0;
+            
+        }
+        
+    }
+    
+}
+
 - (void)editCell:(UICanuActivityCellScroll *)cellTouch{
+    
+    if (_feedType == FeedProfileType) {
+        if (!_profileViewHidden) {
+            [self.delegate hiddenProfileView:YES Animated:YES];
+        }
+    }
     
     self.cellSaveForEdit = cellTouch;
     
@@ -962,13 +1157,21 @@
 
 #pragma mark -- Others
 
-- (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
+- (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId{
     
-    if (_feedType == FeedProfileType) {
-        if (!_profileViewHidden) {
-            [self.delegate hiddenProfileView:NO];
+    BOOL isOpen = false;
+    
+    if (_detailActivity) {
+        if (self.detailActivity.activity.activityId == activityId) {
+            isOpen = true;
         }
     }
+    
+    return isOpen;
+    
+}
+
+- (void)closeDetailActivity:(DetailActivityViewControllerAnimate *)viewController{
     
     for (int i = 0; i < [_arrayCell count]; i++) {
      
@@ -978,6 +1181,13 @@
             cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130);
             if (cell.activity != viewController.activity) {
                 cell.alpha = 1;
+                
+                // After end animation / Only one time
+                if (_feedType == FeedProfileType) {
+                    if (!_profileViewHidden) {
+                        [self.delegate hiddenProfileView:NO Animated:YES];
+                    }
+                }
             }
         }];
         
@@ -1175,6 +1385,8 @@
 }
 
 -(void)killViewController:(id)sender{
+    
+    self.detailActivity = nil;
     
     for (int i = 0; i < [_arrayCell count]; i++) {
         UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];

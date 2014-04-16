@@ -37,12 +37,18 @@ typedef enum {
  */
 - (void)removeAfterlogOut;
 
+- (void)openActivityAfterPush:(NSInteger)activityId;
+
+- (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId;
+
+- (void)killCurrentDetailsViewController;
+
 @end
 
 @protocol ActivityScrollViewControllerDelegate <NSObject>
 
 @required
-- (void)hiddenProfileView:(BOOL)hidden;
+- (void)hiddenProfileView:(BOOL)hidden Animated:(BOOL)animated;
 - (void)moveProfileView:(float)offset;
 - (void)activityScrollViewControllerStartWithEmptyFeed;
 - (void)activityScrollViewControllerChangementFeed;

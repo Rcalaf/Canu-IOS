@@ -25,9 +25,6 @@
 @property (nonatomic) BOOL firstAnimationEmptyFeed;
 @property (strong, nonatomic) UIView *viewForEmptyBackground;
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) ActivityScrollViewController *localFeed;
-@property (strong, nonatomic) ActivityScrollViewController *tribeFeed;
-@property (strong, nonatomic) ActivityScrollViewController *profilFeed;
 @property (strong, nonatomic) UIProfileView *profileView;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 
@@ -257,6 +254,34 @@
     
 }
 
+- (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId{
+    
+    BOOL isOpen = false;
+    
+    if ([self.localFeed pushChatIsCurrentDetailsViewOpen:activityId]) {
+        isOpen = true;
+    }
+    
+    if ([self.tribeFeed pushChatIsCurrentDetailsViewOpen:activityId]) {
+        isOpen = true;
+    }
+    
+    if ([self.profilFeed pushChatIsCurrentDetailsViewOpen:activityId]) {
+        isOpen = true;
+    }
+    
+    return isOpen;
+    
+}
+
+- (void)killCurrentDetailsViewController{
+    
+    [self.localFeed killCurrentDetailsViewController];
+    [self.tribeFeed killCurrentDetailsViewController];
+    [self.profilFeed killCurrentDetailsViewController];
+    
+}
+
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{
@@ -301,14 +326,20 @@
     }];
 }
 
-- (void)hiddenProfileView:(BOOL)hidden{
+- (void)hiddenProfileView:(BOOL)hidden Animated:(BOOL)animated{
+    
+    float duration = 0.4f;
+    
+    if (!animated) {
+        duration = 0;
+    }
     
     if (hidden) {
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:duration animations:^{
             self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
         }];
     } else {
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:duration animations:^{
             self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - _profileView.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
         }];
     }

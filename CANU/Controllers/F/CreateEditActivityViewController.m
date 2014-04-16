@@ -258,7 +258,6 @@ typedef enum {
     // Bottom bar
     
     self.bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 45)];
-    self.bottomBar.clipsToBounds = YES;
     [self.view addSubview:_bottomBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -340,6 +339,17 @@ typedef enum {
         self.titleInput.text = _editActivity.title;
         
         navigation.control.hidden = YES;
+        
+        self.wrapperButtonDaySelected.alpha = 0;
+        self.wrapperTimeLengthPicker.alpha = 0;
+        self.wrapperLocation.alpha = 0;
+        
+        [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperButtonDaySelected.alpha = 1;
+            self.wrapperTimeLengthPicker.alpha = 1;
+            self.wrapperLocation.alpha = 1;
+        } completion:^(BOOL finished) {
+        }];
         
     }
     
@@ -1302,6 +1312,7 @@ typedef enum {
         [UIView animateWithDuration:0.4 animations:^{
             self.backgroundDark.backgroundColor = [UIColor colorWithRed:43.0f/255.0f green:75.0f/255.0f blue:88.0f/255.0f alpha:0.5f];
             self.wrapperDescription.frame = CGRectMake(-2, 99, 304, 23 + 16 * numberOfLine);
+            self.wrapper.contentOffset = CGPointMake(0, 0);
         }];
     }
     
@@ -1722,17 +1733,41 @@ typedef enum {
                                                            
                                                            navigation.control.hidden = NO;
                                                            
-                                                           [UIView animateWithDuration:0.4 animations:^{
-                                                               self.wrapper.alpha = 0;
-                                                               self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
-                                                               navigation.control.alpha = 1;
+                                                           [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                                               self.userList.alpha = 0;
+                                                               self.wrapper.contentOffset = CGPointMake(0, 0);
                                                            } completion:^(BOOL finished) {
                                                                
-                                                               [self forceDealloc];
+                                                               [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                                                   self.wrapperUserList.frame = CGRectMake(_wrapperUserList.frame.origin.x, _wrapperUserList.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
+                                                                   self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, self.view.frame.size.height, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
+                                                               } completion:^(BOOL finished) {
+                                                                   
+                                                               }];
                                                                
-                                                               [self willMoveToParentViewController:nil];
-                                                               [self.view removeFromSuperview];
-                                                               [self removeFromParentViewController];
+                                                               [UIView animateWithDuration:0.4 delay:0.15 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                                                   self.wrapperButtonDaySelected.frame = CGRectMake(_wrapperButtonDaySelected.frame.origin.x, _wrapperButtonDaySelected.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperButtonDaySelected.frame.size.width, _wrapperButtonDaySelected.frame.size.height);
+                                                                   self.wrapperTimeLengthPicker.frame = CGRectMake(_wrapperTimeLengthPicker.frame.origin.x, _wrapperTimeLengthPicker.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperTimeLengthPicker.frame.size.width, _wrapperTimeLengthPicker.frame.size.height);
+                                                                   self.wrapperLocation.frame = CGRectMake(_wrapperLocation.frame.origin.x, _wrapperLocation.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperLocation.frame.size.width, _wrapperLocation.frame.size.height);
+                                                               } completion:^(BOOL finished) {
+                                                                   
+                                                                   
+                                                                   
+                                                               }];
+                                                               
+                                                               [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                                                   self.wrapperActivity.frame = CGRectMake(_wrapperActivity.frame.origin.x, _wrapperActivity.frame.origin.y + [[UIScreen mainScreen] bounds].size.height, _wrapperActivity.frame.size.width, _wrapperActivity.frame.size.height);
+                                                                   self.view.alpha = 0;
+                                                                   navigation.control.alpha = 1;
+                                                               } completion:^(BOOL finished) {
+                                                                   
+                                                                   [self forceDealloc];
+                                                                   
+                                                                   [self willMoveToParentViewController:nil];
+                                                                   [self.view removeFromSuperview];
+                                                                   [self removeFromParentViewController];
+                                                                   
+                                                               }];
                                                                
                                                            }];
                                                            
@@ -1765,11 +1800,7 @@ typedef enum {
     [self.editActivity removeActivityWithBlock:^(NSError *error){
         if (!error) {
             
-            if (self.delegate && [self.delegate respondsToSelector:@selector(currentActivityWasDeleted)]) {
-                [self.delegate currentActivityWasDeleted];
-            } else {
-               [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];
-            }
+            [self.delegate currentActivityWasDeleted:self.editActivity];
             
             id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
             [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Activity" action:@"Edit" label:@"Delete" value:nil] build]];

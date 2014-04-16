@@ -17,6 +17,7 @@
 #import "UICanuNavigationController.h"
 #import "TutorialViewController.h"
 #import "ActivitiesFeedViewController.h"
+#import "AlertViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
@@ -245,7 +246,8 @@
 
 - (void)checkPhoneNumber{
     
-    NSLog(@"Google Start SignUp PhoneCode");
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"PhoneCode" value:nil] build]];
     
     self.nextButton.buttonStatus = UICanuButtonStatusDisable;
     
@@ -425,6 +427,24 @@
     if (!_isForceVerified) {
         TutorialViewController *tutorial = [[TutorialViewController alloc] init];
         [appDelegate.canuViewController presentViewController:tutorial animated:YES completion:nil];
+    } else {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        if (types & UIRemoteNotificationTypeAlert){
+            
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+            
+        } else {
+            
+            AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+            
+            AlertViewController *alert = [[AlertViewController alloc]init];
+            alert.canuAlertViewType = CANUAlertViewPopIn;
+            alert.canuError = CANUErrorPushNotDetermined;
+            
+            [appDelegate.window addSubview:alert.view];
+            [appDelegate.window.rootViewController addChildViewController:alert];
+            
+        }
     }
     
 }

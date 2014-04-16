@@ -17,5 +17,6 @@
 
 - (id)initWithActivityFeed:(ActivitiesFeedViewController *)activityFeed;
 - (void)changePosition:(float)position;
+- (void)changePage:(float)position;
 
 @end

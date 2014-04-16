@@ -78,7 +78,7 @@
 
         self.actionButton                     = [UIButton buttonWithType:UIButtonTypeCustom];
         self.actionButton.frame               = CGRectMake(frame.size.width - 10 - 45, 45, 45, 45);
-        [self.actionButton addTarget:self action:@selector(touchActionButton) forControlEvents:UIControlEventTouchDown];
+        [self.actionButton addTarget:self action:@selector(touchActionButton) forControlEvents:UIControlEventTouchUpInside];
         [background addSubview:_actionButton];
         
         if ( _activity.status == UICanuActivityCellGo ) {
@@ -87,7 +87,7 @@
             [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
         } else {
             [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
-            self.actionButton.frame = CGRectMake(frame.size.width - 23 - 25, 13, 35, 35);
+            self.actionButton.frame = CGRectMake(frame.size.width - 23 - 30, 8, 45, 45);
         }
         
         self.wrapperActivityBottom = [[UIView alloc]initWithFrame:CGRectMake(2, 102, 300, 30)];

@@ -144,6 +144,7 @@
 		1E8A33AA18E1DA9A0049A6B7 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A418E1DA9A0049A6B7 /* easing.c */; };
 		1E8A33AB18E1DA9A0049A6B7 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
+		1EAE079A18FD22F1002326F4 /* PushRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE079918FD22F1002326F4 /* PushRemote.m */; };
 		1ED1457A18F42F7A007F4640 /* UICanuTextFieldLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1457918F42F7A007F4640 /* UICanuTextFieldLine.m */; };
 		DE517723184EA69100690E2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
 		DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607838182C007C0053F23B /* Default-568h@2x.png */; };
@@ -447,6 +448,8 @@
 		1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasingFunctions.m"; sourceTree = "<group>"; };
 		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
+		1EAE079818FD22F1002326F4 /* PushRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushRemote.h; path = CANU/Models/PushRemote.h; sourceTree = "<group>"; };
+		1EAE079918FD22F1002326F4 /* PushRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushRemote.m; path = CANU/Models/PushRemote.m; sourceTree = "<group>"; };
 		1ED1457818F42F7A007F4640 /* UICanuTextFieldLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuTextFieldLine.h; sourceTree = "<group>"; };
 		1ED1457918F42F7A007F4640 /* UICanuTextFieldLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuTextFieldLine.m; sourceTree = "<group>"; };
 		799314792D78419EB446BEF1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1299,6 +1302,8 @@
 				1E77B94818A1192E00A16845 /* PhoneBook.m */,
 				1E70867B189A849300328F76 /* Contact.h */,
 				1E70867C189A849300328F76 /* Contact.m */,
+				1EAE079818FD22F1002326F4 /* PushRemote.h */,
+				1EAE079918FD22F1002326F4 /* PushRemote.m */,
 			);
 			name = Models;
 			path = ..;
@@ -1504,6 +1509,7 @@
 				1E279E4918D205310076C25E /* UICanuScrollPicker.m in Sources */,
 				1E279E1C18D203DB0076C25E /* UICanuLabelTimeEnd.m in Sources */,
 				1E279E1D18D203DB0076C25E /* UICanuLabelTimeStart.m in Sources */,
+				1EAE079A18FD22F1002326F4 /* PushRemote.m in Sources */,
 				1E279E7C18D2168B0076C25E /* SearchLocationMapViewController.m in Sources */,
 				1E279EB618D301A60076C25E /* UICanuAttendeeCellScroll.m in Sources */,
 				1E8A339818E045320049A6B7 /* TTTAttributedLabel.m in Sources */,

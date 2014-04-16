@@ -300,8 +300,24 @@ typedef enum {
 }
 
 - (void)changePosition:(float)position{
-   
+    
     self.control.frame = CGRectMake(self.control.frame.origin.x, 415.0f + KIphone5Margin + position * 65,self.control.frame.size.width, self.control.frame.size.height);
+    
+}
+
+- (void)changePage:(float)position{
+    
+    float navBoxPosition = NavBoxLocal;
+    
+    if (position == 0.5) {
+        navBoxPosition = NavBoxTribes;
+    } else if (position == 1) {
+        navBoxPosition = NavBoxProfil;
+    }
+    
+    self.naveboxPosition = navBoxPosition;
+    
+    self.control.frame = CGRectMake(navBoxPosition, self.control.frame.origin.y,self.control.frame.size.width, self.control.frame.size.height);
     
 }
 

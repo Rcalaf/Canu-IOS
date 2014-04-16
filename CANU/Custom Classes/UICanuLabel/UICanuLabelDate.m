@@ -52,12 +52,21 @@
 
 + (NSString *)dayWithDate:(NSDate *)date{
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    dateFormatter.dateFormat       = @"d MMM";
-    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    NSString *day;
     
-    return [dateFormatter stringFromDate:date];
+    if ([date mk_isToday]) {
+        day = [NSString stringWithFormat:@"%@ ",NSLocalizedString(@"Today", nil)];
+    } else if ([date mk_isTomorrow]){
+        day = [NSString stringWithFormat:@"%@ ",NSLocalizedString(@"Tomorrow", nil)];
+    } else {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        dateFormatter.dateFormat       = @"d MMM";
+        [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+        day = [dateFormatter stringFromDate:date];
+    }
+    
+    return day;
     
 }
 

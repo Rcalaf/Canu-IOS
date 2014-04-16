@@ -38,7 +38,7 @@
 
 @optional
 
-- (void)currentActivityWasDeleted;
+- (void)currentActivityWasDeleted:(Activity *)activity;
 
 - (void)createEditActivityIsFinish:(Activity *)activity;
 
