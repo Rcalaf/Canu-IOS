@@ -30,24 +30,25 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+        
         self.activeReset = NO;
         
         self.canuTextfieldInvitStep = CANUTextfieldInvitStep0;
         
         self.arrayUserCell = [[NSMutableArray alloc]init];
         
-        UIImageView *imgClose = [[UIImageView alloc]initWithFrame:CGRectMake(0, 1, 47, 47)];
+        UIImageView *imgClose = [[UIImageView alloc]initWithFrame:CGRectMake(0, 1, 45, 45)];
         imgClose.image = [UIImage imageNamed:@"F1_input_Location_reset"];
         
-        self.resetSearch = [[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 47, 47)];
+        self.resetSearch = [[UIButton alloc]initWithFrame:CGRectMake( 0, 0, 45, 45)];
         [self.resetSearch addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchDown];
-        self.resetSearch.backgroundColor = [UIColor whiteColor];
         self.resetSearch.clipsToBounds = YES;
         [self.resetSearch addSubview:imgClose];
         
-        self.wrapperLeft = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 47)];
+        self.wrapperLeft = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 10, 42)];
         
-        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 0, 47)];
+        self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, 0, 35)];
         self.scrollView.showsHorizontalScrollIndicator = NO;
         [self.wrapperLeft addSubview:_scrollView];
         
@@ -75,14 +76,14 @@
         
     }
     
-    self.scrollView.frame = CGRectMake(0, 0, 48 * [_arrayAllUserSelected count], 47);
-    self.scrollView.contentSize = CGSizeMake(48 * [_arrayAllUserSelected count], 47);
+    self.scrollView.frame = CGRectMake(0, 0, 40 * [_arrayAllUserSelected count], 42);
+    self.scrollView.contentSize = CGSizeMake(40 * [_arrayAllUserSelected count], 42);
     
     if ([_arrayAllUserSelected count] >= 3) {
-        self.scrollView.frame = CGRectMake(0, 0, 48 * 3 - 24, 47);
+        self.scrollView.frame = CGRectMake(0, 0, 40 * 3 - 20, 42);
     } else if ([_arrayAllUserSelected count] == 0) {
-        self.scrollView.frame = CGRectMake(0, 0, 0, 47);
-        self.scrollView.contentSize = CGSizeMake(0, 47);
+        self.scrollView.frame = CGRectMake(0, 0, 0, 42);
+        self.scrollView.contentSize = CGSizeMake(0, 42);
     }
     
     for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
@@ -96,18 +97,18 @@
             userData = [_arrayAllUserSelected objectAtIndex:i];
         }
         
-        UICanuUserInputCell *cell = [[UICanuUserInputCell alloc]initWithFrame:CGRectMake(i * 48, 0, 47, 47) WithContact:contactData AndUser:userData];
+        UICanuUserInputCell *cell = [[UICanuUserInputCell alloc]initWithFrame:CGRectMake(5 + i * 40, 3, 35, 35) WithContact:contactData AndUser:userData];
         [self.scrollView addSubview:cell];
         [self.arrayUserCell addObject:cell];
         
     }
     
     self.scrollView.contentOffset = CGPointMake(_scrollView.contentSize.width - _scrollView.frame.size.width, 0);
-    self.wrapperLeft.frame = CGRectMake(0, 0, _scrollView.frame.size.width + 10, 47);
+    self.wrapperLeft.frame = CGRectMake(0, 0, _scrollView.frame.size.width + 10, 42);
     [self updateSizeWrapperTouchResetDeleteUser];
     
     self.activeDeleteUser = NO;
-    
+    ;
     [self reset];
     
 }

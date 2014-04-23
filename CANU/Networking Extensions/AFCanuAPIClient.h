@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 CANU. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperationManager.h"
 
-@interface AFCanuAPIClient : AFHTTPClient
+@interface AFCanuAPIClient : AFHTTPRequestOperationManager
 
 @property (nonatomic) BOOL distributionMode;
 @property (nonatomic) NSString *urlBase;

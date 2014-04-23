@@ -18,6 +18,11 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+CANU/Vendor/export/*
 
 #CocoaPods
 Pods
+
+/Podfile.lock
+
+/CANU.xcworkspace/

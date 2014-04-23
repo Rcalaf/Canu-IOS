@@ -25,7 +25,7 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 
-#import <Availability.h>
+#import <Availability.h>f
 
 #ifdef _SYSTEMCONFIGURATION_H
 #import <netinet/in.h>

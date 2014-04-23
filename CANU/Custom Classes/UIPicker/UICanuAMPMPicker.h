@@ -19,7 +19,7 @@
  */
 - (void)changeCurrentObjectTo:(int)currentObject;
 
-- (int)currentObject;
+- (NSInteger)currentObject;
 
 - (void)blockTo:(int)value;
 

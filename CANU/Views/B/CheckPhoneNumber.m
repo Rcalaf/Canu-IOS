@@ -84,6 +84,7 @@
             self.phoneNumber.backgroundColor = [UIColor whiteColor];
             self.phoneNumber.placeholder = @"Put your phone numer : +46 00";
             [self addSubview:_phoneNumber];
+            
         }
         
     }
@@ -128,10 +129,11 @@
         
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
         
-        NSString *path = @"users/sms-verification-dev";
+        NSString *url = @"users/sms-verification-dev";
         
-        [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:currentUser.token];
-        [[AFCanuAPIClient sharedClient] postPath:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id JSON) {
+//        [[AFCanuAPIClient sharedClient] setAuthorizationHeaderWithToken:currentUser.token];
+        
+        [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [self performSelector:@selector(checkPhoneValidation) withObject:nil afterDelay:1];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.loadingIndicator stopAnimating];

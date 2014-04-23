@@ -10,6 +10,7 @@
 #import "Contact.h"
 #import "User.h"
 #import "UIImageView+AFNetworking.h"
+#import "ProfilePicture.h"
 
 @interface UICanuUserInputCell ()
 
@@ -27,22 +28,26 @@
         self.user = user;
         self.contact = contact;
         
-        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 47, 47)];
-        avatar.image = [UIImage imageNamed:@"icon_username.png"];
+        UIImageView *avatar = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        avatar.image = [ProfilePicture defaultProfilePicture35];
         avatar.contentMode = UIViewContentModeScaleAspectFill;
         avatar.clipsToBounds = YES;
         [self addSubview:avatar];
         
+        UIImageView *strokePicture = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        strokePicture.image = [UIImage imageNamed:@"All_stroke_profile_picture_35"];
+        [avatar addSubview:strokePicture];
+        
         if (user) {
-            [avatar setImageWithURL:user.profileImageUrl placeholderImage:[UIImage imageNamed:@"icon_username.png"]];
+            [avatar setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
         } else {
             if (contact.profilePicture) {
                 avatar.image = contact.profilePicture;
             }
         }
         
-        self.selectedImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 47, 47)];
-        self.selectedImage.image = [UIImage imageNamed:@"F5_inputCell_selected"];
+        self.selectedImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 35, 35)];
+        self.selectedImage.image = [UIImage imageNamed:@"All_stroke_profile_picture_35_selected"];
         self.selectedImage.alpha = 0;
         [self addSubview:_selectedImage];
         

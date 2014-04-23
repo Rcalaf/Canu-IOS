@@ -17,9 +17,13 @@
 @property (retain) id delegate;
 @property (nonatomic) int maxHeight;
 @property (nonatomic) int minHeigt;
+@property (nonatomic) int active;
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
+@property (strong, nonatomic) NSMutableArray *peoplesAlreadySelected;
+
+- (void)lauchView;
 
 /**
  *  Phone book is now available
@@ -36,9 +40,15 @@
 
 - (void)updateAndDeleteContact:(Contact *)contact;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol CreateEditUserListDelegate <NSObject>
+
+@optional
+
+- (void)hiddenKeyboardUserList;
 
 @required
 

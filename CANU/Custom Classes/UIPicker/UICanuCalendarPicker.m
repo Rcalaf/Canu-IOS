@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *arrayCell;
 @property (strong, nonatomic) UIImageView *controleSlide1;
 @property (strong, nonatomic) UIImageView *controleSlide2;
+@property (strong, nonatomic) UIScrollView *wrapperCalendar;
 @property (strong, nonatomic) UICanuCalendarButtonPicker *currentSelected;
 @property (strong, nonatomic) UICanuCalendarButtonPicker *firstDay;
 
@@ -27,38 +28,38 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = UIColorFromRGB(0xe9eeee);
-        
         self.clipsToBounds = YES;
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
-        UIView *headerDay = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 20)];
-        headerDay.backgroundColor = UIColorFromRGB(0xe6ebeb);
+        UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(8, 5, 304, 121)];
+        background.image = [[UIImage imageNamed:@"F_calendar_background"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:1.0f];
+        [self addSubview:background];
+        
+        UIImageView *header = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 300, 6)];
+        header.image = [UIImage imageNamed:@"F_calendar_header"];
+        [self addSubview:header];
+        
+        UIImageView *bottom = [[UIImageView alloc]initWithFrame:CGRectMake(10, 125, 300, 1)];
+        bottom.image = [UIImage imageNamed:@"F_calendar_bottom_line"];
+        [self addSubview:bottom];
+        
+        UIView *headerDay = [[UIView alloc]initWithFrame:CGRectMake(10, 6, 300, 26)];
         [self addSubview:headerDay];
-        
-        UIImageView *shadowDescription = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 6)];
-        shadowDescription.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-        [headerDay addSubview:shadowDescription];
-        
-        UIImageView *shadowDescriptionReverse = [[UIImageView alloc]initWithFrame:CGRectMake(0, 116 - 6, 320, 6)];
-        shadowDescriptionReverse.image = [UIImage imageNamed:@"F1_Shadow_Description"];
-        shadowDescriptionReverse.transform = CGAffineTransformMakeRotation(M_PI);
-        [self addSubview:shadowDescriptionReverse];
         
         NSDateFormatter * dateFormater = [[NSDateFormatter alloc] init];
         [dateFormater setLocale: [NSLocale currentLocale]];
         NSArray * weekdays = [dateFormater weekdaySymbols];
         
-        int firstDay = [[NSCalendar currentCalendar] firstWeekday] - 1;
+        NSUInteger firstDay = [[NSCalendar currentCalendar] firstWeekday] - 1;
         
         for (int i = 0; i < [weekdays count]; i ++) {
             
-            UILabel *dayName = [[UILabel alloc]initWithFrame:CGRectMake(13 + i * 42, 0, 42, 20)];
+            UILabel *dayName = [[UILabel alloc]initWithFrame:CGRectMake(3 + i * 42, 2, 42, 20)];
             dayName.font = [UIFont fontWithName:@"Lato-Regular" size:7];
             dayName.textAlignment = NSTextAlignmentCenter;
             dayName.backgroundColor = [UIColor clearColor];
-            dayName.textColor = UIColorFromRGB(0xabb3b7);
+            dayName.textColor = UIColorFromRGB(0x2b4b58);
             dayName.text = [[[weekdays objectAtIndex:firstDay] substringToIndex:1] uppercaseString];
             [headerDay addSubview:dayName];
             
@@ -70,11 +71,11 @@
             
         }
         
-        UIScrollView *wrapperCalendar = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 20, 320, 116 - headerDay.frame.size.height)];
-        wrapperCalendar.pagingEnabled = YES;
-        wrapperCalendar.showsHorizontalScrollIndicator = NO;
-        wrapperCalendar.delegate = self;
-        [self addSubview:wrapperCalendar];
+        self.wrapperCalendar = [[UIScrollView alloc]initWithFrame:CGRectMake(11, 27, 298, 120 - headerDay.frame.size.height)];
+        self.wrapperCalendar.pagingEnabled = YES;
+        self.wrapperCalendar.showsHorizontalScrollIndicator = NO;
+        self.wrapperCalendar.delegate = self;
+        [self addSubview:_wrapperCalendar];
         
         // Current Date
         NSDateComponents *dateCurrent = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -84,11 +85,11 @@
         [dateFormaterNumberDayForTheWeek setLocale: [NSLocale currentLocale]];
         [dateFormaterNumberDayForTheWeek setDateFormat:@"c"];
         
-        int yearCalendar = [dateCurrent year];
+        NSInteger yearCalendar = [dateCurrent year];
         
-        int monthCalendar = [dateCurrent month];
+        NSInteger monthCalendar = [dateCurrent month];
         
-        int dayCalendar = [dateCurrent day] - [[dateFormaterNumberDayForTheWeek stringFromDate:[NSDate date]] intValue] + 1;
+        NSInteger dayCalendar = [dateCurrent day] - [[dateFormaterNumberDayForTheWeek stringFromDate:[NSDate date]] intValue] + 1;
         
         int dayOff = [[dateFormaterNumberDayForTheWeek stringFromDate:[NSDate date]] intValue] - 2;
         
@@ -144,10 +145,10 @@
             
             NSDate *date = [self dateWithYear:yearCalendar month:monthCalendar day:dayCalendar];
             
-            UICanuCalendarButtonPicker *day = [[UICanuCalendarButtonPicker alloc]initWithFrame:CGRectMake(13 + colums * 42 + numberOf2week * 320, row * 42, 42, 42) Date:date Type:canuCalendarButtonType];
+            UICanuCalendarButtonPicker *day = [[UICanuCalendarButtonPicker alloc]initWithFrame:CGRectMake(3 + colums * 42 + numberOf2week * 300, row * 42, 42, 42) Date:date Type:canuCalendarButtonType];
             day.delegate = self;
             [self.arrayCell addObject:day];
-            [wrapperCalendar addSubview:day];
+            [self.wrapperCalendar addSubview:day];
             
             if (i == dayOff + 3) {
                 day.selected = YES;
@@ -184,18 +185,37 @@
             
         }
         
-        wrapperCalendar.contentSize = CGSizeMake(320 * numberOf2week, 87);
+        self.wrapperCalendar.contentSize = CGSizeMake(298 * numberOf2week, 87);
         
-        self.controleSlide1 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 - 6, 116 - 8, 4, 4)];
+        self.controleSlide1 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 - 5, 120 - 8, 4, 4)];
         self.controleSlide1.image = [UIImage imageNamed:@"F1_Calendar_dote_Enable"];
         [self addSubview:_controleSlide1];
         
-        self.controleSlide2 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 + 6, 116 - 8, 4, 4)];
+        self.controleSlide2 = [[UIImageView alloc]initWithFrame:CGRectMake(frame.size.width/2 - 2 + 5, 120 - 8, 4, 4)];
         self.controleSlide2.image = [UIImage imageNamed:@"F1_Calendar_dote_Disable"];
         [self addSubview:_controleSlide2];
         
     }
     return self;
+}
+
+- (void)forceDealloc{
+    
+    [self.arrayCell removeAllObjects];
+    
+    [self.currentSelected removeFromSuperview];
+    [self.firstDay removeFromSuperview];
+    [self.wrapperCalendar removeFromSuperview];
+    
+    _arrayCell = nil;
+    _currentSelected = nil;
+    _firstDay = nil;
+    _wrapperCalendar = nil;
+    
+}
+
+- (void)dealloc{
+    NSLog(@"Dealloc Calendar");
 }
 
 #pragma mark - Public
@@ -240,10 +260,13 @@
     if (_currentSelected != day) {
         self.currentSelected.selected = NO;
         _currentSelected = day;
+        self.currentSelected.selected = YES;
     }
     
     if ([day.date mk_isToday] || [day.date mk_isTomorrow]) {
         [self.delegate calendarTouchTodayOrTomorrowDay:day.date];
+    } else {
+        [self.delegate calendarTouchAnotherDay];
     }
     
 }
@@ -274,7 +297,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float fractionalPage = scrollView.contentOffset.x/ 320.0f;
+    float fractionalPage = scrollView.contentOffset.x/ 298.0f;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
     if (nearestNumberCurrent == 0) {

@@ -31,7 +31,7 @@
 @property (readonly) CLLocationCoordinate2D coordinate;
 @property (readonly) MKMapItem *location;
 @property (readonly) NSURL *pictureUrl;
-@property (readonly) int status;
+@property (readonly) NSInteger status;
 @property (readonly) NSArray *attendeeIds;
 
 @property (readonly) User *user;
@@ -74,6 +74,8 @@
                      PrivateLocation:(BOOL)privatelocation
                                Block:(void (^)(NSError *error))block;
 
+- (void)addPeopleActivityWithGuests:(NSMutableArray *)arrayGuests Block:(void (^)(NSError *error))block;
+
 + (void)activityWithId:(NSUInteger)activityId
               andBlock:(void (^)(Activity *activity, NSError *error))block;
 
@@ -89,10 +91,6 @@
 
 + (NSString *)lengthToString:(NSInteger)length;
 - (NSInteger)lengthToInteger;
-//- (NSDate *)startDate;
 - (NSString *)locationDescription;
-//- (void)populateLocationDataWith:(MKMapItem *)mapItem;
-
-
 
 @end

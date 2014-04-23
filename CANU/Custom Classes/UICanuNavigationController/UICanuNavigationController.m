@@ -13,7 +13,7 @@
 
 #define kNavboxAlpha ((float) .7)
 #define KNavboxPosition
-#define KNavboxSize ((CGRect) 2.0,418.0 + KIphone5Margin,63.0,63.0)
+#define KNavboxSize ((CGRect) 2.0,418.0 + KIphone5Margin,64.0,64.0)
 
 typedef enum {
     NavBoxLocal = 2,
@@ -22,8 +22,7 @@ typedef enum {
 } NavBoxPosition;
 
 typedef enum {
-    AreaTribes = 110,
-    AreaLocal = 280,
+    AreaCreate = 150
 } AreaPosition;
 
 @interface UICanuNavigationController () <UIGestureRecognizerDelegate>
@@ -57,7 +56,7 @@ typedef enum {
         self.naveboxPosition = NavBoxTribes;
         
         self.navigationBarHidden = YES;
-        self.control = [[UIView alloc] initWithFrame:CGRectMake(NavBoxTribes, 415.0 + KIphone5Margin, 63.0, 63.0)];
+        self.control = [[UIView alloc] initWithFrame:CGRectMake(NavBoxTribes, 415.0 + KIphone5Margin, 64.0, 64.0)];
         self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Tribes"]];
         [self.view addSubview:self.control];
         
@@ -135,11 +134,12 @@ typedef enum {
         }
         
         if (_verticalDirection) {
+            
+            self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Create"]];
+            
             self.control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl.y, self.control.frame.size.width, self.control.frame.size.height);
             
-            if (self.view.frame.size.height - self.control.frame.origin.y > AreaTribes - 50 && !self.activityFeed.animationCreateActivity.active) {
-                
-                self.activityFeed.animationCreateActivity.localIsUnlock = [self.activityFeed localFeedIsUnlock];
+            if (self.view.frame.size.height - self.control.frame.origin.y > AreaCreate - 50 && !self.activityFeed.animationCreateActivity.active) {
                 
                 [self.activityFeed.animationCreateActivity startView];
                 
@@ -178,7 +178,8 @@ typedef enum {
         
         self.velocity = [recognizer velocityInView:self.view].x;
         
-        [self performSelectorOnMainThread:@selector(releaseNavBox) withObject:self waitUntilDone:NO];
+        [self releaseNavBox];
+        
         
     }
     
@@ -192,10 +193,8 @@ typedef enum {
         
         CANUCreateActivity canuCreateActivity;
         
-        if (positionToBottom > AreaTribes && positionToBottom < AreaLocal) {
-            canuCreateActivity = CANUCreateActivityTribes;
-        } else if (positionToBottom > AreaTribes) {
-            canuCreateActivity = CANUCreateActivityLocal;
+        if (positionToBottom > AreaCreate) {
+            canuCreateActivity = CANUCreateActivityAcitve;
         } else {
             canuCreateActivity = CANUCreateActivityNone;
         }
@@ -203,7 +202,13 @@ typedef enum {
         [UIView animateWithDuration:0.3 animations:^{
             self.control.frame = CGRectMake(_naveboxPosition, 415.0f + KIphone5Margin,self.control.frame.size.width, self.control.frame.size.height);
         }completion:^(BOOL finished) {
-            
+            if (_naveboxPosition == NavBoxLocal) {
+                self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local"]];
+            }else if (_naveboxPosition == NavBoxTribes){
+                self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Tribes"]];
+            }else if (_naveboxPosition == NavBoxProfil){
+                self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me"]];
+            }
         }];
         
         if (self.activityFeed.animationCreateActivity.active) {
@@ -260,13 +265,13 @@ typedef enum {
             
             duration = 0.3f;
             
-            if (self.control.frame.origin.x + (63/2) >= -20 && self.control.frame.origin.x + (63/2) < NavBoxLocal + _areaSize) {
+            if (self.control.frame.origin.x + (64/2) >= -20 && self.control.frame.origin.x + (64/2) < NavBoxLocal + _areaSize) {
                 value = 0;
                 _naveboxPosition = NavBoxLocal;
-            }else if (self.control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize && self.control.frame.origin.x + (63/2) <= NavBoxLocal + _areaSize + _areaSize){
+            }else if (self.control.frame.origin.x + (64/2) >= NavBoxLocal + _areaSize && self.control.frame.origin.x + (64/2) <= NavBoxLocal + _areaSize + _areaSize){
                 value = 0.5;
                 _naveboxPosition = NavBoxTribes;
-            }else if (self.control.frame.origin.x + (63/2) >= NavBoxLocal + _areaSize + _areaSize && self.control.frame.origin.x + (63/2) <= 340){
+            }else if (self.control.frame.origin.x + (64/2) >= NavBoxLocal + _areaSize + _areaSize && self.control.frame.origin.x + (64/2) <= 340){
                 value = 1;
                 _naveboxPosition = NavBoxProfil;
             }
@@ -295,8 +300,24 @@ typedef enum {
 }
 
 - (void)changePosition:(float)position{
-   
+    
     self.control.frame = CGRectMake(self.control.frame.origin.x, 415.0f + KIphone5Margin + position * 65,self.control.frame.size.width, self.control.frame.size.height);
+    
+}
+
+- (void)changePage:(float)position{
+    
+    float navBoxPosition = NavBoxLocal;
+    
+    if (position == 0.5) {
+        navBoxPosition = NavBoxTribes;
+    } else if (position == 1) {
+        navBoxPosition = NavBoxProfil;
+    }
+    
+    self.naveboxPosition = navBoxPosition;
+    
+    self.control.frame = CGRectMake(navBoxPosition, self.control.frame.origin.y,self.control.frame.size.width, self.control.frame.size.height);
     
 }
 

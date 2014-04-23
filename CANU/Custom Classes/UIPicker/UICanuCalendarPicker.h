@@ -18,10 +18,13 @@
 
 - (void)changeTo:(NSDate *)date;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol UICanuCalendarPickerDelegate <NSObject>
 
 @required
 - (void)calendarTouchTodayOrTomorrowDay:(NSDate *)date;
+- (void)calendarTouchAnotherDay;
 @end

@@ -19,8 +19,6 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMessageComposeViewController.h>
 
-#include <CommonCrypto/CommonDigest.h>
-
 typedef NS_ENUM(NSInteger, CANUG5type) {
     CANUG5 = 0,
     CANUG5Fail = 1,
@@ -62,6 +60,8 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
     
     self = [super initWithFrame:frame];
     if (self) {
+        
+        self.forCreateActivity = YES;
         
         self.activity = activity;
         
@@ -122,12 +122,7 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
         [formatterMonth setDateFormat:@"MMMM"];
         NSString *stringFromMonth = [formatterMonth stringFromDate:_activity.start];
         
-        //NSString *string = [NSString stringWithFormat:@"%icanuGettogether%i",_activity.activityId,_activity.user.userId];
-        
-        //NSString *token = [self sha1:string];
-        
-        //controller.body = [NSString stringWithFormat:@"%@? ( %@, %i | %i.%i | %@, %@ ) canu.se/i/%i?key=%@",_activity.title,stringFromMonth,[_activity.start mk_day],[_activity.start mk_hour],[_activity.start mk_minutes],_activity.street,_activity.city,_activity.activityId,token];
-        controller.body = [NSString stringWithFormat:@"%@? ( %@, %i | %i.%i | %@, %@ ) canu.se/i/%@",_activity.title,stringFromMonth,[_activity.start mk_day],[_activity.start mk_hour],[_activity.start mk_minutes],_activity.street,_activity.city,_activity.invitationToken];
+        controller.body = [NSString stringWithFormat:@"%@? ( %@, %li | %li.%li | %@, %@ ) canu.se/i/%@",_activity.title,stringFromMonth,(long)[_activity.start mk_day],(long)[_activity.start mk_hour],(long)[_activity.start mk_minutes],_activity.street,_activity.city,_activity.invitationToken];
         controller.recipients = phoneNumber;
         controller.messageComposeDelegate = self;
         [self.parentViewController presentViewController:controller animated:YES completion:nil];
@@ -142,24 +137,30 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
     
     for (int i = 0; i < [self.arrayUserSelected count]; i++) {
         
-        if (i < 3) {
-            if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
-                ifUser = YES;
-            }
+        if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
+            ifUser = YES;
         }
         
     }
     
-    if (ifUser) {
-        
+    if (_forCreateActivity) {
+        if (ifUser) {
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
+            
+            [self.delegate  messageGhostUserWillDisappearAfterFail];
+        } else {
+            [self disappearG5Fail];
+            [self appearG5failb];
+        }
+    } else {
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
         
-        [self.delegate  messageGhostUserWillDisappear];
-    } else {
-        [self disappearG5Fail];
-        [self appearG5failb];
+        [self.delegate  messageGhostUserWillDisappearAfterFail];
     }
+    
+    
     
 }
 
@@ -169,24 +170,6 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
     
     [self.delegate messageGhostUserWillDisappearForDeleteActivity];
-    
-}
-
--(NSString*) sha1:(NSString*)input{
-    
-    const char *cstr = [input cStringUsingEncoding:NSUTF8StringEncoding];
-    NSData *data = [NSData dataWithBytes:cstr length:input.length];
-    
-    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
-    
-    CC_SHA1(data.bytes, data.length, digest);
-    
-    NSMutableString* output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
-    
-    for(int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x", digest[i]];
-    
-    return output;
     
 }
 
@@ -347,7 +330,7 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
         
         if (messageIsSend) {
             
-            [self.delegate  messageGhostUserWillDisappear];
+            [self.delegate  messageGhostUserWillDisappearAfterSucess];
             
         }
         

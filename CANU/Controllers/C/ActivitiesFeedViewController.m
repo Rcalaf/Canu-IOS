@@ -25,9 +25,6 @@
 @property (nonatomic) BOOL firstAnimationEmptyFeed;
 @property (strong, nonatomic) UIView *viewForEmptyBackground;
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) ActivityScrollViewController *localFeed;
-@property (strong, nonatomic) ActivityScrollViewController *tribeFeed;
-@property (strong, nonatomic) ActivityScrollViewController *profilFeed;
 @property (strong, nonatomic) UIProfileView *profileView;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 
@@ -112,12 +109,12 @@
     [self addChildViewController:_tribeFeed];
     [self.view addSubview:_tribeFeed.view];
     
-    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 119)];
+    self.profilFeed = [[ActivityScrollViewController alloc] initFor:FeedProfileType andUser:_user andFrame:CGRectMake(320, 0, 320, self.view.frame.size.height)];
     self.profilFeed.delegate = self;
     [self addChildViewController:_profilFeed];
     [self.view addSubview:_profilFeed.view];
     
-    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.view.frame.size.height - 119, 320, 119) User:self.user];
+    self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.view.frame.size.height - 165, 320, 165) User:self.user];
     [self.view addSubview:_profileView];
     
     self.animationCreateActivity = [[AnimationCreateActivity alloc]init];
@@ -257,6 +254,34 @@
     
 }
 
+- (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId{
+    
+    BOOL isOpen = false;
+    
+    if ([self.localFeed pushChatIsCurrentDetailsViewOpen:activityId]) {
+        isOpen = true;
+    }
+    
+    if ([self.tribeFeed pushChatIsCurrentDetailsViewOpen:activityId]) {
+        isOpen = true;
+    }
+    
+    if ([self.profilFeed pushChatIsCurrentDetailsViewOpen:activityId]) {
+        isOpen = true;
+    }
+    
+    return isOpen;
+    
+}
+
+- (void)killCurrentDetailsViewController{
+    
+    [self.localFeed killCurrentDetailsViewController];
+    [self.tribeFeed killCurrentDetailsViewController];
+    [self.profilFeed killCurrentDetailsViewController];
+    
+}
+
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{
@@ -294,22 +319,37 @@
 }
 
 - (void)activityScrollViewControllerChangementFeed{
+    
     [UIView animateWithDuration:0.4 animations:^{
         [self animationNavBox:self.lastPosition];
+        [self.profileView forEmptyFeed:self.profilFeed.isEmpty];
     }];
 }
 
-- (void)hiddenProfileView:(BOOL)hidden{
+- (void)hiddenProfileView:(BOOL)hidden Animated:(BOOL)animated{
+    
+    float duration = 0.4f;
+    
+    if (!animated) {
+        duration = 0;
+    }
     
     if (hidden) {
-        [UIView animateWithDuration:0.4 animations:^{
-            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height, 320, 119);
+        [UIView animateWithDuration:duration animations:^{
+            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
         }];
     } else {
-        [UIView animateWithDuration:0.4 animations:^{
-            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - 119, 320, 119);
+        [UIView animateWithDuration:duration animations:^{
+            self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - _profileView.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
         }];
     }
+    
+}
+
+- (void)moveProfileView:(float)offset{
+    
+    [self.profileView animationProfileViewWithScroll:offset];
+    self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - (_profileView.frame.size.height - offset), _profileView.frame.size.width, _profileView.frame.size.height);
     
 }
 

@@ -7,17 +7,21 @@
 //
 
 #import "AFCanuAPIClient.h"
-#import "AFJSONRequestOperation.h"
+#import "AFURLResponseSerialization.h"
 
-NSString * const kAFCanuAPIBaseUDistributionRLString = @"http://api.canu.se";
-//NSString * const kAFCanuAPIDevBaseURLString = @"http://192.168.0.102:3000";
-NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
+NSString * const kAFCanuAPIBaseUDistributionRLString = @"https://api.canu.se";
+NSString * const kAFCanuAPIDevBaseURLString = @"https://api.canu.se";
+//NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
 
-BOOL const kAFCanuAPIDistributionMode = YES;
 
+// Change with Product / Scheme / Edit Scheme / Run CANU.app / Build Configuration / (Release | Debug)
+#ifdef DEBUG
+    BOOL const kAFCanuAPIDistributionMode = NO;
+#else
+    BOOL const kAFCanuAPIDistributionMode = YES;
+#endif
 
 @implementation AFCanuAPIClient
-
 
 + (AFCanuAPIClient *)sharedClient {
   
@@ -38,6 +42,7 @@ BOOL const kAFCanuAPIDistributionMode = YES;
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
+    
     self = [super initWithBaseURL:url];
     if (!self) {
         return nil;
@@ -45,16 +50,18 @@ BOOL const kAFCanuAPIDistributionMode = YES;
     
     self.distributionMode = kAFCanuAPIDistributionMode;
     
+    self.securityPolicy.allowInvalidCertificates = YES;
+    
     if (self.distributionMode) {
         self.urlBase = kAFCanuAPIBaseUDistributionRLString;
     } else {
         self.urlBase = kAFCanuAPIDevBaseURLString;
     }
     
-    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
-    
+    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json",nil];
+
     // Accept HTTP Header; see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
-	[self setDefaultHeader:@"Accept" value:@"application/json"];
+	[self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     return self;
 }

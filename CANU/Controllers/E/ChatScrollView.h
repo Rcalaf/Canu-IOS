@@ -12,19 +12,21 @@
 
 @interface ChatScrollView : UIView
 
+@property (nonatomic) id delegate;
 @property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) NSMutableArray *arrayCell;
 
-- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity andMaxHeight:(int)maxHeight andMinHeight:(int)minHeight;
+- (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity;
 
 - (void)load;
 
-- (void)scrollToBottom;
+- (void)addSendMessage:(NSString *)text;
 
--(void)scrollToLastMessage;
+@end
 
-- (void)scrollAnimationFolderFor:(int)contentOffset;
+@protocol ChatScrollViewDelegate <NSObject>
 
-- (void)killScroll;
-
+@required
+- (void)openDesciption;
+- (void)closeDescription;
 @end

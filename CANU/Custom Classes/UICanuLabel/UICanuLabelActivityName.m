@@ -15,8 +15,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.font            = [UIFont fontWithName:@"Lato-Bold" size:22.0];
-        self.backgroundColor = [UIColor whiteColor];
+        self.font            = [UIFont fontWithName:@"Lato-Bold" size:23.0];
+        self.backgroundColor = [UIColor clearColor];
         self.textColor       = UIColorFromRGB(0x2b4b58);
         
     }

@@ -31,11 +31,18 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
-        UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 47)];
-        icon.image = [UIImage imageNamed:@"F1_time_picker"];
-        [self addSubview:icon];
+        UIView *backgroundSelected = [[UIView alloc]initWithFrame:CGRectMake(0, 35, frame.size.width, 45)];
+        backgroundSelected.backgroundColor = UIColorFromRGB(0xf8fafa);
+        [self addSubview:backgroundSelected];
+        
+        UILabel *atText = [[UILabel alloc]initWithFrame:CGRectMake(10, 51, 25, 13)];
+        atText.textColor = UIColorFromRGB(0x2b4b58);
+        atText.backgroundColor = UIColorFromRGB(0xf8fafa);
+        atText.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+        atText.text = NSLocalizedString(@"At :", nil);
+        [self addSubview:atText];
         
         BOOL is24hFormat = [self timeIs24HourFormat];
     
@@ -45,10 +52,10 @@
             self.arrayHours = @[@"12",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11"];
         }
         
-        CGRect rectHours = CGRectMake(40, 1, 40, self.frame.size.height - 2);
+        CGRect rectHours = CGRectMake(35, 0, 50, self.frame.size.height);
         
         if (!is24hFormat) {
-            rectHours = CGRectMake(35, 1, 30, self.frame.size.height - 2);
+            rectHours = CGRectMake(35, 0, 35, self.frame.size.height);
         }
         
         self.hoursScroll = [[UICanuScrollPicker alloc]initWithFrame:rectHours WithContent:_arrayHours];
@@ -56,26 +63,26 @@
         self.hoursScroll.delegatePicker = self;
         [self addSubview:_hoursScroll];
         
-        CGRect rectDoubleDote = CGRectMake(80, 19, 10, 16);
+        CGRect rectDoubleDote = CGRectMake(85, 29, 5, 55);
         
         if (!is24hFormat) {
-            rectDoubleDote = CGRectMake(65, 19, 10, 16);
+            rectDoubleDote = CGRectMake(70, 29, 5, 55);
         }
         
         UILabel *doubleDote = [[UILabel alloc]initWithFrame:rectDoubleDote];
-        doubleDote.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-        doubleDote.textColor = UIColorFromRGB(0x1ca6c3);
+        doubleDote.font = [UIFont fontWithName:@"Lato-Regular" size:18];
+        doubleDote.textColor = UIColorFromRGB(0x2b4b58);
         doubleDote.textAlignment = NSTextAlignmentCenter;
         doubleDote.text = @":";
-        doubleDote.backgroundColor = [UIColor whiteColor];
+        doubleDote.backgroundColor = [UIColor clearColor];
         [self addSubview:doubleDote];
         
-        self.arrayMinutes = @[@"0",@"15",@"30",@"45"];
+        self.arrayMinutes = @[@"00",@"15",@"30",@"45"];
         
-        CGRect rectMinutes = CGRectMake(80 + 10, 1, 40, self.frame.size.height - 2);
+        CGRect rectMinutes = CGRectMake(80 + 10, 0, 50, self.frame.size.height);
         
         if (!is24hFormat) {
-            rectMinutes = CGRectMake(65 + 10, 1, 30, self.frame.size.height - 2);
+            rectMinutes = CGRectMake(65 + 10, 0, 35, self.frame.size.height);
         }
         
         self.minutesScroll = [[UICanuScrollPicker alloc]initWithFrame:rectMinutes WithContent:_arrayMinutes];
@@ -83,7 +90,7 @@
         [self addSubview:_minutesScroll];
         
         if (!is24hFormat) {
-            self.amPmScroll = [[UICanuAMPMPicker alloc] initWithFrame:CGRectMake(100 + 10, 1, 30, self.frame.size.height - 2)];
+            self.amPmScroll = [[UICanuAMPMPicker alloc] initWithFrame:CGRectMake(100 + 13, 0, 30, self.frame.size.height)];
             [self.amPmScroll changeCurrentObjectTo:1];
             [self.amPmScroll changeCurrentObjectTo:0];
             self.amPmScroll.delegatePicker = self;
@@ -92,6 +99,25 @@
         
     }
     return self;
+}
+
+- (void)forceDealloc{
+    
+    [self.hoursScroll removeFromSuperview];
+    [self.minutesScroll removeFromSuperview];
+    [self.amPmScroll removeFromSuperview];
+    
+    _arrayHours = nil;
+    _arrayMinutes = nil;
+    _hoursScroll = nil;
+    _minutesScroll = nil;
+    _amPmScroll = nil;
+    
+}
+
+- (void)dealloc
+{
+    NSLog(@"Dealloc UICanuTimePicker");
 }
 
 - (BOOL)timeIs24HourFormat {
@@ -117,7 +143,7 @@
         
         NSArray *hours24 = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23"];
         
-        int indexhours24 = [self.hoursScroll currentObject];
+        NSInteger indexhours24 = [self.hoursScroll currentObject];
         
         if ([self.amPmScroll currentObject] == 1) {
             indexhours24 += 12;
@@ -141,12 +167,12 @@
 
 - (void)changeTo:(NSDate *)date{
     
-    int hours = [date mk_hour];
-    int mins = [date mk_minutes];
+    NSInteger hours = [date mk_hour];
+    NSInteger mins = [date mk_minutes];
     
     if ([self timeIs24HourFormat]) {
         [self.hoursScroll changeCurrentObjectTo:hours];
-        [self.minutesScroll changeCurrentObjectTo:abs(mins/15)];
+        [self.minutesScroll changeCurrentObjectTo:ABS(mins/15)];
     } else {
         if (hours < 12) {
             [self.amPmScroll changeCurrentObjectTo:0];
@@ -159,7 +185,7 @@
         }
         
         [self.hoursScroll changeCurrentObjectTo:hours];
-        [self.minutesScroll changeCurrentObjectTo:abs(mins/15)];
+        [self.minutesScroll changeCurrentObjectTo:ABS(mins/15)];
         
     }
     
@@ -169,9 +195,9 @@
     
     self.isBlokedValue = blockedValue;
     
-    int maxHours = [[NSDate date] mk_hour];
+    NSInteger maxHours = [[NSDate date] mk_hour];
     
-    int maxMins = abs([[NSDate date] mk_minutes]/15) + 1;
+    NSInteger maxMins = ABS([[NSDate date] mk_minutes]/15) + 1;
     
     if (maxMins >= [_arrayMinutes count]) {
         maxMins = 0;
@@ -219,9 +245,9 @@
         
         self.valueIsChanged = isSelected;
         
-        int maxHours = [[NSDate date] mk_hour];
+        NSInteger maxHours = [[NSDate date] mk_hour];
         
-        int maxMins = abs([[NSDate date] mk_minutes]/15) + 1;
+        NSInteger maxMins = ABS([[NSDate date] mk_minutes]/15) + 1;
         
         if (maxMins >= [_arrayMinutes count]) {
             maxMins = 0;
@@ -273,9 +299,9 @@
         
         self.valueIsChangedAmPm = blockedValue;
         
-        int maxHours = [[NSDate date] mk_hour];
+        NSInteger maxHours = [[NSDate date] mk_hour];
         
-        int maxMins = abs([[NSDate date] mk_minutes]/15) + 1;
+        NSInteger maxMins = ABS([[NSDate date] mk_minutes]/15) + 1;
         
         if (maxMins >= [_arrayMinutes count]) {
             maxMins = 0;

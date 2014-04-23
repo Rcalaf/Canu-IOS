@@ -15,10 +15,18 @@
 
 @property (strong, nonatomic) AnimationCreateActivity *animationCreateActivity;
 
+@property (strong, nonatomic) ActivityScrollViewController *localFeed;
+@property (strong, nonatomic) ActivityScrollViewController *tribeFeed;
+@property (strong, nonatomic) ActivityScrollViewController *profilFeed;
+
 - (void)changePosition:(float)position;
 
 - (void)removeAfterlogOut;
 
 - (BOOL)localFeedIsUnlock;
+
+- (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId;
+
+- (void)killCurrentDetailsViewController;
 
 @end

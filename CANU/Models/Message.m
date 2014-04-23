@@ -13,7 +13,7 @@
 - (void)setDate:(id)date{
     
     if ([[date class] isKindOfClass:[NSDate class]] ) {
-        self.date = date;
+        _date = date;
     } else {
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         NSArray *dateParts = [date componentsSeparatedByString:@"T"];
@@ -26,9 +26,13 @@
         [comps setHour:[[timeParts objectAtIndex:0] integerValue]];
         [comps setMinute:[[timeParts objectAtIndex:1] integerValue]];
         [comps setSecond:[[timeParts objectAtIndex:2] integerValue]];
-        self.date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+        _date = [[NSCalendar currentCalendar] dateFromComponents:comps];
     }
     
+}
+
+- (void)addDate:(NSDate *)date{
+    _date = date;
 }
 
 - (id)initWithAttributes:(NSDictionary *)attributes {
@@ -36,7 +40,7 @@
     if (!self) {
         return nil;
     }
-    //NSLog(@"%@",attributes);
+    
     self.text = [attributes valueForKeyPath:@"text"];
     
     self.date = [attributes valueForKeyPath:@"created_at"];

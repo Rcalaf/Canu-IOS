@@ -15,10 +15,10 @@ typedef NS_ENUM(NSInteger, CANUError) {
     CANUErrorServerDown = 2,            // The canu api server is down
     CANUErrorPhoneBookRestricted = 3,   // If We don't have access to the phone book
     CANUErrorPhoneBookNotDetermined = 4,// If We don't have access to the phone book
-    CANUErrorLocationRestricted = 5,    // If We don't have access to the phone book
-    CANUErrorLocationNotDetermined = 6, // If We don't have access to the phone book
-    CANUErrorPushNotDetermined = 7,     // If We don't have access to the phone book
-    CANUErrorPushG3b = 8                // If the user don't allow the push and ha click on Go.
+    CANUErrorLocationRestricted = 5,    // If We don't have access to the location
+    CANUErrorLocationNotDetermined = 6, // If We don't have access to the location
+    CANUErrorPushNotDetermined = 7,     // If We don't know if the user allow push notification
+    CANUErrorPushG3b = 8                // If the user don't allow the push and he click on Go.
 };
 
 @interface ErrorManager : NSObject

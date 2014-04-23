@@ -25,18 +25,31 @@ typedef enum {
 @property (nonatomic) BOOL isUnlock; // Counter
 @property (retain) id delegate;
 
-- (void)reload;
-
 - (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame;
 
+/**
+ *  Reload the feed view
+ */
+- (void)reload;
+
+/**
+ *  Remove the view after logout / and children
+ */
 - (void)removeAfterlogOut;
+
+- (void)openActivityAfterPush:(NSInteger)activityId;
+
+- (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId;
+
+- (void)killCurrentDetailsViewController;
 
 @end
 
 @protocol ActivityScrollViewControllerDelegate <NSObject>
 
 @required
-- (void)hiddenProfileView:(BOOL)hidden;
+- (void)hiddenProfileView:(BOOL)hidden Animated:(BOOL)animated;
+- (void)moveProfileView:(float)offset;
 - (void)activityScrollViewControllerStartWithEmptyFeed;
 - (void)activityScrollViewControllerChangementFeed;
 @end

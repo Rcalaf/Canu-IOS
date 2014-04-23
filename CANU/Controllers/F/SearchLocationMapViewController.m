@@ -8,6 +8,8 @@
 
 #import "SearchLocationMapViewController.h"
 #import "UICanuButtonSignBottomBar.h"
+#import "UICanuBottomBar.h"
+#import "UICanuButton.h"
 #import <MapKit/MapKit.h>
 #import "Location.h"
 #import "UICanuTextFieldLocation.h"
@@ -16,9 +18,11 @@
 
 @property (nonatomic) BOOL searchLocationIsOpen;
 @property (strong, nonatomic) UIView *wrapper;
+@property (strong, nonatomic) UIImageView *wrapperLocation;
+@property (strong, nonatomic) UIImageView *wrapperLocationInfo;
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) MKMapItem *chosenLocation;
-@property (strong, nonatomic) UICanuTextFieldLocation *locationInput;
+@property (strong, nonatomic) UILabel *adress;
 
 @end
 
@@ -51,25 +55,45 @@
     self.wrapper = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
     [self.view addSubview:_wrapper];
     
-    UIView *bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 57, self.view.frame.size.width, 57)];
-    bottomBar .backgroundColor = UIColorFromRGB(0xf4f4f4);
-    [self.view addSubview:bottomBar ];
+    UICanuBottomBar *bottomBar = [[UICanuBottomBar alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
+    [self.view addSubview:bottomBar];
     
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    [backButton setFrame:CGRectMake(0.0, 0.0, 45, 45)];
+    [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(goToForm) forControlEvents:UIControlEventTouchDown];
-    [bottomBar  addSubview:backButton];
+    [bottomBar addSubview:backButton];
     
-    UICanuButtonSignBottomBar *buttonAction = [[UICanuButtonSignBottomBar alloc]initWithFrame:CGRectMake(57 + 10, 10.0, self.view.frame.size.width - 57 - 20, 37.0) andBlue:YES];
-    [buttonAction setTitle:NSLocalizedString(@"SET LOCATION", nil) forState:UIControlStateNormal];
+    UICanuButton *buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
+    [buttonAction setTitle:NSLocalizedString(@"Save location", nil) forState:UIControlStateNormal];
     [buttonAction addTarget:self action:@selector(setLocation) forControlEvents:UIControlEventTouchDown];
-    [bottomBar  addSubview:buttonAction];
+    [bottomBar addSubview:buttonAction];
     
-    self.locationInput = [[UICanuTextFieldLocation alloc]initWithFrame:CGRectMake(10, 10, 300, 47)];
-    self.locationInput.returnKeyType = UIReturnKeySearch;
-    self.locationInput.userInteractionEnabled = NO;
-    [self.view addSubview:_locationInput];
+    self.wrapperLocation = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 300, 55)];
+    self.wrapperLocation.image = [UIImage imageNamed:@"F_location_cell"];
+    [self.view addSubview:_wrapperLocation];
+    
+    UILabel *name = [[UILabel alloc]initWithFrame:CGRectMake(10, 9, 233, 20)];
+    name.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+    name.textColor = UIColorFromRGB(0x2b4b58);
+    name.text = NSLocalizedString(@"Pin location", nil);
+    [self.wrapperLocation addSubview:name];
+    
+    self.adress = [[UILabel alloc]initWithFrame:CGRectMake(10, 31, 233, 11)];
+    self.adress.font = [UIFont fontWithName:@"Lato-Italic" size:10];
+    self.adress.textColor = UIColorFromRGB(0x2b4b58);
+    [self.wrapperLocation addSubview:_adress];
+    
+    self.wrapperLocationInfo = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10 + 55 + 5, 300, 35)];
+    self.wrapperLocationInfo.image = [UIImage imageNamed:@"F_search_location_pin_background"];
+    [self.view addSubview:_wrapperLocationInfo];
+    
+    UILabel *info = [[UILabel alloc]initWithFrame:CGRectMake(5, 10, 290, 13)];
+    info.font = [UIFont fontWithName:@"Lato-Regular" size:10];
+    info.textAlignment = NSTextAlignmentCenter;
+    info.textColor = UIColorFromRGB(0x2b4b58);
+    info.text = NSLocalizedString(@"Long press at a new place to move the pin", nil);
+    [self.wrapperLocationInfo addSubview:info];
     
 }
 
@@ -133,6 +157,8 @@
     
     if (recognizer.state == UIGestureRecognizerStateBegan) {
         
+        self.wrapperLocationInfo.alpha = 0;
+        
         [self.mapView removeAnnotations:[self.mapView annotations]];
         
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:[recognizer locationInView:self.mapView] toCoordinateFromView:self.mapView];
@@ -173,8 +199,7 @@
     NSMutableArray *arrayLocation = [[NSMutableArray alloc]init];
     [arrayLocation addObject:location];
     
-    self.locationInput.activeSearch = NO;
-    self.locationInput.text = location.name;
+    self.adress.text = location.name;
     
 }
 
@@ -200,8 +225,7 @@
          NSMutableArray *arrayLocation = [[NSMutableArray alloc]init];
          [arrayLocation addObject:location];
          
-         self.locationInput.activeSearch = NO;
-         self.locationInput.text = location.name;
+         self.adress.text = location.name;
          
      }];
     

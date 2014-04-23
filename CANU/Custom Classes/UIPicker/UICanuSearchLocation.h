@@ -25,6 +25,8 @@
 
 - (void)forceLocationTo:(Location *)location;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol UICanuSearchLocationDelegate <NSObject>
@@ -32,5 +34,6 @@
 @required
 
 - (void)locationIsSelected:(Location *)location;
+- (void)hiddenKeyboardSearchLocation;
 
 @end

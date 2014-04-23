@@ -10,8 +10,7 @@
 
 @interface UICanuLenghtPicker () <UIScrollViewDelegate>
 
-@property (nonatomic) int currentObject;
-@property (strong, nonatomic) UILabel *patternHours;
+@property (nonatomic) NSInteger currentObject;
 @property (strong, nonatomic) UIScrollView *lenghtScroll;
 @property (strong, nonatomic) NSMutableArray *arrayDataLowDisable;
 
@@ -26,31 +25,20 @@
         
         self.arrayDataLowDisable = [[NSMutableArray alloc]init];
         
-        self.backgroundColor = [UIColor whiteColor];
+        UIView *backgroundSelected = [[UIView alloc]initWithFrame:CGRectMake(0, 35, frame.size.width, 45)];
+        backgroundSelected.backgroundColor = UIColorFromRGB(0xf8fafa);
+        [self addSubview:backgroundSelected];
         
-        UIImageView *icon = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 15, 47)];
-        icon.image = [UIImage imageNamed:@"F1_lenght_picker"];
-        [self addSubview:icon];
+        UILabel *forText = [[UILabel alloc]initWithFrame:CGRectMake(15, 51, 30, 13)];
+        forText.textColor = UIColorFromRGB(0x2b4b58);
+        forText.backgroundColor = UIColorFromRGB(0xf8fafa);
+        forText.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+        forText.text = NSLocalizedString(@"For :", nil);
+        [self addSubview:forText];
         
-        UILabel *patternMins = [[UILabel alloc]initWithFrame:CGRectMake(43, 21, 80, 16)];
-        patternMins.text = @"min";
-        patternMins.font = [UIFont fontWithName:@"Lato-Bold" size:10];
-        patternMins.textColor = UIColorFromRGB(0x1ca6c3);
-        patternMins.textAlignment = NSTextAlignmentRight;
-        patternMins.backgroundColor = [UIColor whiteColor];
-        [self addSubview:patternMins];
-        
-        self.patternHours = [[UILabel alloc]initWithFrame:CGRectMake(40, 21, 37, 16)];
-        self.patternHours.text = @"h";
-        self.patternHours.font = [UIFont fontWithName:@"Lato-Bold" size:10];
-        self.patternHours.textColor = UIColorFromRGB(0x1ca6c3);
-        self.patternHours.textAlignment = NSTextAlignmentRight;
-        self.patternHours.backgroundColor = [UIColor whiteColor];
-        [self addSubview:_patternHours];
-        
-        self.lenghtScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(40, 1, 100, self.frame.size.height - 2)];
+        self.lenghtScroll = [[UIScrollView alloc]initWithFrame:CGRectMake(50, 0, 100, self.frame.size.height)];
         self.lenghtScroll.backgroundColor = [UIColor clearColor];
-        self.lenghtScroll.contentSize = CGSizeMake( 100, 19 + 96 * 26);
+        self.lenghtScroll.contentSize = CGSizeMake( 100, 55 + 96 * 55);
         self.lenghtScroll.decelerationRate = UIScrollViewDecelerationRateFast;
         self.lenghtScroll.showsVerticalScrollIndicator = NO;
         self.lenghtScroll.delegate = self;
@@ -76,27 +64,19 @@
             NSString *minHour;
             
             if (hours == 0) {
-                minHour = [NSString stringWithFormat:@"%i",mins];
+                minHour = [NSString stringWithFormat:@"%i min",mins];
             } else if (hours != 0 && mins != 0) {
-                minHour = [NSString stringWithFormat:@"%i      %i",hours,mins];
+                minHour = [NSString stringWithFormat:@"%i h %i min",hours,mins];
             } else {
-                minHour = [NSString stringWithFormat:@"%i      00",hours];
+                minHour = [NSString stringWithFormat:@"%i h",hours];
             }
             
-            UILabel *dataGray = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + i * 26, 60, 16)];
-            dataGray.text = minHour;
-            dataGray.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            dataGray.textColor = UIColorFromRGB(0xe0e3e4);
-            dataGray.textAlignment = NSTextAlignmentRight;
-            dataGray.backgroundColor = [UIColor clearColor];
-            [self.lenghtScroll addSubview:dataGray];
-            
-            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 19 + i * 26, 60, 16)];
+            UILabel *data = [[UILabel alloc]initWithFrame:CGRectMake(0, 29 + i * 55, 95, 55)];
             data.text = minHour;
-            data.font = [UIFont fontWithName:@"Lato-Bold" size:15];
-            data.textColor = UIColorFromRGB(0x1ca6c3);
-            data.textAlignment = NSTextAlignmentRight;
+            data.font = [UIFont fontWithName:@"Lato-Regular" size:18];
+            data.textColor = UIColorFromRGB(0x2b4b58);
             data.backgroundColor = [UIColor clearColor];
+            data.alpha = 0.3f;
             [self.lenghtScroll addSubview:data];
             [self.arrayDataLowDisable addObject:data];
             
@@ -112,14 +92,19 @@
     return self;
 }
 
+- (void)dealloc
+{
+    NSLog(@"Dealloc UICanuLenghtPicker");
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    float fractionalPage = scrollView.contentOffset.y/ 26.0f ;
+    float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
-    int newCurrentObject = 0;
+    NSInteger newCurrentObject = 0;
     
     if (nearestNumberCurrent < 0) {
         newCurrentObject = 0;
@@ -131,14 +116,26 @@
     
     _currentObject = newCurrentObject;
     
-    for (int i = 0; i < [_arrayDataLowDisable count]; i++) {
+    NSInteger minIndex = _currentObject - 2;
+    
+    if (minIndex < 0) {
+        minIndex = 0;
+    }
+    
+    NSInteger maxIndex = _currentObject + 2;
+    
+    if (maxIndex > [_arrayDataLowDisable count]) {
+        maxIndex = [_arrayDataLowDisable count];
+    }
+    
+    for (NSInteger i = minIndex; i < maxIndex; i++) {
         
         UILabel *data = [_arrayDataLowDisable objectAtIndex:i];
         
         if (i != _currentObject) {
             [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 data.alpha = 0;
+                                 data.alpha = 0.3f;
                              }completion:^(BOOL finished) {}];
         } else {
             [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
@@ -147,19 +144,6 @@
                              }completion:^(BOOL finished) {}];
         }
         
-    }
-    
-    // if there is hour
-    if (_currentObject >= 3) {
-        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             self.patternHours.alpha = 1;
-                         }completion:^(BOOL finished) {}];
-    } else {
-        [UIView animateWithDuration:0.15f delay:0 options:UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             self.patternHours.alpha = 0;
-                         }completion:^(BOOL finished) {}];
     }
     
 }
@@ -268,7 +252,7 @@
 
 - (void)adapteCellWithAnimation:(BOOL)animation{
     
-    int scrollContentOffeset = _currentObject * 26;
+    NSInteger scrollContentOffeset = _currentObject * 55;
     
     float delay = 0.15f;
     

@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    UICanuActivityCellEditable = 0,
-    UICanuActivityCellGo = 1,
-    UICanuActivityCellToGo = 2,
-} UICanuActivityCellStatus;
+typedef NS_ENUM(NSInteger, UICanuActivityCellStatus) {
+    UICanuActivityCellEditable  = 0,
+    UICanuActivityCellGo        = 1,
+    UICanuActivityCellToGo      = 2
+};
 
 @class Activity,User;
 
@@ -20,12 +20,16 @@ typedef enum {
 
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (strong, nonatomic) UIButton *actionButton;
-@property (strong, nonatomic) UIImageView *animationButtonGo;
-@property (strong, nonatomic) UIImageView *animationButtonToGo;
 @property (strong, nonatomic) Activity *activity;
 @property (retain) id delegate;
 
 - (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity;
+
+- (void)animateAfterDelay:(float)delay;
+
+- (void)hiddenBottomBar:(BOOL)hidden;
+
+- (void)updateWithActivity:(Activity *)activity;
 
 @end
 

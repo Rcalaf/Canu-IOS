@@ -18,6 +18,6 @@
 
 -(id)initWithAttributes:(NSDictionary *)attributes;
 
-
+- (void)addDate:(NSDate *)date;
 
 @end

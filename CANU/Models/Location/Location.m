@@ -271,11 +271,11 @@
     
     NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=AIzaSyAG-D8gSvKf5rUZtEklnWFXCK2ZgGpj7PM",self.referencePlaceDetails];
     
-    [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        
-        [self addMoreDataWithAttributes:JSON];
-
+        [self addMoreDataWithAttributes:responseObject];
         
         if (block) {
             block(self, nil);
@@ -291,23 +291,6 @@
             
             block(nil,error);
         }
-        
-        //        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
-        //
-        //            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
-        //
-        //            if (block) {
-        //                block([NSArray alloc],customError);
-        //            }
-        //
-        //            if (canuError == CANUErrorServerDown) {
-        //                [[ErrorManager sharedErrorManager] serverIsDown];
-        //            } else if (canuError == CANUErrorUnknown) {
-        //                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"userActivitiesWithBlock:"];
-        //            }
-        //
-        //        }];
-        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
     
@@ -341,8 +324,8 @@
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    [[AFCanuAPIClient sharedClient] getPath:url parameters:nil success:^(AFHTTPRequestOperation *operation, id JSON) {
-        
+    
+    [[AFCanuAPIClient sharedClient] GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray *arrayLocation = [[NSMutableArray alloc]init];
         NSArray *arrayJson;
         
@@ -355,10 +338,10 @@
                 
             }
             
-            arrayJson = [[JSON objectForKey:@"response"] objectForKey:@"venues"];
+            arrayJson = [[responseObject objectForKey:@"response"] objectForKey:@"venues"];
             
         } else {
-            arrayJson = [JSON objectForKey:@"predictions"];
+            arrayJson = [responseObject objectForKey:@"predictions"];
         }
         
         
@@ -387,7 +370,6 @@
         }
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error : %@",error);
         if (block) {

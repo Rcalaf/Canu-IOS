@@ -19,11 +19,9 @@
 /**
  *  Create activity (local or tribe)
  *
- *  @param activity
- *
  *  @return
  */
-- (id)initForCreate:(CANUCreateActivity)canuCreateActivity;
+- (id)initForCreate;
 
 /**
  *  Edit a activity
@@ -38,8 +36,10 @@
 
 @protocol CreateEditActivityViewControllerDelegate <NSObject>
 
-@required
+@optional
 
-- (void)currentActivityWasDeleted;
+- (void)currentActivityWasDeleted:(Activity *)activity;
+
+- (void)createEditActivityIsFinish:(Activity *)activity;
 
 @end
