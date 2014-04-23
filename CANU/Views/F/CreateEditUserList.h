@@ -21,6 +21,7 @@
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
+@property (strong, nonatomic) NSMutableArray *peoplesAlreadySelected;
 
 - (void)lauchView;
 
@@ -45,12 +46,14 @@
 
 @protocol CreateEditUserListDelegate <NSObject>
 
+@optional
+
+- (void)hiddenKeyboardUserList;
+
 @required
 
 - (void)changeUserSelected:(NSMutableArray *)arrayAllUserSelected;
 
 - (void)phoneBookIsLoad;
-
-- (void)hiddenKeyboardUserList;
 
 @end

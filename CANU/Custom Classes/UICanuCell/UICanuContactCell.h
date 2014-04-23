@@ -13,6 +13,7 @@
 @interface UICanuContactCell : UIView
 
 @property (retain) id delegate;
+@property (nonatomic) BOOL isDisable;
 @property (strong, nonatomic) UIImageView *square;
 @property (strong, nonatomic) Contact *contact;
 @property (strong, nonatomic) User *user;

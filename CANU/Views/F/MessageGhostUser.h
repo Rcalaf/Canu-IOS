@@ -14,16 +14,21 @@
 
 @property (retain) id delegate;
 
+@property (nonatomic) BOOL forCreateActivity;
+
 - (id)initWithFrame:(CGRect)frame andArray:(NSMutableArray *)usersSelected andParentViewcontroller:(UIViewController *)viewController withActivity:(Activity *)activity;
 
 @end
 
 @protocol MessageGhostUserDelegate <NSObject>
 
-@required
-
-- (void)messageGhostUserWillDisappear;
+@optional
 
 - (void)messageGhostUserWillDisappearForDeleteActivity;
+
+@required
+
+- (void)messageGhostUserWillDisappearAfterSucess;
+- (void)messageGhostUserWillDisappearAfterFail;
 
 @end

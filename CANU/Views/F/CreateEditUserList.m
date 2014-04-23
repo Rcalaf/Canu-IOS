@@ -213,6 +213,7 @@
                     if (error) {
                         
                     } else {
+                        
                         [self showUser];
                     }
                     
@@ -260,16 +261,27 @@
             
         }
         
+        BOOL alreadySelected = NO;
+        
+        for (int y = 0; y < [self.peoplesAlreadySelected count]; y++) {
+            
+            NSString *phoneNumber = [self.peoplesAlreadySelected objectAtIndex:y];
+            
+            if ([phoneNumber isEqualToString:user.phoneNumber]) {
+                alreadySelected = YES;
+            }
+            
+        }
+        
         UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + row * (55 + 5), 300, 55) WithContact:contact AndUser:user];
         cellContact.delegate = self;
+        cellContact.isDisable = alreadySelected;
         [self.scrollView addSubview:cellContact];
         [self.arrayCellCanuUser addObject:cellContact];
         
         row++;
         
     }
-    
-    
     
     for (int i = 0; i < [_arrayContact count]; i++) {
         
@@ -288,8 +300,22 @@
         }
         
         if (!user) {
+            
+            BOOL alreadySelected = NO;
+            
+            for (int y = 0; y < [self.peoplesAlreadySelected count]; y++) {
+                
+                NSString *phoneNumber = [self.peoplesAlreadySelected objectAtIndex:y];
+                
+                if ([phoneNumber isEqualToString:contact.convertNumber]) {
+                    alreadySelected = YES;
+                }
+                
+            }
+            
             UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + row * (55 + 5), 300, 55) WithContact:contact AndUser:nil];
             cellContact.delegate = self;
+            cellContact.isDisable = alreadySelected;
             [self.scrollView addSubview:cellContact];
             [self.arrayCellCanuUser addObject:cellContact];
             row++;

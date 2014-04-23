@@ -28,6 +28,7 @@
 @property (nonatomic) NSArray *attendees;
 @property (nonatomic) NSArray *invitationUser;
 @property (nonatomic) NSArray *invitationGhostuser;
+@property (strong, nonatomic) UILabel *peoplesUnknowLabel;
 @property (strong, nonatomic) NSMutableArray *allContact;
 @property (nonatomic) LoaderAnimation *loaderAnimation;
 @property (nonatomic) BOOL isReload;
@@ -79,6 +80,35 @@
     return self;
 }
 
+- (NSMutableArray *)invits{
+    
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < [_invitationGhostuser count]; i++) {
+        
+        NSString *phoneNumber = [_invitationGhostuser objectAtIndex:i];
+        [array addObject:phoneNumber];
+        
+    }
+    
+    for (int i = 0; i < [_attendees count]; i++) {
+        
+        User *user = [_attendees objectAtIndex:i];
+        [array addObject:user.phoneNumber];
+        
+    }
+    
+    for (int i = 0; i < [_invitationUser count]; i++) {
+        
+        User *user = [_invitationUser objectAtIndex:i];
+        [array addObject:user.phoneNumber];
+        
+    }
+    
+    return array;
+    
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     float newY;
@@ -102,6 +132,10 @@
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
     }
     
+}
+
+- (void)forceReload{
+    [NSThread detachNewThreadSelector:@selector(load)toTarget:self withObject:nil];
 }
 
 - (void)reload{
@@ -169,45 +203,13 @@
         
     }
     
-    float heightContentScrollView = ([_attendees count] + [_invitationUser count] + [_invitationGhostuser count]) * (55 + 5) + 5;
-    
-    if (heightContentScrollView <= _scrollview.frame.size.height) {
-        heightContentScrollView = _scrollview.frame.size.height + 1;
+    if (_peoplesUnknowLabel) {
+        [self.peoplesUnknowLabel removeFromSuperview];
+        self.peoplesUnknowLabel = nil;
     }
     
-    self.scrollview.contentSize = CGSizeMake(320, heightContentScrollView);
-    [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
-    
-    int row = 0;
-    
-    for (int i = 0; i < [_attendees count]; i++) {
-        
-        User *user = [_attendees objectAtIndex:i];
-        
-        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:user orContact:nil];
-        cell.delegate = self;
-        [self.scrollview addSubview:cell];
-        
-        [_arrayCell addObject:cell];
-        
-        row ++;
-        
-    }
-    
-    for (int i = 0; i < [_invitationUser count]; i++) {
-        
-        User *user = [_invitationUser objectAtIndex:i];
-        
-        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:user orContact:nil];
-        cell.alpha = 0.5;
-        cell.delegate = self;
-        [self.scrollview addSubview:cell];
-        
-        [_arrayCell addObject:cell];
-        
-        row ++;
-        
-    }
+    NSInteger peoplesUnknows = 0;
+    NSMutableArray *arrayContactRecognize = [[NSMutableArray alloc]init];
     
     for (int i = 0; i < [_invitationGhostuser count]; i++) {
         
@@ -225,6 +227,82 @@
             
         }
         
+        if (contact) {
+            [arrayContactRecognize addObject:contact];
+        } else {
+            peoplesUnknows += 1;
+        }
+        
+    }
+    
+    float heightContentScrollView = ([_attendees count] + [_invitationUser count] + [arrayContactRecognize count]) * (55 + 5) + 5;
+    
+    if (heightContentScrollView <= _scrollview.frame.size.height) {
+        heightContentScrollView = _scrollview.frame.size.height + 1;
+    }
+    
+    self.scrollview.contentSize = CGSizeMake(320, heightContentScrollView);
+    [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
+    
+    int row = 0;
+    
+    for (int i = 0; i < [_attendees count]; i++) {
+        
+        User *user = [_attendees objectAtIndex:i];
+        
+        Contact *contact;
+        
+        for (int y = 0; y < [_allContact count]; y++) {
+            
+            Contact *dataContact = [_allContact objectAtIndex:y];
+            
+            if ([user.phoneNumber isEqualToString:dataContact.convertNumber]) {
+                contact = dataContact;
+            }
+            
+        }
+        
+        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:user orContact:contact];
+        cell.delegate = self;
+        [self.scrollview addSubview:cell];
+        
+        [_arrayCell addObject:cell];
+        
+        row ++;
+        
+    }
+    
+    for (int i = 0; i < [_invitationUser count]; i++) {
+        
+        User *user = [_invitationUser objectAtIndex:i];
+        
+        Contact *contact;
+        
+        for (int y = 0; y < [_allContact count]; y++) {
+            
+            Contact *dataContact = [_allContact objectAtIndex:y];
+            
+            if ([user.phoneNumber isEqualToString:dataContact.convertNumber]) {
+                contact = dataContact;
+            }
+            
+        }
+        
+        UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:user orContact:contact];
+        cell.alpha = 0.5;
+        cell.delegate = self;
+        [self.scrollview addSubview:cell];
+        
+        [_arrayCell addObject:cell];
+        
+        row ++;
+        
+    }
+    
+    for (int i = 0; i < [arrayContactRecognize count]; i++) {
+        
+        Contact *contact = [arrayContactRecognize objectAtIndex:i];
+        
         UICanuAttendeeCellScroll *cell = [[UICanuAttendeeCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 300, 55) andUser:nil orContact:contact];
         cell.alpha = 0.5;
         cell.delegate = self;
@@ -233,6 +311,18 @@
         [_arrayCell addObject:cell];
         
         row ++;
+        
+    }
+    
+    if (peoplesUnknows > 0) {
+        
+        self.peoplesUnknowLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, _scrollview.contentSize.height - ( row * (55 + 5) + 5 ) - 55, 320, 55)];
+        self.peoplesUnknowLabel.textAlignment = NSTextAlignmentCenter;
+        self.peoplesUnknowLabel.font = [UIFont fontWithName:@"Lato-Regular" size:10];
+        self.peoplesUnknowLabel.text = [NSString stringWithFormat:@"and %ld others peoples",(long)peoplesUnknows];
+        self.peoplesUnknowLabel.textColor = UIColorFromRGB(0x2b4b58);
+        self.peoplesUnknowLabel.alpha = 0.3f;
+        [self.scrollview addSubview:_peoplesUnknowLabel];
         
     }
     

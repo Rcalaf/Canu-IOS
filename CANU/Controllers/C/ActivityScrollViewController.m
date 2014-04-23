@@ -1181,12 +1181,15 @@
             cell.frame = CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130);
             if (cell.activity != viewController.activity) {
                 cell.alpha = 1;
-                
-                // After end animation / Only one time
-                if (_feedType == FeedProfileType) {
-                    if (!_profileViewHidden) {
-                        [self.delegate hiddenProfileView:NO Animated:YES];
-                    }
+            }
+        }completion:^(BOOL finished) {
+            // After end animation / Only one time
+            if (_feedType == FeedProfileType) {
+                if (!_profileViewHidden) {
+                    [self.delegate hiddenProfileView:NO Animated:YES];
+                    NSLog(@"On affiche");
+                } else {
+                    NSLog(@"iksdjfh");
                 }
             }
         }];

@@ -30,6 +30,7 @@
 #import "UserManager.h"
 #import "ProfilePicture.h"
 #import "UICanuButton.h"
+#import "InvitOthersViewController.h"
 
 typedef enum {
     UICanuActivityCellEditable = 0,
@@ -37,7 +38,7 @@ typedef enum {
     UICanuActivityCellToGo = 2,
 } UICanuActivityCellStatus;
 
-@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate>
+@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate,InvitOthersViewControllerDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL keyboardIsOpen;
@@ -56,9 +57,15 @@ typedef enum {
 @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, strong) UILabel *counterInvit;
 @property (nonatomic, strong) UICanuButton *sendButton;
+@property (nonatomic, strong) UICanuButton *bottomButton;
 @property (nonatomic, strong) ChatScrollView *chatView;
 @property (nonatomic, strong) UICanuBottomBar *bottomBar;
 @property (nonatomic, strong) AttendeesScrollViewController *attendeesList;
+@property (nonatomic, strong) InvitOthersViewController *addInvit;
+@property (nonatomic, strong) UICanuLabelUserName *userName;
+@property (nonatomic, strong) UICanuLabelActivityName *nameActivity;
+@property (nonatomic, strong) UICanuLabelDate *date;
+@property (nonatomic, strong) UICanuLabelLocation *location;
 
 @end
 
@@ -129,6 +136,12 @@ typedef enum {
     [self.backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [self.backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchDown];
     [self.bottomBar addSubview:_backButton];
+    
+    self.bottomButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45, 4, 320 - 45 * 2, 37) forStyle:UICanuButtonStyleLarge];
+    [self.bottomButton setTitle:NSLocalizedString(@"Invite others", nil) forState:UIControlStateNormal];
+    [self.bottomButton addTarget:self action:@selector(bottomButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    self.bottomButton.alpha = 0;
+    [self.bottomBar addSubview:self.bottomButton];
     
     self.sendButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
     [self.sendButton setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
@@ -230,13 +243,13 @@ typedef enum {
     strokePicture.image = [UIImage imageNamed:@"All_stroke_profile_picture_35"];
     [profilePicture addSubview:strokePicture];
     
-    UICanuLabelUserName *userName = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(55, 18, 200, 17)];
-    userName.text = self.activity.user.userName;
-    [background addSubview:userName];
+    self.userName = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(55, 18, 200, 17)];
+    self.userName.text = self.activity.user.userName;
+    [background addSubview:self.userName];
     
-    CGSize expectedLabelSize = [userName.text sizeWithFont:userName.font
-                                         constrainedToSize:userName.frame.size
-                                             lineBreakMode:userName.lineBreakMode];
+    CGSize expectedLabelSize = [self.userName.text sizeWithFont:self.userName.font
+                                              constrainedToSize:self.userName.frame.size
+                                                  lineBreakMode:self.userName.lineBreakMode];
     
     self.counterInvit = [[UILabel alloc]initWithFrame:CGRectMake( 55 + 5 + expectedLabelSize.width, 18, 70, 17)];
     self.counterInvit.textColor = UIColorFromRGB(0x2b4b58);
@@ -254,9 +267,9 @@ typedef enum {
     [areaShowAttendees addGestureRecognizer:tap];
     [view addSubview:areaShowAttendees];
     
-    UICanuLabelActivityName *nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
-    nameActivity.text = _activity.title;
-    [background addSubview:nameActivity];
+    self.nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
+    self.nameActivity.text = _activity.title;
+    [background addSubview:self.nameActivity];
     
     self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.loadingIndicator.frame = CGRectMake(243.0f, 45, 45, 45);
@@ -269,7 +282,7 @@ typedef enum {
     
     if ( _activity.status == UICanuActivityCellGo ) {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
-    } else if ( _activity.status == UICanuActivityCellToGo ){
+    } else if ( _activity.status == UICanuActivityCellToGo ) {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
     } else {
         [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
@@ -283,13 +296,13 @@ typedef enum {
     backgroundBottom.image = [UIImage imageNamed:@"E_Activity_bottom"];
     [self.wrapperActivityBottom addSubview:backgroundBottom];
     
-    UICanuLabelDate *date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310 -2, -1, 300, 30)];
-    [date setDate:_activity];
-    [self.wrapperActivityBottom addSubview:date];
+    self.date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(view.frame.size.width - 310 -2, -1, 300, 30)];
+    [self.date setDate:_activity];
+    [self.wrapperActivityBottom addSubview:self.date];
     
-    UICanuLabelLocation *location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
-    location.text = _activity.locationDescription;
-    [self.wrapperActivityBottom addSubview:location];
+    self.location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
+    self.location.text = _activity.locationDescription;
+    [self.wrapperActivityBottom addSubview:self.location];
     
     UITapGestureRecognizer *tapMap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openInMap)];
     [self.wrapperActivityBottom addGestureRecognizer:tapMap];
@@ -352,6 +365,13 @@ typedef enum {
             }];
         }];
     }
+}
+
+#pragma mark - InvitOthersViewControllerDelegate
+
+-(void)isDone{
+    [self.attendeesList forceReload];
+    [self goAddInvit];
 }
 
 #pragma mark - UITextViewDelegate
@@ -558,6 +578,13 @@ typedef enum {
 
 - (void)createEditActivityIsFinish:(Activity *)activity{
     
+    self.activity = activity;
+    
+    self.userName.text = self.activity.user.userName;
+    self.nameActivity.text = self.activity.title;
+    [self.date setDate:self.activity];
+    self.location.text = self.activity.locationDescription;
+    
     [UIView animateWithDuration:0.4 delay:0.6 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.counterInvit.alpha = 1;
         self.actionButton.alpha = 1;
@@ -582,18 +609,32 @@ typedef enum {
 
 - (void)backAction{
     
-    if (_attendeesList != nil) {
+    if (_attendeesList && !_addInvit) {
         
         [self showAttendees];
         
-    }else if (_keyboardIsOpen){
+    } else if (_keyboardIsOpen) {
         
         [self touchChatView];
         
-    }else{
+    } else if (_addInvit) {
+        
+        [self goAddInvit];
+        
+    } else {
         
         [self animationBack];
         
+    }
+    
+}
+
+- (void)bottomButtonAction{
+    
+    if (_addInvit) {
+        [self.addInvit addPeoples];
+    } else {
+        [self goAddInvit];
     }
     
 }
@@ -632,7 +673,7 @@ typedef enum {
 
 - (void)showAttendees{
     
-    if (_attendeesList == nil) {
+    if (!_attendeesList) {
         
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:kGAIScreenName value:@"Activity Attendees"];
@@ -651,7 +692,9 @@ typedef enum {
             self.input.alpha = 0;
             self.sendButton.alpha = 0;
         } completion:^(BOOL finished) {
-            
+            [UIView animateWithDuration:0.4 animations:^{
+                self.bottomButton.alpha = 1;
+            }];
         }];
     }else{
         
@@ -660,17 +703,79 @@ typedef enum {
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         
         [UIView animateWithDuration:0.4 animations:^{
-            self.attendeesList.view.alpha = 0;
-            self.wrapper.alpha = 1;
-            self.wrapper.frame = CGRectMake(0, 0, 320, self.wrapper.frame.size.height);
-            self.attendeesList.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height - 57);
-            self.input.alpha = 1;
-            self.sendButton.alpha = 1;
+            self.bottomButton.alpha = 0;
         } completion:^(BOOL finished) {
-            [self.attendeesList willMoveToParentViewController:nil];
-            [self.attendeesList.view removeFromSuperview];
-            [self.attendeesList removeFromParentViewController];
-            self.attendeesList = nil;
+            [UIView animateWithDuration:0.4 animations:^{
+                self.attendeesList.view.alpha = 0;
+                self.wrapper.alpha = 1;
+                self.wrapper.frame = CGRectMake(0, 0, 320, self.wrapper.frame.size.height);
+                self.attendeesList.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height - 57);
+                self.input.alpha = 1;
+                self.sendButton.alpha = 1;
+            } completion:^(BOOL finished) {
+                [self.attendeesList willMoveToParentViewController:nil];
+                [self.attendeesList.view removeFromSuperview];
+                [self.attendeesList removeFromParentViewController];
+                self.attendeesList = nil;
+            }];
+        }];
+    }
+    
+}
+
+- (void)goAddInvit{
+    
+    if (!_addInvit) {
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Invite"];
+        [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
+        
+        self.addInvit = [[InvitOthersViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 45) andActivity:_activity andInvits:self.attendeesList.invits];
+        self.addInvit.delegate = self;
+        [self addChildViewController:self.addInvit];
+        [self.view addSubview:self.addInvit.view];
+        
+        self.addInvit.view.alpha = 0;
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.attendeesList.view.alpha = 0;
+            self.attendeesList.view.frame = CGRectMake(-320, 0, 320, self.view.frame.size.height - 45);
+            self.addInvit.view.alpha = 1;
+            self.addInvit.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height - 45);
+            self.bottomButton.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.bottomButton setTitle:NSLocalizedString(@"Add peoples", nil) forState:UIControlStateNormal];
+            [UIView animateWithDuration:0.4 animations:^{
+                self.bottomButton.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+            }];
+        }];
+        
+    }else{
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Activity Attendees"];
+        [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.attendeesList.view.alpha = 1;
+            self.attendeesList.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height - 45);
+            self.addInvit.view.alpha = 0;
+            self.addInvit.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height - 45);
+            self.bottomButton.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self.addInvit willMoveToParentViewController:nil];
+            [self.addInvit.view removeFromSuperview];
+            [self.addInvit removeFromParentViewController];
+            self.addInvit = nil;
+            [self.bottomButton setTitle:NSLocalizedString(@"Invite others", nil) forState:UIControlStateNormal];
+            [UIView animateWithDuration:0.4 animations:^{
+                self.bottomButton.alpha = 1;
+            } completion:^(BOOL finished) {
+                
+            }];
         }];
     }
     
@@ -678,23 +783,26 @@ typedef enum {
 
 - (void)openInMap{
     
-    Class mapItemClass = [MKMapItem class];
-    if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]){
-        // Create an MKMapItem to pass to the Maps app
-        MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:_activity.coordinate
-                                                       addressDictionary:nil];
-        MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-        [mapItem setName:_activity.title];
+    if ([[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:@"comgooglemaps-x-callback://"]]) {
         
-        // Set the directions mode to "Walking"
-        // Can use MKLaunchOptionsDirectionsModeDriving instead
-        NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
-        // Get the "Current User Location" MKMapItem
-        MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
-        // Pass the current location and destination map items to the Maps app
-        // Set the direction mode in the launchOptions dictionary
-        [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
-                       launchOptions:launchOptions];
+        NSString *url = [NSString stringWithFormat:@"comgooglemaps-x-callback://?saddr=&daddr=%f,%f&center=%f,%f&zoom=20&directionsmode=transit&x-success=secanucanu://?resume=true&x-source=CANU",_activity.coordinate.latitude,_activity.coordinate.longitude,_activity.coordinate.latitude,_activity.coordinate.longitude];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        
+    } else {
+        
+        Class mapItemClass = [MKMapItem class];
+        if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]){
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:_activity.coordinate
+                                                           addressDictionary:nil];
+            MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+            [mapItem setName:_activity.title];
+            NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
+            MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+            [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
+                           launchOptions:launchOptions];
+        }
+        
     }
     
 }

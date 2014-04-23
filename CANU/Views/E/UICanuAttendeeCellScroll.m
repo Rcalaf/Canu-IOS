@@ -58,26 +58,21 @@
         
         if (user) {
             self.user = user;
-            name.text = user.firstName;
+            if (![user.firstName mk_isEmpty]) {
+                name.text = user.firstName;
+            } else if (!contact){
+                [adress removeFromSuperview];
+                adress = nil;
+                name.text = user.userName;
+                name.frame = CGRectMake(55, 17, 233, 20);
+            }
             adress.text = user.userName;
             [avatar setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];
         } else {
             if (contact.profilePicture) {
                 avatar.image = contact.profilePicture;
-            } else {
-                avatar.image = [ProfilePicture defaultProfilePicture35];
             }
-            
-            if (contact.fullName) {
-                name.text = contact.fullName;
-            } else {
-                name.text = @"Little Boy";
-            }
-            
         }
-        
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cellIsTouched)];
-//        [self addGestureRecognizer:tap];
     
     }
     return self;

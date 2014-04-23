@@ -12,6 +12,10 @@
 
 @interface AttendeesScrollViewController : UIViewController
 
+@property (strong, nonatomic) NSMutableArray *invits;
+
 - (id)initWithFrame:(CGRect)frame andActivity:(Activity *)activity;
+
+- (void)forceReload;
 
 @end

@@ -75,15 +75,14 @@ typedef enum {
 @property (strong, nonatomic) UIView *wrapperLocation;
 @property (strong, nonatomic) UIView *wrapperUserList;
 @property (strong, nonatomic) UIView *backgroundDark;
-@property (strong, nonatomic) UILabel *labelSyncContact;
 @property (strong, nonatomic) UIButton *openMap;
 @property (strong, nonatomic) UIButton *openCalendar;
 @property (strong, nonatomic) UIButton *deleteButton;
-@property (strong, nonatomic) UIButton *synContact;
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
 @property (strong, nonatomic) UILabel *counterLength;
 @property (strong, nonatomic) UICanuBottomBar *bottomBar;
+@property (strong, nonatomic) UICanuButton *synContact;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
 @property (strong, nonatomic) Activity *createActivity;
 @property (strong, nonatomic) Activity *editActivity;
@@ -234,21 +233,10 @@ typedef enum {
             self.wrapperUserList.alpha = 0;
             self.wrapperUserList.userInteractionEnabled = NO;
             
-            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Sync contacts", nil)];
-            [attributeString addAttribute:NSUnderlineStyleAttributeName
-                                    value:[NSNumber numberWithInt:1]
-                                    range:(NSRange){0,[attributeString length]}];
-            
-            self.labelSyncContact = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 260, 37)];
-            self.labelSyncContact.attributedText = attributeString;
-            self.labelSyncContact.textAlignment = NSTextAlignmentCenter;
-            self.labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
-            self.labelSyncContact.font = [UIFont fontWithName:@"Lato-Bold" size:14];
-            
-            self.synContact = [[UIButton alloc]initWithFrame:CGRectMake(30, _wrapperUserList.frame.origin.y + 15 - _distanceFirstAnimation, 260, 37)];
+            self.synContact = [[UICanuButton alloc]initWithFrame:CGRectMake(30, _wrapperUserList.frame.origin.y + 15 - _distanceFirstAnimation, 260, 37) forStyle:UICanuButtonStyleNormal];
+            [self.synContact setTitle:NSLocalizedString(@"Sync contacts", nil) forState:UIControlStateNormal];
             self.synContact.alpha = 0;
-            [self.synContact addSubview:_labelSyncContact];
-            [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchDown];
+            [self.synContact addTarget:self action:@selector(syncUserContact) forControlEvents:UIControlEventTouchUpInside];
             [self.wrapper addSubview:_synContact];
             
         }
@@ -734,7 +722,7 @@ typedef enum {
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    NSLog(@"textViewDidBeginEditing");
+    
     if ([textView.text isEqualToString:NSLocalizedString(@"Add details (Optional)", nil)]) {
         textView.text = @"";
         textView.textColor = UIColorFromRGB(0x2b4b58);
@@ -894,7 +882,6 @@ typedef enum {
 #pragma mark - MessageGhostUserDelegate
 
 - (void)messageGhostUserWillDisappear{
-    
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     UICanuNavigationController *navigation = appDelegate.canuViewController;
     
@@ -913,7 +900,14 @@ typedef enum {
         [self removeFromParentViewController];
         
     }];
-    
+}
+
+- (void)messageGhostUserWillDisappearAfterFail{
+    [self messageGhostUserWillDisappear];
+}
+
+- (void)messageGhostUserWillDisappearAfterSucess{
+    [self messageGhostUserWillDisappear];
 }
 
 - (void)messageGhostUserWillDisappearForDeleteActivity{
@@ -1859,11 +1853,6 @@ typedef enum {
         } else {
             self.invitInput.valueValide = NO;
             inputValid = NO;
-            if (self.userList.canuError && self.userList.canuError != CANUErrorNoError) {
-                self.labelSyncContact.textColor = UIColorFromRGB(0xec5f56);
-            } else {
-                self.labelSyncContact.textColor = UIColorFromRGB(0x2b4b58);
-            }
         }
         
     }

@@ -11,7 +11,7 @@
 typedef NS_ENUM(NSInteger, UICanuActivityCellStatus) {
     UICanuActivityCellEditable  = 0,
     UICanuActivityCellGo        = 1,
-    UICanuActivityCellToGo      = 2,
+    UICanuActivityCellToGo      = 2
 };
 
 @class Activity,User;

@@ -569,6 +569,38 @@
     
 }
 
+- (void)addPeopleActivityWithGuests:(NSMutableArray *)arrayGuests Block:(void (^)(NSError *error))block{
+    
+    NSArray *objectsArray = [NSArray arrayWithObjects: arrayGuests, nil];
+    NSArray *keysArray = [NSArray arrayWithObjects: @"guests", nil];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    NSString *url = [NSString stringWithFormat:@"users/%lu/activities/%lu/addpeople",(unsigned long)[[UserManager sharedUserManager] currentUser].userId,(unsigned long)self.activityId];
+    
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [self updateWithAttributes:responseObject];
+        
+        if (block) {
+            block(nil);
+        }
+        
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (block) {
+            
+            NSLog(@"%@",error);
+            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
+            block(error);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
 
 - (void)messagesWithBlock:(void (^)(NSArray *messages, NSError *error))block {
     

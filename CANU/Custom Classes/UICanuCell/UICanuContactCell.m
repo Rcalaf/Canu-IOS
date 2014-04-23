@@ -19,6 +19,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.isDisable = NO;
+        
         UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 55)];
         background.image = [UIImage imageNamed:@"F_location_cell"];
         [self addSubview:background];
@@ -73,7 +75,21 @@
 
 - (void)cellIsTouched{
     
-    [self.delegate cellLocationIsTouched:self];
+    if (!_isDisable) {
+        [self.delegate cellLocationIsTouched:self];
+    }
+    
+}
+
+- (void)setIsDisable:(BOOL)isDisable{
+    
+    _isDisable = isDisable;
+    
+    if (_isDisable) {
+        self.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+    } else {
+        self.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
+    }
     
 }
 

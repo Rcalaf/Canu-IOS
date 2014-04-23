@@ -61,6 +61,8 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.forCreateActivity = YES;
+        
         self.activity = activity;
         
         self.canuG5type = CANUG5;
@@ -135,24 +137,30 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
     
     for (int i = 0; i < [self.arrayUserSelected count]; i++) {
         
-        if (i < 3) {
-            if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
-                ifUser = YES;
-            }
+        if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
+            ifUser = YES;
         }
         
     }
     
-    if (ifUser) {
-        
+    if (_forCreateActivity) {
+        if (ifUser) {
+            id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+            [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
+            
+            [self.delegate  messageGhostUserWillDisappearAfterFail];
+        } else {
+            [self disappearG5Fail];
+            [self appearG5failb];
+        }
+    } else {
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Notification" action:@"G5 S/F" label:@"Fail" value:nil] build]];
         
-        [self.delegate  messageGhostUserWillDisappear];
-    } else {
-        [self disappearG5Fail];
-        [self appearG5failb];
+        [self.delegate  messageGhostUserWillDisappearAfterFail];
     }
+    
+    
     
 }
 
@@ -322,7 +330,7 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
         
         if (messageIsSend) {
             
-            [self.delegate  messageGhostUserWillDisappear];
+            [self.delegate  messageGhostUserWillDisappearAfterSucess];
             
         }
         

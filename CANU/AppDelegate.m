@@ -100,7 +100,7 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
-    NSLog(@"Check Token");
+    
     const char* data = [deviceToken bytes];
     NSMutableString* token = [NSMutableString string];
     
@@ -108,9 +108,7 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
         [token appendFormat:@"%02.2hhX", data[i]];
     }
     
-    NSLog(@"%@",token);
-    
-    _device_token = token;
+    self.device_token = token;
     
     if ([[UserManager sharedUserManager] userIsLogIn]) {
         [[[UserManager sharedUserManager] currentUser] updateDeviceToken:_device_token Block:nil];

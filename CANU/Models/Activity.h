@@ -74,6 +74,8 @@
                      PrivateLocation:(BOOL)privatelocation
                                Block:(void (^)(NSError *error))block;
 
+- (void)addPeopleActivityWithGuests:(NSMutableArray *)arrayGuests Block:(void (^)(NSError *error))block;
+
 + (void)activityWithId:(NSUInteger)activityId
               andBlock:(void (^)(Activity *activity, NSError *error))block;
 
