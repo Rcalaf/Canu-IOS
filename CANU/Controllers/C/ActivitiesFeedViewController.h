@@ -23,6 +23,8 @@
 
 - (void)changePosition:(float)position;
 
+- (void)changePositionForTutorial:(float)position;
+
 - (void)removeAfterlogOut;
 
 - (BOOL)localFeedIsUnlock;

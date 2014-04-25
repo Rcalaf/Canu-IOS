@@ -194,6 +194,7 @@ typedef enum {
             }
             
             [self.activityFeed changePosition:value];
+            [self.activityFeed changePositionForTutorial:value];
             
         }
         
@@ -328,7 +329,7 @@ typedef enum {
             self.control.frame = CGRectMake(_naveboxPosition, 415.0f + KIphone5Margin,self.control.frame.size.width, self.control.frame.size.height);
             [self.activityFeed changePosition:value];
         }completion:^(BOOL finished) {
-            
+            [self.activityFeed changePositionForTutorial:value];
         }];
         
     }

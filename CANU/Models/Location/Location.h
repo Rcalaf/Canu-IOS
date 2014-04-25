@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, CANULocation) {
     CANULocationMKMapItem = 0,      // MKMapItem
     CANULocationPlaceDetails = 1,   // Place Details API (Google)
     CANULocationPlaceSearch = 2,     // Place Search Api (Google)
-    CANULocationAutocomplete = 3    // Place for Search Place Autocomplete API (Google)
+    CANULocationAutocomplete = 3,    // Place for Search Place Autocomplete API (Google)
+    CANULocationCurrent = 4    // Map Kit to find current Location
 };
 
 @interface Location : NSObject

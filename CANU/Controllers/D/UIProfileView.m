@@ -38,7 +38,7 @@
     if (self) {
         
         AppDelegate *appDelegate                   = [[UIApplication sharedApplication]delegate];
-
+        
         self.profileImage                          = [[UIImageView alloc] initWithFrame:CGRectMake(113, 10, 95, 95)];
         [self.profileImage setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture95]];
         self.profileImage.userInteractionEnabled   = YES;

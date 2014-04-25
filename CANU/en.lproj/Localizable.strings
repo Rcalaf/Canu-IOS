@@ -11,6 +11,7 @@
 "I'M NEW" = "I'm new";
 "SIGN IN" = "Sign in";
 "Create an account" = "Create an account";
+"I have an account" = "I already have an account";
 
 //SignUp
 
@@ -24,7 +25,6 @@
 "Terms" = "Terms";
 "Privacy Policy" = "Privacy Policy";
 "Your Profile" = "Your info";
-"Grab my Facebook info" = "Use my Facebook info";
 "Choose an existing one" = "Choose from library";
 "Take a picture" = "Take a picture";
 "Cancel" = "Cancel";
@@ -48,36 +48,36 @@
 
 //Feed
 
-"Looks like you have plenty of spare time" = "Looks like you have plenty of spare time";
-"Your friends seem asleep" = "Your friends seem asleep";
+"Looks like you have plenty of spare time" = "You’ve got plenty of spare time, now what do you do with it?";
+"Your friends seem asleep" = "Your friends really want to meet you!";
 "There isn't much happening around you" = "There isn't much happening around you";
-"I want to change this" = "I want to change this";
+"I want to change this" = "Create activity";
 "Locked until we are enougth.\nRead why" = "Locked until we are enough.\nRead why";
 "Read why" = "Read why";
-"people included" = "counted";
+"people included" = "Are ready to meet new people";
 "We’ll let you know once\nnew areas go live." = "We’ll let you know once\nnew areas go live.";
-"COUNT ME IN" = "COUNT ME IN";
-"BECOME AN EARLY BIRD" = "BECOME AN EARLY BIRD";
+"COUNT ME IN" = "I’m ready";
+"BECOME AN EARLY BIRD" = "Become an Early Bird";
 "Want early access?" = "Want early access?";
 "Add name" = "Add name";
 
 //Tutorial
 
-"Got it" = "Got it"; // New
-"It's how you create an activity" = "It's how you create an activity"; // New
-"New activity" = "New activity"; // New
+"Got it" = "Got it";
+"It's how you create an activity" = "Here you create your own activity";
+"New activity" = "Create activity";
 
 //Local
-"Activities around you" = "Activities around you";
-"Local" = "Local"; // New
+"Activities around you" = "Here you’ll find activities around you";
+"Local" = "Local";
 
 //Tribes
-"Activities you are invited to" = "Activities you are invited to";
-"Tribes" = "Tribes"; // New
+"Activities you are invited to" = "Here you’ll find activities you’re invited to";
+"Tribes" = "Tribe";
 
 //Profile
-"Your schedule" = "Your schedule";
-"Profile" = "Profile"; // New
+"Your schedule" = "Here you’ll find your schedule";
+"Profile" = "Profile";
 
 //Error
 "Unknown Error" = "Unknown error, sorry for that";
@@ -87,7 +87,7 @@
 "OK" = "Ok";
 "Ok" = "Ok";
 "Settings > Privacy > Contacts" = "To sync contacts go to \nSettings > Privacy > Contacts \nand activate CANU";
-"We need to know where you are" = "It’s good if we know where you are at";
+"We need to know where you are" = "It’s good if we know where you are";
 "Enable my GPS" = "Enable GPS";
 "Settings > Privacy > Location" = "To activate the local feed go to\nSettings > Privacy > Location\nand activate CANU";
 "Would you like to be notified \n\nwhen your friends invite you ?" = "Would you like to be notified \nwhen your friends invite you to activities?";
@@ -104,19 +104,21 @@
 "Search for a companion" = "Search for a companion";
 "My tribe" = "My tribe";
 "Add details (Optional)" = "Details (Optional)";
-"Current Location" = "My current position (Change)";
+"Current Location (Change)" = "My current location (Change)";
+"Touch to change" = "Tap to change";
+"Current Location" = "My current location";
 "Somewhere" = "Close by";
 "SEARCH ON THE MAP" = "Search on map";
 "SEARCH" = "Search";
 "ON THE MAP" = "on map";
-"No results ..." = "Can’t seem to find what you seated for";
+"No results ..." = "Can’t seem to find what you where looking for";
 "Adress" = "Address";
 "Send activity" = "Send activity";
 "Save location" = "Save location";
 "Pin location" = "Pin location";
 "Save" = "Save";
 "Delete" = "Delete";
-"Long press at a new place t0 move the pin" = "Long press at a new place to move the pin";
+"Long press at a new place t0 move the pin" = "Long press at a new location to move the pin";
 "YES" = "Yes";
 "NO" = "No";
 "Those who are not yet on CANU will receive a text message with a link to your activity." = "Those who are not yet on CANU will receive a text message with a link to your activity.";
@@ -124,12 +126,12 @@
 "other will not be invited if you cancel. Are you sure?" = "other will not be invited if you cancel. \n\nAre you sure?";
 "others will not be invited if you cancel. Are you sure?" = "others will not be invited if you cancel. \n\nAre you sure?";
 "and" = "and";
-"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?";
+"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete your activity?";
 "DELETE" = "Delete";
 
 // Full
 
 "Send" = "Send";
 "Write something nice..." = "Say something nice...";
-"Invite others" = "Invite others"; // New
-"Add peoples" = "Add peoples";
+"Invite others" = "Invite more";
+"Add peoples" = "Invite";

@@ -52,6 +52,7 @@ typedef enum {
 @property (nonatomic, strong) UIView *wrapperActivity;
 @property (nonatomic, strong) UITextView *descriptionTextView;
 @property (nonatomic, strong) UIImageView *wrapperActivityDescription;
+@property (nonatomic, strong) UIImageView *addMorePeople;
 @property (nonatomic, strong) UIView *wrapperActivityBottom;
 @property (nonatomic, strong) UITextView *input;
 @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
@@ -169,6 +170,7 @@ typedef enum {
             [navigation changePosition:1];
             self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
             self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, 320, 45);
+            self.addMorePeople.alpha = 1;
         } completion:^(BOOL finished) {
             navigation.control.hidden = YES;
             self.view.backgroundColor = backgroundColorView;
@@ -261,6 +263,22 @@ typedef enum {
     }
     [background addSubview:_counterInvit];
     
+    CGSize expectedLabelSizeCounter = [self.counterInvit.text sizeWithFont:self.counterInvit.font
+                                                         constrainedToSize:self.counterInvit.frame.size
+                                                             lineBreakMode:self.counterInvit.lineBreakMode];
+    
+    UILabel *plusLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 20, 16)];
+    plusLabel.text = @"+";
+    plusLabel.textColor = [UIColor whiteColor];
+    self.counterInvit.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+    plusLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.addMorePeople = [[UIImageView alloc]initWithFrame:CGRectMake(self.counterInvit.frame.origin.x + expectedLabelSizeCounter.width + 5, 17, 20, 20)];
+    self.addMorePeople.image = [[UIImage imageNamed:@"All_button_red_normal"] stretchableImageWithLeftCapWidth:5.0 topCapHeight:5.0];
+    self.addMorePeople.alpha = 0;
+    [self.addMorePeople addSubview:plusLabel];
+    [background addSubview:_addMorePeople];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAttendees)];
     
     UIView *areaShowAttendees = [[UIView alloc]initWithFrame:CGRectMake(5, 5, 250, 40)];
@@ -303,6 +321,19 @@ typedef enum {
     self.location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
     self.location.text = _activity.locationDescription;
     [self.wrapperActivityBottom addSubview:self.location];
+    
+    CGSize sizeLocation = [self.location.text sizeWithFont:self.location.font
+                                         constrainedToSize:self.location.frame.size
+                                             lineBreakMode:self.location.lineBreakMode];
+    
+    CGSize sizeDate = [self.date.text sizeWithFont:self.date.font
+                                 constrainedToSize:self.date.frame.size
+                                     lineBreakMode:self.date.lineBreakMode];
+    
+    if (10 + sizeLocation.width+ 10 + sizeDate.width + 10 > 280) {
+        int gap = 10 + sizeLocation.width + 10 + sizeDate.width + 10 - 300;
+        self.location.frame = CGRectMake(10, -1, sizeLocation.width - gap, 30);
+    }
     
     UITapGestureRecognizer *tapMap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openInMap)];
     [self.wrapperActivityBottom addGestureRecognizer:tapMap];

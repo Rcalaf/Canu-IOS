@@ -288,7 +288,6 @@
     NSString *url;
     
     if (!searchWords || [searchWords mk_isEmpty]) {
-//        url = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&query=&limit=10&intent=browse&radius=800&oauth_token=01SK0VSRTMIFZUMB0DWDJRZBE00S2FNSKX0SFK3ZXBJDR5IA&v=20140217",appDelegate.currentLocation.latitude,appDelegate.currentLocation.longitude];
         url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAG-D8gSvKf5rUZtEklnWFXCK2ZgGpj7PM&location=%f,%f&radius=800&sensor=true&types=amusement_park%%7Caquarium%%7Cart_gallery%%7Cbar%%7Cbowling_alley%%7Ccafe%%7Ccampground%%7Ccasino%%7Cchurch%%7Ccourthouse%%7Cestablishment%%7Cfood%%7Cgrocery_or_supermarket%%7Cgym%%7Chair_care%%7Chealth%%7Chindu_temple%%7Cjewelry_store%%7Claundry%%7Clibrary%%7Clocksmith%%7Clodging%%7Cmovie_theater%%7Cmoving_company%%7Cmuseum%%7Cnight_club%%7Cpark%%7Cplace_of_worship%%7Crestaurant%%7Crv_par%%7C%%7Cschool%%7Cshopping_mall%%7Cspa%%7Cstadium%%7Cstore%%7Csynagogue%%7Cuniversity%%7Czoo",appDelegate.currentLocation.latitude,appDelegate.currentLocation.longitude];
         [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     } else {
@@ -311,6 +310,7 @@
                 
                 Location *location = [[Location alloc]initLocationWithMKMapItem:currentLocation];
                 location.name = NSLocalizedString(@"Current Location", nil);
+                location.canuLocation = CANULocationCurrent;
                 [arrayLocation addObject:location];
                 
             }

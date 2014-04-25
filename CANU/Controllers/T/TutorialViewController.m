@@ -61,30 +61,36 @@
                                          [UIImage imageNamed:@"T_arraw_animation-6"],nil];
     self.arrowAnimate.animationDuration = 1.0f;
     self.arrowAnimate.animationRepeatCount = 0;
-    [self.arrowAnimate startAnimating];
     self.arrowAnimate.alpha = 0;
     [self.view addSubview:_arrowAnimate];
     
-    self.circle = [[UIImageView alloc]initWithFrame:CGRectMake(20, self.view.frame.size.height - 41, 20, 20)];
-    self.circle.image = [UIImage imageNamed:@"T_goal"];
-    self.circle.hidden = YES;
+    self.circle = [[UIImageView alloc]initWithFrame:CGRectMake(27, self.view.frame.size.height - 35, 10, 10)];
+    self.circle.animationImages = [NSArray arrayWithObjects:
+                                         [UIImage imageNamed:@"T_goal_1"],
+                                         [UIImage imageNamed:@"T_goal_2"],
+                                         [UIImage imageNamed:@"T_goal_3"],
+                                         [UIImage imageNamed:@"T_goal_4"],
+                                         [UIImage imageNamed:@"T_goal_5"],
+                                         [UIImage imageNamed:@"T_goal_6"],
+                                         [UIImage imageNamed:@"T_goal_7"],
+                                         [UIImage imageNamed:@"T_goal_8"],
+                                         [UIImage imageNamed:@"T_goal_9"],
+                                         [UIImage imageNamed:@"T_goal_10"],
+                                         [UIImage imageNamed:@"T_goal_11"],
+                                         [UIImage imageNamed:@"T_goal_12"],
+                                         [UIImage imageNamed:@"T_goal_13"],
+                                         [UIImage imageNamed:@"T_goal_14"],
+                                         [UIImage imageNamed:@"T_goal_15"],
+                                         [UIImage imageNamed:@"T_goal_16"],
+                                         [UIImage imageNamed:@"T_goal_17"],
+                                         [UIImage imageNamed:@"T_goal_18"],nil];
+    self.circle.alpha = 0;
+    self.circle.animationDuration = 0.36f;
+    self.circle.animationRepeatCount = 0;
     [self.view addSubview:_circle];
     
-    CABasicAnimation* opacityScale = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    opacityScale.fromValue = [NSNumber numberWithDouble:1];
-    opacityScale.toValue = [NSNumber numberWithDouble:0.5];
-    
-    CABasicAnimation *opacityAnim = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    opacityAnim.fromValue = [NSNumber numberWithFloat:0.3];
-    opacityAnim.toValue = [NSNumber numberWithFloat:1];
-    
-    CAAnimationGroup *animGroup = [CAAnimationGroup animation];
-    animGroup.animations = [NSArray arrayWithObjects:opacityAnim,opacityScale, nil];
-    animGroup.duration = 1;
-    animGroup.autoreverses = YES;
-    animGroup.repeatCount = HUGE_VALF;
-    animGroup.delegate = self;
-    [self.circle.layer addAnimation:animGroup forKey:nil];
+    [self.circle startAnimating];
+    [self.arrowAnimate startAnimating];
     
 }
 
@@ -112,7 +118,7 @@
     [appDelegate.canuViewController changePage:0];
     self.arrowAnimate.alpha = 0;
     self.arrowAnimate.transform = CGAffineTransformMakeRotation(0);
-    self.circle.hidden = YES;
+    self.circle.alpha = 0;
 }
 
 - (void)changeToStepProfile{
@@ -124,7 +130,7 @@
     [appDelegate.canuViewController changePage:1];
     self.arrowAnimate.alpha = 0;
     self.arrowAnimate.transform = CGAffineTransformMakeRotation(0);
-    self.circle.hidden = YES;
+    self.circle.alpha = 0;
 }
 
 #pragma mark - Public
@@ -180,17 +186,17 @@
     if (_stepTutorial == TutorialStepTribes) {
         self.arrowAnimate.frame = CGRectMake(100, self.view.frame.size.height - 50, 14, 39);
         self.arrowAnimate.transform = CGAffineTransformMakeRotation(- M_PI / 2);
-        self.circle.hidden = NO;
         [UIView animateWithDuration:0.4 animations:^{
             self.arrowAnimate.alpha = 1;
+            self.circle.alpha = 1;
         }];
     } else if (_stepTutorial == TutorialStepLocal) {
         self.arrowAnimate.frame = CGRectMake(85, self.view.frame.size.height - 50, 14, 39);
         self.arrowAnimate.transform = CGAffineTransformMakeRotation( M_PI / 2);
-        self.circle.frame = CGRectMake(280, self.view.frame.size.height - 41, 20, 20);
-        self.circle.hidden = NO;
+        self.circle.frame = CGRectMake(280, self.view.frame.size.height - 35, 10, 10);
         [UIView animateWithDuration:0.4 animations:^{
             self.arrowAnimate.alpha = 1;
+            self.circle.alpha = 1;
         }];
     } else if (_stepTutorial == TutorialStepProfile) {
         self.arrowAnimate.frame = CGRectMake(280, self.view.frame.size.height - 110, 14, 39);

@@ -217,10 +217,6 @@
     
     self.viewForEmptyBackground.alpha = [self alphaBackgroundEmptyValueForPosition:position];
     
-    if (_activeTutorial) {
-        [self.tutorialViewController positionNavBox:position];
-    }
-    
 }
 
 #pragma mark - Public
@@ -246,6 +242,14 @@
         [tracker set:kGAIScreenName value:@"Profile Feed"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         self.appDelegate.oldScreenName = @"Profile Feed";
+    }
+    
+}
+
+- (void)changePositionForTutorial:(float)position{
+    
+    if (_activeTutorial) {
+        [self.tutorialViewController positionNavBox:position];
     }
     
 }

@@ -106,6 +106,19 @@
         [self.date setDate:_activity];
         [self.wrapperActivityBottom addSubview:_date];
         
+        CGSize sizeLocation = [self.location.text sizeWithFont:self.location.font
+                                             constrainedToSize:self.location.frame.size
+                                                 lineBreakMode:self.location.lineBreakMode];
+        
+        CGSize sizeDate = [self.date.text sizeWithFont:self.date.font
+                                     constrainedToSize:self.date.frame.size
+                                         lineBreakMode:self.date.lineBreakMode];
+        
+        if (10 + sizeLocation.width+ 10 + sizeDate.width + 10 > 280) {
+            int gap = 10 + sizeLocation.width + 10 + sizeDate.width + 10 - 300;
+            self.location.frame = CGRectMake(10, -1, sizeLocation.width - gap, 30);
+        }
+        
     }
     return self;
 }
