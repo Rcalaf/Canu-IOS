@@ -694,6 +694,7 @@ typedef enum {
             self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130);
             self.wrapperActivityBottom.frame = CGRectMake(0, 100, 300, 30);
             self.descriptionTextView.alpha = 0;
+            self.addMorePeople.alpha = 0;
             self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:0.0];
         } completion:^(BOOL finished) {
             self.descriptionIsOpen = YES;
