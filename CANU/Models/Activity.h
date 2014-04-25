@@ -21,6 +21,7 @@
 @property (readonly) NSString *title;
 @property (readonly) NSString *description;
 @property (readonly) NSString *street;
+@property (readonly) NSString *placeName;
 @property (readonly) NSString *city;
 @property (readonly) NSString *zip;
 @property (readonly) NSString *country;
@@ -50,6 +51,7 @@
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate
                                 Length:(NSString *)length
+                             PlaceName:(NSString *)placeName
                                 Street:(NSString *)street
                                   City:(NSString *)city
                                    Zip:(NSString *)zip
@@ -64,6 +66,7 @@
                          Description:(NSString *)description
                            StartDate:(NSString *)startDate
                               Length:(NSString *)length
+                           PlaceName:(NSString *)placeName
                               Street:(NSString *)street
                                 City:(NSString *)city
                                  Zip:(NSString *)zip

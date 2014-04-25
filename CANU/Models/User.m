@@ -103,8 +103,8 @@
 
 + (void)logInWithEmail:(NSString *)email Password:(NSString *)password Block:(void (^)(User *user, NSError *error))block {
 
-    if (!email) email = @""; 
-    if (!password) password = @""; 
+    if (!email) email = @"";
+    if (!password) password = @"";
     
     NSArray *objectsArray = [NSArray arrayWithObjects:email,password,nil];
     NSArray *keysArray = [NSArray arrayWithObjects:@"email",@"password",nil];

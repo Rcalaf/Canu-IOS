@@ -425,8 +425,7 @@
     appDelegate.window.rootViewController = appDelegate.canuViewController;
     
     if (!_isForceVerified) {
-        TutorialViewController *tutorial = [[TutorialViewController alloc] init];
-        [appDelegate.canuViewController presentViewController:tutorial animated:YES completion:nil];
+        appDelegate.feedViewController.activeTutorial = YES;
     } else {
         UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
         if (types & UIRemoteNotificationTypeAlert){

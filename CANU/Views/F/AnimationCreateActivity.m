@@ -144,6 +144,7 @@ typedef enum {
         UICanuNavigationController *navigation = appDelegate.canuViewController;
         
         CreateEditActivityViewController *createView = [[CreateEditActivityViewController alloc]initForCreate];
+        createView.activeTutorial = self.activeTutorial;
         
         [appDelegate.feedViewController addChildViewController:createView];
         [appDelegate.feedViewController.view addSubview:createView.view];

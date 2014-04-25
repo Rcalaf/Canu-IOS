@@ -19,6 +19,8 @@
 @property (strong, nonatomic) ActivityScrollViewController *tribeFeed;
 @property (strong, nonatomic) ActivityScrollViewController *profilFeed;
 
+@property (nonatomic) BOOL activeTutorial;
+
 - (void)changePosition:(float)position;
 
 - (void)removeAfterlogOut;
@@ -28,5 +30,9 @@
 - (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId;
 
 - (void)killCurrentDetailsViewController;
+
+- (void)stopTutorial;
+
+- (void)tutorialStopMiddelLocalStep;
 
 @end

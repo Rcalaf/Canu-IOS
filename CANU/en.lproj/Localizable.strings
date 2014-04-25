@@ -63,30 +63,21 @@
 
 //Tutorial
 
-//Start
-"Welcome" = "Hello and welcome";
-"Let’s see where your upcoming activities are." = "Before you get started, you need to know where you'll find things.";
+"Got it" = "Got it"; // New
+"It's how you create an activity" = "It's how you create an activity"; // New
+"New activity" = "New activity"; // New
 
 //Local
-"These are activities where you and everyone around is invited." = "Here you’ll find the activities around you";
-"Move the white box to the right" = "Move this box to continue.";
-"Move" = "Move";
+"Activities around you" = "Activities around you";
+"Local" = "Local"; // New
 
 //Tribes
-"These are activities your friends don’t want you to miss." = "This is where you’ll find the activities you're invited to";
+"Activities you are invited to" = "Activities you are invited to";
+"Tribes" = "Tribes"; // New
 
 //Profile
-"These are the activities you are going to." = "This is where you’ll find the activities you clicked go on";
-"Tap the white box" = "Tap the white box to continue.";
-"Tap" = "Tap";
-"Tap again" = "Tap again";
-"This is you." = "This is your profile.";
-"Move the white box up" = "Move the box up to continue";
-
-//Final
-"That’s how you create an activity of your choice. For your friends or for everyone." = "That’s how you create an activity.";
-"We’re all done. Enjoy." = "All done, time to get together.";
-"GOT IT" = "Finish";
+"Your schedule" = "Your schedule";
+"Profile" = "Profile"; // New
 
 //Error
 "Unknown Error" = "Unknown error, sorry for that";

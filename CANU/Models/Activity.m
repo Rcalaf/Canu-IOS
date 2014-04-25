@@ -107,11 +107,10 @@
 - (MKMapItem *)location {
    
     if (!_location) {
-        if (!self.street) _street   = @"";
-        if (!self.city) _city       = @"";
-        if (!self.zip) _zip         = @"";
-        if (!self.country) _country = @"";
-        
+        if (!self.street) _street       = @"";
+        if (!self.city) _city           = @"";
+        if (!self.zip) _zip             = @"";
+        if (!self.country) _country     = @"";
     
         NSArray *objectsArray = [NSArray arrayWithObjects:self.street,self.city,self.zip,self.country,nil];
    
@@ -120,8 +119,11 @@
         NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
         
         MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.coordinate addressDictionary:parameters];
-
+        
         _location = [[MKMapItem alloc] initWithPlacemark:placemark];
+        
+        [_location setName:self.placeName];
+        
     }
     return _location;
 }
@@ -161,8 +163,16 @@
 - (NSString *)locationDescription
 {
     NSString *description = @"";
+    
     if (self.street) description = [description stringByAppendingString:self.street];
     if (self.city) description = [description stringByAppendingFormat:@", %@",self.city];
+    
+    if (self.placeName && self.placeName != (NSString *)[NSNull null]) {
+        if (![self.placeName mk_isEmpty]) {
+            description = self.placeName;
+        }
+    }
+    
     return description;
 }
 
@@ -187,6 +197,7 @@
     
     _description         = [attributes valueForKeyPath:@"description"];
     
+    _placeName           = [attributes valueForKeyPath:@"place_name"];
     _city                = [attributes valueForKeyPath:@"city"];
     _country             = [attributes valueForKeyPath:@"country"];
     _street              = [attributes valueForKeyPath:@"street"];
@@ -470,6 +481,7 @@
                            Description:(NSString *)description
                              StartDate:(NSString *)startDate
                                 Length:(NSString *)length
+                             PlaceName:(NSString *)placeName
                                 Street:(NSString *)street
                                   City:(NSString *)city
                                    Zip:(NSString *)zip
@@ -487,9 +499,12 @@
     if (!city) city = @"";
     if (!zip) zip = @"";
     if (!country) country = @"";
+    if ([placeName isEqual:NSLocalizedString(@"Current Location", nil)]) {
+        placeName = @"";
+    }
     
-    NSArray *objectsArray = [NSArray arrayWithObjects: title, description, startDate, length, street, city, zip, country, latitude, longitude,arrayGuests,[NSNumber numberWithBool:privatelocation], nil];
-    NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length", @"street", @"city", @"zip", @"country", @"latitude", @"longitude",@"guests",@"private_location", nil];
+    NSArray *objectsArray = [NSArray arrayWithObjects: title, description, startDate, length, placeName, street, city, zip, country, latitude, longitude,arrayGuests,[NSNumber numberWithBool:privatelocation], nil];
+    NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length",@"place_name", @"street", @"city", @"zip", @"country", @"latitude", @"longitude",@"guests",@"private_location", nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -518,6 +533,7 @@
                          Description:(NSString *)description
                            StartDate:(NSString *)startDate
                               Length:(NSString *)length
+                           PlaceName:(NSString *)placeName
                               Street:(NSString *)street
                                 City:(NSString *)city
                                  Zip:(NSString *)zip
@@ -538,8 +554,8 @@
     if (!country) country = @"";
     
     
-    NSArray *objectsArray = [NSArray arrayWithObjects: title, description, startDate, length, street, city, zip, country, latitude, longitude, nil];
-    NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length", @"street", @"city", @"zip", @"country", @"latitude", @"longitude", nil];
+    NSArray *objectsArray = [NSArray arrayWithObjects: title, description, startDate, length, placeName, street, city, zip, country, latitude, longitude, nil];
+    NSArray *keysArray = [NSArray arrayWithObjects: @"title", @"description", @"start", @"length", @"place_name", @"street", @"city", @"zip", @"country", @"latitude", @"longitude", nil];
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
     [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", [[UserManager sharedUserManager] currentUser].token] forHTTPHeaderField:@"Authorization"];

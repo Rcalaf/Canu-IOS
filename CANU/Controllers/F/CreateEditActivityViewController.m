@@ -35,6 +35,7 @@
 #import "UICanuNavigationController.h"
 #import "ProfilePicture.h"
 #import "UICanuLabelUserName.h"
+#import "TutorialPopUp.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -47,7 +48,7 @@ typedef enum {
     AreaCreate = 150
 } AreaPosition;
 
-@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate>
+@interface CreateEditActivityViewController () <UITextFieldDelegate,UITextViewDelegate,UIScrollViewDelegate,CLLocationManagerDelegate,UICanuCalendarPickerDelegate,UICanuSearchLocationDelegate,SearchLocationMapViewControllerDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate,UICanuTextFieldInvitDelegate,TutorialPopUpDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL activityIsOpen;
@@ -81,6 +82,7 @@ typedef enum {
 @property (strong, nonatomic) UIScrollView *wrapper;
 @property (strong, nonatomic) UITextView *descriptionInput;
 @property (strong, nonatomic) UILabel *counterLength;
+@property (strong, nonatomic) UIView *backgroundOpacity;
 @property (strong, nonatomic) UICanuBottomBar *bottomBar;
 @property (strong, nonatomic) UICanuButton *synContact;
 @property (nonatomic, readonly) CLLocationManager *locationManager;
@@ -103,6 +105,7 @@ typedef enum {
 @property (strong, nonatomic) SearchLocationMapViewController *mapLocation;
 @property (strong, nonatomic) MessageGhostUser *messageGhostUser;
 @property (strong, nonatomic) UICanuButton *buttonAction;
+@property (strong, nonatomic) TutorialPopUp *tutorialPopUp;
 
 @end
 
@@ -255,27 +258,15 @@ typedef enum {
     backButton.alpha = 0;
     [_bottomBar addSubview:backButton];
     
-    NSInteger maxWidthButton = (self.view.frame.size.width - (45 + 10)*2);
-    
-    self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleNormal];
+    self.buttonAction = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleLarge];
     self.buttonAction.alpha = 0;
     if (!_editActivity) {
         [self.buttonAction setTitle:NSLocalizedString(@"Send activity", nil) forState:UIControlStateNormal];
     } else {
-        maxWidthButton = (self.view.frame.size.width - (45 + 10)) / 2;
-        self.buttonAction.frame = CGRectMake(45 + 10 + maxWidthButton, 4, maxWidthButton, 37);
         [self.buttonAction setTitle:NSLocalizedString(@"Save", nil) forState:UIControlStateNormal];
     }
-    [self.buttonAction addTarget:self action:@selector(createEditForm) forControlEvents:UIControlEventTouchDown];
+    [self.buttonAction addTarget:self action:@selector(createEditForm) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomBar addSubview:_buttonAction];
-    
-    if (_editActivity) {
-        self.deleteButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, maxWidthButton , 37) forStyle:UICanuButtonStyleNormal];
-        self.deleteButton.alpha = 0;
-        [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
-        [self.deleteButton addTarget:self action:@selector(deleteActivity) forControlEvents:UIControlEventTouchUpInside];
-        [self.bottomBar addSubview:_deleteButton];
-    }
     
     // Wrapper
     if (!_editActivity) {
@@ -438,7 +429,10 @@ typedef enum {
                 self.searchLocation.currentLocation = _currentLocation;
                 
                 if (_editActivity) {
-                    [self.searchLocation forceLocationTo:[[Location alloc]initLocationWithMKMapItem:_editActivity.location]];
+                    
+                    Location *location = [[Location alloc]initLocationWithMKMapItem:_editActivity.location];
+                    
+                    [self.searchLocation forceLocationTo:location];
                 }
                 
             }
@@ -449,13 +443,6 @@ typedef enum {
     if (self.editActivity) {
         
         self.descriptionInput.text = _editActivity.description;
-        
-//        int numberOfLine = (int)self.descriptionInput.contentSize.height / self.descriptionInput.font.lineHeight;
-//        NSLog(@"%i",numberOfLine);
-////        self.wrapperDescription.frame = CGRectMake(-2, 99, 304, 23 + 16 * numberOfLine);
-//        self.counterLength.frame = CGRectMake(302 - 30, _wrapperDescription.frame.size.height - 2 - 20, 20, 10);
-//        self.descriptionInput.frame = CGRectMake(10, 10, 280, 16 * numberOfLine);
-//        self.counterLength.text = [NSString stringWithFormat:@"%i",140 - (int)_editActivity.description.length];
         
         [self.timePicker isToday:NO];
         
@@ -546,6 +533,46 @@ typedef enum {
     _calendar = nil;
     _searchLocation = nil;
     _messageGhostUser = nil;
+    
+}
+
+#pragma mark - Setters
+
+- (void)setActiveTutorial:(BOOL)activeTutorial{
+    
+    if (activeTutorial) {
+        self.backgroundOpacity = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        self.backgroundOpacity.backgroundColor = UIColorFromRGB(0x2b4b58);
+        self.backgroundOpacity.alpha = 0.5;
+        [self.view addSubview:_backgroundOpacity];
+        
+        self.tutorialPopUp = [[TutorialPopUp alloc]initWithFrame:CGRectMake(20, 80, 280, 110)];
+        self.tutorialPopUp.delegate = self;
+        self.tutorialPopUp.alpha = 0;
+        [self.tutorialPopUp changeToCreate];
+        [self.view addSubview:_tutorialPopUp];
+        
+        [UIView animateWithDuration:0.4 delay:0.6 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.tutorialPopUp.alpha = 1;
+        } completion:nil];
+        
+    }
+    
+}
+
+#pragma mark - TutorialPopUpDelegate
+
+- (void)nextStep{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.tutorialPopUp.alpha = 0;
+        self.backgroundOpacity.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.backgroundOpacity removeFromSuperview];
+        [self.tutorialPopUp removeFromSuperview];
+        self.backgroundOpacity = nil;
+        self.tutorialPopUp = nil;
+    }];
     
 }
 
@@ -865,7 +892,7 @@ typedef enum {
     
     self.userList.frame = CGRectMake(_userList.frame.origin.x, _userList.frame.origin.y, _userList.frame.size.width, self.userList.maxHeight);
     
-    self.wrapper.contentSize = CGSizeMake(320, _wrapper.contentSize.height + self.userList.maxHeight - 10);
+    self.wrapper.contentSize = CGSizeMake(320, _userList.frame.origin.y + self.userList.maxHeight + 40);
     
     if (_finishAnimationCreate) {
         [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -1042,6 +1069,15 @@ typedef enum {
     self.titleInput.leftView = nil;
     self.titleInput.delegate = self;
     [view addSubview:_titleInput];
+    
+    if (_editActivity) {
+        self.deleteButton = [[UIButton alloc]initWithFrame:CGRectMake(view.frame.size.width - 23 - 25, 2, 45, 45)];
+        self.deleteButton.alpha = 0;
+        [self.deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
+        [self.deleteButton addTarget:self action:@selector(deleteActivity) forControlEvents:UIControlEventTouchUpInside];
+        [self.deleteButton setImage:[UIImage imageNamed:@"F_delete"] forState:UIControlStateNormal];
+        [view addSubview:_deleteButton];
+    }
     
     return view;
 }
@@ -1487,6 +1523,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.userList.alpha = 0;
+        self.synContact.alpha = 0;
         self.wrapper.contentOffset = CGPointMake(0, 0);
     } completion:^(BOOL finished) {
         
@@ -1530,6 +1567,7 @@ typedef enum {
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.userList.alpha = 0;
+        self.synContact.alpha = 0;
         if (_editActivity) {
             self.wrapper.contentOffset = CGPointMake(0, 0);
         }
@@ -1669,6 +1707,7 @@ typedef enum {
                                                 Description:description
                                                   StartDate:[dateFormatter stringFromDate:dateFull]
                                                      Length:[self.lenghtPicker selectedLenght]
+                                                  PlaceName:self.locationSelected.name
                                                      Street:self.locationSelected.street
                                                        City:self.locationSelected.city
                                                         Zip:self.locationSelected.zip
@@ -1703,6 +1742,7 @@ typedef enum {
                                          Description:description
                                            StartDate:[dateFormatter stringFromDate:dateFull]
                                               Length:[self.lenghtPicker selectedLenght]
+                                           PlaceName:self.locationSelected.name
                                               Street:self.locationSelected.street
                                                 City:self.locationSelected.city
                                                  Zip:self.locationSelected.zip

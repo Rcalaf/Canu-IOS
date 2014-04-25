@@ -23,6 +23,11 @@ typedef NS_ENUM(NSInteger, CANUCreateActivity) {
 @property (nonatomic) BOOL active;
 
 /**
+ *  If the view is active for the animation
+ */
+@property (nonatomic) BOOL activeTutorial;
+
+/**
  *  Active the view and the animation
  */
 - (void)startView;

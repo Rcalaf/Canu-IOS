@@ -10,4 +10,10 @@
 
 @interface TutorialViewController : UIViewController
 
+- (void)positionNavBox:(float)position;
+
+- (void)tutorialStopMiddelLocalStep;
+
+- (void)forceDealloc;
+
 @end

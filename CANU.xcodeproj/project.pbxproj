@@ -68,18 +68,9 @@
 		1E279E8018D2FBA50076C25E /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E7F18D2FBA50076C25E /* SignInViewController.m */; };
 		1E279E8418D2FC380076C25E /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E8318D2FC380076C25E /* TutorialViewController.m */; };
 		1E279E8718D2FD5E0076C25E /* AttendeesScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E8618D2FD5E0076C25E /* AttendeesScrollViewController.m */; };
-		1E279E8A18D2FDB90076C25E /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E8918D2FDB90076C25E /* SignUpViewController.m */; };
 		1E279E8E18D300890076C25E /* AnimationCreateActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E8D18D300890076C25E /* AnimationCreateActivity.m */; };
 		1E279E9318D300A80076C25E /* CreateEditUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E9018D300A80076C25E /* CreateEditUserList.m */; };
 		1E279E9418D300A80076C25E /* MessageGhostUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E9218D300A80076C25E /* MessageGhostUser.m */; };
-		1E279E9C18D300D60076C25E /* CheckPhoneNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E9718D300D60076C25E /* CheckPhoneNumber.m */; };
-		1E279E9D18D300D60076C25E /* SignUpStep1.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E9918D300D60076C25E /* SignUpStep1.m */; };
-		1E279E9E18D300D60076C25E /* SignUpStep2.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279E9B18D300D60076C25E /* SignUpStep2.m */; };
-		1E279EAA18D300ED0076C25E /* TutorialStepFinal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EA118D300ED0076C25E /* TutorialStepFinal.m */; };
-		1E279EAB18D300ED0076C25E /* TutorialStepLocal.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EA318D300ED0076C25E /* TutorialStepLocal.m */; };
-		1E279EAC18D300ED0076C25E /* TutorialStepProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EA518D300ED0076C25E /* TutorialStepProfile.m */; };
-		1E279EAD18D300ED0076C25E /* TutorialStepStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EA718D300ED0076C25E /* TutorialStepStart.m */; };
-		1E279EAE18D300ED0076C25E /* TutorialStepTribes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EA918D300ED0076C25E /* TutorialStepTribes.m */; };
 		1E279EB218D3015B0076C25E /* UICanuActivityCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EB118D3015B0076C25E /* UICanuActivityCellScroll.m */; };
 		1E279EB618D301A60076C25E /* UICanuAttendeeCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EB518D301A60076C25E /* UICanuAttendeeCellScroll.m */; };
 		1E279EB918D301E70076C25E /* UICanuChatCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EB818D301E70076C25E /* UICanuChatCellScroll.m */; };
@@ -144,6 +135,7 @@
 		1E8A33AA18E1DA9A0049A6B7 /* easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A418E1DA9A0049A6B7 /* easing.c */; };
 		1E8A33AB18E1DA9A0049A6B7 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
+		1EA0D31A1907C0C700E3733B /* TutorialPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0D3191907C0C700E3733B /* TutorialPopUp.m */; };
 		1EAE079A18FD22F1002326F4 /* PushRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE079918FD22F1002326F4 /* PushRemote.m */; };
 		1EC3F7A918FFD97C003A342E /* InvitOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3F7A818FFD97C003A342E /* InvitOthersViewController.m */; };
 		1ED1457A18F42F7A007F4640 /* UICanuTextFieldLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1457918F42F7A007F4640 /* UICanuTextFieldLine.m */; };
@@ -290,30 +282,12 @@
 		1E279E8318D2FC380076C25E /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
 		1E279E8518D2FD5E0076C25E /* AttendeesScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendeesScrollViewController.h; sourceTree = "<group>"; };
 		1E279E8618D2FD5E0076C25E /* AttendeesScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendeesScrollViewController.m; sourceTree = "<group>"; };
-		1E279E8818D2FDB90076C25E /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		1E279E8918D2FDB90076C25E /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		1E279E8C18D300890076C25E /* AnimationCreateActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationCreateActivity.h; sourceTree = "<group>"; };
 		1E279E8D18D300890076C25E /* AnimationCreateActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationCreateActivity.m; sourceTree = "<group>"; };
 		1E279E8F18D300A80076C25E /* CreateEditUserList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateEditUserList.h; sourceTree = "<group>"; };
 		1E279E9018D300A80076C25E /* CreateEditUserList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateEditUserList.m; sourceTree = "<group>"; };
 		1E279E9118D300A80076C25E /* MessageGhostUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageGhostUser.h; sourceTree = "<group>"; };
 		1E279E9218D300A80076C25E /* MessageGhostUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageGhostUser.m; sourceTree = "<group>"; };
-		1E279E9618D300D60076C25E /* CheckPhoneNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckPhoneNumber.h; sourceTree = "<group>"; };
-		1E279E9718D300D60076C25E /* CheckPhoneNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckPhoneNumber.m; sourceTree = "<group>"; };
-		1E279E9818D300D60076C25E /* SignUpStep1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpStep1.h; sourceTree = "<group>"; };
-		1E279E9918D300D60076C25E /* SignUpStep1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpStep1.m; sourceTree = "<group>"; };
-		1E279E9A18D300D60076C25E /* SignUpStep2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpStep2.h; sourceTree = "<group>"; };
-		1E279E9B18D300D60076C25E /* SignUpStep2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpStep2.m; sourceTree = "<group>"; };
-		1E279EA018D300ED0076C25E /* TutorialStepFinal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialStepFinal.h; sourceTree = "<group>"; };
-		1E279EA118D300ED0076C25E /* TutorialStepFinal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialStepFinal.m; sourceTree = "<group>"; };
-		1E279EA218D300ED0076C25E /* TutorialStepLocal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialStepLocal.h; sourceTree = "<group>"; };
-		1E279EA318D300ED0076C25E /* TutorialStepLocal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialStepLocal.m; sourceTree = "<group>"; };
-		1E279EA418D300ED0076C25E /* TutorialStepProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialStepProfile.h; sourceTree = "<group>"; };
-		1E279EA518D300ED0076C25E /* TutorialStepProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialStepProfile.m; sourceTree = "<group>"; };
-		1E279EA618D300ED0076C25E /* TutorialStepStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialStepStart.h; sourceTree = "<group>"; };
-		1E279EA718D300ED0076C25E /* TutorialStepStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialStepStart.m; sourceTree = "<group>"; };
-		1E279EA818D300ED0076C25E /* TutorialStepTribes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialStepTribes.h; sourceTree = "<group>"; };
-		1E279EA918D300ED0076C25E /* TutorialStepTribes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialStepTribes.m; sourceTree = "<group>"; };
 		1E279EB018D3015B0076C25E /* UICanuActivityCellScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuActivityCellScroll.h; sourceTree = "<group>"; };
 		1E279EB118D3015B0076C25E /* UICanuActivityCellScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuActivityCellScroll.m; sourceTree = "<group>"; };
 		1E279EB418D301A60076C25E /* UICanuAttendeeCellScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuAttendeeCellScroll.h; sourceTree = "<group>"; };
@@ -449,6 +423,8 @@
 		1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasingFunctions.m"; sourceTree = "<group>"; };
 		1E90977C189187F4004501E2 /* ErrorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ErrorManager.h; path = CANU/Manager/ErrorManager.h; sourceTree = "<group>"; };
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
+		1EA0D3181907C0C700E3733B /* TutorialPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPopUp.h; sourceTree = "<group>"; };
+		1EA0D3191907C0C700E3733B /* TutorialPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPopUp.m; sourceTree = "<group>"; };
 		1EAE079818FD22F1002326F4 /* PushRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushRemote.h; path = CANU/Models/PushRemote.h; sourceTree = "<group>"; };
 		1EAE079918FD22F1002326F4 /* PushRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushRemote.m; path = CANU/Models/PushRemote.m; sourceTree = "<group>"; };
 		1EC3F7A718FFD97C003A342E /* InvitOthersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitOthersViewController.h; sourceTree = "<group>"; };
@@ -845,8 +821,6 @@
 		1E279E7D18D2FBA50076C25E /* B */ = {
 			isa = PBXGroup;
 			children = (
-				1E279E8818D2FDB90076C25E /* SignUpViewController.h */,
-				1E279E8918D2FDB90076C25E /* SignUpViewController.m */,
 				1E279E7E18D2FBA50076C25E /* SignInViewController.h */,
 				1E279E7F18D2FBA50076C25E /* SignInViewController.m */,
 				1E235EAC18F68A2200F57059 /* CheckPhoneNumberViewController.h */,
@@ -882,33 +856,11 @@
 			path = Views/F;
 			sourceTree = "<group>";
 		};
-		1E279E9518D300D60076C25E /* B */ = {
-			isa = PBXGroup;
-			children = (
-				1E279E9618D300D60076C25E /* CheckPhoneNumber.h */,
-				1E279E9718D300D60076C25E /* CheckPhoneNumber.m */,
-				1E279E9818D300D60076C25E /* SignUpStep1.h */,
-				1E279E9918D300D60076C25E /* SignUpStep1.m */,
-				1E279E9A18D300D60076C25E /* SignUpStep2.h */,
-				1E279E9B18D300D60076C25E /* SignUpStep2.m */,
-			);
-			name = B;
-			path = Views/B;
-			sourceTree = "<group>";
-		};
 		1E279E9F18D300ED0076C25E /* T */ = {
 			isa = PBXGroup;
 			children = (
-				1E279EA018D300ED0076C25E /* TutorialStepFinal.h */,
-				1E279EA118D300ED0076C25E /* TutorialStepFinal.m */,
-				1E279EA218D300ED0076C25E /* TutorialStepLocal.h */,
-				1E279EA318D300ED0076C25E /* TutorialStepLocal.m */,
-				1E279EA418D300ED0076C25E /* TutorialStepProfile.h */,
-				1E279EA518D300ED0076C25E /* TutorialStepProfile.m */,
-				1E279EA618D300ED0076C25E /* TutorialStepStart.h */,
-				1E279EA718D300ED0076C25E /* TutorialStepStart.m */,
-				1E279EA818D300ED0076C25E /* TutorialStepTribes.h */,
-				1E279EA918D300ED0076C25E /* TutorialStepTribes.m */,
+				1EA0D3181907C0C700E3733B /* TutorialPopUp.h */,
+				1EA0D3191907C0C700E3733B /* TutorialPopUp.m */,
 			);
 			name = T;
 			path = Views/T;
@@ -939,7 +891,6 @@
 		1E3A6B76188595C2007FB6BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1E279E9518D300D60076C25E /* B */,
 				1E279EAF18D3015B0076C25E /* C */,
 				1E279EB318D301A60076C25E /* E */,
 				1E279E8B18D300890076C25E /* F */,
@@ -1471,7 +1422,6 @@
 				1E8A33AA18E1DA9A0049A6B7 /* easing.c in Sources */,
 				1E279E0618D203BB0076C25E /* UICanuContactCell.m in Sources */,
 				1E279E4518D205310076C25E /* UICanuAMPMPicker.m in Sources */,
-				1E279EAC18D300ED0076C25E /* TutorialStepProfile.m in Sources */,
 				1E279EB918D301E70076C25E /* UICanuChatCellScroll.m in Sources */,
 				1E3BA47418AE4855003C2BF4 /* Location.m in Sources */,
 				DEA93B2E17204EA600303BB5 /* AppDelegate.m in Sources */,
@@ -1481,8 +1431,6 @@
 				1E8A33AB18E1DA9A0049A6B7 /* UIView+EasingFunctions.m in Sources */,
 				1E279E4F18D2055B0076C25E /* UIScrollViewReverse.m in Sources */,
 				1E279CF918D1F16E0076C25E /* Activity.m in Sources */,
-				1E279EAB18D300ED0076C25E /* TutorialStepLocal.m in Sources */,
-				1E279EAD18D300ED0076C25E /* TutorialStepStart.m in Sources */,
 				1E279E1A18D203DB0076C25E /* UICanuLabelDescription.m in Sources */,
 				1E279E1918D203DB0076C25E /* UICanuLabelDay.m in Sources */,
 				1E891CA818E96ABF003B45F8 /* NSDate+TimeAgo.m in Sources */,
@@ -1499,7 +1447,6 @@
 				1E279E6818D20ADE0076C25E /* EditUserViewController.m in Sources */,
 				1E279E9318D300A80076C25E /* CreateEditUserList.m in Sources */,
 				1E279E5718D206540076C25E /* CreateEditActivityViewController.m in Sources */,
-				1E279EAE18D300ED0076C25E /* TutorialStepTribes.m in Sources */,
 				1E279E3518D204CB0076C25E /* UICanuTextField.m in Sources */,
 				1E8A339418E045230049A6B7 /* NSString+MK_Validation.m in Sources */,
 				1E279DEA18D2018A0076C25E /* UIProfileView.m in Sources */,
@@ -1514,6 +1461,7 @@
 				1E279E4918D205310076C25E /* UICanuScrollPicker.m in Sources */,
 				1E279E1C18D203DB0076C25E /* UICanuLabelTimeEnd.m in Sources */,
 				1E279E1D18D203DB0076C25E /* UICanuLabelTimeStart.m in Sources */,
+				1EA0D31A1907C0C700E3733B /* TutorialPopUp.m in Sources */,
 				1EAE079A18FD22F1002326F4 /* PushRemote.m in Sources */,
 				1E279E7C18D2168B0076C25E /* SearchLocationMapViewController.m in Sources */,
 				1EC3F7A918FFD97C003A342E /* InvitOthersViewController.m in Sources */,
@@ -1531,13 +1479,10 @@
 				1E8A339018E045230049A6B7 /* NSString+MK_Empty.m in Sources */,
 				1E279E9418D300A80076C25E /* MessageGhostUser.m in Sources */,
 				1E279E4618D205310076C25E /* UICanuCalendarButtonPicker.m in Sources */,
-				1E279E9D18D300D60076C25E /* SignUpStep1.m in Sources */,
 				1E279DED18D202190076C25E /* User.m in Sources */,
-				1E279E9C18D300D60076C25E /* CheckPhoneNumber.m in Sources */,
 				1E8A33A018E182200049A6B7 /* ProfilePicture.m in Sources */,
 				1E77B94918A1192E00A16845 /* PhoneBook.m in Sources */,
 				1E8A338618E045230049A6B7 /* NSNumber+MK_Comparison.m in Sources */,
-				1E279EAA18D300ED0076C25E /* TutorialStepFinal.m in Sources */,
 				1E279E8018D2FBA50076C25E /* SignInViewController.m in Sources */,
 				1E279E3018D204320076C25E /* UICanuTextFieldInvit.m in Sources */,
 				1E279E8718D2FD5E0076C25E /* AttendeesScrollViewController.m in Sources */,
@@ -1551,7 +1496,6 @@
 				1E8A338018E045230049A6B7 /* NSDate+MK_Formatting.m in Sources */,
 				1E279DF518D2039A0076C25E /* LoaderAnimation.m in Sources */,
 				1E8A337918E045230049A6B7 /* NSMutableArray+MK_Misc.m in Sources */,
-				1E279E8A18D2FDB90076C25E /* SignUpViewController.m in Sources */,
 				1E279E5318D2061A0076C25E /* DetailActivityViewControllerAnimate.m in Sources */,
 				1E279E6218D209790076C25E /* CounterTextViewController.m in Sources */,
 				1E8A338818E045230049A6B7 /* NSNumber+MK_Fraction.m in Sources */,
@@ -1564,7 +1508,6 @@
 				1E279E2F18D204320076C25E /* UICanuButtonSignBottomBar.m in Sources */,
 				1E90977E189187F4004501E2 /* ErrorManager.m in Sources */,
 				1E8A337E18E045230049A6B7 /* NSDate+MK_Components.m in Sources */,
-				1E279E9E18D300D60076C25E /* SignUpStep2.m in Sources */,
 				1E8A338518E045230049A6B7 /* NSMutableDictionary+MK_Misc.m in Sources */,
 				1E8A337B18E045230049A6B7 /* NSMutableArray+MK_Stack.m in Sources */,
 				1E279E3118D204320076C25E /* UICanuTextFieldLocation.m in Sources */,

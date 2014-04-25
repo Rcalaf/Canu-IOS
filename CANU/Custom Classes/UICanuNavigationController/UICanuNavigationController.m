@@ -35,6 +35,7 @@ typedef enum {
 @property (nonatomic) CGPoint gapTouchControl;
 @property (nonatomic) CGPoint oldPositionControl;
 @property (nonatomic) NavBoxPosition naveboxPosition;
+@property (nonatomic) TutorialStep stepTutorial;
     
 @end
 
@@ -48,6 +49,8 @@ typedef enum {
         self.unknowDirection = YES;
         
         self.panIsDetect = NO;
+        
+        self.userInteractionEnabled = YES;
         
         self.activityFeed = activityFeed;
         
@@ -101,12 +104,15 @@ typedef enum {
 
 - (void)swipeControl:(UIPanGestureRecognizer *)recognizer{
     
+    if (!_userInteractionEnabled) {
+        return;
+    }
+    
     CGPoint location = [recognizer locationInView:self.view];
     
     // Start Mouvement
     
     if ([recognizer state] == UIGestureRecognizerStateBegan) {
-        
         self.oldPositionControl = location;
         self.unknowDirection = YES;
         self.panIsDetect = YES;
@@ -129,6 +135,14 @@ typedef enum {
                 self.verticalDirection = NO;
             }
             
+            if (self.stepTutorial == TutorialStepTribes || self.stepTutorial == TutorialStepLocal) {
+                self.verticalDirection = NO;
+            }
+            
+            if (self.stepTutorial == TutorialStepProfile) {
+                self.verticalDirection = YES;
+            }
+            
             self.unknowDirection = NO;
             
         }
@@ -139,9 +153,15 @@ typedef enum {
             
             self.control.frame = CGRectMake(_naveboxPosition, location.y - _gapTouchControl.y, self.control.frame.size.width, self.control.frame.size.height);
             
-            if (self.view.frame.size.height - self.control.frame.origin.y > AreaCreate - 50 && !self.activityFeed.animationCreateActivity.active) {
+            if (self.view.frame.size.height - self.control.frame.origin.y > AreaCreate - 70 && !self.activityFeed.animationCreateActivity.active) {
                 
                 [self.activityFeed.animationCreateActivity startView];
+                
+                if (self.stepTutorial == TutorialStepProfile) {
+                    self.activityFeed.animationCreateActivity.activeTutorial = YES;
+                } else {
+                    self.activityFeed.animationCreateActivity.activeTutorial = NO;
+                }
                 
             }
             
@@ -165,6 +185,12 @@ typedef enum {
                 value = 0;
             }else if (value > 1){
                 value = 1;
+            }
+            
+            if (self.stepTutorial == TutorialStepTribes && value > 0.5f) {
+                value = 0.5f;
+                self.control.frame = CGRectMake(NavBoxTribes, 415.0 + KIphone5Margin, self.control.frame.size.width, self.control.frame.size.height);
+                self.naveboxPosition = NavBoxTribes;
             }
             
             [self.activityFeed changePosition:value];
@@ -195,6 +221,10 @@ typedef enum {
         
         if (positionToBottom > AreaCreate) {
             canuCreateActivity = CANUCreateActivityAcitve;
+            if (_stepTutorial == TutorialStepProfile) {
+                self.stepTutorial = TutorialStepFinish;
+                [self.activityFeed stopTutorial];
+            }
         } else {
             canuCreateActivity = CANUCreateActivityNone;
         }
@@ -234,15 +264,20 @@ typedef enum {
                         value = 1;
                     }
                 }else if (_naveboxPosition == NavBoxTribes) {
-                    _naveboxPosition = NavBoxProfil;
-                    value = 1;
+                    
+                    if (self.stepTutorial == TutorialStepTribes) {
+                        _naveboxPosition = NavBoxTribes;
+                        value = 0.5;
+                    } else {
+                        _naveboxPosition = NavBoxProfil;
+                        value = 1;
+                    }
                 }else{
                     _naveboxPosition = NavBoxProfil;
                     value = 1;
                 }
                 
             }else{
-                
                 if (_naveboxPosition == NavBoxProfil) {
                     if (self.control.frame.origin.x > NavBoxTribes - 30.f) {
                         _naveboxPosition = NavBoxTribes;
@@ -281,6 +316,9 @@ typedef enum {
         if (value == 0) {
             self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local"]];
         }else if (value == 0.5){
+            if (_stepTutorial == TutorialStepLocal) {
+                [self.activityFeed tutorialStopMiddelLocalStep];
+            }
             self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Tribes"]];
         }else if (value == 1){
             self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me"]];
@@ -308,16 +346,25 @@ typedef enum {
 - (void)changePage:(float)position{
     
     float navBoxPosition = NavBoxLocal;
+    self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_local"]];
     
     if (position == 0.5) {
         navBoxPosition = NavBoxTribes;
+        self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"NavBox_Tribes"]];
     } else if (position == 1) {
         navBoxPosition = NavBoxProfil;
+        self.control.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"navmenu_me"]];
     }
     
     self.naveboxPosition = navBoxPosition;
     
     self.control.frame = CGRectMake(navBoxPosition, self.control.frame.origin.y,self.control.frame.size.width, self.control.frame.size.height);
+    
+}
+
+- (void)blockForStep:(TutorialStep)step{
+    
+    self.stepTutorial = step;
     
 }
 

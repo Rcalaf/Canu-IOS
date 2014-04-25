@@ -8,7 +8,7 @@
 
 #import "PrivacyPolicyViewController.h"
 #import "UserSettingsViewController.h"
-#import "TutorialViewController.h"
+#import "ActivitiesFeedViewController.h"
 #import "EditUserViewController.h"
 #import "MainViewController.h"
 #import "AppDelegate.h"
@@ -45,8 +45,9 @@
 }
 
 - (void)showTutorial:(id)sender{
-    TutorialViewController *tutorial = [[TutorialViewController alloc] init];
-    [self presentViewController:tutorial animated:NO completion:nil];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    appDelegate.feedViewController.activeTutorial = YES;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

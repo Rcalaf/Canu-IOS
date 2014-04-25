@@ -69,7 +69,7 @@
         
         if (!user.firstName) {
             self.name.text = @"";
-            NSLog(@"Empty");
+            
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Add name", nil)];
             [attributeString addAttribute:NSUnderlineStyleAttributeName
                                     value:[NSNumber numberWithInt:1]

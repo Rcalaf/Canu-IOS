@@ -74,7 +74,7 @@
             self.displayAdresse = NSLocalizedString(@"Somewhere", nil);
         }
         
-        if (![item.placemark.addressDictionary[@"Name"] mk_isEmpty] && item.placemark.addressDictionary[@"Name"] != nil) {
+        if (item.placemark.addressDictionary[@"Name"] != [NSNull null] && ![item.placemark.addressDictionary[@"Name"] mk_isEmpty] && item.placemark.addressDictionary[@"Name"] != nil) {
             self.name = item.placemark.addressDictionary[@"Name"];
         } else if (self.allInformation) {
             if (self.allInformation) {
@@ -147,12 +147,12 @@
  *
  *  @return Location full ( if allInformation == true )
  */
-- (id)initLocationFoursquareWithAttributes:(NSDictionary *)attributes{
+- (id)initLocationPlaceSearchWithAttributes:(NSDictionary *)attributes{
     
     self = [super init];
     if (self) {
         
-        self.canuLocation = CANULocationFoursquare;
+        self.canuLocation = CANULocationPlaceSearch;
         
         self.allInformation = YES;
         
@@ -161,6 +161,7 @@
         self.city      = @"";
         self.zip       = @"";
         self.country   = @"";
+        self.displayAdresse = @"";
         
         if ([attributes objectForKey:@"name"] != [NSNull null] && [attributes objectForKey:@"name"] != nil) {
             self.name      = [attributes objectForKey:@"name"];
@@ -168,44 +169,18 @@
             self.allInformation = NO;
         }
         
-        if ([[attributes objectForKey:@"location"] objectForKey:@"address"] != [NSNull null] && [[attributes objectForKey:@"location"] objectForKey:@"address"] != nil) {
-            self.street      = [[attributes objectForKey:@"location"] objectForKey:@"address"];
+        if ([attributes objectForKey:@"vicinity"] != [NSNull null] && [attributes objectForKey:@"vicinity"] != nil) {
+            self.displayAdresse      = [attributes objectForKey:@"vicinity"];
         } else {
             self.allInformation = NO;
         }
-        
-        if ([[attributes objectForKey:@"location"] objectForKey:@"city"] != [NSNull null] && [[attributes objectForKey:@"location"] objectForKey:@"city"] != nil) {
-            self.city      = [[attributes objectForKey:@"location"] objectForKey:@"city"];
+
+        if ([attributes objectForKey:@"reference"] != [NSNull null] && [attributes objectForKey:@"reference"] != nil) {
+            
+            self.referencePlaceDetails = [attributes objectForKey:@"reference"];
+            
         } else {
             self.allInformation = NO;
-        }
-        
-        if ([[attributes objectForKey:@"location"] objectForKey:@"postalCode"] != [NSNull null] && [[attributes objectForKey:@"location"] objectForKey:@"postalCode"] != nil) {
-            self.zip       = [[attributes objectForKey:@"location"] objectForKey:@"postalCode"];
-        } else {
-            self.allInformation = NO;
-        }
-        
-        if ([[attributes objectForKey:@"location"] objectForKey:@"country"] != [NSNull null] && [[attributes objectForKey:@"location"] objectForKey:@"country"] != nil) {
-            self.country       = [[attributes objectForKey:@"location"] objectForKey:@"country"];
-        } else {
-            self.allInformation = NO;
-        }
-        
-        if ([[attributes objectForKey:@"location"] objectForKey:@"lat"] != [NSNull null] && [[attributes objectForKey:@"location"] objectForKey:@"lat"] != nil) {
-            self.latitude  = [[[attributes objectForKey:@"location"] objectForKey:@"lat"] floatValue];
-        } else {
-            self.allInformation = NO;
-        }
-        
-        if ([[attributes objectForKey:@"location"] objectForKey:@"lat"] != [NSNull null] && [[attributes objectForKey:@"location"] objectForKey:@"lng"] != nil) {
-            self.longitude  = [[[attributes objectForKey:@"location"] objectForKey:@"lng"] floatValue];
-        } else {
-            self.allInformation = NO;
-        }
-        
-        if (_allInformation) {
-            self.displayAdresse = [NSString stringWithFormat:@"%@, %@",self.street,self.city];
         }
         
     }
@@ -267,7 +242,7 @@
  *
  *  @param block    Location Full
  */
-- (void)addDataLocationAutocompleteBlock:(void (^)(Location *locationFull, NSError *error))block{
+- (void)addFullDataLocationBlock:(void (^)(Location *locationFull, NSError *error))block{
     
     NSString *url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?reference=%@&sensor=true&key=AIzaSyAG-D8gSvKf5rUZtEklnWFXCK2ZgGpj7PM",self.referencePlaceDetails];
     
@@ -313,7 +288,9 @@
     NSString *url;
     
     if (!searchWords || [searchWords mk_isEmpty]) {
-        url = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&query=&limit=10&intent=browse&radius=800&oauth_token=01SK0VSRTMIFZUMB0DWDJRZBE00S2FNSKX0SFK3ZXBJDR5IA&v=20140217",appDelegate.currentLocation.latitude,appDelegate.currentLocation.longitude];
+//        url = [NSString stringWithFormat:@"https://api.foursquare.com/v2/venues/search?ll=%f,%f&query=&limit=10&intent=browse&radius=800&oauth_token=01SK0VSRTMIFZUMB0DWDJRZBE00S2FNSKX0SFK3ZXBJDR5IA&v=20140217",appDelegate.currentLocation.latitude,appDelegate.currentLocation.longitude];
+        url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyAG-D8gSvKf5rUZtEklnWFXCK2ZgGpj7PM&location=%f,%f&radius=800&sensor=true&types=amusement_park%%7Caquarium%%7Cart_gallery%%7Cbar%%7Cbowling_alley%%7Ccafe%%7Ccampground%%7Ccasino%%7Cchurch%%7Ccourthouse%%7Cestablishment%%7Cfood%%7Cgrocery_or_supermarket%%7Cgym%%7Chair_care%%7Chealth%%7Chindu_temple%%7Cjewelry_store%%7Claundry%%7Clibrary%%7Clocksmith%%7Clodging%%7Cmovie_theater%%7Cmoving_company%%7Cmuseum%%7Cnight_club%%7Cpark%%7Cplace_of_worship%%7Crestaurant%%7Crv_par%%7C%%7Cschool%%7Cshopping_mall%%7Cspa%%7Cstadium%%7Cstore%%7Csynagogue%%7Cuniversity%%7Czoo",appDelegate.currentLocation.latitude,appDelegate.currentLocation.longitude];
+        [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     } else {
         
         NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
@@ -338,7 +315,7 @@
                 
             }
             
-            arrayJson = [[responseObject objectForKey:@"response"] objectForKey:@"venues"];
+            arrayJson = [responseObject objectForKey:@"results"];
             
         } else {
             arrayJson = [responseObject objectForKey:@"predictions"];
@@ -352,7 +329,7 @@
             Location *location;
             
             if (!searchWords || [searchWords mk_isEmpty]) {
-                location = [[Location alloc]initLocationFoursquareWithAttributes:dic];
+                location = [[Location alloc]initLocationPlaceSearchWithAttributes:dic];
                 if (location.allInformation) {
                     [arrayLocation addObject:location];
                 }
