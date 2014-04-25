@@ -43,6 +43,9 @@
         self.titleButton.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleButton];
         
+        [self addTarget:self action:@selector(touchDown) forControlEvents:UIControlEventTouchDown];
+        [self addTarget:self action:@selector(touchUp) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     return self;
 }
@@ -83,6 +86,14 @@
         self.titleButton.alpha = 0.3f;
     }
     
+}
+
+- (void)touchDown{
+    self.backgroundButton.image = [[UIImage imageNamed:@"All_button_red_touch"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0];
+}
+
+- (void)touchUp{
+    self.backgroundButton.image = [[UIImage imageNamed:@"All_button_red_normal"] stretchableImageWithLeftCapWidth:15.0 topCapHeight:15.0];
 }
 
 @end

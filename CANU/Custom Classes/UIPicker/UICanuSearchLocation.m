@@ -115,11 +115,11 @@
     self.selectedLocation = cell.location;
     [self.delegate locationIsSelected:cell.location];
     
-    if (_selectedLocation.canuLocation == CANULocationAutocomplete) {
+    if (_selectedLocation.canuLocation == CANULocationAutocomplete || _selectedLocation.canuLocation == CANULocationPlaceSearch ) {
         
         // Complete the data
         
-        [NSThread detachNewThreadSelector:@selector(addDataLocationAutocomplete) toTarget:self withObject:nil];
+        [NSThread detachNewThreadSelector:@selector(addFullDataLocation) toTarget:self withObject:nil];
         
     }
     
@@ -208,9 +208,9 @@
     
 }
 
-- (void)addDataLocationAutocomplete{
+- (void)addFullDataLocation{
     
-    [self.selectedLocation addDataLocationAutocompleteBlock:^(Location *locationFull, NSError *error) {
+    [self.selectedLocation addFullDataLocationBlock:^(Location *locationFull, NSError *error) {
         
     }];
     

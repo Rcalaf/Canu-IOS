@@ -18,6 +18,7 @@
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
+#import "TutorialViewController.h"
 
 @interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,ActivityScrollViewControllerDelegate>
 
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) UIProfileView *profileView;
 @property (strong, nonatomic) AppDelegate *appDelegate;
+@property (strong, nonatomic) TutorialViewController *tutorialViewController;
 
 @end
 
@@ -139,6 +141,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Setters
+
+- (void)setActiveTutorial:(BOOL)activeTutorial{
+    
+    _activeTutorial = activeTutorial;
+    
+    if (_activeTutorial) {
+        
+        // Reset position to Tribes
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        [delegate.feedViewController changePosition:0.5];
+        [delegate.canuViewController changePage:0.5];
+        
+        self.tutorialViewController = [[TutorialViewController alloc]init];
+        [self addChildViewController:self.tutorialViewController];
+        [self.view addSubview:self.tutorialViewController.view];
+        
+    }
+    
+}
+
 #pragma mark - Private
 
 - (float)alphaBackgroundEmptyValueForPosition:(float)position{
@@ -223,6 +246,14 @@
     
 }
 
+- (void)changePositionForTutorial:(float)position{
+    
+    if (_activeTutorial) {
+        [self.tutorialViewController positionNavBox:position];
+    }
+    
+}
+
 - (void)removeAfterlogOut{
     
     [self.profileView removeFromSuperview];
@@ -280,6 +311,24 @@
     [self.tribeFeed killCurrentDetailsViewController];
     [self.profilFeed killCurrentDetailsViewController];
     
+}
+
+- (void)stopTutorial{
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.tutorialViewController.view.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.tutorialViewController forceDealloc];
+        [self.tutorialViewController willMoveToParentViewController:nil];
+        [self.tutorialViewController.view removeFromSuperview];
+        [self.tutorialViewController removeFromParentViewController];
+        self.tutorialViewController = nil;
+    }];
+    
+}
+
+- (void)tutorialStopMiddelLocalStep{
+    [self.tutorialViewController tutorialStopMiddelLocalStep];
 }
 
 #pragma mark - NSNotificationCenter

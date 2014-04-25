@@ -1187,9 +1187,6 @@
             if (_feedType == FeedProfileType) {
                 if (!_profileViewHidden) {
                     [self.delegate hiddenProfileView:NO Animated:YES];
-                    NSLog(@"On affiche");
-                } else {
-                    NSLog(@"iksdjfh");
                 }
             }
         }];

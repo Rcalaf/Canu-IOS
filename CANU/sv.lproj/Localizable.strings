@@ -25,7 +25,6 @@
 "Terms" = "Användarvillkor";
 "Privacy Policy" = "Säkerhetspolicy";
 "Your Profile" = "Din information";
-"Grab my Facebook info" = "Använd min Facebook information";
 "Choose an existing one" = "Välj från biblioteket";
 "Take a picture" = "Ta foto";
 "Cancel" = "Avbryt";
@@ -49,45 +48,36 @@
 
 //Feed
 
-"Looks like you have plenty of spare time" = "Du ser ut att ha gott om fritid";
-"Your friends seem asleep" = "Det ser ut som om dina vänner sover";
+"Looks like you have plenty of spare time" = "Du ser ut att ha gott om fritid, vad ska du göra med den?";
+"Your friends seem asleep" = "Dina vänner vill träffa dig!";
 "There isn't much happening around you" = "Det verkar inte hända något runt omkring dig just nu";
-"I want to change this" = "Jag vill ändra på detta";
+"I want to change this" = "Skapa aktivitet";
 "Locked until we are enougth.\nRead why" = "Låst tills vi är tillräckligt många.\nLäs varför";
 "Read why" = "Läs varför";
-"people included" = "Räknade";
+"people included" = "Är redo att träffa nya människor";
 "We’ll let you know once\nnew areas go live." = "Vi säger till när \nnya områden öppnas";
-"COUNT ME IN" = "RÄKNA MED MIG";
-"BECOME AN EARLY BIRD" = "BLI EN EARLY BIRD";
+"COUNT ME IN" = "Jag är redo";
+"BECOME AN EARLY BIRD" = "Bli en Early Bird";
 "Want early access?" = "Vill du ha tidig tillgång?";
 "Add name" = "Lägg till namn";
 
 //Tutorial
 
-//Start
-"Welcome" = "Hello and welcome";
-"Let’s see where your upcoming activities are." = "Before you get started, you need to know where you'll find things.";
+"Got it" = "Jag förstår";
+"It's how you create an activity" = "Här skapar du dina aktiviteter";
+"New activity" = "Skapa aktivitet";
 
 //Local
-"These are activities where you and everyone around is invited." = "Här kommer du se aktiviteterna runt omkring dig";
-"Move the white box to the right" = "Move this box to continue.";
-"Move" = "Move";
+"Activities around you" = "Här hittar du aktiviteter i din närhet";
+"Local" = "Lokalt";
 
 //Tribes
-"These are activities your friends don’t want you to miss." = "Här hamnar aktiviteterna du är bjuden till";
+"Activities you are invited to" = "Här hittar du aktiviteter du är bjuden till";
+"Tribes" = "Tribe";
 
 //Profile
-"These are the activities you are going to." = "Här hamnar aktiviteterna du klickat gå på";
-"Tap the white box" = "Tap the white box to continue.";
-"Tap" = "Tap";
-"Tap again" = "Tap again";
-"This is you." = "This is your profile.";
-"Move the white box up" = "Move the box up to continue";
-
-//Final
-"That’s how you create an activity of your choice. For your friends or for everyone." = "That’s how you create an activity.";
-"We’re all done. Enjoy." = "All done, time to get together.";
-"GOT IT" = "Finish";
+"Your schedule" = "Här hittar du ditt schema";
+"Profile" = "Profil";
 
 //Error
 "Unknown Error" = "Okänt fel, vi ber om ursäkt";
@@ -108,30 +98,32 @@
 "What do you want to do?" = "Vad ska ni göra?";
 "Today" = "Idag";
 "Tomorrow" = "Imorgon";
-"At :" = "Kl. :";
+"At :" = "Kl :";
 "For :" = "i :";
 "Find a place" = "Sök efter en plats eller adress";
 "Search for a companion" = "Sök efter en kompanjon";
-"My tribe" = "Min stam";
+"My tribe" = "Min tribe";
 "Add details (Optional)" = "Detaljer (Valfritt)";
-"Current Location" = "Nuvarande position (Ändra)";
+"Current Location (Change)" = "Nuvarande position (Ändra)";
+"Touch to change" = "Peka för att ändra";
+"Current Location" = "Nuvarande position";
 "Somewhere" = "I närheten";
 "SEARCH ON THE MAP" = "Sök på kartan";
 "SEARCH" = "Sök";
 "ON THE MAP" = "på kartan";
-"No results ..." = "Inga träffar…";
+"No results ..." = "Vi hittar inte det du letar efter";
 "Adress" = "Adress";
 "Send activity" = "Skicka aktivitet";
 "Save location" = "Spara";
 "Pin location" = "Nålens position";
 "Save" = "Spara";
-"Delete" = "Radera";
+"Delete" = "Spara";
 "Long press at a new place t0 move the pin" = "Peka och håll för att ändra nålens position";
 "YES" = "Ja";
 "NO" = "Nej";
 "Those who are not yet on CANU will receive a text message with a link to your activity." = "De som inte har CANU ännu kommer få ett sms med länken till din aktivitet";
 "will not be invited if you cancel. Are you sure?" = "kommer inte bli bjuden om du avbryter \n\nÄr du säker?";
-"other will not be invited if you cancel. Are you sure?" = "andra kommer inte bli bjudna om du avbryter. \n\nÄr du säker?";
+"other will not be invited if you cancel. Are you sure?" = "annan kommer inte bli bjudna om du avbryter. \n\nÄr du säker";
 "others will not be invited if you cancel. Are you sure?" = "andra kommer inte bli bjudna om du avbryter. \n\nÄr du säker?";
 "and" = "och";
 "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "Ingen av de du valt har CANU än \n\nÄr du säker på att du vill radera aktiviteten?";
@@ -140,4 +132,6 @@
 // Full
 
 "Send" = "Skicka";
-"Write something nice..." = "Säg något snällt …";
+"Write something nice..." = "Säg något snällt...";
+"Invite others" = "Bjud in fler";
+"Add peoples" = "Bjud in";

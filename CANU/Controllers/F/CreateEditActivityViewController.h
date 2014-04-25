@@ -16,6 +16,8 @@
 
 @property (retain) id delegate;
 
+@property (nonatomic) BOOL activeTutorial;
+
 /**
  *  Create activity (local or tribe)
  *

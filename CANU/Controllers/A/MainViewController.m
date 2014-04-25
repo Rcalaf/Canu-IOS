@@ -14,6 +14,7 @@
 #import "User.h"
 #import "CheckPhoneNumberViewController.h"
 #import "UserManager.h"
+#import "PrivacyPolicyViewController.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -26,7 +27,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     MainViewControllerViewSignIn = 4
 };
 
-@interface MainViewController () <SignInViewControllerDelegate,UITextFieldDelegate>
+@interface MainViewController () <SignInViewControllerDelegate,UITextFieldDelegate,UIWebViewDelegate>
 
 @property (nonatomic) BOOL keyboardSignUpOpen;
 @property (nonatomic) MainViewControllerView viewType;
@@ -38,6 +39,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 @property (strong, nonatomic) UIButton *backButton;
 @property (strong, nonatomic) UIButton *signIn;
 @property (strong, nonatomic) UIView *bottomBarWrapper;
+@property (strong, nonatomic) UIWebView *termsPrivacy;
 @property (strong, nonatomic) UICanuBottomBar *bottomBar;
 @property (strong, nonatomic) UICanuTextFieldLine *username;
 @property (strong, nonatomic) UICanuTextFieldLine *password;
@@ -168,6 +170,11 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     self.password.delegate = self;
     [self.password setReturnKeyType:UIReturnKeyNext];
     [self.wrapperSignUP addSubview:_password];
+    
+    self.termsPrivacy = [[UIWebView alloc]initWithFrame:CGRectMake(0, 140, 320, 20)];
+    self.termsPrivacy.delegate = self;
+    self.termsPrivacy.backgroundColor = backgroundColorView;
+    [self.wrapperSignUP addSubview:_termsPrivacy];
 
     
     [self.view addSubview:self.backgroundColor];
@@ -179,6 +186,8 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
             [self goSignUpForCHeckNumberPhone:[[UserManager sharedUserManager] currentUser]];
         }];
     }
+    
+    [NSThread detachNewThreadSelector:@selector(addUIWebView)toTarget:self withObject:nil];
     
 }
 
@@ -204,6 +213,28 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 }
 
 #pragma mark - Private
+
+- (void)addUIWebView{
+    [self.termsPrivacy loadHTMLString:[NSString stringWithFormat:@"<html><head><style type='text/css'>body,html,p{ margin:0px; padding:0px; background-color:#f1f5f5; } p { text-align:center; font-family:\"Lato-Regular\"; font-size:9px; color: #2b4b58; opacity: 0.3;} a{ color:#2b4b58; }</style></head><body><p>%@ <a href='http://terms/'>%@</a> %@ <a href='http://privacy/'>%@</a></p></body></html>",NSLocalizedString(@"By signing up I agree with the", nil),NSLocalizedString(@"Terms", nil),NSLocalizedString(@"and the", nil),NSLocalizedString(@"Privacy Policy", nil) ] baseURL:nil];
+}
+
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType{
+    
+    if ( navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        NSURL *url = [request URL];
+        
+        if ([url.absoluteString isEqualToString:@"http://terms/"]) {
+            [self openTerms];
+        }
+        
+        if ([url.absoluteString isEqualToString:@"http://privacy/"]) {
+            [self openPrivacyPolicy];
+        }
+        
+        return NO;
+    }
+    return YES;
+}
 
 - (void)backButtonManager{
     
@@ -282,11 +313,12 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
         self.viewType = MainViewControllerViewSignUp;
         
         [UIView animateWithDuration:0.4 animations:^{
+            self.termsPrivacy.frame = CGRectMake(0, 45 + 53, 320, 20);
             self.backgroundCloud.alpha = 0;
             self.backgroundTotem.frame = CGRectMake(0, - 480, self.view.frame.size.width, 480);
-            self.createAccountText.frame = CGRectMake( 10, 50 + (self.view.frame.size.height - 480)/2, 300, 25);
-            self.signIn.frame = CGRectMake(20, 75 + (self.view.frame.size.height - 480)/2, 280, 30);
-            self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 216 - 140 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
+            self.createAccountText.frame = CGRectMake( 10, 30 + (self.view.frame.size.height - 480)/2, 300, 25);
+            self.signIn.frame = CGRectMake(20, 55 + (self.view.frame.size.height - 480)/2, 280, 30);
+            self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 216 - 170 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
             self.bottomBar.frame = CGRectMake(0, 0, 320, 45);
             self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, 320, 45);
         } completion:^(BOOL finished) {
@@ -301,6 +333,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
         self.viewType = MainViewControllerViewMain;
         
         [UIView animateWithDuration:0.4 animations:^{
+            self.termsPrivacy.frame = CGRectMake(0, 140, 320, 20);
             self.backgroundCloud.alpha = 1;
             self.backgroundTotem.frame = CGRectMake(0, (self.view.frame.size.height - 480) / 2, self.view.frame.size.width, 480);
             self.createAccountText.frame = CGRectMake( 10, self.view.frame.size.height - 190 - (self.view.frame.size.height - 480) / 4, 300, 25);
@@ -455,6 +488,22 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     [UIView animateWithDuration:0.4 animations:^{
         self.backgroundColor.backgroundColor = backgroundColorView;
     } completion:^(BOOL finished) {
+    }];
+}
+
+#pragma Mark -- Terms & Pricavy Policy
+
+- (void)openPrivacyPolicy{
+    PrivacyPolicyViewController *privacy = [[PrivacyPolicyViewController alloc]initForTerms:NO];
+    [self presentViewController:privacy animated:YES completion:^{
+        [self signUpKeyboardIsAppear:NO Block:nil];
+    }];
+}
+
+- (void)openTerms{
+    PrivacyPolicyViewController *privacy = [[PrivacyPolicyViewController alloc]initForTerms:YES];
+    [self presentViewController:privacy animated:YES completion:^{
+        [self signUpKeyboardIsAppear:NO Block:nil];
     }];
 }
 
