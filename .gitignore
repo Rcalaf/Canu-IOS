@@ -1,6 +1,8 @@
 # Xcode
 .DS_Store
+*/.DS_Store
 */build/*
+/build/*
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -16,6 +18,11 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
+CANU/Vendor/export/*
 
 #CocoaPods
 Pods
+
+/Podfile.lock
+
+/CANU.xcworkspace/

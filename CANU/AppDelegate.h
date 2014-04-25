@@ -24,7 +24,6 @@ extern NSString *const FBSessionStateChangedNotification;
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSString *device_token;
 @property (strong, nonatomic) NSString *oldScreenName;
 

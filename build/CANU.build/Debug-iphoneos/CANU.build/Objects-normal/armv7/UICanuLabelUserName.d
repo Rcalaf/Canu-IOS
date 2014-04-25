@@ -1,3 +1,3 @@
 dependencies: \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/UICanuLabel/UICanuLabelUserName.m \
-  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/Vendor/UICanuLabel/UICanuLabelUserName.h
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelUserName.m \
+  /Volumes/HDD/Utilisateurs/Vivien/Application\ iOS/Canu-IOS/CANU/Custom\ Classes/UICanuLabel/UICanuLabelUserName.h

@@ -16,20 +16,18 @@
 #import "GAIDictionaryBuilder.h"
 #import "AFCanuAPIClient.h"
 #import "ErrorManager.h"
+#import "UserManager.h"
+#import "PushRemote.h"
 #import <Instabug/Instabug.h>
+#import <Crashlytics/Crashlytics.h>
 
-NSString *const FBSessionStateChangedNotification =
-@"se.canu.canu:FBSessionStateChangedNotification";
+NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStateChangedNotification";
 
 
 @implementation AppDelegate{
     MainViewController *loginViewController;
 }
 
-@synthesize errorManager = _errorManager;
-@synthesize user = _user;
-@synthesize device_token = _device_token;
-@synthesize feedViewController = _feedViewController;
 @synthesize currentLocation = _currentLocation;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -43,19 +41,7 @@ NSString *const FBSessionStateChangedNotification =
     return _feedViewController;
 }
 
-- (User *)user
-{
-    if (!_user) {
-        NSDictionary *savedUserAttributes = [[NSUserDefaults standardUserDefaults] objectForKey:@"user"];
-        if (savedUserAttributes) {
-            _user = [[User alloc] initWithAttributes:savedUserAttributes];
-        }
-    }
-    return _user;
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     id<GAITracker> tracker;
     
@@ -74,23 +60,23 @@ NSString *const FBSessionStateChangedNotification =
     }
 
     [Instabug KickOffWithToken:@"c44d12a703b04a0a5e797bba7452c9d5" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:YES];
-    if (self.user) {
-        [Instabug setEmail:self.user.email];
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        [Instabug setEmail:[[UserManager sharedUserManager] currentUser].email];
     }
+    
+    [Crashlytics startWithAPIKey:@"ae60e89fbce25a631c3a5caa83362eff69f3d6fb"];
     
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-    if (types == UIRemoteNotificationTypeNone){
-        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"NO" value:nil] build]];
-    } else {
+    if (types & UIRemoteNotificationTypeAlert){
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"YES" value:nil] build]];
+    } else {
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"NO" value:nil] build]];
     }
-    
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    if (self.user) {
-        if (self.user.phoneIsVerified) {
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        if ([[UserManager sharedUserManager] currentUser].phoneIsVerified) {
             NSLog(@"User Active");
             self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
             [self.canuViewController pushViewController:self.feedViewController animated:NO];
@@ -122,10 +108,10 @@ NSString *const FBSessionStateChangedNotification =
         [token appendFormat:@"%02.2hhX", data[i]];
     }
     
-    _device_token = token;
+    self.device_token = token;
     
-    if (self.user) {
-        [self.user updateDeviceToken:_device_token Block:nil];
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        [[[UserManager sharedUserManager] currentUser] updateDeviceToken:_device_token Block:nil];
     }
     
 }
@@ -135,59 +121,52 @@ NSString *const FBSessionStateChangedNotification =
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    NSLog(@"%@",userInfo);
+    NSLog(@"normal %@",userInfo);
    // application.applicationIconBadgeNumber =application.applicationIconBadgeNumber + 1 ;
     
-NSLog(@"didReceiveRemoteNotification");
-    if ( application.applicationState == UIApplicationStateActive ){
-        
-        [self.user updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
+    PushRemote *push = [[PushRemote alloc]initWitApplication:application AndUserInfo:userInfo];
     
-//        if ([[(UICanuNavigationController *)self.window.rootViewController visibleViewController] isKindOfClass:[ChatViewController class]]) {
-//            ChatViewController *currentChat = (ChatViewController *)[(UICanuNavigationController *)self.window.rootViewController visibleViewController];
-//            if (currentChat.activity.activityId == [[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] integerValue]){
-//              [currentChat reload];
-//            }
-//        }
-        /*else {
-           UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-            if (localNotif == nil)
-                return;
-            localNotif.fireDate = [[NSDate date] dateByAddingTimeInterval:4];
-            localNotif.timeZone = [NSTimeZone defaultTimeZone];
-            
-            localNotif.alertBody = [[userInfo valueForKeyPath:@"aps"] valueForKeyPath:@"alert"];
-            localNotif.alertAction = NSLocalizedString(@"View Details", nil);
-            
-            localNotif.soundName = UILocalNotificationDefaultSoundName;
-           // localNotif.applicationIconBadgeNumber = 0;
-            [application scheduleLocalNotification:localNotif];
-        }*/
+//    [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
+    
+    if (push.pushRemoteType == PushRemoteTypeDeepLinking) {
+        
+        if (push.pushRemoteAction == PushRemoteActionChat || push.pushRemoteAction == PushRemoteActionEditActivity || push.pushRemoteAction == PushRemoteActionUserGo || push.pushRemoteAction == PushRemoteActionUserDontGo) {
+            [self.feedViewController changePosition:1];
+            [self.canuViewController changePage:1];
+            [self.feedViewController killCurrentDetailsViewController];
+            [self.feedViewController.profilFeed openActivityAfterPush:push.activityID];
+        } else if (push.pushRemoteAction == PushRemoteActionDeleteActivity) {
+            [self.feedViewController changePosition:1];
+            [self.canuViewController changePage:1];
+            [self.feedViewController killCurrentDetailsViewController];
+        } else if (push.pushRemoteAction == PushRemoteActionNewActivityAround) {
+            [self.feedViewController changePosition:0];
+            [self.canuViewController changePage:0];
+            [self.feedViewController killCurrentDetailsViewController];
+            [self.feedViewController.localFeed openActivityAfterPush:push.activityID];
+        } else if (push.pushRemoteAction == PushRemoteActionNewActivityInvit) {
+            [self.feedViewController changePosition:0.5];
+            [self.canuViewController changePage:0.5];
+            [self.feedViewController killCurrentDetailsViewController];
+            [self.feedViewController.tribeFeed openActivityAfterPush:push.activityID];
+        }
+        
     } else {
-       // NSLog(@"Controller: %@", [[(UINavigationController *)self.window.rootViewController visibleViewController] class]);
-       // NSLog(@"number of staged controllers: %d",[[(UINavigationController *)self.window.rootViewController viewControllers] count]);
-       
-        //Clean the max top three levels
-//        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
-//        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
-//        [[(UINavigationController *)self.window.rootViewController visibleViewController] dismissViewControllerAnimated:NO completion:nil];
         
-        // move to the main activity feed
-//        [(UICanuNavigationController *)self.window.rootViewController goActivities:nil];
+        if (push.pushRemoteAction == PushRemoteActionChat) {
+            
+            if ([self.feedViewController pushChatIsCurrentDetailsViewOpen:push.activityID]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCurrentChat" object:nil];
+            } else {
+                
+                // Notification
+                
+                NSLog(@"Not Open");
+                
+            }
+            
+        }
         
-//        if (![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]) {
-//            NSLog(@"we are in, value: %d",![[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"delete activity"]);
-//            [Activity activityWithId:[[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"id"] unsignedIntegerValue] andBlock:^(Activity *activity, NSError *error){
-//                if (activity) {
-//                    DetailActivityViewController *davc = [[DetailActivityViewController alloc] init];
-//                    davc.activity = activity;
-//                    [(UICanuNavigationController *)self.window.rootViewController pushViewController:davc animated:YES];
-//                    if ([[[userInfo valueForKeyPath:@"info"] valueForKeyPath:@"type"] isEqualToString:@"chat"]) {
-//                        [davc presentViewController:[[ChatViewController alloc] initWithActivity:activity] animated:YES completion:nil];
-//                    }
-//                }
-//            }];
-//        }
     }
         
 }
@@ -279,7 +258,7 @@ NSLog(@"didReceiveRemoteNotification");
     [FBSession.activeSession handleDidBecomeActive];
     application.applicationIconBadgeNumber = 0;
     if (_device_token) {
-        [self.user updateDevice:_device_token Badge:0 WithBlock:nil];
+        [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:0 WithBlock:nil];
     }
    
 }

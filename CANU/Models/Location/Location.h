@@ -13,8 +13,9 @@
 typedef NS_ENUM(NSInteger, CANULocation) {
     CANULocationMKMapItem = 0,      // MKMapItem
     CANULocationPlaceDetails = 1,   // Place Details API (Google)
-    CANULocationFoursquare = 2,     // Place Foursquare Venues API
-    CANULocationAutocomplete = 3    // Place for Search Place Autocomplete API (Google)
+    CANULocationPlaceSearch = 2,     // Place Search Api (Google)
+    CANULocationAutocomplete = 3,    // Place for Search Place Autocomplete API (Google)
+    CANULocationCurrent = 4    // Map Kit to find current Location
 };
 
 @interface Location : NSObject
@@ -59,20 +60,20 @@ typedef NS_ENUM(NSInteger, CANULocation) {
 - (id)initSearchLocationAutocompleteWithAttributes:(NSDictionary *)attributes;
 
 /**
- *  Parse Information of  https://developer.foursquare.com/docs/venues/search
+ *  Parse Information of  https://developers.google.com/places/documentation/search#PlaceSearchRequests
  *
  *  @param attributes
  *
- *  @return Location full ( if allInformation == true )
+ *  @return Always Partial Location ( only : name and displayAdresse )
  */
-- (id)initLocationFoursquareWithAttributes:(NSDictionary *)attributes;
+- (id)initLocationPlaceSearchWithAttributes:(NSDictionary *)attributes;
 
 /**
  *  Use Place Details API https://developers.google.com/places/documentation/details to grab more information
  *
  *  @param block    Location Full
  */
-- (void)addDataLocationAutocompleteBlock:(void (^)(Location *locationFull, NSError *error))block;
+- (void)addFullDataLocationBlock:(void (^)(Location *locationFull, NSError *error))block;
 
 /**
  *  Search Location with currentLocation and Search words
