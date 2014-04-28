@@ -171,7 +171,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     [self.password setReturnKeyType:UIReturnKeyNext];
     [self.wrapperSignUP addSubview:_password];
     
-    self.termsPrivacy = [[UIWebView alloc]initWithFrame:CGRectMake(0, 140, 320, 20)];
+    self.termsPrivacy = [[UIWebView alloc]initWithFrame:CGRectMake(0, 180, 320, 20)];
     self.termsPrivacy.delegate = self;
     self.termsPrivacy.backgroundColor = backgroundColorView;
     [self.wrapperSignUP addSubview:_termsPrivacy];
