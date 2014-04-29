@@ -338,6 +338,20 @@
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField == self.userName) {
+        [self.userName textChange:newString];
+    } else if (textField == self.password) {
+        [self.password textChange:newString];
+    }
+    
+    return YES;
+    
+}
+
 - (void)viewDidUnload{
 
     _password = nil;

@@ -33,6 +33,11 @@ typedef enum {
 - (void)reload;
 
 /**
+ *  Reload the feed view without animation
+ */
+- (void)load;
+
+/**
  *  Remove the view after logout / and children
  */
 - (void)removeAfterlogOut;

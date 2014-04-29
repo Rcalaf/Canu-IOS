@@ -126,6 +126,7 @@
     self.phoneNumber.font = [UIFont fontWithName:@"Lato-Regular" size:18];
     [self.phoneNumber becomeFirstResponder];
     self.phoneNumber.placeholder = @"667732101";
+    self.phoneNumber.disablePlaceHolderAnimate = YES;
     [self.wrapperPhoneNumber addSubview:_phoneNumber];
     
     // Second step

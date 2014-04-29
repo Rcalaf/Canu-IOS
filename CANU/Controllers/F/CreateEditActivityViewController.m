@@ -36,6 +36,7 @@
 #import "ProfilePicture.h"
 #import "UICanuLabelUserName.h"
 #import "TutorialPopUp.h"
+#import "UIView+DTDebug.h"
 
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
@@ -182,7 +183,7 @@ typedef enum {
 - (void)viewDidLoad{
     
     [super viewDidLoad];
-	
+    
     // Init
     
     self.descriptionIsOpen = NO;

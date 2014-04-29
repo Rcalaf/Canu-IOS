@@ -11,6 +11,8 @@
 typedef NS_ENUM(NSInteger, UICanuButtonStyle) {
     UICanuButtonStyleNormal = 0,
     UICanuButtonStyleLarge = 1,
+    UICanuButtonStyleWhite = 2,
+    UICanuButtonStyleWhiteArrow = 3
 };
 
 typedef NS_ENUM(NSInteger, UICanuButtonStatus) {

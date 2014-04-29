@@ -135,3 +135,15 @@
 "Write something nice..." = "Say something nice...";
 "Invite others" = "Invite more";
 "Add peoples" = "Invite";
+
+// Settings
+"Sign Out" = "Sign Out"; // New
+"Our Privacy Policy" = "Our Privacy Policy"; // New
+"Tutorial" = "Tutorial"; // New
+"Edit Profile" = "Edit Profile"; // New
+"Full name" = "Full name"; // New
+"Email" = "Email"; // New
+"Change your password" = "Change your password"; // New
+"New Password" = "New Password"; // New
+"Password Confirmation" = "Password Confirmation"; // New
+"Edit your password" = "Edit your password"; // New

@@ -509,6 +509,20 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 
 #pragma mark - UITextFieldDelegate Sign Up
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField == self.username) {
+        [self.username textChange:newString];
+    } else if (textField == self.password) {
+        [self.password textChange:newString];
+    }
+    
+    return YES;
+    
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     self.keyboardSignUpOpen = YES;
     [self signUpKeyboardIsAppear:YES Block:nil];

@@ -10,8 +10,8 @@
 #import "AFURLResponseSerialization.h"
 
 NSString * const kAFCanuAPIBaseUDistributionRLString = @"https://api.canu.se";
-NSString * const kAFCanuAPIDevBaseURLString = @"https://api.canu.se";
-//NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
+//NSString * const kAFCanuAPIDevBaseURLString = @"https://api.canu.se";
+NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
 
 
 // Change with Product / Scheme / Edit Scheme / Run CANU.app / Build Configuration / (Release | Debug)

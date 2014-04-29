@@ -52,11 +52,6 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
         [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
         id<GAITracker> tracker;
         tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-46900796-1"];
-        NSLog(@"//////// WARNING ////////");
-        NSLog(@"DISTRIBUTION MODE ENABLE");
-        NSLog(@"//////// WARNING ////////");
-        NSLog(@"DISTRIBUTION MODE ENABLE");
-        NSLog(@"//////// WARNING ////////");
     }
 
     [Instabug KickOffWithToken:@"c44d12a703b04a0a5e797bba7452c9d5" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:YES];
@@ -122,11 +117,11 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"normal %@",userInfo);
-   // application.applicationIconBadgeNumber =application.applicationIconBadgeNumber + 1 ;
+   application.applicationIconBadgeNumber = 0 ;
     
     PushRemote *push = [[PushRemote alloc]initWitApplication:application AndUserInfo:userInfo];
     
-//    [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
+    [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
     
     if (push.pushRemoteType == PushRemoteTypeDeepLinking) {
         

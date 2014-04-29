@@ -19,6 +19,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "TutorialViewController.h"
+#import "UIView+DTDebug.h"
 
 @interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,ActivityScrollViewControllerDelegate>
 
@@ -50,6 +51,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (![AFCanuAPIClient sharedClient].distributionMode) {
+        // MainQueue UIView
+        [UIView toggleViewMainThreadChecking];
+    }
     
     self.firstAnimationEmptyFeed = NO;
     
@@ -334,21 +340,21 @@
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{
-    [self.localFeed reload];
-    [self.tribeFeed reload];
-    [self.profilFeed reload];
+    [self.localFeed load];
+    [self.tribeFeed load];
+    [self.profilFeed load];
 }
 
 - (void)reloadLocal{
-    [self.localFeed reload];
+    [self.localFeed load];
 }
 
 - (void)reloadTribes{
-    [self.tribeFeed reload];
+    [self.tribeFeed load];
 }
 
 - (void)reloadProfile{
-    [self.profilFeed reload];
+    [self.profilFeed load];
 }
 
 #pragma mark - ActivityScrollViewControllerDelegate

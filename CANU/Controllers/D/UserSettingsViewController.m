@@ -13,15 +13,17 @@
 #import "MainViewController.h"
 #import "AppDelegate.h"
 #import "UserManager.h"
+#import "UICanuBottomBar.h"
+#import "UICanuButton.h"
 
 @interface UserSettingsViewController ()
 
-@property (strong, nonatomic) UIView *toolBar;
-@property (strong, nonatomic) UIButton *backButton;
-@property (strong, nonatomic) UIButton *editButton;
-@property (strong, nonatomic) UIButton *tutorialButton;
-@property (strong, nonatomic) UIButton *privacyPolicyButton;
-@property (strong, nonatomic) UIButton *logOut;
+@property (strong, nonatomic) UICanuBottomBar *bottomBar;
+@property (strong, nonatomic) UICanuButton *backButton;
+@property (strong, nonatomic) UICanuButton *editButton;
+@property (strong, nonatomic) UICanuButton *tutorialButton;
+@property (strong, nonatomic) UICanuButton *privacyPolicyButton;
+@property (strong, nonatomic) UICanuButton *logOut;
 
 @end
 
@@ -37,7 +39,7 @@
 
 -(void)performLogout:(id)sender{
     [[UserManager sharedUserManager] logOut];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)back:(id)sender{
@@ -66,68 +68,42 @@
 -(void)loadView{
     
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
-
-    UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button_arrow"]];
-    arrow.frame = CGRectMake(253.0f, 0.0f, 47.0f, 47.0f);
+    self.view.backgroundColor = backgroundColorView;
     
-    self.editButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.editButton setTitle:@"Edit Profile" forState:UIControlStateNormal];
-    [self.editButton setFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.0f)];
-    [self.editButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
-    self.editButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    self.editButton.titleEdgeInsets = UIEdgeInsetsMake(0, -200, 0, 0);
-    [self.editButton setBackgroundColor:[UIColor whiteColor]];
+    UIImageView *illu = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 150) / 2 - 5, (self.view.frame.size.height - 480 ) / 2 + 40, 161, 150)];
+    illu.image = [UIImage imageNamed:@"D_illu"];
+    [self.view addSubview:illu];
+    
+    self.editButton = [[UICanuButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height - 45 - 10 - 45 - 5 - 45 - 5 - 45 - 5 - 45, 300, 45) forStyle:UICanuButtonStyleWhite];
+    [self.editButton setTitle:NSLocalizedString(@"Edit Profile", nil) forState:UIControlStateNormal];
     [self.editButton  addTarget:self action:@selector(editProfile:) forControlEvents:UIControlEventTouchUpInside];
-    [self.editButton addSubview:arrow];
     [self.view addSubview:_editButton];
     
-    UIImageView *tutorialArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button_arrow"]];
-    tutorialArrow.frame = CGRectMake(253.0f, 0.0f, 47.0f, 47.0f);
-    self.tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.tutorialButton setTitle:@"Tutorial" forState:UIControlStateNormal];
-    [self.tutorialButton setFrame:CGRectMake(10.0f, 67.0f, 300.0f, 47.0f)];
-    [self.tutorialButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
-    self.tutorialButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    self.tutorialButton.titleEdgeInsets = UIEdgeInsetsMake(0, -219, 0, 0);
-    [self.tutorialButton setBackgroundColor:[UIColor whiteColor]];
+    self.tutorialButton = [[UICanuButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height - 45 - 10 - 45 - 5 - 45 - 5 - 45, 300, 45) forStyle:UICanuButtonStyleWhite];
+    [self.tutorialButton setTitle:NSLocalizedString(@"Tutorial", nil) forState:UIControlStateNormal];
     [self.tutorialButton  addTarget:self action:@selector(showTutorial:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tutorialButton addSubview:tutorialArrow];
     [self.view addSubview:_tutorialButton];
     
-    UIImageView *privacyArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"button_arrow"]];
-    privacyArrow.frame = CGRectMake(253.0f, 0.0f, 47.0f, 47.0f);
-    self.privacyPolicyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.privacyPolicyButton setTitle:@"Our Privacy Policy" forState:UIControlStateNormal];
-    [self.privacyPolicyButton setFrame:CGRectMake(10.0f, 124.0f, 300.0f, 47.0f)];
-    [self.privacyPolicyButton setTitleColor:[UIColor colorWithRed:(109.0f/255.0f) green:(110.0f/255.0f) blue:(122.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
-    self.privacyPolicyButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    self.privacyPolicyButton.titleEdgeInsets = UIEdgeInsetsMake(0, -154, 0, 0);
-    [self.privacyPolicyButton setBackgroundColor:[UIColor whiteColor]];
+    self.privacyPolicyButton = [[UICanuButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height - 45 - 10 - 45 - 5 - 45, 300, 45) forStyle:UICanuButtonStyleWhite];
+    [self.privacyPolicyButton setTitle:NSLocalizedString(@"Our Privacy Policy", nil) forState:UIControlStateNormal];
     [self.privacyPolicyButton  addTarget:self action:@selector(showPrivacyPolicy:) forControlEvents:UIControlEventTouchUpInside];
-    [self.privacyPolicyButton addSubview:privacyArrow];
     [self.view addSubview:_privacyPolicyButton];
     
-    self.logOut = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.logOut setTitle:@"Sign Out" forState:UIControlStateNormal];
-    [self.logOut setFrame:CGRectMake(10.0f, 181.0f, 300.0f, 47.0f)];
-    [self.logOut setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.logOut.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [self.logOut setBackgroundColor:[UIColor colorWithRed:(235.0 / 255.0) green:(95.0 / 255.0) blue:(87.0 / 255.0) alpha: 1]];
+    self.logOut = [[UICanuButton alloc]initWithFrame:CGRectMake(10, self.view.frame.size.height - 45 - 10 - 45, 300, 45) forStyle:UICanuButtonStyleWhite];
+    [self.logOut setTitle:NSLocalizedString(@"Sign Out", nil) forState:UIControlStateNormal];
     [self.logOut  addTarget:self action:@selector(performLogout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_logOut];
     
-    
-    self.toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
-    self.toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    self.bottomBar = [[UICanuBottomBar alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
+    self.bottomBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [self.backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    [self.backButton setFrame:CGRectMake(0.0, 0.0, 45, 45)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [self.backButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.toolBar addSubview:_backButton];
-    [self.view addSubview:_toolBar];
+    [self.bottomBar addSubview:_backButton];
+    [self.view addSubview:_bottomBar];
 
 }
 
