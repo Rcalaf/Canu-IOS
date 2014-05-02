@@ -19,6 +19,7 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "TutorialViewController.h"
+#import "UIView+DTDebug.h"
 
 @interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,ActivityScrollViewControllerDelegate>
 
@@ -50,6 +51,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (![AFCanuAPIClient distributionMode]) {
+        // MainQueue UIView
+        [UIView toggleViewMainThreadChecking];
+    }
     
     self.firstAnimationEmptyFeed = NO;
     
@@ -132,6 +138,7 @@
 - (void)dealloc{
     
     NSLog(@"dealloc ActivitiesFeedViewController");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
@@ -148,6 +155,10 @@
     _activeTutorial = activeTutorial;
     
     if (_activeTutorial) {
+        
+        [self.localFeed arrowAnimateHidden:YES];
+        [self.tribeFeed arrowAnimateHidden:YES];
+        [self.profilFeed arrowAnimateHidden:YES];
         
         // Reset position to Tribes
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -279,12 +290,6 @@
     
 }
 
-- (BOOL)localFeedIsUnlock{
-    
-    return self.localFeed.isUnlock;
-    
-}
-
 - (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId{
     
     BOOL isOpen = false;
@@ -323,6 +328,9 @@
         [self.tutorialViewController.view removeFromSuperview];
         [self.tutorialViewController removeFromParentViewController];
         self.tutorialViewController = nil;
+        [self.localFeed arrowAnimateHidden:NO];
+        [self.tribeFeed arrowAnimateHidden:NO];
+        [self.profilFeed arrowAnimateHidden:NO];
     }];
     
 }
@@ -331,24 +339,30 @@
     [self.tutorialViewController tutorialStopMiddelLocalStep];
 }
 
+- (void)updateActivity:(Activity *)activity{
+    [self.localFeed updateActivity:activity];
+    [self.tribeFeed updateActivity:activity];
+    [self.profilFeed updateActivity:activity];
+}
+
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{
-    [self.localFeed reload];
-    [self.tribeFeed reload];
-    [self.profilFeed reload];
+    [self.localFeed load];
+    [self.tribeFeed load];
+    [self.profilFeed load];
 }
 
 - (void)reloadLocal{
-    [self.localFeed reload];
+    [self.localFeed load];
 }
 
 - (void)reloadTribes{
-    [self.tribeFeed reload];
+    [self.tribeFeed load];
 }
 
 - (void)reloadProfile{
-    [self.profilFeed reload];
+    [self.profilFeed load];
 }
 
 #pragma mark - ActivityScrollViewControllerDelegate

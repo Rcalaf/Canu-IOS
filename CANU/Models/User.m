@@ -14,6 +14,7 @@
 #import "MainViewController.h"
 #import "ErrorManager.h"
 #import "UserManager.h"
+#import "Contact.h"
 
 @interface User ()
 
@@ -69,11 +70,13 @@
             
             if (![[attributes objectForKey:@"profile_pic"] isEqualToString:@"/profile_images/default/missing.png"] && ![[attributes objectForKey:@"profile_pic"] isEqualToString:@"/profile_images/thumb/missing.png"] ) {
                 _profileImageUrlShort = [attributes valueForKey:@"profile_pic"];
-                _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
+                
+                NSString *urlWithoutHttps = [[AFCanuAPIClient sharedClient].urlBase stringByReplacingOccurrencesOfString:@"https" withString:@"http"];
+                _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",urlWithoutHttps,[attributes valueForKey:@"profile_pic"]]];
             }
             
         }
-        
+       
     }
     
     return self;
@@ -614,48 +617,68 @@
  *  @param arrayPhoneNumer Array with phone clean number
  *  @param block
  */
-- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block{
+- (void)checkPhoneBook:(NSMutableArray*)arrayContact WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block{
     
-    NSString *url = @"users/search/phonebook";
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:arrayPhoneNumber] forKeys: [NSArray arrayWithObject:@"phone_numbers"]];
-    
-    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
-    
-    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray *respond = (NSArray *)responseObject;
-        
-        NSMutableArray *arrayCANUUser = [[NSMutableArray alloc]init];
-        
-        for (int i = 0; i < [respond count]; i++) {
-            User *user = [[User alloc]initWithAttributes:[respond objectAtIndex:i]];
-            [arrayCANUUser addObject:user];
-        }
-        
+    if (appDelegate.arrayContactCanuUser) {
         if (block) {
-            block(arrayCANUUser,nil);
+            NSLog(@"Use cache Canu User");
+            block([[NSMutableArray alloc] initWithArray:appDelegate.arrayContactCanuUser],nil);
         }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+    } else {
+        
+        NSMutableArray *arrayPhoneNumber = [[NSMutableArray alloc]init];
+        
+        for (int i = 0; i < [arrayContact count]; i++) {
+            Contact *contact = [arrayContact objectAtIndex:i];
+            [arrayPhoneNumber addObject:contact.convertNumber];
+        }
+        
+        NSString *url = @"users/search/phonebook";
+        
+        NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:arrayPhoneNumber] forKeys: [NSArray arrayWithObject:@"phone_numbers"]];
+        
+        [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
+        
+        [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSArray *respond = (NSArray *)responseObject;
             
-            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            NSMutableArray *arrayCANUUser = [[NSMutableArray alloc]init];
+            
+            for (int i = 0; i < [respond count]; i++) {
+                User *user = [[User alloc]initWithAttributes:[respond objectAtIndex:i]];
+                [arrayCANUUser addObject:user];
+            }
             
             if (block) {
-                block(nil,customError);
+                NSMutableArray *newArray = [[NSMutableArray alloc] initWithArray:arrayCANUUser];
+                appDelegate.arrayContactCanuUser = newArray;
+                block(arrayCANUUser,nil);
             }
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+                
+                NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+                
+                if (block) {
+                    block(nil,customError);
+                }
+                
+                if (canuError == CANUErrorServerDown) {
+                    [[ErrorManager sharedErrorManager] serverIsDown];
+                } else if (canuError == CANUErrorUnknown) {
+                    [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"checkPhoneBook:WithBlock:"];
+                }
+                
+            }];
             
-            if (canuError == CANUErrorServerDown) {
-                [[ErrorManager sharedErrorManager] serverIsDown];
-            } else if (canuError == CANUErrorUnknown) {
-                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"checkPhoneBook:WithBlock:"];
-            }
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             
         }];
         
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        
-    }];
+    }
     
 }
 

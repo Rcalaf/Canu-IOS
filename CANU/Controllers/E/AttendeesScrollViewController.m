@@ -121,10 +121,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
-    float newX,newY;
-    
-    newX = scrollView.contentOffset.x;
-    newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
+    float newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     //Refresh
     

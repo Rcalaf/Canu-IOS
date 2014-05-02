@@ -31,12 +31,7 @@
 #import "ProfilePicture.h"
 #import "UICanuButton.h"
 #import "InvitOthersViewController.h"
-
-typedef enum {
-    UICanuActivityCellEditable = 0,
-    UICanuActivityCellGo = 1,
-    UICanuActivityCellToGo = 2,
-} UICanuActivityCellStatus;
+#import "ActivitiesFeedViewController.h"
 
 @interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate,InvitOthersViewControllerDelegate>
 
@@ -625,7 +620,8 @@ typedef enum {
         self.chatView.alpha = 1;
         self.bottomBar.frame = CGRectMake(_bottomBar.frame.origin.x, _bottomBar.frame.origin.y - 45, _bottomBar.frame.size.width, _bottomBar.frame.size.height);
     } completion:^(BOOL finished) {
-        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+        [appDelegate.feedViewController updateActivity:_activity];
     }];
     
 }
@@ -799,7 +795,9 @@ typedef enum {
             self.bottomButton.alpha = 0;
         } completion:^(BOOL finished) {
             [self.addInvit willMoveToParentViewController:nil];
-            [self.addInvit.view removeFromSuperview];
+            if ([self.addInvit.view superview]) {
+                [self.addInvit.view removeFromSuperview];
+            }
             [self.addInvit removeFromParentViewController];
             self.addInvit = nil;
             [self.bottomButton setTitle:NSLocalizedString(@"Invite others", nil) forState:UIControlStateNormal];
@@ -848,6 +846,7 @@ typedef enum {
 - (void)dealloc{
     
     NSLog(@"dealloc Detail Activity");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 

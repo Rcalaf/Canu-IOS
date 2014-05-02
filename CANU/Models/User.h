@@ -93,7 +93,7 @@
  *  @param arrayPhoneNumer Array with phone clean number
  *  @param block
  */
-- (void)checkPhoneBook:(NSMutableArray*)arrayPhoneNumber WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block;
+- (void)checkPhoneBook:(NSMutableArray*)arrayContact WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block;
 
 - (void)checkCounterWithBlock:(void (^)(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error))block;
 

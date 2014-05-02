@@ -11,6 +11,8 @@
 
 #import "AnimationCreateActivity.h"
 
+@class Activity;
+
 @interface ActivitiesFeedViewController : UIViewController
 
 @property (strong, nonatomic) AnimationCreateActivity *animationCreateActivity;
@@ -27,8 +29,6 @@
 
 - (void)removeAfterlogOut;
 
-- (BOOL)localFeedIsUnlock;
-
 - (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId;
 
 - (void)killCurrentDetailsViewController;
@@ -36,5 +36,7 @@
 - (void)stopTutorial;
 
 - (void)tutorialStopMiddelLocalStep;
+
+- (void)updateActivity:(Activity *)activity;
 
 @end

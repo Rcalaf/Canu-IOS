@@ -169,14 +169,6 @@ typedef enum {
             
         }else{
             
-            float horizontalPosition = location.x;
-            
-            if (horizontalPosition < NavBoxLocal) {
-                horizontalPosition = NavBoxLocal;
-            }else if (horizontalPosition > NavBoxProfil){
-                horizontalPosition = NavBoxProfil;
-            }
-            
             self.control.frame = CGRectMake(location.x - _gapTouchControl.x, 415.0 + KIphone5Margin, self.control.frame.size.width, self.control.frame.size.height);
             
             float value = ((location.x - _gapTouchControl.x) - NavBoxLocal) / (NavBoxProfil - NavBoxLocal);
