@@ -149,7 +149,7 @@
     self.view.backgroundColor = backgroundColorView;
     
     UILabel *editProfileTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, 320, 20)];
-    editProfileTitle.text = NSLocalizedString(@"Edit profile", nil);
+    editProfileTitle.text = NSLocalizedString(@"Edit Profile", nil);
     editProfileTitle.textColor = UIColorFromRGB(0x2b4b58);
     editProfileTitle.font = [UIFont fontWithName:@"Lato-Regular" size:18];
     editProfileTitle.textAlignment = NSTextAlignmentCenter;
