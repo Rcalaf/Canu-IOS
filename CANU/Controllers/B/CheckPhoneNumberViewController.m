@@ -126,6 +126,7 @@
     self.phoneNumber.font = [UIFont fontWithName:@"Lato-Regular" size:18];
     [self.phoneNumber becomeFirstResponder];
     self.phoneNumber.placeholder = @"667732101";
+    self.phoneNumber.disablePlaceHolderAnimate = YES;
     [self.wrapperPhoneNumber addSubview:_phoneNumber];
     
     // Second step
@@ -187,7 +188,7 @@
     self.code4.font = [UIFont fontWithName:@"Lato-Regular" size:22];
     [self.wrapperCodePhone addSubview:_code4];
     
-    if (![AFCanuAPIClient sharedClient].distributionMode) {
+    if (![AFCanuAPIClient distributionMode]) {
         self.codeShowDev = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 45)];
         [self.wrapperCodePhone addSubview:_codeShowDev];
     }
@@ -227,6 +228,7 @@
                     [[UserManager sharedUserManager] updateUser:user];
                 } else {
                     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)user.userId]];
                     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Finish" value:nil] build]];
                     [[UserManager sharedUserManager] logIn:user];
                 }
@@ -253,7 +255,7 @@
     
     self.code = arc4random() % 10 + (arc4random() % 10) * 10 + (arc4random() % 10) * 100 + ((arc4random() % 9) + 1) * 1000;
     
-    if ([AFCanuAPIClient sharedClient].distributionMode) {
+    if ([AFCanuAPIClient distributionMode]) {
         
         NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
         

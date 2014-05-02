@@ -81,7 +81,7 @@ static dispatch_once_t oncePredicate;
         }
         
         self.arrayError = [[NSMutableArray alloc]init];
-        self.feedBackAlert = [AFCanuAPIClient sharedClient].distributionMode;
+        self.feedBackAlert = [AFCanuAPIClient distributionMode];
         
     }
     return self;

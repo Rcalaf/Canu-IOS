@@ -13,7 +13,6 @@ NSString * const kAFCanuAPIBaseUDistributionRLString = @"https://api.canu.se";
 NSString * const kAFCanuAPIDevBaseURLString = @"https://api.canu.se";
 //NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
 
-
 // Change with Product / Scheme / Edit Scheme / Run CANU.app / Build Configuration / (Release | Debug)
 #ifdef DEBUG
     BOOL const kAFCanuAPIDistributionMode = NO;
@@ -48,11 +47,9 @@ NSString * const kAFCanuAPIDevBaseURLString = @"https://api.canu.se";
         return nil;
     }
     
-    self.distributionMode = kAFCanuAPIDistributionMode;
-    
     self.securityPolicy.allowInvalidCertificates = YES;
     
-    if (self.distributionMode) {
+    if (kAFCanuAPIDistributionMode) {
         self.urlBase = kAFCanuAPIBaseUDistributionRLString;
     } else {
         self.urlBase = kAFCanuAPIDevBaseURLString;
@@ -64,6 +61,12 @@ NSString * const kAFCanuAPIDevBaseURLString = @"https://api.canu.se";
 	[self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     return self;
+}
+
++ (BOOL)distributionMode{
+    
+    return kAFCanuAPIDistributionMode;
+    
 }
 
 @end

@@ -138,6 +138,9 @@
 		1EA0D31A1907C0C700E3733B /* TutorialPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0D3191907C0C700E3733B /* TutorialPopUp.m */; };
 		1EAE079A18FD22F1002326F4 /* PushRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE079918FD22F1002326F4 /* PushRemote.m */; };
 		1EC3F7A918FFD97C003A342E /* InvitOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3F7A818FFD97C003A342E /* InvitOthersViewController.m */; };
+		1EC6074B190FA57E006D2690 /* UIView+DTDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC6074A190FA57E006D2690 /* UIView+DTDebug.m */; };
+		1EC6074E190FA5E6006D2690 /* NSObject+DTRuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC6074D190FA5E6006D2690 /* NSObject+DTRuntime.m */; };
+		1EC60751190FA606006D2690 /* DTObjectBlockExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC60750190FA606006D2690 /* DTObjectBlockExecutor.m */; };
 		1ED1457A18F42F7A007F4640 /* UICanuTextFieldLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ED1457918F42F7A007F4640 /* UICanuTextFieldLine.m */; };
 		DE517723184EA69100690E2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA93B1B17204EA600303BB5 /* UIKit.framework */; };
 		DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE607838182C007C0053F23B /* Default-568h@2x.png */; };
@@ -429,6 +432,12 @@
 		1EAE079918FD22F1002326F4 /* PushRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushRemote.m; path = CANU/Models/PushRemote.m; sourceTree = "<group>"; };
 		1EC3F7A718FFD97C003A342E /* InvitOthersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitOthersViewController.h; sourceTree = "<group>"; };
 		1EC3F7A818FFD97C003A342E /* InvitOthersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitOthersViewController.m; sourceTree = "<group>"; };
+		1EC60749190FA57E006D2690 /* UIView+DTDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DTDebug.h"; sourceTree = "<group>"; };
+		1EC6074A190FA57E006D2690 /* UIView+DTDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DTDebug.m"; sourceTree = "<group>"; };
+		1EC6074C190FA5E6006D2690 /* NSObject+DTRuntime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DTRuntime.h"; sourceTree = "<group>"; };
+		1EC6074D190FA5E6006D2690 /* NSObject+DTRuntime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DTRuntime.m"; sourceTree = "<group>"; };
+		1EC6074F190FA606006D2690 /* DTObjectBlockExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTObjectBlockExecutor.h; sourceTree = "<group>"; };
+		1EC60750190FA606006D2690 /* DTObjectBlockExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTObjectBlockExecutor.m; sourceTree = "<group>"; };
 		1ED1457818F42F7A007F4640 /* UICanuTextFieldLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICanuTextFieldLine.h; sourceTree = "<group>"; };
 		1ED1457918F42F7A007F4640 /* UICanuTextFieldLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICanuTextFieldLine.m; sourceTree = "<group>"; };
 		799314792D78419EB446BEF1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1144,6 +1153,20 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		1EC60748190FA57E006D2690 /* DTFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				1EC6074F190FA606006D2690 /* DTObjectBlockExecutor.h */,
+				1EC60750190FA606006D2690 /* DTObjectBlockExecutor.m */,
+				1EC6074C190FA5E6006D2690 /* NSObject+DTRuntime.h */,
+				1EC6074D190FA5E6006D2690 /* NSObject+DTRuntime.m */,
+				1EC60749190FA57E006D2690 /* UIView+DTDebug.h */,
+				1EC6074A190FA57E006D2690 /* UIView+DTDebug.m */,
+			);
+			name = DTFoundation;
+			path = CANU/Framework/DTFoundation;
+			sourceTree = "<group>";
+		};
 		DEA93B0F17204EA600303BB5 = {
 			isa = PBXGroup;
 			children = (
@@ -1169,6 +1192,7 @@
 		DEA93B1A17204EA600303BB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1EC60748190FA57E006D2690 /* DTFoundation */,
 				1E235EA618F52FEB00F57059 /* CFNetwork.framework */,
 				1E235EA418F52FC200F57059 /* PulseSDK.framework */,
 				1E891CA418E96ABF003B45F8 /* TimeAgo */,
@@ -1437,6 +1461,7 @@
 				1E279E3218D204320076C25E /* UICanuTextFieldReset.m in Sources */,
 				1E8A338A18E045230049A6B7 /* NSNumber+MK_Negative.m in Sources */,
 				1E8A338F18E045230049A6B7 /* NSString+MK_Conversion.m in Sources */,
+				1EC6074E190FA5E6006D2690 /* NSObject+DTRuntime.m in Sources */,
 				1E70867D189A849300328F76 /* Contact.m in Sources */,
 				1E8A338318E045230049A6B7 /* NSDictionary+MK_Block.m in Sources */,
 				1ED1457A18F42F7A007F4640 /* UICanuTextFieldLine.m in Sources */,
@@ -1468,6 +1493,7 @@
 				1E279EB618D301A60076C25E /* UICanuAttendeeCellScroll.m in Sources */,
 				1E8A339818E045320049A6B7 /* TTTAttributedLabel.m in Sources */,
 				1E62AE2C18D83F2200520AA0 /* UICanuButton.m in Sources */,
+				1EC6074B190FA57E006D2690 /* UIView+DTDebug.m in Sources */,
 				1E279DF018D2028A0076C25E /* UserSettingsViewController.m in Sources */,
 				1E8A338D18E045230049A6B7 /* NSSet+MK_Block.m in Sources */,
 				1E8A338C18E045230049A6B7 /* NSObject+MK_AutoDescribe.m in Sources */,
@@ -1487,6 +1513,7 @@
 				1E279E3018D204320076C25E /* UICanuTextFieldInvit.m in Sources */,
 				1E279E8718D2FD5E0076C25E /* AttendeesScrollViewController.m in Sources */,
 				1E279E8E18D300890076C25E /* AnimationCreateActivity.m in Sources */,
+				1EC60751190FA606006D2690 /* DTObjectBlockExecutor.m in Sources */,
 				1E279EBC18D3022C0076C25E /* UICANULocationCell.m in Sources */,
 				1E279E4818D205310076C25E /* UICanuLenghtPicker.m in Sources */,
 				1E279D0918D1F41E0076C25E /* AFCanuAPIClient.m in Sources */,
@@ -1603,6 +1630,7 @@
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1705,6 +1733,7 @@
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1743,6 +1772,7 @@
 				OTHER_LDFLAGS = (
 					"-lsqlite3.0",
 					"-ObjC",
+					"-lxml2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

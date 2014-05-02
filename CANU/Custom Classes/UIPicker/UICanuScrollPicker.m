@@ -144,16 +144,6 @@
     float fractionalPage = scrollView.contentOffset.y/ 55.0f ;
     NSInteger nearestNumberCurrent = lround(fractionalPage);
     
-    NSInteger newCurrentObject = 0;
-    
-    if (nearestNumberCurrent < 0) {
-        newCurrentObject = 0;
-    }else if (nearestNumberCurrent > [_arrayContent count] + 6){
-        newCurrentObject = [_arrayContent count] + 6;
-    }else{
-        newCurrentObject = nearestNumberCurrent;
-    }
-    
     [self changementCurrentObjectIfBlockedValue:nearestNumberCurrent - 3];
     
     if (_currentObject < 0) {

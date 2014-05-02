@@ -15,9 +15,11 @@
 @interface CreateEditUserList : UIView
 
 @property (retain) id delegate;
-@property (nonatomic) int maxHeight;
-@property (nonatomic) int minHeigt;
-@property (nonatomic) int active;
+@property (nonatomic) NSInteger maxHeight;
+@property (nonatomic) NSInteger minHeigt;
+@property (nonatomic) BOOL active;
+@property (nonatomic) BOOL isSearchMode;
+@property (nonatomic) BOOL forceLocalCell;
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;
@@ -39,6 +41,8 @@
 - (void)updateAndDeleteUser:(User *)user;
 
 - (void)updateAndDeleteContact:(Contact *)contact;
+
+- (void)scrollContentOffsetY:(float)y;
 
 - (void)forceDealloc;
 

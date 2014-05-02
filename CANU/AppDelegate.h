@@ -27,6 +27,9 @@ extern NSString *const FBSessionStateChangedNotification;
 @property (strong, nonatomic) NSString *device_token;
 @property (strong, nonatomic) NSString *oldScreenName;
 
+@property (strong, nonatomic) NSMutableArray *arrayContact;
+@property (strong, nonatomic) NSMutableArray *arrayContactCanuUser;
+
 /**
  *  Gestion Error ( UIAlert, Messages )
  */

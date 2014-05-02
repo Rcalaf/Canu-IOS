@@ -180,6 +180,9 @@
                 self.wrapper.alpha = 0;
             } completion:^(BOOL finished) {
                 
+                id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)user.userId]];
+                
                 if (user.phoneIsVerified) {
                     NSLog(@"User Active");
                     appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
@@ -332,6 +335,20 @@
         [self.password becomeFirstResponder];
     }else if (textField == _password){
         [self login];
+    }
+    
+    return YES;
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField == self.userName) {
+        [self.userName textChange:newString];
+    } else if (textField == self.password) {
+        [self.password textChange:newString];
     }
     
     return YES;

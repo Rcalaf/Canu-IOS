@@ -8,21 +8,23 @@
 
 #import "User.h"
 #import "AppDelegate.h"
-#import "UICanuTextField.h"
 #import "EditUserPasswordViewController.h"
 #import "UserManager.h"
-
+#import "UICanuButton.h"
+#import "UICanuButton.h"
+#import "UICanuBottomBar.h"
+#import "UICanuTextFieldLine.h"
 
 @interface EditUserPasswordViewController () <UITextFieldDelegate>
 
 @property (strong, nonatomic) User *user;
 
-@property (strong, nonatomic) UIView *toolBar;
+@property (strong, nonatomic) UICanuBottomBar *toolBar;
 @property (strong, nonatomic) UIButton *backButton;
-@property (strong, nonatomic) UIButton *saveButton;
+@property (strong, nonatomic) UICanuButton *saveButton;
 
-@property (strong, nonatomic) UITextField *password;
-@property (strong, nonatomic) UITextField *proxyPassword;
+@property (strong, nonatomic) UICanuTextFieldLine *password;
+@property (strong, nonatomic) UICanuTextFieldLine *proxyPassword;
 
 @property (strong, nonatomic) UIActivityIndicatorView *loadingIndicator;
 
@@ -43,15 +45,6 @@
     }
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)back:(id)sender
 {
     [self dismissViewControllerAnimated:NO completion:nil];
@@ -61,7 +54,7 @@
 {
     self.password.rightView = nil;
    self.proxyPassword.rightView = nil;
-    //NSLog(@" %@ %@",_password.text,_proxyPassword.text);
+    
     if ([self.password.text isEqualToString:_proxyPassword.text]) {
     
         [self operationInProcess:YES];
@@ -106,6 +99,20 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField == self.password) {
+        [self.password textChange:newString];
+    } else if (textField == self.proxyPassword) {
+        [self.proxyPassword textChange:newString];
+    }
+    
+    return YES;
+    
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if ([self.password isFirstResponder]) {
@@ -125,40 +132,46 @@
 {
     [super loadView];
     
+    UILabel *editProfileTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 40, 320, 20)];
+    editProfileTitle.text = NSLocalizedString(@"Edit your password", nil);
+    editProfileTitle.textColor = UIColorFromRGB(0x2b4b58);
+    editProfileTitle.font = [UIFont fontWithName:@"Lato-Regular" size:18];
+    editProfileTitle.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:editProfileTitle];
+    
     self.user = [[UserManager sharedUserManager] currentUser];
     
-    self.view.backgroundColor = [UIColor colorWithRed:(231.0 / 255.0) green:(231.0 / 255.0) blue:(231.0 / 255.0) alpha: 1];
+    self.view.backgroundColor = backgroundColorView;
     
-    self.password = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 300.0f, 47.0f)];
-    self.password.placeholder = @"New Password";
+    self.password = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 85, 280, 45)];
+    self.password.placeholder = NSLocalizedString(@"New Password", nil);
     self.password.secureTextEntry = YES;
     [self.password setReturnKeyType:UIReturnKeyNext];
     self.password.delegate = self;
     [self.view addSubview:self.password];
     
-    self.proxyPassword = [[UICanuTextField alloc] initWithFrame:CGRectMake(10.0f, 67.0f, 300.0f, 47.0f)];
-    self.proxyPassword.placeholder = @"Password Confirmation";
+    self.proxyPassword = [[UICanuTextFieldLine alloc] initWithFrame:CGRectMake(20, 85 + 5 + 45, 280, 45)];
+    self.proxyPassword.placeholder = NSLocalizedString(@"Password Confirmation", nil);
     self.proxyPassword.secureTextEntry = YES;
     [self.proxyPassword setReturnKeyType:UIReturnKeyDone];
     self.proxyPassword.delegate = self;
     [self.view addSubview:self.proxyPassword];
     
-    self.toolBar = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 57, 320.0, 57.0)];
-    self.toolBar.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
+    UIImageView *illu = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.frame.size.width - 91) / 2, 85 + 5 + 45 + 5 + 45 + 35, 79, 91)];
+    illu.image = [UIImage imageNamed:@"D_illu_edit_profile"];
+    [self.view addSubview:illu];
+    
+    self.toolBar = [[UICanuBottomBar alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height - 45, 320.0, 45)];
     
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.backButton setFrame:CGRectMake(0.0, 0.0, 57.0, 57.0)];
-    [self.backButton setImage:[UIImage imageNamed:@"back_arrow.png"] forState:UIControlStateNormal];
+    [self.backButton setFrame:CGRectMake(0.0, 0.0, 45, 45)];
+    [self.backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
     [self.backButton  addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
+    [self.toolBar addSubview:_backButton];
     
-    self.saveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.saveButton setTitle:@"SAVE" forState:UIControlStateNormal];
-    [self.saveButton setFrame:CGRectMake(67.0, 10.0, 243.0, 37.0)];
-    [self.saveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.saveButton.titleLabel.font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-    [self.saveButton setBackgroundColor:[UIColor colorWithRed:(28.0 / 255.0) green:(166.0 / 255.0) blue:(195.0 / 255.0) alpha: 1]];
+    self.saveButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45 + 10, 4, (self.view.frame.size.width - (45 + 10)*2), 37.0) forStyle:UICanuButtonStyleLarge];
+    [self.saveButton setTitle:NSLocalizedString(@"Save", nil) forState:UIControlStateNormal];
     [self.saveButton  addTarget:self action:@selector(updatePassword:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.toolBar addSubview:_saveButton];
     
     // Activity Indicator
@@ -167,7 +180,6 @@
     self.loadingIndicator.center = CGPointMake(188.5f, 28.5f);
     [self.toolBar addSubview:_loadingIndicator];
     
-    [self.toolBar addSubview:_backButton];
     [self.view addSubview:_toolBar];
     
     

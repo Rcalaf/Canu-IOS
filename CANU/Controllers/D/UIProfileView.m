@@ -45,7 +45,7 @@
         self.profileImage.clipsToBounds            = YES;
         [self setRoundedView:_profileImage];
         [self addSubview:self.profileImage];
-
+        
         UIImageView *strokeProfile                 = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 95, 95)];
         strokeProfile.image                        = [UIImage imageNamed:@"All_stroke_profile_picture_95"];
         [self.profileImage addSubview:strokeProfile];

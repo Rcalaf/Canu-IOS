@@ -85,7 +85,7 @@
                                          [UIImage imageNamed:@"T_goal_17"],
                                          [UIImage imageNamed:@"T_goal_18"],nil];
     self.circle.alpha = 0;
-    self.circle.animationDuration = 0.36f;
+    self.circle.animationDuration = 0.75f;
     self.circle.animationRepeatCount = 0;
     [self.view addSubview:_circle];
     

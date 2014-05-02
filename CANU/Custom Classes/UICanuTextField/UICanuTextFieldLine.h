@@ -11,5 +11,8 @@
 @interface UICanuTextFieldLine : UITextField
 
 @property (nonatomic) BOOL valueValide;
+@property (nonatomic) BOOL disablePlaceHolderAnimate;
+
+- (void)textChange:(NSString *)text;
 
 @end

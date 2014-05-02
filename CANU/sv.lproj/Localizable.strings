@@ -48,9 +48,9 @@
 
 //Feed
 
-"Looks like you have plenty of spare time" = "Du ser ut att ha gott om fritid, vad ska du göra med den?";
-"Your friends seem asleep" = "Dina vänner vill träffa dig!";
-"There isn't much happening around you" = "Det verkar inte hända något runt omkring dig just nu";
+"Looks like you have plenty of spare time" = "Du har inget i ditt schema";
+"Your friends seem asleep" = "Du har inga inbjudningar";
+"There isn't much happening around you" = "Du har inga aktiviteter i din närhet";
 "I want to change this" = "Skapa aktivitet";
 "Locked until we are enougth.\nRead why" = "Låst tills vi är tillräckligt många.\nLäs varför";
 "Read why" = "Läs varför";
@@ -69,7 +69,7 @@
 
 //Local
 "Activities around you" = "Här hittar du aktiviteter i din närhet";
-"Local" = "Lokalt";
+"Local" = "Publikt";
 
 //Tribes
 "Activities you are invited to" = "Här hittar du aktiviteter du är bjuden till";
@@ -101,7 +101,7 @@
 "At :" = "Kl :";
 "For :" = "i :";
 "Find a place" = "Sök efter en plats eller adress";
-"Search for a companion" = "Sök efter en kompanjon";
+"Search for a companion" = "Sök efter en person";
 "My tribe" = "Min tribe";
 "Add details (Optional)" = "Detaljer (Valfritt)";
 "Current Location (Change)" = "Nuvarande position (Ändra)";
@@ -135,3 +135,18 @@
 "Write something nice..." = "Säg något snällt...";
 "Invite others" = "Bjud in fler";
 "Add peoples" = "Bjud in";
+"and" = "och";
+"others peoples" = "andra personer";
+"other person" = "annan person";
+
+// Settings
+"Sign Out" = "Logga ut";
+"Our Privacy Policy" = "Sekretesspolicy";
+"Tutorial" = "Tutorial";
+"Edit Profile" = "Redigera profil";
+"Full name" = "För- och efternamn";
+"Email" = "E-post";
+"Change your password" = "Byt lösenord";
+"New Password" = "Nytt lösenord";
+"Password Confirmation" = "Bekräfta lösenord";
+"Edit your password" = "Ändra lösenord";
