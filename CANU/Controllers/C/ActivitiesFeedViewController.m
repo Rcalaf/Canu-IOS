@@ -52,7 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (![AFCanuAPIClient sharedClient].distributionMode) {
+    if (![AFCanuAPIClient distributionMode]) {
         // MainQueue UIView
         [UIView toggleViewMainThreadChecking];
     }

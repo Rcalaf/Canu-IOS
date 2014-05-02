@@ -44,6 +44,7 @@
 @property (strong, nonatomic) NSMutableArray *arrayCell;
 @property (strong, nonatomic) UIImageView *imageEmptyFeed;
 @property (strong, nonatomic) UIImageView *arrowAnimate;
+@property (strong, nonatomic) UILabel *titleFeed;
 @property (strong, nonatomic) UITextView *feedbackMessage;
 @property (strong, nonatomic) UIButton *callBackActionEmptyFeed;
 @property (strong, nonatomic) User *user;
@@ -95,7 +96,22 @@
         self.imageEmptyFeed.alpha = 0;
         [self.view addSubview:_imageEmptyFeed];
         
-        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(40.0f, (self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 240.0f, 100.0f)];
+        self.titleFeed = [[UILabel alloc]initWithFrame:CGRectMake(10, (self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 300, 20)];
+        self.titleFeed.text = @"Tribe";
+        if (_feedType == FeedLocalType) {
+            self.titleFeed.text = NSLocalizedString(@"Local", nil);
+        }else if (_feedType == FeedTribeType) {
+            self.titleFeed.text = NSLocalizedString(@"Tribes", nil);
+        }else if (_feedType == FeedProfileType) {
+            self.titleFeed.text = NSLocalizedString(@"Profile", nil);
+        }
+        self.titleFeed.textAlignment = NSTextAlignmentCenter;
+        self.titleFeed.textColor = [UIColor whiteColor];
+        self.titleFeed.font = [UIFont fontWithName:@"Lato-Bold" size:18.0];
+        self.titleFeed.alpha = 0;
+        [self.view addSubview:_titleFeed];
+        
+        self.feedbackMessage                             = [[UITextView alloc] initWithFrame:CGRectMake(40.0f, (self.view.frame.size.height - 480)/2 + 320 + _correctionFeedViewProfile, 240.0f, 100.0f)];
         self.feedbackMessage.font                        = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         self.feedbackMessage.textColor                   = [UIColor whiteColor];
         self.feedbackMessage.allowsEditingTextAttributes = NO;
@@ -299,7 +315,8 @@
             
             if (self.isEmpty) {
                 self.imageEmptyFeed.frame = CGRectMake(0, - newYAbs + (self.view.frame.size.height - 480)/2 + 30 + _correctionFeedViewProfile, 320, 480);
-                self.feedbackMessage.frame = CGRectMake(40.0f, - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 240.0f, 100.0f);
+                self.titleFeed.frame = CGRectMake(10,  - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 300, 20);
+                self.feedbackMessage.frame = CGRectMake(40.0f, - newYAbs * 0.6f + (self.view.frame.size.height - 480)/2 + 320 + _correctionFeedViewProfile, 240.0f, 100.0f);
             }
             
         } else {
@@ -308,7 +325,8 @@
             
             if (self.isEmpty) {
                 self.imageEmptyFeed.frame = CGRectMake(0, (self.view.frame.size.height - 480)/2 + 30 + _correctionFeedViewProfile, 320, 480);
-                self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 240.0f, 100.0f);
+                self.titleFeed.frame = CGRectMake(10,(self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 300, 20);
+                self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 320 + _correctionFeedViewProfile, 240.0f, 100.0f);
             }
             
         }
@@ -525,6 +543,7 @@
  */
 - (void)removeAfterlogOut{
     
+    [self.titleFeed removeFromSuperview];
     [self.feedbackMessage removeFromSuperview];
     [self.scrollview removeFromSuperview];
     [self.loaderAnimation removeFromSuperview];
@@ -546,6 +565,7 @@
     self.loaderAnimation = nil;
     self.arrayCell = nil;
     self.feedbackMessage = nil;
+    self.titleFeed = nil;
     
 }
 
@@ -607,7 +627,8 @@
                     [self.navigation changePosition:0];
                     if (self.isEmpty) {
                         self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 30 + _correctionFeedViewProfile, 320, 480);
-                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 240.0f, 100.0f);
+                        self.titleFeed.frame = CGRectMake(10,(self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 300, 20);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 320 + _correctionFeedViewProfile, 240.0f, 100.0f);
                     }
                 } completion:^(BOOL finished) {
                     [self.loaderAnimation stopAnimation];
@@ -655,7 +676,8 @@
                     [self.navigation changePosition:0];
                     if (self.isEmpty) {
                         self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 30 + _correctionFeedViewProfile, 320, 480);
-                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 240.0f, 100.0f);
+                        self.titleFeed.frame = CGRectMake(10, (self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 300, 20);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 320 + _correctionFeedViewProfile, 240.0f, 100.0f);
                     }
                 } completion:^(BOOL finished) {
                     
@@ -704,7 +726,8 @@
                     [self.navigation changePosition:0];
                     if (self.isEmpty) {
                         self.imageEmptyFeed.frame = CGRectMake(0,(self.view.frame.size.height - 480)/2 + 30 + _correctionFeedViewProfile, 320, 480);
-                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 240.0f, 100.0f);
+                        self.titleFeed.frame = CGRectMake(10, (self.view.frame.size.height - 480)/2 + 300 + _correctionFeedViewProfile, 300, 20);
+                        self.feedbackMessage.frame = CGRectMake(40.0f,(self.view.frame.size.height - 480)/2 + 320 + _correctionFeedViewProfile, 240.0f, 100.0f);
                     }
                 } completion:^(BOOL finished) {
                     
@@ -741,6 +764,7 @@
         
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
+            self.titleFeed.alpha = 1;
             self.imageEmptyFeed.alpha = 1;
             self.callBackActionEmptyFeed.alpha = 1;
         } completion:nil];
@@ -762,6 +786,7 @@
         
         [UIView  animateWithDuration:0.4 animations:^{
             self.feedbackMessage.alpha = 1;
+            self.titleFeed.alpha = 1;
             self.imageEmptyFeed.alpha = 1;
             self.arrowAnimate.alpha = 1;
         } completion:nil];
@@ -773,6 +798,7 @@
             self.imageEmptyFeed.alpha = 0;
             self.callBackActionEmptyFeed.alpha = 0;
             self.arrowAnimate.alpha = 0;
+            self.titleFeed.alpha = 0;
         } completion:^(BOOL finished) {
             [self.arrowAnimate stopAnimating];
             self.callBackActionEmptyFeed.hidden = YES;

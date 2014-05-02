@@ -18,7 +18,6 @@
 
 @property (nonatomic) BOOL loadMore;
 @property (nonatomic) BOOL stopLoadMore;
-@property (nonatomic) BOOL isSearchMode;
 @property (nonatomic) NSInteger numberCell;
 @property (strong, nonatomic) Contact *contactLocal;
 @property (strong, nonatomic) NSMutableArray *arrayContact;
@@ -201,8 +200,6 @@
 #pragma mark - Private
 
 - (void)checkPhoneBook{
-    
-    self.isSearchMode = NO;
     
     [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
         
@@ -452,7 +449,13 @@
         if (!self.loadMore && !self.stopLoadMore) {
             self.loadMore = YES;
             self.numberCell += 100;
-            [NSThread detachNewThreadSelector:@selector(showUser) toTarget:self withObject:nil];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                
+                dispatch_async(dispatch_get_main_queue(),
+                               ^{
+                                   [self showUser];
+                               });
+            });
         }
     }
     
@@ -511,8 +514,6 @@
 - (void)searchPhoneBook:(NSString *)searchWords{
     
     searchWords = [searchWords stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    self.isSearchMode = YES;
     
     self.numberCell = 10;
     self.stopLoadMore = NO;

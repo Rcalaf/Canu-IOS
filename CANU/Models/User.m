@@ -70,7 +70,9 @@
             
             if (![[attributes objectForKey:@"profile_pic"] isEqualToString:@"/profile_images/default/missing.png"] && ![[attributes objectForKey:@"profile_pic"] isEqualToString:@"/profile_images/thumb/missing.png"] ) {
                 _profileImageUrlShort = [attributes valueForKey:@"profile_pic"];
-                _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",[AFCanuAPIClient sharedClient].urlBase,[attributes valueForKey:@"profile_pic"]]];
+                
+                NSString *urlWithoutHttps = [[AFCanuAPIClient sharedClient].urlBase stringByReplacingOccurrencesOfString:@"https" withString:@"http"];
+                _profileImageUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",urlWithoutHttps,[attributes valueForKey:@"profile_pic"]]];
             }
             
         }

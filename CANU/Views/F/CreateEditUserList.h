@@ -18,6 +18,7 @@
 @property (nonatomic) NSInteger maxHeight;
 @property (nonatomic) NSInteger minHeigt;
 @property (nonatomic) BOOL active;
+@property (nonatomic) BOOL isSearchMode;
 @property (nonatomic) BOOL forceLocalCell;
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) UIScrollView *scrollView;

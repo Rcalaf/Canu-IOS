@@ -578,6 +578,7 @@ typedef enum {
         [self.tutorialPopUp removeFromSuperview];
         self.backgroundOpacity = nil;
         self.tutorialPopUp = nil;
+        [self goBack];
     }];
     
 }
@@ -1456,9 +1457,11 @@ typedef enum {
     if (_userListIsOpen) {
         self.wrapper.scrollEnabled = NO;
         self.userList.scrollView.scrollEnabled = YES;
+        self.userList.isSearchMode = YES;
     } else {
         self.wrapper.scrollEnabled = YES;
         self.userList.scrollView.scrollEnabled = NO;
+        self.userList.isSearchMode = NO;
     }
     
     [UIView animateWithDuration:0.4 animations:^{

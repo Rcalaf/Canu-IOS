@@ -10,7 +10,6 @@
 
 @interface AFCanuAPIClient : AFHTTPRequestOperationManager
 
-@property (nonatomic) BOOL distributionMode;
 @property (nonatomic) NSString *urlBase;
 
 + (AFCanuAPIClient *)sharedClient;

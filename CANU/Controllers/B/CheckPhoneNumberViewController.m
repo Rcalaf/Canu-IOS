@@ -188,7 +188,7 @@
     self.code4.font = [UIFont fontWithName:@"Lato-Regular" size:22];
     [self.wrapperCodePhone addSubview:_code4];
     
-    if (![AFCanuAPIClient sharedClient].distributionMode) {
+    if (![AFCanuAPIClient distributionMode]) {
         self.codeShowDev = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 70, 45)];
         [self.wrapperCodePhone addSubview:_codeShowDev];
     }
@@ -255,7 +255,7 @@
     
     self.code = arc4random() % 10 + (arc4random() % 10) * 10 + (arc4random() % 10) * 100 + ((arc4random() % 9) + 1) * 1000;
     
-    if ([AFCanuAPIClient sharedClient].distributionMode) {
+    if ([AFCanuAPIClient distributionMode]) {
         
         NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
         

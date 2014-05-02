@@ -118,10 +118,9 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     UILabel *signInLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 280, 30)];
     signInLabel.attributedText = attributeString;
     signInLabel.textAlignment = NSTextAlignmentCenter;
-    signInLabel.textColor = UIColorFromRGB(0x2b4b58);
+    signInLabel.textColor = UIColorFromRGB(0x829096);
     signInLabel.font = [UIFont fontWithName:@"Lato-Regular" size:10];
     signInLabel.backgroundColor = [UIColor clearColor];
-    signInLabel.alpha = 0.16f;
     [self.signIn addSubview:signInLabel];
     
     self.wrapperSignUP = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height - 140 - (self.view.frame.size.height - 480)/4, 320.0f, 140)];
@@ -310,7 +309,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
             self.signIn.frame = CGRectMake(20, 55 + (self.view.frame.size.height - 480)/2, 280, 30);
             self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 216 - 170 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
             self.bottomBar.frame = CGRectMake(0, 0, 320, 45);
-            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, 320, 45);
+            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 44 - 216, 320, 45);
         } completion:^(BOOL finished) {
             
             if (block) {

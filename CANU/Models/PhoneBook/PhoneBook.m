@@ -102,8 +102,6 @@
                 CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
                 CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
                 
-                NSMutableArray *phoneSave = [[NSMutableArray alloc]init];
-                
                 for (int i = 0; i < nPeople; i++) {
                     
                     ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
@@ -119,7 +117,6 @@
                             theFinalPhoneNumber = phoneNumber;
                         }
                     }
-                    
                     
                     if (theFinalPhoneNumber) {
                         
@@ -146,17 +143,24 @@
                         
                         if (contact && contact.isValide) {
                             
-                            if (![phoneSave containsObject:contact.convertNumber]) {
+                            BOOL alreadyIn = NO;
+                            
+                            for (int y = 0; y < [arrayContact count]; y ++) {
+                                Contact *contactData = [arrayContact objectAtIndex:y];
+                                
+                                if ([contactData.convertNumber isEqualToString:contact.convertNumber]) {
+                                    alreadyIn = YES;
+                                }
+                                
+                            }
+                            
+                            if (!alreadyIn) {
                                 [arrayContact addObject:contact];
-                                [phoneSave addObject:contact.convertNumber];
                             }
                             
                         }
                         
                     }
-                    
-                    [phoneSave removeAllObjects];
-                    phoneSave = nil;
                     
                 }
                 
