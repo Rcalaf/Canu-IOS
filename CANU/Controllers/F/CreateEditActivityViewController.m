@@ -61,6 +61,7 @@ typedef enum {
 @property (nonatomic) BOOL invitInputIsStick;
 @property (nonatomic) BOOL isNewActivity;
 @property (nonatomic) BOOL ghostUser;
+@property (nonatomic) BOOL privateLocation;
 @property (nonatomic) BOOL finishAnimationCreate;
 @property (nonatomic) int previousScrollOffsetWrapper;
 @property (nonatomic) int distanceFirstAnimation;
@@ -145,6 +146,8 @@ typedef enum {
         
         self.distanceFirstAnimation = [[UIScreen mainScreen] bounds].size.height - (AreaCreate - 64);
         
+        self.privateLocation = YES;
+        
     }
     return self;
 }
@@ -185,7 +188,7 @@ typedef enum {
     [super viewDidLoad];
     
     // Init
-    
+    NSLog(@"Start");
     self.descriptionIsOpen = NO;
     self.calendarIsOpen = NO;
     self.searchLocationIsOpen = NO;
@@ -463,6 +466,8 @@ typedef enum {
         
         [self.lenghtPicker changeTo:_editActivity.length];
         
+        self.privateLocation = _editActivity.privacyLocation;
+        
     }
     
 }
@@ -589,6 +594,8 @@ typedef enum {
             float alpha = (scrollView.contentOffset.y - (_wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5))/10;
             
             self.backgroundUserList.alpha = alpha;
+
+            [self.userList scrollContentOffsetY:scrollView.contentOffset.y - (_wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height - 5)];
             
         }else {
             self.wrapperUserList.frame = CGRectMake(10, _wrapperLocation.frame.origin.y + _wrapperLocation.frame.size.height + 5, _wrapperUserList.frame.size.width, _wrapperUserList.frame.size.height);
@@ -1684,14 +1691,6 @@ typedef enum {
         
         NSDate *dateFull = [calendar dateFromComponents:components];
         
-        // Privacy
-        
-        BOOL privateLocation = YES;
-        
-        if (_canuCreateActivity == CANUCreateActivityLocal) {
-            privateLocation = NO;
-        }
-        
         // Description
         
         NSString *description = @"";
@@ -1751,7 +1750,7 @@ typedef enum {
                                             Latitude:[NSString stringWithFormat:@"%f",self.locationSelected.latitude]
                                            Longitude:[NSString stringWithFormat:@"%f",self.locationSelected.longitude]
                                               Guests:[self createArrayUserInvited]
-                                     PrivateLocation:privateLocation
+                                     PrivateLocation:self.privateLocation
                                                Block:^(Activity *activity, NSError *error) {
                                                    
                                                    if (error) {
@@ -1912,8 +1911,12 @@ typedef enum {
         
         if ([[self.userList.arrayAllUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
             Contact *contactData = [self.userList.arrayAllUserSelected objectAtIndex:i];
-            [array addObject:contactData.convertNumber];
-            self.ghostUser = YES;
+            if (contactData.isLocal) {
+                self.privateLocation = NO;
+            } else {
+                [array addObject:contactData.convertNumber];
+                self.ghostUser = YES;
+            }
         } else if ([[self.userList.arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
             User *userData = [self.userList.arrayAllUserSelected objectAtIndex:i];
             [array addObject:userData.phoneNumber];

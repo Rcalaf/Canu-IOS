@@ -138,6 +138,7 @@
 - (void)dealloc{
     
     NSLog(@"dealloc ActivitiesFeedViewController");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
@@ -154,6 +155,10 @@
     _activeTutorial = activeTutorial;
     
     if (_activeTutorial) {
+        
+        [self.localFeed arrowAnimateHidden:YES];
+        [self.tribeFeed arrowAnimateHidden:YES];
+        [self.profilFeed arrowAnimateHidden:YES];
         
         // Reset position to Tribes
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -285,12 +290,6 @@
     
 }
 
-- (BOOL)localFeedIsUnlock{
-    
-    return self.localFeed.isUnlock;
-    
-}
-
 - (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId{
     
     BOOL isOpen = false;
@@ -329,12 +328,21 @@
         [self.tutorialViewController.view removeFromSuperview];
         [self.tutorialViewController removeFromParentViewController];
         self.tutorialViewController = nil;
+        [self.localFeed arrowAnimateHidden:NO];
+        [self.tribeFeed arrowAnimateHidden:NO];
+        [self.profilFeed arrowAnimateHidden:NO];
     }];
     
 }
 
 - (void)tutorialStopMiddelLocalStep{
     [self.tutorialViewController tutorialStopMiddelLocalStep];
+}
+
+- (void)updateActivity:(Activity *)activity{
+    [self.localFeed updateActivity:activity];
+    [self.tribeFeed updateActivity:activity];
+    [self.profilFeed updateActivity:activity];
 }
 
 #pragma mark - NSNotificationCenter

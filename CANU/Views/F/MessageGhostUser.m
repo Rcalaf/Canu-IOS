@@ -113,16 +113,14 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
             
             if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
                 Contact *contactData = [self.arrayUserSelected objectAtIndex:i];
-                [phoneNumber addObject:contactData.convertNumber];
+                if (!contactData.isLocal) {
+                    [phoneNumber addObject:contactData.convertNumber];
+                }
             }
             
         }
         
-        NSDateFormatter *formatterMonth = [[NSDateFormatter alloc] init];
-        [formatterMonth setDateFormat:@"MMMM"];
-        NSString *stringFromMonth = [formatterMonth stringFromDate:_activity.start];
-        
-        controller.body = [NSString stringWithFormat:@"%@? ( %@, %li | %li.%li | %@, %@ ) canu.se/i/%@",_activity.title,stringFromMonth,(long)[_activity.start mk_day],(long)[_activity.start mk_hour],(long)[_activity.start mk_minutes],_activity.street,_activity.city,_activity.invitationToken];
+        controller.body = [NSString stringWithFormat:@"%@?\n\ncanu.se/i/%@",_activity.title,_activity.invitationToken];
         controller.recipients = phoneNumber;
         controller.messageComposeDelegate = self;
         [self.parentViewController presentViewController:controller animated:YES completion:nil];
@@ -198,10 +196,17 @@ typedef NS_ENUM(NSInteger, CANUG5type) {
         if (i < 3) {
             if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
                 Contact *contactData = [self.arrayUserSelected objectAtIndex:i];
-                namePeople = [NSString stringWithFormat:@"%@ %@,",namePeople,contactData.fullName];
+                if (!contactData.isLocal) {
+                    namePeople = [NSString stringWithFormat:@"%@ %@,",namePeople,contactData.fullName];
+                }
             }
         } else {
-            othersPeople++;
+            if ([[self.arrayUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
+                Contact *contactData = [self.arrayUserSelected objectAtIndex:i];
+                if (!contactData.isLocal) {
+                    othersPeople++;
+                }
+            }
         }
         
     }

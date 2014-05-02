@@ -228,6 +228,7 @@
                     [[UserManager sharedUserManager] updateUser:user];
                 } else {
                     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                    [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)user.userId]];
                     [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Finish" value:nil] build]];
                     [[UserManager sharedUserManager] logIn:user];
                 }

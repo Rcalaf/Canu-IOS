@@ -22,7 +22,6 @@ typedef enum {
 
 @property (strong, nonatomic) NSArray *activities;
 @property (nonatomic) BOOL isEmpty;
-@property (nonatomic) BOOL isUnlock; // Counter
 @property (retain) id delegate;
 
 - (id)initFor:(FeedTypes)feedType andUser:(User *)user andFrame:(CGRect)frame;
@@ -31,6 +30,8 @@ typedef enum {
  *  Reload the feed view
  */
 - (void)reload;
+
+- (void)updateActivity:(Activity *)activity;
 
 /**
  *  Reload the feed view without animation
@@ -47,6 +48,8 @@ typedef enum {
 - (BOOL)pushChatIsCurrentDetailsViewOpen:(NSInteger)activityId;
 
 - (void)killCurrentDetailsViewController;
+
+- (void)arrowAnimateHidden:(BOOL)hidden;
 
 @end
 

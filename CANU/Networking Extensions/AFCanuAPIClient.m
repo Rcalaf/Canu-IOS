@@ -66,4 +66,10 @@ NSString * const kAFCanuAPIDevBaseURLString = @"http://172.18.61.130:3000";
     return self;
 }
 
++ (BOOL)distributionMode{
+    
+    return kAFCanuAPIDistributionMode;
+    
+}
+
 @end

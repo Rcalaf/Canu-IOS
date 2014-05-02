@@ -15,5 +15,7 @@
 
 + (AFCanuAPIClient *)sharedClient;
 
++ (BOOL)distributionMode;
+
 @end
 

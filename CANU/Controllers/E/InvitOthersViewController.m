@@ -54,6 +54,7 @@
     self.userList.delegate = self;
     self.userList.minHeigt = [[UIScreen mainScreen] bounds].size.height - 10 - 45 - 45;
     self.userList.peoplesAlreadySelected = self.invits;
+    self.userList.forceLocalCell = !_activity.privacyLocation;
     
     [self.view addSubview:_userList];
     

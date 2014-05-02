@@ -128,6 +128,8 @@
 "and" = "and";
 "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete your activity?";
 "DELETE" = "Delete";
+"Everyone Around" = "Everyone Around"; // New
+"Makes the Activity Local" = "Makes the Activity Local"; // New
 
 // Full
 

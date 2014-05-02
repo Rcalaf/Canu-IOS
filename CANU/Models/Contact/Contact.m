@@ -7,6 +7,8 @@
 //
 
 #import "Contact.h"
+#import "UserManager.h"
+#import "User.h"
 
 @interface Contact ()
 
@@ -25,12 +27,29 @@
         self.initialNumber = phoneNumber;
         self.countryCode = countryCode;
         self.convertNumber = [self convertPhoneNumer:phoneNumber];
+        self.isLocal = NO;
         
     }
     return self;
 }
 
+- (instancetype)initForLocal{
+    
+    self = [super init];
+    if (self) {
+        self.fullName = NSLocalizedString(@"Everyone Around", nil);
+        self.convertNumber = NSLocalizedString(@"Makes the Activity Local", nil);
+        self.profilePicture = [UIImage imageNamed:@"F_local"];
+        self.initialNumber = @"";
+        self.isLocal = YES;
+    }
+    
+    return self;
+}
+
 - (NSString *)convertPhoneNumer:(NSString*)number{
+    
+    self.isValide = NO;
     
     NSString *newNumber = number;
     
@@ -52,6 +71,18 @@
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@"(" withString:@""];
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@")" withString:@""];
     newNumber = [newNumber stringByReplacingOccurrencesOfString:@"(0)" withString:@""];
+    
+    NSString *phoneRegex = @"^\\+?\\d{10,15}$";
+    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    
+    BOOL matches = [test evaluateWithObject:newNumber];
+    
+    if (matches) {
+        self.isValide = YES;
+        if ([newNumber isEqualToString:[[UserManager sharedUserManager] currentUser].phoneNumber]) {
+            self.isValide = NO;
+        }
+    }
     
     return newNumber;
     

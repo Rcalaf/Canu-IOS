@@ -45,13 +45,16 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
     
     id<GAITracker> tracker;
     
-    if ([AFCanuAPIClient sharedClient].distributionMode) {
+    if ([AFCanuAPIClient distributionMode]) {
         // Google Analytics //
         [GAI sharedInstance].trackUncaughtExceptions = YES;
         [GAI sharedInstance].dispatchInterval = 20;
         [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelNone];
         id<GAITracker> tracker;
         tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-46900796-1"];
+        if ([[UserManager sharedUserManager] userIsLogIn]) {
+            [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)[UserManager sharedUserManager].currentUser.userId]];
+        }
     }
 
     [Instabug KickOffWithToken:@"c44d12a703b04a0a5e797bba7452c9d5" CaptureSource:InstabugCaptureSourceUIKit FeedbackEvent:InstabugFeedbackEventShake IsTrackingLocation:YES];
@@ -64,6 +67,7 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
     UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
     if (types & UIRemoteNotificationTypeAlert){
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"YES" value:nil] build]];
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     } else {
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Push" action:@"Subscribtion" label:@"NO" value:nil] build]];
     }

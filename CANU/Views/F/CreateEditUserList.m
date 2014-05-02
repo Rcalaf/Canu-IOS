@@ -12,9 +12,15 @@
 #import "UICanuContactCell.h"
 #import "User.h"
 #import "UserManager.h"
+#import "AppDelegate.h"
 
 @interface CreateEditUserList () <UICanuContactCellDelegate, UIScrollViewDelegate>
 
+@property (nonatomic) BOOL loadMore;
+@property (nonatomic) BOOL stopLoadMore;
+@property (nonatomic) BOOL isSearchMode;
+@property (nonatomic) NSInteger numberCell;
+@property (strong, nonatomic) Contact *contactLocal;
 @property (strong, nonatomic) NSMutableArray *arrayContact;
 @property (strong, nonatomic) NSMutableArray *arrayCanuUser;
 @property (strong, nonatomic) NSMutableArray *arrayCellCanuUser;
@@ -28,8 +34,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.loadMore = NO;
+        self.stopLoadMore = NO;
+        self.forceLocalCell = NO;
+        self.isSearchMode = NO;
+        
+        self.numberCell = 10;
+        
         self.maxHeight = 10;
         self.minHeigt = [[UIScreen mainScreen] bounds].size.height - 10 - 45;
+        
+        self.contactLocal = [[Contact alloc]initForLocal];
         
         self.clipsToBounds = YES;
         
@@ -49,9 +64,7 @@
         NSError *error = [PhoneBook checkPhoneBookAccess];
         
         if (error) {
-            
             self.canuError = error.code;
-            
         }
         
     }
@@ -60,7 +73,11 @@
 
 - (void)forceDealloc{
     
-    [self.scrollView removeFromSuperview];
+    if (self.scrollView) {
+        if ([self.scrollView superview]) {
+            [self.scrollView removeFromSuperview];
+        }
+    }
     
     [self.arrayContact removeAllObjects];
     [self.arrayCanuUser removeAllObjects];
@@ -83,6 +100,10 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     [self.delegate hiddenKeyboardUserList];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self manageLoadCell:scrollView.contentOffset.y];
 }
 
 #pragma mark - Public
@@ -171,9 +192,17 @@
     
 }
 
+- (void)scrollContentOffsetY:(float)y{
+    
+    [self manageLoadCell:y];
+    
+}
+
 #pragma mark - Private
 
 - (void)checkPhoneBook{
+    
+    self.isSearchMode = NO;
     
     [PhoneBook contactPhoneBookWithBlock:^(NSMutableArray *arrayContact, NSError *error) {
         
@@ -181,48 +210,42 @@
             
         } else {
             
-            NSMutableArray *phoneNumberClean = [[NSMutableArray alloc]init];
-            
-            for (int i = 0; i < [arrayContact count]; i++) {
-                
-                
-                
-                Contact *contact = [arrayContact objectAtIndex:i];
-                
-                if (![contact.convertNumber isEqualToString:[[UserManager sharedUserManager] currentUser].phoneNumber]) {
-                    [phoneNumberClean addObject:contact.convertNumber];
-                } else {
-                    
-                    // User Number
-                    [arrayContact removeObjectAtIndex:i];
-                    
-                }
-                
-            }
-            
             self.arrayContact = arrayContact;
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+            
+            if (!appDelegate.arrayContactCanuUser) {
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    
+                    dispatch_async(dispatch_get_main_queue(),
+                                   ^{
+                                       self.numberCell = 10;
+                                       self.stopLoadMore = NO;
+                                       self.loadMore = NO;
+                                       [self showUser];
+                                   });
+                });
+            }
+            
+            if ([arrayContact count] != 0) {
                 
-                dispatch_async(dispatch_get_main_queue(),
-                               ^{
-                                   [self showUser];
-                               });
-            });
-            
-            
-            
-            if ([phoneNumberClean count] != 0) {
-                
-                [[[UserManager sharedUserManager] currentUser] checkPhoneBook:phoneNumberClean WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
+                [[[UserManager sharedUserManager] currentUser] checkPhoneBook:arrayContact WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
                     
                     self.arrayCanuUser = arrayCANUUser;
                     
                     if (error) {
                         
                     } else {
-                        
-                        [self showUser];
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            
+                            dispatch_async(dispatch_get_main_queue(),
+                                           ^{
+                                               self.numberCell = 10;
+                                               self.stopLoadMore = NO;
+                                               self.loadMore = NO;
+                                               [self showUser];
+                                           });
+                        });
                     }
                     
                 }];
@@ -251,9 +274,52 @@
         
     }
     
+    NSInteger maxCanuUser = _numberCell;
+    
+    if (maxCanuUser > [_arrayCanuUser count]) {
+        maxCanuUser = [_arrayCanuUser count];
+    }
+    
+    NSInteger maxContact = _numberCell - maxCanuUser;
+    
+    if (maxContact > [_arrayContact count]) {
+        maxContact = [_arrayContact count];
+        self.stopLoadMore = YES;
+    }
+    
+    NSInteger marginTop = 10;
+    
+    if (_isSearchMode) {
+        marginTop = 20;
+    }
+    
     int row = 0;
     
-    for (int i = 0; i < [_arrayCanuUser count]; i++) {
+    // Local cell
+    
+    UICanuContactCell *celllocal = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:_contactLocal AndUser:nil];
+    celllocal.delegate = self;
+    if (_forceLocalCell) {
+        celllocal.isDisable = YES;
+        celllocal.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+    }
+    [self.scrollView addSubview:celllocal];
+    [self.arrayCellCanuUser addObject:celllocal];
+    
+    for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
+        
+        if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
+            Contact *contactData = [_arrayAllUserSelected objectAtIndex:i];
+            if (contactData.isLocal) {
+                celllocal.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+            }
+        }
+        
+    }
+    
+    row++;
+    
+    for (int i = 0; i < maxCanuUser; i++) {
         
         User *user = [_arrayCanuUser objectAtIndex:i];
         
@@ -281,17 +347,28 @@
             
         }
         
-        UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + row * (55 + 5), 300, 55) WithContact:contact AndUser:user];
+        UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:contact AndUser:user];
         cellContact.delegate = self;
         cellContact.isDisable = alreadySelected;
         [self.scrollView addSubview:cellContact];
         [self.arrayCellCanuUser addObject:cellContact];
         
+        for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
+            
+            if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
+                User *userData = [_arrayAllUserSelected objectAtIndex:i];
+                if (userData == cellContact.user) {
+                    cellContact.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+                }
+            }
+            
+        }
+        
         row++;
         
     }
     
-    for (int i = 0; i < [_arrayContact count]; i++) {
+    for (int i = 0; i < maxContact; i++) {
         
         Contact *contact = [_arrayContact objectAtIndex:i];
         
@@ -321,25 +398,63 @@
                 
             }
             
-            UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, 10 + row * (55 + 5), 300, 55) WithContact:contact AndUser:nil];
+            UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:contact AndUser:nil];
             cellContact.delegate = self;
             cellContact.isDisable = alreadySelected;
             [self.scrollView addSubview:cellContact];
             [self.arrayCellCanuUser addObject:cellContact];
+            
+            for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
+                
+                if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[Contact class]]) {
+                    Contact *contactData = [_arrayAllUserSelected objectAtIndex:i];
+                    if (contactData == cellContact.contact) {
+                        cellContact.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+                    }
+                }
+                
+            }
+            
             row++;
         }
         
     }
     
-    self.scrollView.contentSize = CGSizeMake(320, row * ( 55 + 5) + 15);
+    NSInteger marginForLoadMore = 100;
     
-    self.maxHeight = row * ( 55 + 5) + 15;
+    if (_stopLoadMore) {
+        marginForLoadMore = 0;
+    }
     
-    self.scrollView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _maxHeight);
+    self.loadMore = NO;
+    
+    self.scrollView.contentSize = CGSizeMake(320, row * ( 55 + 5) + marginTop + 5 + marginForLoadMore);
+    
+    self.maxHeight = row * ( 55 + 5) + marginTop + 5 + marginForLoadMore;
+    
+    if (_isSearchMode) {
+        self.scrollView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _minHeigt);
+    } else {
+        self.scrollView.frame = CGRectMake(0, 0, _scrollView.frame.size.width, _maxHeight);
+    }
     
     self.active = YES;
     
-    [self.delegate phoneBookIsLoad];
+    if (!_isSearchMode) {
+        [self.delegate phoneBookIsLoad];
+    }
+    
+}
+
+- (void)manageLoadCell:(float)value{
+    
+    if (value + _minHeigt > _scrollView.contentSize.height - 100) {
+        if (!self.loadMore && !self.stopLoadMore) {
+            self.loadMore = YES;
+            self.numberCell += 100;
+            [NSThread detachNewThreadSelector:@selector(showUser) toTarget:self withObject:nil];
+        }
+    }
     
 }
 
@@ -395,53 +510,53 @@
 
 - (void)searchPhoneBook:(NSString *)searchWords{
     
-    for (int i = 0; i < [_arrayCellCanuUser count]; i++) {
-        
-        UICanuContactCell *cell = [_arrayCellCanuUser objectAtIndex:i];
-        [cell removeFromSuperview];
-    }
+    searchWords = [searchWords stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    self.isSearchMode = YES;
+    
+    self.numberCell = 10;
+    self.stopLoadMore = NO;
+    self.loadMore = NO;
+    
+    [self.arrayContact  removeAllObjects];
+    [self.arrayCanuUser  removeAllObjects];
+    
+    AppDelegate *appdelegate = [[UIApplication sharedApplication]delegate];
+    
+    NSMutableArray *arrayAllContactCanuUser = [[NSMutableArray alloc] initWithArray:appdelegate.arrayContactCanuUser];
+    NSMutableArray *arrayAllContact = [[NSMutableArray alloc] initWithArray:appdelegate.arrayContact];
     
     if ([searchWords mk_isEmpty] || !searchWords) {
         
-        int i = 0;
-        
-        for (i = 0; i < [_arrayCellCanuUser count]; i++) {
-            
-            UICanuContactCell *cell = [_arrayCellCanuUser objectAtIndex:i];
-            cell.frame = CGRectMake(10, 10 + i * (55 + 5), 300, 55);
-            [self.scrollView addSubview:cell];
-            
-        }
-        
-        self.scrollView.contentSize = CGSizeMake(320, i * ( 55 + 5) + 10);
+        self.arrayCanuUser = arrayAllContactCanuUser;
+        self.arrayContact = arrayAllContact;
         
     } else {
         
-        int row = 0;
-        
-        for (int i = 0; i < [_arrayCellCanuUser count]; i++) {
+        for (int i = 0; i < [arrayAllContact count]; i++) {
+            Contact *contact = [arrayAllContact objectAtIndex:i];
             
-            UICanuContactCell *cell = [_arrayCellCanuUser objectAtIndex:i];
-            
-            NSString *name;
-            
-            if (cell.user) {
-                name = [NSString stringWithFormat:@"%@ %@ %@",[cell.user.firstName lowercaseString], [cell.user.lastName lowercaseString],[cell.user.userName lowercaseString]];
-            } else {
-                name = [cell.contact.fullName lowercaseString];
-            }
-            
-            if ([name rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
-                cell.frame = CGRectMake(10, 10 + row * (55 + 5), 300, 55);
-                [self.scrollView addSubview:cell];
-                row++;
+            if ([contact.fullName rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
+                [self.arrayContact addObject:contact];
             }
             
         }
         
-        self.scrollView.contentSize = CGSizeMake(320, row * ( 55 + 5) + 10);
+        for (int i = 0; i < [arrayAllContactCanuUser count]; i++) {
+            
+            User *user = [arrayAllContactCanuUser objectAtIndex:i];
+            
+            NSString *name = [NSString stringWithFormat:@"%@%@%@",[user.firstName lowercaseString], [user.lastName lowercaseString],[user.userName lowercaseString]];
+            
+            if ([name rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
+                [self.arrayCanuUser addObject:user];
+            }
+            
+        }
         
     }
+    
+    [self showUser];
     
 }
 
