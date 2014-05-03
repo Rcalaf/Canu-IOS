@@ -1278,6 +1278,7 @@
 				DEA93B1617204EA600303BB5 /* Resources */,
 				1E62AE3118DADF0C00520AA0 /* ShellScript */,
 				A7FE583C41C845C09A4EE54B /* Copy Pods Resources */,
+				DE888C4F190B97B600646E8F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1395,6 +1396,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DE888C4F190B97B600646E8F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run ae60e89fbce25a631c3a5caa83362eff69f3d6fb 51f85cd6d3ad2b5376b67f1343e910e021c9eba79a990f9a59ad05f4e0777c7c";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1582,15 +1596,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS/Canu/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
 					"$(PROJECT_DIR)",
+					"/Users/rcalaf/IOs/Canu-Vivien",
+					"/Users/rcalaf/IOs/Canu-Vivien/Canu/Framework/Instabug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1606,7 +1620,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39471160-250D-4BE4-962D-44BB19FED94C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1688,11 +1702,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS/Canu/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
 					"$(PROJECT_DIR)",
+					"/Users/rcalaf/IOs/Canu-Vivien",
+					"/Users/rcalaf/IOs/Canu-Vivien/Canu/Framework/Instabug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1708,7 +1722,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39471160-250D-4BE4-962D-44BB19FED94C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C355FA2-87EF-40EC-AEE8-70ECFD38872F";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1722,15 +1736,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS",
-					"/Volumes/HDD/Utilisateurs/Vivien/Application\\ iOS/Canu-IOS/Canu/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
 					"$(PROJECT_DIR)",
+					"/Users/rcalaf/IOs/Canu-Vivien",
+					"/Users/rcalaf/IOs/Canu-Vivien/Canu/Framework/Instabug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1746,7 +1760,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "39471160-250D-4BE4-962D-44BB19FED94C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
