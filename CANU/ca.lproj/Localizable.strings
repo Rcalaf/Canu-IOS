@@ -1,0 +1,154 @@
+/*
+ Localizable.strings
+ CANU
+ 
+ Created by Vivien Cormier on 14/01/14.
+ Copyright (c) 2014 CANU. All rights reserved.
+ */
+
+//Main
+
+"I'M NEW" = "Sóc nou";
+"SIGN IN" = "Iniciar sessió";
+"Create an account" = "Crear un usuari";
+"I have an account" = "Ja tinc un usuari";
+
+//SignUp
+
+"Create Account" = "Crear un usuari";
+"Username" = "Nom d'usuari";
+"Password" = "Contrasenya";
+"NEXT" = "Següent";
+"DONE" = "Validar";
+"By signing up I agree with the" = "Estic d'acord amb";
+"and the" = "i de";
+"Terms" = "Termes";
+"Privacy Policy" = "Política de Privacitat";
+"Your Profile" = "El teu Perfil";
+"Choose an existing one" = "Escull de la biblioteca";
+"Take a picture" = "Fés una foto";
+"Cancel" = "Cancel·lar";
+"Full name" = "Nom complert";
+"E-mail" = "E-mail";
+"Phone check" = "Verificar telèfon";
+"Please confirm your country code \nand enter your phone number" = "Si et plau, confirma el teu codi de país\ni entra el teu número de telèfon";
+"Check the sms that has been send to you" = "T'hem enviat el codi amb un sms";
+"I promise that this is my number." = "Presiona enviar per verificar el teu número de telèfon.";
+"Reverify my number" = "Reintentar";
+"Verify my number" = "Verifica el meu número";
+
+//SignIn
+
+"Welcome Back" = "Benvingut de nou";
+"Forgot password" = "He oblidat la contrasenya";
+"Reset Password" = "Nueva contrasenya";
+"your email or phone number" = "E-mail o número de telèfon";
+"Check your email. Contact us if you need help" = "Comprova el teu E-mail. Contacta amb nosaltres si necessites ajuda";
+"RESET" = "Reset";
+
+//Feed
+
+"Looks like you have plenty of spare time" = "No hi ha res a la teva agenda";
+"Your friends seem asleep" = "No tens cap invitació";
+"There isn't much happening around you" = "No hi ha activitats al teu voltant";
+"I want to change this" = "Crear una activitat";
+"Locked until we are enougth.\nRead why" = "Bloquejat fins que no siguem prous.\nLlegir perquè";
+"Read why" = "Llegir perquè";
+"people included" = "Preparat per coneixer gent";
+"We’ll let you know once\nnew areas go live." = "Et farem saber quan\nnoves areas estiguin actives";
+"COUNT ME IN" = "Estic preparat";
+"BECOME AN EARLY BIRD" = "Sigues un pioner";
+"Want early access?" = "Vols ser dels primers?";
+"Add name" = "Afagir el meu nom";
+
+//Tutorial
+
+"Got it" = "Captat";
+"It's how you create an activity" = "Aquí crees les teves activitats";
+"New activity" = "Crear activitat";
+
+//Local
+"Activities around you" = "Aquí trobaràs les activitats que t'envolten";
+"Local" = "Públic";
+
+//Tribes
+"Activities you are invited to" = "Aquí trobaràs les activitats a les que t'han convidat";
+"Tribes" = "Tribu";
+
+//Profile
+"Your schedule" = "Aquí trobaràs la teva agenda";
+"Profile" = "Perfil";
+
+//Error
+"Unknown Error" = "Perdó, error desconegut";
+"Please restart your action" = "Si et plau, intenta de nou";
+"No Internet Connection" = "Woups, on ha anat a para internet?";
+"Internal Error" = "Hey-oo, alguna cosa ha anat malament";
+"OK" = "Ok";
+"Ok" = "Ok";
+"Settings > Privacy > Contacts" = "Per sinc. els contactes ves\nConfiguració > Privacitat > Contactes \ni activa CANU";
+"We need to know where you are" = "És bo si sabem on et trobes";
+"Enable my GPS" = "Activa GPS";
+"Settings > Privacy > Location" = "Per activar la llista local vés\nConfiguració > Privacitat > Localizació\ni activa CANU";
+"Would you like to be notified \n\nwhen your friends invite you ?" = "T'agradaria rebre notificacions \nquan els teus amics et conviden a les activitats?";
+"To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners" = "Per rebre notificacions vés a Configuració > Notificacions i configura CANU a Banners";
+
+// Create
+"Release for create a activity" = "Deixa anar per crear una activitat";
+"What do you want to do?" = "Que vols fer?";
+"Today" = "Avui";
+"Tomorrow" = "Demà";
+"At :" = "Quan :";
+"For :" = "Durant :";
+"Find a place" = "Buscar el lloc o la ubicació";
+"Search for a companion" = "Buscar gent";
+"My tribe" = "La meva tribu";
+"Add details (Optional)" = "Detalls (Opcional)";
+"Current Location (Change)" = "Ubicación actual (Canviar)";
+"Touch to change" = "Toca para canviar";
+"Current Location" = "Ubicación actual";
+"Somewhere" = "Cerca de";
+"SEARCH ON THE MAP" = "Buscar en el mapa";
+"SEARCH" = "Buscar";
+"ON THE MAP" = "en el mapa";
+"No results ..." = "No trobem el lloc que busques";
+"Adress" = "Direcció";
+"Send activity" = "Enviar activitat";
+"Save location" = "Guardar ubicació";
+"Pin location" = "Pin de la ubicació";
+"Save" = "Guardar";
+"Delete" = "Eliminar";
+"Long press at a new place t0 move the pin" = "Persiona una estona en la nova ubicació per moure el pin";
+"YES" = "Si";
+"NO" = "No";
+"Those who are not yet on CANU will receive a text message with a link to your activity." = "Els que encara no son a CANU rebran un misatge de text amb un enllaç a la teva activitat.";
+"will not be invited if you cancel. Are you sure?" = "No serà convidat si cancel·les. \n\nEstàs segur?";
+"other will not be invited if you cancel. Are you sure?" = "No serà convidat si cancel·les. \n\nEstàs segur?";
+"others will not be invited if you cancel. Are you sure?" = "Altres no seran convidats si cancel·les. \n\nEstàs segur?";
+"and" = "i";
+"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "Cap dels seleccionats es troben a CANU - encara. \n\nEstàs segur que vols eliminar la activitat?";
+"DELETE" = "Eliminar";
+"Everyone Around" = "Tothom del voltant";
+"Makes the Activity Local" = "Fer una activitat pública";
+
+// Full
+
+"Send" = "Enviar";
+"Write something nice..." = "Escriu algo divertit...";
+"Invite others" = "Convida a altres";
+"Add peoples" = "Afagir";
+"and" = "i";
+"others peoples" = "altra gent";
+"other person" = "altra persona";
+
+// Settings
+"Sign Out" = "Tancar sessió";
+"Our Privacy Policy" = "La nostre Política de Privacitat";
+"Tutorial" = "Tutorial";
+"Edit Profile" = "Editar perfil";
+"Full name" = "Nom complet";
+"Email" = "E-mail";
+"Change your password" = "Canvia contrasenya";
+"New Password" = "Nou contrasenya";
+"Password Confirmation" = "Confirmar contrasenya";
+"Edit your password" = "Canviar la teva contrasenya";

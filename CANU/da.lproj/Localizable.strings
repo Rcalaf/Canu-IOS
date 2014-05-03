@@ -8,34 +8,34 @@
 
 //Main
 
-"I'M NEW" = "I'm new";
-"SIGN IN" = "Sign in";
+"I'M NEW" = "Jeg er ny";
+"SIGN IN" = "Log på";
 "Create an account" = "Create an account";
 "I have an account" = "I already have an account";
 
 //SignUp
 
-"Create Account" = "Create an account";
-"Username" = "Username";
-"Password" = "Password";
-"NEXT" = "Next";
-"DONE" = "Done";
-"By signing up I agree with the" = "By signing up I agree with the";
-"and the" = "and the";
-"Terms" = "Terms";
-"Privacy Policy" = "Privacy Policy";
-"Your Profile" = "Your info";
-"Choose an existing one" = "Choose from library";
-"Take a picture" = "Take a picture";
-"Cancel" = "Cancel";
-"Full name" = "Full name";
+"Create Account" = "Opret profil";
+"Username" = "Brugernavn";
+"Password" = "Adgangskode";
+"NEXT" = "Næste";
+"DONE" = "Opret Profil";
+"By signing up I agree with the" = "Ved at klikke på Opret profil accepterer du vores";
+"and the" = "og erklærer,";
+"Terms" = "Vilkår";
+"Privacy Policy" = "fortrolighedspolitik";
+"Your Profile" = "Din profil";
+"Choose an existing one" = "Vælg fra kamerarulle";
+"Take a picture" = "Tag et billede";
+"Cancel" = "annuler";
+"Full name" = "Fuldt navn";
 "E-mail" = "E-mail";
-"Phone check" = "Phone verification";
-"Please confirm your country code \nand enter your phone number" = "Please confirm your country code\nand enter your phone number";
-"Check the sms that has been send to you" = "An sms with the code has been sent to you";
-"I promise that this is my number." = "Press send to verify your phone number.";
-"Reverify my number" = "Try again";
-"Verify my number" = "Verify my number";
+"Phone check" = "Telefon bekræftelse";
+"Please confirm your country code \nand enter your phone number" = "Venligst bekræft din landekode og indtast dit telefonnummer ";
+"Check the sms that has been send to you" = "Du vil modtage en SMS med din bekræftelseskode";
+"I promise that this is my number." = "Tryk send for at bekræfte dit telefon nummer";
+"Reverify my number" = "Prøv igen";
+"Verify my number" = "Bekræft mit nummer";
 
 //SignIn
 

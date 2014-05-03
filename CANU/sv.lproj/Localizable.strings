@@ -31,7 +31,7 @@
 "Full name" = "För- och efternamn";
 "E-mail" = "E-post";
 "Phone check" = "Telefonnummer verifikation";
-"Please confirm your country code/nand enter your phone number" = "Bekräfta din landskod/noch ange ditt telefonnummer";
+"Please confirm your country code \nand enter your phone number" = "Bekräfta din landskod\noch ange ditt telefonnummer";
 "Check the sms that has been send to you" = "Ett sms med koden har skickats till dig";
 "I promise that this is my number." = "Jag lovar att det här är mitt nummer.";
 "Reverify my number" = "Försök igen";
@@ -128,6 +128,9 @@
 "and" = "och";
 "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "Ingen av de du valt har CANU än \n\nÄr du säker på att du vill radera aktiviteten?";
 "DELETE" = "Radera";
+"Everyone Around" = "Alla i närheten";
+"Makes the Activity Local" = "Gör aktiviteten publik";
+
 
 // Full
 
