@@ -10,10 +10,14 @@
 
 @interface Contact : NSObject
 
+@property (nonatomic) BOOL isValide;
 @property (nonatomic) NSString *initialNumber;
 @property (nonatomic) NSString *convertNumber;
 @property (nonatomic) NSString *fullName;
 @property (nonatomic) UIImage* profilePicture;
+@property (nonatomic) BOOL isLocal;
+
+- (instancetype)initForLocal;
 
 - (id)initWithFullName:(NSString *)fullName profilePicture:(UIImage*)profilePicture phoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode;
 

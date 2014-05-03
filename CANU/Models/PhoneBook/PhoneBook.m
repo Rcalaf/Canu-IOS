@@ -12,6 +12,7 @@
 
 #import <CoreTelephony/CTCarrier.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import "AppDelegate.h"
 
 #import "ErrorManager.h"
 
@@ -56,119 +57,128 @@
         
     } else {
         
-        NSMutableArray *arrayContact = [[NSMutableArray alloc]init];
+        AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
         
-        CFErrorRef *errorBook = nil;
-        
-        ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, errorBook);
-        
-        __block BOOL accessGranted = NO;
-        if (ABAddressBookRequestAccessWithCompletion != NULL) {
-            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-            ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-                accessGranted = granted;
-                dispatch_semaphore_signal(sema);
-            });
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        }
-        
-        if (accessGranted) {
-            
-            CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
-            CTCarrier *carrier = [networkInfo subscriberCellularProvider];
-            NSString *mcc = [carrier isoCountryCode];
-            
-            NSString *countryCode;
-            
-            if (mcc){
-                
-                NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DiallingCodes" ofType:@"plist"];
-                NSDictionary *dictConvertion = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-                
-                countryCode = [dictConvertion objectForKey:[mcc lowercaseString]];
-                
+        if (appDelegate.arrayContact) {
+            if (block) {
+                block([[NSMutableArray alloc] initWithArray:appDelegate.arrayContact],nil);
             }
+        } else {
+            
+            NSMutableArray *arrayContact = [[NSMutableArray alloc]init];
+            
+            CFErrorRef *errorBook = nil;
             
             ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, errorBook);
-            CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
-            CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
             
-            for (int i = 0; i < nPeople; i++) {
+            __block BOOL accessGranted = NO;
+            if (ABAddressBookRequestAccessWithCompletion != NULL) {
+                dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+                ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+                    accessGranted = granted;
+                    dispatch_semaphore_signal(sema);
+                });
+                dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+            }
+            
+            if (accessGranted) {
                 
-                ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
+                CTTelephonyNetworkInfo *networkInfo = [[CTTelephonyNetworkInfo alloc] init];
+                CTCarrier *carrier = [networkInfo subscriberCellularProvider];
+                NSString *mcc = [carrier isoCountryCode];
                 
-                ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
+                NSString *countryCode;
                 
-                NSString *theFinalPhoneNumber;
-                
-                for (int j = 0; j < ABMultiValueGetCount(multiPhones); j++) {
-                    CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, 0);
-                    NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
-                    if (phoneNumber) {
-                        theFinalPhoneNumber = phoneNumber;
-                    }
+                if (mcc){
+                    
+                    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DiallingCodes" ofType:@"plist"];
+                    NSDictionary *dictConvertion = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+                    
+                    countryCode = [dictConvertion objectForKey:[mcc lowercaseString]];
+                    
                 }
                 
+                ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, errorBook);
+                CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople(addressBook);
+                CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
                 
-                if (theFinalPhoneNumber) {
+                for (int i = 0; i < nPeople; i++) {
                     
-                    NSString *firstNames = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+                    ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
                     
-                    NSString *lastNames =  (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
+                    ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
                     
-                    UIImage *image;
+                    NSString *theFinalPhoneNumber;
                     
-                    if(ABPersonHasImageData(person)){
-                        image = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageData(person)];
+                    for (int j = 0; j < ABMultiValueGetCount(multiPhones); j++) {
+                        CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, 0);
+                        NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
+                        if (phoneNumber) {
+                            theFinalPhoneNumber = phoneNumber;
+                        }
                     }
                     
-                    Contact *contact;
-                    
-                    if (firstNames && ![firstNames mk_isEmpty] && lastNames && ![lastNames mk_isEmpty]) {
-                        NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstNames,lastNames];
-                        contact = [[Contact alloc]initWithFullName:fullName profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];;
-                    } else if (firstNames && ![firstNames mk_isEmpty]) {
-                        contact = [[Contact alloc]initWithFullName:firstNames profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];
-                    } else if (lastNames && ![lastNames mk_isEmpty]) {
-                        contact = [[Contact alloc]initWithFullName:lastNames profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];
-                    }
-                    
-                    if (contact) {
+                    if (theFinalPhoneNumber) {
                         
-                        BOOL isAlreadyIn = NO;
+                        NSString *firstNames = (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
                         
-                        for (int y = 0; y < [arrayContact count]; y++) {
+                        NSString *lastNames =  (__bridge_transfer NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
+                        
+                        UIImage *image;
+                        
+                        if(ABPersonHasImageData(person)){
+                            image = [UIImage imageWithData:(__bridge NSData *)ABPersonCopyImageData(person)];
+                        }
+                        
+                        Contact *contact;
+                        
+                        if (firstNames && ![firstNames mk_isEmpty] && lastNames && ![lastNames mk_isEmpty]) {
+                            NSString *fullName = [NSString stringWithFormat:@"%@ %@",firstNames,lastNames];
+                            contact = [[Contact alloc]initWithFullName:fullName profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];;
+                        } else if (firstNames && ![firstNames mk_isEmpty]) {
+                            contact = [[Contact alloc]initWithFullName:firstNames profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];
+                        } else if (lastNames && ![lastNames mk_isEmpty]) {
+                            contact = [[Contact alloc]initWithFullName:lastNames profilePicture:image phoneNumber:theFinalPhoneNumber countryCode:countryCode];
+                        }
+                        
+                        if (contact && contact.isValide) {
                             
-                            Contact *contactData = [arrayContact objectAtIndex:y];
+                            BOOL alreadyIn = NO;
                             
-                            if ([contactData.convertNumber isEqualToString:contact.convertNumber]) {
-                                isAlreadyIn = YES;
+                            for (int y = 0; y < [arrayContact count]; y ++) {
+                                Contact *contactData = [arrayContact objectAtIndex:y];
+                                
+                                if ([contactData.convertNumber isEqualToString:contact.convertNumber]) {
+                                    alreadyIn = YES;
+                                }
+                                
+                            }
+                            
+                            if (!alreadyIn) {
+                                [arrayContact addObject:contact];
                             }
                             
                         }
                         
-                        if (!isAlreadyIn) {
-                            [arrayContact addObject:contact];
-                        }
-                        
                     }
-
+                    
                 }
                 
-            }
-            
-            if (block) {
-                block(arrayContact,nil);
-            }
-            
-        } else {
-            
-            // Cannot fetch Phone Book
-            
-            error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookRestricted userInfo:nil];
-            
-            if (block) {
-                block(nil,error);
+                if (block) {
+                    appDelegate.arrayContact = [[NSMutableArray alloc] initWithArray:arrayContact];
+                    block(arrayContact,nil);
+                }
+                
+            } else {
+                
+                // Cannot fetch Phone Book
+                
+                error = [NSError errorWithDomain:@"CANUError" code:CANUErrorPhoneBookRestricted userInfo:nil];
+                
+                if (block) {
+                    block(nil,error);
+                }
+                
             }
             
         }

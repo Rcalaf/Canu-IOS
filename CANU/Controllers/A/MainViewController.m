@@ -54,16 +54,6 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 
 #pragma mark - Lifecycle
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-
 -(void) loadView{
     [super loadView];
     
@@ -128,10 +118,9 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     UILabel *signInLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 280, 30)];
     signInLabel.attributedText = attributeString;
     signInLabel.textAlignment = NSTextAlignmentCenter;
-    signInLabel.textColor = UIColorFromRGB(0x2b4b58);
+    signInLabel.textColor = UIColorFromRGB(0x829096);
     signInLabel.font = [UIFont fontWithName:@"Lato-Regular" size:10];
     signInLabel.backgroundColor = [UIColor clearColor];
-    signInLabel.alpha = 0.16f;
     [self.signIn addSubview:signInLabel];
     
     self.wrapperSignUP = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.view.frame.size.height - 140 - (self.view.frame.size.height - 480)/4, 320.0f, 140)];
@@ -171,7 +160,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     [self.password setReturnKeyType:UIReturnKeyNext];
     [self.wrapperSignUP addSubview:_password];
     
-    self.termsPrivacy = [[UIWebView alloc]initWithFrame:CGRectMake(0, 140, 320, 20)];
+    self.termsPrivacy = [[UIWebView alloc]initWithFrame:CGRectMake(0, 180, 320, 20)];
     self.termsPrivacy.delegate = self;
     self.termsPrivacy.backgroundColor = backgroundColorView;
     [self.wrapperSignUP addSubview:_termsPrivacy];
@@ -320,7 +309,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
             self.signIn.frame = CGRectMake(20, 55 + (self.view.frame.size.height - 480)/2, 280, 30);
             self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 216 - 170 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
             self.bottomBar.frame = CGRectMake(0, 0, 320, 45);
-            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, 320, 45);
+            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 44 - 216, 320, 45);
         } completion:^(BOOL finished) {
             
             if (block) {
@@ -508,6 +497,20 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 }
 
 #pragma mark - UITextFieldDelegate Sign Up
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField == self.username) {
+        [self.username textChange:newString];
+    } else if (textField == self.password) {
+        [self.password textChange:newString];
+    }
+    
+    return YES;
+    
+}
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     self.keyboardSignUpOpen = YES;
