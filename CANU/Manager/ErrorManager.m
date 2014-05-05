@@ -134,6 +134,35 @@ static dispatch_once_t oncePredicate;
     
 }
 
+/**
+ *  Detect error and convert it to CANUError
+ *
+ *  @param error NSError
+ *  @param data  NSData
+ *  @param block CANUError
+ */
+- (void)detectError:(NSError *)error AndRespondData:(NSData *)data Block: (void (^)(CANUError canuError))block{
+    
+    NSDictionary *jsonDic = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    
+    if ([jsonDic objectForKey:@"user_name"] != [NSNull null] && [jsonDic objectForKey:@"user_name"] != nil) {
+        
+        block(CANUErrorFormatUsername);
+        
+    } else if ([jsonDic objectForKey:@"email"] != [NSNull null] && [jsonDic objectForKey:@"email"] != nil) {
+        
+        block(CANUErrorFormatMail);
+        
+    } else {
+        [self detectError:error Block:^(CANUError canuError) {
+            if (block) {
+                block(canuError);
+            }
+        }];
+    }
+    
+}
+
 #pragma mark - - Detect Manager Error Push Notification
 
 /**

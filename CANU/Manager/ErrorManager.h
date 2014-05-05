@@ -18,7 +18,9 @@ typedef NS_ENUM(NSInteger, CANUError) {
     CANUErrorLocationRestricted = 5,    // If We don't have access to the location
     CANUErrorLocationNotDetermined = 6, // If We don't have access to the location
     CANUErrorPushNotDetermined = 7,     // If We don't know if the user allow push notification
-    CANUErrorPushG3b = 8                // If the user don't allow the push and he click on Go.
+    CANUErrorPushG3b = 8,               // If the user don't allow the push and he click on Go.
+    CANUErrorFormatUsername = 9,        // If the format of the user_name is wrong (ex : whitepsace)
+    CANUErrorFormatMail = 10            // If the format of the user_name is wrong (ex : whitepsace)
 };
 
 @interface ErrorManager : NSObject
@@ -41,6 +43,15 @@ typedef NS_ENUM(NSInteger, CANUError) {
  *  @param block CANUError
  */
 - (void)detectError:(NSError *)error Block: (void (^)(CANUError canuError))block;
+
+/**
+ *  Detect error and convert it to CANUError
+ *
+ *  @param error NSError
+ *  @param data  NSData
+ *  @param block CANUError
+ */
+- (void)detectError:(NSError *)error AndRespondData:(NSData *)data Block: (void (^)(CANUError canuError))block;
 
 #pragma mark - - Detect Manager Error Push Notification
 
