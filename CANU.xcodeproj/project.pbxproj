@@ -1650,8 +1650,6 @@
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
 					"$(PROJECT_DIR)",
-					"/Users/rcalaf/IOs/Canu-Vivien",
-					"/Users/rcalaf/IOs/Canu-Vivien/Canu/Framework/Instabug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1753,8 +1751,6 @@
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
 					"$(PROJECT_DIR)",
-					"/Users/rcalaf/IOs/Canu-Vivien",
-					"/Users/rcalaf/IOs/Canu-Vivien/Canu/Framework/Instabug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";
@@ -1792,8 +1788,6 @@
 					"$(PROJECT_DIR)/CANU/Framework/Instabug",
 					"$(PROJECT_DIR)/CANU/Framework",
 					"$(PROJECT_DIR)",
-					"/Users/rcalaf/IOs/Canu-Vivien",
-					"/Users/rcalaf/IOs/Canu-Vivien/Canu/Framework/Instabug",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CANU/CANU-Prefix.pch";

@@ -388,11 +388,26 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (block) {
-            NSLog(@"Request Failed with Error: %@", [error.userInfo valueForKey:@"NSLocalizedRecoverySuggestion"]);
-            block(nil, error);
-        }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        [[ErrorManager sharedErrorManager] detectError:error AndRespondData:operation.responseData Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block(nil,customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"userActivitiesWithBlock:"];
+            }
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+        }];
+        
+        
     }];
     
 }

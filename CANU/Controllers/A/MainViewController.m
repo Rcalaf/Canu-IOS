@@ -322,7 +322,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
         self.viewType = MainViewControllerViewMain;
         
         [UIView animateWithDuration:0.4 animations:^{
-            self.termsPrivacy.frame = CGRectMake(0, 140, 320, 20);
+            self.termsPrivacy.frame = CGRectMake(0, 180, 320, 20);
             self.backgroundCloud.alpha = 1;
             self.backgroundTotem.frame = CGRectMake(0, (self.view.frame.size.height - 480) / 2, self.view.frame.size.width, 480);
             self.createAccountText.frame = CGRectMake( 10, self.view.frame.size.height - 190 - (self.view.frame.size.height - 480) / 4, 300, 25);
@@ -503,7 +503,11 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (textField == self.username) {
-        [self.username textChange:newString];
+        if (![string isEqualToString:@" "]) {
+            [self.username textChange:newString];
+        } else {
+            return NO;
+        }
     } else if (textField == self.password) {
         [self.password textChange:newString];
     }

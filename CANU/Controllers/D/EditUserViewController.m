@@ -14,6 +14,7 @@
 #import "UserManager.h"
 #import "UICanuButton.h"
 #import "UICanuBottomBar.h"
+#import "ErrorManager.h"
 
 @interface EditUserViewController () <UITextFieldDelegate>
 
@@ -68,10 +69,19 @@
                           Email:self.email.text
                           Block:^(User *user, NSError *error){
                               
-                              if (error && [[error localizedRecoverySuggestion] rangeOfString:@"Access denied"].location != NSNotFound) {
+                              if (error) {
                                   
-                                  [[UserManager sharedUserManager] logOut];
-                                  
+                                  if (error.code == CANUErrorFormatMail || self.email.text == nil) {
+                                      self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                  }else{
+                                      self.email.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                  }
+                                  if (error.code == CANUErrorFormatUsername || self.userName.text == nil) {
+                                      self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_bad.png"]];
+                                  }else{
+                                      self.userName.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
+                                  }
+                                  self.name.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"feedback_good.png"]];
                                   NSLog(@"EditUser Error");
                               } else {
                                   if ((error && [[error localizedRecoverySuggestion] rangeOfString:@"email"].location != NSNotFound) || self.email.text == nil) {
@@ -106,7 +116,11 @@
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if (textField == self.userName) {
-        [self.userName textChange:newString];
+        if (![string isEqualToString:@" "]) {
+            [self.userName textChange:newString];
+        } else {
+            return NO;
+        }
     } else if (textField == self.name) {
         [self.name textChange:newString];
     } else if (textField == self.email) {
