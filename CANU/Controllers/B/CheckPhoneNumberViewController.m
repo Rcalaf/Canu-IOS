@@ -255,18 +255,23 @@
     
     self.code = arc4random() % 10 + (arc4random() % 10) * 10 + (arc4random() % 10) * 100 + ((arc4random() % 9) + 1) * 1000;
     
-    if ([AFCanuAPIClient distributionMode]) {
+    if ([AFCanuAPIClient distributionMode] || true) {
         
         NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
-        
         phonenumber = [phonenumber substringFromIndex:1];
+        
         if ([self.coutry.text isEqualToString:@"United Kingdom"]) {
-            phonenumber = [NSString stringWithFormat:@"00%@",phonenumber];
+            phonenumber = [NSString stringWithFormat:@"0044%@",phonenumber];
         }
         
-        NSString *text = [NSString stringWithFormat:@"Your code : %u",(unsigned)_code];
+        NSString *url;
         
-        NSString *url = [NSString stringWithFormat:@"https://rest.nexmo.com/sms/json?api_key=a86782bd&api_secret=68a115a0&from=CANU&to=%@&text=%@",phonenumber,text];
+        if ([self.countryCode.text isEqualToString:@"+1"]) {
+            url = [NSString stringWithFormat:@"https://rest.nexmo.com/sc/us/2fa/json?api_key=a86782bd&api_secret=68a115a0&to=%@&pin=%u",phonenumber,(unsigned)_code];
+        } else {
+            NSString *text = [NSString stringWithFormat:@"Your code : %u",(unsigned)_code];
+            url = [NSString stringWithFormat:@"https://rest.nexmo.com/sms/json?api_key=a86782bd&api_secret=68a115a0&from=CANU&to=%@&text=%@",phonenumber,text];
+        }
         
         url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         

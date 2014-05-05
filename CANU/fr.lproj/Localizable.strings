@@ -8,111 +8,117 @@
 
 //Main
 
-"I'M NEW" = "I'm new";
-"SIGN IN" = "Sign in";
-"Put your future moments\n in one place" = "Get together";
+"I'M NEW" = "Nouveau";
+"SIGN IN" = "Se connecter";
+"Create an account" = "Créer un compte";
+"I have an account" = "J'ai déjà un compte";
 
 //SignUp
 
-"Create Account" = "Create Account";
-"Username" = "Username";
-"Password" = "Password";
-"NEXT" = "Next";
-"DONE" = "Done";
-"By signing up I agree with the" = "By signing up I agree with the";
-"and the" = "and the";
-"Terms" = "Terms";
-"Privacy Policy" = "Privacy Policy";
-"Your Profile" = "Your info";
-"Grab my Facebook info" = "Use my Facebook info";
-"Choose an existing one" = "Choose from library";
-"Take a picture" = "Take a picture";
-"Cancel" = "Cancel";
-"Full name" = "Full name";
+"Create Account" = "Créer un compte";
+"Username" = "Nom d'utilisateur";
+"Password" = "Mot de passe";
+"NEXT" = "Suivant";
+"DONE" = "Ok";
+"By signing up I agree with the" = "En m'inscrivant, je suis d'accord avec les";
+"and the" = "et la";
+"Terms" = "Conditions";
+"Privacy Policy" = "Politique de confidentialité";
+"Your Profile" = "Vos infos";
+"Choose an existing one" = "Choisir à partir de la librairie";
+"Take a picture" = "Prendre une photo";
+"Cancel" = "Quitter";
+"Full name" = "Nom et Prénom";
 "E-mail" = "E-mail";
-"Phone Check" = "Phone check";
-"I promise that this is my number." = "Press send to verify your phone number.";
-"Reverify my number" = "Try again";
-"Verify my number" = "Verify my number";
+"Phone check" = "Vérification du n° de téléphone";
+"Please confirm your country code \nand enter your phone number" = "Confirmez votre code de pays\naet entrez votre numéro de téléphone";
+"Check the sms that has been send to you" = "Un SMS avec le code vous a été envoyé";
+"I promise that this is my number." = "Appuyez sur envoyer pour vérifier votre numéro de téléphone.";
+"Reverify my number" = "Essayer encore";
+"Verify my number" = "Vérifier mon numéro";
 
 //SignIn
 
-"Welcome Back" = "Welcome Back";
-"Forgot password" = "I forgot my password";
-"Reset Password" = "Reset password";
-"your email or phone number" = "E-mail or phone number";
-"Check your email. Contact us if you need help" = "Check your email. Contact us if you need help";
+"Welcome Back" = "Bienvenue";
+"Forgot password" = "J'ai oublié mon mot de passe";
+"Reset Password" = "Nouveau mot de passe";
+"your email or phone number" = "E-mail ou numéro de téléphone";
+"Check your email. Contact us if you need help" = "Vérifiez votre e-mail. Contactez-nous si vous avez besoin d'aide";
 "RESET" = "Reset";
 
 //Feed
 
-"Looks like you have plenty of spare time" = "Looks like you have plenty of spare time";
-"Your friends seem asleep" = "Your friends seem asleep";
-"There isn't much happening around you" = "There isn't much happening around you";
-"I want to change this" = "I want to change this";
-"Locked until we are enought.\nRead why" = "Locked until we are enought.\nRead why"; // New
-"Read why" = "Read why"; // New
-"people inclued" = "people included"; // New
-"We’ll let you know once\nnew areas go live." = "We’ll let you know once\nnew areas go live."; // New
-"COUNT ME IN" = "COUNT ME IN"; // New
-"BECOME AN EARLY BIRD" = "BECOME AN EARLY BIRD"; // New
-"Want early access?" = "Want early access?"; // New
+"Looks like you have plenty of spare time" = "Vous n'avez rien dans votre agenda";
+"Your friends seem asleep" = "Vous n'avez pas d'invitations";
+"There isn't much happening around you" = "Vous n'avez pas d'activités autour de vous";
+"I want to change this" = "Créer une activité";
+"Locked until we are enougth.\nRead why" = "Locked until we are enough.\nRead why";
+"Read why" = "Read why";
+"people included" = "Are ready to meet new people";
+"We’ll let you know once\nnew areas go live." = "We’ll let you know once\nnew areas go live.";
+"COUNT ME IN" = "I’m ready";
+"BECOME AN EARLY BIRD" = "Become an Early Bird";
+"Want early access?" = "Want early access?";
+"Add name" = "Ajoutez un Nom et Prénom";
 
 //Tutorial
 
-//Start
-"Welcome" = "Hello and welcome";
-"Let’s see where your upcoming activities are." = "Before you get started, you need to know where you'll find things.";
+"Got it" = "J'ai compris";
+"It's how you create an activity" = "Ici vous créer votre propre activité";
+"New activity" = "Créer une activité";
 
 //Local
-"These are activities where you and everyone around is invited." = "Activites around you.";
-"Move the white box to the right" = "Move this box to continue.";
-"Move" = "Move";
+"Activities around you" = "Ici vous trouverez des activités autour de vous";
+"Local" = "Public";
 
 //Tribes
-"These are activities your friends don’t want you to miss." = "Activities where you're invited.";
+"Activities you are invited to" = "Vous trouverez ici les activités auxquelles vous êtes invités";
+"Tribes" = "Tribue";
 
 //Profile
-"These are the activities you are going to." = "Your schedule.";
-"Tap the white box" = "Tap the white box to continue.";
-"Tap" = "Tap";
-"Tap again" = "Tap again";
-"This is you." = "This is your profile.";
-"Move the white box up" = "Move the box up to continue";
-
-//Final
-"That’s how you create an activity of your choice. For your friends or for everyone." = "That’s how you create an activity.";
-"We’re all done. Enjoy." = "All done, time to get together.";
-"GOT IT" = "Finish";
+"Your schedule" = "Ici, vous trouverez votre agenda";
+"Profile" = "Profile";
 
 //Error
-"Unknown Error" = "Unknown Error";
-"Please restart your action" = "Please try again.";
-"No Internet Connection" = "Can't seem to find an internet connection.";
-"Internal Error" = "Internal Error"; // New
+"Unknown Error" = "Erreur inconnue, Désolé.";
+"Please restart your action" = "Pouvez-vous essayer à nouveau ?";
+"No Internet Connection" = "Oups, avez-vous internet ?";
+"Internal Error" = "Oups, il y a un erreur interne";
 "OK" = "Ok";
 "Ok" = "Ok";
-"Settings > Privacy > Contacts" = "To sync contacts go to \nSettings > Privacy >Contacts \nand set Canu to On";
-"We need to know where you are" = "We need to know where you are"; // New
-"Enable my GPS" = "Enable my GPS";
-"Settings > Privacy > Location" = "To use the local feed go to\nSettings > Privacy > Location\nand set Canu to On"; // New
+"Settings > Privacy > Contacts" = "To sync contacts go to \nSettings > Privacy > Contacts \nand activate CANU";
+"We need to know where you are" = "It’s good if we know where you are";
+"Enable my GPS" = "Enable GPS";
+"Settings > Privacy > Location" = "To activate the local feed go to\nSettings > Privacy > Location\nand activate CANU";
+"Would you like to be notified \n\nwhen your friends invite you ?" = "Would you like to be notified \nwhen your friends invite you to activities?";
+"To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners" = "To receive notifications if an activity your going to change go to Settings > Notifications and set CANU to Banners";
 
 // Create
-
+"Release for create a activity" = "Release to create an activity";
 "What do you want to do?" = "What are you up to?";
 "Today" = "Today";
 "Tomorrow" = "Tomorrow";
+"At :" = "At :";
+"For :" = "For :";
 "Find a place" = "Search for a place or location";
-"Who is invited ?" = "With";
-"Add a description" = "Add details (Optional)";
-"Current Location" = "Current position";
-"Somewhere" = "Closeby";
-"SEARCH ON THE MAP" = "Search on the map";
+"Search for a companion" = "Search for people";
+"My tribe" = "My tribe";
+"Add details (Optional)" = "Details (Optional)";
+"Current Location (Change)" = "My current location (Change)";
+"Touch to change" = "Tap to change";
+"Current Location" = "My current location";
+"Somewhere" = "Close by";
+"SEARCH ON THE MAP" = "Search on map";
 "SEARCH" = "Search";
-"ON THE MAP" = "on the map";
-"No results ..." = "No results ...";
-"Adress" = "Adress";
-"CREATE" = "Create";
+"ON THE MAP" = "on map";
+"No results ..." = "Can’t seem to find what you where looking for";
+"Adress" = "Address";
+"Send activity" = "Send activity";
+"Save location" = "Save location";
+"Pin location" = "Pin location";
+"Save" = "Save";
+"Delete" = "Delete";
+"Long press at a new place t0 move the pin" = "Long press at a new location to move the pin";
 "YES" = "Yes";
 "NO" = "No";
 "Those who are not yet on CANU will receive a text message with a link to your activity." = "Those who are not yet on CANU will receive a text message with a link to your activity.";
@@ -120,5 +126,30 @@
 "other will not be invited if you cancel. Are you sure?" = "other will not be invited if you cancel. \n\nAre you sure?";
 "others will not be invited if you cancel. Are you sure?" = "others will not be invited if you cancel. \n\nAre you sure?";
 "and" = "and";
-"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?";
+"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete your activity?";
 "DELETE" = "Delete";
+"Everyone Around" = "Everyone around";
+"Makes the Activity Local" = "Makes the activity public";
+
+
+// Full
+
+"Send" = "Send";
+"Write something nice..." = "Say something nice...";
+"Invite others" = "Invite more";
+"Add peoples" = "Invite";
+"and" = "and";
+"others peoples" = "other people";
+"other person" = "other person";
+
+// Settings
+"Sign Out" = "Sign out";
+"Our Privacy Policy" = "Our Privacy Policy";
+"Tutorial" = "Tutorial";
+"Edit Profile" = "Edit profile";
+"Full name" = "Full name";
+"Email" = "E-mail";
+"Change your password" = "Change your password";
+"New Password" = "New password";
+"Password Confirmation" = "Password confirmation";
+"Edit your password" = "Change your password";

@@ -51,7 +51,12 @@
         [self.profilePicture addSubview:strokePicture];
 
         self.userName                         = [[UICanuLabelUserName alloc] initWithFrame:CGRectMake(55, 18, 200, 17)];
-        self.userName.text                    = self.activity.user.userName;
+        if ([self.activity.user.firstName mk_isEmpty]) {
+            self.userName.text = self.activity.user.userName;
+        } else {
+            self.userName.text = self.activity.user.firstName;
+        }
+        
         [background addSubview:_userName];
         
         CGSize expectedLabelSize = [self.userName.text sizeWithFont:self.userName.font
