@@ -1,0 +1,154 @@
+/*
+ Localizable.strings
+ CANU
+ 
+ Created by Vivien Cormier on 14/01/14.
+ Copyright (c) 2014 CANU. All rights reserved.
+ */
+
+//Main
+
+"I'M NEW" = "Soy nuevo";
+"SIGN IN" = "Inicia sessión";
+"Create an account" = "Crear una cuenta";
+"I have an account" = "Ya tengo una cuenta";
+
+//SignUp
+
+"Create Account" = "Crear una cuenta";
+"Username" = "Nombre de usuario";
+"Password" = "Contraseña";
+"NEXT" = "Siguiente";
+"DONE" = "Hecho";
+"By signing up I agree with the" = "Firmando afirmas estar de acuerdo con";
+"and the" = "y de";
+"Terms" = "Terminos";
+"Privacy Policy" = "Politica de Privacidad";
+"Your Profile" = "Tu información";
+"Choose an existing one" = "Elige de la carrete";
+"Take a picture" = "Tomar una foto";
+"Cancel" = "Cancelar";
+"Full name" = "Nombre completo";
+"E-mail" = "E-mail";
+"Phone check" = "Verificando teléfono";
+"Please confirm your country code \nand enter your phone number" = "Por favor confirma el código de país\ny entra tu número de teléfono";
+"Check the sms that has been send to you" = "Te hemos enviado un sms con un código";
+"I promise that this is my number." = "Presiona enviar para verificar tu num. de teléfono.";
+"Reverify my number" = "Reintentar";
+"Verify my number" = "Verifica mi numbero";
+
+//SignIn
+
+"Welcome Back" = "Bienvenido de vuelta";
+"Forgot password" = "Olvidé my contraseña";
+"Reset Password" = "Nueva contraseña";
+"your email or phone number" = "E-mail o número de teléfono";
+"Check your email. Contact us if you need help" = "Comprueba tu E-mail. Contacta con nosotros si necesitas ayuda";
+"RESET" = "Reset";
+
+//Feed
+
+"Looks like you have plenty of spare time" = "No tienes nada en tu dia";
+"Your friends seem asleep" = "No tienes ninguna invitación";
+"There isn't much happening around you" = "No hay actividades a tu alrededor";
+"I want to change this" = "Crear una actividad";
+"Locked until we are enougth.\nRead why" = "Bloqueado mientras no seamos suficientes.\nLeer porque";
+"Read why" = "Leer porque";
+"people included" = "Perparado para conocer gente";
+"We’ll let you know once\nnew areas go live." = "Te haremos saber cuando\nnuevas areas estén activas";
+"COUNT ME IN" = "Estoy preparado";
+"BECOME AN EARLY BIRD" = "Se un pionero";
+"Want early access?" = "Quieres ser de los primeros?";
+"Add name" = "Añade mi nombre";
+
+//Tutorial
+
+"Got it" = "Lo entiendo";
+"It's how you create an activity" = "Aquí creas tus propias actividades";
+"New activity" = "Crear actividad";
+
+//Local
+"Activities around you" = "Aquí encontrarás actividades que te rodean";
+"Local" = "Público";
+
+//Tribes
+"Activities you are invited to" = "Aquí encontrarás actividades a las que has sido invitado";
+"Tribes" = "Tribu";
+
+//Profile
+"Your schedule" = "Aquí encontrarás tu agenda";
+"Profile" = "Perfil";
+
+//Error
+"Unknown Error" = "Lo sentimos, error desconocido";
+"Please restart your action" = "Por favor prueba otra vez";
+"No Internet Connection" = "Woups, a donde fue tu internet?";
+"Internal Error" = "Hey-oo, algo fue mal";
+"OK" = "Ok";
+"Ok" = "Ok";
+"Settings > Privacy > Contacts" = "Para sincronizar contactos ves\nConfiguración > Privacidad > Contactos \ny activa CANU";
+"We need to know where you are" = "Es bueno si sabemos donde te encuentras";
+"Enable my GPS" = "Activa GPS";
+"Settings > Privacy > Location" = "Para activar la lista local ves\nConfiguración > Privacidad > Localización\ny activa CANU";
+"Would you like to be notified \n\nwhen your friends invite you ?" = "Te gustaría recibir notificaciones \ncuando tus amigos te inviten a actividades?";
+"To receive a notification if the date of the activity change go to Settings > Notifications and set CANU to Banners" = "Para recibir notificationes ves a Configuración > Notificaciones y configura CANU a Tiras";
+
+// Create
+"Release for create a activity" = "Suelta para crear una actividad";
+"What do you want to do?" = "Que te gustaría hacer?";
+"Today" = "Hoy";
+"Tomorrow" = "Mañana";
+"At :" = "Cuando :";
+"For :" = "Durante :";
+"Find a place" = "Busca el lugar o ubicación";
+"Search for a companion" = "Busca gente";
+"My tribe" = "Mi tribu";
+"Add details (Optional)" = "Detalles (Opcional)";
+"Current Location (Change)" = "Mi ubicación actual (Cambiar)";
+"Touch to change" = "Toca para cambiar";
+"Current Location" = "Mi ubicación actual";
+"Somewhere" = "Cerca de";
+"SEARCH ON THE MAP" = "Buscar en el mapa";
+"SEARCH" = "Buscar";
+"ON THE MAP" = "en el mapa";
+"No results ..." = "Parece que no encontramos el sitio que buscas";
+"Adress" = "Dirección";
+"Send activity" = "Crear actividad";
+"Save location" = "Guardar ubicación";
+"Pin location" = "Pin de la ubicación";
+"Save" = "Guardar";
+"Delete" = "Eliminar";
+"Long press at a new place t0 move the pin" = "Persiona largo en la nueva ubicación para mover el pin";
+"YES" = "Si";
+"NO" = "No";
+"Those who are not yet on CANU will receive a text message with a link to your activity." = "Los que aún no están en CANU recivirán un mensaje de texto con un enlace a tu actividad.";
+"will not be invited if you cancel. Are you sure?" = "No será invitado si cancelas. \n\nEstás seguro?";
+"other will not be invited if you cancel. Are you sure?" = "Otro no serán invitados si cancelas. \n\nEstás seguro?";
+"others will not be invited if you cancel. Are you sure?" = "Otros no serán invitados si cancelas. \n\nEstás seguro?";
+"and" = "y";
+"None of whom you've selected is on CANU - yet. \n\nAre you sure you want to delete this activity?" = "Ninguno de los seleccionados están en CANU - aún. \n\nEstás seguro que quieres eliminar la actividad?";
+"DELETE" = "Eliminar";
+"Everyone Around" = "Todo el mundo alrededor";
+"Makes the Activity Local" = "Hacer la actividad pública";
+
+// Full
+
+"Send" = "Enviar";
+"Write something nice..." = "Escribe algo divertido...";
+"Invite others" = "Invita a otros";
+"Add peoples" = "Añade";
+"and" = "y";
+"others peoples" = "otra gente";
+"other person" = "otra persona";
+
+// Settings
+"Sign Out" = "Cerrar sessión";
+"Our Privacy Policy" = "Nuestra Política de privacidad";
+"Tutorial" = "Tutorial";
+"Edit Profile" = "Editar perfil";
+"Full name" = "Nombre completo";
+"Email" = "E-mail";
+"Change your password" = "Cambiar contraseña";
+"New Password" = "Nuevo password";
+"Password Confirmation" = "Confirmar contraseña";
+"Edit your password" = "Cambiar tu cotraseña";

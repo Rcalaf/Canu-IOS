@@ -31,7 +31,7 @@
 "Full name" = "Full name";
 "E-mail" = "E-mail";
 "Phone check" = "Phone verification";
-"Please confirm your country code/nand enter your phone number" = "Please confirm your country code/nand enter your phone number";
+"Please confirm your country code \nand enter your phone number" = "Please confirm your country code\nand enter your phone number";
 "Check the sms that has been send to you" = "An sms with the code has been sent to you";
 "I promise that this is my number." = "Press send to verify your phone number.";
 "Reverify my number" = "Try again";
@@ -130,6 +130,7 @@
 "DELETE" = "Delete";
 "Everyone Around" = "Everyone around";
 "Makes the Activity Local" = "Makes the activity public";
+
 
 // Full
 
