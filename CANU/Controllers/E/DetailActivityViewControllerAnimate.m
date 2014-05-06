@@ -153,6 +153,7 @@
     self.input.textColor = UIColorFromRGB(0xabb3b7);
     self.input.returnKeyType = UIReturnKeyDefault;
     self.input.delegate = self;
+    self.input.keyboardType = UIKeyboardTypeASCIICapable;
     if (IS_OS_7_OR_LATER) {
         [self.input setTintColor:UIColorFromRGB(0x2b4b58)];
     }

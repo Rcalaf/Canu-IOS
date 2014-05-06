@@ -514,6 +514,7 @@
 - (void)searchPhoneBook:(NSString *)searchWords{
     
     searchWords = [searchWords stringByReplacingOccurrencesOfString:@" " withString:@""];
+    searchWords = [searchWords lowercaseString];
     
     self.numberCell = 10;
     self.stopLoadMore = NO;
@@ -537,7 +538,7 @@
         for (int i = 0; i < [arrayAllContact count]; i++) {
             Contact *contact = [arrayAllContact objectAtIndex:i];
             
-            if ([contact.fullName rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
+            if ([contact.fullName rangeOfString:searchWords options:NSCaseInsensitiveSearch].location != NSNotFound) {
                 [self.arrayContact addObject:contact];
             }
             
@@ -549,7 +550,7 @@
             
             NSString *name = [NSString stringWithFormat:@"%@%@%@",[user.firstName lowercaseString], [user.lastName lowercaseString],[user.userName lowercaseString]];
             
-            if ([name rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
+            if ([name rangeOfString:searchWords options:NSCaseInsensitiveSearch].location != NSNotFound) {
                 [self.arrayCanuUser addObject:user];
             }
             

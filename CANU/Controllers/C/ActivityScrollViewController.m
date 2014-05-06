@@ -141,7 +141,10 @@
             self.arrowAnimate.frame = CGRectMake(280, self.view.frame.size.height - 110, 14, 39);
         }
         
-        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-100];
+        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake(145, self.view.frame.size.height - 30 - 19, 30, 30) withStart:-30 andEnd:-80];
+        if (_feedType == FeedProfileType) {
+            self.loaderAnimation.frame = CGRectMake(145, self.view.frame.size.height - 30 - 19 - 165, 30, 30);
+        }
         [self.loaderAnimation startAnimation];
         [self.view addSubview:_loaderAnimation];
         
@@ -335,7 +338,9 @@
     
     if (_feedType == FeedProfileType) {
         
-        [self.delegate moveProfileView:newY];
+        if (newY >= 0) {
+            [self.delegate moveProfileView:newY];
+        }
         
     }
     
@@ -347,7 +352,7 @@
     
     //Refresh
     
-    if( newY <= -100.0f ){
+    if( newY <= -80.0f ){
         [NSThread detachNewThreadSelector:@selector(reload)toTarget:self withObject:nil];
     }
     

@@ -39,7 +39,9 @@
                                        [UIImage imageNamed:@"loop_1"],
                                        [UIImage imageNamed:@"loop_2"],
                                        [UIImage imageNamed:@"loop_3"],
-                                       [UIImage imageNamed:@"loop_4"], nil];
+                                       [UIImage imageNamed:@"loop_4"],
+                                       [UIImage imageNamed:@"loop_5"],
+                                       [UIImage imageNamed:@"loop_6"],nil];
         self.imageView.animationDuration = 1.0f;
         self.imageView.animationRepeatCount = 0;
         [self addSubview:_imageView];
@@ -70,7 +72,7 @@
     
     if (value != 0 ) {
         
-        int numberImage = roundf(value * 16 + 1);
+        int numberImage = roundf(value * 14 + 1);
         
         self.imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"loader-%i",numberImage]];
         
