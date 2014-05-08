@@ -36,5 +36,7 @@ typedef NS_ENUM(NSInteger, UICanuActivityCellStatus) {
 @protocol UICanuActivityCellScrollDelegate <NSObject>
 
 @required
+- (void)cellEventTouched:(UICanuActivityCellScroll *)cell;
 - (void)cellEventActionButton:(UICanuActivityCellScroll *)cell;
+- (void)cellEventAdresse:(UICanuActivityCellScroll *)cell;
 @end

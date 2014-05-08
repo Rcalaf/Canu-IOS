@@ -1067,7 +1067,11 @@ typedef enum {
     
     // Name
     UICanuLabelUserName *username = [[UICanuLabelUserName alloc]initWithFrame:CGRectMake(55 - 2, 18 - 2, 200, 17)];
-    username.text = [[UserManager sharedUserManager] currentUser].userName;
+    if ([[[UserManager sharedUserManager] currentUser].firstName mk_isEmpty]) {
+        username.text = [[UserManager sharedUserManager] currentUser].userName;
+    } else {
+        username.text = [[UserManager sharedUserManager] currentUser].firstName;
+    }
     [view addSubview:username];
     
     self.titleInput = [[UICanuTextFieldReset alloc]initWithFrame:CGRectMake(10 - 2, 57 - 1, 280, 25)];

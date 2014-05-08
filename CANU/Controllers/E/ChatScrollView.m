@@ -242,7 +242,7 @@
         
         // Animation
         
-        NSInteger final = [_arrayCell count] - 6;
+        NSInteger final = [_arrayCell count] - 10;
         float correction = 0;
         
         if (final < 0) {

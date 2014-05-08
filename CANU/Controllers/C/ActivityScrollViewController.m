@@ -24,12 +24,13 @@
 #import "CounterTextViewController.h"
 #import "GAIFields.h"
 #import "UserManager.h"
+#import "UIActivityViewControllerCustom.h"
 
 #import "AppDelegate.h"
 
 #import "Activity.h"
 
-@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate,CreateEditActivityViewControllerDelegate>
+@interface ActivityScrollViewController () <CLLocationManagerDelegate,UIScrollViewDelegate,DetailActivityViewControllerAnimateDelegate,CreateEditActivityViewControllerDelegate,UIActivityViewControllerCustomDelegate>
 
 @property (nonatomic) BOOL isReload;
 @property (nonatomic) BOOL isFirstTime;
@@ -357,7 +358,7 @@
     }
     
     if (_feedType == FeedProfileType && !decelerate) {
-        if (newY >= 0 && newY < 165/3) {
+        if (newY <= 165/3) {
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
@@ -365,10 +366,12 @@
                 self.profileViewHidden = NO;
             }];
             
-        } else if (newY >= 165/3 && newY <= 165) {
+        } else if (newY >= 165/3) {
             
             [UIView animateWithDuration:0.3 animations:^{
-                [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+                if (newY <= 165) {
+                    [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+                }
             } completion:^(BOOL finished) {
                 self.profileViewHidden = YES;
             }];
@@ -383,7 +386,7 @@
     float newY = scrollView.contentSize.height - (scrollView.frame.size.height + scrollView.contentOffset.y);
     
     if (_feedType == FeedProfileType) {
-        if (newY >= 0 && newY < 165/3) {
+        if (newY <= 165/3) {
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self.scrollview setContentOffsetReverse:CGPointMake(0, 0)];
@@ -391,10 +394,12 @@
                 self.profileViewHidden = NO;
             }];
             
-        } else if (newY >= 165/3 && newY <= 165) {
+        } else if (newY >= 165/3) {
             
             [UIView animateWithDuration:0.3 animations:^{
-                [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+                if (newY <= 165) {
+                    [self.scrollview setContentOffsetReverse:CGPointMake(0, 165)];
+                }
             } completion:^(BOOL finished) {
                 self.profileViewHidden = YES;
             }];
@@ -849,15 +854,12 @@
     
     for (int i = 0; i < [_activities count]; i++) {
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(touchCell:)];
-        
         Activity *activity= [_activities objectAtIndex:i];
         
         UICanuActivityCellScroll *cell = [[UICanuActivityCellScroll alloc]initWithFrame:CGRectMake(10, _scrollview.contentSize.height - ( i * (130 + 10) + _marginFirstActivity ) - 130, 300, 130) andActivity:activity];
         cell.activity = activity;
         cell.delegate = self;
         cell.tag = i;
-        [cell addGestureRecognizer:tap];
         [self.scrollview addSubview:cell];
         
         [_arrayCell addObject:cell];
@@ -948,15 +950,13 @@
     }
 }
 
-- (void)touchCell:(UITapGestureRecognizer *)sender{
+- (void)cellEventTouched:(UICanuActivityCellScroll *)cellTouch{
     
     if (_feedType == FeedProfileType) {
         if (!_profileViewHidden) {
             [self.delegate hiddenProfileView:YES Animated:YES];
         }
     }
-    
-    UICanuActivityCellScroll *cellTouch = (UICanuActivityCellScroll *)sender.view;
     
     for (int i = 0; i < [_arrayCell count]; i++) {
         
@@ -998,6 +998,55 @@
             
         }
         
+    }
+    
+}
+
+- (void)cellEventAdresse:(UICanuActivityCellScroll *)cell{
+    
+    NSMutableArray *buttons = [NSMutableArray new];
+    [buttons addObject:NSLocalizedString(@"Open in Maps", nil)];
+    if ([[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:@"comgooglemaps-x-callback://"]]) {
+        [buttons addObject:NSLocalizedString(@"Open in Google Maps", nil)];
+    }
+    [buttons addObject:NSLocalizedString(@"Copy adress", nil)];
+    
+    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_camera"] andButtons:buttons];
+    activityView.delegate = self;
+    activityView.object = cell;
+    [activityView show];
+    
+}
+
+- (void)ActivityAction:(NSString *)action WithObject:(id)object{
+    
+    UICanuActivityCellScroll *cell = (UICanuActivityCellScroll *)object;
+    
+    if ([action isEqualToString:NSLocalizedString(@"Open in Maps", nil)]) {
+        Class mapItemClass = [MKMapItem class];
+        if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]){
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:cell.activity.coordinate
+                                                           addressDictionary:nil];
+            MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
+            [mapItem setName:cell.activity.title];
+            NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
+            MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
+            [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
+                           launchOptions:launchOptions];
+        }
+    } else if ([action isEqualToString:NSLocalizedString(@"Open in Google Maps", nil)]) {
+        NSString *url = [NSString stringWithFormat:@"comgooglemaps-x-callback://?saddr=&daddr=%f,%f&center=%f,%f&zoom=20&directionsmode=transit&x-success=secanucanu://?resume=true&x-source=CANU",cell.activity.coordinate.latitude,cell.activity.coordinate.longitude,cell.activity.coordinate.latitude,cell.activity.coordinate.longitude];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    } else if ([action isEqualToString:NSLocalizedString(@"Copy adress", nil)]) {
+        NSString *adress;
+        if ([cell.activity.placeName mk_isEmpty]) {
+            adress = [NSString stringWithFormat:@"%@, %@, %@, %@",cell.activity.street,cell.activity.city, cell.activity.zip,cell.activity.country];
+        } else {
+            adress = [NSString stringWithFormat:@"%@, %@, %@, %@, %@",cell.activity.placeName,cell.activity.street,cell.activity.city, cell.activity.zip,cell.activity.country];
+        }
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = adress;
     }
     
 }

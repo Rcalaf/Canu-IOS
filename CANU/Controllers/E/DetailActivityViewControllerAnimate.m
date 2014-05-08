@@ -32,8 +32,9 @@
 #import "UICanuButton.h"
 #import "InvitOthersViewController.h"
 #import "ActivitiesFeedViewController.h"
+#import "UIActivityViewControllerCustom.h"
 
-@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate,InvitOthersViewControllerDelegate>
+@interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate,InvitOthersViewControllerDelegate,UIActivityViewControllerCustomDelegate>
 
 @property (nonatomic) BOOL descriptionIsOpen;
 @property (nonatomic) BOOL keyboardIsOpen;
@@ -764,7 +765,7 @@
         [tracker set:kGAIScreenName value:@"Activity Invite"];
         [tracker send:[[GAIDictionaryBuilder createAppView]  build]];
         
-        self.addInvit = [[InvitOthersViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 45) andActivity:_activity andInvits:self.attendeesList.invits];
+        self.addInvit = [[InvitOthersViewController alloc] initWithFrame:CGRectMake(320, 0, 320, self.view.frame.size.height - 45) andActivity:self.activity andInvits:self.attendeesList.invits];
         self.addInvit.delegate = self;
         [self addChildViewController:self.addInvit];
         [self.view addSubview:self.addInvit.view];
@@ -818,26 +819,46 @@
 
 - (void)openInMap{
     
+    NSMutableArray *buttons = [NSMutableArray new];
+    [buttons addObject:NSLocalizedString(@"Open in Maps", nil)];
     if ([[UIApplication sharedApplication] canOpenURL: [NSURL URLWithString:@"comgooglemaps-x-callback://"]]) {
-        
-        NSString *url = [NSString stringWithFormat:@"comgooglemaps-x-callback://?saddr=&daddr=%f,%f&center=%f,%f&zoom=20&directionsmode=transit&x-success=secanucanu://?resume=true&x-source=CANU",_activity.coordinate.latitude,_activity.coordinate.longitude,_activity.coordinate.latitude,_activity.coordinate.longitude];
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-        
-    } else {
-        
+        [buttons addObject:NSLocalizedString(@"Open in Google Maps", nil)];
+    }
+    [buttons addObject:NSLocalizedString(@"Copy adress", nil)];
+    
+    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_camera"] andButtons:buttons];
+    activityView.delegate = self;
+    [activityView show];
+    
+}
+
+- (void)ActivityAction:(NSString *)action{
+    
+    if ([action isEqualToString:NSLocalizedString(@"Open in Maps", nil)]) {
         Class mapItemClass = [MKMapItem class];
         if (mapItemClass && [mapItemClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)]){
-            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:_activity.coordinate
+            MKPlacemark *placemark = [[MKPlacemark alloc] initWithCoordinate:self.activity.coordinate
                                                            addressDictionary:nil];
             MKMapItem *mapItem = [[MKMapItem alloc] initWithPlacemark:placemark];
-            [mapItem setName:_activity.title];
+            [mapItem setName:self.activity.title];
             NSDictionary *launchOptions = @{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking};
             MKMapItem *currentLocationMapItem = [MKMapItem mapItemForCurrentLocation];
             [MKMapItem openMapsWithItems:@[currentLocationMapItem, mapItem]
                            launchOptions:launchOptions];
         }
+    } else if ([action isEqualToString:NSLocalizedString(@"Open in Google Maps", nil)]) {
+        NSString *url = [NSString stringWithFormat:@"comgooglemaps-x-callback://?saddr=&daddr=%f,%f&center=%f,%f&zoom=20&directionsmode=transit&x-success=secanucanu://?resume=true&x-source=CANU",self.activity.coordinate.latitude,self.activity.coordinate.longitude,self.activity.coordinate.latitude,self.activity.coordinate.longitude];
         
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    } else if ([action isEqualToString:NSLocalizedString(@"Copy adress", nil)]) {
+        NSString *adress;
+        if ([self.activity.placeName mk_isEmpty]) {
+            adress = [NSString stringWithFormat:@"%@, %@, %@, %@",self.activity.street,self.activity.city, self.activity.zip,self.activity.country];
+        } else {
+            adress = [NSString stringWithFormat:@"%@, %@, %@, %@, %@",self.activity.placeName,self.activity.street,self.activity.city, self.activity.zip,self.activity.country];
+        }
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = adress;
     }
     
 }

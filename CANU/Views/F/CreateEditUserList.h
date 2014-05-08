@@ -20,6 +20,7 @@
 @property (nonatomic) BOOL active;
 @property (nonatomic) BOOL isSearchMode;
 @property (nonatomic) BOOL forceLocalCell;
+@property (nonatomic) BOOL disableLocalCell;
 @property (nonatomic) CANUError canuError;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) NSMutableArray *arrayAllUserSelected;

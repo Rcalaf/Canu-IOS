@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 
 @interface MainViewController () <SignInViewControllerDelegate,UITextFieldDelegate,UIWebViewDelegate>
 
+@property (strong, nonatomic) User *userSave;
 @property (nonatomic) BOOL keyboardSignUpOpen;
 @property (nonatomic) MainViewControllerView viewType;
 @property (strong, nonatomic) UIView *backgroundColor;
@@ -138,7 +139,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     [self.backButton addTarget:self action:@selector(backButtonManager) forControlEvents:UIControlEventTouchDown];
     [_bottomBar addSubview:self.backButton];
     
-    self.nextButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45, 4, 320 - 45 * 2, 35) forStyle:UICanuButtonStyleLarge];
+    self.nextButton = [[UICanuButton alloc]initWithFrame:CGRectMake(45, 5, 320 - 45 * 2, 35) forStyle:UICanuButtonStyleLarge];
     [self.nextButton setTitle:NSLocalizedString(@"Next", nil) forState:UIControlStateNormal];
     [self.nextButton addTarget:self action:@selector(nextButtonManager) forControlEvents:UIControlEventTouchUpInside];
     [self.bottomBarWrapper addSubview:_nextButton];
@@ -165,7 +166,6 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     self.termsPrivacy.backgroundColor = backgroundColorView;
     [self.wrapperSignUP addSubview:_termsPrivacy];
 
-    
     [self.view addSubview:self.backgroundColor];
     
     if (_isPhoneCheck) {
@@ -249,6 +249,8 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
                 [self.checkPhoneNumberViewController hiddenPickCountryCode];
             } else if (self.checkPhoneNumberViewController.viewType == CheckPhoneNumberViewControllerViewPhoneCode) {
                 [self.checkPhoneNumberViewController goBackPhoneNumber];
+            } else {
+                [self signUpGoBackHome];
             }
         }
             break;
@@ -263,7 +265,13 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     
     switch (_viewType) {
         case MainViewControllerViewMain:
-            //
+            
+            if (_userSave) {
+                [self signUpKeyboardIsAppear:YES Block:^(BOOL finished) {
+                    [self signUpStep1CheckUsername];
+                }];
+            }
+            
             break;
         case MainViewControllerViewSignUp:
             [self signUpStep1CheckUsername];
@@ -309,7 +317,7 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
             self.signIn.frame = CGRectMake(20, 55 + (self.view.frame.size.height - 480)/2, 280, 30);
             self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 216 - 170 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
             self.bottomBar.frame = CGRectMake(0, 0, 320, 45);
-            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 44 - 216, 320, 45);
+            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, 320, 45);
         } completion:^(BOOL finished) {
             
             if (block) {
@@ -341,6 +349,8 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
 
 - (void)goSignUpForCHeckNumberPhone:(User *)user{
     
+    self.userSave = user;
+    
     self.viewType = MainViewControllerViewCheckPhoneNumber;
     
     if (!_isPhoneCheck) {
@@ -358,15 +368,14 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
         
         [UIView animateWithDuration:0.4 animations:^{
             self.backgroundTotem.frame = CGRectMake(-320, - 480, self.view.frame.size.width, 480);
-            self.createAccountText.frame = CGRectMake( -310, 50, 300, 25);
+            self.createAccountText.frame = CGRectMake( -310, 30 + (self.view.frame.size.height - 480)/2, 300, 25);
             self.signIn.frame = CGRectMake(-300, 75, 280, 30);
-            self.wrapperSignUP.frame = CGRectMake(-320, self.view.frame.size.height - 216 - 140, 320.0f, 140);
+            self.wrapperSignUP.frame = CGRectMake(-320, self.view.frame.size.height - 216 - 170 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
             self.bottomBar.frame = CGRectMake(0, 0, 320, 45);
             self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, 320, 45);
             self.checkPhoneNumberViewController.view.frame = CGRectMake(0, _checkPhoneNumberViewController.view.frame.origin.y, _checkPhoneNumberViewController.view.frame.size.width, _checkPhoneNumberViewController.view.frame.size.height);
-            self.backButton.alpha = 0;
         } completion:^(BOOL finished) {
-            self.backButton.hidden = YES;
+            
         }];
         
     }
@@ -377,16 +386,62 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     
     self.viewType = MainViewControllerViewMain;
     
-    [self.username resignFirstResponder];
-    [self.password resignFirstResponder];
+    if (_checkPhoneNumberViewController) {
+        
+        [self.username resignFirstResponder];
+        [self.password resignFirstResponder];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.termsPrivacy.frame = CGRectMake(0, 45 + 53, 320, 20);
+            self.backgroundCloud.alpha = 0;
+            self.backgroundTotem.frame = CGRectMake(0, - 480, self.view.frame.size.width, 480);
+            self.createAccountText.frame = CGRectMake( 10, 30 + (self.view.frame.size.height - 480)/2, 300, 25);
+            self.signIn.frame = CGRectMake(20, 55 + (self.view.frame.size.height - 480)/2, 280, 30);
+            self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 216 - 170 - (self.view.frame.size.height - 480)/2, 320.0f, 140);
+            self.bottomBar.frame = CGRectMake(0, 0, 320, 45);
+            self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45 - 216, 320, 45);
+            self.checkPhoneNumberViewController.view.frame = CGRectMake(320, _checkPhoneNumberViewController.view.frame.origin.y, _checkPhoneNumberViewController.view.frame.size.width, _checkPhoneNumberViewController.view.frame.size.height);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.4 animations:^{
+                self.termsPrivacy.frame = CGRectMake(0, 180, 320, 20);
+                self.backgroundCloud.alpha = 1;
+                self.backgroundTotem.frame = CGRectMake(0, (self.view.frame.size.height - 480) / 2, self.view.frame.size.width, 480);
+                self.createAccountText.frame = CGRectMake( 10, self.view.frame.size.height - 190 - (self.view.frame.size.height - 480) / 4, 300, 25);
+                self.signIn.frame = CGRectMake(20, self.view.frame.size.height - 170 - (self.view.frame.size.height - 480) / 4, 280, 30);
+                self.wrapperSignUP.frame = CGRectMake(0, self.view.frame.size.height - 140 - (self.view.frame.size.height - 480)/4, 320.0f, 140);
+                self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height, 320, 45);
+                self.bottomBarWrapper.frame = CGRectMake(0, self.view.frame.size.height - 45, 320, 45);
+            } completion:^(BOOL finished) {
+                [self.checkPhoneNumberViewController willMoveToParentViewController:nil];
+                [self.checkPhoneNumberViewController.view removeFromSuperview];
+                [self.checkPhoneNumberViewController removeFromParentViewController];
+                self.checkPhoneNumberViewController = nil;
+            }];
+        }];
     
-    self.keyboardSignUpOpen = NO;
-    [self signUpKeyboardIsAppear:NO Block:nil];
+    }
 }
 
 #pragma mark -- Sign Up Form
 
 - (void)signUpStep1CheckUsername{
+    
+    if (_userSave) {
+        [self goSignUpForCHeckNumberPhone:_userSave];
+    } else {
+        self.nextButton.hidden = YES;
+        
+        [User SignUpWithUserName:self.username.text Password:self.password.text Block:^(User *user, NSError *error) {
+            if (!error) {
+                self.username.valueValide = YES;
+                self.password.valueValide = YES;
+                [self goSignUpForCHeckNumberPhone:user];
+            }else{
+                self.username.valueValide = NO;
+            }
+            self.nextButton.hidden = NO;
+        }];
+    }
     
     if ([self.password.text isEqualToString:@""] || self.password.text  == nil || [self.username.text isEqualToString:@""] || self.username.text  == nil) {
         
@@ -398,20 +453,6 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
         return;
         
     }
-    
-    self.nextButton.hidden = YES;
-//    [self.loadingIndicator startAnimating];
-    
-    [User SignUpWithUserName:self.username.text Password:self.password.text Block:^(User *user, NSError *error) {
-        if (!error) {
-            self.username.valueValide = YES;
-            self.password.valueValide = YES;
-            [self goSignUpForCHeckNumberPhone:user];
-        }else{
-            self.username.valueValide = NO;
-        }
-        self.nextButton.hidden = NO;
-    }];
     
 }
 
@@ -505,11 +546,17 @@ typedef NS_ENUM(NSInteger, MainViewControllerView) {
     if (textField == self.username) {
         if (![string isEqualToString:@" "]) {
             [self.username textChange:newString];
+            self.userSave = nil;
+            self.username.rightView = nil;
+            self.password.rightView = nil;
         } else {
             return NO;
         }
     } else if (textField == self.password) {
         [self.password textChange:newString];
+        self.password.rightView = nil;
+        self.username.rightView = nil;
+        self.userSave = nil;
     }
     
     return YES;

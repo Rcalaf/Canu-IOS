@@ -136,6 +136,8 @@
 		1E8A33AB18E1DA9A0049A6B7 /* UIView+EasingFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8A33A818E1DA9A0049A6B7 /* UIView+EasingFunctions.m */; };
 		1E90977E189187F4004501E2 /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E90977D189187F4004501E2 /* ErrorManager.m */; };
 		1EA0D31A1907C0C700E3733B /* TutorialPopUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA0D3191907C0C700E3733B /* TutorialPopUp.m */; };
+		1EA328C0191A6CEB004B85B9 /* UIActivityViewControllerCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA328BF191A6CEB004B85B9 /* UIActivityViewControllerCustom.m */; };
+		1EA4CE7C191A1ACC0024DF5A /* ResetPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA4CE7B191A1ACC0024DF5A /* ResetPassword.m */; };
 		1EAE079A18FD22F1002326F4 /* PushRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EAE079918FD22F1002326F4 /* PushRemote.m */; };
 		1EC3F7A918FFD97C003A342E /* InvitOthersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC3F7A818FFD97C003A342E /* InvitOthersViewController.m */; };
 		1EC6074B190FA57E006D2690 /* UIView+DTDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EC6074A190FA57E006D2690 /* UIView+DTDebug.m */; };
@@ -428,6 +430,10 @@
 		1E90977D189187F4004501E2 /* ErrorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ErrorManager.m; path = CANU/Manager/ErrorManager.m; sourceTree = "<group>"; };
 		1EA0D3181907C0C700E3733B /* TutorialPopUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialPopUp.h; sourceTree = "<group>"; };
 		1EA0D3191907C0C700E3733B /* TutorialPopUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialPopUp.m; sourceTree = "<group>"; };
+		1EA328BE191A6CEB004B85B9 /* UIActivityViewControllerCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIActivityViewControllerCustom.h; path = "Custom Classes/UIActivityViewControllerCustom/UIActivityViewControllerCustom.h"; sourceTree = "<group>"; };
+		1EA328BF191A6CEB004B85B9 /* UIActivityViewControllerCustom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIActivityViewControllerCustom.m; path = "Custom Classes/UIActivityViewControllerCustom/UIActivityViewControllerCustom.m"; sourceTree = "<group>"; };
+		1EA4CE7A191A1ACC0024DF5A /* ResetPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResetPassword.h; path = Views/B/ResetPassword.h; sourceTree = "<group>"; };
+		1EA4CE7B191A1ACC0024DF5A /* ResetPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResetPassword.m; path = Views/B/ResetPassword.m; sourceTree = "<group>"; };
 		1EAE079818FD22F1002326F4 /* PushRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushRemote.h; path = CANU/Models/PushRemote.h; sourceTree = "<group>"; };
 		1EAE079918FD22F1002326F4 /* PushRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushRemote.m; path = CANU/Models/PushRemote.m; sourceTree = "<group>"; };
 		1EC3F7A718FFD97C003A342E /* InvitOthersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitOthersViewController.h; sourceTree = "<group>"; };
@@ -592,6 +598,7 @@
 		1E279DDB18D200960076C25E /* Custom Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1EA328BD191A6CA0004B85B9 /* UIActivityViewControllerCustom */,
 				1E235EA818F5814400F57059 /* MCC */,
 				1E8A339D18E181EE0049A6B7 /* ProfilePicture */,
 				1E62AE2D18D84DA300520AA0 /* UICanuBottomBar */,
@@ -908,6 +915,7 @@
 		1E3A6B76188595C2007FB6BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1EA4CE79191A1AA00024DF5A /* B */,
 				1E279EAF18D3015B0076C25E /* C */,
 				1E279EB318D301A60076C25E /* E */,
 				1E279E8B18D300890076C25E /* F */,
@@ -1159,6 +1167,24 @@
 			);
 			name = Manager;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		1EA328BD191A6CA0004B85B9 /* UIActivityViewControllerCustom */ = {
+			isa = PBXGroup;
+			children = (
+				1EA328BE191A6CEB004B85B9 /* UIActivityViewControllerCustom.h */,
+				1EA328BF191A6CEB004B85B9 /* UIActivityViewControllerCustom.m */,
+			);
+			name = UIActivityViewControllerCustom;
+			sourceTree = "<group>";
+		};
+		1EA4CE79191A1AA00024DF5A /* B */ = {
+			isa = PBXGroup;
+			children = (
+				1EA4CE7A191A1ACC0024DF5A /* ResetPassword.h */,
+				1EA4CE7B191A1ACC0024DF5A /* ResetPassword.m */,
+			);
+			name = B;
 			sourceTree = "<group>";
 		};
 		1EC60748190FA57E006D2690 /* DTFoundation */ = {
@@ -1469,6 +1495,7 @@
 				1E8A338E18E045230049A6B7 /* NSString+MK_Base64.m in Sources */,
 				1E279E1E18D203DB0076C25E /* UICanuLabelUserName.m in Sources */,
 				1E279E1818D203DB0076C25E /* UICanuLabelActivityName.m in Sources */,
+				1EA4CE7C191A1ACC0024DF5A /* ResetPassword.m in Sources */,
 				1E8A33AA18E1DA9A0049A6B7 /* easing.c in Sources */,
 				1E279E0618D203BB0076C25E /* UICanuContactCell.m in Sources */,
 				1E279E4518D205310076C25E /* UICanuAMPMPicker.m in Sources */,
@@ -1563,6 +1590,7 @@
 				1E8A337E18E045230049A6B7 /* NSDate+MK_Components.m in Sources */,
 				1E8A338518E045230049A6B7 /* NSMutableDictionary+MK_Misc.m in Sources */,
 				1E8A337B18E045230049A6B7 /* NSMutableArray+MK_Stack.m in Sources */,
+				1EA328C0191A6CEB004B85B9 /* UIActivityViewControllerCustom.m in Sources */,
 				1E279E3118D204320076C25E /* UICanuTextFieldLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

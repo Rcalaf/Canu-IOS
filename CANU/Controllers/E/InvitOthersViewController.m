@@ -16,6 +16,7 @@
 #import "UICanuButton.h"
 #import "ErrorManager.h"
 #import "PhoneBook.h"
+#import "UserManager.h"
 
 @interface InvitOthersViewController () <UICanuTextFieldInvitDelegate,UITextFieldDelegate,CreateEditUserListDelegate,MessageGhostUserDelegate>
 
@@ -39,9 +40,9 @@
     self = [super init];
     if (self) {
         self.invits = invits;
+        self.activity = activity;
         self.view.frame = frame;
         self.view.clipsToBounds = YES;
-        self.activity = activity;
     }
     return self;
 }
@@ -54,8 +55,11 @@
     self.userList.delegate = self;
     self.userList.minHeigt = [[UIScreen mainScreen] bounds].size.height - 10 - 45 - 45;
     self.userList.peoplesAlreadySelected = self.invits;
-    self.userList.forceLocalCell = !_activity.privacyLocation;
-    
+    self.userList.forceLocalCell = !self.activity.privacyLocation;
+    self.userList.disableLocalCell = YES;
+//    if (self.activity.user.userId != [UserManager sharedUserManager].currentUser.userId) {
+//        self.userList.disableLocalCell = YES;
+//    }
     [self.view addSubview:_userList];
     
     // If Phone Book isn't allowed or not determined
