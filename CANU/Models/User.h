@@ -49,6 +49,8 @@
                   Password:(NSString*)password
                      Block:(void (^)(User *user, NSError *error))block;
 
+- (void)sendSMSWithCode:(NSInteger)code countrycode:(NSString *)countryCode andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(NSError *error))block;
+
 - (void)phoneNumber:(NSString *)phoneNumber isVerifiedBlock:(void (^)(User *user, NSError *error))block;
 
 /**
@@ -67,6 +69,8 @@
 
 - (void)logOut;
 
++ (void)sendSMSForResetPasswordWithCode:(NSInteger)code countrycode:(NSString *)countryCode andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(User *user, NSError *error))block;
+
 - (void)editLatitude:(CLLocationDegrees)latitude
            Longitude:(CLLocationDegrees)longitude;
 
@@ -76,6 +80,8 @@
                     LastName:(NSString *)lastName
                        Email:(NSString *)email
                        Block:(void (^)(User *user, NSError *error))block;
+
+- (void)editPassword:(NSString *) password ForUser:(User *) user Block:(void (^)(User *user, NSError *error))block;
 
 - (void)editUserProfilePicture:(UIImage *)profilePicture
                          Block:(void (^)(User *user, NSError *error))block;

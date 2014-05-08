@@ -16,6 +16,7 @@
     if (self) {
         UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, frame.size.height)];
         self.leftView = paddingView;
+        self.keyboardType = UIKeyboardTypeASCIICapable;
         self.leftViewMode = UITextFieldViewModeAlways;
         self.backgroundColor = [UIColor whiteColor];
         self.borderStyle = UITextBorderStyleNone;

@@ -20,11 +20,14 @@ typedef NS_ENUM(NSInteger, CheckPhoneNumberViewControllerView) {
 
 @interface CheckPhoneNumberViewController : UIViewController
 
+@property (nonatomic) id delegate;
 @property (nonatomic) CheckPhoneNumberViewControllerView viewType;
 @property (strong, nonatomic) UICanuButton *nextButton;
 @property (strong, nonatomic) UIButton *backButton;
 
 - (instancetype)initForUser:(User *)user ForceVerified:(BOOL)isForceVerified;
+
+- (instancetype)initForResetPassword;
 
 - (void)checkPhoneCode;
 
@@ -35,5 +38,13 @@ typedef NS_ENUM(NSInteger, CheckPhoneNumberViewControllerView) {
 - (void)selectCountry;
 
 - (void)hiddenPickCountryCode;
+
+@end
+
+@protocol CheckPhoneNumberViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)goToResetPasswordTo:(User *)user;
 
 @end

@@ -11,6 +11,7 @@
 @interface UICanuBottomBar ()
 
 @property (nonatomic, strong) UIImageView *backgroundImage;
+@property (nonatomic, strong) UIImageView *line;
 
 @end
 
@@ -29,6 +30,10 @@
         marginForBounce.backgroundColor = [UIColor whiteColor];
         [self addSubview:marginForBounce];
         
+        self.line = [[UIImageView alloc]initWithFrame:CGRectMake(0, frame.size.height - 1, frame.size.width, 1)];
+        self.line.image = [UIImage imageNamed:@"All_line_keyboard"];
+        [self addSubview:self.line];
+        
     }
     return self;
 }
@@ -38,6 +43,7 @@
     [super setFrame:frame];
     
     self.backgroundImage.frame = CGRectMake(0, -2, frame.size.width, 47);
+    self.line.frame = CGRectMake(0, frame.size.height - 1, frame.size.width, 1);
     
 }
 

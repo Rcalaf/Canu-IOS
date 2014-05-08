@@ -37,6 +37,7 @@
         self.stopLoadMore = NO;
         self.forceLocalCell = NO;
         self.isSearchMode = NO;
+        self.disableLocalCell = NO;
         
         self.numberCell = 10;
         
@@ -294,10 +295,27 @@
     
     // Local cell
     
+//    if (!_disableLocalCell) {
+//        UICanuContactCell *celllocal = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:_contactLocal AndUser:nil];
+//        celllocal.delegate = self;
+//        if (_forceLocalCell) {
+//            celllocal.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
+//            celllocal.isDisable = YES;
+//        }
+//        [self.scrollView addSubview:celllocal];
+//        [self.arrayCellCanuUser addObject:celllocal];
+//        
+//        row++;
+//    }
+    
     UICanuContactCell *celllocal = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:_contactLocal AndUser:nil];
     celllocal.delegate = self;
-    if (_forceLocalCell) {
+    if (_disableLocalCell) {
         celllocal.isDisable = YES;
+        celllocal.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location"];
+        celllocal.alpha = 0.5;
+    }
+    if (_forceLocalCell) {
         celllocal.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
     }
     [self.scrollView addSubview:celllocal];
@@ -514,6 +532,7 @@
 - (void)searchPhoneBook:(NSString *)searchWords{
     
     searchWords = [searchWords stringByReplacingOccurrencesOfString:@" " withString:@""];
+    searchWords = [searchWords lowercaseString];
     
     self.numberCell = 10;
     self.stopLoadMore = NO;
@@ -537,7 +556,9 @@
         for (int i = 0; i < [arrayAllContact count]; i++) {
             Contact *contact = [arrayAllContact objectAtIndex:i];
             
-            if ([contact.fullName rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
+            NSString *nameContact = [contact.fullName stringByReplacingOccurrencesOfString:@" " withString:@""];
+            
+            if ([nameContact rangeOfString:searchWords options:NSCaseInsensitiveSearch].location != NSNotFound) {
                 [self.arrayContact addObject:contact];
             }
             
@@ -549,7 +570,7 @@
             
             NSString *name = [NSString stringWithFormat:@"%@%@%@",[user.firstName lowercaseString], [user.lastName lowercaseString],[user.userName lowercaseString]];
             
-            if ([name rangeOfString:[searchWords lowercaseString]].location != NSNotFound) {
+            if ([name rangeOfString:searchWords options:NSCaseInsensitiveSearch].location != NSNotFound) {
                 [self.arrayCanuUser addObject:user];
             }
             

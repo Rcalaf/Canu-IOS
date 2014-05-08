@@ -15,11 +15,12 @@
 #import "UserSettingsViewController.h"
 #import "UserManager.h"
 #import "ProfilePicture.h"
+#import "UIActivityViewControllerCustom.h"
 #import <QuartzCore/QuartzCore.h>
 
 @class ActivitiesFeedViewController;
 
-@interface UIProfileView () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface UIProfileView () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActivityViewControllerCustomDelegate>
 
 @property (strong, nonatomic) UIImageView *profileImage;
 @property (strong, nonatomic) UIImageView *settingsButton;
@@ -92,7 +93,7 @@
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
         [self.settingsButton addGestureRecognizer:tapRecognizer];
         
-        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(takePic)];
+        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changePicture)];
         [self.profileImage addGestureRecognizer:tapRecognizer];
         
     }
@@ -131,16 +132,19 @@
     
 }
 
-- (void)takePic{
+- (void)changePicture{
     
-    UIViewController *viewController = (UIViewController *)self.navigation.activityFeed;
+    NSArray *buttons = [NSArray arrayWithObjects:NSLocalizedString(@"Take a picture", nil), NSLocalizedString(@"Choose an existing one", nil), nil];
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose an existing one",@"Take a picture", nil];
-    [actionSheet showInView:viewController.view];
+    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_camera"] andButtons:buttons];
+    activityView.delegate = self;
+    [activityView show];
     
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+#pragma mark - UIActivityViewControllerCustomDelegate
+
+- (void)ActivityAction:(NSString *)action{
     
     UIViewController *viewController = (UIViewController *)self.navigation.activityFeed;
     
@@ -148,14 +152,14 @@
     imagePicker.delegate = self;
     imagePicker.allowsEditing = YES;
     
-    if (buttonIndex == 0) {
-        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-        [viewController presentViewController:imagePicker animated:YES completion:nil];
-    } else if (buttonIndex == 1){
+    if ([action isEqualToString:NSLocalizedString(@"Take a picture", nil)]) {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
             [viewController presentViewController:imagePicker animated:YES completion:nil];
         }
+    } else if ([action isEqualToString:NSLocalizedString(@"Choose an existing one", nil)]) {
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        [viewController presentViewController:imagePicker animated:YES completion:nil];
     }
     
 }

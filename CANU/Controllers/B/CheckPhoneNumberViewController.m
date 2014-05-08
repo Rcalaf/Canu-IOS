@@ -30,6 +30,7 @@
 
 @property (nonatomic) NSInteger code;
 @property (nonatomic) BOOL isForceVerified;
+@property (nonatomic) BOOL isResetPassword;
 @property (strong, nonatomic) UIImageView *arrow;
 @property (strong, nonatomic) UIPickerView *pickViewCountry;
 @property (strong, nonatomic) UILabel *titlePhoneCheck;
@@ -61,6 +62,19 @@
         self.user = user;
         self.isForceVerified = isForceVerified;
         self.viewType = CheckPhoneNumberViewControllerViewPhoneNumber;
+        self.isResetPassword = NO;
+    }
+    return self;
+}
+
+- (instancetype)initForResetPassword
+{
+    self = [super init];
+    if (self) {
+        self.user = nil;
+        self.isForceVerified = NO;
+        self.viewType = CheckPhoneNumberViewControllerViewPhoneNumber;
+        self.isResetPassword = YES;
     }
     return self;
 }
@@ -79,7 +93,11 @@
     self.mcc = [[MCC alloc]init];
     
     self.titlePhoneCheck = [[UILabel alloc]initWithFrame:CGRectMake(0, 20, 320, 30)];
-    self.titlePhoneCheck.text = NSLocalizedString(@"Phone check", nil);
+    if (_isResetPassword) {
+        self.titlePhoneCheck.text = NSLocalizedString(@"Reset password", nil);
+    } else {
+        self.titlePhoneCheck.text = NSLocalizedString(@"Phone check", nil);
+    }
     self.titlePhoneCheck.textAlignment = NSTextAlignmentCenter;
     self.titlePhoneCheck.textColor = UIColorFromRGB(0x2b4b58);
     self.titlePhoneCheck.font = [UIFont fontWithName:@"Lato-Regular" size:18];
@@ -205,7 +223,7 @@
 
 - (void)checkPhoneCode{
     
-    if (!_isForceVerified) {
+    if (!_isForceVerified || _isResetPassword) {
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"TryPhoneCode" value:nil] build]];
     }
@@ -214,30 +232,38 @@
     
     if ([codeString isEqualToString:_codePhone.text]) {
         
-        NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
-        
-        [self.user phoneNumber:phonenumber isVerifiedBlock:^(User *user, NSError *error) {
+        if (_isResetPassword) {
             
-            if (error) {
-                NSLog(@"Error");
-            }else{
+            NSLog(@"Go to reset");
+            self.codeShowDev.text = @"";
+            [self.delegate goToResetPasswordTo:self.user];
+            
+        } else {
+            NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
+            
+            [self.user phoneNumber:phonenumber isVerifiedBlock:^(User *user, NSError *error) {
                 
-                self.user = user;
-                
-                if (_isForceVerified) {
-                    [[UserManager sharedUserManager] updateUser:user];
-                } else {
-                    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-                    [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)user.userId]];
-                    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Finish" value:nil] build]];
-                    [[UserManager sharedUserManager] logIn:user];
+                if (error) {
+                    NSLog(@"Error");
+                }else{
+                    
+                    self.user = user;
+                    
+                    if (_isForceVerified) {
+                        [[UserManager sharedUserManager] updateUser:user];
+                    } else {
+                        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+                        [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)user.userId]];
+                        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"Finish" value:nil] build]];
+                        [[UserManager sharedUserManager] logIn:user];
+                    }
+                    
+                    [self goToFeedViewController];
+                    
                 }
                 
-                [self goToFeedViewController];
-                
-            }
-            
-        }];
+            }];
+        }
         
     } else {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -248,37 +274,92 @@
 
 - (void)checkPhoneNumber{
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"PhoneCode" value:nil] build]];
+    if (!_isForceVerified || _isResetPassword) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"User" action:@"SignUp" label:@"PhoneCode" value:nil] build]];
+    }
     
     self.nextButton.buttonStatus = UICanuButtonStatusDisable;
     
+    NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
+    phonenumber = [phonenumber substringFromIndex:1];
+    
     self.code = arc4random() % 10 + (arc4random() % 10) * 10 + (arc4random() % 10) * 100 + ((arc4random() % 9) + 1) * 1000;
     
-    if ([AFCanuAPIClient distributionMode] || true) {
+    if (_isResetPassword) {
         
-        NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
-        phonenumber = [phonenumber substringFromIndex:1];
+        [User sendSMSForResetPasswordWithCode:self.code countrycode:self.countryCode.text andPhoneNumber:phonenumber Block:^(User *user, NSError *error) {
+            self.nextButton.buttonStatus = UICanuButtonStatusNormal;
+            if (error) {
+                self.phoneNumber.valueValide = NO;
+            } else {
+                
+                self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
+                
+                self.user = user;
+                
+                self.phoneNumber.valueValide = YES;
+                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
+                    self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
+                    self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
+                    self.textPhoneCheck.alpha = 0;
+                } completion:^(BOOL finished) {
+                    self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
+                    self.backButton.hidden = NO;
+                    [UIView animateWithDuration:0.4 animations:^{
+                        self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
+                        self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
+                        self.textPhoneCheck.alpha = 1;
+                        self.arrow.frame = CGRectMake(60, 30, 200, 26);
+                        self.backButton.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        [self.codePhone becomeFirstResponder];
+                        self.nextButton.buttonStatus = UICanuButtonStatusDisable;
+                        self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
+                    }];
+                }];
+            }
+        }];
+    
+    } else {
         
-        if ([self.coutry.text isEqualToString:@"United Kingdom"]) {
-            phonenumber = [NSString stringWithFormat:@"0044%@",phonenumber];
-        }
-        
-        NSString *url;
-        
-        if ([self.countryCode.text isEqualToString:@"+1"]) {
-            url = [NSString stringWithFormat:@"https://rest.nexmo.com/sc/us/2fa/json?api_key=a86782bd&api_secret=68a115a0&to=%@&pin=%u",phonenumber,(unsigned)_code];
+        if ([AFCanuAPIClient distributionMode]) {
+            
+            [self.user sendSMSWithCode:self.code countrycode:self.countryCode.text andPhoneNumber:phonenumber Block:^(NSError *error) {
+                
+                if (error) {
+                    self.nextButton.buttonStatus = UICanuButtonStatusNormal;
+                } else {
+                    
+                    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                        self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
+                        self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
+                        self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
+                        self.textPhoneCheck.alpha = 0;
+                    } completion:^(BOOL finished) {
+                        self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
+                        self.backButton.hidden = NO;
+                        [UIView animateWithDuration:0.4 animations:^{
+                            self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
+                            self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
+                            self.textPhoneCheck.alpha = 1;
+                            self.arrow.frame = CGRectMake(60, 30, 200, 26);
+                            self.backButton.alpha = 1;
+                        } completion:^(BOOL finished) {
+                            [self.codePhone becomeFirstResponder];
+                            self.nextButton.buttonStatus = UICanuButtonStatusDisable;
+                            self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
+                        }];
+                    }];
+                    
+                }
+                
+            }];
+            
         } else {
-            NSString *text = [NSString stringWithFormat:@"Your code : %u",(unsigned)_code];
-            url = [NSString stringWithFormat:@"https://rest.nexmo.com/sms/json?api_key=a86782bd&api_secret=68a115a0&from=CANU&to=%@&text=%@",phonenumber,text];
-        }
-        
-        url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        
-        [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
             
             [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
@@ -301,34 +382,7 @@
                 }];
             }];
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            self.nextButton.buttonStatus = UICanuButtonStatusNormal;
-        }];
-        
-    } else {
-        
-        self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
-        
-        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
-            self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
-            self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
-            self.textPhoneCheck.alpha = 0;
-        } completion:^(BOOL finished) {
-            self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
-            self.backButton.hidden = NO;
-            [UIView animateWithDuration:0.4 animations:^{
-                self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
-                self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
-                self.textPhoneCheck.alpha = 1;
-                self.arrow.frame = CGRectMake(60, 30, 200, 26);
-                self.backButton.alpha = 1;
-            } completion:^(BOOL finished) {
-                [self.codePhone becomeFirstResponder];
-                self.nextButton.buttonStatus = UICanuButtonStatusDisable;
-                self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
-            }];
-        }];
+        }
         
     }
     
@@ -341,9 +395,9 @@
         self.textPhoneCheck.frame = CGRectMake(0, 50, 320, 30);
         self.textPhoneCheck.alpha = 0;
         self.arrow.frame = CGRectMake(60, -26, 200, 26);
-        self.backButton.alpha = 0;
+//        self.backButton.alpha = 0;
     } completion:^(BOOL finished) {
-        self.backButton.hidden = YES;
+//        self.backButton.hidden = YES;
         self.textPhoneCheck.text = NSLocalizedString(@"Please confirm your country code \nand enter your phone number", nil);
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.wrapperFieldCountryCode.frame = CGRectMake(10, 100, 300, 45);

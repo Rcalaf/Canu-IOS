@@ -119,17 +119,33 @@
                                      constrainedToSize:self.date.frame.size
                                          lineBreakMode:self.date.lineBreakMode];
         
-        if (10 + sizeLocation.width+ 10 + sizeDate.width + 10 > 280) {
+        if (10 + sizeLocation.width + 10 + sizeDate.width + 10 > 280) {
             int gap = 10 + sizeLocation.width + 10 + sizeDate.width + 10 - 300;
             self.location.frame = CGRectMake(10, -1, sizeLocation.width - gap, 30);
         }
+        
+        UIButton *areaTouch = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 240, 95)];
+        [areaTouch addTarget:self action:@selector(touchArea) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:areaTouch];
+        
+        UIButton *areaAdress = [[UIButton alloc]initWithFrame:CGRectMake(0, 95, 150, 35)];
+        [areaAdress addTarget:self action:@selector(touchAdress) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:areaAdress];
         
     }
     return self;
 }
 
+- (void)touchArea{
+    [self.delegate cellEventTouched:self];
+}
+
 - (void)touchActionButton{
     [self.delegate cellEventActionButton:self];
+}
+
+- (void)touchAdress{
+    [self.delegate cellEventAdresse:self];
 }
 
 - (void)animateAfterDelay:(float)delay{

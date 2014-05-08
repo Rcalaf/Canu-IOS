@@ -80,9 +80,6 @@
                                   
                                  if (user) {
                                       [self dismissViewControllerAnimated:NO completion:nil];
-                                      //AppDelegate *appDelegate =(AppDelegate *)[[UIApplication sharedApplication] delegate];
-                                      //appDelegate.user = user;
-                                      //self.user = user;
                                  }
                                  [self operationInProcess:NO];
                         }];
