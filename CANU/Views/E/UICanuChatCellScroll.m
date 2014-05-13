@@ -43,14 +43,13 @@
         self.backgroundMessage.image = [[UIImage imageNamed:@"E_Message_background"] stretchableImageWithLeftCapWidth:5.0 topCapHeight:5.0f];
         [self addSubview:_backgroundMessage];
         
-        self.textMessage = [[UITextView alloc]initWithFrame:CGRectMake(55 + 10, 1 + 10, 234 - 10 - 10, 5)];
+        self.textMessage = [[UITextView alloc]initWithFrame:CGRectMake(55 + 5, 0, 234 - 10, 5)];
         self.textMessage.editable = NO;
         self.textMessage.scrollEnabled = NO;
         self.textMessage.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         self.textMessage.backgroundColor = [UIColor clearColor];
         self.textMessage.textColor = UIColorFromRGB(0x2b4b58);
         self.textMessage.text = message.text;
-        [self.textMessage sizeToFit];
         [self addSubview:_textMessage];
         
         if (isFirst) {
@@ -97,7 +96,6 @@
             if ([message.date mk_differenceInDaysToDate:[NSDate date]] == 0) {
                 time.text = [message.date timeAgo];
             } else {
-                
                 time.text = [NSString stringWithFormat:@"%@ %@",[self timeWithDate:message.date],[self dayWithDate:message.date]];
             }
             
@@ -110,7 +108,6 @@
 - (float)heightContent{
     
     CGSize textViewSize = [self.textMessage sizeThatFits:CGSizeMake(self.textMessage.frame.size.width, FLT_MAX)];
-    
     CGSize textViewSizeHeight = [self.textMessage sizeThatFits:CGSizeMake(FLT_MAX, FLT_MAX)];
     
     int width = self.textMessage.frame.size.width;
@@ -118,29 +115,27 @@
     if (textViewSizeHeight.height == textViewSize.height) {
         CGSize sizeOfText = [self.textMessage.text sizeWithFont:self.textMessage.font constrainedToSize:CGSizeMake(self.textMessage.frame.size.width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByClipping];
         width = sizeOfText.width + 10 + 1;
-    };
+    }
     
-    self.backgroundMessage.frame = CGRectMake(_backgroundMessage.frame.origin.x, _backgroundMessage.frame.origin.y, width + 20, textViewSize.height + 20);
+    self.backgroundMessage.frame = CGRectMake(_backgroundMessage.frame.origin.x, _backgroundMessage.frame.origin.y, width + 10, textViewSize.height + 3);
     
-    self.textMessage.frame = CGRectMake(_textMessage.frame.origin.x, _textMessage.frame.origin.y, width, textViewSize.height + 1);
+    self.textMessage.frame = CGRectMake(_textMessage.frame.origin.x, _textMessage.frame.origin.y + 2, width, textViewSize.height + 1);
     
     float height = 0;
     
-    height = textViewSize.height + 1 + 20;
-    
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+    height = textViewSize.height + 4;
     
     if (_isTheUser) {
         self.backgroundMessage.frame = CGRectMake(300 - 10 - _backgroundMessage.frame.size.width, _backgroundMessage.frame.origin.y, _backgroundMessage.frame.size.width, _backgroundMessage.frame.size.height);
-        self.textMessage.frame = CGRectMake(300 - 10 - 10 - _textMessage.frame.size.width, _textMessage.frame.origin.y, _textMessage.frame.size.width, _textMessage.frame.size.height);
+        self.textMessage.frame = CGRectMake(300 - 10 - 5 - _textMessage.frame.size.width, _textMessage.frame.origin.y, _textMessage.frame.size.width, _textMessage.frame.size.height);
         if (_isFirst) {
-            self.arrowBackgroundMessage.frame = CGRectMake(300 - 10 - 1, height - 11 - 13, 6, 11);
+            self.arrowBackgroundMessage.frame = CGRectMake(300 - 10 - 1, height - 11 - 12, 6, 11);
             self.arrowBackgroundMessage.transform = CGAffineTransformMakeRotation(M_PI);
         }
     } else {
         if (_isFirst) {
             self.profilePicture.frame = CGRectMake(10, height - 35, 35, 35);
-            self.arrowBackgroundMessage.frame = CGRectMake(55 - 5, height - 11 - 13, 6, 11);
+            self.arrowBackgroundMessage.frame = CGRectMake(55 - 5, height - 11 - 12, 6, 11);
         }
     }
     
@@ -154,7 +149,9 @@
         height += 12 + 10;
     }
     
-    return height;
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+    
+    return height + 1;
     
 }
 

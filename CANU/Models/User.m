@@ -222,6 +222,37 @@
 
 }
 
+- (void)sendSMSWithCode:(NSInteger)code countrycode:(NSString *)countryCode andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(NSError *error))block{
+    
+    NSArray *objectsArray;
+    NSArray *keysArray;
+    
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:code],countryCode,phoneNumber,nil];
+    keysArray = [NSArray arrayWithObjects:@"code",@"country_code",@"phone_number",nil];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    
+    NSString *url = @"users/send-sms";
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        
+        if (block) {
+            block(nil);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        if (block) {
+            NSLog(@"Request Failed with Error: %@", error);
+            block(error);
+        }
+    }];
+    
+}
+
 - (void)phoneNumber:(NSString *)phoneNumber isVerifiedBlock:(void (^)(User *user, NSError *error))block{
     
     NSArray *objectsArray;
@@ -288,6 +319,41 @@
             block(nil, error);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }];
+    
+}
+
++ (void)sendSMSForResetPasswordWithCode:(NSInteger)code countrycode:(NSString *)countryCode andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(User *user, NSError *error))block{
+    
+    NSArray *objectsArray;
+    NSArray *keysArray;
+    
+    NSString *devKey = @"9384nc934875";
+    
+    if ([AFCanuAPIClient distributionMode]) {
+        devKey = @"";
+    }
+    
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:code],countryCode,phoneNumber,devKey,nil];
+    keysArray = [NSArray arrayWithObjects:@"code",@"country_code",@"phone_number",@"key",nil];
+    
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    
+    NSString *url = @"users/send-sms-reset-password";
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        User *user = [[User alloc]initWithAttributes:responseObject];
+        if (block) {
+            block(user,nil);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        if (block) {
+            NSLog(@"Request Failed with Error: %@", error);
+            block(nil,error);
+        }
     }];
     
 }
@@ -376,6 +442,64 @@
     
     
     NSString *url = [NSString stringWithFormat:@"/users/%lu",(unsigned long)self.userId];
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
+    
+    [[AFCanuAPIClient sharedClient] PUT:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        User *user= [[User alloc] initWithAttributes:responseObject];
+        if (block) {
+            block(user, nil);
+        }
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        [[ErrorManager sharedErrorManager] detectError:error AndRespondData:operation.responseData Block:^(CANUError canuError) {
+            
+            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            
+            if (block) {
+                block(nil,customError);
+            }
+            
+            if (canuError == CANUErrorServerDown) {
+                [[ErrorManager sharedErrorManager] serverIsDown];
+            } else if (canuError == CANUErrorUnknown) {
+                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"userActivitiesWithBlock:"];
+            }
+            
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+        }];
+        
+        
+    }];
+    
+}
+
+- (void)editPassword:(NSString *) password ForUser:(User *) user Block:(void (^)(User *user, NSError *error))block{
+    
+    NSString *userName = user.userName;
+    NSString *firstName = user.firstName;
+    NSString *lastName = user.lastName;
+    NSString *email = user.email;
+    
+    if (!userName) { userName = @""; }
+    if (!firstName){ firstName = @""; }
+    if (!lastName) { lastName = @""; }
+    if (!email)    { email = @""; }
+    
+    NSArray *objectsArray;
+    NSArray *keysArray;
+    objectsArray = [NSArray arrayWithObjects:userName,password,firstName,lastName,email,nil];
+    keysArray = [NSArray arrayWithObjects:@"user_name",@"proxy_password",@"first_name",@"last_name",@"email",nil];
+    
+    NSDictionary *userDic = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
+    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObjects:userDic,@"9348yr20qo98r4",nil] forKeys: [NSArray arrayWithObjects:@"user",@"key",nil]];
+    
+    
+    NSString *url = [NSString stringWithFormat:@"/users/%lu/reset-password",(unsigned long)self.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     

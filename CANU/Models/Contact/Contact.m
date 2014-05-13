@@ -57,7 +57,9 @@
     
     if ([firstCharactere isEqualToString:@"0"]){
         
-        if ([firstCharactere isEqualToString:@"00"]){
+        NSString *firstAndSecondCharactere = [number substringToIndex:2];
+        
+        if ([firstAndSecondCharactere isEqualToString:@"00"]){
             newNumber = [NSString stringWithFormat:@"+%@",[number substringFromIndex:2]];
         } else {
             newNumber = [NSString stringWithFormat:@"+%@%@",_countryCode,[number substringFromIndex:1]];

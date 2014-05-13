@@ -18,7 +18,7 @@
 "Create Account" = "Create an account";
 "Username" = "Username";
 "Password" = "Password";
-"NEXT" = "Next";
+"Next" = "Next";
 "DONE" = "Done";
 "By signing up I agree with the" = "By signing up I agree with the";
 "and the" = "and the";
@@ -60,6 +60,11 @@
 "BECOME AN EARLY BIRD" = "Become an Early Bird";
 "Want early access?" = "Want early access?";
 "Add name" = "Add name";
+
+// Maps
+"Open in Maps" = "Open in Maps"; // New
+"Open in Google Maps" = "Open in Google Maps"; // New
+"Copy adress" = "Copy adress"; // New
 
 //Tutorial
 

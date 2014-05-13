@@ -39,7 +39,7 @@
         
         self.arrayCell = [[NSMutableArray alloc]init];
         
-        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, frame.size.height - 40, 30, 30) withStart:-20 andEnd:-80];
+        self.loaderAnimation = [[LoaderAnimation alloc]initWithFrame:CGRectMake((frame.size.width - 30) / 2, frame.size.height - 40, 30, 30) withStart:-20 andEnd:-60];
         [self addSubview:_loaderAnimation];
         
         self.scrollview = [[UIScrollViewReverse alloc]initWithFrame:CGRectMake(0, -2, frame.size.width, frame.size.height)];
@@ -74,7 +74,7 @@
     
     //Refresh
     
-    if( newY <= - 80.0f ){;
+    if( newY <= - 60.0f ){;
         [self performSelectorOnMainThread:@selector(reload) withObject:self waitUntilDone:NO];
     }
     
@@ -242,7 +242,7 @@
         
         // Animation
         
-        NSInteger final = [_arrayCell count] - 6;
+        NSInteger final = [_arrayCell count] - 10;
         float correction = 0;
         
         if (final < 0) {
