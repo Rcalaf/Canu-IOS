@@ -222,13 +222,13 @@
 
 }
 
-- (void)sendSMSWithCode:(NSInteger)code countrycode:(NSString *)countryCode andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(NSError *error))block{
+- (void)sendSMSWithCode:(NSInteger)code countrycode:(NSString *)countryCode countryName:(NSString *)countryName andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(NSError *error))block{
     
     NSArray *objectsArray;
     NSArray *keysArray;
     
-    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:code],countryCode,phoneNumber,nil];
-    keysArray = [NSArray arrayWithObjects:@"code",@"country_code",@"phone_number",nil];
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:code],countryCode,countryName,phoneNumber,nil];
+    keysArray = [NSArray arrayWithObjects:@"code",@"country_code",@"country_name",@"phone_number",nil];
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     
@@ -323,7 +323,7 @@
     
 }
 
-+ (void)sendSMSForResetPasswordWithCode:(NSInteger)code countrycode:(NSString *)countryCode andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(User *user, NSError *error))block{
++ (void)sendSMSForResetPasswordWithCode:(NSInteger)code countrycode:(NSString *)countryCode countryName:(NSString *)countryName andPhoneNumber:(NSString *)phoneNumber Block:(void (^)(User *user, NSError *error))block{
     
     NSArray *objectsArray;
     NSArray *keysArray;
@@ -334,8 +334,8 @@
         devKey = @"";
     }
     
-    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:code],countryCode,phoneNumber,devKey,nil];
-    keysArray = [NSArray arrayWithObjects:@"code",@"country_code",@"phone_number",@"key",nil];
+    objectsArray = [NSArray arrayWithObjects:[NSNumber numberWithLong:code],countryCode,countryName,phoneNumber,devKey,nil];
+    keysArray = [NSArray arrayWithObjects:@"code",@"country_code", @"country_name",@"phone_number",@"key",nil];
     
     NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: objectsArray forKeys: keysArray];
     

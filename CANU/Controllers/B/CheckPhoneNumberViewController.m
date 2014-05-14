@@ -26,6 +26,8 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 
+#import "Contact.h"
+
 @interface CheckPhoneNumberViewController ()<UIPickerViewDelegate,UITextFieldDelegate>
 
 @property (nonatomic) NSInteger code;
@@ -284,54 +286,29 @@
     NSString *phonenumber = [NSString stringWithFormat:@"%@%@",self.countryCode.text,self.phoneNumber.text];
     phonenumber = [phonenumber substringFromIndex:1];
     
-    self.code = arc4random() % 10 + (arc4random() % 10) * 10 + (arc4random() % 10) * 100 + ((arc4random() % 9) + 1) * 1000;
-    
-    if (_isResetPassword) {
+    // Correction Phone number
+    Contact *convert = [[Contact alloc]init];
+    phonenumber = [convert convertPhoneNumer:phonenumber];
+
+    if (convert.isValide) {
         
-        [User sendSMSForResetPasswordWithCode:self.code countrycode:self.countryCode.text andPhoneNumber:phonenumber Block:^(User *user, NSError *error) {
-            self.nextButton.buttonStatus = UICanuButtonStatusNormal;
-            if (error) {
-                self.phoneNumber.valueValide = NO;
-            } else {
-                
-                self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
-                
-                self.user = user;
-                
-                self.phoneNumber.valueValide = YES;
-                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                    self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
-                    self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
-                    self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
-                    self.textPhoneCheck.alpha = 0;
-                } completion:^(BOOL finished) {
-                    self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
-                    self.backButton.hidden = NO;
-                    [UIView animateWithDuration:0.4 animations:^{
-                        self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
-                        self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
-                        self.textPhoneCheck.alpha = 1;
-                        self.arrow.frame = CGRectMake(60, 30, 200, 26);
-                        self.backButton.alpha = 1;
-                    } completion:^(BOOL finished) {
-                        [self.codePhone becomeFirstResponder];
-                        self.nextButton.buttonStatus = UICanuButtonStatusDisable;
-                        self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
-                    }];
-                }];
-            }
-        }];
-    
-    } else {
+        self.phoneNumber.valueValide = YES;
         
-        if ([AFCanuAPIClient distributionMode]) {
+        self.code = arc4random() % 10 + (arc4random() % 10) * 10 + (arc4random() % 10) * 100 + ((arc4random() % 9) + 1) * 1000;
+        
+        if (_isResetPassword) {
             
-            [self.user sendSMSWithCode:self.code countrycode:self.countryCode.text andPhoneNumber:phonenumber Block:^(NSError *error) {
-                
+            [User sendSMSForResetPasswordWithCode:self.code countrycode:self.countryCode.text countryName:self.coutry.text andPhoneNumber:phonenumber Block:^(User *user, NSError *error) {
+                self.nextButton.buttonStatus = UICanuButtonStatusNormal;
                 if (error) {
-                    self.nextButton.buttonStatus = UICanuButtonStatusNormal;
+                    self.phoneNumber.valueValide = NO;
                 } else {
                     
+                    self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
+                    
+                    self.user = user;
+                    
+                    self.phoneNumber.valueValide = YES;
                     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
                         self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
@@ -352,38 +329,76 @@
                             self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
                         }];
                     }];
-                    
                 }
-                
             }];
             
         } else {
             
-            self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
-            
-            [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
-                self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
-                self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
-                self.textPhoneCheck.alpha = 0;
-            } completion:^(BOOL finished) {
-                self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
-                self.backButton.hidden = NO;
-                [UIView animateWithDuration:0.4 animations:^{
-                    self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
-                    self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
-                    self.textPhoneCheck.alpha = 1;
-                    self.arrow.frame = CGRectMake(60, 30, 200, 26);
-                    self.backButton.alpha = 1;
-                } completion:^(BOOL finished) {
-                    [self.codePhone becomeFirstResponder];
-                    self.nextButton.buttonStatus = UICanuButtonStatusDisable;
-                    self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
+            if ([AFCanuAPIClient distributionMode] || true) {
+                
+                [self.user sendSMSWithCode:self.code countrycode:self.countryCode.text countryName:self.coutry.text andPhoneNumber:phonenumber Block:^(NSError *error) {
+                    
+                    if (error) {
+                        self.nextButton.buttonStatus = UICanuButtonStatusNormal;
+                    } else {
+                        
+                        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
+                            self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
+                            self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
+                            self.textPhoneCheck.alpha = 0;
+                        } completion:^(BOOL finished) {
+                            self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
+                            self.backButton.hidden = NO;
+                            [UIView animateWithDuration:0.4 animations:^{
+                                self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
+                                self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
+                                self.textPhoneCheck.alpha = 1;
+                                self.arrow.frame = CGRectMake(60, 30, 200, 26);
+                                self.backButton.alpha = 1;
+                            } completion:^(BOOL finished) {
+                                [self.codePhone becomeFirstResponder];
+                                self.nextButton.buttonStatus = UICanuButtonStatusDisable;
+                                self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
+                            }];
+                        }];
+                        
+                    }
+                    
                 }];
-            }];
+                
+            } else {
+                
+                self.codeShowDev.text = [NSString stringWithFormat:@"%u",(unsigned)_code];
+                
+                [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                    self.wrapperFieldCountryCode.frame = CGRectMake(-310, 100, 300, 45);
+                    self.wrapperPhoneNumber.frame = CGRectMake(-310, 100 + 45 + 15, 300, 45);
+                    self.wrapperCodePhone.frame = CGRectMake(0, 100 + 45 + 5, 320, 45);
+                    self.textPhoneCheck.alpha = 0;
+                } completion:^(BOOL finished) {
+                    self.textPhoneCheck.text = NSLocalizedString(@"Check the sms that has been send to you", nil);
+                    self.backButton.hidden = NO;
+                    [UIView animateWithDuration:0.4 animations:^{
+                        self.titlePhoneCheck.frame = CGRectMake(0, 85, 320, 30);
+                        self.textPhoneCheck.frame = CGRectMake(0, 115, 320, 30);
+                        self.textPhoneCheck.alpha = 1;
+                        self.arrow.frame = CGRectMake(60, 30, 200, 26);
+                        self.backButton.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        [self.codePhone becomeFirstResponder];
+                        self.nextButton.buttonStatus = UICanuButtonStatusDisable;
+                        self.viewType = CheckPhoneNumberViewControllerViewPhoneCode;
+                    }];
+                }];
+                
+            }
             
         }
         
+    } else {
+        self.phoneNumber.valueValide = NO;
+        self.nextButton.buttonStatus = UICanuButtonStatusNormal;
     }
     
 }

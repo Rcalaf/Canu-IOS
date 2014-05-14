@@ -108,8 +108,8 @@
     [self updateSizeWrapperTouchResetDeleteUser];
     
     self.activeDeleteUser = NO;
-    ;
-    [self reset];
+    
+//    [self reset];
     
 }
 

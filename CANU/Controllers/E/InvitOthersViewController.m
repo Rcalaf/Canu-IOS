@@ -56,7 +56,7 @@
     self.userList.minHeigt = [[UIScreen mainScreen] bounds].size.height - 10 - 45 - 45;
     self.userList.peoplesAlreadySelected = self.invits;
     self.userList.forceLocalCell = !self.activity.privacyLocation;
-    self.userList.disableLocalCell = YES;
+    self.userList.disableLocalCell = NO;
 //    if (self.activity.user.userId != [UserManager sharedUserManager].currentUser.userId) {
 //        self.userList.disableLocalCell = YES;
 //    }

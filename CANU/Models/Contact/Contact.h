@@ -21,4 +21,6 @@
 
 - (id)initWithFullName:(NSString *)fullName profilePicture:(UIImage*)profilePicture phoneNumber:(NSString *)phoneNumber countryCode:(NSString *)countryCode;
 
+- (NSString *)convertPhoneNumer:(NSString*)number;
+
 @end
