@@ -75,6 +75,15 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if ([[UserManager sharedUserManager] userIsLogIn]) {
+        
+        User *currentUser = [UserManager sharedUserManager].currentUser;
+        
+        if (currentUser.userId == 7 || currentUser.userId == 1 || currentUser.userId == 8 || currentUser.userId == 14 || currentUser.userId == 19 || currentUser.userId == 26 || currentUser.userId == 27 || currentUser.userId == 228 || currentUser.userId == 227) {
+            [GAI sharedInstance].optOut = YES;
+        } else {
+            [GAI sharedInstance].optOut = NO;
+        }
+        
         if ([[UserManager sharedUserManager] currentUser].phoneIsVerified) {
             NSLog(@"User Active");
             self.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:self.feedViewController];
