@@ -27,7 +27,6 @@
         
         self.textColor = UIColorFromRGB(0x2b4b58);
         self.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
-        self.keyboardType = UIKeyboardTypeASCIICapable;
         
         self.line = [[UIView alloc]initWithFrame:CGRectMake(0, frame.size.height/2 + 15, frame.size.width, 1)];
         self.line.backgroundColor = UIColorFromRGB(0x2b4b58);

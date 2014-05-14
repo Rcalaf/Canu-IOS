@@ -525,7 +525,7 @@
     
     [self.delegate changeUserSelected:_arrayAllUserSelected];
     
-    [self searchPhoneBook:@""];
+//    [self searchPhoneBook:@""];
     
 }
 

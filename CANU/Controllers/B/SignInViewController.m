@@ -235,6 +235,12 @@
         id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
         [tracker set:@"&uid" value:[NSString stringWithFormat:@"%lu",(unsigned long)user.userId]];
         
+        if (user.userId == 7 || user.userId == 1 || user.userId == 8 || user.userId == 14 || user.userId == 19 || user.userId == 26 || user.userId == 27 || user.userId == 228 || user.userId == 227) {
+            [GAI sharedInstance].optOut = YES;
+        } else {
+            [GAI sharedInstance].optOut = NO;
+        }
+        
         if (user.phoneIsVerified) {
             NSLog(@"User Active");
             appDelegate.canuViewController = [[UICanuNavigationController alloc] initWithActivityFeed:appDelegate.feedViewController];
