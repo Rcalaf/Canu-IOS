@@ -76,6 +76,7 @@
 		1E279EB918D301E70076C25E /* UICanuChatCellScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EB818D301E70076C25E /* UICanuChatCellScroll.m */; };
 		1E279EBC18D3022C0076C25E /* UICANULocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EBB18D3022C0076C25E /* UICANULocationCell.m */; };
 		1E279EBF18D306BA0076C25E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279EBE18D306BA0076C25E /* UserManager.m */; };
+		1E30A5231923B08900676D0D /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E30A5221923B08900676D0D /* Notification.m */; };
 		1E3A6B6318854220007FB6BA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3A6B6218854220007FB6BA /* CoreText.framework */; };
 		1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E3A6B7118854F2C007FB6BA /* Localizable.strings */; };
 		1E3A6B8618868EAE007FB6BA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3A6B8518868EAE007FB6BA /* MessageUI.framework */; };
@@ -83,6 +84,7 @@
 		1E62AE2C18D83F2200520AA0 /* UICanuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE2B18D83F2200520AA0 /* UICanuButton.m */; };
 		1E62AE3018D84DD300520AA0 /* UICanuBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE2F18D84DD300520AA0 /* UICanuBottomBar.m */; };
 		1E62AE3718DAE0B200520AA0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */; };
+		1E6FDC301924EE9000E8C826 /* AlertNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6FDC2F1924EE9000E8C826 /* AlertNotification.m */; };
 		1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E70867918996FE000328F76 /* AddressBook.framework */; };
 		1E70867D189A849300328F76 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70867C189A849300328F76 /* Contact.m */; };
 		1E7138D0188E9BA000137A48 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7138CF188E9BA000137A48 /* GLKit.framework */; };
@@ -303,6 +305,8 @@
 		1E279EBB18D3022C0076C25E /* UICANULocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICANULocationCell.m; sourceTree = "<group>"; };
 		1E279EBD18D306BA0076C25E /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = CANU/Manager/UserManager.h; sourceTree = "<group>"; };
 		1E279EBE18D306BA0076C25E /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = CANU/Manager/UserManager.m; sourceTree = "<group>"; };
+		1E30A5211923B08900676D0D /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notification.h; path = CANU/Models/Notification.h; sourceTree = "<group>"; };
+		1E30A5221923B08900676D0D /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Notification.m; path = CANU/Models/Notification.m; sourceTree = "<group>"; };
 		1E3A6B6218854220007FB6BA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1E3A6B6918854EB4007FB6BA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1E3A6B6A18854EBB007FB6BA /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 		1E62AE2E18D84DD300520AA0 /* UICanuBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuBottomBar.h; path = "Custom Classes/UICanuBottomBar/UICanuBottomBar.h"; sourceTree = "<group>"; };
 		1E62AE2F18D84DD300520AA0 /* UICanuBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuBottomBar.m; path = "Custom Classes/UICanuBottomBar/UICanuBottomBar.m"; sourceTree = "<group>"; };
 		1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = CANU/Framework/Crashlytics.framework; sourceTree = "<group>"; };
+		1E6FDC2E1924EE9000E8C826 /* AlertNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertNotification.h; sourceTree = "<group>"; };
+		1E6FDC2F1924EE9000E8C826 /* AlertNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertNotification.m; sourceTree = "<group>"; };
 		1E70867918996FE000328F76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		1E70867B189A849300328F76 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Contact.h; path = CANU/Models/Contact/Contact.h; sourceTree = "<group>"; };
 		1E70867C189A849300328F76 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Contact.m; path = CANU/Models/Contact/Contact.m; sourceTree = "<group>"; };
@@ -805,6 +811,8 @@
 			children = (
 				1E279E5918D206BB0076C25E /* AlertViewController.h */,
 				1E279E5A18D206BB0076C25E /* AlertViewController.m */,
+				1E6FDC2E1924EE9000E8C826 /* AlertNotification.h */,
+				1E6FDC2F1924EE9000E8C826 /* AlertNotification.m */,
 			);
 			name = G;
 			path = Controllers/G;
@@ -1318,6 +1326,8 @@
 				1E70867C189A849300328F76 /* Contact.m */,
 				1EAE079818FD22F1002326F4 /* PushRemote.h */,
 				1EAE079918FD22F1002326F4 /* PushRemote.m */,
+				1E30A5211923B08900676D0D /* Notification.h */,
+				1E30A5221923B08900676D0D /* Notification.m */,
 			);
 			name = Models;
 			path = ..;
@@ -1479,6 +1489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E30A5231923B08900676D0D /* Notification.m in Sources */,
 				DEA93B2A17204EA600303BB5 /* main.m in Sources */,
 				1E8A339118E045230049A6B7 /* NSString+MK_Misc.m in Sources */,
 				1E8A337D18E045230049A6B7 /* NSDate+MK_Comparison.m in Sources */,
@@ -1583,6 +1594,7 @@
 				1E891CA118E439F2003B45F8 /* UICanuLabelDate.m in Sources */,
 				1E279E5E18D2090C0076C25E /* ChatScrollView.m in Sources */,
 				1E62AE3018D84DD300520AA0 /* UICanuBottomBar.m in Sources */,
+				1E6FDC301924EE9000E8C826 /* AlertNotification.m in Sources */,
 				1E279E2E18D204320076C25E /* UICanuButtonSelect.m in Sources */,
 				1E8A33A918E1DA9A0049A6B7 /* CAKeyframeAnimation+AHEasing.m in Sources */,
 				1E279E2F18D204320076C25E /* UICanuButtonSignBottomBar.m in Sources */,

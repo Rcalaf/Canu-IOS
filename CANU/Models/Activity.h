@@ -34,6 +34,7 @@
 @property (readonly) NSURL *pictureUrl;
 @property (readonly) NSInteger status;
 @property (readonly) NSArray *attendeeIds;
+@property (readonly) NSMutableArray *notifications;
 
 @property (readonly) User *user;
 
@@ -45,7 +46,7 @@
  *  @param coordinate
  *  @param block
  */
-+ (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block;
++ (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate andUser:(User *)user WithBlock:(void (^)(NSArray *activities, NSError *error))block;
 
 + (void)createActivityForUserWithTitle:(NSString *)title
                            Description:(NSString *)description
@@ -91,6 +92,8 @@
 - (void)messagesWithBlock:(void (^)(NSArray *messages, NSError *error))block;
 - (void)newMessage:(NSString *)message
          WithBlock:(void (^)(NSError *error))block;
+
+- (void)deleteNotifications;
 
 + (NSString *)lengthToString:(NSInteger)length;
 - (NSInteger)lengthToInteger;

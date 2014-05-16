@@ -18,6 +18,7 @@
 #import "ErrorManager.h"
 #import "UserManager.h"
 #import "PushRemote.h"
+#import "AlertNotification.h"
 #import <Instabug/Instabug.h>
 #import <Crashlytics/Crashlytics.h>
 
@@ -129,35 +130,12 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    NSLog(@"normal %@",userInfo);
-   application.applicationIconBadgeNumber = 0 ;
     
     PushRemote *push = [[PushRemote alloc]initWitApplication:application AndUserInfo:userInfo];
     
-    [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:application.applicationIconBadgeNumber WithBlock:nil];
-    
     if (push.pushRemoteType == PushRemoteTypeDeepLinking) {
         
-        if (push.pushRemoteAction == PushRemoteActionChat || push.pushRemoteAction == PushRemoteActionEditActivity || push.pushRemoteAction == PushRemoteActionUserGo || push.pushRemoteAction == PushRemoteActionUserDontGo) {
-            [self.feedViewController changePosition:1];
-            [self.canuViewController changePage:1];
-            [self.feedViewController killCurrentDetailsViewController];
-            [self.feedViewController.profilFeed openActivityAfterPush:push.activityID];
-        } else if (push.pushRemoteAction == PushRemoteActionDeleteActivity) {
-            [self.feedViewController changePosition:1];
-            [self.canuViewController changePage:1];
-            [self.feedViewController killCurrentDetailsViewController];
-        } else if (push.pushRemoteAction == PushRemoteActionNewActivityAround) {
-            [self.feedViewController changePosition:0];
-            [self.canuViewController changePage:0];
-            [self.feedViewController killCurrentDetailsViewController];
-            [self.feedViewController.localFeed openActivityAfterPush:push.activityID];
-        } else if (push.pushRemoteAction == PushRemoteActionNewActivityInvit) {
-            [self.feedViewController changePosition:0.5];
-            [self.canuViewController changePage:0.5];
-            [self.feedViewController killCurrentDetailsViewController];
-            [self.feedViewController.tribeFeed openActivityAfterPush:push.activityID];
-        }
+        [self deepLinkingActivity:push];
         
     } else {
         
@@ -167,16 +145,51 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadCurrentChat" object:nil];
             } else {
                 
-                // Notification
-                
-                NSLog(@"Not Open");
+                AlertNotification *notification = [[AlertNotification alloc]initWithPush:push];
+                [notification show];
                 
             }
+            
+        } else if (push.pushRemoteAction == PushRemoteActionDeleteActivity) {
+            
+            AlertNotification *notification = [[AlertNotification alloc]initWithPush:push];
+            notification.enable = NO;
+            [notification show];
+            
+        } else {
+            
+            AlertNotification *notification = [[AlertNotification alloc]initWithPush:push];
+            [notification show];
             
         }
         
     }
         
+}
+
+- (void)deepLinkingActivity:(PushRemote *)push{
+    
+    if (push.pushRemoteAction == PushRemoteActionChat || push.pushRemoteAction == PushRemoteActionEditActivity || push.pushRemoteAction == PushRemoteActionUserGo || push.pushRemoteAction == PushRemoteActionUserDontGo) {
+        [self.feedViewController changePosition:1];
+        [self.canuViewController changePage:1];
+        [self.feedViewController killCurrentDetailsViewController];
+        [self.feedViewController.profilFeed openActivityAfterPush:push.activityID];
+    } else if (push.pushRemoteAction == PushRemoteActionDeleteActivity) {
+        [self.feedViewController changePosition:1];
+        [self.canuViewController changePage:1];
+        [self.feedViewController killCurrentDetailsViewController];
+    } else if (push.pushRemoteAction == PushRemoteActionNewActivityAround) {
+        [self.feedViewController changePosition:0];
+        [self.canuViewController changePage:0];
+        [self.feedViewController killCurrentDetailsViewController];
+        [self.feedViewController.localFeed openActivityAfterPush:push.activityID];
+    } else if (push.pushRemoteAction == PushRemoteActionNewActivityInvit) {
+        [self.feedViewController changePosition:0.5];
+        [self.canuViewController changePage:0.5];
+        [self.feedViewController killCurrentDetailsViewController];
+        [self.feedViewController.tribeFeed openActivityAfterPush:push.activityID];
+    }
+    
 }
 
 /*
@@ -264,10 +277,7 @@ NSString *const FBSessionStateChangedNotification = @"se.canu.canu:FBSessionStat
 - (void)applicationDidBecomeActive:(UIApplication *)application{
 
     [FBSession.activeSession handleDidBecomeActive];
-    application.applicationIconBadgeNumber = 0;
-    if (_device_token) {
-        [[[UserManager sharedUserManager] currentUser] updateDevice:_device_token Badge:0 WithBlock:nil];
-    }
+    [self.feedViewController reloadActivityOnlyIfPossible];
    
 }
 

@@ -158,3 +158,16 @@
 "New Password" = "New password";
 "Password Confirmation" = "Password confirmation";
 "Edit your password" = "Change your password";
+
+// Notification
+"New activity with your tribe" = "New activity with your tribe"; // New
+"New activity around you" = "New activity around you"; // New
+"is going" = "is going"; // New
+"is no longer going" = "is no longer going"; // New
+"New name for" = "New name for"; // New
+"New date" = "New date"; // New
+"New place" = "New place"; // New
+"New message from" = "New message from"; // New
+"New message" = "New message"; // New
+"Activity updated" = "Activity updated"; // New
+"Attendees list" = "Attendees list"; // New

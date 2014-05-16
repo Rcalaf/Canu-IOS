@@ -115,6 +115,9 @@
     if (textViewSizeHeight.height == textViewSize.height) {
         CGSize sizeOfText = [self.textMessage.text sizeWithFont:self.textMessage.font constrainedToSize:CGSizeMake(self.textMessage.frame.size.width, CGFLOAT_MAX) lineBreakMode:NSLineBreakByClipping];
         width = sizeOfText.width + 10 + 1;
+        if (!IS_OS_7_OR_LATER) {
+            width += 5;
+        }
     }
     
     self.backgroundMessage.frame = CGRectMake(_backgroundMessage.frame.origin.x, _backgroundMessage.frame.origin.y, width + 10, textViewSize.height + 3);

@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger, UICanuActivityCellStatus) {
 
 - (void)updateWithActivity:(Activity *)activity;
 
+- (void)forceDealloc;
+
 @end
 
 @protocol UICanuActivityCellScrollDelegate <NSObject>

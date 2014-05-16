@@ -36,6 +36,7 @@
 @property (nonatomic) BOOL isFirstTime;
 @property (nonatomic) BOOL loadFirstTime;
 @property (nonatomic) BOOL profileViewHidden;
+@property (nonatomic) BOOL fullOrEditViewOpen;
 @property (nonatomic) int marginFirstActivity;
 @property (nonatomic) int correctionFeedViewProfile;
 @property (nonatomic) CANUError canuError;
@@ -72,6 +73,8 @@
         self.view.frame = frame;
         
         self.profileViewHidden = NO;
+        
+        self.fullOrEditViewOpen = NO;
         
         self.user = user;
         
@@ -435,6 +438,8 @@
         
     }
     
+    self.fullOrEditViewOpen = NO;
+    
     UICanuNavigationController *navigation = appDelegate.canuViewController;
     
     navigation.control.hidden = NO;
@@ -453,6 +458,8 @@
             [self.delegate hiddenProfileView:YES Animated:YES];
         }
     }
+    
+    self.fullOrEditViewOpen = NO;
     
     NSMutableArray *newArrayCell = [[NSMutableArray alloc]init];
     
@@ -530,7 +537,19 @@
         self.scrollview.frame = CGRectMake(0, - 58, _scrollview.frame.size.width, _scrollview.frame.size.height);
     } completion:^(BOOL finished) {
         
-        [self load];
+        if (_feedType == FeedLocalType) {
+            [self load];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+        }else if (_feedType == FeedTribeType) {
+            [self load];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadProfile" object:nil];
+        }else if (_feedType == FeedProfileType) {
+            [self load];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLocal" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTribes" object:nil];
+        }
         
     }];
     
@@ -597,10 +616,18 @@
 
 #pragma mark -- Load
 
+- (void)loadOnlyIfPossible{
+    
+    if (!_fullOrEditViewOpen && !_isFirstTime) {
+        [self loadWithCompletion:nil];
+    }
+    
+}
+
 - (void)load{
     
     [self loadWithCompletion:nil];
-
+    
 }
 
 - (void)loadWithCompletion:(void (^)(NSError *error))block{
@@ -609,7 +636,7 @@
     
     if (_feedType == FeedLocalType) {
         
-        [Activity publicFeedWithCoorindate:_currentLocation WithBlock:^(NSArray *activities, NSError *error) {
+        [Activity publicFeedWithCoorindate:_currentLocation andUser:self.user WithBlock:^(NSArray *activities, NSError *error) {
             
             if (error) {
                 
@@ -828,6 +855,7 @@
         for (int i = 0; i < [_arrayCell count]; i++) {
             
             UICanuActivityCellScroll *cell = [_arrayCell objectAtIndex:i];
+            [cell forceDealloc];
             [cell removeFromSuperview];
             cell = nil;
             
@@ -977,6 +1005,8 @@
             
             float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
             
+            self.fullOrEditViewOpen = YES;
+            
             DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity For:CANUOpenDetailsActivityAfterFeedView andPosition:position];
             davc.delegate = self;
             davc.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -1011,7 +1041,7 @@
     }
     [buttons addObject:NSLocalizedString(@"Copy adress", nil)];
     
-    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_camera"] andButtons:buttons];
+    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_maps"] andButtons:buttons];
     activityView.delegate = self;
     activityView.object = cell;
     [activityView show];
@@ -1114,6 +1144,8 @@
             
             float position = cellTouch.frame.origin.y - _scrollview.contentOffset.y;
             
+            self.fullOrEditViewOpen = YES;
+            
             DetailActivityViewControllerAnimate *davc = [[DetailActivityViewControllerAnimate alloc]initFrame:CGRectMake(0, 0, 320, [[UIScreen mainScreen] bounds].size.height) andActivity:activity For:CANUOpenDetailsActivityAfterPush andPosition:position];
             davc.delegate = self;
             davc.modalPresentationStyle = UIModalPresentationCurrentContext;
@@ -1144,6 +1176,8 @@
             [self.delegate hiddenProfileView:YES Animated:YES];
         }
     }
+    
+    self.fullOrEditViewOpen = YES;
     
     self.cellSaveForEdit = cellTouch;
     
@@ -1232,6 +1266,8 @@
         }];
         
     }
+    
+    self.fullOrEditViewOpen = NO;
     
     if (viewController.closeAfterDelete) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadActivity" object:nil];

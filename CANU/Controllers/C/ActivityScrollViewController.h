@@ -38,6 +38,8 @@ typedef enum {
  */
 - (void)load;
 
+- (void)loadOnlyIfPossible;
+
 /**
  *  Remove the view after logout / and children
  */

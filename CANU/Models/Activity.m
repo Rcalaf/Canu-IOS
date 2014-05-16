@@ -14,6 +14,7 @@
 #import "UICanuActivityCellScroll.h"
 #import "UserManager.h"
 #import "Contact.h"
+#import "Notification.h"
 
 @interface Activity () <MKAnnotation>
 
@@ -227,6 +228,19 @@
     
     _invitationToken = [attributes valueForKeyPath:@"invitation_token"];
     
+    if ([[attributes objectForKey:@"all_notifications"] count] != 0) {
+        
+        _notifications = [[NSMutableArray alloc]init];
+        
+        for (NSInteger i = 0; i < [[attributes objectForKey:@"all_notifications"] count]; i++) {
+            
+            Notification *notification = [[Notification alloc]initWithAttributes:[[attributes objectForKey:@"all_notifications"] objectAtIndex:i]];
+            [_notifications addObject:notification];
+            
+        }
+        
+    }
+    
 }
 
 /**
@@ -235,7 +249,7 @@
  *  @param coordinate
  *  @param block
  */
-+ (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate WithBlock:(void (^)(NSArray *activities, NSError *error))block {
++ (void)publicFeedWithCoorindate:(CLLocationCoordinate2D)coordinate andUser:(User *)user WithBlock:(void (^)(NSArray *activities, NSError *error))block {
     
     NSDictionary *parameters;
     if (CLLocationCoordinate2DIsValid(coordinate)) {
@@ -244,10 +258,15 @@
         parameters = nil;
     }
     
+    NSString *url = [NSString stringWithFormat:@"/users/%lu/activities/public/",(unsigned long)user.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    [[AFCanuAPIClient sharedClient] GET:@"activities" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFCanuAPIClient *operation = [AFCanuAPIClient sharedClient];
+    
+    [operation.requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", user.token] forHTTPHeaderField:@"Authorization"];
+    
+    [operation GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableArray *mutableActivities = [NSMutableArray arrayWithCapacity:[responseObject count]];
         for (NSDictionary *attributes in responseObject) {
             Activity *activity = [[Activity alloc] initWithAttributes:attributes];
@@ -673,6 +692,20 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];
+    
+}
+
+- (void)deleteNotifications{
+    
+    for (int i = 0; i < [_notifications count]; i++) {
+        
+        Notification *notif = [_notifications objectAtIndex:i];
+        notif = nil;
+        
+    }
+    
+    [_notifications removeAllObjects];
+    _notifications = nil;
     
 }
 

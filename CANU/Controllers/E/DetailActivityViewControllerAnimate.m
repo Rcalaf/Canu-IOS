@@ -33,6 +33,7 @@
 #import "InvitOthersViewController.h"
 #import "ActivitiesFeedViewController.h"
 #import "UIActivityViewControllerCustom.h"
+#import "Notification.h"
 
 @interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate,InvitOthersViewControllerDelegate,UIActivityViewControllerCustomDelegate>
 
@@ -179,6 +180,10 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadCurrentChat) name:@"reloadCurrentChat" object:nil];
+    
+    if ([self.activity.notifications count] != 0) {
+        [NSThread detachNewThreadSelector:@selector(readNotification) toTarget:self withObject:nil];
+    }
 
 }
 
@@ -403,6 +408,20 @@
     return returnValue;
 }
 
+- (void)readNotification{
+    
+    [Notification readNotificationsForUser:[UserManager sharedUserManager].currentUser ToActivity:self.activity Block:^(NSError *error) {
+        
+        if (!error) {
+            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+            [self.activity deleteNotifications];
+            [appDelegate.feedViewController updateActivity:_activity];
+        }
+        
+    }];
+    
+}
+
 #pragma mark - ChatScrollViewDelegate
 
 - (void)openDesciption{
@@ -535,6 +554,9 @@
     NSString *message = _input.text;
     
     if ([message length] != 0 && ![message isEqualToString:NSLocalizedString(@"Write something nice...", nil)] && ![message isEqualToString:@"\n"]) {
+        
+        [self.input becomeFirstResponder];
+        
         [self.chatView addSendMessage:message];
         
         self.input.text = @"";
@@ -628,7 +650,12 @@
                 
                 if ([_activity.attendeeIds count] != 1) {
                     self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[self.activity.attendeeIds count] -1];
+                } else {
+                    self.counterInvit.text = @"";
                 }
+                
+                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+                [appDelegate.feedViewController updateActivity:_activity];
                 
             }
         }];
@@ -647,7 +674,12 @@
                 
                 if ([_activity.attendeeIds count] != 1) {
                     self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[self.activity.attendeeIds count] -1];
+                } else {
+                    self.counterInvit.text = @"";
                 }
+                
+                AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+                [appDelegate.feedViewController updateActivity:_activity];
                 
             }
         }];
@@ -658,7 +690,11 @@
     
     self.activity = activity;
     
-    self.userName.text = self.activity.user.userName;
+    if ([self.activity.user.firstName mk_isEmpty]) {
+        self.userName.text = self.activity.user.userName;
+    } else {
+        self.userName.text = self.activity.user.firstName;
+    }
     self.nameActivity.text = self.activity.title;
     [self.date setDate:self.activity];
     self.location.text = self.activity.locationDescription;
@@ -872,7 +908,7 @@
     }
     [buttons addObject:NSLocalizedString(@"Copy adress", nil)];
     
-    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_camera"] andButtons:buttons];
+    UIActivityViewControllerCustom *activityView = [[UIActivityViewControllerCustom alloc]initWithUIImage:[UIImage imageNamed:@"D_maps"] andButtons:buttons];
     activityView.delegate = self;
     [activityView show];
     

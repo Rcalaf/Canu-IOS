@@ -12,10 +12,7 @@
 #import "User.h"
 #import "ErrorManager.h"
 
-@class UICanuNavigationController;
-
-
-@class ActivitiesFeedViewController;
+@class ActivitiesFeedViewController, PushRemote, UICanuNavigationController;
 
 
 extern NSString *const FBSessionStateChangedNotification;
@@ -48,6 +45,8 @@ extern NSString *const FBSessionStateChangedNotification;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+- (void)deepLinkingActivity:(PushRemote *)push;
 
 //Facebook SDK login methods
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;

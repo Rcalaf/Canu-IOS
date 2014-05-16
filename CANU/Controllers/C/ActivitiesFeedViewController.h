@@ -39,4 +39,8 @@
 
 - (void)updateActivity:(Activity *)activity;
 
+- (void)reloadActivity;
+
+- (void)reloadActivityOnlyIfPossible;
+
 @end

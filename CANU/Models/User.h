@@ -89,10 +89,6 @@
 - (void)updateDeviceToken:(NSString *)device_token
                     Block: (void (^)(NSError *error))block;
 
-- (void)updateDevice:(NSString *)device_token
-               Badge:(NSInteger)badge
-           WithBlock:(void (^)(NSError *))block;
-
 /**
  *  Detec the CANU User with the phone number in the phone book
  *

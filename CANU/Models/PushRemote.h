@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, PushRemoteType) {
 @property (nonatomic) PushRemoteType pushRemoteType;
 @property (nonatomic) PushRemoteAction pushRemoteAction;
 @property (nonatomic) NSInteger activityID;
+@property (strong, nonatomic) NSString *text;
 
 - (instancetype)initWitApplication:(UIApplication *)application AndUserInfo:(NSDictionary *)userInfo;
 

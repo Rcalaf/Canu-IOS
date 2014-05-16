@@ -13,18 +13,26 @@
 #import "UICanuLabelActivityName.h"
 #import "UICanuLabelLocation.h"
 #import "Activity.h"
+#import "Notification.h"
 #import "ProfilePicture.h"
 #import "UICanuLabelDate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface UICanuActivityCellScroll ()
 
+@property (nonatomic) NSInteger previousNotification;
 @property (nonatomic, strong) UIImageView *profilePicture;
+@property (nonatomic, strong) UIImageView *badge;
 @property (nonatomic, strong) UILabel *counterInvit;
+@property (nonatomic, strong) UILabel *textNotification;
 @property (nonatomic, strong) UICanuLabelUserName *userName;
 @property (nonatomic, strong) UICanuLabelActivityName *nameActivity;
 @property (nonatomic, strong) UICanuLabelLocation *location;
 @property (nonatomic, strong) UICanuLabelDate *date;
 @property (nonatomic, strong) UIView *wrapperActivityBottom;
+@property (nonatomic, strong) UIScrollView *wrapperActivityBottomNotification;
+@property (nonatomic) BOOL stopAnimation;
+@property (nonatomic) BOOL adressIsShowed;
 
 @end
 
@@ -36,6 +44,9 @@
     if (self) {
         
         self.activity                         = activity;
+        
+        self.stopAnimation = NO;
+        self.adressIsShowed = YES;
 
         UIImageView *background               = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -2, 304, 105)];
         background.image                      = [UIImage imageNamed:@"F_activity_background"];
@@ -100,16 +111,30 @@
         
         UIImageView *backgroundBottom = [[UIImageView alloc]initWithFrame:CGRectMake(-2, -1, 304, 33)];
         backgroundBottom.image = [UIImage imageNamed:@"E_Activity_bottom"];
-        backgroundBottom.userInteractionEnabled = YES;
         [self.wrapperActivityBottom addSubview:backgroundBottom];
         
-        self.location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, -1, 210, 30)];
-        self.location.text = _activity.locationDescription;
-        [self.wrapperActivityBottom addSubview:_location];
+        self.wrapperActivityBottomNotification = [[UIScrollView alloc]initWithFrame:CGRectMake(0, -1, 300, 30)];
+        self.wrapperActivityBottomNotification.scrollEnabled = NO;
+        self.wrapperActivityBottomNotification.contentSize = CGSizeMake(300, 60);
+        [self.wrapperActivityBottom addSubview:_wrapperActivityBottomNotification];
         
-        self.date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(frame.size.width - 310 -2, -1, 300, 30)];
+        UIImageView *badgeBottom = [[UIImageView alloc] initWithFrame:CGRectMake(8, 8 + 30, 13, 13)];
+        badgeBottom.image = [UIImage imageNamed:@"All_badge_notification"];
+        [self.wrapperActivityBottomNotification addSubview:badgeBottom];
+        
+        self.textNotification = [[UILabel alloc]initWithFrame:CGRectMake( 25, 30, 240, 30)];
+        self.textNotification.textColor = UIColorFromRGB(0x2b4b58);
+        self.textNotification.backgroundColor = [UIColor clearColor];
+        self.textNotification.font = [UIFont fontWithName:@"Lato-Regular" size:10];
+        [self.wrapperActivityBottomNotification addSubview:_textNotification];
+        
+        self.location = [[UICanuLabelLocation alloc]initWithFrame:CGRectMake(10, 0, 210, 30)];
+        self.location.text = _activity.locationDescription;
+        [self.wrapperActivityBottomNotification addSubview:_location];
+        
+        self.date = [[UICanuLabelDate alloc]initWithFrame:CGRectMake(frame.size.width - 310 -2, 0, 300, 30)];
         [self.date setDate:_activity];
-        [self.wrapperActivityBottom addSubview:_date];
+        [self.wrapperActivityBottomNotification addSubview:_date];
         
         CGSize sizeLocation = [self.location.text sizeWithFont:self.location.font
                                              constrainedToSize:self.location.frame.size
@@ -121,7 +146,7 @@
         
         if (10 + sizeLocation.width + 10 + sizeDate.width + 10 > 280) {
             int gap = 10 + sizeLocation.width + 10 + sizeDate.width + 10 - 300;
-            self.location.frame = CGRectMake(10, -1, sizeLocation.width - gap, 30);
+            self.location.frame = CGRectMake(10, 0, sizeLocation.width - gap, 30);
         }
         
         UIButton *areaTouch = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 240, 95)];
@@ -131,6 +156,17 @@
         UIButton *areaAdress = [[UIButton alloc]initWithFrame:CGRectMake(0, 95, 150, 35)];
         [areaAdress addTarget:self action:@selector(touchAdress) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:areaAdress];
+        
+        if ([self.activity.notifications count] != 0) {
+            self.badge = [[UIImageView alloc] initWithFrame:CGRectMake(33, 9, 13, 13)];
+            self.badge.image = [UIImage imageNamed:@"All_badge_notification"];
+            [self addSubview:_badge];
+            
+            self.previousNotification = 0;
+            
+            [self animateNotification];
+            
+        }
         
     }
     return self;
@@ -145,7 +181,11 @@
 }
 
 - (void)touchAdress{
-    [self.delegate cellEventAdresse:self];
+    if (_adressIsShowed) {
+        [self.delegate cellEventAdresse:self];
+    } else {
+        [self.delegate cellEventTouched:self]; 
+    }
 }
 
 - (void)animateAfterDelay:(float)delay{
@@ -161,6 +201,7 @@
     self.location.alpha = 0;
     self.date.alpha = 0;
     self.actionButton.transform = CGAffineTransformMakeScale(0, 0);
+    self.badge.transform = CGAffineTransformMakeScale(0, 0);
     
     [UIView animateWithDuration:0.4 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.alpha = 1;
@@ -190,6 +231,12 @@
         } completion:^(BOOL finished) {
             
         }];
+        
+        [UIView animateWithDuration:0.3 delay:0.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.badge.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL finished) {
+            
+        }];
     }];
     
 }
@@ -208,21 +255,94 @@
         self.wrapperActivityBottom.frame = CGRectMake(2, 102, 300, 30);
     }
     
-    
 }
 
 - (void)updateWithActivity:(Activity *)activity{
     
     self.activity = activity;
     
-    self.userName.text     = activity.user.userName;
+    if ([activity.user.firstName mk_isEmpty]) {
+        self.userName.text = activity.user.userName;
+    } else {
+        self.userName.text = activity.user.firstName;
+    }
     if ([_activity.attendeeIds count] != 1) {
-    self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[activity.attendeeIds count] -1];
+        self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[activity.attendeeIds count] -1];
+    } else {
+        self.counterInvit.text = @"";
     }
     self.nameActivity.text = activity.title;
     self.location.text     = activity.locationDescription;
     [self.date setDate:_activity];
     
+    if ( _activity.status == UICanuActivityCellGo ) {
+        [self.actionButton setImage:[UIImage imageNamed:@"feed_action_yes"] forState:UIControlStateNormal];
+    } else if ( _activity.status == UICanuActivityCellToGo ){
+        [self.actionButton setImage:[UIImage imageNamed:@"feed_action_go"] forState:UIControlStateNormal];
+    } else {
+        [self.actionButton setImage:[UIImage imageNamed:@"feed_action_edit"] forState:UIControlStateNormal];
+        self.actionButton.frame = CGRectMake(self.frame.size.width - 23 - 30, 8, 45, 45);
+    }
+    
+    [self.badge removeFromSuperview];
+    
+    if ([activity.notifications count] != 0) {
+        
+        self.stopAnimation = NO;
+        
+        self.badge = [[UIImageView alloc] initWithFrame:CGRectMake(33, 9, 13, 13)];
+        self.badge.image = [UIImage imageNamed:@"All_badge_notification"];
+        [self addSubview:_badge];
+        
+        self.previousNotification = 0;
+        
+        [self animateNotification];
+        
+    } else {
+        self.stopAnimation = YES;
+        self.wrapperActivityBottomNotification.contentOffset = CGPointMake(0, 0);
+        [self.wrapperActivityBottomNotification.layer removeAllAnimations];
+        self.adressIsShowed = YES;
+    }
+    
+}
+
+- (void)forceDealloc{
+    
+    self.stopAnimation = YES;
+    
+}
+
+- (void)animateNotification{
+    
+    if (!_stopAnimation) {
+        
+        self.adressIsShowed = YES;
+        
+        Notification *notif = [self.activity.notifications objectAtIndex:_previousNotification];
+        
+        self.previousNotification++;
+        
+        if (self.previousNotification >= [self.activity.notifications count]) {
+            self.previousNotification = 0;
+        }
+        
+        self.textNotification.text = notif.text;
+        
+        [UIView animateWithDuration:0.4 delay:4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.wrapperActivityBottomNotification.contentOffset = CGPointMake(0, 30);
+        } completion:^(BOOL finished) {
+            self.adressIsShowed = NO;
+            [UIView animateWithDuration:0.4 delay:4 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.wrapperActivityBottomNotification.contentOffset = CGPointMake(0, 0);
+            } completion:^(BOOL finished) {
+                
+                [self animateNotification];
+                
+            }];
+        }];
+    }
+
 }
 
 @end

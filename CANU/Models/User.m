@@ -683,9 +683,16 @@
     [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
     
     [[AFCanuAPIClient sharedClient] POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSInteger countNotification = [[responseObject objectForKey:@"number_notifications"] integerValue];
+        
+        UIApplication *application = [UIApplication sharedApplication];
+        application.applicationIconBadgeNumber = countNotification;
+        
         if (block) {
             block(nil);
         }
+        
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
@@ -700,45 +707,6 @@
                 [[ErrorManager sharedErrorManager] serverIsDown];
             } else if (canuError == CANUErrorUnknown) {
                 [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDeviceToken:Block:"];
-            }
-            
-        }];
-        
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    }];
-
-}
-
-- (void)updateDevice:(NSString *)device_token Badge:(NSInteger)badge WithBlock:(void (^)(NSError *))block{
-    
-    if (!device_token) device_token = @"";
-    
-    NSDictionary *parameters = [[NSDictionary alloc] initWithObjects: [NSArray arrayWithObject:[NSNumber numberWithInteger:badge]] forKeys: [NSArray arrayWithObject:@"badge"]];
-    
-    NSString *url = [NSString stringWithFormat:@"/devices/%@/badge",device_token];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    [[AFCanuAPIClient sharedClient].requestSerializer setValue:[NSString stringWithFormat:@"Token token=\"%@\"", self.token] forHTTPHeaderField:@"Authorization"];
-    
-    [[AFCanuAPIClient sharedClient] PUT:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (block) {
-            block(nil);
-        }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
-            
-            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
-            
-            if (block) {
-                block(customError);
-            }
-            
-            if (canuError == CANUErrorServerDown) {
-                [[ErrorManager sharedErrorManager] serverIsDown];
-            } else if (canuError == CANUErrorUnknown) {
-                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"User" function:@"updateDevice:Badge:WithBlock:"];
             }
             
         }];

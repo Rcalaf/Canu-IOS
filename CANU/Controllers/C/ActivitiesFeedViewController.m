@@ -345,6 +345,12 @@
     [self.profilFeed updateActivity:activity];
 }
 
+- (void)reloadActivityOnlyIfPossible{
+    [self.localFeed loadOnlyIfPossible];
+    [self.tribeFeed loadOnlyIfPossible];
+    [self.profilFeed loadOnlyIfPossible];
+}
+
 #pragma mark - NSNotificationCenter
 
 - (void)reloadActivity{

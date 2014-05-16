@@ -58,6 +58,8 @@
             
         }
         
+        self.text = [[userInfo valueForKeyPath:@"aps"] valueForKeyPath:@"alert"];
+        
     }
     return self;
 }

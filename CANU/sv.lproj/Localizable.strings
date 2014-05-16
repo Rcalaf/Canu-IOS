@@ -87,7 +87,7 @@
 "OK" = "Ok";
 "Ok" = "Ok";
 "Settings > Privacy > Contacts" = "Ge tillgång till dina kontakter genom att gå till \nInställningar > Integritetsskydd > Kontakter \noch aktivera CANU";
-"We need to know where you are" = "Det är bra om vi vet du är";
+"We need to know where you are" = "Aktivera GPS för att se aktiviteter i din närhet";
 "Enable my GPS" = "Aktivera GPS";
 "Settings > Privacy > Location" = "För att få tillgång till det lokala flödet gå till \nInställningar > Integritetsskydd > Platstjänster\noch aktivera CANU";
 "Would you like to be notified \n\nwhen your friends invite you ?" = "Vill få notiser när \ndina vänner bjuder in dig till aktiviteter?";
