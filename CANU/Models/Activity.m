@@ -258,6 +258,12 @@
         parameters = nil;
     }
     
+    if ([[UserManager sharedUserManager] userIsLogIn]) {
+        
+    } else {
+        
+    }
+    
     NSString *url = [NSString stringWithFormat:@"/users/%lu/activities/public/",(unsigned long)user.userId];
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -277,21 +283,33 @@
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+        
+        if ([[UserManager sharedUserManager] userIsLogIn]) {
             
-            NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+            [[ErrorManager sharedErrorManager] detectError:error Block:^(CANUError canuError) {
+                
+                NSError *customError = [NSError errorWithDomain:@"CANUError" code:canuError userInfo:nil];
+                
+                if (block) {
+                    block([NSArray alloc],customError);
+                }
+                
+                if (canuError == CANUErrorServerDown) {
+                    [[ErrorManager sharedErrorManager] serverIsDown];
+                } else if (canuError == CANUErrorUnknown) {
+                    [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"Activity" function:@"publicFeedWithCoorindate:WithBlock:"];
+                }
+                
+            }];
             
+        } else {
             if (block) {
-                block([NSArray alloc],customError);
+                
+                NSArray *emptyArray = [[NSArray alloc]init];
+                
+                block(emptyArray,nil);
             }
-            
-            if (canuError == CANUErrorServerDown) {
-                [[ErrorManager sharedErrorManager] serverIsDown];
-            } else if (canuError == CANUErrorUnknown) {
-                [[ErrorManager sharedErrorManager] unknownErrorDetected:error ForFile:@"Activity" function:@"publicFeedWithCoorindate:WithBlock:"];
-            }
-            
-        }];
+        }
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     }];

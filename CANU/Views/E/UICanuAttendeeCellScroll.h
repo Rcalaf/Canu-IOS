@@ -13,6 +13,7 @@
 @interface UICanuAttendeeCellScroll : UIView
 
 @property (nonatomic) id delegate;
+@property (nonatomic) BOOL tribeMode;
 
 - (id)initWithFrame:(CGRect)frame andUser:(User *)user orContact:(Contact *)contact;
 

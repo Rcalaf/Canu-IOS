@@ -20,9 +20,17 @@
 @property (nonatomic) BOOL stopLoadMore;
 @property (nonatomic) NSInteger numberCell;
 @property (strong, nonatomic) Contact *contactLocal;
+@property (strong, nonatomic) NSString *searchWords;
 @property (strong, nonatomic) NSMutableArray *arrayContact;
 @property (strong, nonatomic) NSMutableArray *arrayCanuUser;
 @property (strong, nonatomic) NSMutableArray *arrayCellCanuUser;
+@property (strong, nonatomic) UIButton *searchApi;
+@property (strong, nonatomic) UILabel *textsearchApi;
+@property (strong, nonatomic) UILabel *noResult;
+@property (strong, nonatomic) UILabel *public;
+@property (strong, nonatomic) UILabel *myTribes;
+@property (strong, nonatomic) UILabel *myCANUContact;
+@property (strong, nonatomic) UILabel *myContact;
 
 @end
 
@@ -60,6 +68,42 @@
         [self addSubview:_scrollView];
         
         self.alpha = 0;
+        
+        // Button search api
+        self.searchApi = [[UIButton alloc]initWithFrame:CGRectMake(10, 100, 300, 55)];
+        [self.searchApi addTarget:self action:@selector(searchToAllUser) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.textsearchApi = [[UILabel alloc]initWithFrame:CGRectMake(10, 0, 280, 55)];
+        self.textsearchApi.textColor = UIColorFromRGB(0x829096);
+        self.textsearchApi.font = [UIFont fontWithName:@"Lato-Regular" size:14];
+        self.textsearchApi.textAlignment = NSTextAlignmentCenter;
+        [self.searchApi addSubview:_textsearchApi];
+        
+        self.noResult = [[UILabel alloc]initWithFrame:CGRectMake(20, 100, 300, 55)];
+        self.noResult.textColor = UIColorFromRGB(0x2b4b58);
+        self.noResult.text = NSLocalizedString(@"No results ...", nil);
+        self.noResult.font = [UIFont fontWithName:@"Lato-Bold" size:14];
+        
+        self.public = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 15)];
+        self.public.textColor = UIColorFromRGB(0x2b4b58);
+        self.public.text = NSLocalizedString(@"Local", nil);
+        self.public.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+        [self.scrollView addSubview:_public];
+        
+        self.myTribes = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 15)];
+        self.myTribes.textColor = UIColorFromRGB(0x2b4b58);
+        self.myTribes.text = NSLocalizedString(@"My tribe", nil);
+        self.myTribes.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+        
+        self.myCANUContact = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 15)];
+        self.myCANUContact.textColor = UIColorFromRGB(0x2b4b58);
+        self.myCANUContact.text = NSLocalizedString(@"My CANU contacts", nil);
+        self.myCANUContact.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+        
+        self.myContact = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, 280, 15)];
+        self.myContact.textColor = UIColorFromRGB(0x2b4b58);
+        self.myContact.text = NSLocalizedString(@"My contacts", nil);
+        self.myContact.font = [UIFont fontWithName:@"Lato-Regular" size:13];
         
         NSError *error = [PhoneBook checkPhoneBookAccess];
         
@@ -272,6 +316,26 @@
         
     }
     
+    if (self.searchApi.superview) {
+        [self.searchApi removeFromSuperview];
+    }
+    
+    if (self.noResult.superview) {
+        [self.noResult removeFromSuperview];
+    }
+    
+    if (self.myTribes.superview) {
+        [self.myTribes removeFromSuperview];
+    }
+    
+    if (self.myCANUContact.superview) {
+        [self.myCANUContact removeFromSuperview];
+    }
+    
+    if (self.myContact.superview) {
+        [self.myContact removeFromSuperview];
+    }
+    
     NSInteger maxCanuUser = _numberCell;
     
     if (maxCanuUser > [_arrayCanuUser count]) {
@@ -285,10 +349,10 @@
         self.stopLoadMore = YES;
     }
     
-    NSInteger marginTop = 10;
+    NSInteger marginTop = 10 + 20;
     
     if (_isSearchMode) {
-        marginTop = 20;
+        marginTop = 20 + 20;
     }
     
     int row = 0;
@@ -307,6 +371,8 @@
 //        
 //        row++;
 //    }
+    
+    self.public.frame = CGRectMake(20, marginTop - 20, 280, 15);
     
     UICanuContactCell *celllocal = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:_contactLocal AndUser:nil];
     celllocal.delegate = self;
@@ -333,6 +399,13 @@
     }
     
     row++;
+    
+    if (maxCanuUser != 0) {
+        [self.scrollView addSubview:_myCANUContact];
+        self.myCANUContact.frame = CGRectMake(20, 10 + marginTop + row * (55 + 5), 280, 15);
+        marginTop += 30;
+        self.myCANUContact.text = NSLocalizedString(@"My CANU contacts", nil);
+    }
     
     for (int i = 0; i < maxCanuUser; i++) {
         
@@ -372,7 +445,7 @@
             
             if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
                 User *userData = [_arrayAllUserSelected objectAtIndex:i];
-                if (userData == cellContact.user) {
+                if ([userData.phoneNumber isEqualToString:cellContact.user.phoneNumber]) {
                     cellContact.square.image = [UIImage imageNamed:@"F1_Add_Cell_Location_checked"];
                 }
             }
@@ -381,6 +454,12 @@
         
         row++;
         
+    }
+    
+    if (maxContact != 0) {
+        [self.scrollView addSubview:_myContact];
+        self.myContact.frame = CGRectMake(20, 10 + marginTop + row * (55 + 5), 280, 15);
+        marginTop += 30;
     }
     
     for (int i = 0; i < maxContact; i++) {
@@ -413,7 +492,7 @@
                 
             }
             
-            UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop + row * (55 + 5), 300, 55) WithContact:contact AndUser:nil];
+            UICanuContactCell *cellContact = [[UICanuContactCell alloc]initWithFrame:CGRectMake(10, marginTop+row * (55 + 5), 300, 55) WithContact:contact AndUser:nil];
             cellContact.delegate = self;
             cellContact.isDisable = alreadySelected;
             [self.scrollView addSubview:cellContact];
@@ -433,6 +512,16 @@
             row++;
         }
         
+    }
+    
+    if ([self.arrayContact count] == 0 && [self.arrayCanuUser count] == 0 ) {
+        // Button api
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ \"%@\" %@",NSLocalizedString(@"SEARCH", nil),self.searchWords,NSLocalizedString(@"among all users", nil) ]];
+        [attributeString addAttribute:NSUnderlineStyleAttributeName
+                                value:[NSNumber numberWithInt:1]
+                                range:(NSRange){0,[attributeString length]}];
+        self.textsearchApi.attributedText = attributeString;
+        [self.scrollView addSubview:_searchApi];
     }
     
     NSInteger marginForLoadMore = 100;
@@ -479,6 +568,38 @@
     
 }
 
+- (void)searchToAllUser{
+    
+    NSString *firstCharactere = [self.searchWords substringToIndex:1];
+    
+    if ([firstCharactere isEqualToString:@" "]) {
+        self.searchWords = [self.searchWords substringFromIndex:1];
+    }
+    
+    [[UserManager sharedUserManager].currentUser searchUserWithWords:self.searchWords WithBlock:^(NSMutableArray *arrayCANUUser, NSError *error) {
+        
+        self.numberCell = 10;
+        self.stopLoadMore = NO;
+        self.loadMore = NO;
+        
+        [self.arrayContact  removeAllObjects];
+        [self.arrayCanuUser  removeAllObjects];
+        
+        self.arrayCanuUser = arrayCANUUser;
+        
+        [self showUser];
+        
+        if ([arrayCANUUser count] == 0) {
+            [self.searchApi removeFromSuperview];
+            [self.scrollView addSubview:_noResult];
+        }
+        
+        self.myCANUContact.text = NSLocalizedString(@"All CANU Users", nil);
+        
+    }];
+    
+}
+
 #pragma mark - UICanuContactCellDelegate
 
 - (void)cellLocationIsTouched:(UICanuContactCell *)cell{
@@ -494,7 +615,7 @@
             }
         } else if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
             User *userData = [_arrayAllUserSelected objectAtIndex:i];
-            if (userData == cell.user) {
+            if ([userData.phoneNumber isEqualToString:cell.user.phoneNumber]) {
                 isAlreadySelected = YES;
             }
         }
@@ -504,7 +625,20 @@
     if (isAlreadySelected) {
         
         if (cell.user) {
-            [_arrayAllUserSelected removeObject:cell.user];
+            if ([_arrayAllUserSelected containsObject:cell.user]) {
+                [_arrayAllUserSelected removeObject:cell.user];
+            } else {
+                for (int i = 0; i < [_arrayAllUserSelected count]; i++) {
+                    
+                    if ([[_arrayAllUserSelected objectAtIndex:i] isKindOfClass:[User class]]) {
+                        User *userData = [_arrayAllUserSelected objectAtIndex:i];
+                        if ([userData.phoneNumber isEqualToString:cell.user.phoneNumber]) {
+                            [self.arrayAllUserSelected removeObjectAtIndex:i];
+                        }
+                    }
+                    
+                }
+            }
         } else {
             [_arrayAllUserSelected removeObject:cell.contact];
         }
@@ -525,11 +659,11 @@
     
     [self.delegate changeUserSelected:_arrayAllUserSelected];
     
-//    [self searchPhoneBook:@""];
-    
 }
 
 - (void)searchPhoneBook:(NSString *)searchWords{
+    
+    self.searchWords = searchWords;
     
     searchWords = [searchWords stringByReplacingOccurrencesOfString:@" " withString:@""];
     searchWords = [searchWords lowercaseString];

@@ -53,6 +53,11 @@
             self.user = user;
             if (![user.firstName mk_isEmpty]) {
                 name.text = user.firstName;
+            } else if (!contact){
+                [adress removeFromSuperview];
+                adress = nil;
+                name.text = user.userName;
+                name.frame = CGRectMake(55, 17, 233, 20);
             }
             adress.text = user.userName;
             [avatar setImageWithURL:user.profileImageUrl placeholderImage:[ProfilePicture defaultProfilePicture35]];

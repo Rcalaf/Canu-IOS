@@ -105,7 +105,7 @@
             self.notificationText.frame = CGRectMake( - 20 + _notificationText.frame.origin.x, _notificationText.frame.origin.y, _notificationText.frame.size.width, _notificationText.frame.size.height);
             self.notificationText.alpha = 1;
         } completion:^(BOOL finished) {
-//            self.timer = [NSTimer scheduledTimerWithTimeInterval: 4 target: self selector:@selector(close) userInfo: nil repeats:NO];
+            self.timer = [NSTimer scheduledTimerWithTimeInterval: 4 target: self selector:@selector(close) userInfo: nil repeats:NO];
         }];
     }];
     

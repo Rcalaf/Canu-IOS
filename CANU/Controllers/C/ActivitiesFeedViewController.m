@@ -20,8 +20,9 @@
 #import "GAIFields.h"
 #import "TutorialViewController.h"
 #import "UIView+DTDebug.h"
+#import "InvitListViewController.h"
 
-@interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,ActivityScrollViewControllerDelegate>
+@interface ActivitiesFeedViewController () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,ActivityScrollViewControllerDelegate, UIProfileViewDelegate>
 
 @property (nonatomic) float lastPosition;
 @property (nonatomic) BOOL firstAnimationEmptyFeed;
@@ -30,6 +31,7 @@
 @property (strong, nonatomic) UIProfileView *profileView;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (strong, nonatomic) TutorialViewController *tutorialViewController;
+@property (strong, nonatomic) InvitListViewController *invitList;
 
 @end
 
@@ -107,6 +109,11 @@
         [backgroundImageEmptyFeed addMotionEffect:group];
     }
     
+    self.invitList = [[InvitListViewController alloc]init];
+    self.invitList.view.frame = CGRectMake(320, 0, 320, self.view.frame.size.height);
+    [self addChildViewController:_invitList];
+    [self.view addSubview:_invitList.view];
+    
     self.localFeed = [[ActivityScrollViewController alloc] initFor:FeedLocalType andUser:_user andFrame:CGRectMake(-320, 0, 320, self.view.frame.size.height)];
     self.localFeed.delegate = self;
     [self addChildViewController:_localFeed];
@@ -123,6 +130,7 @@
     [self.view addSubview:_profilFeed.view];
     
     self.profileView = [[UIProfileView alloc] initWithFrame:CGRectMake(320, self.view.frame.size.height - 165, 320, 165) User:self.user];
+    self.profileView.delegate = self;
     [self.view addSubview:_profileView];
     
     self.animationCreateActivity = [[AnimationCreateActivity alloc]init];
@@ -419,6 +427,26 @@
     
     [self.profileView animationProfileViewWithScroll:offset];
     self.profileView.frame = CGRectMake(_profileView.frame.origin.x, self.view.frame.size.height - (_profileView.frame.size.height - offset), _profileView.frame.size.width, _profileView.frame.size.height);
+    
+}
+
+#pragma mark - UIProfileViewDelegate
+
+- (void)openTribeList{
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    UICanuNavigationController *navigation = appDelegate.canuViewController;
+    
+    self.invitList.view.frame = CGRectMake( 0, 0, 320, self.view.frame.size.height);
+    [self.invitList start];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.profilFeed.view.frame = CGRectMake( -320, self.profilFeed.view.frame.origin.y, self.profilFeed.view.frame.size.width, self.profilFeed.view.frame.size.height);
+        [navigation changePosition:1];
+        self.profileView.frame = CGRectMake(_profileView.frame.origin.x, _profileView.frame.origin.y + _profileView.frame.size.height, _profileView.frame.size.width, _profileView.frame.size.height);
+    } completion:^(BOOL finished) {
+        navigation.control.hidden = YES;
+    }];
     
 }
 

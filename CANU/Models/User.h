@@ -97,8 +97,8 @@
  */
 - (void)checkPhoneBook:(NSMutableArray*)arrayContact WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block;
 
-- (void)checkCounterWithBlock:(void (^)(NSNumber *countTotal, NSNumber *isCountIn, NSNumber *isUnlock, NSError *error))block;
+- (void)searchUserWithWords:(NSString *)searchWords WithBlock:(void (^)(NSMutableArray *arrayCANUUser,NSError *error))block;
 
-- (void)countMeWithBlock:(void (^)(NSError *error))block;
+- (void)tribes:(void (^)(NSArray *users, NSError *error))block;
 
 @end

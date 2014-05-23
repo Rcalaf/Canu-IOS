@@ -22,8 +22,6 @@
 		1E279D0918D1F41E0076C25E /* AFCanuAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279D0818D1F41E0076C25E /* AFCanuAPIClient.m */; };
 		1E279D2A18D1F86D0076C25E /* DiallingCodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1E279D2918D1F86D0076C25E /* DiallingCodes.plist */; };
 		1E279DD318D1FE820076C25E /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E279DCF18D1FE820076C25E /* libGoogleAnalyticsServices.a */; };
-		1E279DD418D1FE830076C25E /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1E279DD118D1FE820076C25E /* Instabug.bundle */; };
-		1E279DD518D1FE830076C25E /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E279DD218D1FE820076C25E /* Instabug.framework */; };
 		1E279DDA18D1FFD10076C25E /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279DD918D1FFD10076C25E /* Message.m */; };
 		1E279DDF18D200A60076C25E /* MKCanuAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279DDE18D200A60076C25E /* MKCanuAnnotationView.m */; };
 		1E279DE318D201000076C25E /* UICanuNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E279DE218D201000076C25E /* UICanuNavigationController.m */; };
@@ -84,6 +82,10 @@
 		1E62AE2C18D83F2200520AA0 /* UICanuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE2B18D83F2200520AA0 /* UICanuButton.m */; };
 		1E62AE3018D84DD300520AA0 /* UICanuBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E62AE2F18D84DD300520AA0 /* UICanuBottomBar.m */; };
 		1E62AE3718DAE0B200520AA0 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */; };
+		1E6A49F4192B7A4400BCF508 /* InvitShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6A49F3192B7A4400BCF508 /* InvitShow.m */; };
+		1E6A49F7192CD79100BCF508 /* InvitListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6A49F6192CD79100BCF508 /* InvitListViewController.m */; };
+		1E6A49FE192F4EC700BCF508 /* Instabug.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1E6A49FC192F4EC700BCF508 /* Instabug.bundle */; };
+		1E6A49FF192F4EC700BCF508 /* Instabug.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E6A49FD192F4EC700BCF508 /* Instabug.framework */; };
 		1E6FDC301924EE9000E8C826 /* AlertNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E6FDC2F1924EE9000E8C826 /* AlertNotification.m */; };
 		1E70867A18996FE000328F76 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E70867918996FE000328F76 /* AddressBook.framework */; };
 		1E70867D189A849300328F76 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70867C189A849300328F76 /* Contact.m */; };
@@ -194,8 +196,6 @@
 		1E279DCD18D1FE820076C25E /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		1E279DCE18D1FE820076C25E /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		1E279DCF18D1FE820076C25E /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
-		1E279DD118D1FE820076C25E /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
-		1E279DD218D1FE820076C25E /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
 		1E279DD818D1FFD10076C25E /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Message.h; path = CANU/Models/Message.h; sourceTree = "<group>"; };
 		1E279DD918D1FFD10076C25E /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Message.m; path = CANU/Models/Message.m; sourceTree = "<group>"; };
 		1E279DDD18D200A60076C25E /* MKCanuAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKCanuAnnotationView.h; sourceTree = "<group>"; };
@@ -325,6 +325,12 @@
 		1E62AE2E18D84DD300520AA0 /* UICanuBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UICanuBottomBar.h; path = "Custom Classes/UICanuBottomBar/UICanuBottomBar.h"; sourceTree = "<group>"; };
 		1E62AE2F18D84DD300520AA0 /* UICanuBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UICanuBottomBar.m; path = "Custom Classes/UICanuBottomBar/UICanuBottomBar.m"; sourceTree = "<group>"; };
 		1E62AE3618DAE0B200520AA0 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = CANU/Framework/Crashlytics.framework; sourceTree = "<group>"; };
+		1E6A49F2192B7A4400BCF508 /* InvitShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitShow.h; sourceTree = "<group>"; };
+		1E6A49F3192B7A4400BCF508 /* InvitShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitShow.m; sourceTree = "<group>"; };
+		1E6A49F5192CD79100BCF508 /* InvitListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InvitListViewController.h; path = ../../Views/C/InvitListViewController.h; sourceTree = "<group>"; };
+		1E6A49F6192CD79100BCF508 /* InvitListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InvitListViewController.m; path = ../../Views/C/InvitListViewController.m; sourceTree = "<group>"; };
+		1E6A49FC192F4EC700BCF508 /* Instabug.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Instabug.bundle; sourceTree = "<group>"; };
+		1E6A49FD192F4EC700BCF508 /* Instabug.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Instabug.framework; sourceTree = "<group>"; };
 		1E6FDC2E1924EE9000E8C826 /* AlertNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertNotification.h; sourceTree = "<group>"; };
 		1E6FDC2F1924EE9000E8C826 /* AlertNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertNotification.m; sourceTree = "<group>"; };
 		1E70867918996FE000328F76 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -506,7 +512,6 @@
 				1E7138D0188E9BA000137A48 /* GLKit.framework in Frameworks */,
 				1E3A6B8618868EAE007FB6BA /* MessageUI.framework in Frameworks */,
 				1E3A6B6318854220007FB6BA /* CoreText.framework in Frameworks */,
-				1E279DD518D1FE830076C25E /* Instabug.framework in Frameworks */,
 				1E814CFB187C49F30013E238 /* libz.dylib in Frameworks */,
 				DE517723184EA69100690E2F /* UIKit.framework in Frameworks */,
 				DE713963179D47FE00EBCB91 /* CoreLocation.framework in Frameworks */,
@@ -524,6 +529,7 @@
 				DEA93B2017204EA600303BB5 /* CoreGraphics.framework in Frameworks */,
 				DEA93B2217204EA600303BB5 /* CoreData.framework in Frameworks */,
 				E1560F2300694234B086EAF2 /* libPods.a in Frameworks */,
+				1E6A49FF192F4EC700BCF508 /* Instabug.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +564,8 @@
 		1E279CF318D1F0F70076C25E /* C */ = {
 			isa = PBXGroup;
 			children = (
+				1E6A49F5192CD79100BCF508 /* InvitListViewController.h */,
+				1E6A49F6192CD79100BCF508 /* InvitListViewController.m */,
 				1E279CFD18D1F2400076C25E /* ActivityScrollViewController.h */,
 				1E279CFE18D1F2400076C25E /* ActivityScrollViewController.m */,
 				1E279CF418D1F0F70076C25E /* ActivitiesFeedViewController.h */,
@@ -594,8 +602,8 @@
 		1E279DD018D1FE820076C25E /* Instabug */ = {
 			isa = PBXGroup;
 			children = (
-				1E279DD118D1FE820076C25E /* Instabug.bundle */,
-				1E279DD218D1FE820076C25E /* Instabug.framework */,
+				1E6A49FC192F4EC700BCF508 /* Instabug.bundle */,
+				1E6A49FD192F4EC700BCF508 /* Instabug.framework */,
 			);
 			name = Instabug;
 			path = CANU/Framework/Instabug;
@@ -915,6 +923,8 @@
 				1E279EB818D301E70076C25E /* UICanuChatCellScroll.m */,
 				1E279EB418D301A60076C25E /* UICanuAttendeeCellScroll.h */,
 				1E279EB518D301A60076C25E /* UICanuAttendeeCellScroll.m */,
+				1E6A49F2192B7A4400BCF508 /* InvitShow.h */,
+				1E6A49F3192B7A4400BCF508 /* InvitShow.m */,
 			);
 			name = E;
 			path = Views/E;
@@ -1413,13 +1423,13 @@
 				1E891CA318E96709003B45F8 /* Images.xcassets in Resources */,
 				DEFD7A991747F83E0087CB8A /* icon@2x.png in Resources */,
 				DE60783B182C007C0053F23B /* Default-568h@2x.png in Resources */,
-				1E279DD418D1FE830076C25E /* Instabug.bundle in Resources */,
 				DEDACFD217FC58950068DB72 /* icon-60.png in Resources */,
 				1E3A6B6F18854F2C007FB6BA /* Localizable.strings in Resources */,
 				1E8A338218E045230049A6B7 /* .gitkeep in Resources */,
 				1E279D2A18D1F86D0076C25E /* DiallingCodes.plist in Resources */,
 				DE60783D182C007C0053F23B /* Default@2x.png in Resources */,
 				DE60783C182C007C0053F23B /* Default.png in Resources */,
+				1E6A49FE192F4EC700BCF508 /* Instabug.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1538,6 +1548,7 @@
 				1E279E5718D206540076C25E /* CreateEditActivityViewController.m in Sources */,
 				1E279E3518D204CB0076C25E /* UICanuTextField.m in Sources */,
 				1E8A339418E045230049A6B7 /* NSString+MK_Validation.m in Sources */,
+				1E6A49F4192B7A4400BCF508 /* InvitShow.m in Sources */,
 				1E279DEA18D2018A0076C25E /* UIProfileView.m in Sources */,
 				1E8A338B18E045230049A6B7 /* NSNumber+MK_Precision.m in Sources */,
 				1E279EBF18D306BA0076C25E /* UserManager.m in Sources */,
@@ -1559,6 +1570,7 @@
 				1E62AE2C18D83F2200520AA0 /* UICanuButton.m in Sources */,
 				1EC6074B190FA57E006D2690 /* UIView+DTDebug.m in Sources */,
 				1E279DF018D2028A0076C25E /* UserSettingsViewController.m in Sources */,
+				1E6A49F7192CD79100BCF508 /* InvitListViewController.m in Sources */,
 				1E8A338D18E045230049A6B7 /* NSSet+MK_Block.m in Sources */,
 				1E8A338C18E045230049A6B7 /* NSObject+MK_AutoDescribe.m in Sources */,
 				1E279E6518D20AB00076C25E /* EditUserPasswordViewController.m in Sources */,
@@ -1683,7 +1695,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Didrik Persson (HJ444QVMGU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1706,7 +1718,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C355FA2-87EF-40EC-AEE8-70ECFD38872F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9946F029-5784-4AFF-AD99-B6383B425A4A";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1784,7 +1796,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Roger Calaf (WZGVT5H53N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Didrik Persson (HJ444QVMGU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1807,7 +1819,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9C355FA2-87EF-40EC-AEE8-70ECFD38872F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9946F029-5784-4AFF-AD99-B6383B425A4A";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1821,7 +1833,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Roger Cot (73TCT5FXV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Didrik Persson (DZ6C6G6GTU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -1844,7 +1856,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D4C11A5F-E8C9-48F1-A9CC-8B3E08B50119";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "36C69D08-4375-44E8-B782-F923F63BB00F";
 				SYMROOT = build;
 				WRAPPER_EXTENSION = app;
 			};

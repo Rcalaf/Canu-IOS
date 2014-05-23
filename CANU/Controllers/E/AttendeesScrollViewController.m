@@ -176,6 +176,7 @@
                 self.isReload = NO;
                 
             }];
+            
         }
         
         [self.loaderAnimation stopAnimation];

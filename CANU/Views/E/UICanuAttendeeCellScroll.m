@@ -30,6 +30,8 @@
         
         self.user = user;
         
+        self.tribeMode = NO;
+        
         UIImageView *background = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300, 55)];
         background.image = [UIImage imageNamed:@"F_location_cell"];
         [self addSubview:background];
@@ -76,6 +78,18 @@
     
     }
     return self;
+}
+
+- (void)setTribeMode:(BOOL)tribeMode{
+    
+    _tribeMode = tribeMode;
+    
+    UIButton *deleteButton = [[UIButton alloc]initWithFrame:CGRectMake(300 - 45 - 5, 5, 45, 45)];
+    [deleteButton setTitle:NSLocalizedString(@"Delete", nil) forState:UIControlStateNormal];
+//    [deleteButton addTarget:self action:@selector(deleteActivity) forControlEvents:UIControlEventTouchUpInside];
+    [deleteButton setImage:[UIImage imageNamed:@"F_delete"] forState:UIControlStateNormal];
+    [self addSubview:deleteButton];
+    
 }
 
 @end

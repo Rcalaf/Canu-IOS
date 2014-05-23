@@ -116,7 +116,7 @@
 "SEARCH ON THE MAP" = "Search on map";
 "SEARCH" = "Search";
 "ON THE MAP" = "on map";
-"No results ..." = "Can’t seem to find what you where looking for";
+"No results ..." = "No results ...";
 "Adress" = "Address";
 "Send activity" = "Send activity";
 "Save location" = "Save location";
@@ -135,7 +135,11 @@
 "DELETE" = "Delete";
 "Everyone Around" = "Everyone around";
 "Makes the Activity Local" = "Makes the activity public";
-
+"among all users" = "among all users"; // New
+"My tribe" = "My tribe"; // New
+"My CANU contacts" = "My CANU contacts"; // New
+"My contacts" = "My contacts"; // New
+"All CANU Users" = "All CANU Users"; // New
 
 // Full
 
@@ -146,6 +150,12 @@
 "and" = "and";
 "others peoples" = "other people";
 "other person" = "other person";
+"is invited" = "is invited";
+"are invited" = "are invited";
+"other" = "other";
+"others" = "others";
+"No people invited yet" = "No people invited yet";
+"people" = "people";
 
 // Settings
 "Sign Out" = "Sign out";

@@ -12,10 +12,20 @@
 
 @interface UIProfileView : UIView
 
+@property (nonatomic) id delegate;
+
 - (id)initWithFrame:(CGRect)frame User:(User *)user;
 
 - (void)animationProfileViewWithScroll:(float)offset;
 
 - (void)forEmptyFeed:(BOOL)isEmptyFeed;
+
+@end
+
+@protocol UIProfileViewDelegate <NSObject>
+
+@required
+
+- (void)openTribeList;
 
 @end

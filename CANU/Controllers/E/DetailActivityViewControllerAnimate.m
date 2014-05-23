@@ -34,6 +34,7 @@
 #import "ActivitiesFeedViewController.h"
 #import "UIActivityViewControllerCustom.h"
 #import "Notification.h"
+#import "InvitShow.h"
 
 @interface DetailActivityViewControllerAnimate ()<MKMapViewDelegate,UITextViewDelegate,UIScrollViewDelegate,CreateEditActivityViewControllerDelegate,ChatScrollViewDelegate,InvitOthersViewControllerDelegate,UIActivityViewControllerCustomDelegate>
 
@@ -48,8 +49,8 @@
 @property (nonatomic, strong) UIButton *touchQuitKeyboard;
 @property (nonatomic, strong) UIView *wrapperActivity;
 @property (nonatomic, strong) UITextView *descriptionTextView;
+@property (nonatomic, strong) InvitShow *wrapperInvitList;
 @property (nonatomic, strong) UIImageView *wrapperActivityDescription;
-@property (nonatomic, strong) UIImageView *addMorePeople;
 @property (nonatomic, strong) UIView *wrapperActivityBottom;
 @property (nonatomic, strong) UITextView *input;
 @property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
@@ -95,6 +96,7 @@
         self.keyboardIsOpen               = NO;
         self.descriptionIsOpen            = NO;
         self.closeAfterDelete             = NO;
+        
     }
     return self;
 }
@@ -168,7 +170,6 @@
             [navigation changePosition:1];
             self.wrapper.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
             self.bottomBar.frame = CGRectMake(0, self.view.frame.size.height - 45, 320, 45);
-            self.addMorePeople.alpha = 1;
         } completion:^(BOOL finished) {
             navigation.control.hidden = YES;
             self.view.backgroundColor = backgroundColorView;
@@ -196,31 +197,58 @@
     self.wrapperActivityDescription = [[UIImageView alloc]initWithFrame:CGRectMake(-2, 99, 304, 0)];
     self.wrapperActivityDescription.image = [[UIImage imageNamed:@"E_activity_description"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:10.0f];
     self.wrapperActivityDescription.clipsToBounds = YES;
+    self.wrapperActivityDescription.userInteractionEnabled = YES;
     [self.wrapperActivity addSubview:_wrapperActivityDescription];
     
-    self.descriptionTextView = [[UITextView alloc]initWithFrame:CGRectMake(2 + 10, 10, 280, 5)];
-    self.descriptionTextView.font = [UIFont fontWithName:@"Lato-Regular" size:13];
-    self.descriptionTextView.textColor = UIColorFromRGB(0xbfc9cd);
-    self.descriptionTextView.text = _activity.description;
-    self.descriptionTextView.alpha = 0;
-    [self.wrapperActivityDescription addSubview:_descriptionTextView];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAttendees)];
     
-    CGSize textViewSize = [self.descriptionTextView sizeThatFits:CGSizeMake(self.descriptionTextView.frame.size.width, FLT_MAX)];
-    
-    self.descriptionTextView.frame = CGRectMake(2 + 10, 10, 280, textViewSize.height);
+    self.wrapperInvitList = [[InvitShow alloc]initWithFrame:CGRectMake( 2, 0, 300, 70)];
+    self.wrapperInvitList.alpha = 0;
+    [self.wrapperInvitList addGestureRecognizer:tap];
+    self.wrapperInvitList.activity = _activity;
     
     if (![_activity.description isEqualToString:@""]) {
-        [UIView animateWithDuration:0.4 animations:^{
-            self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, 10 + textViewSize.height + 10);
-            self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130 + 10 + textViewSize.height + 10);
-            self.wrapperActivityBottom.frame = CGRectMake(0, 100 + 10 + textViewSize.height + 10, 300, 30);
-        } completion:^(BOOL finished) {
-            self.descriptionIsOpen = YES;
-            [UIView animateWithDuration:0.2 animations:^{
-                self.descriptionTextView.alpha = 1;
-            }];
-        }];
+        
+        self.descriptionTextView = [[UITextView alloc]initWithFrame:CGRectMake(2 + 10, 10, 280, 0)];
+        self.descriptionTextView.frame = CGRectMake(2 + 10, 10, 280, 5);
+        self.descriptionTextView.font = [UIFont fontWithName:@"Lato-Regular" size:13];
+        self.descriptionTextView.textColor = UIColorFromRGB(0x2b4b58);
+        self.descriptionTextView.text = _activity.description;
+        self.descriptionTextView.alpha = 0;
+        [self.wrapperActivityDescription addSubview:_descriptionTextView];
+        
+        CGSize textViewSize = [self.descriptionTextView sizeThatFits:CGSizeMake(self.descriptionTextView.frame.size.width, FLT_MAX)];
+        
+        self.descriptionTextView.frame = CGRectMake(2 + 10, 10, 280, textViewSize.height);
+        
+        self.wrapperInvitList.frame = CGRectMake(2, 10 + self.descriptionTextView.frame.size.height + 10, 300, 70);
+        
+        UIImageView *line = [[UIImageView alloc]initWithFrame:CGRectMake(0, 10 + self.descriptionTextView.frame.size.height + 10, 300, 1)];
+        line.image = [UIImage imageNamed:@"E_invit_line"];
+        [self.wrapperActivityDescription addSubview:line];
+        
     }
+    
+    [self.wrapperActivityDescription addSubview:_wrapperInvitList];
+    
+    self.descriptionIsOpen = YES;
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        if (![_activity.description isEqualToString:@""]) {
+            self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, 10 + self.descriptionTextView.frame.size.height + 10 + self.wrapperInvitList.frame.size.height);
+            self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130 + 10 + self.descriptionTextView.frame.size.height + 10 + self.wrapperInvitList.frame.size.height);
+            self.wrapperActivityBottom.frame = CGRectMake(0, 100 + 10 + self.descriptionTextView.frame.size.height + 10 + self.wrapperInvitList.frame.size.height, 300, 30);
+        } else {
+            self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, self.wrapperInvitList.frame.size.height);
+            self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130 + self.wrapperInvitList.frame.size.height);
+            self.wrapperActivityBottom.frame = CGRectMake(0, 100 + self.wrapperInvitList.frame.size.height, 300, 30);
+        }
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.descriptionTextView.alpha = 1;
+            self.wrapperInvitList.alpha = 1;
+        }];
+    }];
     
     [self.chatView load];
     
@@ -268,28 +296,6 @@
         self.counterInvit.text = [NSString stringWithFormat:@"&%lu",(unsigned long)[_activity.attendeeIds count] -1];
     }
     [background addSubview:_counterInvit];
-    
-    CGSize expectedLabelSizeCounter = [self.counterInvit.text sizeWithFont:self.counterInvit.font
-                                                         constrainedToSize:self.counterInvit.frame.size
-                                                             lineBreakMode:self.counterInvit.lineBreakMode];
-    
-    UILabel *plusLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 20, 16)];
-    plusLabel.text = @"+";
-    plusLabel.textColor = [UIColor whiteColor];
-    self.counterInvit.font = [UIFont fontWithName:@"Lato-Regular" size:14];
-    plusLabel.textAlignment = NSTextAlignmentCenter;
-    
-    self.addMorePeople = [[UIImageView alloc]initWithFrame:CGRectMake(self.counterInvit.frame.origin.x + expectedLabelSizeCounter.width + 5, 17, 20, 20)];
-    self.addMorePeople.image = [[UIImage imageNamed:@"All_button_red_normal"] stretchableImageWithLeftCapWidth:5.0 topCapHeight:5.0];
-    self.addMorePeople.alpha = 0;
-    [self.addMorePeople addSubview:plusLabel];
-    [background addSubview:_addMorePeople];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showAttendees)];
-    
-    UIView *areaShowAttendees = [[UIView alloc]initWithFrame:CGRectMake(5, 5, 250, 40)];
-    [areaShowAttendees addGestureRecognizer:tap];
-    [view addSubview:areaShowAttendees];
     
     self.nameActivity = [[UICanuLabelActivityName alloc]initWithFrame:CGRectMake(10, 57, 280, 25)];
     self.nameActivity.text = _activity.title;
@@ -425,15 +431,22 @@
 #pragma mark - ChatScrollViewDelegate
 
 - (void)openDesciption{
-    if (!_descriptionIsOpen && ![_activity.description isEqualToString:@""]) {
+    if (!_descriptionIsOpen) {
         self.descriptionIsOpen = YES;
         [UIView animateWithDuration:0.2 animations:^{
-            self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, 10 + self.descriptionTextView.frame.size.height + 10);
-            self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130 + 10 + self.descriptionTextView.frame.size.height + 10);
-            self.wrapperActivityBottom.frame = CGRectMake(0, 100 + 10 + self.descriptionTextView.frame.size.height + 10, 300, 30);
+            if (![_activity.description isEqualToString:@""]) {
+                self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, 10 + self.descriptionTextView.frame.size.height + 10 + self.wrapperInvitList.frame.size.height);
+                self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130 + 10 + self.descriptionTextView.frame.size.height + 10 + self.wrapperInvitList.frame.size.height);
+                self.wrapperActivityBottom.frame = CGRectMake(0, 100 + 10 + self.descriptionTextView.frame.size.height + 10 + self.wrapperInvitList.frame.size.height, 300, 30);
+            } else {
+                self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, self.wrapperInvitList.frame.size.height);
+                self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130 + self.wrapperInvitList.frame.size.height);
+                self.wrapperActivityBottom.frame = CGRectMake(0, 100 + self.wrapperInvitList.frame.size.height, 300, 30);
+            }
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.2 animations:^{
                 self.descriptionTextView.alpha = 1;
+                self.wrapperInvitList.alpha = 1;
             }completion:^(BOOL finished) {
                 
             }];
@@ -442,10 +455,11 @@
 }
 
 - (void)closeDescription{
-    if (_descriptionIsOpen && ![_activity.description isEqualToString:@""]) {
+    if (_descriptionIsOpen) {
         self.descriptionIsOpen = NO;
         [UIView animateWithDuration:0.2 animations:^{
             self.descriptionTextView.alpha = 0;
+            self.wrapperInvitList.alpha = 0;
         }completion:^(BOOL finished) {
             [UIView animateWithDuration:0.2 animations:^{
                 self.wrapperActivityDescription.frame = CGRectMake(-2, 99, 304, 0);
@@ -778,7 +792,7 @@
             self.wrapperActivity.frame = CGRectMake(10, 10, 300, 130);
             self.wrapperActivityBottom.frame = CGRectMake(0, 100, 300, 30);
             self.descriptionTextView.alpha = 0;
-            self.addMorePeople.alpha = 0;
+            self.wrapperInvitList.alpha = 0;
             self.view.backgroundColor = [UIColor colorWithRed:230.0f/255.0f green:230.0f/255.0f blue:230.0f/255.0f alpha:0.0];
         } completion:^(BOOL finished) {
             self.descriptionIsOpen = YES;

@@ -24,6 +24,7 @@
 
 @property (strong, nonatomic) UIImageView *profileImage;
 @property (strong, nonatomic) UIImageView *settingsButton;
+@property (strong, nonatomic) UIImageView *tribeButton;
 @property (strong, nonatomic) UILabel *pseudo;
 @property (strong, nonatomic) UILabel *name;
 @property (strong, nonatomic) UICanuNavigationController *navigation;
@@ -93,6 +94,14 @@
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSettings)];
         [self.settingsButton addGestureRecognizer:tapRecognizer];
         
+        self.tribeButton = [[UIImageView alloc]initWithFrame:CGRectMake(263, -10, 57, 57)];
+        self.tribeButton.backgroundColor = [UIColor redColor];
+        self.tribeButton.userInteractionEnabled = YES;
+        [self addSubview:_tribeButton];
+        
+        UITapGestureRecognizer *tapTribe = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTribeList)];
+        [self.tribeButton addGestureRecognizer:tapTribe];
+        
         tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changePicture)];
         [self.profileImage addGestureRecognizer:tapRecognizer];
         
@@ -129,6 +138,12 @@
     
     UIViewController *viewController = (UIViewController *)self.navigation.activityFeed;
     [viewController presentViewController:us animated:YES completion:nil];
+    
+}
+
+- (void)showTribeList{
+    
+    [self.delegate openTribeList];
     
 }
 
